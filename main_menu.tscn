@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bfqbs0pmolh7q"]
+
+[ext_resource type="PackedScene" uid="uid://cf68jc3bykwlp" path="res://crosshair.tscn" id="1_06t4h"]
+
+[node name="Node2D" type="Node2D" unique_id=1861403558]
+
+[node name="Crosshair_center" parent="." unique_id=1658635796 instance=ExtResource("1_06t4h")]
+position = Vector2(480, 270)
+
+[node name="Crosshair_top_left" parent="." unique_id=788414964 instance=ExtResource("1_06t4h")]
+
+[node name="Crosshair_top_right" parent="." unique_id=901436228 instance=ExtResource("1_06t4h")]
+position = Vector2(960, 0)
+
+[node name="Crosshair_bottom_left" parent="." unique_id=1456791545 instance=ExtResource("1_06t4h")]
+position = Vector2(0, 540)
+
+[node name="Crosshair_bottom_right" parent="." unique_id=930686662 instance=ExtResource("1_06t4h")]
+position = Vector2(960, 540)
