@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cf68jc3bykwlp"]
+
+[node name="Crosshair" type="Control" unique_id=1182596602]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="x" type="ColorRect" parent="." unique_id=855265307]
+layout_mode = 0
+offset_left = -32.0
+offset_top = -1.0
+offset_right = 32.0
+offset_bottom = 1.0
+metadata/_edit_use_anchors_ = true
+
+[node name="y" type="ColorRect" parent="." unique_id=732774800]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -33.0
+offset_right = 1.0
+offset_bottom = 31.0
+metadata/_edit_use_anchors_ = true
