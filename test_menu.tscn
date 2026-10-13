@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://bfqbs0pmolh7q"]
+
+[ext_resource type="PackedScene" uid="uid://cf68jc3bykwlp" path="res://crosshair.tscn" id="2_f1yyh"]
+[ext_resource type="PackedScene" uid="uid://c2kjfy0oo3dgx" path="res://candy_button.tscn" id="3_wg18h"]
+
+[node name="SceneRoot" type="Node2D" unique_id=1908462043]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1308117872]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1890790077]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Crosshair_top_left" parent="CanvasLayer/Control" unique_id=788414964 instance=ExtResource("2_f1yyh")]
+layout_mode = 1
+
+[node name="Crosshair_top_right" parent="CanvasLayer/Control" unique_id=901436228 instance=ExtResource("2_f1yyh")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+
+[node name="Crosshair_bottom_left" parent="CanvasLayer/Control" unique_id=1456791545 instance=ExtResource("2_f1yyh")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+
+[node name="Crosshair_bottom_right" parent="CanvasLayer/Control" unique_id=930686662 instance=ExtResource("2_f1yyh")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Crosshair_center" parent="CanvasLayer/Control" unique_id=1658635796 instance=ExtResource("2_f1yyh")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Control" unique_id=809278699]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="Candy" parent="CanvasLayer/Control/GridContainer" unique_id=1118639746 instance=ExtResource("3_wg18h")]
+layout_mode = 2
+
+[node name="Candy2" parent="CanvasLayer/Control/GridContainer" unique_id=1955401198 instance=ExtResource("3_wg18h")]
+layout_mode = 2
+candy_type = 5
+
+[node name="Candy3" parent="CanvasLayer/Control/GridContainer" unique_id=42876675 instance=ExtResource("3_wg18h")]
+layout_mode = 2
+candy_type = 2
+
+[node name="Candy4" parent="CanvasLayer/Control/GridContainer" unique_id=1067227359 instance=ExtResource("3_wg18h")]
+layout_mode = 2
+candy_type = 1
+
+[node name="Candy5" parent="CanvasLayer/Control/GridContainer" unique_id=252885555 instance=ExtResource("3_wg18h")]
+layout_mode = 2
+candy_type = 7
+
+[node name="Candy6" parent="CanvasLayer/Control/GridContainer" unique_id=889101681 instance=ExtResource("3_wg18h")]
+layout_mode = 2
+candy_type = 3
+
+[node name="Candy7" parent="CanvasLayer/Control/GridContainer" unique_id=528374765 instance=ExtResource("3_wg18h")]
+layout_mode = 2
+candy_type = 6
+
+[node name="Candy8" parent="CanvasLayer/Control/GridContainer" unique_id=579203272 instance=ExtResource("3_wg18h")]
+layout_mode = 2
+candy_type = 4
