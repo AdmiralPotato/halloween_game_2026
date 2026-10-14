@@ -212,7 +212,7 @@ Start with stock of: flour, sugar, chocolate bar, plain frosting
 		- Rainbow
 		- Chocolate
 		- White
-		- Ball bearings
+		- Ball bearing
 - **Hard sugar candy shapes**
 	- Storage: countertop
 	- Sources: BUY $$$
@@ -234,6 +234,7 @@ Start with stock of: flour, sugar, chocolate bar, plain frosting
 		- Lemon (yellow)
 		- Lime (yellow-green)
 		- Mint (pale blue-green)
+		- Blueberry (blue-purple)
 - **Candied flowers**
 	- Storage: countertop
 	- Sources: BUY $$$$$
@@ -283,7 +284,7 @@ Also there is an arbitrary amount of countertop space
 		- none = sugar cookie
 		- + cocoa powder = chocolate cookie
 		- + chocolate chips = chocolate chip cookie
-		- + salted caramels = salted caramel cookie 
+		- + salted caramels = salted caramel cookie
 		- + X flavoring = X cookie
 	- Cook: dough @ oven (quick)
 	- Post-bake fillings:
@@ -310,7 +311,7 @@ Also there is an arbitrary amount of countertop space
 		- none = cupcake
 		- + cocoa powder = chocolate cupcake
 		- + chocolate chips = chocolate chip cupcake
-		- + salted caramels = salted caramel cupcake 
+		- + salted caramels = salted caramel cupcake
 		- + X flavoring = X cupcake
 	- Cook: dough + muffin liners @ oven (medium)
 	- Post-bake fillings:
