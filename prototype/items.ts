@@ -13,11 +13,20 @@
 */
 
 type Color = 'pale' | 'dark' | 'red' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple' | 'varigated';
+const colors = new Set([ 'pale', 'dark', 'red', 'orange', 'yellow', 'green', 'blue', 'purple', 'varigated' ]);
+const isColor = (v: unknown): v is Color => typeof v === 'string' && colors.has(v);
+
 type Texture = 'dry' | 'moist' | 'soft' | 'hard' | 'sticky' | 'crumbly' | 'pop';
+const textures = new Set([ 'dry', 'moist', 'soft', 'hard', 'sticky', 'crumbly', 'pop' ]);
+const isTexture = (v: unknown): v is Texture => typeof v === 'string' && textures.has(v);
+
 type Flavor = 'nutty' | 'savory' | 'chocolatey' | 'fruity' | 'minty' | 'salty' | 'sweet' | 'tart' | 'floral';
-type Temperature = 'cold' | 'hot';
-type Allergy = 'dairy' | 'egg' | 'milk' | 'tree_nut';
-type Attribute = Color | Texture | Flavor | Temperature | Allergy;
+const flavors = new Set([ 'nutty', 'savory', 'chocolatey', 'fruity', 'minty', 'salty', 'sweet', 'tart', 'floral' ]);
+const isFlavor = (v: unknown): v is Flavor => typeof v === 'string' && flavors.has(v);
+
+type Attribute = Color | Texture | Flavor ;
+const isAttribute = (v: unknown): v is Attribute => isColor(v) || isTexture(v) || isFlavor(v);
+
 type AttributeMap = Partial<Record<Attribute, number>>;
 type AttributeInfo = {
 	attribute: string;
@@ -32,13 +41,6 @@ type AttributeInfo = {
 	attribute: string;
 	type: 'flavor';
 	opposite?: Flavor;
-} | {
-	attribute: string;
-	type: 'temperature';
-	opposite?: Temperature;
-} | {
-	attribute: string;
-	type: 'allergy';
 };
 const attributeInfo: Record<Attribute, AttributeInfo> = {
 	pale: {
@@ -157,32 +159,6 @@ const attributeInfo: Record<Attribute, AttributeInfo> = {
 		type: 'flavor',
 		attribute: 'floral',
 	},
-	cold: {
-		type: 'temperature',
-		attribute: 'cold',
-		opposite: 'hot',
-	},
-	hot: {
-		type: 'temperature',
-		attribute: 'hot',
-		opposite: 'cold',
-	},
-	dairy: {
-		type: 'allergy',
-		attribute: 'dairy',
-	},
-	egg: {
-		type: 'allergy',
-		attribute: 'egg',
-	},
-	milk: {
-		type: 'allergy',
-		attribute: 'milk',
-	},
-	tree_nut: {
-		type: 'allergy',
-		attribute: 'tree_nut',
-	},
 };
 
 // -------------------------------- VARIANTS -------------------------------- //
@@ -240,15 +216,12 @@ const itemInfo: Record<string, ItemInfo> = {
 	egg: {
 		storage: 'fridge',
 		cost: 1,
-		attributes: {
-			egg: 1,
-		},
+		attributes: {},
 	},
 	cream: {
 		storage: 'fridge',
 		cost: 2,
 		attributes: {
-			dairy: 2,
 			pale: 2,
 		},
 	},
@@ -655,7 +628,7 @@ const finishers: Record<string, Record<string, string[]>> = {
 		allowed_fillings: [
 			'pastry_cream',
 			'whipped_cream',
-			'jam',
+			// 'jam',
 			'pudding',
 		],
 		allowed_decorations: [
@@ -671,7 +644,7 @@ const finishers: Record<string, Record<string, string[]>> = {
 	cake: {
 		allowed_fillings: [
 			'whipped_cream',
-			'jam',
+			// 'jam',
 			'ice_cream',
 		],
 		allowed_decorations: [
@@ -697,6 +670,7 @@ const addAttributesToMap = (a: AttributeMap, b: AttributeMap) => {
 	const keysB = Object.keys(b);
 	const keys = new Set([...keysA, ...keysB]);
 	[...keys].forEach(key=>{
+		if (!isAttribute(key)) { throw new Error (`${key} is not an attribute!`)}
 		a[key] = (a[key] || 0) + (b[key] || 0);
 	})
 	return a;

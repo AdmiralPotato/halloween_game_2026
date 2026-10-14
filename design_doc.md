@@ -381,4 +381,5 @@ Also there is an arbitrary amount of countertop space
 - Ice cream
 - Candy (Wanko really wants)
 - Sweet breads
+- Marshmallows
 
