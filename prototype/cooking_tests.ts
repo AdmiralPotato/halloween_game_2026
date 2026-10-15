@@ -1,8 +1,8 @@
-import { cook } from "./items.ts";
+import { cook } from "./main.ts";
 import type {
 	CookingInput,
 	CookingCompatibilityEval,
-} from "./items.ts";
+} from "./main.ts";
 
 const standardizeArray = (arr: string[]) => `[` + structuredClone(arr.sort()).join(', ') + `]`;
 
@@ -165,6 +165,6 @@ const testsMap = cookingCompatibilityTests.map((test, i)=>{
 	return errorMessages;
 });
 
-if (testsMap.length === 0) {
-	console.log("EVERYTHING OKAY, BOSS");
+if (testsMap.flat().length === 0) {
+	console.log("ALL COOKING TESTS PASS, BOSS");
 }

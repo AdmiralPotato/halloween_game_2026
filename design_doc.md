@@ -95,6 +95,12 @@
 - Rating: Simplicity vs luxury
 	- Lower scoring attributes means higher simplicity
 	- Higher scoring attributes means higher luxury
+- Each product "layer" gets the attributes summed, which may cancel some out, e.g. pale + dark
+	- Layers:
+		- Base (includes "base" modifiers)
+		- Filling (does not contribute to shop visual appeal)
+		- Decoration
+		- Doodads (requires decoration to be present)
 
 ## Food
 
