@@ -1,3 +1,21 @@
+const mapToList = (map: Record<string, number>): string[] => {
+	const ret: string[] = [];
+	Object.entries(map).forEach(([k,v])=>{
+		for (let i = 0; i < v; i++) {
+			ret.push(k);
+			
+		}
+	})
+	return ret;
+};
+const listToMap = (list: string[]): Record<string, number> => {
+	const ret: Record<string, number> = {};
+	list.forEach(item=>{
+		ret[item] = (ret[item] || 0) + 1;
+	})
+	return ret;
+};
+
 // -------------------------------- ATTRIBUTES -------------------------------- //
 
 /*
@@ -213,9 +231,9 @@ const variantLookup = {
 	chocolate_sprinkles: { parent: 'sprinkles', variant_name: 'chocolate' },
 	white_sprinkles: { parent: 'sprinkles', variant_name: 'white' },
 	ball_bearing_sprinkles: { parent: 'sprinkles', variant_name: 'ball_bearing' },
-	hard_candy_bats: { parent: 'hard_candy_shapes', variant_name: 'bats' },
-	hard_candy_eyeballs: { parent: 'hard_candy_shapes', variant_name: 'eyeballs' },
-	hard_candy_ghosts: { parent: 'hard_candy_shapes', variant_name: 'ghosts' },
+	hard_candy_bats: { parent: 'hard_candy_shapes', variant_name: 'bat' },
+	hard_candy_eyeballs: { parent: 'hard_candy_shapes', variant_name: 'eyeball' },
+	hard_candy_ghosts: { parent: 'hard_candy_shapes', variant_name: 'ghost' },
 }
 
 // -------------------------------- ITEMS -------------------------------- //
@@ -269,9 +287,7 @@ const itemInfo: Record<string, ItemInfo> = {
 	egg: {
 		storage: 'fridge',
 		cost: 1,
-		attributes: {
-			dark: 1,
-		},
+		attributes: {},
 	},
 	cream: {
 		storage: 'fridge',
@@ -498,6 +514,7 @@ type RecipeListing = {
 	finished?: boolean; // can be sold; finishers can be used on it
 	quantity: number;
 	location: string;
+	cook_in?: string;
 	time_tier: number;
 	ingredients: string[],
 	add_attributes: AttributeMap, // attributes to add in addition to the ingredients'
@@ -548,7 +565,7 @@ const recipeMap: Record<string, RecipeListing> = {
 		time_tier: 2,
 		ingredients: [ 'cream', 'egg' ],
 		add_attributes: {
-			pale: 1,
+			dark: 1,
 			soft: 1
 		},
 	},
@@ -581,23 +598,12 @@ const recipeMap: Record<string, RecipeListing> = {
 			'chocolate_chips',
 		],
 	},
-	cookie: {
-		product: 'cookie',
-		finished: true,
-		quantity: 12,
-		location: 'oven',
-		time_tier: 2,
-		ingredients: [ 'cookie_dough' ],
-		add_attributes: {
-			dark: 1,
-		},
-	},
-	cupcake_batter: {
-		product: 'cupcake_batter',
+	cake_batter: {
+		product: 'cake_batter',
 		quantity: 1,
 		location: 'mixer',
 		time_tier: 2,
-		ingredients: [ 'flour', 'flour', 'sugar' ],
+		ingredients: [ 'flour', 'sugar', 'egg' ],
 		add_attributes: {
 			soft: 1,
 		},
@@ -605,44 +611,40 @@ const recipeMap: Record<string, RecipeListing> = {
 			'cocoa_powder',
 			'flavoring',
 			'chocolate_chips',
+			'shredded_carrot',
 		],
+	},
+	// COOKING STEPS
+	// Note: cooking adds "dark: 1"
+	cookie: {
+		product: 'cookie',
+		finished: true,
+		quantity: 12,
+		location: 'oven',
+		cook_in: 'jellyroll_pan',
+		time_tier: 2,
+		ingredients: [ 'cookie_dough' ],
+		add_attributes: {},
 	},
 	cupcake: {
 		product: 'cupcake',
 		finished: true,
 		quantity: 6,
 		location: 'oven',
-		time_tier: 2,
-		ingredients: [ 'cupcake_batter' ],
-		add_attributes: {
-			dark: 1,
-		},
-	},
-	cake_batter: {
-		product: 'cake_batter',
-		quantity: 1,
-		location: 'mixer',
+		cook_in: 'muffin_tin',
 		time_tier: 3,
-		ingredients: [ 'flour', 'flour', 'sugar', 'egg' ],
-		add_attributes: {
-			soft: 2,
-		},
-		allowed_modifiers: [
-			'cocoa_powder',
-			'flavoring',
-			'shredded_carrot',
-		],
+		ingredients: [ 'cake_batter' ],
+		add_attributes: {},
 	},
 	cake: {
 		product: 'cake',
 		finished: true,
 		quantity: 1,
 		location: 'oven',
-		time_tier: 2,
+		cook_in: 'cake_form',
+		time_tier: 4,
 		ingredients: [ 'cake_batter' ],
-		add_attributes: {
-			dark: 1
-		},
+		add_attributes: {},
 	},
 	cake_slice: {
 		product: 'cake_slice',
@@ -747,7 +749,7 @@ const addAttributesToMap = (a: AttributeMap, b: AttributeMap) => {
 // QUICK TEST
 
 const recipeAttributeCache: Record<string, AttributeMap> = {};
-const getAttributesForItem = (v: string) => {
+const getAttributesForItem = (v: string, ) => {
 	// Use cache, if any
 	const cache = recipeAttributeCache[v];
 	if (cache !== undefined) {
@@ -775,14 +777,82 @@ const getAttributesForItem = (v: string) => {
 		addAttributesToMap(productAttributes, ingredientAttributes);
 	})
 	// Cooking darkens it slightly
-	if (asProduct.location === 'oven') {
+	if (asProduct.cook_in !== undefined) {
 		addAttributesToMap(productAttributes, {dark: 1});
 	}
 	recipeAttributeCache[v] = productAttributes;
 	return productAttributes;
-}
+};
 // Fill out the cache; use cache from here(?)
 Object.keys(recipeMap).forEach(k=>{
 	getAttributesForItem(k);
-})
+});
 console.log(recipeAttributeCache)
+
+// A SECOND QUICK TEST
+
+type IngredientUnit = {
+	item: string;
+	quantity: number;
+	modifiers: string[];
+};
+type CookingInfo = {
+	location: string;
+	ingredients: IngredientUnit[];
+};
+type CookingTest = CookingInfo & {
+	expected: IngredientUnit;
+};
+
+const testIngredients: CookingTest[] = [
+	{
+		location: 'mixer',
+		ingredients: [
+			{ item: 'flour', quantity: 1, modifiers: [] },
+			{ item: 'sugar', quantity: 1, modifiers: [] },
+			{ item: 'orange_flavoring', quantity: 1, modifiers: [] },
+		],
+		expected: {
+			item: 'cookie_dough',
+			quantity: 1,
+			modifiers: [ 'orange_flavoring' ],
+		},
+	},
+	{
+		location: 'mixer',
+		ingredients: [
+			{ item: 'cookie_dough', quantity: 1, modifiers: [] },
+			{ item: 'orange_flavoring', quantity: 1, modifiers: [] },
+		],
+		expected: {
+			item: 'cookie_dough',
+			quantity: 1,
+			modifiers: [ 'orange_flavoring' ],
+		},
+	},
+	{
+		location: 'mixer',
+		ingredients: [
+			{ item: 'cookie_dough', quantity: 1, modifiers: [] },
+			{ item: 'cocoa_powder', quantity: 1, modifiers: [] },
+			{ item: 'orange_flavoring', quantity: 1, modifiers: [] },
+		],
+		expected: {
+			item: 'cookie_dough',
+			quantity: 1,
+			modifiers: [ 'cocoa_powder', 'orange_flavoring' ],
+		},
+	},
+	{
+		location: 'mixer',
+		ingredients: [
+			{ item: 'cookie_dough', quantity: 1, modifiers: [ 'cocoa_powder' ] },
+			{ item: 'orange_flavoring', quantity: 1, modifiers: [] },
+		],
+		expected: {
+			item: 'cookie_dough',
+			quantity: 1,
+			modifiers: [ 'cocoa_powder', 'orange_flavoring' ],
+		},
+	},
+];
