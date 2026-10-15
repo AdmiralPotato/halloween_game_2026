@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cf68jc3bykwlp" path="res://crosshair.tscn" id="2_f1yyh"]
 [ext_resource type="PackedScene" uid="uid://c2kjfy0oo3dgx" path="res://candy_button.tscn" id="3_wg18h"]
+[ext_resource type="PackedScene" uid="uid://cdn7xnw3rl3y3" path="res://candy_tween_button.tscn" id="3_wg18j"]
 
 [node name="SceneRoot" type="Node2D" unique_id=1908462043]
 
@@ -66,7 +67,7 @@ columns = 2
 [node name="Candy" parent="CanvasLayer/Control/GridContainer" unique_id=1118639746 instance=ExtResource("3_wg18h")]
 layout_mode = 2
 
-[node name="Candy2" parent="CanvasLayer/Control/GridContainer" unique_id=1955401198 instance=ExtResource("3_wg18h")]
+[node name="Candy2" parent="CanvasLayer/Control/GridContainer" unique_id=1955401198 instance=ExtResource("3_wg18j")]
 layout_mode = 2
 candy_type = 5
 
@@ -74,7 +75,7 @@ candy_type = 5
 layout_mode = 2
 candy_type = 2
 
-[node name="Candy4" parent="CanvasLayer/Control/GridContainer" unique_id=1067227359 instance=ExtResource("3_wg18h")]
+[node name="Candy4" parent="CanvasLayer/Control/GridContainer" unique_id=1067227359 instance=ExtResource("3_wg18j")]
 layout_mode = 2
 candy_type = 1
 
@@ -82,7 +83,7 @@ candy_type = 1
 layout_mode = 2
 candy_type = 7
 
-[node name="Candy6" parent="CanvasLayer/Control/GridContainer" unique_id=889101681 instance=ExtResource("3_wg18h")]
+[node name="Candy6" parent="CanvasLayer/Control/GridContainer" unique_id=889101681 instance=ExtResource("3_wg18j")]
 layout_mode = 2
 candy_type = 3
 
@@ -90,6 +91,6 @@ candy_type = 3
 layout_mode = 2
 candy_type = 6
 
-[node name="Candy8" parent="CanvasLayer/Control/GridContainer" unique_id=579203272 instance=ExtResource("3_wg18h")]
+[node name="Candy8" parent="CanvasLayer/Control/GridContainer" unique_id=579203272 instance=ExtResource("3_wg18j")]
 layout_mode = 2
 candy_type = 4
