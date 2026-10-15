@@ -1,20 +1,40 @@
-const mapToList = (map: Record<string, number>): string[] => {
+type Tallies = Record<string, number>;
+
+const tallyToList = (map: Tallies): string[] => {
 	const ret: string[] = [];
 	Object.entries(map).forEach(([k,v])=>{
 		for (let i = 0; i < v; i++) {
 			ret.push(k);
-			
 		}
 	})
 	return ret;
 };
-const listToMap = (list: string[]): Record<string, number> => {
-	const ret: Record<string, number> = {};
+const listToTally = (list: string[]): Tallies => {
+	const ret: Tallies = {};
 	list.forEach(item=>{
 		ret[item] = (ret[item] || 0) + 1;
 	})
 	return ret;
 };
+
+const talliesAreEqual = (a: Tallies, b: Tallies): boolean => {
+	const keysA = Object.keys(a);
+	const keysB = Object.keys(b);
+	if (keysA.length !== keysB.length) {
+		return false;
+	}
+	const uniqueKeys = [...new Set([...keysA, ...keysB])];
+	if (keysA.length !== uniqueKeys.length) {
+		return false;
+	}
+	for (let i = 0; i < uniqueKeys.length; i++) {
+		const key = uniqueKeys[i];
+		if (a[key] !== b[key]) {
+			return false;
+		}
+	}
+	return true;
+}
 
 // -------------------------------- ATTRIBUTES -------------------------------- //
 
@@ -211,35 +231,39 @@ const getAttributeInfo = (v: string) => {
 
 // -------------------------------- VARIANTS -------------------------------- //
 
-const variantLookup = {
-	cherry_flavoring: { parent: 'flavoring', variant_name: 'cherry' },
-	strawberry_flavoring: { parent: 'flavoring', variant_name: 'strawberry' },
-	raspberry_flavoring: { parent: 'flavoring', variant_name: 'raspberry' },
-	orange_flavoring: { parent: 'flavoring', variant_name: 'orange' },
-	almond_flavoring: { parent: 'flavoring', variant_name: 'almond' },
-	lemon_flavoring: { parent: 'flavoring', variant_name: 'lemon' },
-	lime_flavoring: { parent: 'flavoring', variant_name: 'lime' },
-	blueberry_flavoring: { parent: 'flavoring', variant_name: 'blueberry' },
-	ube_flavoring: { parent: 'flavoring', variant_name: 'ube' },
-	mint_flavoring: { parent: 'flavoring', variant_name: 'mint' },
-	caramel_flavoring: { parent: 'flavoring', variant_name: 'caramel' },
-	red_candied_flowers: { parent: 'candied_flowers', variant_name: 'red' },
-	white_candied_flowers: { parent: 'candied_flowers', variant_name: 'white' },
-	blue_candied_flowers: { parent: 'candied_flowers', variant_name: 'blue' },
-	yellow_candied_flowers: { parent: 'candied_flowers', variant_name: 'yellow' },
-	rainbow_sprinkles: { parent: 'sprinkles', variant_name: 'rainbow' },
-	chocolate_sprinkles: { parent: 'sprinkles', variant_name: 'chocolate' },
-	white_sprinkles: { parent: 'sprinkles', variant_name: 'white' },
-	ball_bearing_sprinkles: { parent: 'sprinkles', variant_name: 'ball_bearing' },
-	hard_candy_bats: { parent: 'hard_candy_shapes', variant_name: 'bat' },
-	hard_candy_eyeballs: { parent: 'hard_candy_shapes', variant_name: 'eyeball' },
-	hard_candy_ghosts: { parent: 'hard_candy_shapes', variant_name: 'ghost' },
+type VariantInfo = {
+	parent: string;
+	variantName: string;
+}
+const variantLookup: Record<string, VariantInfo> = {
+	cherry_flavoring: { parent: 'flavoring', variantName: 'cherry' },
+	strawberry_flavoring: { parent: 'flavoring', variantName: 'strawberry' },
+	raspberry_flavoring: { parent: 'flavoring', variantName: 'raspberry' },
+	orange_flavoring: { parent: 'flavoring', variantName: 'orange' },
+	almond_flavoring: { parent: 'flavoring', variantName: 'almond' },
+	lemon_flavoring: { parent: 'flavoring', variantName: 'lemon' },
+	lime_flavoring: { parent: 'flavoring', variantName: 'lime' },
+	blueberry_flavoring: { parent: 'flavoring', variantName: 'blueberry' },
+	ube_flavoring: { parent: 'flavoring', variantName: 'ube' },
+	mint_flavoring: { parent: 'flavoring', variantName: 'mint' },
+	caramel_flavoring: { parent: 'flavoring', variantName: 'caramel' },
+	red_candied_flowers: { parent: 'candied_flowers', variantName: 'red' },
+	white_candied_flowers: { parent: 'candied_flowers', variantName: 'white' },
+	blue_candied_flowers: { parent: 'candied_flowers', variantName: 'blue' },
+	yellow_candied_flowers: { parent: 'candied_flowers', variantName: 'yellow' },
+	rainbow_sprinkles: { parent: 'sprinkles', variantName: 'rainbow' },
+	chocolate_sprinkles: { parent: 'sprinkles', variantName: 'chocolate' },
+	white_sprinkles: { parent: 'sprinkles', variantName: 'white' },
+	ball_bearing_sprinkles: { parent: 'sprinkles', variantName: 'ball_bearing' },
+	hard_candy_bats: { parent: 'hard_candy_shapes', variantName: 'bat' },
+	hard_candy_eyeballs: { parent: 'hard_candy_shapes', variantName: 'eyeball' },
+	hard_candy_ghosts: { parent: 'hard_candy_shapes', variantName: 'ghost' },
 }
 
 // -------------------------------- ITEMS -------------------------------- //
 
-type StorageType = 'bag' | 'fridge' | 'box' | 'countertop';
-const isStorageType = (v: unknown): v is StorageType => {
+type ItemStorageType = 'bag' | 'fridge' | 'box' | 'countertop';
+const isItemStorageType = (v: unknown): v is ItemStorageType => {
 	if (v === 'bag') { return true; }
 	if (v === 'fridge') { return true; }
 	if (v === 'box') { return true; }
@@ -247,17 +271,42 @@ const isStorageType = (v: unknown): v is StorageType => {
 	return true;
 };
 
+type ItemCategory = 'base' // raw ingredient, e.g. egg, flour, or base material, e.g. cookie dough
+	| 'modifier' // optional supplement for any other category
+	| 'product' // final, sellable item
+	| 'filling' // optional; useable only on a finished product
+	| 'decoration' // optional; useable only on a finished product
+	| 'doodad' // optional; useable only on a finished product if a decoration is already present
+const isItemCategory = (v: unknown): v is ItemCategory => {
+	if (v === 'base') { return true; }
+	if (v === 'modifier') { return true; }
+	if (v === 'filling') { return true; }
+	if (v === 'decoration') { return true; }
+	if (v === 'doodad') { return true; }
+	return true;
+};
+type ItemCategories = ItemCategory[];
+const isItemCategories = (v: unknown): v is ItemCategories => {
+	if (!Array.isArray(v)) { return false; }
+	if (!v.every(isItemCategory)) { return false; }
+	return true;
+};
+
 type ItemInfo = {
-	storage: StorageType;
+	storage: ItemStorageType;
+	categories: ItemCategory[];
 	cost: number | null;
-	attributes: AttributeMap;
+	attributes: AttributeMap | 'from_recipe';
 	infinite?: boolean;
 }
 const isItemInfo = (v: unknown): v is ItemInfo => {
 	if (typeof v !== 'object' || v === null) {
 		return false;
 	}
-	if (!isStorageType((v as ItemInfo).storage)) {
+	if (!isItemStorageType((v as ItemInfo).storage)) {
+		return false;
+	}
+	if (!isItemCategories((v as ItemInfo).categories)) {
 		return false;
 	}
 	if (typeof (v as ItemInfo).cost !== 'number' && (v as ItemInfo) !== null) {
@@ -269,9 +318,10 @@ const isItemInfo = (v: unknown): v is ItemInfo => {
 	return true;
 };
 
-const itemInfo: Record<string, ItemInfo> = {
+const itemInfoMap: Record<string, ItemInfo> = {
 	flour: {
 		storage: 'bag',
+		categories: [ 'base' ],
 		cost: 1,
 		attributes: {
 			pale: 1,
@@ -279,6 +329,7 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	sugar: {
 		storage: 'bag',
+		categories: [ 'base' ],
 		cost: 1,
 		attributes: {
 			sweet: 2,
@@ -286,42 +337,38 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	egg: {
 		storage: 'fridge',
+		categories: [ 'base' ],
 		cost: 1,
 		attributes: {},
 	},
 	cream: {
 		storage: 'fridge',
+		categories: [ 'base' ],
 		cost: 2,
 		attributes: {
 			pale: 2,
 		},
 	},
+	cocoa_powder: {
+		storage: 'bag',
+		categories: [ 'modifier' ],
+		cost: 3,
+		attributes: {
+			chocolatey: 1,
+			dark: 1,
+		},
+	},
 	chocolate_bar: {
 		storage: 'box',
+		categories: [ 'base' ],
 		cost: 2,
 		attributes: {
 			chocolatey: 1,
-			dark: 1,
-		},
-	},
-	cocoa_powder: {
-		storage: 'bag',
-		cost: 3,
-		attributes: {
-			chocolatey: 1,
-			dark: 1,
-		},
-	},
-	chocolate_chips: {
-		storage: 'countertop',
-		cost: 3,
-		attributes: {
-			chocolatey: 1,
-			pop: 1,
 		},
 	},
 	cherry_flavoring: {
 		storage: 'countertop',
+		categories: [ 'modifier' ],
 		cost: 4,
 		attributes: {
 			fruity: 2,
@@ -332,6 +379,7 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	strawberry_flavoring: {
 		storage: 'countertop',
+		categories: [ 'modifier' ],
 		cost: 4,
 		attributes: {
 			fruity: 2,
@@ -341,6 +389,7 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	raspberry_flavoring: {
 		storage: 'countertop',
+		categories: [ 'modifier' ],
 		cost: 4,
 		attributes: {
 			fruity: 2,
@@ -350,6 +399,7 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	orange_flavoring: {
 		storage: 'countertop',
+		categories: [ 'modifier' ],
 		cost: 4,
 		attributes: {
 			fruity: 2,
@@ -359,6 +409,7 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	almond_flavoring: {
 		storage: 'countertop',
+		categories: [ 'modifier' ],
 		cost: 4,
 		attributes: {
 			nutty: 1,
@@ -367,6 +418,7 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	lemon_flavoring: {
 		storage: 'countertop',
+		categories: [ 'modifier' ],
 		cost: 4,
 		attributes: {
 			fruity: 1,
@@ -376,6 +428,7 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	lime_flavoring: {
 		storage: 'countertop',
+		categories: [ 'modifier' ],
 		cost: 4,
 		attributes: {
 			fruity: 1,
@@ -385,6 +438,7 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	blueberry_flavoring: {
 		storage: 'countertop',
+		categories: [ 'modifier' ],
 		cost: 4,
 		attributes: {
 			fruity: 2,
@@ -395,6 +449,7 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	ube_flavoring: {
 		storage: 'countertop',
+		categories: [ 'modifier' ],
 		cost: 4,
 		attributes: {
 			purple: 2,
@@ -403,6 +458,7 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	mint_flavoring: {
 		storage: 'countertop',
+		categories: [ 'modifier' ],
 		cost: 4,
 		attributes: {
 			minty: 3,
@@ -413,6 +469,7 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	caramel_flavoring: {
 		storage: 'countertop',
+		categories: [ 'modifier' ],
 		cost: 4,
 		attributes: {
 			fruity: 2,
@@ -422,6 +479,7 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	red_candied_flowers: {
 		storage: 'countertop',
+		categories: [ 'doodad' ],
 		cost: 5,
 		attributes: {
 			red: 1,
@@ -430,6 +488,7 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	white_candied_flowers: {
 		storage: 'countertop',
+		categories: [ 'doodad' ],
 		cost: 5,
 		attributes: {
 			pale: 2,
@@ -438,6 +497,7 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	blue_candied_flowers: {
 		storage: 'countertop',
+		categories: [ 'doodad' ],
 		cost: 5,
 		attributes: {
 			blue: 1,
@@ -446,6 +506,7 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	yellow_candied_flowers: {
 		storage: 'countertop',
+		categories: [ 'doodad' ],
 		cost: 5,
 		attributes: {
 			yellow: 1,
@@ -454,6 +515,7 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	rainbow_sprinkles: {
 		storage: 'countertop',
+		categories: [ 'modifier', 'doodad' ],
 		cost: 2,
 		attributes: {
 			varigated: 1,
@@ -462,6 +524,7 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	chocolate_sprinkles: {
 		storage: 'countertop',
+		categories: [ 'modifier', 'doodad' ],
 		cost: 2,
 		attributes: {
 			pop: 1,
@@ -469,6 +532,7 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	white_sprinkles: {
 		storage: 'countertop',
+		categories: [ 'modifier', 'doodad' ],
 		cost: 2,
 		attributes: {
 			pale: 1,
@@ -477,6 +541,7 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	ball_bearing_sprinkles: {
 		storage: 'countertop',
+		categories: [ 'modifier', 'doodad' ],
 		cost: 2,
 		attributes: {
 			pale: 1,
@@ -485,6 +550,7 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	hard_candy_bats: {
 		storage: 'countertop',
+		categories: [ 'doodad' ],
 		cost: 3,
 		attributes: {
 			pop: 1,
@@ -492,6 +558,7 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	hard_candy_eyeballs: {
 		storage: 'countertop',
+		categories: [ 'doodad' ],
 		cost: 3,
 		attributes: {
 			varigated: 1,
@@ -500,223 +567,399 @@ const itemInfo: Record<string, ItemInfo> = {
 	},
 	hard_candy_ghosts: {
 		storage: 'countertop',
+		categories: [ 'doodad' ],
 		cost: 3,
 		attributes: {
 			pop: 1,
 		},
 	},
+	chocolate_chips: {
+		storage: 'countertop',
+		categories: ['modifier', 'doodad'],
+		cost: 3,
+		attributes: 'from_recipe',
+	},
+	frosting: {
+		storage: 'countertop',
+		categories: ['decoration'],
+		cost: 2,
+		attributes: 'from_recipe',
+	},
+	whipped_cream: {
+		storage: 'fridge',
+		categories: ['filling', 'decoration'],
+		cost: 2,
+		attributes: 'from_recipe',
+	},
+	pastry_cream: {
+		storage: 'fridge',
+		categories: ['filling'],
+		cost: 3,
+		attributes: 'from_recipe',
+	},
+	pudding: {
+		storage: 'fridge',
+		categories: ['filling'],
+		cost: 3,
+		attributes: 'from_recipe',
+	},
+	cookie_dough: {
+		storage: 'fridge',
+		categories: ['base'],
+		cost: 2,
+		attributes: 'from_recipe',
+	},
+	cake_batter: {
+		storage: 'fridge',
+		categories: ['base'],
+		cost: 2,
+		attributes: 'from_recipe',
+	},
+	cookie: {
+		storage: 'countertop',
+		categories: ['product'],
+		cost: null,
+		attributes: 'from_recipe',
+	},
+	cupcake: {
+		storage: 'countertop',
+		categories: ['product'],
+		cost: null,
+		attributes: 'from_recipe',
+	},
+	cake: {
+		storage: 'fridge',
+		categories: ['product'],
+		cost: null,
+		attributes: 'from_recipe',
+	},
+	cake_slice: {
+		storage: 'fridge',
+		categories: ['product'],
+		cost: null,
+		attributes: 'from_recipe',
+	},
 };
 
 // -------------------------------- RECIPES -------------------------------- //
 
-type RecipeListing = {
-	product: string;
-	finished?: boolean; // can be sold; finishers can be used on it
+type RecipeInfo = {
+	output: string;
 	quantity: number;
-	location: string;
-	cook_in?: string;
-	time_tier: number;
+	location: string; // the appliance or tool to use
+	bakeWith?: string; // what kind of pan to use
+	time: number; // not exact time, but "short"/"medium"/"long" tiers
+	newAttributes: AttributeMap, // attributes to add to the output
+	// these will add their attributes to the output:
 	ingredients: string[],
-	add_attributes: AttributeMap, // attributes to add in addition to the ingredients'
-	allowed_modifiers?: string[];
+	allowedModifiers: string[]; // this will affect the product display name
 }
 
-const recipeMap: Record<string, RecipeListing> = {
-	chocolate_chips: {
-		product: 'chocolate_chips',
+const recipeList: RecipeInfo[] = [
+	{
+		output: 'chocolate_chips',
 		quantity: 4,
 		location: 'cutting_board',
-		time_tier: 1,
+		time: 1,
 		ingredients: [ 'chocolate_bar' ],
-		add_attributes: {
-			hard: 1
+		newAttributes: {
+			pop: 1
 		},
+		allowedModifiers: [],
 	},
-	frosting: {
-		product: 'frosting',
+	{
+		output: 'frosting',
 		quantity: 2,
 		location: 'mixer',
-		time_tier: 2,
+		time: 2,
 		ingredients: [ 'sugar' ],
-		add_attributes: {
+		newAttributes: {
 			pale: 3,
 			soft: 1,
 		},
-		allowed_modifiers: [
+		allowedModifiers: [
 			'cocoa_powder',
 			'flavoring',
 		],
 	},
-	whipped_cream: {
-		product: 'whipped_cream',
+	{
+		output: 'whipped_cream',
 		quantity: 3,
 		location: 'mixer',
-		time_tier: 3,
+		time: 3,
 		ingredients: [ 'cream' ],
-		add_attributes: {
+		newAttributes: {
 			pale: 1,
 			soft: 3,
 		},
+		allowedModifiers: [],
 	},
-	pastry_cream: {
-		product: 'pastry_cream',
+	{
+		output: 'pastry_cream',
 		quantity: 1,
 		location: 'saucepan',
-		time_tier: 2,
+		time: 2,
 		ingredients: [ 'cream', 'egg' ],
-		add_attributes: {
+		newAttributes: {
 			dark: 1,
 			soft: 1
 		},
+		allowedModifiers: [],
 	},
-	pudding: {
-		product: 'pudding',
+	{
+		output: 'pudding',
 		quantity: 1,
 		location: 'saucepan',
-		time_tier: 2,
+		time: 2,
 		ingredients: [ 'cream', 'sugar' ],
-		add_attributes: {
+		newAttributes: {
 			soft: 2
 		},
-		allowed_modifiers: [
+		allowedModifiers: [
 			'cocoa_powder',
 			'flavoring',
 		],
 	},
-	cookie_dough: {
-		product: 'cookie_dough',
+	// PRE-BAKING OUTPUT
+	{
+		output: 'cookie_dough',
 		quantity: 1,
 		location: 'mixer',
-		time_tier: 2,
+		time: 2,
 		ingredients: [ 'flour', 'sugar' ],
-		add_attributes: {
+		newAttributes: {
 			soft: 1,
 		},
-		allowed_modifiers: [
+		allowedModifiers: [
 			'cocoa_powder',
 			'flavoring',
 			'chocolate_chips',
 		],
 	},
-	cake_batter: {
-		product: 'cake_batter',
+	{
+		// Duplicate! (so you can add modifiers to already-finished cookie dough)
+		output: 'cookie_dough',
 		quantity: 1,
 		location: 'mixer',
-		time_tier: 2,
+		time: 0, // Note the cook time!
+		ingredients: [ 'cookie_dough' ],
+		newAttributes: {}, // No "new" attributes because that part happened already
+		allowedModifiers: [
+			'cocoa_powder',
+			'flavoring',
+			'chocolate_chips',
+		],
+	},
+	{
+		output: 'cake_batter',
+		quantity: 1,
+		location: 'mixer',
+		time: 2,
 		ingredients: [ 'flour', 'sugar', 'egg' ],
-		add_attributes: {
+		newAttributes: {
 			soft: 1,
 		},
-		allowed_modifiers: [
+		allowedModifiers: [
 			'cocoa_powder',
 			'flavoring',
 			'chocolate_chips',
 			'shredded_carrot',
 		],
 	},
-	// COOKING STEPS
-	// Note: cooking adds "dark: 1"
-	cookie: {
-		product: 'cookie',
-		finished: true,
+	{
+		// Duplicate! (so you can add modifiers to already-finished batter)
+		output: 'cake_batter',
+		quantity: 1,
+		location: 'mixer',
+		time: 0, // Note the cook time!
+		ingredients: [ 'cake_batter' ],
+		newAttributes: {}, // No "new" attributes because that part happened already
+		allowedModifiers: [
+			'cocoa_powder',
+			'flavoring',
+			'chocolate_chips',
+			'shredded_carrot',
+		],
+	},
+	// POST-BAKING OUTPUT! THE ACTUAL PRODUCTS
+	// Note: cooking adds "dark: 1" automatically
+	{
+		output: 'cookie',
 		quantity: 12,
 		location: 'oven',
-		cook_in: 'jellyroll_pan',
-		time_tier: 2,
+		bakeWith: 'cookie_sheet',
+		time: 2,
 		ingredients: [ 'cookie_dough' ],
-		add_attributes: {},
+		newAttributes: {},
+		allowedModifiers: [ 'cookie_cutter' ],
 	},
-	cupcake: {
-		product: 'cupcake',
-		finished: true,
+	{
+		output: 'cupcake',
 		quantity: 6,
 		location: 'oven',
-		cook_in: 'muffin_tin',
-		time_tier: 3,
+		bakeWith: 'muffin_tin',
+		time: 3,
 		ingredients: [ 'cake_batter' ],
-		add_attributes: {},
+		newAttributes: {},
+		allowedModifiers: [ 'muffin_liner' ],
 	},
-	cake: {
-		product: 'cake',
-		finished: true,
+	{
+		output: 'cake',
 		quantity: 1,
 		location: 'oven',
-		cook_in: 'cake_form',
-		time_tier: 4,
+		bakeWith: 'cake_pan',
+		time: 4,
 		ingredients: [ 'cake_batter' ],
-		add_attributes: {},
+		newAttributes: {},
+		allowedModifiers: ['cake_form'],
 	},
-	cake_slice: {
-		product: 'cake_slice',
-		finished: true,
+	{
+		output: 'cake_slice',
 		quantity: 6,
 		location: 'cake_knife',
-		time_tier: 0,
+		time: 0,
 		ingredients: [ 'cake' ],
-		add_attributes: {},
+		newAttributes: {},
+		allowedModifiers: [],
 	}
+];
+
+const getRecipesForProduct = (product: string) => {
+	const recipes = Object.values(recipeList).filter(v=>v.output === product);
+	if (recipes.length === 0) {
+		throw new Error (`No recipes found for product ${product}`);
+	}
+	return recipes;
+};
+const getFirstRecipeForProduct = (product: string) => {
+	const recipes = getRecipesForProduct(product);
+	return recipes[0];
+};
+const getRecipesForLocation = (location: string) => {
+	const recipes = Object.values(recipeList).filter(v=>v.location === location);
+	if (recipes.length === 0) {
+		throw new Error (`No recipes found for location ${location}`);
+	}
+	return recipes;
 };
 
-// Worry about this later
-// const jumbo_recipes = {
-// 	cookie: { servings: 3 },
-// 	cupcake: { servings: 2 },
-// 	cake: { servings: 1 },
-// };
+const isModifierAllowedInRecipe = (modifier: string, recipe: RecipeInfo): boolean => {
+	if (recipe.allowedModifiers.includes(modifier)) {
+		return true;
+	}
+	// If we're here, we might need to look it up by its parent name
+	// E.g. cherry_flavoring -> flavoring
+	const variantInfo = variantLookup[modifier];
+	if (variantInfo === undefined) {
+		// item not a valid modifier
+		return false;
+	}
+	const parentName = variantInfo.parent;
+	if (recipe.allowedModifiers.includes(parentName)) {
+		return true;
+	}
+	return false;
+};
 
-const finishers: Record<string, Record<string, string[]>> = {
+// -------------------------------- FINISHERS (filling, decorations) -------------------------------- //
+
+type ProductFinisherType = 'filling' | 'decoration' | 'doodad';
+const isProductFinisherType = (v: unknown): v is ProductFinisherType => {
+	if (v === 'filling') { return true; }
+	if (v === 'decoration') { return true; }
+	if (v === 'doodad') { return true; }
+	return true;
+};
+
+type ProductFinisherInfo = {
+	filling: string[];
+	decoration: string[];
+	doodad: string[];
+}
+const productFinishers: Record<string, ProductFinisherInfo> = {
 	cookie: {
-		allowed_fillings: [],
-		allowed_decorations: [
+		filling: [],
+		decoration: [
 			'frosting',
 		],
-		allowed_doodads: [
+		doodad: [
 			'candy_shapes',
 			'sprinkles',
 			'candied_flowers',
 		],
 	},
 	cupcake: {
-		allowed_fillings: [
+		filling: [
 			'pastry_cream',
 			'whipped_cream',
-			// 'jam',
 			'pudding',
 		],
-		allowed_decorations: [
+		decoration: [
 			'frosting',
 			'whipped_cream',
 		],
-		allowed_doodads: [
+		doodad: [
 			'candy_shapes',
 			'sprinkles',
 			'candied_flowers',
 		],
 	},
 	cake: {
-		allowed_fillings: [
+		filling: [
 			'whipped_cream',
-			// 'jam',
 			'ice_cream',
 		],
-		allowed_decorations: [
+		decoration: [
 			'frosting',
 			'whipped_cream',
 		],
-		allowed_doodads: [
+		doodad: [
 			'sprinkles',
 			'candied_flowers',
 		],
 	},
 	cake_slice: {
-		allowed_fillings: [],
-		allowed_decorations: [],
-		allowed_doodads: [],
+		filling: [],
+		decoration: [],
+		doodad: [],
 	},
+};
+const getFinisherInfo = (product: string) => {
+	const ret = productFinishers[product];
+	if (ret === undefined) {
+		throw new Error (`No finisher info found for product ${product}`)
+	}
+	return ret;
+};
+
+const isFinisherAllowedOnProduct = (finisherName: string, finisherType: ProductFinisherType, product: string): boolean => {
+	const finishers = getFinisherInfo(product);
+	if (finishers[finisherType].includes(finisherName)) {
+		return true;
+	}
+	// If we're here, we might need to look it up by its parent name
+	// E.g. cherry_flavoring -> flavoring
+	const variantInfo = variantLookup[finisherName];
+	if (variantInfo === undefined) {
+		// item incompatible for this finisher layer
+		return false;
+	}
+	const parentName = variantInfo.parent;
+	if (finishers[finisherType].includes(parentName)) {
+		return true;
+	}
+	return false;
 };
 
 // -------------------------------- BUILDING THE THINGS -------------------------------- //
 
+const getItemInfo = (item: string) => {
+	const info = itemInfoMap[item];
+	if (info === undefined) {
+		throw new Error (`Cannot find item info for ${item}`);
+	}
+	return info;
+}
 
 type Modifier = {
 	item: string;
@@ -749,110 +992,133 @@ const addAttributesToMap = (a: AttributeMap, b: AttributeMap) => {
 // QUICK TEST
 
 const recipeAttributeCache: Record<string, AttributeMap> = {};
-const getAttributesForItem = (v: string, ) => {
+
+// Note: this does not account for any modifiers atm
+const getAttributesForItem = (item: string) => {
 	// Use cache, if any
-	const cache = recipeAttributeCache[v];
+	const cache = recipeAttributeCache[item];
 	if (cache !== undefined) {
 		return cache;
 	}
-	// Might be an ingredient
-	const asIngredient = itemInfo[v];
-	if (asIngredient !== undefined) {
-		const ingredientAttributes = asIngredient.attributes;
-		recipeAttributeCache[v] = ingredientAttributes;
-		return ingredientAttributes;
+	
+	const itemInfo = getItemInfo(item);
+
+	// Return attributes if provided
+	if (typeof itemInfo.attributes !== 'string') {
+		recipeAttributeCache[item] = itemInfo.attributes;
+		return itemInfo.attributes;
 	}
-	// If it's not a product, something broke
-	const asProduct = recipeMap[v];
-	if (asProduct === undefined) {
-		throw new Error (`No item info or recipe info found for ${v}`);
-	}
-	// If we're here, it's definitely a product
-	const productAttributes: AttributeMap = structuredClone(asProduct.add_attributes);
-	asProduct.ingredients.forEach(ingredient=>{
+
+	// Otherwise generate them from the recipe
+	const recipe = getFirstRecipeForProduct(item);
+	const attributes: AttributeMap = structuredClone(recipe.newAttributes);
+	recipe.ingredients.forEach(ingredient=>{
 		const ingredientAttributes = getAttributesForItem(ingredient);
 		if (ingredientAttributes === undefined) {
 			throw new Error (`Could not get ingredient attributes for ${ingredient}`);
 		}
-		addAttributesToMap(productAttributes, ingredientAttributes);
+		addAttributesToMap(attributes, ingredientAttributes);
 	})
-	// Cooking darkens it slightly
-	if (asProduct.cook_in !== undefined) {
-		addAttributesToMap(productAttributes, {dark: 1});
-	}
-	recipeAttributeCache[v] = productAttributes;
-	return productAttributes;
-};
-// Fill out the cache; use cache from here(?)
-Object.keys(recipeMap).forEach(k=>{
-	getAttributesForItem(k);
-});
-console.log(recipeAttributeCache)
 
-// A SECOND QUICK TEST
+	// IMPORTANT NOTE!! Cooking darkens it slightly! Auto add "dark: 1"
+	if (recipe.bakeWith !== undefined) {
+		addAttributesToMap(attributes, {dark: 1});
+	}
+
+	recipeAttributeCache[item] = attributes;
+	return attributes;
+};
+
+// Fill out the basic cache
+recipeList.forEach(recipe=>{
+	getAttributesForItem(recipe.output);
+});
+
+// Check the output
+// console.log(recipeAttributeCache)
+
+// ------------------------------ A SECOND QUICK TEST ------------------------------
 
 type IngredientUnit = {
 	item: string;
 	quantity: number;
 	modifiers: string[];
 };
-type CookingInfo = {
+const isIngredientUnit = (v: unknown): v is IngredientUnit => {
+	if (typeof (v as IngredientUnit).item !== 'string') { return false; }
+	if (typeof (v as IngredientUnit).quantity !== 'number') { return false; }
+	if (!Array.isArray((v as IngredientUnit).modifiers)) { return false; }
+	if (!((v as IngredientUnit).modifiers.every(v=>typeof v === 'string'))) { return false; }
+	return true;
+};
+
+const ingredientUnitsToTallies = (ingredients: IngredientUnit[]) => {
+	const ret: Tallies = {};
+	ingredients.forEach(v=>{
+		ret[v.item] = (ret[v.item] || 0) + v.quantity
+	})
+	return ret;
+};
+
+export type CookingInput = {
 	location: string;
 	ingredients: IngredientUnit[];
 };
-type CookingTest = CookingInfo & {
-	expected: IngredientUnit;
+export type CookingCompatibilityEval = {
+	// Output info
+	output: string;
+	quantity: number;
+	inheritedModifiers: string[]; // if the base ingredients had modifiers on them, they land here
+	newModifiers: string[]; // new ingredients that are adding new modifiers go here
+	// Report card
+	errorCount: number; // quantity of problematic ingredients, both missing and extraneous
+	missingIngredients: string[];
+	extraneousIngredients: IngredientUnit[];
 };
 
-const testIngredients: CookingTest[] = [
-	{
-		location: 'mixer',
-		ingredients: [
-			{ item: 'flour', quantity: 1, modifiers: [] },
-			{ item: 'sugar', quantity: 1, modifiers: [] },
-			{ item: 'orange_flavoring', quantity: 1, modifiers: [] },
-		],
-		expected: {
-			item: 'cookie_dough',
-			quantity: 1,
-			modifiers: [ 'orange_flavoring' ],
-		},
-	},
-	{
-		location: 'mixer',
-		ingredients: [
-			{ item: 'cookie_dough', quantity: 1, modifiers: [] },
-			{ item: 'orange_flavoring', quantity: 1, modifiers: [] },
-		],
-		expected: {
-			item: 'cookie_dough',
-			quantity: 1,
-			modifiers: [ 'orange_flavoring' ],
-		},
-	},
-	{
-		location: 'mixer',
-		ingredients: [
-			{ item: 'cookie_dough', quantity: 1, modifiers: [] },
-			{ item: 'cocoa_powder', quantity: 1, modifiers: [] },
-			{ item: 'orange_flavoring', quantity: 1, modifiers: [] },
-		],
-		expected: {
-			item: 'cookie_dough',
-			quantity: 1,
-			modifiers: [ 'cocoa_powder', 'orange_flavoring' ],
-		},
-	},
-	{
-		location: 'mixer',
-		ingredients: [
-			{ item: 'cookie_dough', quantity: 1, modifiers: [ 'cocoa_powder' ] },
-			{ item: 'orange_flavoring', quantity: 1, modifiers: [] },
-		],
-		expected: {
-			item: 'cookie_dough',
-			quantity: 1,
-			modifiers: [ 'cocoa_powder', 'orange_flavoring' ],
-		},
-	},
-];
+const getIngredientRecipeEval = (recipeInfo: RecipeInfo, givenIngredients: IngredientUnit[]): CookingCompatibilityEval => {
+	const tally = listToTally(recipeInfo.ingredients);
+	const inheritedModifiers: string[] = [];
+	const newModifiers: string[] = [];
+	const extraneousIngredients: IngredientUnit[] = [];
+	givenIngredients.forEach(v=>{
+		// v = { item: 'sugar', quantity: 1, modifiers: [] }
+		if (tally[v.item]) { // 0 means we don't have any even though there's an entry; the falsiness is fine
+			tally[v.item] -= 1;
+			if (v.modifiers.length > 0) {
+				inheritedModifiers.push(...(v.modifiers))
+			}
+			return;
+		}
+		// if allowed as a modifier, collect it
+		if (isModifierAllowedInRecipe(v.item, recipeInfo)) {
+			newModifiers.push(v.item);
+			if (v.modifiers.length > 0) {
+				newModifiers.push(...(v.modifiers))
+			}
+		} else {
+			extraneousIngredients.push(v);
+		}
+	});
+	const missingIngredients = tallyToList(tally);
+	return {
+		output: recipeInfo.output,
+		quantity: recipeInfo.quantity,
+		inheritedModifiers,
+		newModifiers,
+		errorCount: missingIngredients.length + extraneousIngredients.length,
+		missingIngredients,
+		extraneousIngredients,
+	};
+};
+
+export const cook = (location: string, providedIngredients: IngredientUnit[]) => {
+	// Recipes at the given location
+	const allRecipes = getRecipesForLocation(location);
+	const evals = allRecipes
+		.map(recipe=>getIngredientRecipeEval(recipe, providedIngredients))
+		.sort((a,b)=>a.errorCount - b.errorCount)
+	const bestScore = evals[0].errorCount
+	const bestEvals = evals.filter(v=>v.errorCount === bestScore);
+	return bestEvals[0];
+};
