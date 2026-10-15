@@ -12,36 +12,61 @@
 
 */
 
+// COLOR
+
 type Color = 'pale' | 'dark' | 'red' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple' | 'varigated';
 const colors = new Set([ 'pale', 'dark', 'red', 'orange', 'yellow', 'green', 'blue', 'purple', 'varigated' ]);
-const isColor = (v: unknown): v is Color => typeof v === 'string' && colors.has(v);
-
-type Texture = 'dry' | 'moist' | 'soft' | 'hard' | 'sticky' | 'crumbly' | 'pop';
-const textures = new Set([ 'dry', 'moist', 'soft', 'hard', 'sticky', 'crumbly', 'pop' ]);
-const isTexture = (v: unknown): v is Texture => typeof v === 'string' && textures.has(v);
-
-type Flavor = 'nutty' | 'savory' | 'chocolatey' | 'fruity' | 'minty' | 'salty' | 'sweet' | 'tart' | 'floral';
-const flavors = new Set([ 'nutty', 'savory', 'chocolatey', 'fruity', 'minty', 'salty', 'sweet', 'tart', 'floral' ]);
-const isFlavor = (v: unknown): v is Flavor => typeof v === 'string' && flavors.has(v);
-
-type Attribute = Color | Texture | Flavor ;
-const isAttribute = (v: unknown): v is Attribute => isColor(v) || isTexture(v) || isFlavor(v);
-
-type AttributeMap = Partial<Record<Attribute, number>>;
-type AttributeInfo = {
+type ColorInfo = {
 	attribute: string;
 	type: 'color';
 	neighbors?: Color[];
 	opposite?: Color
-} | {
+};
+const isColor = (v: unknown): v is Color => typeof v === 'string' && colors.has(v);
+const isColorInfo = (v: unknown): v is ColorInfo => (v as ColorInfo).type === 'color';
+
+// TEXTURE
+
+type Texture = 'dry' | 'moist' | 'soft' | 'hard' | 'sticky' | 'crumbly' | 'pop';
+const textures = new Set([ 'dry', 'moist', 'soft', 'hard', 'sticky', 'crumbly', 'pop' ]);
+type TextureInfo = {
 	attribute: string;
 	type: 'texture';
 	opposite?: Texture;
-} | {
+};
+const isTexture = (v: unknown): v is Texture => typeof v === 'string' && textures.has(v);
+const isTextureInfo = (v: unknown): v is TextureInfo => (v as TextureInfo).type === 'texture';
+
+// FLAVOR
+
+type Flavor = 'nutty' | 'savory' | 'chocolatey' | 'fruity' | 'minty' | 'salty' | 'sweet' | 'tart' | 'floral';
+const flavors = new Set([ 'nutty', 'savory', 'chocolatey', 'fruity', 'minty', 'salty', 'sweet', 'tart', 'floral' ]);
+type FlavorInfo = {
 	attribute: string;
 	type: 'flavor';
 	opposite?: Flavor;
 };
+const isFlavor = (v: unknown): v is Flavor => typeof v === 'string' && flavors.has(v);
+const isFlavorInfo = (v: unknown): v is FlavorInfo => (v as FlavorInfo).type === 'flavor';
+
+// ALL TOGETHER
+
+type Attribute = Color | Texture | Flavor ;
+const isAttribute = (v: unknown): v is Attribute => isColor(v) || isTexture(v) || isFlavor(v);
+type AttributeInfo = ColorInfo | TextureInfo | FlavorInfo;
+
+type AttributeMap = Partial<Record<Attribute, number>>;
+const isAttributeMap = (v: unknown): v is AttributeMap => {
+	if (typeof v !== 'object' || v === null) {
+		return false;
+	}
+	const keysAreGood = Object.keys(v).every(v=>isAttribute(v));
+	const valuesAreGood = Object.values(v).every(v=>typeof v === 'number');
+	return keysAreGood && valuesAreGood;
+};
+
+// THE ACTUAL INFO
+
 const attributeInfo: Record<Attribute, AttributeInfo> = {
 	pale: {
 		type: 'color',
@@ -160,6 +185,11 @@ const attributeInfo: Record<Attribute, AttributeInfo> = {
 		attribute: 'floral',
 	},
 };
+const getAttributeInfo = (v: string) => {
+	if (!isAttribute(v)) {
+		throw new Error (`${v} is not an Attribute!`);
+	}
+}
 
 // -------------------------------- VARIANTS -------------------------------- //
 
@@ -190,14 +220,37 @@ const variantLookup = {
 
 // -------------------------------- ITEMS -------------------------------- //
 
-
 type StorageType = 'bag' | 'fridge' | 'box' | 'countertop';
+const isStorageType = (v: unknown): v is StorageType => {
+	if (v === 'bag') { return true; }
+	if (v === 'fridge') { return true; }
+	if (v === 'box') { return true; }
+	if (v === 'countertop') { return true; }
+	return true;
+};
+
 type ItemInfo = {
 	storage: StorageType;
 	cost: number | null;
 	attributes: AttributeMap;
 	infinite?: boolean;
 }
+const isItemInfo = (v: unknown): v is ItemInfo => {
+	if (typeof v !== 'object' || v === null) {
+		return false;
+	}
+	if (!isStorageType((v as ItemInfo).storage)) {
+		return false;
+	}
+	if (typeof (v as ItemInfo).cost !== 'number' && (v as ItemInfo) !== null) {
+		return false;
+	}
+	if (!isAttributeMap((v as ItemInfo).attributes)) {
+		return false;
+	}
+	return true;
+};
+
 const itemInfo: Record<string, ItemInfo> = {
 	flour: {
 		storage: 'bag',
@@ -216,7 +269,9 @@ const itemInfo: Record<string, ItemInfo> = {
 	egg: {
 		storage: 'fridge',
 		cost: 1,
-		attributes: {},
+		attributes: {
+			dark: 1,
+		},
 	},
 	cream: {
 		storage: 'fridge',
@@ -440,14 +495,13 @@ const itemInfo: Record<string, ItemInfo> = {
 
 type RecipeListing = {
 	product: string;
-	finished?: boolean;
+	finished?: boolean; // can be sold; finishers can be used on it
 	quantity: number;
 	location: string;
 	time_tier: number;
 	ingredients: string[],
-	add_attributes: AttributeMap,
+	add_attributes: AttributeMap, // attributes to add in addition to the ingredients'
 	allowed_modifiers?: string[];
-	modifier_threshold?: number;
 }
 
 const recipeMap: Record<string, RecipeListing> = {
@@ -475,7 +529,6 @@ const recipeMap: Record<string, RecipeListing> = {
 			'cocoa_powder',
 			'flavoring',
 		],
-		modifier_threshold: 2,
 	},
 	whipped_cream: {
 		product: 'whipped_cream',
@@ -484,7 +537,7 @@ const recipeMap: Record<string, RecipeListing> = {
 		time_tier: 3,
 		ingredients: [ 'cream' ],
 		add_attributes: {
-			pale: 3,
+			pale: 1,
 			soft: 3,
 		},
 	},
@@ -512,7 +565,6 @@ const recipeMap: Record<string, RecipeListing> = {
 			'cocoa_powder',
 			'flavoring',
 		],
-		modifier_threshold: 2,
 	},
 	cookie_dough: {
 		product: 'cookie_dough',
@@ -528,7 +580,6 @@ const recipeMap: Record<string, RecipeListing> = {
 			'flavoring',
 			'chocolate_chips',
 		],
-		modifier_threshold: 2,
 	},
 	cookie: {
 		product: 'cookie',
@@ -555,7 +606,6 @@ const recipeMap: Record<string, RecipeListing> = {
 			'flavoring',
 			'chocolate_chips',
 		],
-		modifier_threshold: 2,
 	},
 	cupcake: {
 		product: 'cupcake',
@@ -582,7 +632,6 @@ const recipeMap: Record<string, RecipeListing> = {
 			'flavoring',
 			'shredded_carrot',
 		],
-		modifier_threshold: 2,
 	},
 	cake: {
 		product: 'cake',
@@ -606,11 +655,12 @@ const recipeMap: Record<string, RecipeListing> = {
 	}
 };
 
-const jumbo_recipes = {
-	cookie: { servings: 3 },
-	cupcake: { servings: 2 },
-	cake: { servings: 1 },
-};
+// Worry about this later
+// const jumbo_recipes = {
+// 	cookie: { servings: 3 },
+// 	cupcake: { servings: 2 },
+// 	cake: { servings: 1 },
+// };
 
 const finishers: Record<string, Record<string, string[]>> = {
 	cookie: {
@@ -665,6 +715,24 @@ const finishers: Record<string, Record<string, string[]>> = {
 
 // -------------------------------- BUILDING THE THINGS -------------------------------- //
 
+
+type Modifier = {
+	item: string;
+	quantity: number;
+};
+type ProductComponent = {
+	item: string;
+	modifiers: Modifier[];
+	quantity: number;
+};
+type FinalItem = {
+	base: ProductComponent;
+	modifiers?: ProductComponent[],
+	fillings?: ProductComponent[],
+	decorations?: ProductComponent[],
+	doodads?: ProductComponent[],
+};
+
 const addAttributesToMap = (a: AttributeMap, b: AttributeMap) => {
 	const keysA = Object.keys(a);
 	const keysB = Object.keys(b);
@@ -675,3 +743,46 @@ const addAttributesToMap = (a: AttributeMap, b: AttributeMap) => {
 	})
 	return a;
 };
+
+// QUICK TEST
+
+const recipeAttributeCache: Record<string, AttributeMap> = {};
+const getAttributesForItem = (v: string) => {
+	// Use cache, if any
+	const cache = recipeAttributeCache[v];
+	if (cache !== undefined) {
+		return cache;
+	}
+	// Might be an ingredient
+	const asIngredient = itemInfo[v];
+	if (asIngredient !== undefined) {
+		const ingredientAttributes = asIngredient.attributes;
+		recipeAttributeCache[v] = ingredientAttributes;
+		return ingredientAttributes;
+	}
+	// If it's not a product, something broke
+	const asProduct = recipeMap[v];
+	if (asProduct === undefined) {
+		throw new Error (`No item info or recipe info found for ${v}`);
+	}
+	// If we're here, it's definitely a product
+	const productAttributes: AttributeMap = structuredClone(asProduct.add_attributes);
+	asProduct.ingredients.forEach(ingredient=>{
+		const ingredientAttributes = getAttributesForItem(ingredient);
+		if (ingredientAttributes === undefined) {
+			throw new Error (`Could not get ingredient attributes for ${ingredient}`);
+		}
+		addAttributesToMap(productAttributes, ingredientAttributes);
+	})
+	// Cooking darkens it slightly
+	if (asProduct.location === 'oven') {
+		addAttributesToMap(productAttributes, {dark: 1});
+	}
+	recipeAttributeCache[v] = productAttributes;
+	return productAttributes;
+}
+// Fill out the cache; use cache from here(?)
+Object.keys(recipeMap).forEach(k=>{
+	getAttributesForItem(k);
+})
+console.log(recipeAttributeCache)
