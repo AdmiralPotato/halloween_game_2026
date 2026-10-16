@@ -1,8 +1,5 @@
 import { cook } from "./main.ts";
-import type {
-	CookingInput,
-	CookingCompatibilityEval,
-} from "./main.ts";
+import type { CookingInput, CookingCompatibilityEval } from "./main.ts";
 
 const standardizeArray = (arr: string[]) => `[` + structuredClone(arr.sort()).join(', ') + `]`;
 
@@ -150,6 +147,43 @@ const cookingCompatibilityTests: CookingCompatibilityTest[] = [
 			newModifiers: [ 'orange_flavoring' ],
 			errorCount: 0,
 			missingIngredients: [],
+			extraneousIngredients: [],
+		},
+	},
+	{
+		input: {
+			location: 'mixer',
+			ingredients: [
+				{ item: 'cookie_dough', quantity: 1, modifiers: [ 'cocoa_powder' ] },
+				{ item: 'orange_flavoring', quantity: 1, modifiers: [] },
+				{ item: 'frosting', quantity: 1, modifiers: [] },
+			],
+		},
+		expected: {
+			output: 'cookie_dough',
+			quantity: 1,
+			inheritedModifiers: [ 'cocoa_powder' ],
+			newModifiers: [ 'orange_flavoring' ],
+			errorCount: 1,
+			missingIngredients: [],
+			extraneousIngredients: [{ item: 'frosting', quantity: 1, modifiers: [] }],
+		},
+	},
+	{
+		input: {
+			location: 'mixer',
+			ingredients: [
+				{ item: 'flour', quantity: 1, modifiers: [] },
+				{ item: 'orange_flavoring', quantity: 1, modifiers: [] },
+			],
+		},
+		expected: {
+			output: 'cookie_dough',
+			quantity: 1,
+			inheritedModifiers: [],
+			newModifiers: [ 'orange_flavoring' ],
+			errorCount: 1,
+			missingIngredients: [ 'sugar' ],
 			extraneousIngredients: [],
 		},
 	},
