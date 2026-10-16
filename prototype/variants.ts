@@ -35,3 +35,11 @@ export const getVariantParent = (v: string) => {
 	}
 	return info.parent;
 };
+
+export const getVariantPrintName = (v: string) => {
+	const info = variantLookup[v];
+	if (info === undefined) {
+		return undefined;
+	}
+	return info.variantName;
+}

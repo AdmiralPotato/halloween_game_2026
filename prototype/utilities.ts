@@ -56,3 +56,21 @@ export const ingredientUnitsToTallies = (ingredients: IngredientUnit[]) => {
 	})
 	return ret;
 };
+
+// MISC
+
+export const quickOxfordCommas = (items: string[]) => {
+	if (items.length === 2) {
+		return items.join(' and ');
+	}
+	if (items.length > 2) {
+		const last = items.pop();
+		const secondToLast = items.pop();
+		if (!last || !secondToLast) {
+			throw new Error ("I just proved they're there TS");
+		}
+		items.push(secondToLast + ', and ' + last);
+	}
+	return items.join(', ');
+};
+

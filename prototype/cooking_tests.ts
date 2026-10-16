@@ -1,4 +1,4 @@
-import { cook } from "./main.ts";
+import { cookEval } from "./main.ts";
 import type { CookingInput, CookingCompatibilityEval } from "./main.ts";
 
 const standardizeArray = (arr: string[]) => `[` + structuredClone(arr.sort()).join(', ') + `]`;
@@ -190,7 +190,7 @@ const cookingCompatibilityTests: CookingCompatibilityTest[] = [
 ];
 
 const testsMap = cookingCompatibilityTests.map((test, i)=>{
-	const found = cook(test.input.location, test.input.ingredients);
+	const found = cookEval(test.input.location, test.input.ingredients);
 	const errorMessages = compareCookingCompatibilityEvals(found, test.expected);
 	if (errorMessages.length > 0) {
 		console.error(`Test #${i}: ${errorMessages.length} errors!`)

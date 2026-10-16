@@ -9,6 +9,8 @@ import { listToTally, tallyToList } from "./utilities.ts";
 
 import { getItemInfo } from "./items.ts";
 
+import type { FinishedProduct } from "./finishers.ts";
+
 type Modifier = {
 	item: string;
 	quantity: number;
@@ -127,7 +129,7 @@ const getIngredientRecipeEval = (recipeInfo: RecipeInfo, givenIngredients: Ingre
 	};
 };
 
-export const cook = (location: string, providedIngredients: IngredientUnit[]) => {
+export const cookEval = (location: string, providedIngredients: IngredientUnit[]): CookingCompatibilityEval => {
 	// Recipes at the given location
 	const allRecipes = getRecipesForLocation(location);
 	const evals = allRecipes
@@ -136,4 +138,16 @@ export const cook = (location: string, providedIngredients: IngredientUnit[]) =>
 	const bestScore = evals[0].errorCount
 	const bestEvals = evals.filter(v=>v.errorCount === bestScore);
 	return bestEvals[0];
+};
+
+export const cook = (location: string, providedIngredients: IngredientUnit[]): FinishedProduct => {
+	const result = cookEval(location, providedIngredients);
+	return {
+		product: result.output,
+		quantity: result.quantity,
+		modifiers: [...result.newModifiers, ...result.inheritedModifiers],
+		filling: [],
+		decoration: [],
+		doodad: [],
+	}
 };
