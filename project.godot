@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="halloween_game_2026"
-run/main_scene="uid://bfqbs0pmolh7q"
+run/main_scene="uid://q3l36yvm5xr1"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
