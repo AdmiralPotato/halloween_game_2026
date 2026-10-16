@@ -1,7 +1,7 @@
-import { cookEval } from "./main.ts";
 import type { CookingInput, CookingCompatibilityEval } from "./main.ts";
+import { cookEval } from "./main.ts";
 
-const standardizeArray = (arr: string[]) => `[` + structuredClone(arr.sort()).join(', ') + `]`;
+import { sortAndStringifyArray } from "./utilities.ts";
 
 export type CookingCompatibilityTest = {
 	input: CookingInput;
@@ -13,7 +13,7 @@ const compareCookingCompatibilityEvals = (found: CookingCompatibilityEval, expec
 
 	const logAndOrSaveMessage = (v: string) => {
 		messages.push(v);
-		console.log(v);
+		// console.log(v);
 	}
 
 	if (found.errorCount !== expected.errorCount) {
@@ -28,26 +28,26 @@ const compareCookingCompatibilityEvals = (found: CookingCompatibilityEval, expec
 		logAndOrSaveMessage(`quantity: expected ${expected.quantity}, found ${found.quantity}`);
 	}
 
-	const foundInheritedMods = standardizeArray(found.inheritedModifiers)
-	const expectedInheritedMods = standardizeArray(expected.inheritedModifiers)
+	const foundInheritedMods = sortAndStringifyArray(found.inheritedModifiers)
+	const expectedInheritedMods = sortAndStringifyArray(expected.inheritedModifiers)
 	if (foundInheritedMods !== expectedInheritedMods) {
 		logAndOrSaveMessage(`inheritedModifiers: expected ${expectedInheritedMods}, found ${foundInheritedMods}`);
 	}
 
-	const foundNewMods = standardizeArray(found.newModifiers)
-	const expectedNewMods = standardizeArray(expected.newModifiers)
+	const foundNewMods = sortAndStringifyArray(found.newModifiers)
+	const expectedNewMods = sortAndStringifyArray(expected.newModifiers)
 	if (foundNewMods !== expectedNewMods) {
 		logAndOrSaveMessage(`newModifiers: expected ${expectedNewMods}, found ${foundNewMods}`);
 	}
 
-	const foundMissingIngredients = standardizeArray(found.missingIngredients)
-	const expectedMissingIngredients = standardizeArray(expected.missingIngredients)
+	const foundMissingIngredients = sortAndStringifyArray(found.missingIngredients)
+	const expectedMissingIngredients = sortAndStringifyArray(expected.missingIngredients)
 	if (foundMissingIngredients !== expectedMissingIngredients) {
 		logAndOrSaveMessage(`missingIngredients: expected ${expectedMissingIngredients}, found ${foundMissingIngredients}`);
 	}
 
-	const foundExtraneousIngredients = standardizeArray(found.extraneousIngredients.map(v=>v.item))
-	const expectedExtraneousIngredients = standardizeArray(expected.extraneousIngredients.map(v=>v.item))
+	const foundExtraneousIngredients = sortAndStringifyArray(found.extraneousIngredients.map(v=>v.item))
+	const expectedExtraneousIngredients = sortAndStringifyArray(expected.extraneousIngredients.map(v=>v.item))
 	if (foundExtraneousIngredients !== expectedExtraneousIngredients) {
 		logAndOrSaveMessage(`extraneousIngredients: expected ${expectedExtraneousIngredients}, found ${foundExtraneousIngredients}`);
 	}
@@ -173,17 +173,17 @@ const cookingCompatibilityTests: CookingCompatibilityTest[] = [
 		input: {
 			location: 'mixer',
 			ingredients: [
-				{ item: 'flour', quantity: 1, modifiers: [] },
-				{ item: 'orange_flavoring', quantity: 1, modifiers: [] },
+				{ item: 'sugar', quantity: 1, modifiers: [] },
+				{ item: 'cocoa_powder', quantity: 2, modifiers: [] },
 			],
 		},
 		expected: {
-			output: 'cookie_dough',
-			quantity: 1,
+			output: 'frosting',
+			quantity: 2,
 			inheritedModifiers: [],
-			newModifiers: [ 'orange_flavoring' ],
-			errorCount: 1,
-			missingIngredients: [ 'sugar' ],
+			newModifiers: [ 'cocoa_powder', 'cocoa_powder' ],
+			errorCount: 0,
+			missingIngredients: [],
 			extraneousIngredients: [],
 		},
 	},

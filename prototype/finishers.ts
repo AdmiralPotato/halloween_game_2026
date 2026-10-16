@@ -1,6 +1,13 @@
 import { getModifierPrintName } from "./items.ts";
+
 import type { IngredientUnit } from "./utilities.ts";
-import { listToTally, quickOxfordCommas } from "./utilities.ts";
+import {
+	arrayOfIngredientUnitsMatchIncludingQuantity,
+	listToTally,
+	quickOxfordCommas,
+	sortAndStringifyArray
+} from "./utilities.ts";
+
 import { getVariantParent } from "./variants.ts";
 
 type ProductFinisherType = 'filling' | 'decoration' | 'doodad';
@@ -96,6 +103,13 @@ export type FinishedProduct = {
 	decoration: IngredientUnit[];
 	doodad: IngredientUnit[];
 };
+export const finishedProductMatchIgnoringQuantity = (a: FinishedProduct, b: FinishedProduct): boolean => {
+	return a.product === b.product
+		&& sortAndStringifyArray(a.modifiers) === sortAndStringifyArray(b.modifiers)
+		&& arrayOfIngredientUnitsMatchIncludingQuantity(a.filling, b.filling)
+		&& arrayOfIngredientUnitsMatchIncludingQuantity(a.decoration, b.decoration)
+		&& arrayOfIngredientUnitsMatchIncludingQuantity(a.doodad, b.doodad)
+}
 
 export const addFinisherToProduct = (finisherType: ProductFinisherType, ingredient: IngredientUnit, product: FinishedProduct): FinishedProduct | null => {
 	const ret = structuredClone(product);
@@ -106,9 +120,9 @@ export const addFinisherToProduct = (finisherType: ProductFinisherType, ingredie
 	return ret;
 }
 
-// ------------------------------------- NAMING ------------------------------------- //
+// ------------------------------------- AUTO DISPLAY NAMES ------------------------------------- //
 
-const prettyNumbers: Record<number, string> = {
+const reproductiveNumbers: Record<number, string> = {
 	0: '',
 	1: '',
 	2: 'double ',
@@ -117,15 +131,17 @@ const prettyNumbers: Record<number, string> = {
 	5: 'm-m-m-monster ',
 };
 const getReproductiveNumber = (n: number): string => {
-	if (prettyNumbers[n] !== undefined) {
-		return prettyNumbers[n];
+	if (reproductiveNumbers[n] !== undefined) {
+		return reproductiveNumbers[n];
 	}
 	if (n > 5) {
-		return prettyNumbers[5];
+		return reproductiveNumbers[5];
 	}
 	throw new Error ("UNREACHABLE")
 };
-const prettyItemMaker = (item: string, modifiers: string[]): string => {
+
+// e.g. item: 'frosting', modifiers: ['cocoa_powder', 'cocoa_powder'] -> 'double chocolate frosting'
+const printModifiersWithItemName = (item: string, modifiers: string[]): string => {
 	const sortedPrettyNames = modifiers.map(getModifierPrintName).sort()
 	const tally = listToTally(sortedPrettyNames);
 	const prettiedModifiers = Object.entries(tally).map(([modifierName, quantity])=>{
@@ -135,29 +151,37 @@ const prettyItemMaker = (item: string, modifiers: string[]): string => {
 	return [...prettiedModifiers, item.replace(/_/g, ' ')].join(' ');
 };
 
-const prettyPrintFinisher = (finisher: IngredientUnit): string => {
+// If there is two+ of a modifier's quantity on a finisher item, don't do the same "double" stuff as above
+// Instead add "extra" (because it's not quad choc frosting, it's an extra amount of double choc frosting)
+// { item: 'frosting', quantity: 2, modifiers: ['cocoa_powder', 'cocoa_powder' ]} -> extra double chocolate frosting
+
+const prettyPrintFinisherIncludingQuantity = (finisher: IngredientUnit): string => {
 	const twoOrMore = finisher.quantity > 1 ? 'extra ' : '';
-	const name = prettyItemMaker(finisher.item, finisher.modifiers);
+	const name = printModifiersWithItemName(finisher.item, finisher.modifiers);
 	return twoOrMore + name;
+};
+
+const printXQuantity = (n: number): string => {
+	return n > 1 ? `${n}x ` : '';
 }
 
-export const prettyFinishedProductNameMaker = (product: FinishedProduct): string => {
-	const count = product.quantity > 1 ? `${product.quantity}x ` : '';
-	const base = prettyItemMaker(product.product, product.modifiers);
+export const prettyPrintFinishedProduct = (product: FinishedProduct): string => {
+	const count = printXQuantity(product.quantity);
+	const base = printModifiersWithItemName(product.product, product.modifiers);
 
 	const extras: string[] = [];
 
-	const fillings = product.filling.map(prettyPrintFinisher);
+	const fillings = product.filling.map(prettyPrintFinisherIncludingQuantity);
 	if (fillings.length > 0) {
 		extras.push(`with ${quickOxfordCommas(fillings)} filling`);
 	}
 
-	const decorations = product.decoration.map(prettyPrintFinisher);
+	const decorations = product.decoration.map(prettyPrintFinisherIncludingQuantity);
 	if (decorations.length > 0) {
 		extras.push(`with ${quickOxfordCommas(decorations)}`);
 	}
 
-	const doodads = product.doodad.map(prettyPrintFinisher);
+	const doodads = product.doodad.map(prettyPrintFinisherIncludingQuantity);
 	if (doodads.length > 0) {
 		extras.push(`topped with ${quickOxfordCommas(doodads)}`);
 	}
@@ -167,4 +191,13 @@ export const prettyFinishedProductNameMaker = (product: FinishedProduct): string
 		finishers = ' ' + finishers;
 	}
 	return count + base + finishers;
-}
+};
+
+// For things that aren't finished, like things from the store or in inventory, here's a more generic thing:
+
+export const printGenericIngredientUnit = (item: IngredientUnit) => {
+	const modifierAndItemName = printModifiersWithItemName(item.item, item.modifiers);
+	const nX = printXQuantity(item.quantity);
+	return nX + modifierAndItemName;
+};
+

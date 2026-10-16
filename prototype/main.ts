@@ -109,9 +109,11 @@ const getIngredientRecipeEval = (recipeInfo: RecipeInfo, givenIngredients: Ingre
 		}
 		// if allowed as a modifier, collect it
 		if (isModifierAllowedInRecipe(v.item, recipeInfo)) {
-			newModifiers.push(v.item);
-			if (v.modifiers.length > 0) {
-				newModifiers.push(...(v.modifiers))
+			for (let i = 0; i < v.quantity; i++) {
+				newModifiers.push(v.item);
+				if (v.modifiers.length > 0) {
+					newModifiers.push(...v.modifiers)
+				}
 			}
 		} else {
 			extraneousIngredients.push(v);
@@ -140,7 +142,27 @@ export const cookEval = (location: string, providedIngredients: IngredientUnit[]
 	return bestEvals[0];
 };
 
-export const cook = (location: string, providedIngredients: IngredientUnit[]): FinishedProduct => {
+export const turnCookEvalIntoOutput = (eva: CookingCompatibilityEval): FinishedProduct | IngredientUnit => {
+	const info = getItemInfo(eva.output);
+	if (!info.categories.includes('product')) {
+		const ret: IngredientUnit = {
+			item: eva.output,
+			quantity: eva.quantity,
+			modifiers: [...eva.inheritedModifiers, ...eva.newModifiers],
+		}
+		return ret;
+	}
+	return {
+		product: eva.output,
+		quantity: eva.quantity,
+		modifiers: [...eva.newModifiers, ...eva.inheritedModifiers],
+		filling: [],
+		decoration: [],
+		doodad: [],
+	}
+}
+
+export const cook = (location: string, providedIngredients: IngredientUnit[]): FinishedProduct | IngredientUnit => {
 	const result = cookEval(location, providedIngredients);
 	return {
 		product: result.output,

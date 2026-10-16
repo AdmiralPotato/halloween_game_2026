@@ -1,3 +1,11 @@
+export const sortAndStringifyArray = (arr: string[]) => `[` + structuredClone(arr.sort()).join(', ') + `]`;
+
+export const capitalizeFirstLetter = (s: string) => {
+	const splits = s.split('');
+	splits[0] = splits[0].toLocaleUpperCase();
+	return splits.join('');
+}
+
 export type Tallies = Record<string, number>;
 export const tallyToList = (map: Tallies): string[] => {
 	const ret: string[] = [];
@@ -41,13 +49,66 @@ export type IngredientUnit = {
 	quantity: number;
 	modifiers: string[];
 };
+const isArrayOfStrings = (arr: unknown): arr is string[] => {
+	if (!Array.isArray(arr)) { return false; }
+	for (let i = 0; i < arr.length; i++) {
+		if (typeof arr[i] !== 'string') {
+			return false;
+		}
+	}
+	return true;
+}
 export const isIngredientUnit = (v: unknown): v is IngredientUnit => {
 	if (typeof (v as IngredientUnit).item !== 'string') { return false; }
 	if (typeof (v as IngredientUnit).quantity !== 'number') { return false; }
-	if (!Array.isArray((v as IngredientUnit).modifiers)) { return false; }
-	if (!((v as IngredientUnit).modifiers.every(v=>typeof v === 'string'))) { return false; }
+	if (!isArrayOfStrings((v as IngredientUnit).modifiers)) { return false; }
 	return true;
 };
+export const ingredientUnitsMatchIgnoringQuantity = (a: IngredientUnit, b: IngredientUnit): boolean => {
+	if (a.item !== b.item) {
+		return false;
+	}
+	if (sortAndStringifyArray(a.modifiers) !== sortAndStringifyArray(b.modifiers)) {
+		return false;
+	}
+	return true;
+}
+export const ingredientUnitsMatchIncludingQuantity = (a: IngredientUnit, b: IngredientUnit): boolean => {
+	if (a.item !== b.item) {
+		return false;
+	}
+	if (a.quantity !== b.quantity) {
+		return false;
+	}
+	if (sortAndStringifyArray(a.modifiers) !== sortAndStringifyArray(b.modifiers)) {
+		return false;
+	}
+	return true;
+}
+export const arrayOfIngredientUnitsMatchIncludingQuantity = (arrA: IngredientUnit[], arrB: IngredientUnit[]): boolean => {
+	if (arrA.length !== arrB.length) {
+		// get an easy case out of the way
+		return false;
+	}
+	const matchedA: IngredientUnit[] = [];
+	const notMatchedA = arrA.slice();
+	const matchedB: IngredientUnit[] = [];
+	const notMatchedB = arrB.slice();
+	for (let aI = 0; aI < notMatchedA.length; aI++) {
+		const a = notMatchedA[aI];
+		for (let bI = 0; bI < notMatchedB.length; bI++) {
+			const b = notMatchedB[bI];
+			if (!ingredientUnitsMatchIncludingQuantity(a, b)) {
+				continue;
+			}
+			matchedA.push(a);
+			matchedB.push(b);
+			notMatchedA.splice(aI, 1);
+			notMatchedB.splice(bI, 1);
+		}
+	}
+	return notMatchedA.length === 0 && notMatchedB.length === 0;
+}
 
 export const ingredientUnitsToTallies = (ingredients: IngredientUnit[]) => {
 	const ret: Tallies = {};

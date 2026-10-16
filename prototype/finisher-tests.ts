@@ -1,5 +1,5 @@
 import type { FinishedProduct } from "./finishers.ts";
-import { prettyFinishedProductNameMaker } from "./finishers.ts";
+import { prettyPrintFinishedProduct } from "./finishers.ts";
 
 type FinisherTest = {
 	input: FinishedProduct;
@@ -129,7 +129,7 @@ const logAndOrSaveMessage = (v: string) => {
 	console.log(v);
 }
 finisherTests.map((test, i)=>{
-	const found = prettyFinishedProductNameMaker(test.input);
+	const found = prettyPrintFinishedProduct(test.input);
 	if (found !== test.expected) {
 		logAndOrSaveMessage(`Test #${i}:`)
 		logAndOrSaveMessage(`>> Expected: '${test.expected}'`)
