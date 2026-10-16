@@ -57,7 +57,6 @@ jobs:
           relative_project_path: ./
           archive_output: false
           verbose: false
-          cache: true
 
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v5
