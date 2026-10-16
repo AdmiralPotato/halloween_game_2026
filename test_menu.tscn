@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c2kjfy0oo3dgx" path="res://candy_button.tscn" id="3_wg18h"]
 [ext_resource type="PackedScene" uid="uid://cdn7xnw3rl3y3" path="res://candy_tween_button.tscn" id="3_wg18j"]
 
-[node name="SceneRoot" type="Node2D" unique_id=1908462043]
+[node name="TestMenu" type="Node2D" unique_id=1908462043]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1308117872]
 

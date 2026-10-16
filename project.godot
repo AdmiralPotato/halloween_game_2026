@@ -10,9 +10,11 @@ config_version=5
 
 [application]
 
-config/name="halloween_game_2026"
+config/name="Halloween Game 2026"
 run/main_scene="uid://q3l36yvm5xr1"
 config/features=PackedStringArray("4.7", "GL Compatibility")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="uid://tdosspgn5nwg"
 config/icon="res://icon.svg"
 
 [display]
