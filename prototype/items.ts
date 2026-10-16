@@ -93,7 +93,8 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		cost: 3,
 		attributes: {
 			chocolatey: 1,
-			dark: 1,
+			dark: 2,
+			orange: 1,
 		},
 	},
 	chocolate_bar: {

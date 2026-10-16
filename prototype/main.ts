@@ -31,7 +31,7 @@ type FinalItem = {
 const recipeAttributeCache: Record<string, AttributeMap> = {};
 
 // Note: this does not account for any modifiers atm
-const getAttributesForItem = (item: string) => {
+export const getAttributesForItem = (item: string, modifiers = [] as string[]) => {
 	// Use cache, if any
 	const cache = recipeAttributeCache[item];
 	if (cache !== undefined) {
@@ -56,6 +56,11 @@ const getAttributesForItem = (item: string) => {
 		}
 		addAttributesToMap(attributes, ingredientAttributes);
 	})
+
+	// Get the modifiers separately (will this work?)
+	modifiers.forEach(modifier=>{
+		addAttributesToMap(attributes, getAttributesForItem(modifier));
+	});
 
 	// IMPORTANT NOTE!! Cooking darkens it slightly! Auto add "dark: 1"
 	if (recipe.bakeWith !== undefined) {

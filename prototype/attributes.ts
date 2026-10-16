@@ -43,7 +43,6 @@ const isFlavorInfo = (v: unknown): v is FlavorInfo => (v as FlavorInfo).type ===
 type Attribute = Color | Texture | Flavor ;
 export const isAttribute = (v: unknown): v is Attribute => isColor(v) || isTexture(v) || isFlavor(v);
 
-
 //  ----------------------------------------- THE ACTUAL INFO ----------------------------------------- //
 
 type AttributeInfo = ColorInfo | TextureInfo | FlavorInfo;
@@ -194,4 +193,28 @@ export const addAttributesToMap = (a: AttributeMap, b: AttributeMap) => {
 		a[key] = (a[key] || 0) + (b[key] || 0);
 	})
 	return a;
+};
+
+//  ----------------------------------------- COMPARE ATTRIBUTES ----------------------------------------- //
+
+export const compareAttributes = (expected: AttributeMap, found: AttributeMap): string[] => {
+	const keysFound: string[] = Object.keys(found);
+	const keysExpected: string[] = Object.keys(expected);
+	if (!keysFound.every(v=>isAttribute(v))) { throw new Error(`TS fr`); }
+	if (!keysExpected.every(v=>isAttribute(v))) { throw new Error(`TS fr`); }
+	const uniqueKeys: Attribute[] = [...new Set([...keysFound, ...keysExpected])];
+	const messages: string[] = [];
+
+	const logAndOrSaveMessage = (v: string) => {
+		messages.push(v);
+		console.log(v);
+	}
+	
+	for (let i = 0; i < uniqueKeys.length; i++) {
+		const key = uniqueKeys[i];
+		if (found[key] !== expected[key]) {
+			logAndOrSaveMessage(`found "${key}: ${found[key] || 0}", expected ${expected[key] || 0}"`);
+		}
+	}
+	return messages;
 };
