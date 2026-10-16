@@ -3,38 +3,29 @@ class_name Tilemap
 ## Manages a 2D collection of tiles, which can be occupied and interacted with.
 
 class Tile extends RefCounted:
-	var floor: Node3D
 	var furni: FurniNode
 	var item: ItemNode
-	func _init(floor_node: Node3D):
-		self.floor_node = floor_node
 
-var floor_spawner: Callable
 var tiles: Dictionary[Vector2i, Tile]
 
-## _floor_spawner: A Callable that will spawn a floor scene for given tile
-## coordinates and return its top-level Node. The Tilemap will translate the
-## resulting Node into place. The first parameter will be the Vector2i
-## coordinates of the tile. If additional arguments are passed to create_slots,
-## they will be passed after the first parameter.
-func _init(floor_spawner: Callable):
-	self.floor_spawner = floor_spawner
-
-func create_slots(min: Vector2i, size: Vector2i, ...extra_args):
+func create_slots(minCoord: Vector2i, size: Vector2i, ...extra_args):
 	var args = extra_args
 	args.insert(0, null)
-	for x in range(min.x, min.x+size.x):
-		for y in range(min.y, min.y+size.y):
-			var xy = Vector2i(x, y)
+	for x in range(minCoord.x, minCoord.x+size.x):
+		for y in range(minCoord.y, minCoord.y+size.y):
+			var xy := Vector2i(x, y)
 			if tiles.has(xy):
 				print("Warning: tried to create tile %v that already existed" % xy)
 				continue
 			args[0] = xy
-			var floor = floor_spawner.callv(args)
-			assert(floor)
-			tiles.set(xy, floor)
-			floor.translate = Vector3(x+0.5, 0, y+0.5)
-			add_child(floor)
+			var tile := Tile.new()
+			tiles.set(xy, tile)
+			
+## Destroys everything in the tilemap.
+func clear():
+	tiles.clear()
+	for tile in get_children():
+		remove_child(tile)
 
 ## Returns the coordinates of a tile that someone standing at `position` and
 ## facing `facing` (a unit vector) should be interacting with / picking up from
@@ -46,13 +37,6 @@ func find_tile(position: Vector3, facing: Vector3, reach: float = 1.0) \
 
 func _get_tile(xy: Vector2i) -> Tile:
 	return tiles.get(xy)
-
-## Returns the floor node at the given tile coordinates, or null if there is
-## no tile there.
-func get_floor(xy: Vector2i) -> Node3D:
-	var tile := _get_tile(xy)
-	if tile: return tile.floor
-	else: return null
 
 ## Returns the furni node at the given tile coordinates, or null if there is
 ## no tile there.
@@ -67,27 +51,6 @@ func get_item(xy: Vector2i) -> Node3D:
 	var tile := _get_tile(xy)
 	if tile: return tile.item
 	else: return null
-
-## If there is a tile at the given coordinates, this replaces that tile's floor
-## node and returns the one that used to be there. If not, returns the node
-## you passed in.
-##
-## Removes the old node from our list of children, and adds the new node to our
-## list of children. We will translate the new node appropriately. YOU are
-## responsible for setting the translation of the returned node / ensuring it is
-## a child of whomever it needs to be.
-##
-## NOTE: Unlike swap_furni and swap_item, a floor node can never be null.
-func swap_floor(xy: Vector2i, new_node: Node3D) -> Node3D:
-	assert(new_node)
-	var tile := _get_tile(xy)
-	if !tile: return new_node
-	var old_node := tile.floor
-	tile.floor = new_node
-	remove_child(old_node)
-	add_child(new_node)
-	new_node.translation = Vector3(xy.x+0.5, 0.0, xy.y+0.5)
-	return old_node
 
 ## If there is a tile at the given coordinates, this swaps the new node into
 ## place as a furni. If there was an old furni node, returns that. Otherwise,
@@ -108,12 +71,12 @@ func swap_furni(xy: Vector2i, new_node: FurniNode) -> FurniNode:
 	tile.furni = new_node
 	remove_child(old_node)
 	add_child(tile.furni)
-	new_node.translation = Vector3(xy.x+0.5, 0.0, xy.y+0.5)
+	new_node.position = Vector3(xy.x+0.5, 0.0, xy.y+0.5)
 	if tile.item:
 		if tile.furni && tile.furni.has_property("item_height"):
-			tile.item.translation.y = tile.furni.item_height
+			tile.item.position.y = tile.furni.item_height
 		else:
-			tile.item.translation.y = 0.0
+			tile.item.position.y = 0.0
 	return old_node
 
 ## If there is a tile at the given coordinates, this swaps the new node into
@@ -135,10 +98,10 @@ func swap_item(xy: Vector2i, new_node: ItemNode) -> ItemNode:
 	tile.item = new_node
 	remove_child(old_node)
 	add_child(tile.item)
-	new_node.translation = Vector3(xy.x+0.5, 0.0, xy.y+0.5)
+	new_node.position = Vector3(xy.x+0.5, 0.0, xy.y+0.5)
 	if tile.item:
 		if tile.furni && tile.furni.has_property("item_height"):
-			new_node.translation.y = tile.furni.item_height
+			new_node.position.y = tile.furni.item_height
 	return old_node
 
 ## If there is a tile at the given coordinates, this attempts to combine the
@@ -160,8 +123,8 @@ func combine_item(xy: Vector2i, new_node: ItemNode) -> ItemNode:
 	assert(tile.item == null)
 	tile.item = new_node
 	add_child(tile.item)
-	new_node.translation = Vector3(xy.x+0.5, 0.0, xy.y+0.5)
+	new_node.position = Vector3(xy.x+0.5, 0.0, xy.y+0.5)
 	if tile.item:
 		if tile.furni && tile.furni.has_property("item_height"):
-			new_node.translation.y = tile.furni.item_height
+			new_node.position.y = tile.furni.item_height
 	return null
