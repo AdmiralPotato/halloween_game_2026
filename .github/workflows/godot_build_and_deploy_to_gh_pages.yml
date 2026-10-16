@@ -43,6 +43,12 @@ jobs:
     - name: Create Build Directory
       run: mkdir -p /home/runner/.local/share/godot/builds/Web
 
+    - name: Touch Forbidden File
+      run: touch /home/runner/.local/share/godot/builds/Web/index.pck
+
+    - name: Fire Permissions Laser
+      run: chmod 777 /home/runner/.local/share/godot/builds/Web/index.pck
+
     - name: export game
       id: export
       # Use latest version (see releases for all versions)
