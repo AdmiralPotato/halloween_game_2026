@@ -60,7 +60,7 @@ const recipeList: RecipeInfo[] = [
 		time: 2,
 		ingredients: [ 'cream', 'egg' ],
 		newAttributes: {
-			dark: 1,
+			pale: -1,
 			soft: 1
 		},
 		allowedModifiers: [],

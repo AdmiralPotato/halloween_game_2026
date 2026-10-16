@@ -1,5 +1,5 @@
 import type { AttributeMap } from "./attributes.ts";
-import { addAttributesToMap } from "./attributes.ts";
+import { addAttributesToMap, maillardAttributes } from "./attributes.ts";
 
 import type { RecipeInfo } from "./recipes.ts";
 import { getFirstRecipeForProduct, getRecipesForLocation, isModifierAllowedInRecipe } from "./recipes.ts";
@@ -62,9 +62,9 @@ export const getAttributesForItem = (item: string, modifiers = [] as string[]) =
 		addAttributesToMap(attributes, getAttributesForItem(modifier));
 	});
 
-	// IMPORTANT NOTE!! Cooking darkens it slightly! Auto add "dark: 1"
+	// IMPORTANT NOTE!! Cooking darkens it slightly! Auto add maillard attributes
 	if (recipe.bakeWith !== undefined) {
-		const bakingAttributes: AttributeMap = {dark: 1}
+		const bakingAttributes: AttributeMap = maillardAttributes;
 		addAttributesToMap(attributes, bakingAttributes);
 	}
 

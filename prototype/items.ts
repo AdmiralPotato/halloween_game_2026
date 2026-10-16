@@ -93,7 +93,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		cost: 3,
 		attributes: {
 			chocolatey: 1,
-			dark: 2,
+			pale: -2,
 			orange: 1,
 		},
 	},
@@ -113,7 +113,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 			fruity: 2,
 			red: 1,
 			purple: 1,
-			dark: 2,
+			pale: -2,
 		},
 	},
 	strawberry_flavoring: {
@@ -123,7 +123,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		attributes: {
 			fruity: 2,
 			red: 1,
-			dark: 1,
+			pale: -1,
 		},
 	},
 	raspberry_flavoring: {
@@ -133,7 +133,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		attributes: {
 			fruity: 2,
 			red: 2,
-			dark: 1,
+			pale: -1,
 		},
 	},
 	orange_flavoring: {
@@ -143,7 +143,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		attributes: {
 			fruity: 2,
 			orange: 2,
-			dark: 1,
+			pale: -1,
 		},
 	},
 	almond_flavoring: {
@@ -183,7 +183,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 			fruity: 2,
 			blue: 1,
 			purple: 1,
-			dark: 1,
+			pale: -1,
 		},
 	},
 	ube_flavoring: {
@@ -192,7 +192,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		cost: 4,
 		attributes: {
 			purple: 2,
-			dark: 1,
+			pale: -1,
 		},
 	},
 	mint_flavoring: {
@@ -203,7 +203,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 			minty: 3,
 			green: 1,
 			blue: 1,
-			dark: 1,
+			pale: -1,
 		},
 	},
 	caramel_flavoring: {
@@ -213,7 +213,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		attributes: {
 			fruity: 2,
 			red: 2,
-			dark: 2,
+			pale: -2,
 		},
 	},
 	red_candied_flowers: {

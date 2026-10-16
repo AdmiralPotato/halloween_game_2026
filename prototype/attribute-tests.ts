@@ -17,14 +17,13 @@ const attributeTests: AttributeTest[] = [
 			modifiers: [ 'cocoa_powder' ]
 		},
 		expected: {
-			pale: 3,
+			pale: 1, // 3 pale from frosting, -2 pale from cocoa_powder
 			soft: 1,
 			sweet: 2,
 			chocolatey: 1,
-			dark: 2,
 			orange: 1,
 		}
-	}
+	},
 ];
 
 const testsMap = attributeTests.map((test, i)=>{

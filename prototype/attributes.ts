@@ -1,27 +1,27 @@
 // COLOR
 
-type Color = 'pale' | 'dark' | 'red' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple' | 'varigated';
-const colors = new Set([ 'pale', 'dark', 'red', 'orange', 'yellow', 'green', 'blue', 'purple', 'varigated' ]);
+type Color = 'pale' | 'red' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple' | 'varigated';
+const colors = new Set([ 'pale', 'red', 'orange', 'yellow', 'green', 'blue', 'purple', 'varigated' ]);
 const isColor = (v: unknown): v is Color => typeof v === 'string' && colors.has(v);
 
 type ColorInfo = {
 	attribute: string;
 	type: 'color';
 	neighbors?: Color[];
-	opposite?: Color
+	opposite?: Color | 'dark';
 };
 const isColorInfo = (v: unknown): v is ColorInfo => (v as ColorInfo).type === 'color';
 
 // TEXTURE
 
-type Texture = 'dry' | 'moist' | 'soft' | 'hard' | 'sticky' | 'crumbly' | 'pop';
-const textures = new Set([ 'dry', 'moist', 'soft', 'hard', 'sticky', 'crumbly', 'pop' ]);
+type Texture = 'moist' | 'soft' | 'crumbly' | 'pop';
+const textures = new Set([ 'moist', 'soft', 'crumbly', 'pop' ]);
 const isTexture = (v: unknown): v is Texture => typeof v === 'string' && textures.has(v);
 
 type TextureInfo = {
 	attribute: string;
 	type: 'texture';
-	opposite?: Texture;
+	opposite?: Texture | 'dry' | 'hard' | 'sticky';
 };
 const isTextureInfo = (v: unknown): v is TextureInfo => (v as TextureInfo).type === 'texture';
 
@@ -52,13 +52,6 @@ const attributeInfo: Record<Attribute, AttributeInfo> = {
 		type: 'color',
 		attribute: 'pale',
 		opposite: 'dark',
-		neighbors: [ 'blue', 'purple' ],
-	},
-	dark: {
-		type: 'color',
-		attribute: 'dark',
-		opposite: 'pale',
-		neighbors: [ 'yellow', 'orange' ],
 	},
 	red: {
 		type: 'color',
@@ -68,12 +61,12 @@ const attributeInfo: Record<Attribute, AttributeInfo> = {
 	orange: {
 		type: 'color',
 		attribute: 'orange',
-		neighbors: ['red', 'yellow', 'pale'],
+		neighbors: ['red', 'yellow'],
 	},
 	yellow: {
 		type: 'color',
 		attribute: 'yellow',
-		neighbors: ['orange', 'green', 'pale'],
+		neighbors: ['orange', 'green'],
 	},
 	green: {
 		type: 'color',
@@ -83,21 +76,16 @@ const attributeInfo: Record<Attribute, AttributeInfo> = {
 	blue: {
 		type: 'color',
 		attribute: 'blue',
-		neighbors: ['green', 'purple', 'dark'],
+		neighbors: ['green', 'purple'],
 	},
 	purple: {
 		type: 'color',
 		attribute: 'purple',
-		neighbors: ['blue', 'red', 'dark'],
+		neighbors: ['blue', 'red'],
 	},
 	varigated: {
 		type: 'color',
 		attribute: 'varigated',
-	},
-	dry: {
-		type: 'texture',
-		attribute: 'dry',
-		opposite: 'moist',
 	},
 	moist: {
 		type: 'texture',
@@ -108,16 +96,6 @@ const attributeInfo: Record<Attribute, AttributeInfo> = {
 		type: 'texture',
 		attribute: 'soft',
 		opposite: 'hard',
-	},
-	hard: {
-		type: 'texture',
-		attribute: 'hard',
-		opposite: 'soft',
-	},
-	sticky: {
-		type: 'texture',
-		attribute: 'sticky',
-		opposite: 'crumbly',
 	},
 	crumbly: {
 		type: 'texture',
@@ -171,6 +149,8 @@ const getAttributeInfo = (v: string) => {
 	}
 	return attributeInfo[v];
 };
+
+export const maillardAttributes = { pale: -1 };
 
 //  ----------------------------------------- COLLECTING ATTRIBUTES ----------------------------------------- //
 
