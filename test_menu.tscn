@@ -94,3 +94,11 @@ candy_type = 6
 [node name="Candy8" parent="CanvasLayer/Control/GridContainer" unique_id=579203272 instance=ExtResource("3_wg18j")]
 layout_mode = 2
 candy_type = 4
+
+[node name="CandyButton" parent="CanvasLayer/Control/GridContainer" unique_id=429041467 instance=ExtResource("3_wg18h")]
+layout_mode = 2
+candy_type = 5
+
+[node name="CandyButton2" parent="CanvasLayer/Control/GridContainer" unique_id=1100726456 instance=ExtResource("3_wg18j")]
+layout_mode = 2
+candy_type = 2
