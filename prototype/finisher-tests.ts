@@ -123,21 +123,27 @@ const finisherTests: FinisherTest[] = [
 	},
 ]
 
-const errorMessages: string[] = [];
-const logAndOrSaveMessage = (v: string) => {
-	errorMessages.push(v);
-	console.log(v);
-}
-finisherTests.map((test, i)=>{
-	const found = prettyPrintFinishedProduct(test.input);
-	if (found !== test.expected) {
-		logAndOrSaveMessage(`Test #${i}:`)
-		logAndOrSaveMessage(`>> Expected: '${test.expected}'`)
-		logAndOrSaveMessage(`>>>>> Found: '${found}'`)
+export const doFinisherTests = () => {
+	const errorMessages: string[] = [];
+	const logAndOrSaveMessage = (v: string) => {
+		errorMessages.push(v);
+		// console.log(v);
 	}
-});
 
-if (errorMessages.length === 0) {
-	console.log("ALL FINISHER PRINT TESTS PASS, BOSS");
-}
 
+	finisherTests.map((test, i)=>{
+		const found = prettyPrintFinishedProduct(test.input);
+		if (found !== test.expected) {
+			logAndOrSaveMessage(`Test #${i}:`)
+			logAndOrSaveMessage(`>> Expected: '${test.expected}'`)
+			logAndOrSaveMessage(`>>>>> Found: '${found}'`)
+		}
+	});
+
+	if (errorMessages.length === 0) {
+		console.log("ALL FINISHER PRINT TESTS PASS!");
+	} else {
+		console.error("FINISHER TESTS HAD ISSUES");
+		errorMessages.forEach(console.error);
+	}
+};

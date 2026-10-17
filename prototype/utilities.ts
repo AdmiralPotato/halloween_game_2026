@@ -1,12 +1,45 @@
 import { getVariantPrintName } from "./variants.ts";
 
-export const sortAndStringifyArray = (arr: string[]) => `[` + structuredClone(arr.sort()).join(', ') + `]`;
+// ----------------------------------------- GENERIC ----------------------------------------- //
 
 export const capitalizeFirstLetter = (s: string) => {
 	const splits = s.split('');
 	splits[0] = splits[0].toLocaleUpperCase();
 	return splits.join('');
-}
+};
+
+export const cleanString = (s: string) => s.replace(/_/g, ' ');
+
+export const capitalizeAndClean = (s: string) => capitalizeFirstLetter(cleanString(s));
+
+export const sortAndStringifyArray = (arr: string[]) => `[` + structuredClone(arr.sort()).join(', ') + `]`;
+
+const isArrayOfStrings = (arr: unknown): arr is string[] => {
+	if (!Array.isArray(arr)) { return false; }
+	for (let i = 0; i < arr.length; i++) {
+		if (typeof arr[i] !== 'string') {
+			return false;
+		}
+	}
+	return true;
+};
+
+export const quickOxfordCommas = (items: string[]) => {
+	if (items.length === 2) {
+		return items.join(' and ');
+	}
+	if (items.length > 2) {
+		const last = items.pop();
+		const secondToLast = items.pop();
+		if (!last || !secondToLast) {
+			throw new Error ("I just proved they're there TS");
+		}
+		items.push(secondToLast + ', and ' + last);
+	}
+	return items.join(', ');
+};
+
+// ----------------------------------------- TALLIES ----------------------------------------- //
 
 export type Tallies = Record<string, number>;
 export const tallyToList = (map: Tallies): string[] => {
@@ -44,22 +77,13 @@ export const talliesAreEqual = (a: Tallies, b: Tallies): boolean => {
 	return true;
 };
 
-// "INGREDIENT UNIT"
+// ----------------------------------------- INGREDIENT UNIT ----------------------------------------- //
 
 export type IngredientUnit = {
 	item: string;
 	quantity: number;
 	modifiers: string[];
 };
-const isArrayOfStrings = (arr: unknown): arr is string[] => {
-	if (!Array.isArray(arr)) { return false; }
-	for (let i = 0; i < arr.length; i++) {
-		if (typeof arr[i] !== 'string') {
-			return false;
-		}
-	}
-	return true;
-}
 export const isIngredientUnit = (v: unknown): v is IngredientUnit => {
 	if (typeof (v as IngredientUnit).item !== 'string') { return false; }
 	if (typeof (v as IngredientUnit).quantity !== 'number') { return false; }
@@ -120,24 +144,7 @@ export const ingredientUnitsToTallies = (ingredients: IngredientUnit[]) => {
 	return ret;
 };
 
-// MISC
-
-export const quickOxfordCommas = (items: string[]) => {
-	if (items.length === 2) {
-		return items.join(' and ');
-	}
-	if (items.length > 2) {
-		const last = items.pop();
-		const secondToLast = items.pop();
-		if (!last || !secondToLast) {
-			throw new Error ("I just proved they're there TS");
-		}
-		items.push(secondToLast + ', and ' + last);
-	}
-	return items.join(', ');
-};
-
-// ---------------------------------- EXFILTRATED ITEM STUFF ---------------------------------- //
+// ---------------------------------- FINISHED PRODUCT ---------------------------------- //
 
 export type FinishedProduct = {
 	product: string;
@@ -147,8 +154,6 @@ export type FinishedProduct = {
 	decoration: IngredientUnit[];
 	doodad: IngredientUnit[];
 };
-export type Item = IngredientUnit | FinishedProduct;
-export const getItemName = (item: Item): string => isIngredientUnit(item) ? item.item : item.product;
 
 export const finishedProductMatchIgnoringQuantity = (a: FinishedProduct, b: FinishedProduct): boolean => {
 	return a.product === b.product
@@ -157,6 +162,11 @@ export const finishedProductMatchIgnoringQuantity = (a: FinishedProduct, b: Fini
 		&& arrayOfIngredientUnitsMatchIncludingQuantity(a.decoration, b.decoration)
 		&& arrayOfIngredientUnitsMatchIncludingQuantity(a.doodad, b.doodad)
 };
+
+// --------------------------- ITEM (finished product | ingredient unit) --------------------------- //
+
+export type Item = IngredientUnit | FinishedProduct;
+export const getItemName = (item: Item): string => isIngredientUnit(item) ? item.item : item.product;
 
 export const itemTypesMatch = (a: Item, b: Item): boolean => isIngredientUnit(a) === isIngredientUnit(b);
 export const itemsMatchIgnoringQuantity = (a: Item, b: Item): boolean => {
@@ -169,7 +179,7 @@ export const itemsMatchIgnoringQuantity = (a: Item, b: Item): boolean => {
 		return finishedProductMatchIgnoringQuantity(a, b)
 	}
 	return false;
-}
+};
 
 // ------------------------------------- AUTO DISPLAY NAMES ------------------------------------- //
 

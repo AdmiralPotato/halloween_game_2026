@@ -211,10 +211,10 @@ export const compareAttributes = (expected: AttributeMap, found: AttributeMap): 
 	if (!keysFound.every(v=>isAttribute(v))) { throw new Error(`TS fr`); }
 	if (!keysExpected.every(v=>isAttribute(v))) { throw new Error(`TS fr`); }
 	const uniqueKeys: Attribute[] = [...new Set([...keysFound, ...keysExpected])];
-	const messages: string[] = [];
+	const mismatchMessages: string[] = [];
 
 	const logAndOrSaveMessage = (v: string) => {
-		messages.push(v);
+		mismatchMessages.push(v);
 		console.log(v);
 	}
 	
@@ -224,5 +224,5 @@ export const compareAttributes = (expected: AttributeMap, found: AttributeMap): 
 			logAndOrSaveMessage(`found "${key}: ${found[key] || 0}", expected ${expected[key] || 0}"`);
 		}
 	}
-	return messages;
+	return mismatchMessages;
 };
