@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d06q15n8iq2qt"]
 
 [ext_resource type="Script" uid="uid://bhpv87diypx7w" path="res://map/test_player.gd" id="1_qrya2"]
+[ext_resource type="PackedScene" uid="uid://c0nueq4njhld5" path="res://assets/mage.glb" id="2_rn8i4"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_el5rg"]
 
@@ -20,6 +21,7 @@ linear_damp = 1.4
 script = ExtResource("1_qrya2")
 
 [node name="CapsuleMesh" type="MeshInstance3D" parent="." unique_id=651257228]
+visible = false
 mesh = SubResource("CapsuleMesh_el5rg")
 
 [node name="CapsuleCollision" type="CollisionShape3D" parent="." unique_id=1137736007]
@@ -27,5 +29,9 @@ shape = SubResource("CapsuleShape3D_el5rg")
 
 [node name="Beak" type="MeshInstance3D" parent="." unique_id=441891062]
 transform = Transform3D(0.875, 0, 0, 0, -4.371139e-08, -0.125, 0, 1, -5.4639235e-09, 0, 0.5, 0.29879713)
+visible = false
 mesh = SubResource("PrismMesh_el5rg")
 surface_material_override/0 = SubResource("StandardMaterial3D_g1bkv")
+
+[node name="mage" parent="." unique_id=645908498 instance=ExtResource("2_rn8i4")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1, 0)
