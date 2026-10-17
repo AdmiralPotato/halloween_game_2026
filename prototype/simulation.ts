@@ -42,7 +42,7 @@ const isCookLocation = (v: unknown): v is CookLocation => {
 	return false;
 };
 
-type OtherLocation = 'hand' | 'countertop' | 'display_case' | 'storage';
+type OtherLocation = 'hand' | 'countertop' | 'decorating_stand' | 'display_case' | 'storage';
 const isOtherLocation = (v: unknown): v is OtherLocation => {
 	if (v === 'hand') { return true; }
 	if (v === 'countertop') { return true; }
@@ -59,8 +59,9 @@ const intoStrings: Record<Location, string> = {
 	mixer: `into the mixer`,
 	cutting_board: `onto the cutting board`,
 	hand: `into your hands`,
-	countertop: `onto the countertop`,
+	decorating_stand: `onto the decorating stand`,
 	display_case: `into the display case`,
+	countertop: `onto the countertop`,
 	storage: `into storage`,
 }
 const fromStrings: Record<Location, string> = {
@@ -68,8 +69,9 @@ const fromStrings: Record<Location, string> = {
 	mixer: `from the mixer`,
 	cutting_board: `from the cutting board`,
 	hand: `from your hands`,
-	countertop: `from the countertop`,
+	decorating_stand: `from the decorating stand`,
 	display_case: `from the display case`,
+	countertop: `from the countertop`,
 	storage: `from storage`,
 }
 
@@ -82,6 +84,7 @@ type State = {
 		cutting_board: Item[];
 		hand: Item | null;
 		countertop: Item[];
+		decorating_stand: Item[];
 		display_case: FinishedProduct[];
 	}
 };
@@ -100,6 +103,7 @@ const state: State = {
 		oven: [],
 		mixer: [],
 		cutting_board: [],
+		decorating_stand: [],
 		countertop: [],
 		display_case: [],
 	},
@@ -191,7 +195,7 @@ const empty = (cookLocation: CookLocation): boolean => {
 }
 
 // Returns whether it happened
-const pickup = (location: Location, index = 0, quantity = 1): boolean => {
+const pickup = (location: Location, index = 0, givenQuantity?: number): boolean => {
 	if (location === 'hand') {
 		console.warn(header);
 		console.warn(`You cannot pick up something from your own hands!`);
@@ -219,16 +223,20 @@ const pickup = (location: Location, index = 0, quantity = 1): boolean => {
 		}
 	}
 	const itemToRemove = {...existingItem};
-	if (quantity !== itemToRemove.quantity) {
-		itemToRemove.quantity = quantity;
-	}
+	const quantity = givenQuantity !== undefined
+		? givenQuantity
+		: isCookLocation(location)
+			? itemToRemove.quantity
+			: 1;
+	itemToRemove.quantity = quantity;
+
 	const removed = removeItemFromLocation(itemToRemove, location);
 	if (removed === false) {
 		return false;
 	}
 	state.locations.hand = removed;
 	console.log(header);
-	console.log(`You picked up ${printItem(state.locations.hand)} ${fromStrings[location]}.`)
+	console.log(`You picked up '${printItem(state.locations.hand)}' ${fromStrings[location]}.`)
 	return true;
 };
 
@@ -249,7 +257,7 @@ const drop = (destination: Location): boolean => {
 	if (result !== false) {
 		state.locations.hand = null;
 		console.log(header);
-		console.log(`You put ${printItem(inHand)} ${intoStrings[destination]}.`)
+		console.log(`You put '${printItem(inHand)}' ${intoStrings[destination]}.`)
 		console.log(`${capitalizeFirstLetter(destination.replace(/_/g, ' '))} now contains:`)
 		console.log(printItemList(state.locations[destination]));
 	}
@@ -287,7 +295,7 @@ const glitteringPrizes = (increase = 100_000) => {
 
 // -------------------------------------------- PRINTING -------------------------------------------- //
 
-const header = `\n---------------------\n`;
+const header = `-----------------------------------------------------------------`;
 const printItem = (item: Item): string => {
 	if (isIngredientUnit(item)) {
 		return printGenericIngredientUnit(item)
@@ -329,12 +337,15 @@ const inventory = (location?: Location, suppressHeader?: boolean): void => {
 		console.log(header);
 	}
 	if (location === undefined) {
+		console.log('>>> INVENTORY:')
+		console.log(`Your gold: ${state.gold}`)
 		inventory('hand', true);
 		inventory('storage', true);
-		inventory('oven', true);
-		inventory('mixer', true);
 		inventory('cutting_board', true);
+		inventory('mixer', true);
+		inventory('oven', true);
 		inventory('countertop', true);
+		inventory('decorating_stand', true);
 		inventory('display_case', true);
 		return;
 	}
@@ -383,11 +394,14 @@ const use = (cookLocation: CookLocation): boolean => {
 	const product = turnCookEvalIntoOutput(eva);
 	state.locations[cookLocation] = [product];
 	console.log(header)
-	console.log(`You made '${printItem(product)}' at the ${cookLocation}!`)
-	console.log(`Ingredients used:`)
-	console.log(printItemList(ingredients));
+	console.log(`You used the ${cookLocation.replace(/_/g, ' ')}! Made '${printItem(product)}'!`)
+	// console.log(`Ingredients used:`)
+	// console.log(printItemList(ingredients));
 	return true;
 }
+
+// Staring out:
+inventory();
 
 // Cheeky!
 glitteringPrizes();
@@ -406,7 +420,12 @@ pickup('storage', 5);
 drop('mixer');
 use('mixer'); // made double chocolate cookie dough
 pickup('mixer');
-drop('countertop'); // dropping cookie dough off
+
+// Bake cookies
+drop('oven');
+use('oven');
+pickup('oven');
+drop('countertop') // dropping cookies off
 
 // Double chocolate frosting
 inventory();
@@ -421,4 +440,5 @@ use('mixer');
 pickup('mixer')
 drop('countertop');
 
+inventory();
 console.log('BREAKPOINT ME TO PLAY')
