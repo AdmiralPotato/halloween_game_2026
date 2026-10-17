@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://q3l36yvm5xr1"]
+
+[ext_resource type="Script" uid="uid://c6ijo65efyycu" path="res://map/tilemap_test.gd" id="1_0n275"]
+[ext_resource type="Script" uid="uid://brhfhuo7lsymv" path="res://map/tilemap.gd" id="2_xtlfy"]
+[ext_resource type="Script" uid="uid://bhpv87diypx7w" path="res://map/test_player.gd" id="3_ntnwk"]
+[ext_resource type="PackedScene" uid="uid://bu2gj5xy34utf" path="res://ui/debug_panel.tscn" id="4_8t2af"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_el5rg"]
+size = Vector3(8, 1, 8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_el5rg"]
+size = Vector3(8, 1, 8)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_el5rg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_el5rg"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_el5rg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g1bkv"]
+albedo_color = Color(1, 0.6, 0, 1)
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_xtlfy"]
+
+[sub_resource type="Sky" id="Sky_eai58"]
+sky_material = SubResource("PhysicalSkyMaterial_xtlfy")
+
+[sub_resource type="Environment" id="Environment_el5rg"]
+background_mode = 1
+background_color = Color(0.11727656, 0.011531538, 0.21022078, 1)
+sky = SubResource("Sky_eai58")
+
+[node name="TilemapTest" type="Node3D" unique_id=1389805114]
+process_physics_priority = -1
+script = ExtResource("1_0n275")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1548782193]
+transform = Transform3D(1, 0, 0, 0, 0.25881907, 0.9659258, 0, -0.9659258, 0.25881907, 4, 7, 6)
+
+[node name="Tilemap" type="Node3D" parent="." unique_id=991694847]
+script = ExtResource("2_xtlfy")
+metadata/_custom_type_script = "uid://brhfhuo7lsymv"
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=2097173625]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.5, 4)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=647389857]
+shape = SubResource("BoxShape3D_el5rg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1024537989]
+mesh = SubResource("BoxMesh_el5rg")
+
+[node name="TestPlayer" type="RigidBody3D" parent="." unique_id=1002096108]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 2)
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+gravity_scale = 0.0
+linear_damp = 1.4
+script = ExtResource("3_ntnwk")
+
+[node name="CapsuleMesh" type="MeshInstance3D" parent="TestPlayer" unique_id=1399367687]
+mesh = SubResource("CapsuleMesh_el5rg")
+
+[node name="CapsuleCollision" type="CollisionShape3D" parent="TestPlayer" unique_id=1814211513]
+shape = SubResource("CapsuleShape3D_el5rg")
+
+[node name="Beak" type="MeshInstance3D" parent="TestPlayer" unique_id=1235893890]
+transform = Transform3D(0.875, 0, 0, 0, -4.371139e-08, -0.125, 0, 1, -5.4639235e-09, 0, 0.5, 0.29879713)
+mesh = SubResource("PrismMesh_el5rg")
+surface_material_override/0 = SubResource("StandardMaterial3D_g1bkv")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1716016636]
+environment = SubResource("Environment_el5rg")
+
+[node name="MainLight" type="DirectionalLight3D" parent="." unique_id=1786253674]
+transform = Transform3D(0.8660253, 0.43301287, -0.25000006, 0, 0.49999997, 0.86602545, 0.5000002, -0.75, 0.43301263, 0, 0, 0)
+shadow_enabled = true
+
+[node name="KeyLight" type="DirectionalLight3D" parent="." unique_id=169939251]
+transform = Transform3D(0.49999997, -0.43301272, 0.75, 0, 0.8660254, 0.5, -0.86602545, -0.24999999, 0.43301266, 0, 0, 0)
+light_color = Color(0.8664359, 0.92989075, 0.9247431, 1)
+light_energy = 0.1
+
+[node name="BackLight" type="DirectionalLight3D" parent="." unique_id=1688291091]
+transform = Transform3D(-0.4999999, -0.22414388, -0.8365163, 0, 0.9659258, -0.25881904, 0.86602545, -0.12940949, -0.48296282, 0, 0, 0)
+light_color = Color(0.97131807, 0.8903729, 0.91132176, 1)
+light_energy = 0.2
+
+[node name="PlayerInteractIndicator" type="SpotLight3D" parent="." unique_id=1256523446]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 10, 0)
+light_color = Color(0.12156863, 1, 0.32156864, 1)
+light_energy = 10.0
+spot_range = 20.0
+spot_angle = 2.0
+
+[node name="DebugPanel" parent="." unique_id=249136689 instance=ExtResource("4_8t2af")]

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bu2gj5xy34utf"]
+
+[ext_resource type="Script" uid="uid://e8fjlrf4hlrb" path="res://ui/debug_panel.gd" id="1_tx07p"]
+
+[node name="DebugPanel" type="Control" unique_id=249136689]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tx07p")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1552158188]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1523209147]
+layout_mode = 2

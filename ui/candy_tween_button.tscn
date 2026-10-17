@@ -1,78 +1,78 @@
-[gd_scene format=3 uid="uid://c2kjfy0oo3dgx"]
+[gd_scene format=3 uid="uid://cdn7xnw3rl3y3"]
 
-[ext_resource type="Script" uid="uid://bdhfegkn5wl5m" path="res://candy_button.gd" id="1_lp2cp"]
-[ext_resource type="Texture2D" uid="uid://tdosspgn5nwg" path="res://assets/candy.png" id="2_mkk3v"]
+[ext_resource type="Script" uid="uid://hpyooqt6v088" path="res://ui/candy_tween_button.gd" id="1_bcl1j"]
+[ext_resource type="Texture2D" uid="uid://tdosspgn5nwg" path="res://assets/candy.png" id="2_hishr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ywkj1"]
-atlas = ExtResource("2_mkk3v")
+atlas = ExtResource("2_hishr")
 region = Rect2(0, 0, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3l3ir"]
-atlas = ExtResource("2_mkk3v")
+atlas = ExtResource("2_hishr")
 region = Rect2(256, 0, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_767mp"]
-atlas = ExtResource("2_mkk3v")
+atlas = ExtResource("2_hishr")
 region = Rect2(512, 0, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fq0j4"]
-atlas = ExtResource("2_mkk3v")
+atlas = ExtResource("2_hishr")
 region = Rect2(0, 256, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8dq5e"]
-atlas = ExtResource("2_mkk3v")
+atlas = ExtResource("2_hishr")
 region = Rect2(256, 256, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d58ye"]
-atlas = ExtResource("2_mkk3v")
+atlas = ExtResource("2_hishr")
 region = Rect2(512, 256, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_au70w"]
-atlas = ExtResource("2_mkk3v")
+atlas = ExtResource("2_hishr")
 region = Rect2(0, 512, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l8rme"]
-atlas = ExtResource("2_mkk3v")
+atlas = ExtResource("2_hishr")
 region = Rect2(256, 512, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s7uw0"]
-atlas = ExtResource("2_mkk3v")
+atlas = ExtResource("2_hishr")
 region = Rect2(512, 512, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_etb2s"]
-atlas = ExtResource("2_mkk3v")
+atlas = ExtResource("2_hishr")
 region = Rect2(0, 0, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pqqre"]
-atlas = ExtResource("2_mkk3v")
+atlas = ExtResource("2_hishr")
 region = Rect2(256, 0, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_37cvb"]
-atlas = ExtResource("2_mkk3v")
+atlas = ExtResource("2_hishr")
 region = Rect2(512, 0, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mwa6a"]
-atlas = ExtResource("2_mkk3v")
+atlas = ExtResource("2_hishr")
 region = Rect2(0, 256, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dv8o0"]
-atlas = ExtResource("2_mkk3v")
+atlas = ExtResource("2_hishr")
 region = Rect2(256, 256, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jmyjr"]
-atlas = ExtResource("2_mkk3v")
+atlas = ExtResource("2_hishr")
 region = Rect2(512, 256, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8djai"]
-atlas = ExtResource("2_mkk3v")
+atlas = ExtResource("2_hishr")
 region = Rect2(0, 512, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m74tb"]
-atlas = ExtResource("2_mkk3v")
+atlas = ExtResource("2_hishr")
 region = Rect2(256, 512, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rctwp"]
-atlas = ExtResource("2_mkk3v")
+atlas = ExtResource("2_hishr")
 region = Rect2(512, 512, 256, 256)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p33bg"]
@@ -190,12 +190,17 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("1_lp2cp")
+script = ExtResource("1_bcl1j")
 
-[node name="CandySprite" type="AnimatedSprite2D" parent="." unique_id=1894415944]
+[node name="Scaler" type="Node2D" parent="." unique_id=949280339]
 position = Vector2(320, 320)
 scale = Vector2(2.5, 2.5)
+
+[node name="CandySprite" type="AnimatedSprite2D" parent="Scaler" unique_id=1894415944]
 sprite_frames = SubResource("SpriteFrames_p33bg")
 animation = &"0"
 
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="focus_entered" from="." to="." method="_start_tweens"]
+[connection signal="focus_exited" from="." to="." method="_stop_tweens"]
+[connection signal="mouse_entered" from="." to="." method="_start_tweens"]
+[connection signal="mouse_exited" from="." to="." method="_stop_tweens"]

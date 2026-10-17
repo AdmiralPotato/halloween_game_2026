@@ -1,6 +1,8 @@
 @tool
 extends Node3D
 
+var time: float = 0;
+
 @export var number_of_tiles: Vector2i = Vector2i(8, 8):
 	set(x):
 		number_of_tiles = x
@@ -20,7 +22,7 @@ func update_floor():
 	$Floor/MeshInstance3D.mesh.size.x = number_of_tiles.x
 	$Floor/MeshInstance3D.mesh.size.z = number_of_tiles.y
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if Engine.is_editor_hint():
 		return
 	var birb_position: Vector3 = $TestPlayer.position
@@ -28,3 +30,9 @@ func _physics_process(_delta):
 	var target_tile: Vector2i = $Tilemap.find_tile(birb_position, birb_facing, 1.4)
 	$PlayerInteractIndicator.position.x = target_tile.x + 0.5
 	$PlayerInteractIndicator.position.z = target_tile.y + 0.5
+
+	time += delta
+	Global.debug_panel.add_debug_property("Every 60 Frames", time, 60)
+	Global.debug_panel.add_debug_property("Every 30 Frames", time, 30)
+	Global.debug_panel.add_debug_property("Every 10 Frames", time, 10)
+	Global.debug_panel.add_debug_property("Every Frame", time, 1)
