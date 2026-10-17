@@ -6,11 +6,16 @@ import os
 import socket
 import subprocess
 import sys
+import mimetypes
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
 
+mimetypes.init()
+mimetypes.add_type('text/javascript', '.js')
 
 # See cpython GH-17851 and GH-17864.
+
+
 class DualStackServer(HTTPServer):
     def server_bind(self):
         # Suppress exception when protocol is IPv4.
@@ -44,7 +49,8 @@ def serve(root, port, run_browser):
     url = f"http://127.0.0.1:{port}"
     if run_browser:
         # Open the served page in the user's default browser.
-        print(f"Opening the served URL in the default browser (use `--no-browser` or `-n` to disable this): {url}")
+        print(
+            f"Opening the served URL in the default browser (use `--no-browser` or `-n` to disable this): {url}")
         shell_open(url)
     else:
         print(f"Serving at: {url}")
@@ -60,7 +66,8 @@ def serve(root, port, run_browser):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-p", "--port", help="port to listen on", default=8060, type=int)
+    parser.add_argument(
+        "-p", "--port", help="port to listen on", default=8060, type=int)
     parser.add_argument(
         "-r", "--root", help="path to serve as root (relative to `platform/web/`)", default="../../bin", type=Path
     )
