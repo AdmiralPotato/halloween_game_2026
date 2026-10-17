@@ -31,23 +31,12 @@ jobs:
     # Job name, can be anything
     name: Export Game
     steps:
-      # Always include the checkout step so that
-      # your project is available for Godot to export
+
     - name: checkout
       uses: actions/checkout@v5
 
-    - name: Create Build Directory
-      run: mkdir -p /home/runner/.local/share/godot/builds/Web
-
-    - name: Touch Forbidden File
-      run: touch /home/runner/.local/share/godot/builds/Web/index.pck
-
-    - name: Fire Permissions Laser
-      run: chmod 777 /home/runner/.local/share/godot/builds/Web/index.pck
-
     - name: export game
       id: export
-      # Use latest version (see releases for all versions)
       uses: firebelley/godot-export@v8.0.0
       with:
         # Defining all the required inputs
@@ -56,7 +45,7 @@ jobs:
           use_preset_export_path: true
           relative_project_path: ./
           archive_output: false
-          verbose: false
+          verbose: true
 
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v5
