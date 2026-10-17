@@ -1,6 +1,8 @@
 import type { CookingInput, CookingCompatibilityEval } from "./main.ts";
 import { cookEval } from "./main.ts";
 
+import { getFirstRecipeForProduct, getRecipesForProduct } from "./recipes.ts";
+
 import { sortAndStringifyArray } from "./utilities.ts";
 
 export type CookingCompatibilityTest = {
@@ -26,6 +28,10 @@ const compareCookingCompatibilityEvals = (found: CookingCompatibilityEval, expec
 
 	if (found.quantity !== expected.quantity) {
 		logAndOrSaveMessage(`quantity: expected ${expected.quantity}, found ${found.quantity}`);
+	}
+
+	if (found.bakeWithSatisfied !== expected.bakeWithSatisfied) {
+		logAndOrSaveMessage(`bakeWithSatisfied: expected ${expected.bakeWithSatisfied}, found ${found.bakeWithSatisfied}`);
 	}
 
 	const foundInheritedMods = sortAndStringifyArray(found.inheritedModifiers)
@@ -70,9 +76,11 @@ const cookingCompatibilityTests: CookingCompatibilityTest[] = [
 			quantity: 1,
 			inheritedModifiers: [],
 			newModifiers: [ 'orange_flavoring' ],
+			recipeAttempted: getFirstRecipeForProduct('cookie_dough'),
 			errorCount: 0,
 			missingIngredients: [],
 			extraneousIngredients: [],
+			bakeWithSatisfied: true,
 		},
 	},
 	{
@@ -88,9 +96,11 @@ const cookingCompatibilityTests: CookingCompatibilityTest[] = [
 			quantity: 1,
 			inheritedModifiers: [],
 			newModifiers: [ 'orange_flavoring' ],
+			recipeAttempted: getRecipesForProduct('cookie_dough')[1],
 			errorCount: 0,
 			missingIngredients: [],
 			extraneousIngredients: [],
+			bakeWithSatisfied: true,
 		},
 	},
 	{
@@ -108,9 +118,11 @@ const cookingCompatibilityTests: CookingCompatibilityTest[] = [
 			quantity: 1,
 			inheritedModifiers: [],
 			newModifiers: [ 'orange_flavoring', 'cocoa_powder' ],
+			recipeAttempted: getFirstRecipeForProduct('cookie_dough'),
 			errorCount: 0,
 			missingIngredients: [],
 			extraneousIngredients: [],
+			bakeWithSatisfied: true,
 		},
 	},
 	{
@@ -127,9 +139,11 @@ const cookingCompatibilityTests: CookingCompatibilityTest[] = [
 			quantity: 1,
 			inheritedModifiers: [],
 			newModifiers: [ 'orange_flavoring', 'cocoa_powder' ],
+			recipeAttempted: getRecipesForProduct('cookie_dough')[1],
 			errorCount: 0,
 			missingIngredients: [],
 			extraneousIngredients: [],
+			bakeWithSatisfied: true,
 		},
 	},
 	{
@@ -145,9 +159,11 @@ const cookingCompatibilityTests: CookingCompatibilityTest[] = [
 			quantity: 1,
 			inheritedModifiers: [ 'cocoa_powder' ],
 			newModifiers: [ 'orange_flavoring' ],
+			recipeAttempted: getRecipesForProduct('cookie_dough')[1],
 			errorCount: 0,
 			missingIngredients: [],
 			extraneousIngredients: [],
+			bakeWithSatisfied: true,
 		},
 	},
 	{
@@ -164,9 +180,11 @@ const cookingCompatibilityTests: CookingCompatibilityTest[] = [
 			quantity: 1,
 			inheritedModifiers: [ 'cocoa_powder' ],
 			newModifiers: [ 'orange_flavoring' ],
+			recipeAttempted: getRecipesForProduct('cookie_dough')[1],
 			errorCount: 1,
 			missingIngredients: [],
 			extraneousIngredients: [{ item: 'frosting', quantity: 1, modifiers: [] }],
+			bakeWithSatisfied: true,
 		},
 	},
 	{
@@ -182,9 +200,11 @@ const cookingCompatibilityTests: CookingCompatibilityTest[] = [
 			quantity: 2,
 			inheritedModifiers: [],
 			newModifiers: [ 'cocoa_powder', 'cocoa_powder' ],
+			recipeAttempted: getFirstRecipeForProduct('frosting'),
 			errorCount: 0,
 			missingIngredients: [],
 			extraneousIngredients: [],
+			bakeWithSatisfied: true,
 		},
 	},
 ];

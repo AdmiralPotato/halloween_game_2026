@@ -111,9 +111,14 @@ export const finishedProductMatchIgnoringQuantity = (a: FinishedProduct, b: Fini
 		&& arrayOfIngredientUnitsMatchIncludingQuantity(a.doodad, b.doodad)
 }
 
+// Returns new Product, or null if the process failed
 export const addFinisherToProduct = (finisherType: ProductFinisherType, ingredient: IngredientUnit, product: FinishedProduct): FinishedProduct | null => {
 	const ret = structuredClone(product);
 	if (!isFinisherAllowedOnProduct(ingredient.item, finisherType, product.product)) {
+		return null;
+	}
+	// Doodads cannot go on a product without a decoration for it to stick to
+	if (finisherType === 'doodad' && product.decoration.length === 0) {
 		return null;
 	}
 	ret[finisherType].push(ingredient);

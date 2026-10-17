@@ -6,10 +6,12 @@ import {
 } from "./finishers.ts"
 import { getItemInfo } from "./items.ts";
 
+import type { Pan } from "./recipes.ts";
+
 import { cookEval, turnCookEvalIntoOutput } from "./main.ts";
 
 import type { IngredientUnit } from "./utilities.ts"
-import { capitalizeFirstLetter, ingredientUnitsMatchIgnoringQuantity, isIngredientUnit } from "./utilities.ts"
+import { capitalizeFirstLetter, ingredientUnitsMatchIgnoringQuantity, isIngredientUnit, sortAndStringifyArray } from "./utilities.ts"
 
 const debug = true;
 const debugPrint = (s: string) => {
@@ -322,15 +324,19 @@ const printItemList = (arr: Item[]): string => {
 
 const help = () => {
 	console.log(header);
-	console.log(`======= Locations =======`);
+	console.log(`=============== Locations ===============`);
 	console.log(`'hand', 'storage', 'oven', 'mixer', 'cutting_board', 'countertop', 'display_case'`);
-	console.log(`======= Commands =======`);
+	console.log(`=============== Commands ===============`);
 	console.log(`inventory (location?) [if location is not provided, shows everything]`);
 	console.log(`pickup (location, index, quantity?) [defaults to 1]`);
 	console.log(`drop (location)`);
 	console.log(`use ('oven'|'mixer'|'cutting_board')`);
 	console.log(`empty ('oven'|'mixer'|'cutting_board') [discards contents, if any]`);
 	console.log(`buy (itemName, quantity?)`);
+	console.log(`=============== Shortcuts ===============`);
+	console.log(`bakeCookies () [auto uses oven with cookie sheet]`);
+	console.log(`bakeCupcakes () [auto uses oven with muffin tin]`);
+	console.log(`bakeCake () [auto uses oven with cake pan]`);
 }
 
 const inventory = (location?: Location, suppressHeader?: boolean): void => {
@@ -365,39 +371,70 @@ const inventory = (location?: Location, suppressHeader?: boolean): void => {
 	}
 };
 
-const use = (cookLocation: CookLocation): boolean => {
-	if (!isCookLocation(cookLocation)) {
+const waitTimes: Record<number, string> = {
+	0: "no time at all",
+	1: "a moment",
+	2: "a few minutes",
+	3: "a while",
+	4: "a long time",
+	5: "a really long time",
+}
+
+const bakeCookies = () => use('oven', 'cookie_sheet');
+const bakeCupcakes = () => use('oven', 'muffin_tin');
+const bakeCake = () => use('oven', 'cake_pan');
+const use = (location: CookLocation, bakeWith?: Pan): boolean => {
+	if (!isCookLocation(location)) {
 		console.error(header);
-		console.error(`${cookLocation} is not a valid kitchen location`);
+		console.error(`${location} is not a valid kitchen location`);
 		return false;
 	}
 
-	const items = state.locations[cookLocation];
+	const items = state.locations[location];
 	
 	// If any are finished products, don't go through with it
 	const ingredients = items.filter(isIngredientUnit);
 	const finishedProducts = items.filter(v=>!isIngredientUnit(v));
 	if (finishedProducts.length) {
 		console.error(header);
-		console.error(`${cookLocation}: some of these items are products, not ingredients:`);
+		console.error(`${location}: some of these items are products, not ingredients:`);
 		console.error(printItemList(finishedProducts));
 		return false;
 	}
 	// See if there is a recipe that satisfies everything
-	const eva = cookEval(cookLocation, ingredients);
-	if (eva.errorCount > 0) {
+	const eva = cookEval(location, ingredients, bakeWith);
+	const issues: string[] = [];
+	if (!eva.bakeWithSatisfied) {
+		const recipe = eva.recipeAttempted;
+		if (bakeWith === undefined) {
+			issues.push(`Bake needed '${recipe.bakeWith}', found nothing`);
+		} else if (recipe.bakeWith === undefined) {
+			issues.push(`'${bakeWith}' is not used to make '${recipe.output}'`);
+		} else {
+			issues.push(`Bake needed '${recipe.bakeWith}', found '${bakeWith}'`);
+		}
+	}
+	if (eva.extraneousIngredients.length > 0) {
+		issues.push(`Found extraneous ingredients: ${printItemList(eva.extraneousIngredients)}`)
+	}
+	if (eva.missingIngredients.length > 0) {
+		issues.push(`Some ingredients were missing: ${sortAndStringifyArray(eva.missingIngredients)}`);
+	}
+	if (issues.length > 0) {
 		console.error(header);
-		console.error(`${cookLocation}: could not make anything normal with these ingredients:`);
-		console.error(printItemList(ingredients));
+		console.error(`${location}: there were issues with the attempt to make '${eva.output}'`);
+		console.error(issues.join('\n'));
 		return false;
 	}
 	// Guess it worked
 	const product = turnCookEvalIntoOutput(eva);
-	state.locations[cookLocation] = [product];
+	state.locations[location] = [product];
 	console.log(header)
-	console.log(`You used the ${cookLocation.replace(/_/g, ' ')}! Made '${printItem(product)}'!`)
-	// console.log(`Ingredients used:`)
-	// console.log(printItemList(ingredients));
+	if (bakeWith !== undefined) {
+		console.log(`You put the ${bakeWith.replace(/_/g, ' ')} ${intoStrings[location]} and waited ${waitTimes[eva.recipeAttempted.time]}. Made '${printItem(product)}'!`)
+	} else {
+		console.log(`You used the ${location.replace(/_/g, ' ')} and waited ${waitTimes[eva.recipeAttempted.time]}. Made '${printItem(product)}'!`)
+	}
 	return true;
 }
 
@@ -424,7 +461,7 @@ pickup('mixer');
 
 // Bake cookies
 drop('oven');
-use('oven');
+use('oven', 'cookie_sheet');
 pickup('oven');
 drop('countertop') // dropping cookies off
 

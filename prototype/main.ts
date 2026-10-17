@@ -11,23 +11,6 @@ import { getItemInfo } from "./items.ts";
 
 import type { FinishedProduct } from "./finishers.ts";
 
-type Modifier = {
-	item: string;
-	quantity: number;
-};
-type ProductComponent = {
-	item: string;
-	modifiers: Modifier[];
-	quantity: number;
-};
-type FinalItem = {
-	base: ProductComponent;
-	modifiers?: ProductComponent[],
-	fillings?: ProductComponent[],
-	decorations?: ProductComponent[],
-	doodads?: ProductComponent[],
-};
-
 // QUICK TEST
 
 const recipeAttributeCache: Record<string, AttributeMap> = {};
@@ -79,6 +62,7 @@ export const getAttributesForItem = (item: string, modifiers = [] as string[]) =
 
 export type CookingInput = {
 	location: string;
+	bakeWith?: string;
 	ingredients: IngredientUnit[];
 };
 export type CookingCompatibilityEval = {
@@ -87,13 +71,15 @@ export type CookingCompatibilityEval = {
 	quantity: number;
 	inheritedModifiers: string[]; // if the base ingredients had modifiers on them, they land here
 	newModifiers: string[]; // new ingredients that are adding new modifiers go here
+	recipeAttempted: RecipeInfo;
 	// Report card
 	errorCount: number; // quantity of problematic ingredients, both missing and extraneous
 	missingIngredients: string[];
 	extraneousIngredients: IngredientUnit[];
+	bakeWithSatisfied: boolean;
 };
 
-const getIngredientRecipeEval = (recipeInfo: RecipeInfo, givenIngredients: IngredientUnit[]): CookingCompatibilityEval => {
+const getIngredientRecipeEval = (recipeInfo: RecipeInfo, givenIngredients: IngredientUnit[], bakeWith?: string): CookingCompatibilityEval => {
 	const tally = listToTally(recipeInfo.ingredients);
 	const inheritedModifiers: string[] = [];
 	const newModifiers: string[] = [];
@@ -125,17 +111,19 @@ const getIngredientRecipeEval = (recipeInfo: RecipeInfo, givenIngredients: Ingre
 		quantity: recipeInfo.quantity,
 		inheritedModifiers,
 		newModifiers,
-		errorCount: missingIngredients.length + extraneousIngredients.length,
+		recipeAttempted: recipeInfo,
+		errorCount: missingIngredients.length + extraneousIngredients.length + Number(bakeWith !== recipeInfo.bakeWith),
 		missingIngredients,
 		extraneousIngredients,
+		bakeWithSatisfied: bakeWith === recipeInfo.bakeWith,
 	};
 };
 
-export const cookEval = (location: string, providedIngredients: IngredientUnit[]): CookingCompatibilityEval => {
+export const cookEval = (location: string, providedIngredients: IngredientUnit[], bakeWith?: string): CookingCompatibilityEval => {
 	// Recipes at the given location
 	const allRecipes = getRecipesForLocation(location);
 	const evals = allRecipes
-		.map(recipe=>getIngredientRecipeEval(recipe, providedIngredients))
+		.map(recipe=>getIngredientRecipeEval(recipe, providedIngredients, bakeWith))
 		.sort((a,b)=>a.errorCount - b.errorCount)
 	const bestScore = evals[0].errorCount
 	const bestEvals = evals.filter(v=>v.errorCount === bestScore);

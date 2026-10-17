@@ -14,6 +14,14 @@ export type RecipeInfo = {
 	allowedModifiers: string[];
 }
 
+export type Pan = 'cookie_sheet' | 'muffin_tin' | 'cake_pan';
+const isPan = (v: unknown): v is Pan => {
+	if (v === 'cookie_sheet') { return true; }
+	if (v === 'muffin_tin') { return true; }
+	if (v === 'cake_pan') { return true; }
+	return false;
+}
+
 const recipeList: RecipeInfo[] = [
 	{
 		output: 'chocolate_chips',
