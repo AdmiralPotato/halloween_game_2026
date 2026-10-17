@@ -7,6 +7,9 @@ extends RigidBody3D
 ## How fast the birb wants to turn in RADIANS per second
 @export var turn_speed := TAU
 
+func _ready() -> void:
+	$mage/AnimationPlayer.play("run")
+
 func _physics_process(delta):
 	var desired_x_motion := Input.get_axis("move_left", "move_right") * movement_speed
 	var desired_z_motion := Input.get_axis("move_up", "move_down") * movement_speed
