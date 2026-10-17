@@ -35,10 +35,16 @@ func _process(_delta) -> void:
 				continue
 			if !monitored.label_node:
 				monitored.label_node = Label.new()
-				monitored.label_node.text = "%s: —" % label
+				monitored.label_node.text = ""
 				$PanelContainer/VBoxContainer.add_child(monitored.label_node)
-			if frame_count % monitored.interval != 0: continue
-			monitored.label_node.text = "%s: %s" % [label, str(monitored.node[monitored.property])]
+			if frame_count % monitored.interval != 0 && monitored.label_node.text.length() > 0: continue
+			var value = monitored.node[monitored.property]
+			if value is Callable:
+				value = value.call()
+			if label.contains("%"):
+				monitored.label_node.text = label % value
+			else:
+				monitored.label_node.text = "%s: %s" % [label, str(value)]
 		for label in props_to_delete:
 			monitored_properties.erase(label)
 			labels_in_order.erase(label)

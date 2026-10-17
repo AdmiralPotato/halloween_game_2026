@@ -16,6 +16,7 @@ func _ready():
 		DebugPanel.monitor("Every 30 frames", self, "time", 30)
 		DebugPanel.monitor("Every 10 frames", self, "time", 10)
 		DebugPanel.monitor("Every frame", self, "time", 1)
+		DebugPanel.monitor("Every frame formatted: %.2f", self, "time", 1)
 
 func update_floor():
 	$Floor.position.x = number_of_tiles.x * 0.5
