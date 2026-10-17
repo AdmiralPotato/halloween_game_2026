@@ -1,4 +1,5 @@
 import { getModifierPrintName } from "./items.ts";
+import { addItemToItemList } from "./simulation.ts";
 
 import type { IngredientUnit } from "./utilities.ts";
 import {
@@ -10,7 +11,7 @@ import {
 
 import { getVariantParent } from "./variants.ts";
 
-type ProductFinisherType = 'filling' | 'decoration' | 'doodad';
+export type ProductFinisherType = 'filling' | 'decoration' | 'doodad';
 const isProductFinisherType = (v: unknown): v is ProductFinisherType => {
 	if (v === 'filling') { return true; }
 	if (v === 'decoration') { return true; }
@@ -81,6 +82,7 @@ const getFinisherInfo = (product: string) => {
 	return ret;
 };
 
+// We need to do it this way because whipped cream (or other things) could be a filling OR a decoration
 export const isFinisherAllowedOnProduct = (finisherName: string, finisherType: ProductFinisherType, product: string): boolean => {
 	const finishers = getFinisherInfo(product);
 	if (finishers[finisherType].includes(finisherName)) {
@@ -111,9 +113,14 @@ export const finishedProductMatchIgnoringQuantity = (a: FinishedProduct, b: Fini
 		&& arrayOfIngredientUnitsMatchIncludingQuantity(a.doodad, b.doodad)
 }
 
+const batchSizes: Record<string, number> = {
+	cookie: 12,
+	cupcake: 6,
+	cake: 1,
+}
+
 // Returns new Product, or null if the process failed
 export const addFinisherToProduct = (finisherType: ProductFinisherType, ingredient: IngredientUnit, product: FinishedProduct): FinishedProduct | null => {
-	const ret = structuredClone(product);
 	if (!isFinisherAllowedOnProduct(ingredient.item, finisherType, product.product)) {
 		return null;
 	}
@@ -121,7 +128,16 @@ export const addFinisherToProduct = (finisherType: ProductFinisherType, ingredie
 	if (finisherType === 'doodad' && product.decoration.length === 0) {
 		return null;
 	}
-	ret[finisherType].push(ingredient);
+	// 1x finisher goes to 1x batch of product. If there is not enough finisher available, it fails.
+	const batchSize = batchSizes[product.product];
+	const batchMult = product.quantity / batchSize;
+	if (ingredient.quantity < batchMult) {
+		return null;
+	}
+	const ret = structuredClone(product);
+	const toInsert = {...ingredient, quantity: batchMult}
+	addItemToItemList(toInsert, ret[finisherType]);
+	ingredient.quantity -= batchMult; // todo: I DON'T LIKE THAT THIS IS HAPPENING
 	return ret;
 }
 

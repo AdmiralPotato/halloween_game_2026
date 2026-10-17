@@ -1,6 +1,8 @@
-import type { FinishedProduct } from "./finishers.ts"
+import type { FinishedProduct, ProductFinisherType } from "./finishers.ts"
 import {
+	addFinisherToProduct,
 	finishedProductMatchIgnoringQuantity,
+	isFinisherAllowedOnProduct,
 	prettyPrintFinishedProduct,
 	printGenericIngredientUnit
 } from "./finishers.ts"
@@ -23,6 +25,8 @@ const debugPrint = (s: string) => {
 // -------------------------------------------- STATE -------------------------------------------- //
 
 type Item = IngredientUnit | FinishedProduct;
+const getItemName = (item: Item): string => isIngredientUnit(item) ? item.item : item.product;
+
 const itemTypesMatch = (a: Item, b: Item): boolean => isIngredientUnit(a) === isIngredientUnit(b);
 const itemsMatchIgnoringQuantity = (a: Item, b: Item): boolean => {
 	if (!itemTypesMatch(a, b)) {
@@ -150,7 +154,7 @@ const removeItemFromLocation = (itemToRemove: Item, location: Location): Item | 
 
 // Returns the new item object
 // Object returned might have greater quantity than provided if some where there already
-const addItemToItemList = (itemToAdd: Item, arr: Item[]): Item => {
+export const addItemToItemList = (itemToAdd: Item, arr: Item[]): Item => {
 	const foundIndex = arr.findIndex((v)=>itemsMatchIgnoringQuantity(itemToAdd, v));
 	// Not there? Easy, just add it at the end
 	if (foundIndex === -1) {
@@ -331,12 +335,17 @@ const help = () => {
 	console.log(`pickup (location, index, quantity?) [defaults to 1]`);
 	console.log(`drop (location)`);
 	console.log(`use ('oven'|'mixer'|'cutting_board')`);
+	console.log(`addFinisher ('filling'|'decoration'"|'doodad', location, index?)`)
 	console.log(`empty ('oven'|'mixer'|'cutting_board') [discards contents, if any]`);
 	console.log(`buy (itemName, quantity?)`);
 	console.log(`=============== Shortcuts ===============`);
+	console.log(`dropUsePickup ('oven'|'mixer'|'cutting_board') [chains drop(), use(CookLocation), pickup(), unless something breaks along the way]`);
 	console.log(`bakeCookies () [auto uses oven with cookie sheet]`);
 	console.log(`bakeCupcakes () [auto uses oven with muffin tin]`);
 	console.log(`bakeCake () [auto uses oven with cake pan]`);
+	console.log(`addFilling () [auto uses finisher: filling]`);
+	console.log(`addDecoration () [auto uses finisher: decoration]`);
+	console.log(`addDoodad () [auto uses finisher: doodad]`);
 }
 
 const inventory = (location?: Location, suppressHeader?: boolean): void => {
@@ -438,6 +447,90 @@ const use = (location: CookLocation, bakeWith?: Pan): boolean => {
 	return true;
 }
 
+// Finishers are applied 1x item per batch. Cookies are 12, cupcakes 6, cakes 1. E.g. 12x cookies use 1x frosting, 24x cookies use 2x frosting.
+// Btw, stacks can only be the normal stack size in the back of the room, at least until they are put in the sales counter. Customers buying stuff can buy single units if they want: e.g. 2x cookies
+// Finishers (carried in your hand) can be applied to items on the countertop or items on the decorating stand, but the latter will be applied faster.
+// There must be enough finisher quanitity for the entire count of the stack on the counter tile (or decorating stand) or it will fail.
+
+// Returns false if the decoration failed. Returns the new product otherwise.
+const addFinisher = (finisherType: ProductFinisherType, location: Location, index = 0): FinishedProduct | false => {
+	const plural = finisherType === 'filling' ? 'filling' : finisherType + 's';
+	const indefiniteArticle = finisherType === 'decoration' ? 'decoration' : 'a ' + finisherType;
+	if (location === 'hand') {
+		console.warn(header);
+		console.warn(`You cannot add ${plural} to something you are holding! First set the product on the countertop or on the decoration stand.`);
+		return false;
+	}
+	const inHand = state.locations.hand;
+	if (inHand === null) {
+		console.warn(header);
+		console.warn(`Cannot add ${plural}; you are not carrying anything`);
+		return false;
+	}
+	const existingItem = state.locations[location][index];
+	if (existingItem === undefined) {
+		console.warn(header);
+		console.warn(`There is nothing to add ${plural} to there.`);
+		return false;
+	}
+	if (isIngredientUnit(existingItem)) {
+		console.warn(header);
+		console.warn(`Cannot add ${plural} to '${printItem(existingItem)}' (not a finished product).`);
+		return false;
+	}
+	if (!isIngredientUnit(inHand)) {
+		console.warn(header);
+		console.warn(`Cannot add ${plural} using finished product '${printItem(inHand)}'.`);
+		return false;
+	}
+	if (!isFinisherAllowedOnProduct(getItemName(inHand), finisherType, existingItem.product)) {
+		console.warn(header);
+		console.warn(`'${getItemName(inHand)}' cannot be used as ${indefiniteArticle} for '${existingItem.product}'.`);
+		return false;
+	}
+	const newProduct = addFinisherToProduct(finisherType, inHand, existingItem);
+	if (newProduct === null) {
+		throw new Error ("UNREACHABLE");
+	}
+	console.log(header);
+	if (finisherType === 'filling') {
+		console.log(`Filled '${printItem(existingItem)}' with '${printItem(inHand)}'!`);
+	} else if (finisherType === 'decoration') {
+		console.log(`Decorated '${printItem(existingItem)}' with '${printItem(inHand)}'!`);
+	} else if (finisherType === 'doodad') {
+		console.log(`Added '${printItem(inHand)}' to the top of '${printItem(existingItem)}'!`);
+	}
+	console.log(`Now we have '${printItem(newProduct)}'!`)
+	// adding a finisher modifies the thing in your hand :/
+	if (state.locations.hand === null || state.locations.hand.quantity === 0) {
+		state.locations.hand = null;
+		console.log(`Now you are holding nothing.`)
+	} else {
+		console.log(`Now you are holding '${printItem(state.locations.hand)}'.`)
+	}
+	state.locations[location][index] = newProduct;
+	return newProduct;
+}
+const addFilling = (location: Location, index = 0): FinishedProduct | false => addFinisher('filling', location, index);
+const addDecoration = (location: Location, index = 0): FinishedProduct | false => addFinisher('decoration', location, index);
+const addDoodad = (location: Location, index = 0): FinishedProduct | false => addFinisher('doodad', location, index);
+
+const dropUsePickup = (cookLocation: CookLocation, bakeWith?: Pan): boolean => {
+	const dropped = drop(cookLocation);
+	if (!dropped) {
+		return false;
+	}
+	const used = use(cookLocation, bakeWith);
+	if (!used) {
+		return false;
+	}
+	const pickuped = pickup(cookLocation);
+	if (!pickuped) {
+		return false;
+	}
+	return true;
+}
+
 // Staring out:
 inventory();
 
@@ -445,7 +538,6 @@ inventory();
 glitteringPrizes();
 buy('cocoa_powder', 100)
 
-// Double chocolate cookie dough
 pickup('storage', 0); // flour
 drop('mixer');
 pickup('storage', 1); // sugar
@@ -455,17 +547,11 @@ pickup('storage', 5); // cocoa powder
 drop('mixer');
 use('mixer'); // made chocolate cookie dough
 pickup('storage', 5);
-drop('mixer');
-use('mixer'); // made double chocolate cookie dough
-pickup('mixer');
+dropUsePickup('mixer'); // made double chocolate cookie dough
 
-// Bake cookies
-drop('oven');
-use('oven', 'cookie_sheet');
-pickup('oven');
+dropUsePickup('oven', 'cookie_sheet'); //  BAKE COOKIES
 drop('countertop') // dropping cookies off
 
-// Double chocolate frosting
 inventory();
 pickup('storage', 1); // sugar
 drop('mixer');
@@ -473,10 +559,15 @@ pickup('storage', 5); // cocoa powder
 drop('mixer');
 buy('mint_flavoring', 100)
 pickup('storage', 6); // mint flavoring
-drop('mixer');
-use('mixer');
-pickup('mixer')
-drop('countertop');
+dropUsePickup('mixer'); // made chocolate mint frosting
+// drop('countertop');
+
+addDecoration('countertop') // adding frosting to cookies
+addDecoration('countertop') // adding frosting to cookies
+buy('rainbow_sprinkles', 10);
+pickup('storage', 7)
+addDoodad('countertop') // adding sprinkles to cookies
+
 
 inventory();
-console.log('BREAKPOINT ME TO PLAY')
+;console.log('BREAKPOINT ME TO PLAY')
