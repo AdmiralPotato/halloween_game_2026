@@ -12,6 +12,10 @@ func _ready():
 	update_floor()
 	if !Engine.is_editor_hint():
 		$Tilemap.create_slots(Vector2i(0, 0), number_of_tiles)
+		DebugPanel.monitor("Every 60 frames", self, "time", 60)
+		DebugPanel.monitor("Every 30 frames", self, "time", 30)
+		DebugPanel.monitor("Every 10 frames", self, "time", 10)
+		DebugPanel.monitor("Every frame", self, "time", 1)
 
 func update_floor():
 	$Floor.position.x = number_of_tiles.x * 0.5
@@ -30,9 +34,4 @@ func _physics_process(delta):
 	var target_tile: Vector2i = $Tilemap.find_tile(birb_position, birb_facing, 1.4)
 	$PlayerInteractIndicator.position.x = target_tile.x + 0.5
 	$PlayerInteractIndicator.position.z = target_tile.y + 0.5
-
 	time += delta
-	Global.debug_panel.add_debug_property("Every 60 Frames", time, 60)
-	Global.debug_panel.add_debug_property("Every 30 Frames", time, 30)
-	Global.debug_panel.add_debug_property("Every 10 Frames", time, 10)
-	Global.debug_panel.add_debug_property("Every Frame", time, 1)

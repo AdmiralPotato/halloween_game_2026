@@ -1,26 +1,56 @@
 class_name DebugPanel extends Control
 
-var properties: Array[Label]
-@onready var container = $PanelContainer/VBoxContainer
-const fps_ms = 16
+class Monitored:
+	var node: Node;
+	var property: StringName;
+	var label_string: StringName;
+	var label_node: Label;
+	var interval: int;
+
+static var monitored_properties: Dictionary[StringName, Monitored]
+static var labels_in_order: Array[StringName]
+var frame_count := 0
 
 func _ready() -> void:
+	if Global.debug_panel:
+		Global.debug_panel.queue_free()
 	Global.debug_panel = self
-	visible = true
+	for label in monitored_properties:
+		monitored_properties[label].label_node = null
+	visible = false
 
-func _input(event: InputEvent) -> void:
+func _input(event) -> void:
 	if event.is_action_pressed("debug"):
 		visible = not visible
 		get_viewport().set_input_as_handled()
 
-func add_debug_property(id: StringName, value, time_in_frames) -> void:
-	if properties.has(id):
-		if Time.get_ticks_msec() / fps_ms % time_in_frames == 0:
-			var target = container.find_child(id, true, false) as Label
-			target.text = id + ": " + str(value)
-	else:
-		var property = Label.new()
-		container.add_child(property)
-		property.name = id
-		property.text = id + ": " + str(value)
-		properties.append(id)
+func _process(_delta) -> void:
+	frame_count += 1
+	if visible:
+		var props_to_delete: Array[StringName] = []
+		for label in labels_in_order:
+			var monitored: Monitored = monitored_properties.get(label)
+			if !monitored.node:
+				props_to_delete.push_front(label)
+				continue
+			if !monitored.label_node:
+				monitored.label_node = Label.new()
+				monitored.label_node.text = "%s: —" % label
+				$PanelContainer/VBoxContainer.add_child(monitored.label_node)
+			if frame_count % monitored.interval != 0: continue
+			monitored.label_node.text = "%s: %s" % [label, str(monitored.node[monitored.property])]
+		for label in props_to_delete:
+			monitored_properties.erase(label)
+			labels_in_order.erase(label)
+
+static func monitor(label: StringName, node: Node, property: StringName, interval: int = 1):
+	if interval < 1: interval = 1
+	var monitored: Monitored = monitored_properties.get(label)
+	if !monitored:
+		labels_in_order.push_back(label)
+		monitored = Monitored.new()
+		monitored.label_string = label
+		monitored_properties.set(label, monitored)
+	monitored.node = node
+	monitored.property = property
+	monitored.interval = interval
