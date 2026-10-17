@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Halloween Game 2026"
-run/main_scene="uid://q3l36yvm5xr1"
+run/main_scene="uid://dvqbw3sbxx3si"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="uid://tdosspgn5nwg"
@@ -30,7 +30,7 @@ window/stretch/aspect="expand"
 
 [gui]
 
-theme/custom="uid://7sxce6x4wppf"
+theme/custom="uid://bkphg3nelw53u"
 
 [input]
 
