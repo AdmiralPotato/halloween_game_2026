@@ -47,6 +47,7 @@ const isOtherLocation = (v: unknown): v is OtherLocation => {
 	if (v === 'hand') { return true; }
 	if (v === 'countertop') { return true; }
 	if (v === 'display_case') { return true; }
+	if (v === 'decorating_stand') { return true; }
 	if (v === 'storage') { return true; }
 	return false;
 };
