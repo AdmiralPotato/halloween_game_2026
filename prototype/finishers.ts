@@ -1,13 +1,6 @@
-import { getModifierPrintName } from "./items.ts";
 import { addItemToItemList } from "./simulation.ts";
 
-import type { IngredientUnit } from "./utilities.ts";
-import {
-	arrayOfIngredientUnitsMatchIncludingQuantity,
-	listToTally,
-	quickOxfordCommas,
-	sortAndStringifyArray
-} from "./utilities.ts";
+import type { FinishedProduct, IngredientUnit } from "./utilities.ts";
 
 import { getVariantParent } from "./variants.ts";
 
@@ -97,27 +90,12 @@ export const isFinisherAllowedOnProduct = (finisherName: string, finisherType: P
 	return false;
 };
 
-export type FinishedProduct = {
-	product: string;
-	quantity: number;
-	modifiers: string[];
-	filling: IngredientUnit[];
-	decoration: IngredientUnit[];
-	doodad: IngredientUnit[];
-};
-export const finishedProductMatchIgnoringQuantity = (a: FinishedProduct, b: FinishedProduct): boolean => {
-	return a.product === b.product
-		&& sortAndStringifyArray(a.modifiers) === sortAndStringifyArray(b.modifiers)
-		&& arrayOfIngredientUnitsMatchIncludingQuantity(a.filling, b.filling)
-		&& arrayOfIngredientUnitsMatchIncludingQuantity(a.decoration, b.decoration)
-		&& arrayOfIngredientUnitsMatchIncludingQuantity(a.doodad, b.doodad)
-}
 
 const batchSizes: Record<string, number> = {
 	cookie: 12,
 	cupcake: 6,
 	cake: 1,
-}
+};
 
 // Returns new Product, or null if the process failed
 export const addFinisherToProduct = (finisherType: ProductFinisherType, ingredient: IngredientUnit, product: FinishedProduct): FinishedProduct | null => {
@@ -140,85 +118,3 @@ export const addFinisherToProduct = (finisherType: ProductFinisherType, ingredie
 	ingredient.quantity -= batchMult; // todo: I DON'T LIKE THAT THIS IS HAPPENING
 	return ret;
 }
-
-// ------------------------------------- AUTO DISPLAY NAMES ------------------------------------- //
-
-const reproductiveNumbers: Record<number, string> = {
-	0: '',
-	1: '',
-	2: 'double ',
-	3: 'triple ',
-	4: 'quad ',
-	5: 'm-m-m-monster ',
-};
-const getReproductiveNumber = (n: number): string => {
-	if (reproductiveNumbers[n] !== undefined) {
-		return reproductiveNumbers[n];
-	}
-	if (n > 5) {
-		return reproductiveNumbers[5];
-	}
-	throw new Error ("UNREACHABLE")
-};
-
-// e.g. item: 'frosting', modifiers: ['cocoa_powder', 'cocoa_powder'] -> 'double chocolate frosting'
-const printModifiersWithItemName = (item: string, modifiers: string[]): string => {
-	const sortedPrettyNames = modifiers.map(getModifierPrintName).sort()
-	const tally = listToTally(sortedPrettyNames);
-	const prettiedModifiers = Object.entries(tally).map(([modifierName, quantity])=>{
-		const prettyNumber = getReproductiveNumber(quantity);
-		return prettyNumber + modifierName;
-	})
-	return [...prettiedModifiers, item.replace(/_/g, ' ')].join(' ');
-};
-
-// If there is two+ of a modifier's quantity on a finisher item, don't do the same "double" stuff as above
-// Instead add "extra" (because it's not quad choc frosting, it's an extra amount of double choc frosting)
-// { item: 'frosting', quantity: 2, modifiers: ['cocoa_powder', 'cocoa_powder' ]} -> extra double chocolate frosting
-
-const prettyPrintFinisherIncludingQuantity = (finisher: IngredientUnit): string => {
-	const twoOrMore = finisher.quantity > 1 ? 'extra ' : '';
-	const name = printModifiersWithItemName(finisher.item, finisher.modifiers);
-	return twoOrMore + name;
-};
-
-const printXQuantity = (n: number): string => {
-	return n > 1 ? `${n}x ` : '';
-}
-
-export const prettyPrintFinishedProduct = (product: FinishedProduct): string => {
-	const count = printXQuantity(product.quantity);
-	const base = printModifiersWithItemName(product.product, product.modifiers);
-
-	const extras: string[] = [];
-
-	const fillings = product.filling.map(prettyPrintFinisherIncludingQuantity);
-	if (fillings.length > 0) {
-		extras.push(`with ${quickOxfordCommas(fillings)} filling`);
-	}
-
-	const decorations = product.decoration.map(prettyPrintFinisherIncludingQuantity);
-	if (decorations.length > 0) {
-		extras.push(`with ${quickOxfordCommas(decorations)}`);
-	}
-
-	const doodads = product.doodad.map(prettyPrintFinisherIncludingQuantity);
-	if (doodads.length > 0) {
-		extras.push(`topped with ${quickOxfordCommas(doodads)}`);
-	}
-
-	let finishers = extras.join(', ');
-	if (finishers !== '') {
-		finishers = ' ' + finishers;
-	}
-	return count + base + finishers;
-};
-
-// For things that aren't finished, like things from the store or in inventory, here's a more generic thing:
-
-export const printGenericIngredientUnit = (item: IngredientUnit) => {
-	const modifierAndItemName = printModifiersWithItemName(item.item, item.modifiers);
-	const nX = printXQuantity(item.quantity);
-	return nX + modifierAndItemName;
-};
-

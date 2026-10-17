@@ -1,41 +1,42 @@
-import type { AttributeMap } from "./attributes.ts";
-import { addAttributesToMap, maillardAttributes } from "./attributes.ts";
+import type { AttributeMap, AttributeSpread } from "./attributes.ts";
+import { addAttributesToMap, addAttributesToSpread, maillardAttributes } from "./attributes.ts";
 
 import type { RecipeInfo } from "./recipes.ts";
 import { getFirstRecipeForProduct, getRecipesForLocation, isModifierAllowedInRecipe } from "./recipes.ts";
 
-import type { IngredientUnit } from "./utilities.ts";
+import type { IngredientUnit, FinishedProduct } from "./utilities.ts";
 import { listToTally, tallyToList } from "./utilities.ts";
 
 import { getItemInfo } from "./items.ts";
-
-import type { FinishedProduct } from "./finishers.ts";
 
 // QUICK TEST
 
 const recipeAttributeCache: Record<string, AttributeMap> = {};
 
-// Note: this does not account for any modifiers atm
-export const getAttributesForItem = (item: string, modifiers = [] as string[]) => {
-	// Use cache, if any
-	const cache = recipeAttributeCache[item];
-	if (cache !== undefined) {
-		return cache;
+export const getAttributesForItemNameAndModifiers = (item: string, modifiers = [] as string[]): AttributeMap => {
+	if (modifiers.length === 0) {
+		// Use cache for simple cases
+		const cache = recipeAttributeCache[item];
+		if (cache !== undefined) {
+			return cache;
+		}
 	}
 	
 	const itemInfo = getItemInfo(item);
 
-	// Return attributes if provided
+	// Return attributes if provided in the item info
 	if (typeof itemInfo.attributes !== 'string') {
-		recipeAttributeCache[item] = itemInfo.attributes;
+		if (modifiers.length === 0) {
+			recipeAttributeCache[item] = itemInfo.attributes;
+		}
 		return itemInfo.attributes;
 	}
 
-	// Otherwise generate them from the recipe
+	// Otherwise generate them from the item info's recipe
 	const recipe = getFirstRecipeForProduct(item);
 	const attributes: AttributeMap = structuredClone(recipe.newAttributes);
 	recipe.ingredients.forEach(ingredient=>{
-		const ingredientAttributes = getAttributesForItem(ingredient);
+		const ingredientAttributes = getAttributesForItemNameAndModifiers(ingredient);
 		if (ingredientAttributes === undefined) {
 			throw new Error (`Could not get ingredient attributes for ${ingredient}`);
 		}
@@ -44,7 +45,7 @@ export const getAttributesForItem = (item: string, modifiers = [] as string[]) =
 
 	// Get the modifiers separately (will this work?)
 	modifiers.forEach(modifier=>{
-		addAttributesToMap(attributes, getAttributesForItem(modifier));
+		addAttributesToMap(attributes, getAttributesForItemNameAndModifiers(modifier));
 	});
 
 	// IMPORTANT NOTE!! Cooking darkens it slightly! Auto add maillard attributes
@@ -53,9 +54,35 @@ export const getAttributesForItem = (item: string, modifiers = [] as string[]) =
 		addAttributesToMap(attributes, bakingAttributes);
 	}
 
-	recipeAttributeCache[item] = attributes;
+	if (modifiers.length === 0) {
+		recipeAttributeCache[item] = attributes;
+	}
 	return attributes;
 };
+
+export const getAttributesForIngredientUnit = (ingredient: IngredientUnit): AttributeMap => {
+	const ret: AttributeMap = {};
+	for (let i = 0; i < ingredient.quantity; i++) {
+		addAttributesToMap(ret, getAttributesForItemNameAndModifiers(ingredient.item, ingredient.modifiers));
+	}
+	return ret;
+}
+export const getAttributesForIngredientUnitList = (arr: IngredientUnit[]): AttributeMap => {
+	const ret: AttributeMap = {};
+	arr.forEach(ingredient=>{
+		addAttributesToMap(ret, getAttributesForIngredientUnit(ingredient))
+	})
+	return ret;
+}
+
+export const getAttributeSpreadForFinishedProduct = (product: FinishedProduct): AttributeSpread => {
+	const ret: AttributeSpread = {};
+	addAttributesToSpread(ret, getAttributesForItemNameAndModifiers(product.product, product.modifiers));
+	addAttributesToSpread(ret, getAttributesForIngredientUnitList(product.filling));
+	addAttributesToSpread(ret, getAttributesForIngredientUnitList(product.decoration));
+	addAttributesToSpread(ret, getAttributesForIngredientUnitList(product.doodad));
+	return ret;
+}
 
 // ------------------------------ A SECOND QUICK TEST ------------------------------
 

@@ -1,5 +1,5 @@
-import type { FinishedProduct } from "./finishers.ts";
-import { prettyPrintFinishedProduct } from "./finishers.ts";
+import type { FinishedProduct } from "./utilities.ts";
+import { prettyPrintFinishedProduct } from "./utilities.ts";
 
 type FinisherTest = {
 	input: FinishedProduct;

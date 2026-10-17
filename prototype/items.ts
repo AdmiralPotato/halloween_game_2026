@@ -1,5 +1,4 @@
 import { isAttributeMap, type AttributeMap } from "./attributes.ts";
-import { getVariantPrintName } from "./variants.ts";
 
 type ItemStorageType = 'bag' | 'fridge' | 'box' | 'countertop';
 const isItemStorageType = (v: unknown): v is ItemStorageType => {
@@ -183,7 +182,6 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		attributes: {
 			fruity: 2,
 			blue: 1,
-			purple: 1,
 			pale: -1,
 		},
 	},
@@ -203,7 +201,6 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		attributes: {
 			minty: 3,
 			green: 1,
-			blue: 1,
 			pale: -1,
 		},
 	},
@@ -388,19 +385,3 @@ export const getItemInfo = (item: string) => {
 	}
 	return info;
 };
-
-export const getModifierPrintName = (modifierName: string): string => {
-	if (modifierName === 'cocoa_powder') {
-		return 'chocolate';
-	}
-	if (modifierName === 'chocolate_chips') {
-		return 'chocolate chip';
-	}
-	const variantPrintName = getVariantPrintName(modifierName);
-	if (variantPrintName) {
-		return variantPrintName.replace(/_/g, ' ');
-	}
-	return modifierName.replace(/_/g, ' ');
-};
-
-

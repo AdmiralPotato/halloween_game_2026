@@ -1,6 +1,6 @@
 import type { AttributeMap } from "./attributes.ts";
 import { compareAttributes } from "./attributes.ts";
-import { getAttributesForItem } from "./main.ts";
+import { getAttributesForItemNameAndModifiers } from "./main.ts";
 
 type AttributeTest = {
 	input: {
@@ -27,7 +27,7 @@ const attributeTests: AttributeTest[] = [
 ];
 
 const testsMap = attributeTests.map((test, i)=>{
-	const found = getAttributesForItem(test.input.item, test.input.modifiers);
+	const found = getAttributesForItemNameAndModifiers(test.input.item, test.input.modifiers);
 	const errorMessages = compareAttributes(test.expected, found);
 	if (errorMessages.length > 0) {
 		console.error(`Test #${i}: ${errorMessages.length} errors!`)

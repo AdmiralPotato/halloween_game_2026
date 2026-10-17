@@ -168,11 +168,39 @@ export const addAttributesToMap = (a: AttributeMap, b: AttributeMap) => {
 	const keysA = Object.keys(a);
 	const keysB = Object.keys(b);
 	const keys = new Set([...keysA, ...keysB]);
-	[...keys].forEach(key=>{
-		if (!isAttribute(key)) { throw new Error (`${key} is not an attribute!`)}
-		a[key] = (a[key] || 0) + (b[key] || 0);
+	[...keys].forEach(k=>{
+		if (!isAttribute(k)) { throw new Error (`${k} is not an attribute!`)}
+		a[k] = (a[k] || 0) + (b[k] || 0);
 	})
 	return a;
+};
+
+export type AttributeSpread = Partial<Record<Attribute, number[]>>;
+export const isAttributeSpread = (v: unknown): v is AttributeSpread => {
+	if (typeof v !== 'object' || v === null) {
+		return false;
+	}
+	const keysAreGood = Object.keys(v).every(k=>isAttribute(k));
+	const valuesAreGood = Object.values(v).every(arr=>{
+		if (!Array.isArray(arr)) { return false; }
+		return arr.every(n=>typeof n === 'number');
+	});
+	return keysAreGood && valuesAreGood;
+};
+
+export const addAttributesToSpread = (spread: AttributeSpread, atts: AttributeMap) => {
+	const keysA = Object.keys(spread);
+	const keysB = Object.keys(atts);
+	const keys = new Set([...keysA, ...keysB]);
+	[...keys].forEach(k=>{
+		if (!isAttribute(k)) { throw new Error (`${k} is not an attribute!`)}
+		spread[k] = spread[k] || [];
+		if (atts[k] !== undefined) {
+			spread[k].push(atts[k]);
+		}
+		spread[k].sort((a, b)=>a-b);
+	})
+	return spread;
 };
 
 //  ----------------------------------------- COMPARE ATTRIBUTES ----------------------------------------- //

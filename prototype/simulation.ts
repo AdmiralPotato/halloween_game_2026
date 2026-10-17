@@ -1,19 +1,31 @@
-import type { FinishedProduct, ProductFinisherType } from "./finishers.ts"
+import type { ProductFinisherType } from "./finishers.ts"
 import {
 	addFinisherToProduct,
-	finishedProductMatchIgnoringQuantity,
 	isFinisherAllowedOnProduct,
-	prettyPrintFinishedProduct,
-	printGenericIngredientUnit
 } from "./finishers.ts"
 import { getItemInfo } from "./items.ts";
 
 import type { Pan } from "./recipes.ts";
 
-import { cookEval, turnCookEvalIntoOutput } from "./main.ts";
+import {
+	cookEval,
+	getAttributesForIngredientUnit,
+	getAttributeSpreadForFinishedProduct,
+	turnCookEvalIntoOutput
+} from "./main.ts";
 
-import type { IngredientUnit } from "./utilities.ts"
-import { capitalizeFirstLetter, ingredientUnitsMatchIgnoringQuantity, isIngredientUnit, sortAndStringifyArray } from "./utilities.ts"
+import type { FinishedProduct, IngredientUnit, Item } from "./utilities.ts"
+import {
+	capitalizeFirstLetter,
+	getItemName,
+	isIngredientUnit,
+	itemsMatchIgnoringQuantity,
+	prettyPrintFinishedProduct,
+	printGenericIngredientUnit,
+	sortAndStringifyArray
+} from "./utilities.ts"
+
+import { isAttribute, type AttributeMap, type AttributeSpread } from "./attributes.ts";
 
 const debug = true;
 const debugPrint = (s: string) => {
@@ -23,22 +35,6 @@ const debugPrint = (s: string) => {
 }
 
 // -------------------------------------------- STATE -------------------------------------------- //
-
-type Item = IngredientUnit | FinishedProduct;
-const getItemName = (item: Item): string => isIngredientUnit(item) ? item.item : item.product;
-
-const itemTypesMatch = (a: Item, b: Item): boolean => isIngredientUnit(a) === isIngredientUnit(b);
-const itemsMatchIgnoringQuantity = (a: Item, b: Item): boolean => {
-	if (!itemTypesMatch(a, b)) {
-		return false;
-	}
-	if (isIngredientUnit(a) && isIngredientUnit(b)) {
-		return ingredientUnitsMatchIgnoringQuantity(a, b);
-	} else if (!isIngredientUnit(a) && !isIngredientUnit(b)) {
-		return finishedProductMatchIgnoringQuantity(a, b)
-	}
-	return false;
-}
 
 type CookLocation = 'oven' | 'mixer' | 'cutting_board';
 const isCookLocation = (v: unknown): v is CookLocation => {
@@ -324,6 +320,13 @@ const printItemList = (arr: Item[]): string => {
 	return result.join('\n')
 }
 
+const printAttributes = (attributes: AttributeMap | AttributeSpread): string => {
+	return Object.entries(attributes).map(([k,v])=>{
+		if (!isAttribute(k)) { throw new Error ("UNREACHABLE") }
+		return `  ${k}: ${JSON.stringify(v)}`;
+	}).join('\n')
+};
+
 // -------------------------------------------- ACTIONS -------------------------------------------- //
 
 const help = () => {
@@ -332,12 +335,13 @@ const help = () => {
 	console.log(`'hand', 'storage', 'oven', 'mixer', 'cutting_board', 'countertop', 'display_case'`);
 	console.log(`=============== Commands ===============`);
 	console.log(`inventory (location?) [if location is not provided, shows everything]`);
-	console.log(`pickup (location, index, quantity?) [defaults to 1]`);
+	console.log(`pickup (location, index?, quantity?) [index defautls to 0; quantity defaults to 1]`);
 	console.log(`drop (location)`);
-	console.log(`use ('oven'|'mixer'|'cutting_board')`);
+	console.log(`use ('oven'|'mixer'|'cutting_board', ('cookie_sheet'|'muffin_tin'|'cake_pan')?)`);
 	console.log(`addFinisher ('filling'|'decoration'"|'doodad', location, index?)`)
 	console.log(`empty ('oven'|'mixer'|'cutting_board') [discards contents, if any]`);
-	console.log(`buy (itemName, quantity?)`);
+	console.log(`buy (itemName, quantity?) [buy from the warehouse]`);
+	console.log(`attributes (location, index?) [index defaults to 0]`)
 	console.log(`=============== Shortcuts ===============`);
 	console.log(`dropUsePickup ('oven'|'mixer'|'cutting_board') [chains drop(), use(CookLocation), pickup(), unless something breaks along the way]`);
 	console.log(`bakeCookies () [auto uses oven with cookie sheet]`);
@@ -531,6 +535,22 @@ const dropUsePickup = (cookLocation: CookLocation, bakeWith?: Pan): boolean => {
 	return true;
 }
 
+const attributes = (location: Location, index = 0): void => {
+	const existingItem = location === 'hand'
+		? state.locations.hand
+		: state.locations[location][index];
+	if (!existingItem) {
+		console.error(header);
+		console.error(`There is nothing in '${intoStrings[location]}'.`);
+		return;
+	}
+	const attributes = isIngredientUnit(existingItem)
+		? getAttributesForIngredientUnit(existingItem)
+		: getAttributeSpreadForFinishedProduct(existingItem);
+	console.log(`Attributes for '${printItem(existingItem)}':`);
+	console.log(printAttributes(attributes));
+}
+
 // Staring out:
 inventory();
 
@@ -570,4 +590,4 @@ addDoodad('countertop') // adding sprinkles to cookies
 
 
 inventory();
-;console.log('BREAKPOINT ME TO PLAY')
+console.log('BREAKPOINT ME TO PLAY');
