@@ -1,7 +1,12 @@
-import type { CookingInput, CookingCompatibilityEval } from "./main.ts";
-import { cookEval } from "./main.ts";
-
-import { getFirstRecipeForProduct, getRecipesForProduct } from "./recipes.ts";
+import type {
+	CookingInput,
+	CookingCompatibilityEval
+} from "./recipes.ts";
+import {
+	getFirstRecipeForProduct,
+	getRecipesForProduct,
+	cookEval,
+ } from "./recipes.ts";
 
 import { sortAndStringifyArray } from "./utilities.ts";
 
@@ -209,16 +214,22 @@ const cookingCompatibilityTests: CookingCompatibilityTest[] = [
 	},
 ];
 
-const testsMap = cookingCompatibilityTests.map((test, i)=>{
-	const found = cookEval(test.input.location, test.input.ingredients);
-	const errorMessages = compareCookingCompatibilityEvals(found, test.expected);
-	if (errorMessages.length > 0) {
-		console.error(`Test #${i}: ${errorMessages.length} errors!`)
-		console.error(errorMessages.join('\n'))
-	}
-	return errorMessages;
-});
+export const doCookingTests = () => {
+	const testsMap = cookingCompatibilityTests.map((test, i)=>{
+		const found = cookEval(test.input.location, test.input.ingredients);
+		const errorMessages = compareCookingCompatibilityEvals(found, test.expected);
+		if (errorMessages.length > 0) {
+			console.error(`Test #${i}: ${errorMessages.length} errors!`)
+			console.error(errorMessages.join('\n'))
+		}
+		return errorMessages;
+	});
 
-if (testsMap.flat().length === 0) {
-	console.log("ALL COOKING TESTS PASS, BOSS");
+	if (testsMap.flat().length === 0) {
+		console.log("ALL COOKING TESTS PASS!");
+	} else {
+		console.error("COOKING TESTS HAD ISSUES");
+		testsMap.forEach(console.error);
+	}
 }
+

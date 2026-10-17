@@ -1,22 +1,7 @@
-import type { ProductFinisherType } from "./finishers.ts"
-import {
-	addFinisherToProduct,
-	isFinisherAllowedOnProduct,
-} from "./finishers.ts"
-import { getItemInfo } from "./items.ts";
-
-import type { Pan } from "./recipes.ts";
-
-import {
-	cookEval,
-	getAttributesForIngredientUnit,
-	getAttributeSpreadForFinishedProduct,
-	turnCookEvalIntoOutput
-} from "./main.ts";
-
 import type { FinishedProduct, IngredientUnit, Item } from "./utilities.ts"
 import {
-	capitalizeFirstLetter,
+	capitalizeAndClean,
+	cleanString,
 	getItemName,
 	isIngredientUnit,
 	itemsMatchIgnoringQuantity,
@@ -25,14 +10,31 @@ import {
 	sortAndStringifyArray
 } from "./utilities.ts"
 
-import { isAttribute, type AttributeMap, type AttributeSpread } from "./attributes.ts";
+import type { AttributeMap, AttributeSpread } from "./attributes.ts";
+import { isAttribute } from "./attributes.ts";
+
+import { getItemInfo } from "./items.ts";
+
+import type { Pan } from "./recipes.ts";
+import {
+	cookEval,
+	getAttributesForIngredientUnit,
+	getAttributeSpreadForFinishedProduct,
+	turnCookEvalIntoOutput
+} from "./recipes.ts";
+
+import type { ProductFinisherType } from "./finishers.ts"
+import {
+	addFinisherToProduct,
+	isFinisherAllowedOnProduct,
+} from "./finishers.ts"
 
 const debug = true;
 const debugPrint = (s: string) => {
 	if (debug) {
 		console.log(s)
 	}
-}
+};
 
 // -------------------------------------------- STATE -------------------------------------------- //
 
@@ -76,7 +78,7 @@ const fromStrings: Record<Location, string> = {
 	display_case: `from the display case`,
 	countertop: `from the countertop`,
 	storage: `from storage`,
-}
+};
 
 type State = {
 	gold: number;
@@ -261,7 +263,7 @@ const drop = (destination: Location): boolean => {
 		state.locations.hand = null;
 		console.log(header);
 		console.log(`You put '${printItem(inHand)}' ${intoStrings[destination]}.`)
-		console.log(`${capitalizeFirstLetter(destination.replace(/_/g, ' '))} now contains:`)
+		console.log(`${capitalizeAndClean(destination)} now contains:`)
 		console.log(printItemList(state.locations[destination]));
 	}
 	return result !== false;
@@ -373,7 +375,7 @@ const inventory = (location?: Location, suppressHeader?: boolean): void => {
 		console.error(`There is no location called ${location}`);
 	}
 	if (location !== 'hand') {
-		console.log(`${capitalizeFirstLetter(location.replace(/_/g, ' '))} contains:`);
+		console.log(`${capitalizeAndClean(location)} contains:`);
 		console.log(printItemList(state.locations[location]));
 		return;
 	}
@@ -444,12 +446,12 @@ const use = (location: CookLocation, bakeWith?: Pan): boolean => {
 	state.locations[location] = [product];
 	console.log(header)
 	if (bakeWith !== undefined) {
-		console.log(`You put the ${bakeWith.replace(/_/g, ' ')} ${intoStrings[location]} and waited ${waitTimes[eva.recipeAttempted.time]}. Made '${printItem(product)}'!`)
+		console.log(`You put the ${cleanString(bakeWith)} ${intoStrings[location]} and waited ${waitTimes[eva.recipeAttempted.time]}. Made '${printItem(product)}'!`)
 	} else {
-		console.log(`You used the ${location.replace(/_/g, ' ')} and waited ${waitTimes[eva.recipeAttempted.time]}. Made '${printItem(product)}'!`)
+		console.log(`You used the ${cleanString(location)} and waited ${waitTimes[eva.recipeAttempted.time]}. Made '${printItem(product)}'!`)
 	}
 	return true;
-}
+};
 
 // Finishers are applied 1x item per batch. Cookies are 12, cupcakes 6, cakes 1. E.g. 12x cookies use 1x frosting, 24x cookies use 2x frosting.
 // Btw, stacks can only be the normal stack size in the back of the room, at least until they are put in the sales counter. Customers buying stuff can buy single units if they want: e.g. 2x cookies
@@ -514,7 +516,7 @@ const addFinisher = (finisherType: ProductFinisherType, location: Location, inde
 	}
 	state.locations[location][index] = newProduct;
 	return newProduct;
-}
+};
 const addFilling = (location: Location, index = 0): FinishedProduct | false => addFinisher('filling', location, index);
 const addDecoration = (location: Location, index = 0): FinishedProduct | false => addFinisher('decoration', location, index);
 const addDoodad = (location: Location, index = 0): FinishedProduct | false => addFinisher('doodad', location, index);
@@ -533,7 +535,7 @@ const dropUsePickup = (cookLocation: CookLocation, bakeWith?: Pan): boolean => {
 		return false;
 	}
 	return true;
-}
+};
 
 const attributes = (location: Location, index = 0): void => {
 	const existingItem = location === 'hand'
@@ -549,7 +551,7 @@ const attributes = (location: Location, index = 0): void => {
 		: getAttributeSpreadForFinishedProduct(existingItem);
 	console.log(`Attributes for '${printItem(existingItem)}':`);
 	console.log(printAttributes(attributes));
-}
+};
 
 // Staring out:
 inventory();
@@ -587,7 +589,6 @@ addDecoration('countertop') // adding frosting to cookies
 buy('rainbow_sprinkles', 10);
 pickup('storage', 7)
 addDoodad('countertop') // adding sprinkles to cookies
-
 
 inventory();
 console.log('BREAKPOINT ME TO PLAY');

@@ -1,6 +1,7 @@
 import type { AttributeMap } from "./attributes.ts";
 import { compareAttributes } from "./attributes.ts";
-import { getAttributesForItemNameAndModifiers } from "./main.ts";
+
+import { getAttributesForItemNameAndModifiers } from "./recipes.ts";
 
 type AttributeTest = {
 	input: {
@@ -26,16 +27,23 @@ const attributeTests: AttributeTest[] = [
 	},
 ];
 
-const testsMap = attributeTests.map((test, i)=>{
-	const found = getAttributesForItemNameAndModifiers(test.input.item, test.input.modifiers);
-	const errorMessages = compareAttributes(test.expected, found);
-	if (errorMessages.length > 0) {
-		console.error(`Test #${i}: ${errorMessages.length} errors!`)
-		console.error(errorMessages.join('\n'))
+export const doAttributeTests = () => {
+	const errorMessages: string[] = [];
+	const testsMap = attributeTests.map((test, i)=>{
+		const found = getAttributesForItemNameAndModifiers(test.input.item, test.input.modifiers);
+		const errors = compareAttributes(test.expected, found);
+		if (errors.length > 0) {
+			errorMessages.push(`Test #${i}: ${errors.length} errors!`)
+			errorMessages.push(...errors);
+		}
+		return errors;
+	});
+	
+	if (testsMap.flat().length === 0) {
+		console.log("ALL ATTRIBUTE TESTS PASS!");
+	} else {
+		console.error("ATTRIBUTE TESTS HAD ISSUES");
+		errorMessages.forEach(console.error);
 	}
-	return errorMessages;
-});
+};
 
-if (testsMap.flat().length === 0) {
-	console.log("ALL ATTRIBUTE TESTS PASS, BOSS");
-}
