@@ -19,3 +19,12 @@ func update_floor():
 	$Floor/CollisionShape3D.shape.size.z = number_of_tiles.y
 	$Floor/MeshInstance3D.mesh.size.x = number_of_tiles.x
 	$Floor/MeshInstance3D.mesh.size.z = number_of_tiles.y
+
+func _physics_process(_delta):
+	if Engine.is_editor_hint():
+		return
+	var birb_position: Vector3 = $TestPlayer.position
+	var birb_facing: Vector3 = $TestPlayer.basis.z
+	var target_tile: Vector2i = $Tilemap.find_tile(birb_position, birb_facing, 1.4)
+	$PlayerInteractIndicator.position.x = target_tile.x + 0.5
+	$PlayerInteractIndicator.position.z = target_tile.y + 0.5

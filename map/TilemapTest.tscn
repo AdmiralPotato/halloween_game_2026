@@ -30,6 +30,7 @@ background_color = Color(0.11727656, 0.011531538, 0.21022078, 1)
 sky = SubResource("Sky_eai58")
 
 [node name="TilemapTest" type="Node3D" unique_id=1389805114]
+process_physics_priority = -1
 script = ExtResource("1_0n275")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1548782193]
@@ -84,3 +85,10 @@ light_energy = 0.1
 transform = Transform3D(-0.4999999, -0.22414388, -0.8365163, 0, 0.9659258, -0.25881904, 0.86602545, -0.12940949, -0.48296282, 0, 0, 0)
 light_color = Color(0.97131807, 0.8903729, 0.91132176, 1)
 light_energy = 0.2
+
+[node name="PlayerInteractIndicator" type="SpotLight3D" parent="." unique_id=1256523446]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 10, 0)
+light_color = Color(0.12156863, 1, 0.32156864, 1)
+light_energy = 10.0
+spot_range = 20.0
+spot_angle = 2.0
