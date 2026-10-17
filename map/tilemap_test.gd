@@ -6,7 +6,7 @@ var time: float = 0;
 @export var number_of_tiles: Vector2i = Vector2i(8, 8):
 	set(x):
 		number_of_tiles = x
-		if $Floor:
+		if is_node_ready():
 			update_floor()
 
 func _ready():
