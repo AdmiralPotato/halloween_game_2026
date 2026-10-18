@@ -1,13 +1,13 @@
 import type { StorageType } from "./items.ts";
-import { getItemInfo, isStorageType, newFoodComponent } from "./items.ts";
+import { getItemInfo, isStorageType, newIngredient } from "./items.ts";
 
 import { cookEval, turnCookEvalIntoOutput } from "./recipes.ts";
 
-import type { Pan, FoodComponent, Item, Product } from "./utilities.ts";
+import type { Pan, Ingredient, Item, Product } from "./utilities.ts";
 import {
 	capitalizeAndClean,
 	cleanString,
-	isFoodComponent,
+	isIngredient,
 	isPan,
 	isProduct,
 	itemsCanStack,
@@ -48,14 +48,14 @@ export const fromStrings: Record<string, string> = {
 	storage: `from storage`,
 };
 
-export const itemSubtract = (item: Product | FoodComponent, n = 1): Product | FoodComponent | null => {
+export const itemSubtract = (item: Product | Ingredient, n = 1): Product | Ingredient | null => {
 	item.quantity -= n;
 	if (item.quantity === 0) {
 		return null;
 	}
 	return item;
 };
-export const itemAdd = (item: Product | FoodComponent, n = 1): Product | FoodComponent => {
+export const itemAdd = (item: Product | Ingredient, n = 1): Product | Ingredient => {
 	item.quantity += n;
 	return item;
 };
@@ -81,37 +81,12 @@ export type State = {
 	location_index: number;
 	tiles: (Tile | null)[];
 }
-export const newState = (): State => {
+export const newState = (tiles: (Tile|null)[]): State => {
 	const s: State = {
 		hand: null,
 		gold: 100,
 		location_index: 0,
-		tiles: [
-			newDeliveryZoneTile(''),
-			newOvenTile('oven'),
-			newApplianceTile('cutting_board'),
-			newApplianceTile('mixer'),
-			newFilledStorageTile(newFoodComponent('flour', 20)),
-			newFilledStorageTile(newFoodComponent('sugar', 25)),
-			newFilledStorageTile(newFoodComponent('egg', 12)),
-			newFilledStorageTile(newFoodComponent('frosting', 5)),
-			newFilledStorageTile(newFoodComponent('frosting', 5, ['cocoa_powder'])),
-			newFilledStorageTile(newFoodComponent('cookie_sheet', 3)),
-			newFilledStorageTile(newFoodComponent('muffin_tin', 3)),
-			newFilledStorageTile(newFoodComponent('cake_pan', 3)),
-			newCountertopTile(''),
-			newCountertopTile(''),
-			newCountertopTile(''),
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-		],
+		tiles,
 	}
 	return s;
 };
@@ -182,7 +157,7 @@ export const isStorageTile = (v: unknown): v is StorageTile => (v as StorageTile
 export type StorageTile = TileCommon & {
 	tile: 'storage';
 	type: StorageType;
-	inside: FoodComponent | Product | null;
+	inside: Ingredient | Product | null;
 	refill: (count: number) => boolean;
 };
 
@@ -200,7 +175,7 @@ export const newStorageTile = (type: string): StorageTile => {
 			const hand = s.hand;
 			const setHand = (v: Item | null) => { s.hand = v; }
 			const inner = ret.inside;
-			const setInner = (v: FoodComponent | Product | null) => { ret.inside = v; }
+			const setInner = (v: Ingredient | Product | null) => { ret.inside = v; }
 
 			//////// ----------- storage full!
 
@@ -217,7 +192,7 @@ export const newStorageTile = (type: string): StorageTile => {
 				}
 
 				//// holding food!
-				if (isProduct(hand) || isFoodComponent(hand)) {
+				if (isProduct(hand) || isIngredient(hand)) {
 					// held item cannot stack with storage tile -> DO NOTHING
 					if (!itemsCanStack(hand, inner)) {
 						return false;
@@ -233,7 +208,7 @@ export const newStorageTile = (type: string): StorageTile => {
 
 				//// holding a pan!
 				const pan = hand;
-				const setPan = (v: Product|FoodComponent|null) => {
+				const setPan = (v: Product|Ingredient|null) => {
 					if (!isPan(s.hand)) { throw new Error ("UNREACHABLE") }
 					s.hand.carrying = v;
 				};
@@ -272,7 +247,7 @@ export const newStorageTile = (type: string): StorageTile => {
 			}
 
 			//// holding food...
-			if (isProduct(hand) || isFoodComponent(hand)) {
+			if (isProduct(hand) || isIngredient(hand)) {
 				// held item can go in this storage type -> DROP (1)
 				const foodStorageType = getItemInfo(hand.name).storageType;
 				if (foodStorageType === ret.type) {
@@ -287,7 +262,7 @@ export const newStorageTile = (type: string): StorageTile => {
 
 			//// holding a pan...
 			const pan = hand;
-			const setPan = (v: Product|FoodComponent | null) => {
+			const setPan = (v: Product|Ingredient | null) => {
 				if (!isPan(s.hand)) { throw new Error ("UNREACHABLE") }
 				s.hand.carrying = v;
 			}
@@ -316,7 +291,7 @@ export const newStorageTile = (type: string): StorageTile => {
 	return ret;
 };
 export const newFilledStorageTile = (contents: Item): StorageTile => {
-	if (!isFoodComponent(contents) && !isProduct(contents)) {
+	if (!isIngredient(contents) && !isProduct(contents)) {
 		throw new Error (`Storage contents must be product or food component!`);
 	}
 	const itemInfo = getItemInfo(contents.name);
@@ -340,7 +315,7 @@ export type OvenTile = TileCommon & {
 
 // May only contain pans (with or without food on them)
 
-const newOvenTile = (type = ''): OvenTile => {
+export const newOvenTile = (type = ''): OvenTile => {
 	const ret: OvenTile = {
 		tile: 'oven',
 		type,
@@ -356,7 +331,7 @@ const newOvenTile = (type = ''): OvenTile => {
 
 			// storage is a pan...
 			const pan = inner;
-			const setPan = (v: Product|FoodComponent|null) => {
+			const setPan = (v: Product|Ingredient|null) => {
 				if (!isPan(s.hand)) { throw new Error ("UNREACHABLE") }
 				s.hand.carrying = v;
 			};
@@ -365,7 +340,7 @@ const newOvenTile = (type = ''): OvenTile => {
 				return false;
 			}
 			// what's on the pan is not a raw food -> DO NOTHING
-			if (!isFoodComponent(pan.carrying)) {
+			if (!isIngredient(pan.carrying)) {
 				return false;
 			}
 			// otherwise -> BAKE!
@@ -428,7 +403,7 @@ export const printOvenTile = (tile: OvenTile): string[] => {
 export const isApplianceTile = (v: unknown): v is ApplianceTile => (v as ApplianceTile)?.tile === 'appliance';
 export type ApplianceTile = TileCommon & {
 	tile: 'appliance';
-	inside: (FoodComponent|Product)[];
+	inside: (Ingredient|Product)[];
 	interact: (s: State) => boolean;
 	pickup_or_drop: (s: State) => boolean;
 }
@@ -436,7 +411,7 @@ export type ApplianceTile = TileCommon & {
 // Can only contain food (no pans)
 // Can contain more than 1 thing
 
-const newApplianceTile = (type: string): ApplianceTile => {
+export const newApplianceTile = (type: string): ApplianceTile => {
 	const ret: ApplianceTile = {
 		tile: 'appliance',
 		type,
@@ -444,7 +419,7 @@ const newApplianceTile = (type: string): ApplianceTile => {
 		interact: (s) => {
 			// Avoiding typos:
 			const inner = ret.inside;
-			const setInner = (arr: (FoodComponent|Product)[]) => { ret.inside = arr; };
+			const setInner = (arr: (Ingredient|Product)[]) => { ret.inside = arr; };
 
 			// storage empty -> DO NOTHING
 			if (inner.length === 0) {
@@ -470,7 +445,7 @@ const newApplianceTile = (type: string): ApplianceTile => {
 			const hand = s.hand;
 			const setHand = (v: Item | null) => { s.hand = v; }
 			const inner = ret.inside;
-			const setInner = (arr: (FoodComponent|Product)[]) => { ret.inside = arr; };
+			const setInner = (arr: (Ingredient|Product)[]) => { ret.inside = arr; };
 
 			//////// ----------- storage is multiple things!
 
@@ -482,7 +457,7 @@ const newApplianceTile = (type: string): ApplianceTile => {
 				}
 
 				//// holding food -> DROP (1)
-				if (isProduct(hand) || isFoodComponent(hand)) {
+				if (isProduct(hand) || isIngredient(hand)) {
 					const itemToDrop = {...hand, quantity: 1};
 					const newHand = itemSubtract(hand, 1);
 					setHand(newHand)
@@ -494,7 +469,7 @@ const newApplianceTile = (type: string): ApplianceTile => {
 
 				//// holding a pan...
 				const pan = hand;
-				const setPan = (v: Product|FoodComponent|null) => {
+				const setPan = (v: Product|Ingredient|null) => {
 					if (!isPan(s.hand)) { throw new Error ("UNREACHABLE") }
 					s.hand.carrying = v;
 				};
@@ -526,7 +501,7 @@ const newApplianceTile = (type: string): ApplianceTile => {
 				}
 				
 				//// holding food -> DROP (1)
-				if (isProduct(hand) || isFoodComponent(hand)) {
+				if (isProduct(hand) || isIngredient(hand)) {
 					const itemToDrop = {...hand, quantity: 1};
 					const newHand = itemSubtract(hand, 1);
 					setHand(newHand);
@@ -538,7 +513,7 @@ const newApplianceTile = (type: string): ApplianceTile => {
 
 				//// holding a pan...
 				const pan = hand;
-				const setPan = (v: Product|FoodComponent|null) => {
+				const setPan = (v: Product|Ingredient|null) => {
 					if (!isPan(s.hand)) { throw new Error ("UNREACHABLE") }
 					s.hand.carrying = v;
 				};
@@ -577,7 +552,7 @@ const newApplianceTile = (type: string): ApplianceTile => {
 			}
 
 			//// holding food -> DROP (1)
-			if (isProduct(hand) || isFoodComponent(hand)) {
+			if (isProduct(hand) || isIngredient(hand)) {
 				const itemToDrop = {...hand, quantity: 1};
 				const newHand = itemSubtract(hand, 1)
 				setHand(newHand);
@@ -589,7 +564,7 @@ const newApplianceTile = (type: string): ApplianceTile => {
 
 			//// holding a pan
 			const pan = hand;
-			const setPan = (v: Product|FoodComponent|null) => {
+			const setPan = (v: Product|Ingredient|null) => {
 				if (!isPan(s.hand)) { throw new Error ("UNREACHABLE") }
 				s.hand.carrying = v;
 			};
@@ -629,7 +604,7 @@ export type DeliveryZoneTile = TileCommon & {
 	pickup_or_drop: (s: State) => boolean;
 	deliver: (v: Item) => boolean;
 }
-const newDeliveryZoneTile = (type: string): DeliveryZoneTile => {
+export const newDeliveryZoneTile = (type: string): DeliveryZoneTile => {
 	const ret: DeliveryZoneTile = {
 		tile: 'delivery_zone',
 		type,
@@ -642,7 +617,7 @@ const newDeliveryZoneTile = (type: string): DeliveryZoneTile => {
 				return false;
 			}
 			// holding food -> DO NOTHING
-			if (isFoodComponent(hand)) {
+			if (isIngredient(hand)) {
 				return false;
 			}
 			// holding a product -> DELIVER
@@ -655,7 +630,7 @@ const newDeliveryZoneTile = (type: string): DeliveryZoneTile => {
 			}
 			// holding a pan...
 			const pan = hand;
-			const setPan = (v: Product|FoodComponent|null) => {
+			const setPan = (v: Product|Ingredient|null) => {
 				if (!isPan(s.hand)) { throw new Error ("UNREACHABLE") }
 				s.hand.carrying = v;
 			};
@@ -665,7 +640,7 @@ const newDeliveryZoneTile = (type: string): DeliveryZoneTile => {
 			}
 			// pan full...
 			// pan carrying a food component -> DO NOTHING
-			if (isFoodComponent(pan.carrying)) {
+			if (isIngredient(pan.carrying)) {
 				return false;
 			}
 			// pan carrying a product -> DELIVER
@@ -695,7 +670,7 @@ export type CountertopTile = TileCommon & {
 	interact: (s: State) => boolean;
 	pickup_or_drop: (s: State) => boolean;
 }
-const newCountertopTile = (type = ''): CountertopTile => {
+export const newCountertopTile = (type = ''): CountertopTile => {
 	const ret: CountertopTile = {
 		tile: 'countertop',
 		type,
@@ -717,7 +692,7 @@ const newCountertopTile = (type = ''): CountertopTile => {
 				}
 	
 				// holding food -> DROP (1)
-				if (isProduct(hand) || isFoodComponent(hand)) {
+				if (isProduct(hand) || isIngredient(hand)) {
 					const toDrop = {...hand, quantity: 1};
 					const newHand = itemSubtract(hand, 1);
 					setHand(newHand);
@@ -747,7 +722,7 @@ const newCountertopTile = (type = ''): CountertopTile => {
 			}
 
 			// holding food -> DO NOTHING
-			if (isFoodComponent(hand)) {
+			if (isIngredient(hand)) {
 				return false;
 			}
 
@@ -758,7 +733,7 @@ const newCountertopTile = (type = ''): CountertopTile => {
 
 			// holding a pan...
 			const pan = hand;
-			const setPan = (v: Product|FoodComponent|null) => {
+			const setPan = (v: Product|Ingredient|null) => {
 				if (!isPan(s.hand)) { throw new Error ("UNREACHABLE") }
 				s.hand.carrying = v;
 			};
@@ -797,7 +772,7 @@ const newCountertopTile = (type = ''): CountertopTile => {
 	return ret;
 };
 
-const newCountertopTileWith = (contents: Item, type?: string): CountertopTile => {
+export const newCountertopTileWith = (contents: Item, type?: string): CountertopTile => {
 	const tile = newCountertopTile(type);
 	tile.inside = contents;
 	return tile;

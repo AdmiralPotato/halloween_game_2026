@@ -2,8 +2,8 @@
 
 import { isArrayOfNumbers } from "./utilities.ts";
 
-type Color = 'pale' | 'red' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple' | 'varigated';
-const colors = new Set([ 'pale', 'red', 'orange', 'yellow', 'green', 'blue', 'purple', 'varigated' ]);
+type Color = 'pale' | 'red' | 'orange' | 'brown' | 'yellow' | 'green' | 'blue' | 'purple' | 'varigated';
+const colors = new Set([ 'pale', 'red', 'orange', 'brown', 'yellow', 'green', 'blue', 'purple', 'varigated' ]);
 const isColor = (v: unknown): v is Color => typeof v === 'string' && colors.has(v);
 
 type ColorInfo = {
@@ -63,12 +63,17 @@ const attributeInfo: Record<Attribute, AttributeInfo> = {
 	orange: {
 		type: 'color',
 		attribute: 'orange',
-		neighbors: ['red', 'yellow'],
+		neighbors: ['red', 'yellow', 'brown'],
 	},
 	yellow: {
 		type: 'color',
 		attribute: 'yellow',
-		neighbors: ['orange', 'green'],
+		neighbors: ['orange', 'green', 'brown'],
+	},
+	brown: {
+		type: 'color',
+		attribute: 'yellow',
+		neighbors: ['orange', 'yellow'],
 	},
 	green: {
 		type: 'color',

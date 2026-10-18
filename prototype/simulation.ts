@@ -1,21 +1,54 @@
-import { getItemInfo, newFoodComponent, newProduct } from "./items.ts";
+import { getItemInfo, newIngredient, newProduct } from "./items.ts";
 
-import type { StorageTile, Tile } from "./tiles.ts";
+import type { Tile } from "./tiles.ts";
 import {
 	header,
 	isCountertopTile,
 	isOvenTile,
 	isStorageTile,
 	itemAdd,
+	newCountertopTile,
 	newFilledStorageTile,
 	newState,
+	newTile,
 	printTile
 } from "./tiles.ts";
 
 import type { Item } from "./utilities.ts";
-import { itemsCanStack, printItem, printModifiersWithItemName } from "./utilities.ts";
+import { itemsCanStack, printModifiersWithItemName } from "./utilities.ts";
 
-const state = newState();
+const state = newState([
+	newTile('delivery_zone'),
+	newTile('oven'),
+	newTile('cutting_board'),
+	newTile('mixer'),
+	newTile('storage', newIngredient('flour', 20)),
+	newTile('storage', newIngredient('sugar', 25)),
+	newTile('storage', newIngredient('egg', 12)),
+	newTile('storage', newIngredient('frosting', 5)),
+	newTile('storage', newIngredient('frosting', 5, ['cocoa_powder'])),
+	newTile('storage', newIngredient('cookie_sheet', 3)),
+	newTile('storage', newIngredient('muffin_tin', 3)),
+	newTile('storage', newIngredient('cake_pan', 3)),
+	newCountertopTile(''),
+	newCountertopTile(''),
+	newCountertopTile(''),
+	newCountertopTile(''),
+	newCountertopTile(''),
+	newCountertopTile(''),
+	null,
+	null,
+	null,
+	null,
+	null,
+	null,
+	null,
+	null,
+	null,
+	null,
+	null,
+	null,
+]);
 
 const setTile = (index: number, tile: Tile | null) => {
 	state.tiles[index] = tile;
@@ -67,11 +100,6 @@ const help = () => {
 	console.log(`    or find a tile with strings, e.g. goto('oven') or goto('storage', 'flour')`)
 	console.log(`> buy (itemName: string, quantity?: number [10])`)
 	console.log(`    Buy from the warehouse; refills existing storage, or adds a new storage tile to a null tile`)
-
-	// TODO WIP: a means to buy an empty storage container
-	// Then also adding finishers again
-	// Then getting money from selling things
-
 	// console.log(`empty ('oven'|'mixer'|'cutting_board') [discards entire contents, if any]`);
 	// console.log(`discard (location, index) [removes and discards item, if any]`);
 	// console.log(`attributes (location, index?) [index defaults to 0]`)
@@ -106,7 +134,7 @@ const buy = (name: string, quantity = 10): boolean => {
 	// FIND THE PLACE TO PUT IT
 	const dummyItem = getItemInfo(name).categories.includes('product')
 		? newProduct(name, quantity)
-		: newFoodComponent(name, quantity);
+		: newIngredient(name, quantity);
 	let tileIndex = findStorageTileIndexThatStacksWith(dummyItem);
 	// a matching storage tile already exists
 	if (tileIndex >= 0) {

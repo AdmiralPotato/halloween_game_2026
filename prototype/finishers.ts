@@ -1,5 +1,5 @@
 import { addItemToList } from "./tiles.ts";
-import type { Product, FoodComponent } from "./utilities.ts";
+import type { Product, Ingredient } from "./utilities.ts";
 
 import { getVariantParent } from "./variants.ts";
 
@@ -97,7 +97,7 @@ const batchSizes: Record<string, number> = {
 };
 
 // Returns new Product, or null if the process failed
-export const addFinisherToProduct = (finisherType: ProductFinisherType, ingredient: FoodComponent, product: Product): Product | null => {
+export const addFinisherToProduct = (finisherType: ProductFinisherType, ingredient: Ingredient, product: Product): Product | null => {
 	if (!isFinisherAllowedOnProduct(ingredient.name, finisherType, product.name)) {
 		return null;
 	}

@@ -97,7 +97,7 @@ export type Pan = {
 	name: PanType;
 	// can either be in a stack or carrying something, not both
 	quantity: number;
-	carrying: FoodComponent | Product | null;
+	carrying: Ingredient | Product | null;
 };
 export const isPan = (givenV: unknown): givenV is Pan => {
 	if (typeof givenV !== 'object') { return false; }
@@ -106,7 +106,7 @@ export const isPan = (givenV: unknown): givenV is Pan => {
 	if (isPanType(v.name)) { return false; }
 	if (typeof v.quantity !== 'number') { return false; }
 	if (v.carrying === null) { return true; }
-	if (isFoodComponent(v.carrying)) { return true; }
+	if (isIngredient(v.carrying)) { return true; }
 	if (isProduct(v.carrying)) { return true; }
 	return false;
 };
@@ -132,22 +132,22 @@ export const panMayContain = (pan: PanType, itemName: string): boolean => {
 
 // ----------------------------------------- FOOD COMPONENT ----------------------------------------- //
 
-export type FoodComponent = {
+export type Ingredient = {
 	name: string;
 	quantity: number;
 	modifiers: string[];
 };
-export const isFoodComponent = (givenV: unknown): givenV is FoodComponent => {
+export const isIngredient = (givenV: unknown): givenV is Ingredient => {
 	if (typeof givenV !== 'object') { return false; }
 	if (givenV === null) { return false; }
-	const v = givenV as FoodComponent;
+	const v = givenV as Ingredient;
 	if (typeof v.name !== 'string') { return false; }
 	if (typeof v.quantity !== 'number') { return false; }
 	if (!isArrayOfStrings(v.modifiers)) { return false; }
 	return true;
 };
 
-export const foodComponentsMatchIgnoringQuantity = (a: FoodComponent, b: FoodComponent): boolean => {
+export const ingredientMatchIgnoringQuantity = (a: Ingredient, b: Ingredient): boolean => {
 	if (a.name !== b.name) {
 		return false;
 	}
@@ -156,7 +156,7 @@ export const foodComponentsMatchIgnoringQuantity = (a: FoodComponent, b: FoodCom
 	}
 	return true;
 };
-export const foodComponentsMatchIncludingQuantity = (a: FoodComponent, b: FoodComponent): boolean => {
+export const ingredientsMatchIncludingQuantity = (a: Ingredient, b: Ingredient): boolean => {
 	if (a.name !== b.name) {
 		return false;
 	}
@@ -168,20 +168,20 @@ export const foodComponentsMatchIncludingQuantity = (a: FoodComponent, b: FoodCo
 	}
 	return true;
 };
-export const arrayOfFoodComponentsMatchIncludingQuantity = (arrA: FoodComponent[], arrB: FoodComponent[]): boolean => {
+export const arrayOfIngredientMatchIncludingQuantity = (arrA: Ingredient[], arrB: Ingredient[]): boolean => {
 	if (arrA.length !== arrB.length) {
 		// get an easy case out of the way
 		return false;
 	}
-	const matchedA: FoodComponent[] = [];
+	const matchedA: Ingredient[] = [];
 	const notMatchedA = arrA.slice();
-	const matchedB: FoodComponent[] = [];
+	const matchedB: Ingredient[] = [];
 	const notMatchedB = arrB.slice();
 	for (let aI = 0; aI < notMatchedA.length; aI++) {
 		const a = notMatchedA[aI];
 		for (let bI = 0; bI < notMatchedB.length; bI++) {
 			const b = notMatchedB[bI];
-			if (!foodComponentsMatchIncludingQuantity(a, b)) {
+			if (!ingredientsMatchIncludingQuantity(a, b)) {
 				continue;
 			}
 			matchedA.push(a);
@@ -193,7 +193,7 @@ export const arrayOfFoodComponentsMatchIncludingQuantity = (arrA: FoodComponent[
 	return notMatchedA.length === 0 && notMatchedB.length === 0;
 };
 
-export const foodComponentsToTallies = (ingredients: FoodComponent[]) => {
+export const ingredientToTallies = (ingredients: Ingredient[]) => {
 	const ret: Tallies = {};
 	ingredients.forEach(v=>{
 		ret[v.name] = (ret[v.name] || 0) + v.quantity
@@ -207,9 +207,9 @@ export type Product = {
 	name: string;
 	quantity: number;
 	modifiers: string[];
-	fillings: FoodComponent[];
-	decorations: FoodComponent[];
-	doodads: FoodComponent[];
+	fillings: Ingredient[];
+	decorations: Ingredient[];
+	doodads: Ingredient[];
 };
 export const isProduct = (givenV: unknown): givenV is Product => {
 	if (typeof givenV !== 'object') { return false; }
@@ -218,26 +218,26 @@ export const isProduct = (givenV: unknown): givenV is Product => {
 	if (typeof v.name !== 'string') { return false; }
 	if (typeof v.quantity !== 'number') { return false; }
 	if (!isArrayOfStrings(v.modifiers)) { return false; }
-	if (!arrayValuesAreType<FoodComponent>(v.fillings, isFoodComponent)) { return false; }
-	if (!arrayValuesAreType<FoodComponent>(v.decorations, isFoodComponent)) { return false; }
-	if (!arrayValuesAreType<FoodComponent>(v.doodads, isFoodComponent)) { return false; }
+	if (!arrayValuesAreType<Ingredient>(v.fillings, isIngredient)) { return false; }
+	if (!arrayValuesAreType<Ingredient>(v.decorations, isIngredient)) { return false; }
+	if (!arrayValuesAreType<Ingredient>(v.doodads, isIngredient)) { return false; }
 	return true;
 };
 
 export const productsMatchIgnoringQuantity = (a: Product, b: Product): boolean => {
 	return a.name === b.name
 		&& sortAndStringifyArray(a.modifiers) === sortAndStringifyArray(b.modifiers)
-		&& arrayOfFoodComponentsMatchIncludingQuantity(a.fillings, b.fillings)
-		&& arrayOfFoodComponentsMatchIncludingQuantity(a.decorations, b.decorations)
-		&& arrayOfFoodComponentsMatchIncludingQuantity(a.doodads, b.doodads)
+		&& arrayOfIngredientMatchIncludingQuantity(a.fillings, b.fillings)
+		&& arrayOfIngredientMatchIncludingQuantity(a.decorations, b.decorations)
+		&& arrayOfIngredientMatchIncludingQuantity(a.doodads, b.doodads)
 };
 
-// --------------------------- ITEM (pan | food component | baked product) --------------------------- //
+// --------------------------- ITEM (pan | ingredient | product) --------------------------- //
 
-export type Item = Pan | FoodComponent | Product;
+export type Item = Pan | Ingredient | Product;
 
 export const itemTypesMatch = (a: Item, b: Item): boolean => {
-	if (isFoodComponent(a) === isFoodComponent(b)) return true;
+	if (isIngredient(a) === isIngredient(b)) return true;
 	if (isProduct(a) === isProduct(b)) return true;
 	if (isPan(a) === isPan(b)) return true;
 	return false;
@@ -245,8 +245,8 @@ export const itemTypesMatch = (a: Item, b: Item): boolean => {
 export const itemsMatchIgnoringQuantity = (a: Item, b: Item): boolean => {
 	if (a.name !== b.name) { return false;}
 	if (!itemTypesMatch(a, b)) { return false; }
-	if (isFoodComponent(a) && isFoodComponent(b)) {
-		return foodComponentsMatchIgnoringQuantity(a, b);
+	if (isIngredient(a) && isIngredient(b)) {
+		return ingredientMatchIgnoringQuantity(a, b);
 	} else if (isProduct(a) && isProduct(b)) {
 		return productsMatchIgnoringQuantity(a, b)
 	} else if (isPan(a) && isPan(b)) {
@@ -318,7 +318,7 @@ export const printModifiersWithItemName = (item: string, modifiers: string[]): s
 // Instead add "extra" (because it's not quad choc frosting, it's an extra amount of double choc frosting)
 // { item: 'frosting', quantity: 2, modifiers: ['cocoa_powder', 'cocoa_powder' ]} -> extra double chocolate frosting
 
-const printFinisherIncludingQuantity = (finisher: FoodComponent): string => {
+const printFinisherIncludingQuantity = (finisher: Ingredient): string => {
 	const twoOrMore = finisher.quantity > 1 ? 'extra ' : '';
 	const name = printModifiersWithItemName(finisher.name, finisher.modifiers);
 	return twoOrMore + name;
@@ -358,7 +358,7 @@ export const printFinishedProduct = (product: Product): string => {
 
 // For things that aren't finished, like things from the store or in inventory, here's a more generic thing:
 
-export const printFoodComponent = (item: FoodComponent) => {
+export const printFoodComponent = (item: Ingredient) => {
 	const modifierAndItemName = printModifiersWithItemName(item.name, item.modifiers);
 	const nX = printXQuantity(item.quantity);
 	return nX + modifierAndItemName;
@@ -382,7 +382,7 @@ export const printPan = (item: Pan): string => {
 // Combo
 
 export const printItem = (item: Item): string => {
-	if (isFoodComponent(item)) {
+	if (isIngredient(item)) {
 		return printFoodComponent(item)
 	} else if (isProduct(item)) {
 		return printFinishedProduct(item);

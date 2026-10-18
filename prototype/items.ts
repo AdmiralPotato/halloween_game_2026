@@ -1,10 +1,7 @@
 import { isAttributeMap, type AttributeMap } from "./attributes.ts";
-import type { FoodComponent, Product } from "./utilities.ts";
+import type { Ingredient as Ingredient, Product } from "./utilities.ts";
 
 export type StorageType = 'bag' | 'fridge' | 'freezer' | 'crate' | 'jar';
-// bag, fridge, freezer, crate are on the ground
-// jar is on the countertop (while leaving space for an object also)
-// All these things can also be just set on the countertop
 export const isStorageType = (v: unknown): v is StorageType => {
 	if (v === 'bag') { return true; }
 	if (v === 'fridge') { return true; }
@@ -63,21 +60,21 @@ const isItemInfo = (v: unknown): v is ItemInfo => {
 	return true;
 };
 
-export const newFoodComponent = (name: string, quantity: number, modifiers?: string[]): FoodComponent => {
+export const newIngredient = (name: string, quantity: number, modifiers?: string[]): Ingredient => {
 	return {
 		name,
 		quantity,
 		modifiers: modifiers || [],
 	}	
 };
-export const newProduct = (name: string, quantity: number, modifiers?: string[], fillings?: string[], decorations?: string[], doodads?: string[]): Product => {
+export const newProduct = (name: string, quantity: number, modifiers?: string[], fillings?: Ingredient[], decorations?: Ingredient[], doodads?: Ingredient[]): Product => {
 	return {
 		name,
 		quantity,
 		modifiers: modifiers || [],
-		fillings: [],
-		decorations: [],
-		doodads: []
+		fillings: fillings || [],
+		decorations: decorations || [],
+		doodads: doodads || []
 	}
 };
 

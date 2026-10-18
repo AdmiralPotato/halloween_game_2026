@@ -1,6 +1,6 @@
 import type {
 	Product,
-	FoodComponent
+	Ingredient
 } from "./utilities.ts";
 import {
 	listToTally,
@@ -285,14 +285,14 @@ export const getAttributesForItemNameAndModifiers = (item: string, modifiers = [
 	return attributes;
 };
 
-export const getAttributesForFoodComponent = (ingredient: FoodComponent): AttributeMap => {
+export const getAttributesForFoodComponent = (ingredient: Ingredient): AttributeMap => {
 	const ret: AttributeMap = {};
 	for (let i = 0; i < ingredient.quantity; i++) {
 		addAttributesToMap(ret, getAttributesForItemNameAndModifiers(ingredient.name, ingredient.modifiers));
 	}
 	return ret;
 }
-export const getAttributesForFoodComponentList = (arr: FoodComponent[]): AttributeMap => {
+export const getAttributesForFoodComponentList = (arr: Ingredient[]): AttributeMap => {
 	const ret: AttributeMap = {};
 	arr.forEach(ingredient=>{
 		addAttributesToMap(ret, getAttributesForFoodComponent(ingredient))
@@ -314,7 +314,7 @@ export const getAttributeSpreadForProduct = (product: Product): AttributeSpread 
 export type CookingInput = {
 	location: string;
 	pan?: string;
-	ingredients: FoodComponent[];
+	ingredients: Ingredient[];
 };
 export type CookingCompatibilityEval = {
 	// Output info
@@ -326,15 +326,15 @@ export type CookingCompatibilityEval = {
 	// Report card
 	errorCount: number; // quantity of problematic ingredients, both missing and extraneous
 	missingIngredients: string[];
-	extraneousIngredients: FoodComponent[];
+	extraneousIngredients: Ingredient[];
 	panSatisfied: boolean;
 };
 
-const getIngredientRecipeEval = (recipeInfo: RecipeInfo, givenIngredients: (FoodComponent|Product)[], pan?: string): CookingCompatibilityEval => {
+const getIngredientRecipeEval = (recipeInfo: RecipeInfo, givenIngredients: (Ingredient|Product)[], pan?: string): CookingCompatibilityEval => {
 	const tally = listToTally(recipeInfo.ingredients);
 	const inheritedModifiers: string[] = [];
 	const newModifiers: string[] = [];
-	const extraneousIngredients: FoodComponent[] = [];
+	const extraneousIngredients: Ingredient[] = [];
 	givenIngredients.forEach(v=>{
 		// v = { item: 'sugar', quantity: 1, modifiers: [] }
 		if (tally[v.name]) { // 0 means we don't have any even though there's an entry; the falsiness is fine
@@ -370,7 +370,7 @@ const getIngredientRecipeEval = (recipeInfo: RecipeInfo, givenIngredients: (Food
 	};
 };
 
-export const cookEval = (location: string, providedIngredients: (FoodComponent|Product)[], pan?: string): CookingCompatibilityEval => {
+export const cookEval = (location: string, providedIngredients: (Ingredient|Product)[], pan?: string): CookingCompatibilityEval => {
 	// Recipes at the given location
 	const allRecipes = getRecipesForLocation(location);
 	const evals = allRecipes
@@ -383,10 +383,10 @@ export const cookEval = (location: string, providedIngredients: (FoodComponent|P
 
 // ----------------------------------------- DO RECIPE ----------------------------------------- //
 
-export const turnCookEvalIntoOutput = (eva: CookingCompatibilityEval): Product | FoodComponent => {
+export const turnCookEvalIntoOutput = (eva: CookingCompatibilityEval): Product | Ingredient => {
 	const info = getItemInfo(eva.output);
 	if (!info.categories.includes('product')) {
-		const ret: FoodComponent = {
+		const ret: Ingredient = {
 			name: eva.output,
 			quantity: eva.quantity,
 			modifiers: [...eva.inheritedModifiers, ...eva.newModifiers],
@@ -403,7 +403,7 @@ export const turnCookEvalIntoOutput = (eva: CookingCompatibilityEval): Product |
 	}
 }
 
-export const cook = (location: string, providedIngredients: FoodComponent[]): Product | FoodComponent => {
+export const cook = (location: string, providedIngredients: Ingredient[]): Product | Ingredient => {
 	const result = cookEval(location, providedIngredients);
 	return {
 		name: result.output,
