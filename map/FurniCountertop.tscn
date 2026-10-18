@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cl7xh1lhn0u0b"]
+
+[ext_resource type="Script" uid="uid://du3akdgj3fk24" path="res://map/furni_countertop.gd" id="1_0sade"]
+[ext_resource type="PackedScene" uid="uid://cmo6k5u5piq0f" path="res://assets/furni_countertop_0.glb" id="2_l3uxt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p33bg"]
+size = Vector3(1, 0.8, 1)
+
+[node name="FurniCountertop" type="Node3D" unique_id=1615491916]
+script = ExtResource("1_0sade")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1407366706]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1113763637]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+shape = SubResource("BoxShape3D_p33bg")
+
+[node name="countertop" parent="StaticBody3D" unique_id=1962611896 instance=ExtResource("2_l3uxt")]

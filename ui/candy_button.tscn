@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://c2kjfy0oo3dgx"]
+[gd_scene format=3 uid="uid://cin0idwur22vj"]
 
 [ext_resource type="Script" uid="uid://bdhfegkn5wl5m" path="res://ui/candy_button.gd" id="1_lp2cp"]
 [ext_resource type="Texture2D" uid="uid://tdosspgn5nwg" path="res://assets/candy.png" id="2_mkk3v"]
