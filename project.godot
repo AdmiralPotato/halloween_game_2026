@@ -28,6 +28,10 @@ window/size/viewport_height=640
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[editor]
+
+movie_writer/movie_file="./recordings/recording.ogv"
+
 [gui]
 
 theme/custom="uid://bkphg3nelw53u"
