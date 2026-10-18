@@ -15,6 +15,7 @@ albedo_color = Color(1, 0.6, 0, 1)
 [node name="TestPlayer" type="RigidBody3D" unique_id=1707035649]
 axis_lock_linear_y = true
 axis_lock_angular_x = true
+axis_lock_angular_y = true
 axis_lock_angular_z = true
 gravity_scale = 0.0
 linear_damp = 1.4
