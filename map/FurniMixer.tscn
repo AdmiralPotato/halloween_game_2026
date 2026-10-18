@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://5jo3bft5wl1u"]
+
+[ext_resource type="Script" uid="uid://du3akdgj3fk24" path="res://map/furni_countertop.gd" id="1_lex5f"]
+[ext_resource type="PackedScene" uid="uid://cyax842a6qdje" path="res://assets/furni_mixer_0.glb" id="2_lex5f"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p33bg"]
+size = Vector3(1, 0.8, 1)
+
+[node name="FurniMixer" type="Node3D" unique_id=1615491916]
+script = ExtResource("1_lex5f")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1407366706]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1113763637]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+shape = SubResource("BoxShape3D_p33bg")
+
+[node name="mixer_v1" parent="StaticBody3D" unique_id=1817194741 instance=ExtResource("2_lex5f")]

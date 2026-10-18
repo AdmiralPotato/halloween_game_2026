@@ -3,6 +3,20 @@ extends Node3D
 
 var time: float = 0
 const FURNI_COUNTERTOP := preload("res://map/FurniCountertop.tscn")
+const FURNI_CUTTINGBOARD := preload("res://map/FurniCuttingboard.tscn")
+const FURNI_FRIDGE := preload("res://map/FurniFridge.tscn")
+const FURNI_MIXER := preload("res://map/FurniMixer.tscn")
+const FURNI_OVEN := preload("res://map/FurniOven.tscn")
+const FURNI_STORAGE := preload("res://map/FurniStorage.tscn")
+
+const FURNI_LIST := [
+	FURNI_COUNTERTOP,
+	FURNI_CUTTINGBOARD,
+	FURNI_FRIDGE,
+	FURNI_MIXER,
+	FURNI_OVEN,
+	FURNI_STORAGE,
+];
 
 @export var number_of_tiles: Vector2i = Vector2i(8, 8):
 	set(x):
@@ -13,8 +27,9 @@ const FURNI_COUNTERTOP := preload("res://map/FurniCountertop.tscn")
 func _ready():
 	update_floor()
 	for x in range(0, number_of_tiles.x):
-		$Tilemap.swap_furni(Vector2i(x,0), FURNI_COUNTERTOP.instantiate())
-		$Tilemap.swap_furni(Vector2i(x,number_of_tiles.y - 1), FURNI_COUNTERTOP.instantiate())
+		var FurniPiece = FURNI_LIST[x % FURNI_LIST.size()]
+		$Tilemap.swap_furni(Vector2i(x,0), FurniPiece.instantiate())
+		$Tilemap.swap_furni(Vector2i(x,number_of_tiles.y - 1), FurniPiece.instantiate())
 	if !Engine.is_editor_hint():
 		DebugPanel.monitor("Every 60 frames", self, "time", 60)
 		DebugPanel.monitor("Every 30 frames", self, "time", 30)
