@@ -1,6 +1,6 @@
 import type {
-	FinishedProduct,
-	IngredientUnit
+	Product,
+	FoodComponent
 } from "./utilities.ts";
 import {
 	listToTally,
@@ -22,21 +22,13 @@ export type RecipeInfo = {
 	output: string;
 	quantity: number;
 	location: string; // the appliance or tool to use
-	bakeWith?: string; // what kind of pan to use
+	pan?: string; // what kind of pan to use
 	time: number; // not exact time, but "short"/"medium"/"long" tiers
 	// attributes to add to the output (in addition to those of the ingredients):
 	newAttributes: AttributeMap,
 	// these will also add their attributes to the output:
 	ingredients: string[],
 	allowedModifiers: string[];
-}
-
-export type Pan = 'cookie_sheet' | 'muffin_tin' | 'cake_pan';
-const isPan = (v: unknown): v is Pan => {
-	if (v === 'cookie_sheet') { return true; }
-	if (v === 'muffin_tin') { return true; }
-	if (v === 'cake_pan') { return true; }
-	return false;
 }
 
 const recipeList: RecipeInfo[] = [
@@ -172,31 +164,31 @@ const recipeList: RecipeInfo[] = [
 		output: 'cookie',
 		quantity: 12,
 		location: 'oven',
-		bakeWith: 'cookie_sheet',
+		pan: 'cookie_sheet',
 		time: 2,
 		ingredients: [ 'cookie_dough' ],
 		newAttributes: {},
-		allowedModifiers: [ 'cookie_cutter' ],
+		allowedModifiers: [],
 	},
 	{
 		output: 'cupcake',
 		quantity: 6,
 		location: 'oven',
-		bakeWith: 'muffin_tin',
+		pan: 'muffin_tin',
 		time: 3,
 		ingredients: [ 'cake_batter' ],
 		newAttributes: {},
-		allowedModifiers: [ 'muffin_liner' ],
+		allowedModifiers: [ 'muffin_liners' ],
 	},
 	{
 		output: 'cake',
 		quantity: 1,
 		location: 'oven',
-		bakeWith: 'cake_pan',
+		pan: 'cake_pan',
 		time: 4,
 		ingredients: [ 'cake_batter' ],
 		newAttributes: {},
-		allowedModifiers: ['cake_form'],
+		allowedModifiers: [ 'cake_form' ],
 	},
 	{
 		output: 'cake_slice',
@@ -209,7 +201,7 @@ const recipeList: RecipeInfo[] = [
 	}
 ];
 
-export const getRecipesForProduct = (product: string) => {
+export const getRecipesForOutput = (product: string) => {
 	const recipes = Object.values(recipeList).filter(v=>v.output === product);
 	if (recipes.length === 0) {
 		throw new Error (`No recipes found for product ${product}`);
@@ -217,8 +209,8 @@ export const getRecipesForProduct = (product: string) => {
 	return recipes;
 };
 
-export const getFirstRecipeForProduct = (product: string) => {
-	const recipes = getRecipesForProduct(product);
+export const getFirstRecipeForOutput = (product: string) => {
+	const recipes = getRecipesForOutput(product);
 	return recipes[0];
 };
 
@@ -266,7 +258,7 @@ export const getAttributesForItemNameAndModifiers = (item: string, modifiers = [
 	}
 
 	// Otherwise generate them from the item info's recipe
-	const recipe = getFirstRecipeForProduct(item);
+	const recipe = getFirstRecipeForOutput(item);
 	const attributes: AttributeMap = structuredClone(recipe.newAttributes);
 	recipe.ingredients.forEach(ingredient=>{
 		const ingredientAttributes = getAttributesForItemNameAndModifiers(ingredient);
@@ -282,7 +274,7 @@ export const getAttributesForItemNameAndModifiers = (item: string, modifiers = [
 	});
 
 	// IMPORTANT NOTE!! Cooking darkens it slightly! Auto add maillard attributes
-	if (recipe.bakeWith !== undefined) {
+	if (recipe.pan !== undefined) {
 		const bakingAttributes: AttributeMap = maillardAttributes;
 		addAttributesToMap(attributes, bakingAttributes);
 	}
@@ -293,27 +285,27 @@ export const getAttributesForItemNameAndModifiers = (item: string, modifiers = [
 	return attributes;
 };
 
-export const getAttributesForIngredientUnit = (ingredient: IngredientUnit): AttributeMap => {
+export const getAttributesForFoodComponent = (ingredient: FoodComponent): AttributeMap => {
 	const ret: AttributeMap = {};
 	for (let i = 0; i < ingredient.quantity; i++) {
-		addAttributesToMap(ret, getAttributesForItemNameAndModifiers(ingredient.item, ingredient.modifiers));
+		addAttributesToMap(ret, getAttributesForItemNameAndModifiers(ingredient.name, ingredient.modifiers));
 	}
 	return ret;
 }
-export const getAttributesForIngredientUnitList = (arr: IngredientUnit[]): AttributeMap => {
+export const getAttributesForFoodComponentList = (arr: FoodComponent[]): AttributeMap => {
 	const ret: AttributeMap = {};
 	arr.forEach(ingredient=>{
-		addAttributesToMap(ret, getAttributesForIngredientUnit(ingredient))
+		addAttributesToMap(ret, getAttributesForFoodComponent(ingredient))
 	})
 	return ret;
 }
 
-export const getAttributeSpreadForFinishedProduct = (product: FinishedProduct): AttributeSpread => {
+export const getAttributeSpreadForProduct = (product: Product): AttributeSpread => {
 	const ret: AttributeSpread = {};
-	addAttributesToSpread(ret, getAttributesForItemNameAndModifiers(product.product, product.modifiers));
-	addAttributesToSpread(ret, getAttributesForIngredientUnitList(product.filling));
-	addAttributesToSpread(ret, getAttributesForIngredientUnitList(product.decoration));
-	addAttributesToSpread(ret, getAttributesForIngredientUnitList(product.doodad));
+	addAttributesToSpread(ret, getAttributesForItemNameAndModifiers(product.name, product.modifiers));
+	addAttributesToSpread(ret, getAttributesForFoodComponentList(product.fillings));
+	addAttributesToSpread(ret, getAttributesForFoodComponentList(product.decorations));
+	addAttributesToSpread(ret, getAttributesForFoodComponentList(product.doodads));
 	return ret;
 }
 
@@ -321,8 +313,8 @@ export const getAttributeSpreadForFinishedProduct = (product: FinishedProduct): 
 
 export type CookingInput = {
 	location: string;
-	bakeWith?: string;
-	ingredients: IngredientUnit[];
+	pan?: string;
+	ingredients: FoodComponent[];
 };
 export type CookingCompatibilityEval = {
 	// Output info
@@ -334,28 +326,28 @@ export type CookingCompatibilityEval = {
 	// Report card
 	errorCount: number; // quantity of problematic ingredients, both missing and extraneous
 	missingIngredients: string[];
-	extraneousIngredients: IngredientUnit[];
-	bakeWithSatisfied: boolean;
+	extraneousIngredients: FoodComponent[];
+	panSatisfied: boolean;
 };
 
-const getIngredientRecipeEval = (recipeInfo: RecipeInfo, givenIngredients: IngredientUnit[], bakeWith?: string): CookingCompatibilityEval => {
+const getIngredientRecipeEval = (recipeInfo: RecipeInfo, givenIngredients: (FoodComponent|Product)[], pan?: string): CookingCompatibilityEval => {
 	const tally = listToTally(recipeInfo.ingredients);
 	const inheritedModifiers: string[] = [];
 	const newModifiers: string[] = [];
-	const extraneousIngredients: IngredientUnit[] = [];
+	const extraneousIngredients: FoodComponent[] = [];
 	givenIngredients.forEach(v=>{
 		// v = { item: 'sugar', quantity: 1, modifiers: [] }
-		if (tally[v.item]) { // 0 means we don't have any even though there's an entry; the falsiness is fine
-			tally[v.item] -= 1;
+		if (tally[v.name]) { // 0 means we don't have any even though there's an entry; the falsiness is fine
+			tally[v.name] -= 1;
 			if (v.modifiers.length > 0) {
 				inheritedModifiers.push(...(v.modifiers))
 			}
 			return;
 		}
 		// if allowed as a modifier, collect it
-		if (isModifierAllowedInRecipe(v.item, recipeInfo)) {
+		if (isModifierAllowedInRecipe(v.name, recipeInfo)) {
 			for (let i = 0; i < v.quantity; i++) {
-				newModifiers.push(v.item);
+				newModifiers.push(v.name);
 				if (v.modifiers.length > 0) {
 					newModifiers.push(...v.modifiers)
 				}
@@ -371,18 +363,18 @@ const getIngredientRecipeEval = (recipeInfo: RecipeInfo, givenIngredients: Ingre
 		inheritedModifiers,
 		newModifiers,
 		recipeAttempted: recipeInfo,
-		errorCount: missingIngredients.length + extraneousIngredients.length + Number(bakeWith !== recipeInfo.bakeWith),
+		errorCount: missingIngredients.length + extraneousIngredients.length + Number(pan !== recipeInfo.pan),
 		missingIngredients,
 		extraneousIngredients,
-		bakeWithSatisfied: bakeWith === recipeInfo.bakeWith,
+		panSatisfied: pan === recipeInfo.pan,
 	};
 };
 
-export const cookEval = (location: string, providedIngredients: IngredientUnit[], bakeWith?: string): CookingCompatibilityEval => {
+export const cookEval = (location: string, providedIngredients: (FoodComponent|Product)[], pan?: string): CookingCompatibilityEval => {
 	// Recipes at the given location
 	const allRecipes = getRecipesForLocation(location);
 	const evals = allRecipes
-		.map(recipe=>getIngredientRecipeEval(recipe, providedIngredients, bakeWith))
+		.map(recipe=>getIngredientRecipeEval(recipe, providedIngredients, pan))
 		.sort((a,b)=>a.errorCount - b.errorCount)
 	const bestScore = evals[0].errorCount
 	const bestEvals = evals.filter(v=>v.errorCount === bestScore);
@@ -391,34 +383,34 @@ export const cookEval = (location: string, providedIngredients: IngredientUnit[]
 
 // ----------------------------------------- DO RECIPE ----------------------------------------- //
 
-export const turnCookEvalIntoOutput = (eva: CookingCompatibilityEval): FinishedProduct | IngredientUnit => {
+export const turnCookEvalIntoOutput = (eva: CookingCompatibilityEval): Product | FoodComponent => {
 	const info = getItemInfo(eva.output);
 	if (!info.categories.includes('product')) {
-		const ret: IngredientUnit = {
-			item: eva.output,
+		const ret: FoodComponent = {
+			name: eva.output,
 			quantity: eva.quantity,
 			modifiers: [...eva.inheritedModifiers, ...eva.newModifiers],
 		}
 		return ret;
 	}
 	return {
-		product: eva.output,
+		name: eva.output,
 		quantity: eva.quantity,
 		modifiers: [...eva.newModifiers, ...eva.inheritedModifiers],
-		filling: [],
-		decoration: [],
-		doodad: [],
+		fillings: [],
+		decorations: [],
+		doodads: [],
 	}
 }
 
-export const cook = (location: string, providedIngredients: IngredientUnit[]): FinishedProduct | IngredientUnit => {
+export const cook = (location: string, providedIngredients: FoodComponent[]): Product | FoodComponent => {
 	const result = cookEval(location, providedIngredients);
 	return {
-		product: result.output,
+		name: result.output,
 		quantity: result.quantity,
 		modifiers: [...result.newModifiers, ...result.inheritedModifiers],
-		filling: [],
-		decoration: [],
-		doodad: [],
+		fillings: [],
+		decorations: [],
+		doodads: [],
 	}
 };
