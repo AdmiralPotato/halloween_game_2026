@@ -1,5 +1,7 @@
 // COLOR
 
+import { isArrayOfNumbers } from "./utilities.ts";
+
 type Color = 'pale' | 'red' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple' | 'varigated';
 const colors = new Set([ 'pale', 'red', 'orange', 'yellow', 'green', 'blue', 'purple', 'varigated' ]);
 const isColor = (v: unknown): v is Color => typeof v === 'string' && colors.has(v);
@@ -182,8 +184,7 @@ export const isAttributeSpread = (v: unknown): v is AttributeSpread => {
 	}
 	const keysAreGood = Object.keys(v).every(k=>isAttribute(k));
 	const valuesAreGood = Object.values(v).every(arr=>{
-		if (!Array.isArray(arr)) { return false; }
-		return arr.every(n=>typeof n === 'number');
+		return isArrayOfNumbers(arr);
 	});
 	return keysAreGood && valuesAreGood;
 };

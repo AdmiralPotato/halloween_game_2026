@@ -1,69 +1,68 @@
-import { addItemToItemList } from "./simulation.ts";
-
-import type { FinishedProduct, IngredientUnit } from "./utilities.ts";
+import { addItemToList } from "./tiles.ts";
+import type { Product, FoodComponent } from "./utilities.ts";
 
 import { getVariantParent } from "./variants.ts";
 
-export type ProductFinisherType = 'filling' | 'decoration' | 'doodad';
+export type ProductFinisherType = 'fillings' | 'decorations' | 'doodads';
 const isProductFinisherType = (v: unknown): v is ProductFinisherType => {
-	if (v === 'filling') { return true; }
-	if (v === 'decoration') { return true; }
-	if (v === 'doodad') { return true; }
+	if (v === 'fillings') { return true; }
+	if (v === 'decorations') { return true; }
+	if (v === 'doodads') { return true; }
 	return true;
 };
 
 type ProductFinisherInfo = {
-	filling: string[];
-	decoration: string[];
-	doodad: string[];
+	fillings: string[];
+	decorations: string[];
+	doodads: string[];
 };
 
 const productFinisherMap: Record<string, ProductFinisherInfo> = {
 	cookie: {
-		filling: [],
-		decoration: [
+		fillings: [],
+		decorations: [
 			'frosting',
 		],
-		doodad: [
+		doodads: [
 			'candy_shapes',
 			'sprinkles',
 			'candied_flowers',
 		],
 	},
 	cupcake: {
-		filling: [
+		fillings: [
 			'pastry_cream',
 			'whipped_cream',
 			'pudding',
 		],
-		decoration: [
+		decorations: [
 			'frosting',
 			'whipped_cream',
 		],
-		doodad: [
+		doodads: [
 			'candy_shapes',
 			'sprinkles',
 			'candied_flowers',
 		],
 	},
 	cake: {
-		filling: [
+		fillings: [
 			'whipped_cream',
 			'ice_cream',
 		],
-		decoration: [
+		decorations: [
 			'frosting',
 			'whipped_cream',
 		],
-		doodad: [
+		doodads: [
 			'sprinkles',
 			'candied_flowers',
 		],
 	},
 	cake_slice: {
-		filling: [],
-		decoration: [],
-		doodad: [],
+		fillings: [],
+		decorations: [],
+		doodads: [],
 	},
 };
 
@@ -98,23 +97,23 @@ const batchSizes: Record<string, number> = {
 };
 
 // Returns new Product, or null if the process failed
-export const addFinisherToProduct = (finisherType: ProductFinisherType, ingredient: IngredientUnit, product: FinishedProduct): FinishedProduct | null => {
-	if (!isFinisherAllowedOnProduct(ingredient.item, finisherType, product.product)) {
+export const addFinisherToProduct = (finisherType: ProductFinisherType, ingredient: FoodComponent, product: Product): Product | null => {
+	if (!isFinisherAllowedOnProduct(ingredient.name, finisherType, product.name)) {
 		return null;
 	}
 	// Doodads cannot go on a product without a decoration for it to stick to
-	if (finisherType === 'doodad' && product.decoration.length === 0) {
+	if (finisherType === 'doodads' && product.decorations.length === 0) {
 		return null;
 	}
 	// 1x finisher goes to 1x batch of product. If there is not enough finisher available, it fails.
-	const batchSize = batchSizes[product.product];
+	const batchSize = batchSizes[product.name];
 	const batchMult = product.quantity / batchSize;
 	if (ingredient.quantity < batchMult) {
 		return null;
 	}
 	const ret = structuredClone(product);
 	const toInsert = {...ingredient, quantity: batchMult}
-	addItemToItemList(toInsert, ret[finisherType]);
+	addItemToList(toInsert, ret[finisherType]);
 	ingredient.quantity -= batchMult; // todo: I DON'T LIKE THAT THIS IS HAPPENING
 	return ret;
 }

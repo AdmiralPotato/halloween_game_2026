@@ -1,123 +1,123 @@
-import type { FinishedProduct } from "./utilities.ts";
-import { prettyPrintFinishedProduct } from "./utilities.ts";
+import type { Product } from "./utilities.ts";
+import { printFinishedProduct } from "./utilities.ts";
 
 type FinisherTest = {
-	input: FinishedProduct;
+	input: Product;
 	expected: string;
 }
 
 const finisherTests: FinisherTest[] = [
 	{
 		input: {
-			product: 'cookie',
+			name: 'cookie',
 			quantity: 12,
 			modifiers: [],
-			filling: [],
-			decoration: [],
-			doodad: []
+			fillings: [],
+			decorations: [],
+			doodads: []
 		},
 		expected: '12x cookie'
 	},
 	{
 		input: {
-			product: 'cookie',
+			name: 'cookie',
 			quantity: 12,
 			modifiers: ['cocoa_powder'],
-			filling: [],
-			decoration: [],
-			doodad: []
+			fillings: [],
+			decorations: [],
+			doodads: []
 		},
 		expected: '12x chocolate cookie'
 	},
 	{
 		input: {
-			product: 'cookie',
+			name: 'cookie',
 			quantity: 12,
 			modifiers: ['cocoa_powder', 'cocoa_powder'],
-			filling: [],
-			decoration: [],
-			doodad: []
+			fillings: [],
+			decorations: [],
+			doodads: []
 		},
 		expected: '12x double chocolate cookie'
 	},
 	{
 		input: {
-			product: 'cupcake',
+			name: 'cupcake',
 			quantity: 6,
 			modifiers: ['cocoa_powder', 'cocoa_powder'],
-			filling: [],
-			decoration: [],
-			doodad: []
+			fillings: [],
+			decorations: [],
+			doodads: []
 		},
 		expected: '6x double chocolate cupcake'
 	},
 	{
 		input: {
-			product: 'cupcake',
+			name: 'cupcake',
 			quantity: 6,
 			modifiers: ['cocoa_powder', 'cocoa_powder'],
-			filling: [
-				{ item: 'pastry_cream', quantity: 1, modifiers: [] }
+			fillings: [
+				{ name: 'pastry_cream', quantity: 1, modifiers: [] }
 			],
-			decoration: [],
-			doodad: []
+			decorations: [],
+			doodads: []
 		},
 		expected: '6x double chocolate cupcake with pastry cream filling'
 	},
 	{
 		input: {
-			product: 'cupcake',
+			name: 'cupcake',
 			quantity: 6,
 			modifiers: ['cocoa_powder', 'cocoa_powder'],
-			filling: [
-				{ item: 'pastry_cream', quantity: 1, modifiers: [] }
+			fillings: [
+				{ name: 'pastry_cream', quantity: 1, modifiers: [] }
 			],
-			decoration: [],
-			doodad: [{ item: 'rainbow_sprinkles', quantity: 1, modifiers: [] }]
+			decorations: [],
+			doodads: [{ name: 'rainbow_sprinkles', quantity: 1, modifiers: [] }]
 		},
 		expected: '6x double chocolate cupcake with pastry cream filling, topped with rainbow sprinkles'
 	},
 	{
 		input: {
-			product: 'cupcake',
+			name: 'cupcake',
 			quantity: 6,
 			modifiers: ['cocoa_powder', 'cocoa_powder'],
-			filling: [
-				{ item: 'pastry_cream', quantity: 1, modifiers: [] }
+			fillings: [
+				{ name: 'pastry_cream', quantity: 1, modifiers: [] }
 			],
-			decoration: [],
-			doodad: [
-				{ item: 'rainbow_sprinkles', quantity: 2, modifiers: [] }
+			decorations: [],
+			doodads: [
+				{ name: 'rainbow_sprinkles', quantity: 2, modifiers: [] }
 			]
 		},
 		expected: '6x double chocolate cupcake with pastry cream filling, topped with extra rainbow sprinkles'
 	},
 	{
 		input: {
-			product: 'cupcake',
+			name: 'cupcake',
 			quantity: 6,
 			modifiers: ['cocoa_powder', 'cocoa_powder'],
-			filling: [
-				{ item: 'pastry_cream', quantity: 1, modifiers: [] }
+			fillings: [
+				{ name: 'pastry_cream', quantity: 1, modifiers: [] }
 			],
-			decoration: [
-				{ item: 'frosting', quantity: 1, modifiers: ['cocoa_powder', 'cocoa_powder'] },
-				{ item: 'whipped_cream', quantity: 2, modifiers: [] },
+			decorations: [
+				{ name: 'frosting', quantity: 1, modifiers: ['cocoa_powder', 'cocoa_powder'] },
+				{ name: 'whipped_cream', quantity: 2, modifiers: [] },
 			],
-			doodad: [
-				{ item: 'rainbow_sprinkles', quantity: 2, modifiers: [] }
+			doodads: [
+				{ name: 'rainbow_sprinkles', quantity: 2, modifiers: [] }
 			]
 		},
 		expected: '6x double chocolate cupcake with pastry cream filling, with double chocolate frosting and extra whipped cream, topped with extra rainbow sprinkles'
 	},
 	{
 		input: {
-			product: 'cookie',
+			name: 'cookie',
 			quantity: 12,
 			modifiers: ['chocolate_chips'],
-			filling: [],
-			decoration: [{ item: 'frosting', quantity: 1, modifiers: ['cocoa_powder', 'mint_flavoring'] }],
-			doodad: []
+			fillings: [],
+			decorations: [{ name: 'frosting', quantity: 1, modifiers: ['cocoa_powder', 'mint_flavoring'] }],
+			doodads: []
 		},
 		expected: '12x chocolate chip cookie with chocolate mint frosting'
 	},
@@ -132,7 +132,7 @@ export const doFinisherTests = () => {
 
 
 	finisherTests.map((test, i)=>{
-		const found = prettyPrintFinishedProduct(test.input);
+		const found = printFinishedProduct(test.input);
 		if (found !== test.expected) {
 			logAndOrSaveMessage(`Test #${i}:`)
 			logAndOrSaveMessage(`>> Expected: '${test.expected}'`)

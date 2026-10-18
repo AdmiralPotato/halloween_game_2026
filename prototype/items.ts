@@ -1,11 +1,16 @@
 import { isAttributeMap, type AttributeMap } from "./attributes.ts";
+import type { FoodComponent, Product } from "./utilities.ts";
 
-type ItemStorageType = 'bag' | 'fridge' | 'box' | 'countertop';
-const isItemStorageType = (v: unknown): v is ItemStorageType => {
+export type StorageType = 'bag' | 'fridge' | 'freezer' | 'crate' | 'jar';
+// bag, fridge, freezer, crate are on the ground
+// jar is on the countertop (while leaving space for an object also)
+// All these things can also be just set on the countertop
+export const isStorageType = (v: unknown): v is StorageType => {
 	if (v === 'bag') { return true; }
 	if (v === 'fridge') { return true; }
-	if (v === 'box') { return true; }
-	if (v === 'countertop') { return true; }
+	if (v === 'freezer') { return true; }
+	if (v === 'crate') { return true; }
+	if (v === 'jar') { return true; }
 	return true;
 };
 
@@ -15,12 +20,14 @@ type ItemCategory = 'base' // raw ingredient, e.g. egg, flour, or base material,
 	| 'filling' // optional; useable only on a finished product
 	| 'decoration' // optional; useable only on a finished product
 	| 'doodad' // optional; useable only on a finished product if a decoration is already present
+	| 'pan'
 const isItemCategory = (v: unknown): v is ItemCategory => {
 	if (v === 'base') { return true; }
 	if (v === 'modifier') { return true; }
 	if (v === 'filling') { return true; }
 	if (v === 'decoration') { return true; }
 	if (v === 'doodad') { return true; }
+	if (v === 'pan') { return true; }
 	return true;
 };
 type ItemCategories = ItemCategory[];
@@ -31,7 +38,7 @@ const isItemCategories = (v: unknown): v is ItemCategories => {
 };
 
 type ItemInfo = {
-	storage: ItemStorageType;
+	storageType: StorageType;
 	categories: ItemCategory[];
 	cost: number | null;
 	attributes: AttributeMap | 'from_recipe';
@@ -41,7 +48,7 @@ const isItemInfo = (v: unknown): v is ItemInfo => {
 	if (typeof v !== 'object' || v === null) {
 		return false;
 	}
-	if (!isItemStorageType((v as ItemInfo).storage)) {
+	if (!isStorageType((v as ItemInfo).storageType)) {
 		return false;
 	}
 	if (!isItemCategories((v as ItemInfo).categories)) {
@@ -56,9 +63,27 @@ const isItemInfo = (v: unknown): v is ItemInfo => {
 	return true;
 };
 
+export const newFoodComponent = (name: string, quantity: number, modifiers?: string[]): FoodComponent => {
+	return {
+		name,
+		quantity,
+		modifiers: modifiers || [],
+	}	
+};
+export const newProduct = (name: string, quantity: number, modifiers?: string[], fillings?: string[], decorations?: string[], doodads?: string[]): Product => {
+	return {
+		name,
+		quantity,
+		modifiers: modifiers || [],
+		fillings: [],
+		decorations: [],
+		doodads: []
+	}
+};
+
 const itemInfoMap: Record<string, ItemInfo> = {
 	flour: {
-		storage: 'bag',
+		storageType: 'bag',
 		categories: [ 'base' ],
 		cost: 1,
 		attributes: {
@@ -66,7 +91,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	sugar: {
-		storage: 'bag',
+		storageType: 'bag',
 		categories: [ 'base' ],
 		cost: 1,
 		attributes: {
@@ -74,13 +99,13 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	egg: {
-		storage: 'fridge',
+		storageType: 'fridge',
 		categories: [ 'base' ],
 		cost: 1,
 		attributes: {},
 	},
 	cream: {
-		storage: 'fridge',
+		storageType: 'fridge',
 		categories: [ 'base' ],
 		cost: 2,
 		attributes: {
@@ -88,7 +113,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	cocoa_powder: {
-		storage: 'bag',
+		storageType: 'bag',
 		categories: [ 'modifier' ],
 		cost: 3,
 		attributes: {
@@ -98,7 +123,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	chocolate_bar: {
-		storage: 'box',
+		storageType: 'crate',
 		categories: [ 'base' ],
 		cost: 2,
 		attributes: {
@@ -106,7 +131,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	cherry_flavoring: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: [ 'modifier' ],
 		cost: 4,
 		attributes: {
@@ -117,7 +142,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	strawberry_flavoring: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: [ 'modifier' ],
 		cost: 4,
 		attributes: {
@@ -127,7 +152,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	raspberry_flavoring: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: [ 'modifier' ],
 		cost: 4,
 		attributes: {
@@ -137,7 +162,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	orange_flavoring: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: [ 'modifier' ],
 		cost: 4,
 		attributes: {
@@ -147,7 +172,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	almond_flavoring: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: [ 'modifier' ],
 		cost: 4,
 		attributes: {
@@ -156,7 +181,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	lemon_flavoring: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: [ 'modifier' ],
 		cost: 4,
 		attributes: {
@@ -166,7 +191,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	lime_flavoring: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: [ 'modifier' ],
 		cost: 4,
 		attributes: {
@@ -176,7 +201,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	blueberry_flavoring: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: [ 'modifier' ],
 		cost: 4,
 		attributes: {
@@ -186,7 +211,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	ube_flavoring: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: [ 'modifier' ],
 		cost: 4,
 		attributes: {
@@ -195,7 +220,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	mint_flavoring: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: [ 'modifier' ],
 		cost: 4,
 		attributes: {
@@ -205,7 +230,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	caramel_flavoring: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: [ 'modifier' ],
 		cost: 4,
 		attributes: {
@@ -215,7 +240,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	red_candied_flowers: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: [ 'doodad' ],
 		cost: 5,
 		attributes: {
@@ -224,7 +249,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	white_candied_flowers: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: [ 'doodad' ],
 		cost: 5,
 		attributes: {
@@ -233,7 +258,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	blue_candied_flowers: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: [ 'doodad' ],
 		cost: 5,
 		attributes: {
@@ -242,7 +267,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	yellow_candied_flowers: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: [ 'doodad' ],
 		cost: 5,
 		attributes: {
@@ -251,7 +276,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	rainbow_sprinkles: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: [ 'modifier', 'doodad' ],
 		cost: 2,
 		attributes: {
@@ -260,7 +285,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	chocolate_sprinkles: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: [ 'modifier', 'doodad' ],
 		cost: 2,
 		attributes: {
@@ -268,7 +293,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	white_sprinkles: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: [ 'modifier', 'doodad' ],
 		cost: 2,
 		attributes: {
@@ -277,7 +302,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	ball_bearing_sprinkles: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: [ 'modifier', 'doodad' ],
 		cost: 2,
 		attributes: {
@@ -286,7 +311,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	hard_candy_bats: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: [ 'doodad' ],
 		cost: 3,
 		attributes: {
@@ -294,7 +319,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	hard_candy_eyeballs: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: [ 'doodad' ],
 		cost: 3,
 		attributes: {
@@ -303,7 +328,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	hard_candy_ghosts: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: [ 'doodad' ],
 		cost: 3,
 		attributes: {
@@ -311,70 +336,88 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		},
 	},
 	chocolate_chips: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: ['modifier', 'doodad'],
 		cost: 3,
 		attributes: 'from_recipe',
 	},
 	frosting: {
-		storage: 'countertop',
+		storageType: 'jar',
 		categories: ['decoration'],
 		cost: 2,
 		attributes: 'from_recipe',
 	},
 	whipped_cream: {
-		storage: 'fridge',
+		storageType: 'fridge',
 		categories: ['filling', 'decoration'],
 		cost: 2,
 		attributes: 'from_recipe',
 	},
 	pastry_cream: {
-		storage: 'fridge',
+		storageType: 'fridge',
 		categories: ['filling'],
 		cost: 3,
 		attributes: 'from_recipe',
 	},
 	pudding: {
-		storage: 'fridge',
+		storageType: 'fridge',
 		categories: ['filling'],
 		cost: 3,
 		attributes: 'from_recipe',
 	},
 	cookie_dough: {
-		storage: 'fridge',
+		storageType: 'fridge',
 		categories: ['base'],
 		cost: 2,
 		attributes: 'from_recipe',
 	},
 	cake_batter: {
-		storage: 'fridge',
+		storageType: 'fridge',
 		categories: ['base'],
 		cost: 2,
 		attributes: 'from_recipe',
 	},
 	cookie: {
-		storage: 'countertop',
+		storageType: 'crate',
 		categories: ['product'],
 		cost: null,
 		attributes: 'from_recipe',
 	},
 	cupcake: {
-		storage: 'countertop',
+		storageType: 'fridge',
 		categories: ['product'],
 		cost: null,
 		attributes: 'from_recipe',
 	},
 	cake: {
-		storage: 'fridge',
+		storageType: 'fridge',
 		categories: ['product'],
 		cost: null,
 		attributes: 'from_recipe',
 	},
 	cake_slice: {
-		storage: 'fridge',
+		storageType: 'fridge',
 		categories: ['product'],
 		cost: null,
 		attributes: 'from_recipe',
+	},
+	cookie_sheet: {
+		storageType: 'crate',
+		categories: ['pan'],
+		cost: 2,
+		attributes: {},
+	},
+	muffin_tin: {
+		storageType: 'crate',
+		categories: ['pan'],
+		cost: 2,
+		attributes: {},
+	},
+	cake_pan: {
+		storageType: 'crate',
+		categories: ['pan'],
+		cost: 2,
+		attributes: {},
 	},
 };
 

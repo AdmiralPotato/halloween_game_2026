@@ -14,12 +14,18 @@ export const capitalizeAndClean = (s: string) => capitalizeFirstLetter(cleanStri
 
 export const sortAndStringifyArray = (arr: string[]) => `[` + structuredClone(arr.sort()).join(', ') + `]`;
 
-const isArrayOfStrings = (arr: unknown): arr is string[] => {
+export const isArrayOfStrings = (arr: unknown): arr is string[] => {
+	return arrayValuesAreType(arr, (v)=>typeof v === 'string')
+};
+export const isArrayOfNumbers = (arr: unknown): arr is string[] => {
+	return arrayValuesAreType(arr, (v)=>typeof v === 'number')
+};
+
+const arrayValuesAreType = <T>(arr: unknown, fn: (v: unknown) => v is T): arr is T[] => {
 	if (!Array.isArray(arr)) { return false; }
 	for (let i = 0; i < arr.length; i++) {
-		if (typeof arr[i] !== 'string') {
-			return false;
-		}
+		const value = arr[i];
+		if (!fn(value)) { return false; }
 	}
 	return true;
 };
@@ -77,30 +83,81 @@ export const talliesAreEqual = (a: Tallies, b: Tallies): boolean => {
 	return true;
 };
 
-// ----------------------------------------- INGREDIENT UNIT ----------------------------------------- //
+// ----------------------------------------- PAN ----------------------------------------- //
 
-export type IngredientUnit = {
-	item: string;
+export type PanType = 'cookie_sheet' | 'muffin_tin' | 'cake_pan';
+export const isPanType = (v: unknown): v is PanType => {
+	if (v === 'cookie_sheet') { return true; }
+	if (v === 'muffin_tin') { return true; }
+	if (v === 'cake_pan') { return true; }
+	return false;
+};
+
+export type Pan = {
+	name: PanType;
+	// can either be in a stack or carrying something, not both
+	quantity: number;
+	carrying: FoodComponent | Product | null;
+};
+export const isPan = (givenV: unknown): givenV is Pan => {
+	if (typeof givenV !== 'object') { return false; }
+	if (givenV === null) { return false; }
+	const v = givenV as Pan;
+	if (isPanType(v.name)) { return false; }
+	if (typeof v.quantity !== 'number') { return false; }
+	if (v.carrying === null) { return true; }
+	if (isFoodComponent(v.carrying)) { return true; }
+	if (isProduct(v.carrying)) { return true; }
+	return false;
+};
+export const isEmptyPan = (v: unknown): boolean => {
+	if (!isPan(v)) { return false; }
+	if (v.carrying !== null) { return false; }
+	return true;
+};
+export const isFullPan = (v: unknown): boolean => {
+	if (!isPan(v)) { return false; }
+	if (v.carrying === null) { return false; }
+	return true;
+};
+
+const pansMayContainMap: Record<PanType, string[]> = {
+	cookie_sheet: [ 'cookie_dough', 'cookie', 'cookies' ],
+	muffin_tin: [ 'muffin_liners', 'batter', 'cupcakes', 'muffins' ],
+	cake_pan: [ 'cake_form', 'batter', 'cake' ],
+}
+export const panMayContain = (pan: PanType, itemName: string): boolean => {
+	return pansMayContainMap[pan].includes(itemName);
+};
+
+// ----------------------------------------- FOOD COMPONENT ----------------------------------------- //
+
+export type FoodComponent = {
+	name: string;
 	quantity: number;
 	modifiers: string[];
 };
-export const isIngredientUnit = (v: unknown): v is IngredientUnit => {
-	if (typeof (v as IngredientUnit).item !== 'string') { return false; }
-	if (typeof (v as IngredientUnit).quantity !== 'number') { return false; }
-	if (!isArrayOfStrings((v as IngredientUnit).modifiers)) { return false; }
+export const isFoodComponent = (givenV: unknown): givenV is FoodComponent => {
+	if (typeof givenV !== 'object') { return false; }
+	if (givenV === null) { return false; }
+	const v = givenV as FoodComponent;
+	if (typeof v.name !== 'string') { return false; }
+	if (typeof v.quantity !== 'number') { return false; }
+	if (!isArrayOfStrings(v.modifiers)) { return false; }
 	return true;
 };
-export const ingredientUnitsMatchIgnoringQuantity = (a: IngredientUnit, b: IngredientUnit): boolean => {
-	if (a.item !== b.item) {
+
+export const foodComponentsMatchIgnoringQuantity = (a: FoodComponent, b: FoodComponent): boolean => {
+	if (a.name !== b.name) {
 		return false;
 	}
 	if (sortAndStringifyArray(a.modifiers) !== sortAndStringifyArray(b.modifiers)) {
 		return false;
 	}
 	return true;
-}
-export const ingredientUnitsMatchIncludingQuantity = (a: IngredientUnit, b: IngredientUnit): boolean => {
-	if (a.item !== b.item) {
+};
+export const foodComponentsMatchIncludingQuantity = (a: FoodComponent, b: FoodComponent): boolean => {
+	if (a.name !== b.name) {
 		return false;
 	}
 	if (a.quantity !== b.quantity) {
@@ -110,21 +167,21 @@ export const ingredientUnitsMatchIncludingQuantity = (a: IngredientUnit, b: Ingr
 		return false;
 	}
 	return true;
-}
-export const arrayOfIngredientUnitsMatchIncludingQuantity = (arrA: IngredientUnit[], arrB: IngredientUnit[]): boolean => {
+};
+export const arrayOfFoodComponentsMatchIncludingQuantity = (arrA: FoodComponent[], arrB: FoodComponent[]): boolean => {
 	if (arrA.length !== arrB.length) {
 		// get an easy case out of the way
 		return false;
 	}
-	const matchedA: IngredientUnit[] = [];
+	const matchedA: FoodComponent[] = [];
 	const notMatchedA = arrA.slice();
-	const matchedB: IngredientUnit[] = [];
+	const matchedB: FoodComponent[] = [];
 	const notMatchedB = arrB.slice();
 	for (let aI = 0; aI < notMatchedA.length; aI++) {
 		const a = notMatchedA[aI];
 		for (let bI = 0; bI < notMatchedB.length; bI++) {
 			const b = notMatchedB[bI];
-			if (!ingredientUnitsMatchIncludingQuantity(a, b)) {
+			if (!foodComponentsMatchIncludingQuantity(a, b)) {
 				continue;
 			}
 			matchedA.push(a);
@@ -134,52 +191,83 @@ export const arrayOfIngredientUnitsMatchIncludingQuantity = (arrA: IngredientUni
 		}
 	}
 	return notMatchedA.length === 0 && notMatchedB.length === 0;
-}
+};
 
-export const ingredientUnitsToTallies = (ingredients: IngredientUnit[]) => {
+export const foodComponentsToTallies = (ingredients: FoodComponent[]) => {
 	const ret: Tallies = {};
 	ingredients.forEach(v=>{
-		ret[v.item] = (ret[v.item] || 0) + v.quantity
+		ret[v.name] = (ret[v.name] || 0) + v.quantity
 	})
 	return ret;
 };
 
-// ---------------------------------- FINISHED PRODUCT ---------------------------------- //
+// ---------------------------------- FINISHED PRODUCTS ---------------------------------- //
 
-export type FinishedProduct = {
-	product: string;
+export type Product = {
+	name: string;
 	quantity: number;
 	modifiers: string[];
-	filling: IngredientUnit[];
-	decoration: IngredientUnit[];
-	doodad: IngredientUnit[];
+	fillings: FoodComponent[];
+	decorations: FoodComponent[];
+	doodads: FoodComponent[];
+};
+export const isProduct = (givenV: unknown): givenV is Product => {
+	if (typeof givenV !== 'object') { return false; }
+	if (givenV === null) { return false; }
+	const v = givenV as Product;
+	if (typeof v.name !== 'string') { return false; }
+	if (typeof v.quantity !== 'number') { return false; }
+	if (!isArrayOfStrings(v.modifiers)) { return false; }
+	if (!arrayValuesAreType<FoodComponent>(v.fillings, isFoodComponent)) { return false; }
+	if (!arrayValuesAreType<FoodComponent>(v.decorations, isFoodComponent)) { return false; }
+	if (!arrayValuesAreType<FoodComponent>(v.doodads, isFoodComponent)) { return false; }
+	return true;
 };
 
-export const finishedProductMatchIgnoringQuantity = (a: FinishedProduct, b: FinishedProduct): boolean => {
-	return a.product === b.product
+export const productsMatchIgnoringQuantity = (a: Product, b: Product): boolean => {
+	return a.name === b.name
 		&& sortAndStringifyArray(a.modifiers) === sortAndStringifyArray(b.modifiers)
-		&& arrayOfIngredientUnitsMatchIncludingQuantity(a.filling, b.filling)
-		&& arrayOfIngredientUnitsMatchIncludingQuantity(a.decoration, b.decoration)
-		&& arrayOfIngredientUnitsMatchIncludingQuantity(a.doodad, b.doodad)
+		&& arrayOfFoodComponentsMatchIncludingQuantity(a.fillings, b.fillings)
+		&& arrayOfFoodComponentsMatchIncludingQuantity(a.decorations, b.decorations)
+		&& arrayOfFoodComponentsMatchIncludingQuantity(a.doodads, b.doodads)
 };
 
-// --------------------------- ITEM (finished product | ingredient unit) --------------------------- //
+// --------------------------- ITEM (pan | food component | baked product) --------------------------- //
 
-export type Item = IngredientUnit | FinishedProduct;
-export const getItemName = (item: Item): string => isIngredientUnit(item) ? item.item : item.product;
+export type Item = Pan | FoodComponent | Product;
 
-export const itemTypesMatch = (a: Item, b: Item): boolean => isIngredientUnit(a) === isIngredientUnit(b);
+export const itemTypesMatch = (a: Item, b: Item): boolean => {
+	if (isFoodComponent(a) === isFoodComponent(b)) return true;
+	if (isProduct(a) === isProduct(b)) return true;
+	if (isPan(a) === isPan(b)) return true;
+	return false;
+};
 export const itemsMatchIgnoringQuantity = (a: Item, b: Item): boolean => {
-	if (!itemTypesMatch(a, b)) {
-		return false;
-	}
-	if (isIngredientUnit(a) && isIngredientUnit(b)) {
-		return ingredientUnitsMatchIgnoringQuantity(a, b);
-	} else if (!isIngredientUnit(a) && !isIngredientUnit(b)) {
-		return finishedProductMatchIgnoringQuantity(a, b)
+	if (a.name !== b.name) { return false;}
+	if (!itemTypesMatch(a, b)) { return false; }
+	if (isFoodComponent(a) && isFoodComponent(b)) {
+		return foodComponentsMatchIgnoringQuantity(a, b);
+	} else if (isProduct(a) && isProduct(b)) {
+		return productsMatchIgnoringQuantity(a, b)
+	} else if (isPan(a) && isPan(b)) {
+		if (a.carrying === null && b.carrying === null) {
+			return true;
+		} else if (a.carrying !== null && b.carrying !== null) {
+			return (itemsMatchIgnoringQuantity(a.carrying, b.carrying));
+		}
 	}
 	return false;
 };
+
+export const itemsCanStack = (a: Item, b: Item): boolean => {
+	if (isPan(a) && isPan(b)) {
+		if (a.carrying !== null || b.carrying !== null) {
+			// overrides the below thing
+			return false;
+		}
+	}
+	return itemsMatchIgnoringQuantity(a, b);
+}
 
 // ------------------------------------- AUTO DISPLAY NAMES ------------------------------------- //
 
@@ -216,7 +304,7 @@ const getReproductiveNumber = (n: number): string => {
 };
 
 // e.g. item: 'frosting', modifiers: ['cocoa_powder', 'cocoa_powder'] -> 'double chocolate frosting'
-const printModifiersWithItemName = (item: string, modifiers: string[]): string => {
+export const printModifiersWithItemName = (item: string, modifiers: string[]): string => {
 	const sortedPrettyNames = modifiers.map(getModifierPrintName).sort()
 	const tally = listToTally(sortedPrettyNames);
 	const prettiedModifiers = Object.entries(tally).map(([modifierName, quantity])=>{
@@ -230,9 +318,9 @@ const printModifiersWithItemName = (item: string, modifiers: string[]): string =
 // Instead add "extra" (because it's not quad choc frosting, it's an extra amount of double choc frosting)
 // { item: 'frosting', quantity: 2, modifiers: ['cocoa_powder', 'cocoa_powder' ]} -> extra double chocolate frosting
 
-const prettyPrintFinisherIncludingQuantity = (finisher: IngredientUnit): string => {
+const printFinisherIncludingQuantity = (finisher: FoodComponent): string => {
 	const twoOrMore = finisher.quantity > 1 ? 'extra ' : '';
-	const name = printModifiersWithItemName(finisher.item, finisher.modifiers);
+	const name = printModifiersWithItemName(finisher.name, finisher.modifiers);
 	return twoOrMore + name;
 };
 
@@ -240,23 +328,23 @@ const printXQuantity = (n: number): string => {
 	return n > 1 ? `${n}x ` : '';
 }
 
-export const prettyPrintFinishedProduct = (product: FinishedProduct): string => {
+export const printFinishedProduct = (product: Product): string => {
 	const count = printXQuantity(product.quantity);
-	const base = printModifiersWithItemName(product.product, product.modifiers);
+	const base = printModifiersWithItemName(product.name, product.modifiers);
 
 	const extras: string[] = [];
 
-	const fillings = product.filling.map(prettyPrintFinisherIncludingQuantity);
+	const fillings = product.fillings.map(printFinisherIncludingQuantity);
 	if (fillings.length > 0) {
 		extras.push(`with ${quickOxfordCommas(fillings)} filling`);
 	}
 
-	const decorations = product.decoration.map(prettyPrintFinisherIncludingQuantity);
+	const decorations = product.decorations.map(printFinisherIncludingQuantity);
 	if (decorations.length > 0) {
 		extras.push(`with ${quickOxfordCommas(decorations)}`);
 	}
 
-	const doodads = product.doodad.map(prettyPrintFinisherIncludingQuantity);
+	const doodads = product.doodads.map(printFinisherIncludingQuantity);
 	if (doodads.length > 0) {
 		extras.push(`topped with ${quickOxfordCommas(doodads)}`);
 	}
@@ -270,9 +358,36 @@ export const prettyPrintFinishedProduct = (product: FinishedProduct): string => 
 
 // For things that aren't finished, like things from the store or in inventory, here's a more generic thing:
 
-export const printGenericIngredientUnit = (item: IngredientUnit) => {
-	const modifierAndItemName = printModifiersWithItemName(item.item, item.modifiers);
+export const printFoodComponent = (item: FoodComponent) => {
+	const modifierAndItemName = printModifiersWithItemName(item.name, item.modifiers);
 	const nX = printXQuantity(item.quantity);
 	return nX + modifierAndItemName;
 };
+
+// And pans I guess
+
+export const printPan = (item: Pan): string => {
+	const pan = cleanString(item.name);
+	if (item.carrying === null) {
+		return pan;
+	}
+	const carrying = printItem(item.carrying);
+	if (item.name === 'muffin_tin') {
+		return `${carrying} in a ${pan}`;
+	} else {
+		return `${carrying} on a ${pan}`;
+	}
+};
+
+// Combo
+
+export const printItem = (item: Item): string => {
+	if (isFoodComponent(item)) {
+		return printFoodComponent(item)
+	} else if (isProduct(item)) {
+		return printFinishedProduct(item);
+	} else {
+		return printPan(item);
+	}
+}
 
