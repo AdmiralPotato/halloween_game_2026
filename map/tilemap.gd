@@ -19,13 +19,14 @@ func create_slots(minCoord: Vector2i, size: Vector2i, ...extra_args):
 				continue
 			args[0] = xy
 			var tile := Tile.new()
+			var node_name := "Furni%d_%d" % [x, y]
+			if self.has_node(node_name):
+				tile.furni = self.get_node(node_name)
 			tiles.set(xy, tile)
 
-## Destroys everything in the tilemap.
+## Forget everything we think we know about tiles.
 func clear():
 	tiles.clear()
-	for tile in get_children():
-		remove_child(tile)
 
 ## Returns the coordinates of a tile that someone standing at `position` and
 ## facing `facing` (a unit vector) should be interacting with / picking up from
@@ -71,12 +72,19 @@ func swap_furni(xy: Vector2i, new_node: FurniNode) -> FurniNode:
 	var tile := _get_tile(xy)
 	if !tile: return new_node
 	var old_node := tile.furni
-	tile.furni = new_node
 	if old_node:
+		old_node.name = "FurniPickedUp"
 		remove_child(old_node)
-	if tile.furni:
-		add_child(tile.furni)
-		tile.furni.position = Vector3(xy.x+0.5, 0.0, xy.y+0.5)
+		old_node.pack()
+	tile.furni = new_node
+	if new_node:
+		if new_node.get_parent():
+			new_node.reparent(self, false)
+		else:
+			add_child(new_node)
+		new_node.position = Vector3(xy.x+0.5, 0.0, xy.y+0.5)
+		new_node.name = "Furni%d_%d" % [xy.x, xy.y]
+		new_node.unpack()
 	if tile.item:
 		if tile.furni && tile.furni.has_property("item_height"):
 			tile.item.position.y = tile.furni.item_height
@@ -133,3 +141,6 @@ func combine_item(xy: Vector2i, new_node: ItemNode) -> ItemNode:
 		if tile.furni && tile.furni.has_property("item_height"):
 			new_node.position.y = tile.furni.item_height
 	return null
+
+func _init():
+	Global.tilemap = self

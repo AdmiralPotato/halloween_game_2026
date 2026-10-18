@@ -1,15 +1,10 @@
 [gd_scene format=3 uid="uid://cl7xh1lhn0u0b"]
 
 [ext_resource type="Script" uid="uid://du3akdgj3fk24" path="res://map/furni_countertop.gd" id="1_0sade"]
+[ext_resource type="PackedScene" uid="uid://cmo6k5u5piq0f" path="res://assets/furni_countertop_0.glb" id="2_l3uxt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p33bg"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_p33bg"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0sade"]
-albedo_color = Color(1, 0.32156864, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3o4ji"]
+size = Vector3(1, 0.8, 1)
 
 [node name="FurniCountertop" type="Node3D" unique_id=1615491916]
 script = ExtResource("1_0sade")
@@ -17,15 +12,7 @@ script = ExtResource("1_0sade")
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1407366706]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1113763637]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("BoxShape3D_p33bg")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D" unique_id=742932941]
-transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.95, 0)
-mesh = SubResource("BoxMesh_p33bg")
-surface_material_override/0 = SubResource("StandardMaterial3D_0sade")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1435612301]
-transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.45, 0)
-mesh = SubResource("BoxMesh_p33bg")
-surface_material_override/0 = SubResource("StandardMaterial3D_3o4ji")
+[node name="countertop" parent="StaticBody3D" unique_id=1962611896 instance=ExtResource("2_l3uxt")]

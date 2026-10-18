@@ -7,6 +7,9 @@ extends RigidBody3D
 ## How fast the birb wants to turn in RADIANS per second
 @export var turn_speed := TAU
 
+var held_object: Node3D
+var in_rearrange_mode := true
+
 func _ready() -> void:
 	$mage/AnimationPlayer.play("run")
 
@@ -22,3 +25,16 @@ func _physics_process(delta):
 		var desired_facing = atan2(desired_x_motion, desired_z_motion)
 		var facing_delta = angle_difference(self.rotation.y, desired_facing)
 		self.rotation.y += facing_delta * turn_speed * delta
+	if Input.is_action_just_pressed("pickup"):
+		var target_tile := Global.tilemap.find_tile(self.position, self.basis.z, 1.4)
+		var tilemap := Global.tilemap
+		var store: FurniNode = null
+		if held_object is FurniNode || in_rearrange_mode:
+			# doesn't matter if we're in rearrange mode if we're already holding furni
+			held_object = Global.tilemap.swap_furni(target_tile, held_object)
+		elif held_object is ItemNode || !in_rearrange_mode:
+			held_object = Global.tilemap.swap_item(target_tile, held_object)
+		# If we're holding an object now, it's because we picked one up.
+		if held_object:
+			self.add_child(held_object)
+			held_object.position = Vector3(0.0, -0.5, 0.5)
