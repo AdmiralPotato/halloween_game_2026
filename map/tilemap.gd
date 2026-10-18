@@ -20,7 +20,7 @@ func create_slots(minCoord: Vector2i, size: Vector2i, ...extra_args):
 			args[0] = xy
 			var tile := Tile.new()
 			tiles.set(xy, tile)
-			
+
 ## Destroys everything in the tilemap.
 func clear():
 	tiles.clear()
@@ -61,6 +61,9 @@ func get_item(xy: Vector2i) -> Node3D:
 ## responsible for setting the translation of the returned node / ensuring it is
 ## a child of whomever it needs to be.
 ##
+## If new_node is null(player with empty hands), will remove the old_node and
+## return it, like player decided to pick up that furniture.
+##
 ## NOTE: If there is an item, it will need a new Y translation. If there is
 ## furni, and it has a "placed_item_height" property, that will be used to
 ## decide the new Y translation. Otherwise it will be 0.
@@ -69,9 +72,11 @@ func swap_furni(xy: Vector2i, new_node: FurniNode) -> FurniNode:
 	if !tile: return new_node
 	var old_node := tile.furni
 	tile.furni = new_node
-	remove_child(old_node)
-	add_child(tile.furni)
-	new_node.position = Vector3(xy.x+0.5, 0.0, xy.y+0.5)
+	if old_node:
+		remove_child(old_node)
+	if tile.furni:
+		add_child(tile.furni)
+		tile.furni.position = Vector3(xy.x+0.5, 0.0, xy.y+0.5)
 	if tile.item:
 		if tile.furni && tile.furni.has_property("item_height"):
 			tile.item.position.y = tile.furni.item_height

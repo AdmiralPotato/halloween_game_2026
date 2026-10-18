@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c6ijo65efyycu" path="res://map/tilemap_test.gd" id="1_0n275"]
 [ext_resource type="Script" uid="uid://brhfhuo7lsymv" path="res://map/tilemap.gd" id="2_xtlfy"]
 [ext_resource type="PackedScene" uid="uid://v5tdiarwxe74" path="res://map/TestPlayer.tscn" id="3_8t2af"]
-[ext_resource type="PackedScene" path="res://ui/debug_panel.tscn" id="4_8t2af"]
+[ext_resource type="PackedScene" uid="uid://03n546k1srnw" path="res://ui/debug_panel.tscn" id="4_8t2af"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_el5rg"]
 size = Vector3(8, 1, 8)
@@ -69,3 +69,11 @@ spot_range = 20.0
 spot_angle = 2.0
 
 [node name="DebugPanel" parent="." unique_id=249136689 instance=ExtResource("4_8t2af")]
+
+[node name="Label" type="Label" parent="." unique_id=1777443388]
+custom_minimum_size = Vector2(16, 16)
+offset_left = 25.0
+offset_top = 22.0
+offset_right = 379.0
+offset_bottom = 45.0
+text = "Press Space/P to place/remove Countertops"

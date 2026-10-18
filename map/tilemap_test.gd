@@ -1,7 +1,9 @@
 @tool
 extends Node3D
 
-var time: float = 0;
+var time: float = 0
+var last_tile: Vector2i = Vector2i(0,0)
+var FurniCountertop = preload("res://map/FurniCountertop.tscn")
 
 @export var number_of_tiles: Vector2i = Vector2i(8, 8):
 	set(x):
@@ -9,10 +11,21 @@ var time: float = 0;
 		if is_node_ready():
 			update_floor()
 
+func _input(event) -> void:
+	if event.is_action_pressed("pickup"):
+		var store: FurniNode = null
+		if not $Tilemap.get_furni(last_tile):
+			store = FurniCountertop.instantiate()
+		store = $Tilemap.swap_furni(last_tile, store)
+		if store:
+			store.free()
+
 func _ready():
 	update_floor()
+	for x in range(0, number_of_tiles.x):
+		$Tilemap.swap_furni(Vector2i(x,0), FurniCountertop.instantiate())
+		$Tilemap.swap_furni(Vector2i(x,number_of_tiles.y - 1), FurniCountertop.instantiate())
 	if !Engine.is_editor_hint():
-		$Tilemap.create_slots(Vector2i(0, 0), number_of_tiles)
 		DebugPanel.monitor("Every 60 frames", self, "time", 60)
 		DebugPanel.monitor("Every 30 frames", self, "time", 30)
 		DebugPanel.monitor("Every 10 frames", self, "time", 10)
@@ -20,6 +33,8 @@ func _ready():
 		DebugPanel.monitor("Every frame formatted: %.2f", self, "time", 1)
 
 func update_floor():
+	$Tilemap.clear();
+	$Tilemap.create_slots(Vector2i(0, 0), number_of_tiles)
 	$Floor.position.x = number_of_tiles.x * 0.5
 	$Floor.position.y = -0.5
 	$Floor.position.z = number_of_tiles.y * 0.5
@@ -33,7 +48,7 @@ func _physics_process(delta):
 		return
 	var birb_position: Vector3 = $TestPlayer.position
 	var birb_facing: Vector3 = $TestPlayer.basis.z
-	var target_tile: Vector2i = $Tilemap.find_tile(birb_position, birb_facing, 1.4)
-	$PlayerInteractIndicator.position.x = target_tile.x + 0.5
-	$PlayerInteractIndicator.position.z = target_tile.y + 0.5
+	last_tile = $Tilemap.find_tile(birb_position, birb_facing, 1.4)
+	$PlayerInteractIndicator.position.x = last_tile.x + 0.5
+	$PlayerInteractIndicator.position.z = last_tile.y + 0.5
 	time += delta
