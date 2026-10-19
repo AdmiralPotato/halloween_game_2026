@@ -4,7 +4,7 @@ import { getItemInfo, isStorageType, itemMatchesStorageType } from "./items.ts";
 
 import { cookEval, turnCookEvalIntoOutput } from "./recipes.ts";
 
-import type { Pan, Ingredient, Item, Product } from "./utilities.ts";
+import type { Pan, Ingredient, Item, Product, FillingInjector } from "./utilities.ts";
 import {
 	addItems,
 	cleanString,
@@ -23,6 +23,9 @@ import {
 	addItemToList,
 	getXInnermostItems,
 	clearInnermostItems,
+	isContainer,
+	isFillingInjector,
+	containerMayContain,
 } from "./utilities.ts";
 
 // ------------------------------------------ PRINTING ------------------------------------------ //
@@ -192,7 +195,7 @@ export type StorageTile = TileCommon & {
 	inside: StorageTileInnards;
 	restock: (count: number) => boolean;
 };
-export type StorageTileInnards = Ingredient | Product | Pan | null;
+export type StorageTileInnards = Ingredient | Product | Pan | FillingInjector | null;
 export const isStorageTileInnards = (v: unknown): v is StorageTileInnards => {
 	if (typeof v !== 'object') { return false; }
 	return v === null || isIngredient(v) || isProduct(v) || isPan(v)
@@ -229,19 +232,27 @@ export const newStorageTile = (type: string): StorageTile => {
 				return true;
 			}
 
-			// holding empty pan, box contents are compatible with pan -> PICKUP (1)
+			// holding an empty container, box contents are compatible with container -> PICKUP (1)
 			if (
-				isPan(s.hand)
-				&& isEmptyPan(s.hand)
+				isContainer(s.hand)
+				&& s.hand.contents === null
 				&& ret.inside !== null
-				&& panMayContain(s.hand.name, ret.inside.name)
+				&& containerMayContain(s.hand.name, ret.inside.name)
 			) {
 				const toPickup = getOneRootItem(ret.inside);
 				const remainder = rootItemSubtract(ret.inside, 1);
 				if (isPan(toPickup)) { throw new Error ("UNREACHABLE") }
-				s.hand.panContents = toPickup;	 // add to the pan	
+				if (isFillingInjector(toPickup)) { throw new Error ("UNREACHABLE") }
+				s.hand.contents = toPickup;	 // add to the container	
 				ret.inside = remainder; // adjust remaining stock
-				log(s, `Picked up ${printItem(toPickup)} from storage ${type} and put it on the ${s.hand.name}!`);
+				if (
+					isFillingInjector(s.hand)
+					|| isPan(s.hand) && s.hand.name === 'muffin_tin'
+				) {
+					log(s, `Picked up ${printItem(toPickup)} from storage ${type} and put it in the ${s.hand.name}!`);
+				} else {
+					log(s, `Picked up ${printItem(toPickup)} from storage ${type} and put it on the ${s.hand.name}!`);
+				}
 			}
 
 			const carriedInnerItem = getInnermostItem(s.hand);
@@ -320,22 +331,22 @@ export const newOvenTile = (type = ''): OvenTile => {
 			}
 
 			// pan inside us is empty -> DO NOTHING
-			if (ret.inside.panContents === null) {
+			if (ret.inside.contents === null) {
 				errorLog(s, `Can't use oven without anything on the pan inside: ${ret.inside.name}!`);
 				return false;
 			}
 			// what's on the pan is not an ingredient -> DO NOTHING
-			if (!isIngredient(ret.inside.panContents)) {
-				errorLog(s, `${printItem(ret.inside.panContents)} ineligible for baking!`);
+			if (!isIngredient(ret.inside.contents)) {
+				errorLog(s, `${printItem(ret.inside.contents)} ineligible for baking!`);
 				return false;
 			}
 			// otherwise -> BAKE!
-			const eva = cookEval('oven', [ret.inside.panContents], ret.inside.name);
+			const eva = cookEval('oven', [ret.inside.contents], ret.inside.name);
 			if (eva.errorCount > 0) {
-				throw new Error (`This shouldn't happen, but there were ${eva.errorCount} errors trying to bake ${ret.inside.panContents.name} with a ${ret.inside.name}`)
+				throw new Error (`This shouldn't happen, but there were ${eva.errorCount} errors trying to bake ${ret.inside.contents.name} with a ${ret.inside.name}`)
 			}
 			const newPanInner = turnCookEvalIntoOutput(eva);
-			ret.inside.panContents = newPanInner;
+			ret.inside.contents = newPanInner;
 			log(s, `Baked ${printItem(newPanInner)}!`);
 			return true;
 		},
@@ -348,7 +359,7 @@ export const newOvenTile = (type = ''): OvenTile => {
 					return false;
 				}
 
-				// hand is empty, oven has something inside -> PICKUP (1)
+				// hand is empty, oven has something inside -> PICKUP (1) (whole pan)
 				const toPickup = getOneRootItem(ret.inside);
 				const remainder = rootItemSubtract(ret.inside, 1);
 				s.hand = toPickup; // replace what's in hand
@@ -357,51 +368,68 @@ export const newOvenTile = (type = ''): OvenTile => {
 				return true;
 			}
 
-			if (!isPan(s.hand)) {
-				// holding a non-pan, empty pan in oven is compatible -> DROP (1) (TO INNER)
-				if (
-					isPan(ret.inside)
-					&& ret.inside.panContents === null
-					&& panMayContain(ret.inside.name, s.hand.name)
-				) {
+			if (isPan(s.hand)) {
+				
+				// holding a pan, oven is empty -> DROP (1)
+				if (ret.inside === null) {
 					const toDrop = getOneRootItem(s.hand)
 					const remainder = rootItemSubtract(s.hand, 1);
 					s.hand = remainder;
-					ret.inside.panContents = toDrop;
-					log(s, `Put ${printItem(toDrop)} in/on the ${cleanString(ret.inside.name)} the oven!`);
+					ret.inside = toDrop;
+					log(s, `Put ${printItem(toDrop)} in the oven!`);
 					return true;
 				}
-				
-				// holding a non-pan, empty pan in oven is incompatible -> DO NOTHING
-				errorLog(s, `Only pans can go in the oven! (Carrying ${printItem(s.hand)})`);
+
+				// holding a pan, oven has a pan, ~~and at least one has something on it~~ -> SWAP ALL
+				if (isPan(s.hand)
+					&& isPan(ret.inside)
+					// && !(isEmptyPan(s.hand) && isEmptyPan(ret.inside))
+				) {
+					const inHand = s.hand;
+					const fromOven = ret.inside;
+					ret.inside = inHand;
+					s.hand = fromOven;
+					log(s, `Swapped ${printItem(inHand)} for ${printItem(fromOven)} from oven!`);
+					return true;
+				}
+			}
+
+			// SAFETY
+			if (!isPan(ret.inside)) {
+				throw new Error ("UNREACHABLE: ovens can only contain pans")
+			}
+
+			// holding a non-pan, oven is empty -> DO NOTHING
+			if (!isPan(s.hand) && ret.inside === null) {
+				errorLog(s, `${printItem(s.hand)} can't go in the oven!)`);
 				return false;
 			}
 
-			// holding a pan, oven is empty -> DROP (1)
-			if (ret.inside === null) {
-				const toDrop = getOneRootItem(s.hand)
-				const remainder = rootItemSubtract(s.hand, 1);
-				s.hand = remainder;
-				ret.inside = toDrop;
-				log(s, `Put ${printItem(toDrop)} in the oven!`);
-				return true;
+			// holding a non-pan, oven has a full pan -> DO NOTHING
+			if (isPan(ret.inside) && ret.inside.contents !== null) {
+				errorLog(s, `Can't pick up ${printItem(ret.inside.contents)} from the oven with your hands full!`);
+				return false;
 			}
 
-			// holding a pan, oven has a pan, and at least one has something on it -> SWAP ALL
-			if (
-				isPan(s.hand)
-				&& isPan(ret.inside)
-				&& !(isEmptyPan(s.hand) && isEmptyPan(ret.inside))
-			) {
-				const inHand = s.hand;
-				const fromOven = ret.inside;
-				ret.inside = inHand;
-				s.hand = fromOven;
-				log(s, `Swapped ${printItem(inHand)} for ${printItem(fromOven)} from oven!`);
-				return true;
+			const innerHand = getInnermostItem(s.hand);
+			
+			// holding a non-pan, oven has empty pan, items are NOT compatible -> DO NOTHING
+			if (!panMayContain(ret.inside.name, innerHand.name)) {
+				errorLog(s, `${printItem(s.hand)} can't go in the oven!`);
+				return false;
 			}
 
-			throw new Error ("UNREACHABLE (?)");
+			// SAFETY
+			if (isContainer(innerHand)) {
+				throw new Error ("UNREACHABLE: filling injectors should be eliminated by now")
+			}
+			
+			// holding a non-pan, oven has empty pan, items are compatible -> DROP (1)
+			const remainder = rootItemSubtract(s.hand, 1);
+			s.hand = remainder;
+			ret.inside.contents = innerHand;
+			log(s, `Put ${printItem(innerHand)} in/on the ${cleanString(ret.inside.name)} inside the oven!`);
+			return true;
 		},
 	};
 	return ret;
@@ -457,14 +485,14 @@ export const newApplianceTile = (type: string): ApplianceTile => {
 				if (
 					s.hand === null
 					|| isPan(s.hand)
-					&& s.hand.panContents === null
+					&& s.hand.contents === null
 					&& panMayContain(s.hand.name, insideUs.name)
 				) {
 					const toPickup = getOneRootItem(insideUs);
 					if (isPan(toPickup)) { throw new Error ("UNREACHABLE") }
 					const remainder = rootItemSubtract(insideUs, 1);
 					if (isPan(s.hand)) {
-						s.hand.panContents = toPickup;
+						s.hand.contents = toPickup;
 					} else {
 						s.hand = toPickup;
 					}
@@ -479,7 +507,7 @@ export const newApplianceTile = (type: string): ApplianceTile => {
 			if (
 				s.hand === null 
 				|| isPan(s.hand)
-				&& s.hand.panContents === null
+				&& s.hand.contents === null
 			) {
 				if (ret.inside.length === 0) {
 					errorLog(s, `Nothing in hand to put into ${cleanString(type)}.`)
@@ -539,7 +567,7 @@ export const newDeliveryZoneTile = (type: string): DeliveryZoneTile => {
 			if (
 				s.hand === null
 				|| isPan(s.hand)
-				&& s.hand.panContents === null
+				&& s.hand.contents === null
 			) {
 				errorLog(s, `Nothing in hand to deliver.`)
 				return false;
@@ -739,7 +767,7 @@ export const newTrashTile = (type = ''): TrashTile => {
 			}
 			
 			// carrying empty pan -> DO NOTHING
-			if (isPan(s.hand) && s.hand.panContents === null) {
+			if (isPan(s.hand) && s.hand.contents === null) {
 				errorLog(s, `Cannot throw out the pan!`)
 				return false;
 			}

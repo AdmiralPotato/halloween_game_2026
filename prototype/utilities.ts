@@ -97,7 +97,7 @@ export type Pan = {
 	name: PanType;
 	// can either be in a stack or carrying something, not both
 	quantity: number;
-	panContents: Ingredient | Product | null;
+	contents: Ingredient | Product | null;
 };
 export const isPan = (givenV: unknown): givenV is Pan => {
 	if (typeof givenV !== 'object') { return false; }
@@ -105,21 +105,21 @@ export const isPan = (givenV: unknown): givenV is Pan => {
 	const v = givenV as Pan;
 	if (!isPanType(v.name)) { return false; }
 	if (typeof v.quantity !== 'number') { return false; }
-	if (v.panContents === null) { return true; }
-	if (isIngredient(v.panContents)) { return true; }
-	if (isProduct(v.panContents)) { return true; }
+	if (v.contents === null) { return true; }
+	if (isIngredient(v.contents)) { return true; }
+	if (isProduct(v.contents)) { return true; }
 	return false;
 };
 export const newPan = (name: PanType, quantity = 1): Pan => {
-	return { name, quantity, panContents: null };
+	return { name, quantity, contents: null };
 }
 export const isEmptyPan = (v: unknown): boolean => {
 	if (!isPan(v)) { return false; }
-	return v.panContents === null;
+	return v.contents === null;
 };
 export const isFullPan = (v: unknown): boolean => {
 	if (!isPan(v)) { return false; }
-	return v.panContents !== null;
+	return v.contents !== null;
 };
 
 const pansMayContainMap: Record<PanType, string[]> = {
@@ -129,6 +129,49 @@ const pansMayContainMap: Record<PanType, string[]> = {
 }
 export const panMayContain = (pan: PanType, itemName: string): boolean => {
 	return pansMayContainMap[pan].includes(itemName);
+};
+
+// ----------------------------------------- FILLING_INJECTOR ----------------------------------------- //
+
+export type FillingInjectorType = 'filling_injector';
+export const isFillingInjectorType = (v: unknown): v is PanType => {
+	if (v === 'filling_injector') { return true; }
+	return false;
+};
+
+export type FillingInjector = {
+	name: FillingInjectorType;
+	// can either be in a stack or carrying something, not both
+	quantity: number;
+	contents: Ingredient | null;
+};
+export const isFillingInjector = (givenV: unknown): givenV is FillingInjector => {
+	if (typeof givenV !== 'object') { return false; }
+	if (givenV === null) { return false; }
+	const v = givenV as FillingInjector;
+	if (!isFillingInjector(v.name)) { return false; }
+	if (typeof v.quantity !== 'number') { return false; }
+	if (v.contents === null) { return true; }
+	if (isIngredient(v.contents)) { return true; }
+	return false;
+};
+export const newFillingInjector = (quantity = 1): FillingInjector => {
+	return { name: 'filling_injector', quantity, contents: null };
+}
+export const isEmptyFillingInjector = (v: unknown): boolean => {
+	if (!isPan(v)) { return false; }
+	return v.contents === null;
+};
+export const isFullFillingInjector = (v: unknown): boolean => {
+	if (!isPan(v)) { return false; }
+	return v.contents !== null;
+};
+
+const fillingInjectorMayContainMap: Record<FillingInjectorType, string[]> = {
+	filling_injector: [ 'pastry_cream', 'whipped_cream' ],
+}
+export const fillingInjectorMayContain = (injector: FillingInjectorType, itemName: string): boolean => {
+	return fillingInjectorMayContainMap[injector].includes(itemName);
 };
 
 // ----------------------------------------- INGREDIENTS ----------------------------------------- //
@@ -234,14 +277,27 @@ export const productsMatchIgnoringQuantity = (a: Product, b: Product): boolean =
 		&& arrayOfIngredientMatchIncludingQuantity(a.doodads, b.doodads)
 };
 
-// --------------------------- ITEM (pan | ingredient | product) --------------------------- //
+// --------------------------- ITEM (pan | ingredient | product | filling injector) --------------------------- //
 
-export type Item = Pan | Ingredient | Product;
+export type Item = Pan | Ingredient | Product | FillingInjector;
+export type Container = Pan | FillingInjector;
+export const isContainer = (v:unknown) => isPan(v) || isFillingInjector(v);
+
+export const containerMayContain = (type: PanType | FillingInjectorType, itemName: string): boolean => {
+	if (isPanType(type)) {
+		return panMayContain(type, itemName)
+	}
+	if (isFillingInjectorType(type)) {
+		return fillingInjectorMayContain(type, itemName);
+	}
+	throw new Error ("CONTAINER TYPE NOT HANDLED")
+}
 
 export const itemTypesMatch = (a: Item, b: Item): boolean => {
 	if (isIngredient(a) === isIngredient(b)) return true;
 	if (isProduct(a) === isProduct(b)) return true;
 	if (isPan(a) === isPan(b)) return true;
+	if (isFillingInjector(a) === isFillingInjector(b)) return true;
 	return false;
 };
 export const itemsMatchIgnoringQuantity = (a: Item, b: Item): boolean => {
@@ -252,19 +308,30 @@ export const itemsMatchIgnoringQuantity = (a: Item, b: Item): boolean => {
 	} else if (isProduct(a) && isProduct(b)) {
 		return productsMatchIgnoringQuantity(a, b)
 	} else if (isPan(a) && isPan(b)) {
-		if (a.panContents === null && b.panContents === null) {
+		if (a.contents === null && b.contents === null) {
 			return true;
-		} else if (a.panContents !== null && b.panContents !== null) {
-			return (itemsMatchIgnoringQuantity(a.panContents, b.panContents));
+		} else if (a.contents !== null && b.contents !== null) {
+			return (itemsMatchIgnoringQuantity(a.contents, b.contents));
+		}
+	} else if (isFillingInjector(a) && isFillingInjector(b)) {
+		if (a.contents === null && b.contents === null) {
+			return true;
+		} else if (a.contents !== null && b.contents !== null) {
+			return (itemsMatchIgnoringQuantity(a.contents, b.contents));
 		}
 	}
 	return false;
 };
 
 export const itemsCanStack = (a: Item, b: Item): boolean => {
+	// pans and filling injectors can only stack if they're all empty
 	if (isPan(a) && isPan(b)) {
-		if (a.panContents !== null || b.panContents !== null) {
-			// overrides the below thing
+		if (a.contents !== null || b.contents !== null) {
+			return false;
+		}
+	}
+	if (isFillingInjector(a) && isFillingInjector(b)) {
+		if (a.contents !== null || b.contents !== null) {
 			return false;
 		}
 	}
@@ -286,7 +353,7 @@ export const addItemToList = (itemToAdd: Item, arr: Item[]): Item => {
 	return item;
 };
 
-export const addItems = (a: Item | null, b: Item | null): Item | null => {
+export const addItems = (a: Item | null, b: Item | null): Item => {
 	if (a === null && b !== null) {
 		return structuredClone(b);
 	}
@@ -306,7 +373,7 @@ export const addItems = (a: Item | null, b: Item | null): Item | null => {
 
 // -------------------- ITEM MATH (outermost part, e.g. pan in pan of cookies) -------------------- //
 
-export const rootItemSubtract = <T extends Product|Ingredient|Pan>(item: T, n = 1): T | null => {
+export const rootItemSubtract = <T extends Product|Ingredient|Pan|FillingInjector>(item: T, n = 1): T | null => {
 	item.quantity -= n;
 	if (item.quantity === 0) {
 		return null;
@@ -317,12 +384,12 @@ export const rootItemAdd = <T extends Product|Ingredient>(item: T, n = 1): T => 
 	item.quantity += n;
 	return item;
 };
-export const getOneRootItem = <T extends Product|Ingredient|Pan>(item: T): T => {
+export const getOneRootItem = <T extends Product|Ingredient|Pan|FillingInjector>(item: T): T => {
 	const clone = structuredClone(item);
 	clone.quantity = 1;
 	return clone;
 };
-export const getXRootItem = <T extends Product|Ingredient|Pan>(item: T, quantity: number): T => {
+export const getXRootItem = <T extends Product|Ingredient|Pan|FillingInjector>(item: T, quantity: number): T => {
 	if (quantity < item.quantity) {
 		throw new Error ('Not enough quantity in item to grab X (you should be checking in advance)')
 	}
@@ -355,16 +422,22 @@ export const getAllInnermostItems = (item: Item): Item => {
 
 // Returns the item inside the pan if any, otherwise just hands the root item back 
 export const getInnermostItem = (item: Item): Item => {
-	if (isPan(item) && item.panContents !== null) {
-		return item.panContents;
+	if (isPan(item) && item.contents !== null) {
+		return item.contents;
+	}
+	if (isFillingInjector(item) && item.contents !== null) {
+		return item.contents;
 	}
 	return item;
 };
 // Removes the item inside the pan if any and hands the pan back, otherwise hands back null 
-export const clearInnermostItems = <T extends Product|Ingredient|Pan>(givenItem: T): T | null => {
+export const clearInnermostItems = <T extends Product|Ingredient|Pan|FillingInjector>(givenItem: T): T | null => {
 	const item = structuredClone(givenItem);
-	if (isPan(item) && item.panContents !== null) {
-		item.panContents = null;
+	if (isPan(item) && item.contents !== null) {
+		item.contents = null;
+		return item;
+	} else if (isFillingInjector(item) && item.contents !== null) {
+		item.contents = null;
 		return item;
 	} else {
 		return  null;
@@ -372,33 +445,33 @@ export const clearInnermostItems = <T extends Product|Ingredient|Pan>(givenItem:
 };
 
 // Changes the item inside the pan if any, otherwise just changes the item; returns the root item
-export const innermostItemAdd = <T extends Product|Ingredient|Pan>(givenItem: T, n: number): T => {
+export const innermostItemAdd = <T extends Product|Ingredient|Pan|FillingInjector>(givenItem: T, n: number): T => {
 	const item = structuredClone(givenItem);
-	if (!isPan(item)) {
+	if (!isPan(item) && !isFillingInjector(item)) {
 		item.quantity += n;
 		return item;
 	}
-	if (item.panContents === null) {
+	if (item.contents === null) {
 		item.quantity += n;
 		return item;
 	}
-	item.panContents.quantity += n;
+	item.contents.quantity += n;
 	return item;
 };
 // Changes the item inside the pan if any, otherwise just changes the item; returns the root item
-export const innermostItemSubtract = <T extends Product|Ingredient|Pan>(givenItem: T, n: number): T | null => {
+export const innermostItemSubtract = <T extends Product|Ingredient|Pan|FillingInjector>(givenItem: T, n: number): T | null => {
 	const item = structuredClone(givenItem);
-	if (!isPan(item)) {
+	if (!isPan(item) && !isFillingInjector(item)) {
 		item.quantity -= n;
 		return item.quantity === 0 ? null : item;
 	}
-	if (item.panContents === null) {
+	if (item.contents === null) {
 		item.quantity -= n;
 		return item.quantity === 0 ? null : item;
 	}
-	item.panContents.quantity -= n;
-	if (item.panContents.quantity === 0) {
-		item.panContents = null;
+	item.contents.quantity -= n;
+	if (item.contents.quantity === 0) {
+		item.contents = null;
 	}
 	return item;
 };
@@ -502,15 +575,25 @@ export const printIngredient = (item: Ingredient) => {
 
 export const printPan = (item: Pan): string => {
 	const pan = cleanString(item.name);
-	if (item.panContents === null) {
+	if (item.contents === null) {
 		return pan;
 	}
-	const carrying = printItem(item.panContents);
+	const carrying = printItem(item.contents);
 	if (item.name === 'muffin_tin') {
 		return `${carrying} in a ${pan}`;
 	} else {
 		return `${carrying} on a ${pan}`;
 	}
+};
+
+// there's more!
+export const printFillingInjector = (item: FillingInjector): string => {
+	const injector = cleanString(item.name);
+	if (item.contents === null) {
+		return injector;
+	}
+	const carrying = printItem(item.contents);
+	return `${carrying} in a ${injector}`;
 };
 
 // Combo
@@ -525,6 +608,8 @@ export const printItem = (item: Item | null): string => {
 		return printFinishedProduct(item);
 	} else if (isPan(item)) {
 		return printPan(item);
+	} else if (isFillingInjector(item)) {
+		return printFillingInjector(item);
 	}
 	throw new Error ("PRINT ITEM CASE NOT YET HANDLED")
 }

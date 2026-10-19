@@ -18,7 +18,7 @@ import {
 } from "./tiles.ts";
 
 import type { Item } from "./utilities.ts";
-import { isPan, itemsCanStack, newPan, printModifiersWithItemName, rootItemAdd } from "./utilities.ts";
+import { isFillingInjector, isPan, itemsCanStack, newPan, printModifiersWithItemName, rootItemAdd } from "./utilities.ts";
 
 const s = newState([
 	newTile('delivery_zone'),
@@ -70,6 +70,9 @@ const findStorageTileWithName = (printName: string): number => {
 		if (!isStorageTile(v)) { return false; }
 		if (v.inside === null) { return false; }
 		if (isPan(v.inside)) {
+			return printName === v.inside.name;
+		}
+		if (isFillingInjector(v.inside)) {
 			return printName === v.inside.name;
 		}
 		return printName === printModifiersWithItemName(v.inside.name, v.inside.modifiers);
