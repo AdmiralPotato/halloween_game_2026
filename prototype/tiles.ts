@@ -37,6 +37,7 @@ const getTileName = (s: State): string => {
 export const log = (s: State, message: string) => {
 	console.log(header);
 	console.log(`[${s.tile_index}] ${message}`);
+	console.log(`>>>> GOLD: ${s.gold} | CARRYING: ${printItem(s.hand)}`)
 };
 export const warnLog = (s: State, message: string) => {
 	console.warn(header);

@@ -496,7 +496,10 @@ export const printPan = (item: Pan): string => {
 
 // Combo
 
-export const printItem = (item: Item): string => {
+export const printItem = (item: Item | null): string => {
+	if (item === null) {
+		return `(nothing)`
+	}
 	if (isIngredient(item)) {
 		return printFoodComponent(item)
 	} else if (isProduct(item)) {
