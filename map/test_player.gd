@@ -14,7 +14,14 @@ const TWEEN_TIME = 0.1
 var held_object: BaseMapNode
 var in_rearrange_mode := true
 
+@onready var carry_node = $RightHand/Carry
+@onready var right_hand_node = $RightHand
+@onready var mesh_node = $mage
+@onready var skeleton = $mage/mage_bones/Skeleton3D
+@onready var hand_bone = skeleton.find_bone("hand_R")
+
 func _physics_process(delta):
+	right_hand_node.transform = skeleton.get_bone_global_pose(hand_bone)
 	var input_vec := Vector2(
 		Input.get_axis("move_left", "move_right"),
 		Input.get_axis("move_up", "move_down"),
@@ -29,10 +36,10 @@ func _physics_process(delta):
 	$AnimationTree.set("parameters/BlendSpace1D/blend_position", input_vec.length())
 	if Vector2(desired_x_motion, desired_z_motion).length() > 0.1:
 		var desired_facing = atan2(desired_x_motion, desired_z_motion)
-		var facing_delta = angle_difference(self.rotation.y, desired_facing)
-		self.rotation.y += facing_delta * turn_speed * delta
+		var facing_delta = angle_difference(rotation.y, desired_facing)
+		rotation.y += facing_delta * turn_speed * delta
 	if Input.is_action_just_pressed("pickup"):
-		var target_tile := Global.tilemap.find_tile(self.position, self.basis.z, 1.4)
+		var target_tile := Global.tilemap.find_tile(self.position, basis.z, 1.4)
 		var tilemap := Global.tilemap
 		var old_held := held_object
 		if held_object is FurniNode || in_rearrange_mode:
@@ -42,8 +49,8 @@ func _physics_process(delta):
 			held_object = Global.tilemap.swap_item(target_tile, held_object)
 		# If we're holding an object now, it's because we picked one up.
 		if held_object:
-			add_child(held_object)
-			held_object.position = HAND_POS
+			carry_node.add_child(held_object)
+			held_object.position = Vector3.ZERO
 			held_object.scale = SMOL
 			held_object.animate_to_current_transform()
 		if old_held:
