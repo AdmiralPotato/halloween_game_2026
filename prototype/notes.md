@@ -32,6 +32,18 @@ Each item can belong to one or more categories (though usually only one):
 		- Doodad: countable noun (not mass noun) that can be applied to a product, but only if there's a decoration to adhere to (e.g. can't add sprinkles without frosting)
 - Pan
 
+### Root item vs innermost item
+
+- Innermost item means the pan's contents rather than the pan.
+- Innermost:
+	- Pan<Food> => Food
+	- Pan<> => Pan<>
+	- Food => Food
+- Root:
+	- Pan<Food> => Pan<Food>
+	- Pan<> => Pan<>
+	- Food => Food
+
 ### Attribute
 
 - Any food item has innate attributes. 
@@ -54,10 +66,14 @@ Each item can belong to one or more categories (though usually only one):
 
 ### Appliance Tile
 
-- Types:
-	- Oven: kept separately because it can only take 1 item at a time, and of only one type: pan.
-	- Mixer
-	- Cutting board
+- Oven: kept separately because it can only take 1 item at a time, and of only one type: pan.
+- Appliances:
+	- Types:
+		- Mixer
+		- Cutting board
+	- May only contain food, no pans
+	- May contain more than 1 thing
+	- Once there is more than one thing inside, none of it may be retrieved
 
 ### Storage Tile
 

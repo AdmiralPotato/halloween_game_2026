@@ -16,7 +16,7 @@ import {
 } from "./tiles.ts";
 
 import type { Item } from "./utilities.ts";
-import { isPan, itemsCanStack, printModifiersWithItemName, rootItemAdd } from "./utilities.ts";
+import { isPan, itemsCanStack, newPan, printModifiersWithItemName, rootItemAdd } from "./utilities.ts";
 
 const s = newState([
 	newTile('delivery_zone'),
@@ -28,9 +28,9 @@ const s = newState([
 	newTile('storage', newIngredient('egg', 12)),
 	newTile('storage', newIngredient('frosting', 5)),
 	newTile('storage', newIngredient('frosting', 5, ['cocoa_powder'])),
-	newTile('storage', newIngredient('cookie_sheet', 3)),
-	newTile('storage', newIngredient('muffin_tin', 3)),
-	newTile('storage', newIngredient('cake_pan', 3)),
+	newTile('storage', newPan('cookie_sheet', 3)),
+	newTile('storage', newPan('muffin_tin', 3)),
+	newTile('storage', newPan('cake_pan', 3)),
 	newCountertopTile(''),
 	newCountertopTile(''),
 	newCountertopTile(''),
@@ -260,37 +260,37 @@ goto('mixer');
 drop();
 interact();
 
-// glitteringPrizes();
-// buy('mint_flavoring', 20);
-// goto('storage', 'mint flavoring');
-// pickup();
-// goto('mixer')
-// drop();
-// goto('storage', 'mint flavoring');
-// pickup();
-// goto('mixer')
-// drop();
-// goto('storage', 'mint flavoring');
-// pickup();
-// goto('mixer')
-// drop();
-// goto('storage', 'mint flavoring');
-// pickup();
-// goto('mixer')
-// drop();
-// goto('storage', 'mint flavoring');
-// pickup();
-// goto('mixer')
-// drop();
-// interact()
-// goto(9)
-// pickup()
-// goto('mixer')
-// pickup()
-
+glitteringPrizes();
+buy('mint_flavoring', 20);
+goto('storage', 'mint flavoring');
+pickup();
+goto('mixer')
+drop();
+goto('storage', 'mint flavoring');
+pickup();
+goto('mixer')
+drop();
+goto('storage', 'mint flavoring');
+pickup();
+goto('mixer')
+drop();
+goto('storage', 'mint flavoring');
+pickup();
+goto('mixer')
+drop();
+goto('storage', 'mint flavoring');
+pickup();
+goto('mixer')
+drop();
+interact()
 goto(9)
 pickup()
 goto('mixer')
+pickup()
+
+goto('oven')
 drop()
+interact()
+pickup()
 
 console.log("BREAKPOINT ME")

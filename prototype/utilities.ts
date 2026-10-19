@@ -97,28 +97,29 @@ export type Pan = {
 	name: PanType;
 	// can either be in a stack or carrying something, not both
 	quantity: number;
-	carrying: Ingredient | Product | null;
+	panContents: Ingredient | Product | null;
 };
 export const isPan = (givenV: unknown): givenV is Pan => {
 	if (typeof givenV !== 'object') { return false; }
 	if (givenV === null) { return false; }
 	const v = givenV as Pan;
-	if (isPanType(v.name)) { return false; }
+	if (!isPanType(v.name)) { return false; }
 	if (typeof v.quantity !== 'number') { return false; }
-	if (v.carrying === null) { return true; }
-	if (isIngredient(v.carrying)) { return true; }
-	if (isProduct(v.carrying)) { return true; }
+	if (v.panContents === null) { return true; }
+	if (!isIngredient(v.panContents)) { return true; }
+	if (!isProduct(v.panContents)) { return true; }
 	return false;
 };
+export const newPan = (name: PanType, quantity = 1): Pan => {
+	return { name, quantity, panContents: null };
+}
 export const isEmptyPan = (v: unknown): boolean => {
 	if (!isPan(v)) { return false; }
-	if (v.carrying !== null) { return false; }
-	return true;
+	return v.panContents === null;
 };
 export const isFullPan = (v: unknown): boolean => {
 	if (!isPan(v)) { return false; }
-	if (v.carrying === null) { return false; }
-	return true;
+	return v.panContents !== null;
 };
 
 const pansMayContainMap: Record<PanType, string[]> = {
@@ -250,10 +251,10 @@ export const itemsMatchIgnoringQuantity = (a: Item, b: Item): boolean => {
 	} else if (isProduct(a) && isProduct(b)) {
 		return productsMatchIgnoringQuantity(a, b)
 	} else if (isPan(a) && isPan(b)) {
-		if (a.carrying === null && b.carrying === null) {
+		if (a.panContents === null && b.panContents === null) {
 			return true;
-		} else if (a.carrying !== null && b.carrying !== null) {
-			return (itemsMatchIgnoringQuantity(a.carrying, b.carrying));
+		} else if (a.panContents !== null && b.panContents !== null) {
+			return (itemsMatchIgnoringQuantity(a.panContents, b.panContents));
 		}
 	}
 	return false;
@@ -261,7 +262,7 @@ export const itemsMatchIgnoringQuantity = (a: Item, b: Item): boolean => {
 
 export const itemsCanStack = (a: Item, b: Item): boolean => {
 	if (isPan(a) && isPan(b)) {
-		if (a.carrying !== null || b.carrying !== null) {
+		if (a.panContents !== null || b.panContents !== null) {
 			// overrides the below thing
 			return false;
 		}
@@ -335,15 +336,16 @@ export const getAllInnermostItems = (item: Item): Item => {
 
 // Returns the item inside the pan if any, otherwise just hands the root item back 
 export const getInnermostItem = (item: Item): Item => {
-	if (!isPan(item)) { return item; }
-	if (item.carrying === null) { return item; }
-	return item.carrying;
+	if (isPan(item) && item.panContents !== null) {
+		item.panContents;
+	}
+	return item;
 };
 // Removes the item inside the pan if any and hands the pan back, otherwise hands back null 
 export const clearInnermostItems = <T extends Product|Ingredient|Pan>(givenItem: T): T | null => {
 	const item = structuredClone(givenItem);
 	if (isPan(item)) {
-		item.carrying === null;
+		item.panContents === null;
 		return item;
 	} else {
 		return  null;
@@ -357,11 +359,11 @@ export const innermostItemAdd = <T extends Product|Ingredient|Pan>(givenItem: T,
 		item.quantity += n;
 		return item;
 	}
-	if (item.carrying === null) {
+	if (item.panContents === null) {
 		item.quantity += n;
 		return item;
 	}
-	item.carrying.quantity += n;
+	item.panContents.quantity += n;
 	return item;
 };
 // Changes the item inside the pan if any, otherwise just changes the item; returns the root item
@@ -371,13 +373,13 @@ export const innermostItemSubtract = <T extends Product|Ingredient|Pan>(givenIte
 		item.quantity -= n;
 		return item.quantity === 0 ? null : item;
 	}
-	if (item.carrying === null) {
+	if (item.panContents === null) {
 		item.quantity -= n;
 		return item.quantity === 0 ? null : item;
 	}
-	item.carrying.quantity -= n;
-	if (item.carrying.quantity === 0) {
-		item.carrying = null;
+	item.panContents.quantity -= n;
+	if (item.panContents.quantity === 0) {
+		item.panContents = null;
 	}
 	return item;
 };
@@ -481,10 +483,10 @@ export const printFoodComponent = (item: Ingredient) => {
 
 export const printPan = (item: Pan): string => {
 	const pan = cleanString(item.name);
-	if (item.carrying === null) {
+	if (item.panContents === null) {
 		return pan;
 	}
-	const carrying = printItem(item.carrying);
+	const carrying = printItem(item.panContents);
 	if (item.name === 'muffin_tin') {
 		return `${carrying} in a ${pan}`;
 	} else {
