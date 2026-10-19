@@ -10,7 +10,6 @@ import {
 	isStorageTile,
 	isTrashTile,
 	log,
-	newCountertopTile,
 	newFilledStorageTile,
 	newState,
 	newTile,
@@ -18,7 +17,7 @@ import {
 } from "./tiles.ts";
 
 import type { Item } from "./utilities.ts";
-import { isFillingInjector, isPan, itemsCanStack, newPan, printModifiersWithItemName, rootItemAdd } from "./utilities.ts";
+import { isContainer, itemsCanStack, newPan, printModifiersWithItemName } from "./utilities.ts";
 
 const s = newState([
 	newTile('delivery_zone'),
@@ -69,10 +68,7 @@ const findStorageTileWithName = (printName: string): number => {
 	return s.tiles.findIndex(v=>{
 		if (!isStorageTile(v)) { return false; }
 		if (v.inside === null) { return false; }
-		if (isPan(v.inside)) {
-			return printName === v.inside.name;
-		}
-		if (isFillingInjector(v.inside)) {
+		if (isContainer(v.inside)) {
 			return printName === v.inside.name;
 		}
 		return printName === printModifiersWithItemName(v.inside.name, v.inside.modifiers);

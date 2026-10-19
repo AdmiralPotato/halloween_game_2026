@@ -1,4 +1,4 @@
-import { itemIsBareFinisherTypeForProduct, productSellBatchSize } from "./finishers.ts";
+import { isFinisherAllowedOnProduct, itemIsBareFinisherTypeForProduct, productSellBatchSize } from "./finishers.ts";
 import type { StorageType } from "./items.ts";
 import { getItemInfo, isStorageType, itemMatchesStorageType } from "./items.ts";
 
@@ -16,16 +16,16 @@ import {
 	getOneRootItem,
 	itemsCanStack,
 	rootItemSubtract,
-	panMayContain,
 	printItem,
 	innermostItemSubtract,
-	isEmptyPan,
 	addItemToList,
 	getXInnermostItems,
 	clearInnermostItems,
 	isContainer,
 	isFillingInjector,
 	containerMayContain,
+	isItem,
+	panMayContain,
 } from "./utilities.ts";
 
 // ------------------------------------------ PRINTING ------------------------------------------ //
@@ -198,7 +198,7 @@ export type StorageTile = TileCommon & {
 export type StorageTileInnards = Ingredient | Product | Pan | FillingInjector | null;
 export const isStorageTileInnards = (v: unknown): v is StorageTileInnards => {
 	if (typeof v !== 'object') { return false; }
-	return v === null || isIngredient(v) || isProduct(v) || isPan(v)
+	return v === null || isIngredient(v) || isProduct(v) || isPan(v) || isFillingInjector(v)
 };
 export const newStorageTile = (type: string): StorageTile => {
 	if (!isStorageType(type)) {
@@ -232,17 +232,16 @@ export const newStorageTile = (type: string): StorageTile => {
 				return true;
 			}
 
-			// holding an empty container, box contents are compatible with container -> PICKUP (1)
+			// holding an empty container, box contents are are compatible with container -> PICKUP (1)
 			if (
 				isContainer(s.hand)
 				&& s.hand.contents === null
 				&& ret.inside !== null
+				&& !isContainer(ret.inside) // also what's inside the box is not a container
 				&& containerMayContain(s.hand.name, ret.inside.name)
 			) {
 				const toPickup = getOneRootItem(ret.inside);
 				const remainder = rootItemSubtract(ret.inside, 1);
-				if (isPan(toPickup)) { throw new Error ("UNREACHABLE") }
-				if (isFillingInjector(toPickup)) { throw new Error ("UNREACHABLE") }
 				s.hand.contents = toPickup;	 // add to the container	
 				ret.inside = remainder; // adjust remaining stock
 				if (
@@ -290,8 +289,8 @@ export const newStorageTile = (type: string): StorageTile => {
 	return ret;
 };
 export const newFilledStorageTile = (contents: Item): StorageTile => {
-	if (!isIngredient(contents) && !isProduct(contents)&& !isPan(contents)) {
-		throw new Error (`Storage contents must be ingredients, products, or food!`);
+	if (!isItem(contents)) {
+		throw new Error (`Storage contents must be ingredients, products, or small containers!`);
 	}
 	const itemInfo = getItemInfo(contents.name);
 	const tile = newStorageTile(itemInfo.storageType);
@@ -481,32 +480,32 @@ export const newApplianceTile = (type: string): ApplianceTile => {
 			if (ret.inside.length === 1) {
 				const insideUs = ret.inside[0];
 
-				// carrying nothing OR carrying empty+compatible pan and appliance has only 1 thing -> PICKUP (1)
+				// carrying nothing OR carrying empty&&compatible container and appliance has only 1 thing -> PICKUP (1)
 				if (
 					s.hand === null
-					|| isPan(s.hand)
+					|| isContainer(s.hand)
 					&& s.hand.contents === null
-					&& panMayContain(s.hand.name, insideUs.name)
+					&& containerMayContain(s.hand.name, insideUs.name)
 				) {
 					const toPickup = getOneRootItem(insideUs);
-					if (isPan(toPickup)) { throw new Error ("UNREACHABLE") }
+					if (isContainer(toPickup)) { throw new Error ("UNREACHABLE") }
 					const remainder = rootItemSubtract(insideUs, 1);
-					if (isPan(s.hand)) {
+					if (isContainer(s.hand)) {
 						s.hand.contents = toPickup;
 					} else {
 						s.hand = toPickup;
 					}
 					ret.inside = remainder !== null ? [remainder] : [];
-					const suffix = isPan(s.hand) ? ` and put it on the ${s.hand.name}!` : '!';
+					const suffix = isContainer(s.hand) ? ` and put it on the ${s.hand.name}!` : '!';
 					log(s, `Picked up ${printItem(toPickup)} from the ${cleanString(type)}${suffix}`);
 					return true;
 				}
 			}
 
-			// carrying nothing OR carrying empty pan -> STOP
+			// carrying nothing OR carrying empty container -> STOP
 			if (
 				s.hand === null 
-				|| isPan(s.hand)
+				|| isContainer(s.hand)
 				&& s.hand.contents === null
 			) {
 				if (ret.inside.length === 0) {
@@ -563,15 +562,12 @@ export const newDeliveryZoneTile = (type: string): DeliveryZoneTile => {
 		inside: [],
 		item_is_compatible: (item: Item) => isDeliveryZoneTileInnards(item),
 		interact: (s: State) => {
-			// holding nothing OR an empty pan -> DO NOTHING
-			if (
-				s.hand === null
-				|| isPan(s.hand)
-				&& s.hand.contents === null
-			) {
+			// holding nothing -> DO NOTHING
+			if (s.hand === null) {
 				errorLog(s, `Nothing in hand to deliver.`)
 				return false;
 			}
+
 			const inner = getInnermostItem(s.hand);
 			// holding something you can't sell -> DO NOTHING
 			if (!isProduct(inner)) {
@@ -614,7 +610,7 @@ export type CountertopTile = TileCommon & {
 export type CountertopTileInnards = Item | null;
 export const isCountertopTileInnards = (v: unknown): v is CountertopTileInnards => {
 	if (typeof v !== 'object') { return false; }
-	return v === null || isIngredient(v) || isProduct(v) || isPan(v);
+	return v === null || isItem(v);
 };
 
 export const newCountertopTile = (type = ''): CountertopTile => {
@@ -632,16 +628,17 @@ export const newCountertopTile = (type = ''): CountertopTile => {
 			
 			// if what's on the counter is a product, we can try to finish it
 			// (ignore any pans in this transaction, hence 'innermost')
+
 			const counterInner = getInnermostItem(ret.inside);
 			if (isProduct(counterInner)) {
 
-				// product on counter, empty handed -> DO NOTHING
+				// product on counteer, empty handed -> DO NOTHING
 				if (s.hand === null) {
 					errorLog(s, `Cannot add finisher to product empty handed!`);
 					return false;
 				}
 
-				// product on counter, holding bare finisher
+				// product on counter, holding bare finisher...
 				// (we're checking inside a pan if holding one though in case you put sprinkles on a pan for some reason?)
 				// TODO: for fillings, which need an applicator, you'l have to check the root item though; check for that before this
 				const handInner = getInnermostItem(s.hand);
@@ -650,6 +647,7 @@ export const newCountertopTile = (type = ''): CountertopTile => {
 					bareFinisherType !== null
 					&& isIngredient(handInner)
 				) {
+
 					// not enough finisher to add to entirety of product stack -> DO NOTHING
 					if (handInner.quantity < counterInner.quantity) {
 						errorLog(s, `Not enough ${printItem(handInner)} to apply to ${printItem(counterInner)}`);
@@ -670,10 +668,31 @@ export const newCountertopTile = (type = ''): CountertopTile => {
 					s.hand = remainder; // adjust remaining stock in hand
 					log(s, `Decorated ${printItem(counterInner)} with ${printItem(toDrop)}!`)
 					return true;
+				}
 
-			}
+				// holding full injector, product on the counter...
+				if (
+					isFillingInjector(s.hand)
+					&& handInner !== null
+					&& isFinisherAllowedOnProduct(handInner.name, 'fillings', counterInner.name)
+				) {
+					// not enough finisher to add to entirety of product stack -> DO NOTHING
+					if (handInner.quantity < counterInner.quantity) {
+						errorLog(s, `Not enough ${printItem(handInner)} to apply to ${printItem(counterInner)}`);
+						return false;
+					}
 
+					// otherwise -> APPLY FINISHER (at COUNTER QUANTITY)
+					const quantity = counterInner.quantity
+					const toDrop = getXInnermostItems(s.hand, quantity);
+					const remainder = innermostItemSubtract(s.hand, quantity);
+					addItemToList(toDrop, counterInner['fillings']); // apply to the product filling list
+					s.hand = remainder; // adjust remaining stock in hand
+					log(s, `Filled ${printItem(counterInner)} with ${printItem(toDrop)}!`)
+					return true;
+				}
 			}
+			errorLog(s, `MAY BE UNREACHABLE!`);
 			return false;
 		},
 		pickup_or_drop: (s) => {
@@ -702,36 +721,32 @@ export const newCountertopTile = (type = ''): CountertopTile => {
 				return true;
 			}
 
-			// holding a pan, countertop has a pan, and at least 1 has something on it -> SWAP
-			if (
-				isPan(s.hand)
-				&& isPan(ret.inside)
-				&& !(isEmptyPan(s.hand) && isEmptyPan(ret.inside))
-			) {
-				const inHand = s.hand;
-				const fromCounter = ret.inside;
-				ret.inside = inHand;
-				s.hand = fromCounter;
-				log(s, `Swapped ${printItem(inHand)} for ${printItem(fromCounter)} from countertop!`);
-				return true;
-			}
-
-			// holding something, something on the counter, and they can stack -> DROP (1)
+			// holding something, countertop has something, they can stack -> DROP (1)
 			// TODO: Q. if these can stack things, why buy storage boxes?
 			if (itemsCanStack(s.hand, ret.inside)) {
 				const toDrop = getOneRootItem(s.hand);
 				const remainder = rootItemSubtract(s.hand, 1);
 				ret.inside = addItems(toDrop, ret.inside); // combine quantities
 				s.hand = remainder; // adjust remaining stock in hand
-				log(s, `Put ${printItem(toDrop)} on the countertop! (New stack size: ${ret.inside?.quantity})`);
+				log(s, `Put ${printItem(toDrop)} on the countertop! (New countertop quantity: ${ret.inside?.quantity})`);
 				return true;
 			}
 
 			// for "dropping" a finisher on a product, see INTERACT
 
-			// holding something, something on the counter, cannot stack -> DO NOTHING
-			errorLog(s, `drop: ${printItem(s.hand)} cannot stack with ${printItem(ret.inside)}`);
-			return false;
+			// holding something, countertop has something, they CANNOT stack -> SWAP
+			const inHand = s.hand;
+			const fromCounter = ret.inside;
+			ret.inside = inHand;
+			s.hand = fromCounter;
+			log(s, `Swapped ${printItem(inHand)} for ${printItem(fromCounter)} from countertop!`);
+			return true;
+
+			// OR should we do this?
+
+			// // holding something, something on the counter, cannot stack -> DO NOTHING
+			// errorLog(s, `drop: ${printItem(s.hand)} cannot stack with ${printItem(ret.inside)}`);
+			// return false;
 		},
 	}
 	return ret;
@@ -757,7 +772,7 @@ export const newTrashTile = (type = ''): TrashTile => {
 	const ret: TrashTile = {
 		tile: 'trash',
 		type,
-		item_is_compatible: (item: Item) => !isPan(item),
+		item_is_compatible: (item: Item) => !isContainer(item),
 		interact: (s: State) => ret.pickup_or_drop(s),
 		pickup_or_drop: (s) => {
 			// carrying nothing -> DO NOTHING
@@ -766,9 +781,9 @@ export const newTrashTile = (type = ''): TrashTile => {
 				return false;
 			}
 			
-			// carrying empty pan -> DO NOTHING
-			if (isPan(s.hand) && s.hand.contents === null) {
-				errorLog(s, `Cannot throw out the pan!`)
+			// carrying empty container -> DO NOTHING
+			if (isContainer(s.hand) && s.hand.contents === null) {
+				errorLog(s, `Cannot throw out a ${cleanString(s.hand.name)}!`)
 				return false;
 			}
 			

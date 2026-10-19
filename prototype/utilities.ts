@@ -112,14 +112,6 @@ export const isPan = (givenV: unknown): givenV is Pan => {
 };
 export const newPan = (name: PanType, quantity = 1): Pan => {
 	return { name, quantity, contents: null };
-}
-export const isEmptyPan = (v: unknown): boolean => {
-	if (!isPan(v)) { return false; }
-	return v.contents === null;
-};
-export const isFullPan = (v: unknown): boolean => {
-	if (!isPan(v)) { return false; }
-	return v.contents !== null;
 };
 
 const pansMayContainMap: Record<PanType, string[]> = {
@@ -134,7 +126,7 @@ export const panMayContain = (pan: PanType, itemName: string): boolean => {
 // ----------------------------------------- FILLING_INJECTOR ----------------------------------------- //
 
 export type FillingInjectorType = 'filling_injector';
-export const isFillingInjectorType = (v: unknown): v is PanType => {
+export const isFillingInjectorType = (v: unknown): v is FillingInjectorType => {
 	if (v === 'filling_injector') { return true; }
 	return false;
 };
@@ -157,14 +149,6 @@ export const isFillingInjector = (givenV: unknown): givenV is FillingInjector =>
 };
 export const newFillingInjector = (quantity = 1): FillingInjector => {
 	return { name: 'filling_injector', quantity, contents: null };
-}
-export const isEmptyFillingInjector = (v: unknown): boolean => {
-	if (!isPan(v)) { return false; }
-	return v.contents === null;
-};
-export const isFullFillingInjector = (v: unknown): boolean => {
-	if (!isPan(v)) { return false; }
-	return v.contents !== null;
 };
 
 const fillingInjectorMayContainMap: Record<FillingInjectorType, string[]> = {
@@ -280,10 +264,12 @@ export const productsMatchIgnoringQuantity = (a: Product, b: Product): boolean =
 // --------------------------- ITEM (pan | ingredient | product | filling injector) --------------------------- //
 
 export type Item = Pan | Ingredient | Product | FillingInjector;
+export const isItem = (v: unknown) => isPan(v) || isProduct(v) || isIngredient(v) || isFillingInjector(v)
+
 export type Container = Pan | FillingInjector;
 export const isContainer = (v:unknown) => isPan(v) || isFillingInjector(v);
 
-export const containerMayContain = (type: PanType | FillingInjectorType, itemName: string): boolean => {
+export const containerMayContain = (type: string, itemName: string): boolean => {
 	if (isPanType(type)) {
 		return panMayContain(type, itemName)
 	}
@@ -307,13 +293,7 @@ export const itemsMatchIgnoringQuantity = (a: Item, b: Item): boolean => {
 		return ingredientMatchIgnoringQuantity(a, b);
 	} else if (isProduct(a) && isProduct(b)) {
 		return productsMatchIgnoringQuantity(a, b)
-	} else if (isPan(a) && isPan(b)) {
-		if (a.contents === null && b.contents === null) {
-			return true;
-		} else if (a.contents !== null && b.contents !== null) {
-			return (itemsMatchIgnoringQuantity(a.contents, b.contents));
-		}
-	} else if (isFillingInjector(a) && isFillingInjector(b)) {
+	} else if (isContainer(a) && isContainer(b)) {
 		if (a.contents === null && b.contents === null) {
 			return true;
 		} else if (a.contents !== null && b.contents !== null) {
@@ -420,23 +400,17 @@ export const getAllInnermostItems = (item: Item): Item => {
 	return innermost;
 };
 
-// Returns the item inside the pan if any, otherwise just hands the root item back 
+// Returns the item inside the container if any, otherwise just hands the root item back 
 export const getInnermostItem = (item: Item): Item => {
-	if (isPan(item) && item.contents !== null) {
-		return item.contents;
-	}
-	if (isFillingInjector(item) && item.contents !== null) {
+	if (isContainer(item) && item.contents !== null) {
 		return item.contents;
 	}
 	return item;
 };
-// Removes the item inside the pan if any and hands the pan back, otherwise hands back null 
+// Removes the item inside the container if any and hands the container back, otherwise hands back null 
 export const clearInnermostItems = <T extends Product|Ingredient|Pan|FillingInjector>(givenItem: T): T | null => {
 	const item = structuredClone(givenItem);
-	if (isPan(item) && item.contents !== null) {
-		item.contents = null;
-		return item;
-	} else if (isFillingInjector(item) && item.contents !== null) {
+	if (isContainer(item) && item.contents !== null) {
 		item.contents = null;
 		return item;
 	} else {
@@ -444,10 +418,10 @@ export const clearInnermostItems = <T extends Product|Ingredient|Pan|FillingInje
 	}
 };
 
-// Changes the item inside the pan if any, otherwise just changes the item; returns the root item
+// Changes the item inside the container if any, otherwise just changes the item; returns the root item
 export const innermostItemAdd = <T extends Product|Ingredient|Pan|FillingInjector>(givenItem: T, n: number): T => {
 	const item = structuredClone(givenItem);
-	if (!isPan(item) && !isFillingInjector(item)) {
+	if (!isContainer(item)) {
 		item.quantity += n;
 		return item;
 	}
@@ -461,7 +435,7 @@ export const innermostItemAdd = <T extends Product|Ingredient|Pan|FillingInjecto
 // Changes the item inside the pan if any, otherwise just changes the item; returns the root item
 export const innermostItemSubtract = <T extends Product|Ingredient|Pan|FillingInjector>(givenItem: T, n: number): T | null => {
 	const item = structuredClone(givenItem);
-	if (!isPan(item) && !isFillingInjector(item)) {
+	if (!isContainer(item)) {
 		item.quantity -= n;
 		return item.quantity === 0 ? null : item;
 	}

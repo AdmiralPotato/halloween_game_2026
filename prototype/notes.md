@@ -102,9 +102,8 @@ Each item can belong to one or more categories (though usually only one):
 
 ## TODO
 
-- Trash can
+- Using filling injectors as a finisher
 - Means for buying empty storage container
-- Adding finishers again
 - Selling for money
 	- Determine auto cost for items
 - Put source data into JSON files
@@ -114,3 +113,7 @@ Each item can belong to one or more categories (though usually only one):
 
 - fryer, donuts
 - saucepan, jam
+
+### Questions
+
+- If items on the countertop can stack, why have storage boxes?
