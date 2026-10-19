@@ -11,6 +11,18 @@ size = Vector3(8, 1, 8)
 [sub_resource type="BoxMesh" id="BoxMesh_el5rg"]
 size = Vector3(8, 1, 8)
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_8t2af"]
+plane = Plane(1, 0, 0, 0)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_0vrjm"]
+plane = Plane(0, 0, 1, 0)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_8g1d1"]
+plane = Plane(-1, 0, 0, 0)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_a28pv"]
+plane = Plane(0, 0, -1, 0)
+
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_xtlfy"]
 
 [sub_resource type="Sky" id="Sky_eai58"]
@@ -32,11 +44,27 @@ metadata/_custom_type_script = "uid://brhfhuo7lsymv"
 [node name="Floor" type="StaticBody3D" parent="." unique_id=2097173625]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.5, 4)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=647389857]
+[node name="FloorBox" type="CollisionShape3D" parent="Floor" unique_id=647389857]
 shape = SubResource("BoxShape3D_el5rg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1024537989]
 mesh = SubResource("BoxMesh_el5rg")
+
+[node name="WallNX" type="CollisionShape3D" parent="Floor" unique_id=2049535826]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.5, -4)
+shape = SubResource("WorldBoundaryShape3D_8t2af")
+
+[node name="WallNZ" type="CollisionShape3D" parent="Floor" unique_id=154043353]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.5, -4)
+shape = SubResource("WorldBoundaryShape3D_0vrjm")
+
+[node name="WallPX" type="CollisionShape3D" parent="Floor" unique_id=1048482900]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, 4)
+shape = SubResource("WorldBoundaryShape3D_8g1d1")
+
+[node name="WallPZ" type="CollisionShape3D" parent="Floor" unique_id=331193442]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, 4)
+shape = SubResource("WorldBoundaryShape3D_a28pv")
 
 [node name="TestPlayer" parent="." unique_id=1707035649 instance=ExtResource("3_8t2af")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)

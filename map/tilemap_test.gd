@@ -29,6 +29,9 @@ var time: float = 0
 
 func _ready():
 	update_floor()
+	if Engine.is_editor_hint():
+		return
+
 	for x in range(0, number_of_tiles.x):
 		var FurniPiece = FURNI_LIST[x % FURNI_LIST.size()]
 		$Tilemap.swap_furni(Vector2i(x,0), FurniPiece.instantiate())
@@ -44,21 +47,25 @@ func _ready():
 	ingredientSource.ingredient_type = FurniSource.IngredientType.CARAMEL_APPLE
 	$Tilemap.swap_furni(Vector2i(4,2), ingredientSource)
 
-	if !Engine.is_editor_hint():
-		DebugPanel.monitor("Every 60 frames", self, "time", 60)
-		DebugPanel.monitor("Every 30 frames", self, "time", 30)
-		DebugPanel.monitor("Every 10 frames", self, "time", 10)
-		DebugPanel.monitor("Every frame", self, "time", 1)
-		DebugPanel.monitor("Every frame formatted: %.2f", self, "time", 1)
+	DebugPanel.monitor("Every 60 frames", self, "time", 60)
+	DebugPanel.monitor("Every 30 frames", self, "time", 30)
+	DebugPanel.monitor("Every 10 frames", self, "time", 10)
+	DebugPanel.monitor("Every frame", self, "time", 1)
+	DebugPanel.monitor("Every frame formatted: %.2f", self, "time", 1)
 
 func update_floor():
-	$Tilemap.clear();
+	$Tilemap.clear()
 	$Tilemap.create_slots(Vector2i(0, 0), number_of_tiles)
 	$Floor.position.x = number_of_tiles.x * 0.5
 	$Floor.position.y = -0.5
 	$Floor.position.z = number_of_tiles.y * 0.5
-	$Floor/CollisionShape3D.shape.size.x = number_of_tiles.x
-	$Floor/CollisionShape3D.shape.size.z = number_of_tiles.y
+	var opposite = Vector3(number_of_tiles.x, 0, number_of_tiles.y)
+	$Floor/WallNX.global_position = Vector3.ZERO
+	$Floor/WallNZ.global_position = Vector3.ZERO
+	$Floor/WallPX.global_position = opposite
+	$Floor/WallPZ.global_position = opposite
+	$Floor/FloorBox.shape.size.x = number_of_tiles.x
+	$Floor/FloorBox.shape.size.z = number_of_tiles.y
 	$Floor/MeshInstance3D.mesh.size.x = number_of_tiles.x
 	$Floor/MeshInstance3D.mesh.size.z = number_of_tiles.y
 

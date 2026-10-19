@@ -1,3 +1,4 @@
+@tool
 extends Node3D
 class_name Tilemap
 ## Manages a 2D collection of tiles, which can be occupied and interacted with.
@@ -146,4 +147,5 @@ func combine_item(xy: Vector2i, new_node: ItemNode) -> ItemNode:
 	return null
 
 func _init():
-	Global.tilemap = self
+	if not Engine.is_editor_hint():
+		Global.tilemap = self
