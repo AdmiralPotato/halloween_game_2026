@@ -30,7 +30,6 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("pickup"):
 		var target_tile := Global.tilemap.find_tile(self.position, self.basis.z, 1.4)
 		var tilemap := Global.tilemap
-		var store: FurniNode = null
 		if held_object is FurniNode || in_rearrange_mode:
 			# doesn't matter if we're in rearrange mode if we're already holding furni
 			held_object = Global.tilemap.swap_furni(target_tile, held_object)

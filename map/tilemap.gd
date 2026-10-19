@@ -31,9 +31,9 @@ func clear():
 ## Returns the coordinates of a tile that someone standing at `position` and
 ## facing `facing` (a unit vector) should be interacting with / picking up from
 ## / putting down on. (This tile may or may not actually exist.)
-func find_tile(position: Vector3, facing: Vector3, reach: float = 1.0) \
+func find_tile(player_position: Vector3, facing: Vector3, reach: float = 1.0) \
 -> Vector2i:
-	var target_pos := position + facing * reach
+	var target_pos := player_position + facing * reach
 	return Vector2i(floor(target_pos.x), floor(target_pos.z))
 
 func _get_tile(xy: Vector2i) -> Tile:

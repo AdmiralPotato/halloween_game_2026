@@ -1,7 +1,6 @@
 @tool
 extends Node3D
 
-var time: float = 0
 const FURNI_COUNTERTOP := preload("res://map/FurniCountertop.tscn")
 const FURNI_CUTTINGBOARD := preload("res://map/FurniCuttingboard.tscn")
 const FURNI_FRIDGE := preload("res://map/FurniFridge.tscn")
@@ -23,6 +22,9 @@ const FURNI_LIST := [
 		number_of_tiles = x
 		if is_node_ready():
 			update_floor()
+
+var time: float = 0
+
 
 func _ready():
 	update_floor()

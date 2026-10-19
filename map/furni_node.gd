@@ -14,11 +14,11 @@ func item_can_fit(other_item: ItemNode) -> bool;
 func unpack():
 	if tween:
 		tween.kill()
-	# Become smolbig
-	scale = Vector3(0.0, 0.0, 0.0)
+	# Become smolbig; start tiny but not zero or physics throws warns
+	scale = Vector3.ONE * 0.001
 	tween = self.create_tween()
 	tween.set_trans(Tween.TRANS_SINE)
-	tween.tween_property(self, "scale", Vector3(1.0, 1.0, 1.0), 0.2)
+	tween.tween_property(self, "scale", Vector3.ONE, 0.2)
 	$StaticBody3D/CollisionShape3D.disabled = false
 
 ## Called when you are taken away from a tile, back into someone's hand. Also
