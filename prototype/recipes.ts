@@ -162,7 +162,7 @@ const recipeList: RecipeInfo[] = [
 	// Note: cooking adds "dark: 1" automatically
 	{
 		output: 'cookie',
-		quantity: 12,
+		quantity: 1,
 		location: 'oven',
 		pan: 'cookie_sheet',
 		time: 2,
@@ -172,7 +172,7 @@ const recipeList: RecipeInfo[] = [
 	},
 	{
 		output: 'cupcake',
-		quantity: 6,
+		quantity: 1,
 		location: 'oven',
 		pan: 'muffin_tin',
 		time: 3,
@@ -192,7 +192,7 @@ const recipeList: RecipeInfo[] = [
 	},
 	{
 		output: 'cake_slice',
-		quantity: 6,
+		quantity: 1,
 		location: 'cake_knife',
 		time: 0,
 		ingredients: [ 'cake' ],

@@ -106,8 +106,8 @@ export const isPan = (givenV: unknown): givenV is Pan => {
 	if (!isPanType(v.name)) { return false; }
 	if (typeof v.quantity !== 'number') { return false; }
 	if (v.panContents === null) { return true; }
-	if (!isIngredient(v.panContents)) { return true; }
-	if (!isProduct(v.panContents)) { return true; }
+	if (isIngredient(v.panContents)) { return true; }
+	if (isProduct(v.panContents)) { return true; }
 	return false;
 };
 export const newPan = (name: PanType, quantity = 1): Pan => {
@@ -337,7 +337,7 @@ export const getAllInnermostItems = (item: Item): Item => {
 // Returns the item inside the pan if any, otherwise just hands the root item back 
 export const getInnermostItem = (item: Item): Item => {
 	if (isPan(item) && item.panContents !== null) {
-		item.panContents;
+		return item.panContents;
 	}
 	return item;
 };

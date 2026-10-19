@@ -292,5 +292,7 @@ goto('oven')
 drop()
 interact()
 pickup()
+goto(0)
+drop()
 
 console.log("BREAKPOINT ME")

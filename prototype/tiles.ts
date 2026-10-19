@@ -1,3 +1,4 @@
+import { productSellBatchSize } from "./finishers.ts";
 import type { StorageType } from "./items.ts";
 import { getItemInfo, isStorageType, itemMatchesStorageType, newIngredient } from "./items.ts";
 
@@ -505,7 +506,7 @@ export const isDeliveryZoneTile = (v: unknown): v is DeliveryZoneTile => (v as D
 export type DeliveryZoneTile = TileCommon & {
 	tile: 'delivery_zone';
 	inside: DeliveryZoneTileInnards[],
-	deliver: (v: Item) => boolean;
+	deliver: (s: State, v: Product) => boolean;
 };
 export type DeliveryZoneTileInnards = Product;
 export const isDeliveryZoneTileInnards = (v: unknown): v is DeliveryZoneTileInnards => {
@@ -530,27 +531,26 @@ export const newDeliveryZoneTile = (type: string): DeliveryZoneTile => {
 				errorLog(s, `Nothing in hand to deliver.`)
 				return false;
 			}
+			const inner = getInnermostItem(s.hand);
 			// holding something you can't sell -> DO NOTHING
-			if (!isProduct(s.hand)) {
-				errorLog(s, `That cannot be sold. (${printItem(s.hand)})`)
+			if (!isProduct(inner)) {
+				errorLog(s, `That cannot be sold. (${printItem(inner)})`)
 				return false;
 			}
 			// holding something you can sell -> DROP (1)
-			const toDrop = getOneRootItem(s.hand);
-			const remainder = rootItemSubtract(s.hand, 1);
+			const toDrop = getOneInnermostItem(inner);
+			const remainder = innermostItemSubtract(s.hand, 1);
 			if (!isDeliveryZoneTileInnards(toDrop)) { throw new Error ("IF YOU REACH HERE YOU MESSED UP"); }
-			if (isPan(s.hand)) {
-				s.hand.panContents = remainder;
-			} else {
-				s.hand = remainder;
-			}
-			addItemToList(toDrop, ret.inside);
-			log(s, `Dropped ${printItem(toDrop)} off to be sold!`);
+			s.hand = remainder;
+			ret.deliver(s, toDrop);
 			return true;
 			
 		},
-		deliver: (v: Item) => {
-			// TODO
+		deliver: (s, v: Product) => {
+			const batched = structuredClone(v);
+			batched.quantity *= productSellBatchSize(v.name);
+			addItemToList(batched, ret.inside);
+			log(s, `Put ${printItem(batched)} into the display case for sale!`)
 			return false;
 		}
 	}

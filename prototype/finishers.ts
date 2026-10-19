@@ -1,5 +1,5 @@
-import { addItemToList } from "./tiles.ts";
 import type { Product, Ingredient } from "./utilities.ts";
+import { addItemToList } from "./utilities.ts";
 
 import { getVariantParent } from "./variants.ts";
 
@@ -12,6 +12,7 @@ const isProductFinisherType = (v: unknown): v is ProductFinisherType => {
 };
 
 type ProductFinisherInfo = {
+	sellBatchSize: number;
 	fillings: string[];
 	decorations: string[];
 	doodads: string[];
@@ -19,6 +20,7 @@ type ProductFinisherInfo = {
 
 const productFinisherMap: Record<string, ProductFinisherInfo> = {
 	cookie: {
+		sellBatchSize: 12,
 		fillings: [],
 		decorations: [
 			'frosting',
@@ -30,6 +32,7 @@ const productFinisherMap: Record<string, ProductFinisherInfo> = {
 		],
 	},
 	cupcake: {
+		sellBatchSize: 6,
 		fillings: [
 			'pastry_cream',
 			'whipped_cream',
@@ -46,6 +49,7 @@ const productFinisherMap: Record<string, ProductFinisherInfo> = {
 		],
 	},
 	cake: {
+		sellBatchSize: 1,
 		fillings: [
 			'whipped_cream',
 			'ice_cream',
@@ -60,6 +64,7 @@ const productFinisherMap: Record<string, ProductFinisherInfo> = {
 		],
 	},
 	cake_slice: {
+		sellBatchSize: 6,
 		fillings: [],
 		decorations: [],
 		doodads: [],
@@ -73,6 +78,11 @@ const getFinisherInfo = (product: string) => {
 	}
 	return ret;
 };
+
+export const productSellBatchSize = (name: string) => {
+	const info = getFinisherInfo(name);
+	return info.sellBatchSize;
+}
 
 // We need to do it this way because whipped cream (or other things) could be a filling OR a decoration
 export const isFinisherAllowedOnProduct = (finisherName: string, finisherType: ProductFinisherType, product: string): boolean => {
@@ -89,14 +99,8 @@ export const isFinisherAllowedOnProduct = (finisherName: string, finisherType: P
 	return false;
 };
 
-
-const batchSizes: Record<string, number> = {
-	cookie: 12,
-	cupcake: 6,
-	cake: 1,
-};
-
 // Returns new Product, or null if the process failed
+// You have to specify the finisher type because some things can be used in more than one way (e.g. whipped cream can be filling or decoration)
 export const addFinisherToProduct = (finisherType: ProductFinisherType, ingredient: Ingredient, product: Product): Product | null => {
 	if (!isFinisherAllowedOnProduct(ingredient.name, finisherType, product.name)) {
 		return null;
@@ -106,14 +110,11 @@ export const addFinisherToProduct = (finisherType: ProductFinisherType, ingredie
 		return null;
 	}
 	// 1x finisher goes to 1x batch of product. If there is not enough finisher available, it fails.
-	const batchSize = batchSizes[product.name];
-	const batchMult = product.quantity / batchSize;
-	if (ingredient.quantity < batchMult) {
+	if (ingredient.quantity < product.quantity) {
 		return null;
 	}
 	const ret = structuredClone(product);
-	const toInsert = {...ingredient, quantity: batchMult}
-	addItemToList(toInsert, ret[finisherType]);
-	ingredient.quantity -= batchMult; // todo: I DON'T LIKE THAT THIS IS HAPPENING
+	addItemToList(ingredient, ret[finisherType]);
+	ingredient.quantity -= product.quantity;
 	return ret;
 }

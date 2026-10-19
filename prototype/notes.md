@@ -109,3 +109,8 @@ Each item can belong to one or more categories (though usually only one):
 	- Determine auto cost for items
 - Put source data into JSON files
 - More unit tests (boo)
+
+### Stretch goals
+
+- fryer, donuts
+- saucepan, jam
