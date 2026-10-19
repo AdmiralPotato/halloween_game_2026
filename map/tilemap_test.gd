@@ -18,7 +18,7 @@ const FURNI_LIST := [
 	FURNI_STORAGE,
 ];
 
-@export var number_of_tiles: Vector2i = Vector2i(8, 8):
+@export var number_of_tiles := Vector2i(8, 8):
 	set(x):
 		number_of_tiles = x
 		if is_node_ready():
