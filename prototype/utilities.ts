@@ -363,8 +363,8 @@ export const getInnermostItem = (item: Item): Item => {
 // Removes the item inside the pan if any and hands the pan back, otherwise hands back null 
 export const clearInnermostItems = <T extends Product|Ingredient|Pan>(givenItem: T): T | null => {
 	const item = structuredClone(givenItem);
-	if (isPan(item)) {
-		item.panContents === null;
+	if (isPan(item) && item.panContents !== null) {
+		item.panContents = null;
 		return item;
 	} else {
 		return  null;

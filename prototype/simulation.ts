@@ -5,8 +5,10 @@ import {
 	errorLog,
 	header,
 	isCountertopTile,
+	isDeliveryZoneTile,
 	isOvenTile,
 	isStorageTile,
+	isTrashTile,
 	log,
 	newCountertopTile,
 	newFilledStorageTile,
@@ -48,7 +50,7 @@ const s = newState([
 	null,
 	null,
 	null,
-	null,
+	newTile('trash'),
 ]);
 
 const setTile = (index: number, tile: Tile | null) => {
@@ -139,7 +141,8 @@ const buy = (name: string, quantity = 10): boolean => {
 	return false;
 };
 const goto = (destination: string | number, subtype?: string): boolean => {
-	const printMoved = () => {
+	const moveAndLog = (newTileIndex: number) => {
+		s.tile_index = newTileIndex;
 		const tile = s.tiles[s.tile_index];
 		if (tile === undefined) { return false; }
 		log(s, `Moved to ${printTile(tile).join('\n')}`);
@@ -154,8 +157,19 @@ const goto = (destination: string | number, subtype?: string): boolean => {
 			errorLog(s, `Cannot go to location index ${destination}: out of bounds! (Index was less than 0? Why...?)`);
 			return false;
 		}
-		s.tile_index = destination;
-		printMoved();
+		moveAndLog(destination);
+		return true;
+	}
+	if (destination === 'trash') {
+		const tileIndex = s.tiles.findIndex(v=>isTrashTile(v));
+		if (tileIndex === -1) { throw new Error ("SEOMTHING BOROKE ")}
+		moveAndLog(tileIndex);
+		return true;
+	}
+	if (destination === 'delivery') {
+		const tileIndex = s.tiles.findIndex(v=>isDeliveryZoneTile(v));
+		if (tileIndex === -1) { throw new Error ("SEOMTHING BOROKE ")}
+		moveAndLog(tileIndex);
 		return true;
 	}
 	if (destination === 'oven' || destination === 'mixer' || destination === 'cutting_board') {
@@ -168,8 +182,7 @@ const goto = (destination: string | number, subtype?: string): boolean => {
 			}
 			return false;
 		}
-		s.tile_index = tileIndex;
-		printMoved();
+		moveAndLog(tileIndex);
 		return true;
 	}
 	if (destination === 'storage' && subtype !== undefined) {
@@ -178,8 +191,7 @@ const goto = (destination: string | number, subtype?: string): boolean => {
 			errorLog(s, `Could not find storage: '${destination}', '${subtype}'`);
 			return false;
 		}
-		s.tile_index = tileIndex;
-		printMoved();
+		moveAndLog(tileIndex);
 		return true;
 	}
 	if (destination === 'emptyCounter') {
@@ -188,8 +200,7 @@ const goto = (destination: string | number, subtype?: string): boolean => {
 			errorLog(s, `Could not find any empty counterspace`);
 			return false;
 		}
-		s.tile_index = tileIndex;
-		printMoved();
+		moveAndLog(tileIndex);
 		return true;
 	}
 	throw new Error (`NOT HANDLED: ${destination}, ${subtype}`);
@@ -245,8 +256,6 @@ const help = () => {
 	// console.log(`discard (location, index) [removes and discards item, if any]`);
 	// console.log(`attributes (location, index?) [index defaults to 0]`)
 	// console.log(`addFilling () [uses finisher: filling]`);
-	// console.log(`addDecoration () [uses finisher: decoration]`);
-	// console.log(`addDoodad () [uses finisher: doodad]`);
 };
 
 tiles()
@@ -309,10 +318,14 @@ goto('storage', 'rainbow sprinkles')
 pickup()
 goto(17)
 interact()
-
-// deliver
 pickup()
-goto(0)
-drop()
+
+// throw out
+goto('trash')
+interact()
+
+// // deliver
+// goto(0)
+// interact()
 
 console.log("BREAKPOINT ME")

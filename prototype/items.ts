@@ -1,13 +1,14 @@
 import { isAttributeMap, type AttributeMap } from "./attributes.ts";
 import type { Ingredient as Ingredient, Item, Product } from "./utilities.ts";
 
-export type StorageType = 'bag' | 'fridge' | 'freezer' | 'crate' | 'jar';
+export type StorageType = 'bag' | 'fridge' | 'freezer' | 'crate' | 'jar' | 'pan_stand';
 export const isStorageType = (v: unknown): v is StorageType => {
 	if (v === 'bag') { return true; }
 	if (v === 'fridge') { return true; }
 	if (v === 'freezer') { return true; }
 	if (v === 'crate') { return true; }
 	if (v === 'jar') { return true; }
+	if (v === 'pan_stand') { return true; }
 	return true;
 };
 
@@ -399,19 +400,19 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		attributes: 'from_recipe',
 	},
 	cookie_sheet: {
-		storageType: 'crate',
+		storageType: 'pan_stand',
 		categories: ['pan'],
 		cost: 2,
 		attributes: {},
 	},
 	muffin_tin: {
-		storageType: 'crate',
+		storageType: 'pan_stand',
 		categories: ['pan'],
 		cost: 2,
 		attributes: {},
 	},
 	cake_pan: {
-		storageType: 'crate',
+		storageType: 'pan_stand',
 		categories: ['pan'],
 		cost: 2,
 		attributes: {},

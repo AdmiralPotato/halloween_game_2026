@@ -22,23 +22,29 @@ import {
 	isEmptyPan,
 	addItemToList,
 	getXInnermostItems,
+	clearInnermostItems,
 } from "./utilities.ts";
 
 // ------------------------------------------ PRINTING ------------------------------------------ //
 
 export const header = `-----------------------------------------------------------------`;
-const getTileName = (s: State): string => {
-	const tile = s.tiles[s.tile_index];
-	return tile
-		? tile.tile
-		: tile === null
-			? 'NULL'
-			: '(out of bounds)';
-};
+
+export const status = (s: State): string[] => {
+	return [
+		`GOLD: ${s.gold}`,
+		`CARRYING: ${printItem(s.hand)}`,
+		`HERE: ${printTile(s.tiles[s.tile_index]).join('\n')}`,
+	]
+}
+
 export const log = (s: State, message: string) => {
+	const bar = status(s).join('\n');
+	console.log('')
+	console.log(`> [${s.tile_index}] ${message}`);
+	console.log('')
+	console.log(`${bar}`)
+	console.log('')
 	console.log(header);
-	console.log(`[${s.tile_index}] ${message}`);
-	console.log(`>>>> GOLD: ${s.gold} | CARRYING: ${printItem(s.hand)}`)
 };
 export const warnLog = (s: State, message: string) => {
 	console.warn(header);
@@ -106,7 +112,7 @@ export const newState = (tiles: (Tile|null)[]): State => {
 
 // ------------------------------------------ TILE TYPES ------------------------------------------ //
 
-export type Tile = StorageTile | OvenTile | ApplianceTile | DeliveryZoneTile | CountertopTile;
+export type Tile = StorageTile | OvenTile | ApplianceTile | DeliveryZoneTile | CountertopTile | TrashTile;
 type TileCommon = {
 	tile: string;
 	type: string;
@@ -148,6 +154,10 @@ const tiles: Record<string, TileInfo> = {
 		newWith: (contents, type) => newCountertopTileWith(contents, type),
 		info: `A general work area.`,
 	},
+	trash: {
+		new: () => newTrashTile(),
+		info: `Banish items or mixes to the shadow realm. (Pans are ineligible)`
+	}
 }
 export const newTile = (type: string, contents?: Item) => {
 	const info = tiles[type];
@@ -161,13 +171,15 @@ export const newTile = (type: string, contents?: Item) => {
 	}
 	throw new Error (`Something went wrong trying to run newTile`)
 };
-export const printTile = (v: Tile | null): string[] => {
+export const printTile = (v: Tile | null | undefined): string[] => {
+	if (v === undefined) { return [`(out of bounds)`]; }
 	if (v === null) { return [`(EMPTY TILE)`]; }
 	if (isStorageTile(v)) { return printStorageTile(v); }
 	if (isOvenTile(v)) { return printOvenTile(v); }
 	if (isApplianceTile(v)) { return printApplianceTile(v); }
 	if (isDeliveryZoneTile(v)) { return printDeliveryZoneTile(v); }
 	if (isCountertopTile(v)) { return printCountertopTile(v); }
+	if (isTrashTile(v)) { return printTrashTile(v); }
 	throw new Error (`printTile: tile type not handled not handled`)
 }
 
@@ -522,8 +534,7 @@ export const newDeliveryZoneTile = (type: string): DeliveryZoneTile => {
 		type,
 		inside: [],
 		item_is_compatible: (item: Item) => isDeliveryZoneTileInnards(item),
-		interact: () => false,
-		pickup_or_drop: (s) => {
+		interact: (s: State) => {
 			// holding nothing OR an empty pan -> DO NOTHING
 			if (
 				s.hand === null
@@ -546,7 +557,10 @@ export const newDeliveryZoneTile = (type: string): DeliveryZoneTile => {
 			s.hand = remainder;
 			ret.deliver(s, toDrop);
 			return true;
-			
+		},
+		pickup_or_drop: (s) => {
+			errorLog(s, `In future, this is how you can arrange the display case? Pickup/drop?`)
+			return false;
 		},
 		deliver: (s, v: Product) => {
 			const batched = structuredClone(v);
@@ -702,4 +716,43 @@ export const newCountertopTileWith = (contents: Item, type?: string): Countertop
 };
 export const printCountertopTile = (tile: CountertopTile): string[] => {
 	return [`countertop: ${tile.inside ? printItem(tile.inside) : '(nothing)'}`];
+};
+
+// --------------------------------------- TRASH -------------------------------- //
+
+export const isTrashTile = (v: unknown): v is TrashTile => (v as TrashTile)?.tile === 'trash';
+export type TrashTile = TileCommon & {
+	tile: 'trash';
+};
+
+export const newTrashTile = (type = ''): TrashTile => {
+	const ret: TrashTile = {
+		tile: 'trash',
+		type,
+		item_is_compatible: (item: Item) => !isPan(item),
+		interact: (s: State) => ret.pickup_or_drop(s),
+		pickup_or_drop: (s) => {
+			// carrying nothing -> DO NOTHING
+			if (s.hand === null) {
+				warnLog(s, `Nothing to discard.`)
+				return false;
+			}
+			
+			// carrying empty pan -> DO NOTHING
+			if (isPan(s.hand) && s.hand.panContents === null) {
+				errorLog(s, `Cannot throw out the pan!`)
+				return false;
+			}
+			
+			// otherwise -> DROP (ALL) (inner)
+			const inner = getInnermostItem(s.hand);
+			s.hand = clearInnermostItems(s.hand);
+			log(s, `Threw out ${printItem(inner)}!`);
+			return true;
+		},
+	}
+	return ret;
+};
+export const printTrashTile = (tile: TrashTile): string[] => {
+	return [`trash can`];
 };
