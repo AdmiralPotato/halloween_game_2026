@@ -6,6 +6,7 @@ const FURNI_CUTTINGBOARD := preload("res://map/FurniCuttingboard.tscn")
 const FURNI_FRIDGE := preload("res://map/FurniFridge.tscn")
 const FURNI_MIXER := preload("res://map/FurniMixer.tscn")
 const FURNI_OVEN := preload("res://map/FurniOven.tscn")
+const FURNI_SOURCE := preload("res://map/FurniSource.tscn")
 const FURNI_STORAGE := preload("res://map/FurniStorage.tscn")
 
 const FURNI_LIST := [
@@ -32,6 +33,17 @@ func _ready():
 		var FurniPiece = FURNI_LIST[x % FURNI_LIST.size()]
 		$Tilemap.swap_furni(Vector2i(x,0), FurniPiece.instantiate())
 		$Tilemap.swap_furni(Vector2i(x,number_of_tiles.y - 1), FurniPiece.instantiate())
+
+	var ingredientSource : FurniSource = FURNI_SOURCE.instantiate();
+	ingredientSource.ingredient_type = FurniSource.IngredientType.GUMDROP
+	$Tilemap.swap_furni(Vector2i(2,2), ingredientSource)
+	ingredientSource = FURNI_SOURCE.instantiate();
+	ingredientSource.ingredient_type = FurniSource.IngredientType.PUMPKIN
+	$Tilemap.swap_furni(Vector2i(3,2), ingredientSource)
+	ingredientSource = FURNI_SOURCE.instantiate();
+	ingredientSource.ingredient_type = FurniSource.IngredientType.CARAMEL_APPLE
+	$Tilemap.swap_furni(Vector2i(4,2), ingredientSource)
+
 	if !Engine.is_editor_hint():
 		DebugPanel.monitor("Every 60 frames", self, "time", 60)
 		DebugPanel.monitor("Every 30 frames", self, "time", 30)
