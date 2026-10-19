@@ -2,11 +2,12 @@ import { getItemInfo, newIngredient, newProduct } from "./items.ts";
 
 import type { Tile } from "./tiles.ts";
 import {
+	errorLog,
 	header,
 	isCountertopTile,
 	isOvenTile,
 	isStorageTile,
-	itemAdd,
+	log,
 	newCountertopTile,
 	newFilledStorageTile,
 	newState,
@@ -15,9 +16,9 @@ import {
 } from "./tiles.ts";
 
 import type { Item } from "./utilities.ts";
-import { itemsCanStack, printModifiersWithItemName } from "./utilities.ts";
+import { isPan, itemsCanStack, printModifiersWithItemName, rootItemAdd } from "./utilities.ts";
 
-const state = newState([
+const s = newState([
 	newTile('delivery_zone'),
 	newTile('oven'),
 	newTile('cutting_board'),
@@ -51,26 +52,29 @@ const state = newState([
 ]);
 
 const setTile = (index: number, tile: Tile | null) => {
-	state.tiles[index] = tile;
+	s.tiles[index] = tile;
 };
 const swapTilesByIndices = (i: number, j: number) => {
-	const iTile = state.tiles[i];
-	const jTile = state.tiles[j];
+	const iTile = s.tiles[i];
+	const jTile = s.tiles[j];
 	setTile(i, jTile);
 	setTile(j, iTile);
 };
 const findEmptyWorkspaceIndex = (): number => {
-	return state.tiles.findIndex(v=>isCountertopTile(v) && v.inside === null);
+	return s.tiles.findIndex(v=>isCountertopTile(v) && v.inside === null);
 };
 const findStorageTileWithName = (printName: string): number => {
-	return state.tiles.findIndex(v=>{
+	return s.tiles.findIndex(v=>{
 		if (!isStorageTile(v)) { return false; }
 		if (v.inside === null) { return false; }
+		if (isPan(v.inside)) {
+			return printName === v.inside.name;
+		}
 		return printName === printModifiersWithItemName(v.inside.name, v.inside.modifiers);
 	});
 };
 const findStorageTileIndexThatStacksWith = (item: Item): number => {
-	return state.tiles.findIndex(v=>{
+	return s.tiles.findIndex(v=>{
 		if (v === null) { return false; }
 		if (!isStorageTile(v)) { return false; }
 		if (v.inside === null) { return false; }
@@ -78,13 +82,13 @@ const findStorageTileIndexThatStacksWith = (item: Item): number => {
 	});
 };
 const findFirstNullTileIndex = (): number => {
-	return state.tiles.indexOf(null);
+	return s.tiles.indexOf(null);
 };
 const findApplianceTileIndex = (type: string): number => {
 	if (type === 'oven') {
-		return state.tiles.findIndex(v=>isOvenTile(v));
+		return s.tiles.findIndex(v=>isOvenTile(v));
 	}
-	return state.tiles.findIndex(v=>v?.tile === 'appliance' && v?.type === type);
+	return s.tiles.findIndex(v=>v?.tile === 'appliance' && v?.type === type);
 };
 
 const help = () => {
@@ -119,16 +123,14 @@ const buy = (name: string, quantity = 10): boolean => {
 	const info = getItemInfo(name);
 	if (info.cost === null) {
 		// item is not for sale
-		console.error(header);
-		console.error(`Cannot buy any '${name}': not for sale`);
+		errorLog(s, `Cannot buy any '${name}': not for sale`);
 		return false;
 	}
 	const goldCost = costTiers[info.cost];
 	const totalCost = goldCost * quantity;
-	if (totalCost > state.gold) {
+	if (totalCost > s.gold) {
 		// you can't afford it
-		console.error(header);
-		console.error(`Cannot afford to buy ${quantity}x '${name}': current gold: ${state.gold} (cost: ${totalCost}, ${goldCost} ea.)`);
+		errorLog(s, `Cannot afford to buy ${quantity}x '${name}': current gold: ${s.gold} (cost: ${totalCost}, ${goldCost} ea.)`);
 		return false;
 	}
 	// FIND THE PLACE TO PUT IT
@@ -138,111 +140,101 @@ const buy = (name: string, quantity = 10): boolean => {
 	let tileIndex = findStorageTileIndexThatStacksWith(dummyItem);
 	// a matching storage tile already exists
 	if (tileIndex >= 0) {
-		const tile = state.tiles[tileIndex];
+		const tile = s.tiles[tileIndex];
 		if (!isStorageTile(tile) || tile.inside === null) { throw new Error ("UNREACHABLE"); }
-		itemAdd(tile.inside, quantity);
-		state.gold -= totalCost;
-		console.log(header);
-		console.log(`Bought ${quantity}x '${name}' (new quantity: ${tile.inside.quantity})`);
+		tile.inside.quantity += quantity;
+		s.gold -= totalCost;
+		log(s, `Bought ${quantity}x '${name}' (new quantity: ${tile.inside.quantity})`);
 		return true;
 	}
 	// storage tile does not exist, but there's space. buy it
 	let nullTileIndex = findFirstNullTileIndex();
 	if (nullTileIndex !== -1) {
-		state.tiles[nullTileIndex] = newFilledStorageTile({ name, quantity, modifiers: [] });
-		state.gold -= totalCost;
-		console.log(header);
-		console.log(`Bought ${quantity}x '${name}'`);
+		s.tiles[nullTileIndex] = newFilledStorageTile({ name, quantity, modifiers: [] });
+		s.gold -= totalCost;
+		log(s, `Bought ${quantity}x '${name}'`);
 		return true;
 	}
 	// no more null tiles left to put the box! never mind
-	console.error(header);
-	console.error(`Could not buy ${quantity}x '${name}': not enough space to put a new storage ${info.storageType}`);
+	errorLog(s, `Could not buy ${quantity}x '${name}': not enough space to put a new storage ${info.storageType}`);
 	return false;
 };
 const goto = (destination: string | number, subtype?: string): boolean => {
 	const printMoved = () => {
-		const tile = state.tiles[state.location_index];
+		const tile = s.tiles[s.tile_index];
 		if (tile === undefined) { return false; }
-		console.log(header);
-		console.log(`Moved to location index ${state.location_index}: ${printTile(tile).join('\n')}`);
+		log(s, `Moved to ${printTile(tile).join('\n')}`);
 	}
 	if (typeof destination === 'number') {
-		if (state.tiles.length >= destination) {
+		if (destination >= s.tiles.length) {
 			// out of bounds!
-			console.error(header);
-			console.error(`Cannot go to location index ${state.location_index}: out of bounds! (Max index: ${state.tiles.length -1})`);
+			errorLog(s, `Cannot go to location index ${destination}: out of bounds! (Max index: ${s.tiles.length -1})`);
 			return false;
-		} else if (state.tiles.length < 0) {
+		} else if (destination < 0) {
 			// out of bounds!
-			console.error(header);
-			console.error(`Cannot go to location index ${state.location_index}: out of bounds! (Index was less than 0? Why...?)`);
+			errorLog(s, `Cannot go to location index ${destination}: out of bounds! (Index was less than 0? Why...?)`);
 			return false;
 		}
-		state.location_index = destination;
+		s.tile_index = destination;
 		printMoved();
 		return true;
 	}
 	if (destination === 'oven' || destination === 'mixer' || destination === 'cutting_board') {
 		const tileIndex = findApplianceTileIndex(destination);
 		if (tileIndex === -1) {
-			console.error(header);
 			if (subtype === undefined) {
-				console.error(`Could not find tile: '${destination}'`);
+				errorLog(s, `Could not find tile: '${destination}'`);
 			} else {
-				console.error(`Could not find tile: '${destination}', '${subtype}'`);
+				errorLog(s, `Could not find tile: '${destination}', '${subtype}'`);
 			}
 			return false;
 		}
-		state.location_index = tileIndex;
+		s.tile_index = tileIndex;
 		printMoved();
 		return true;
 	}
 	if (destination === 'storage' && subtype !== undefined) {
 		const tileIndex = findStorageTileWithName(subtype);
 		if (tileIndex == -1) {
-			console.error(header);
-			console.error(`Could not find storage: '${destination}', '${subtype}'`);
+			errorLog(s, `Could not find storage: '${destination}', '${subtype}'`);
 			return false;
 		}
-		state.location_index = tileIndex;
+		s.tile_index = tileIndex;
 		printMoved();
 		return true;
 	}
 	if (destination === 'emptyCounter') {
 		const tileIndex = findEmptyWorkspaceIndex();
 		if (tileIndex === -1) {
-			console.error(header);
-			console.error(`Could not find any empty counterspace`);
+			errorLog(s, `Could not find any empty counterspace`);
 			return false;
 		}
-		state.location_index = tileIndex;
+		s.tile_index = tileIndex;
 		printMoved();
 		return true;
 	}
 	throw new Error (`NOT HANDLED: ${destination}, ${subtype}`);
 }
 const interact = (): boolean => {
-	const tile = state.tiles[state.location_index];
+	const tile = s.tiles[s.tile_index];
 	if (tile === null || tile === undefined) { return false; }
-	return tile.interact(state);
+	return tile.interact(s);
 }
 const pickupOrDrop = (): boolean => {
-	const tile = state.tiles[state.location_index];
+	const tile = s.tiles[s.tile_index];
 	if (tile === null || tile === undefined) { return false; }
-	return tile.pickup_or_drop(state);
+	return tile.pickup_or_drop(s);
 }
 const drop = pickupOrDrop;
 const pickup = pickupOrDrop;
 
 const glitteringPrizes = (increase = 100_000) => {
-	state.gold += increase;
-	console.log(header);
-	console.log(`How strange! ${increase} gold was added to your account!`);
+	s.gold += increase;
+	log(s, `How strange! ${increase} gold was added to your account!`);
 }
 
 const tiles = () => {
-	const toPrint = state.tiles.map((v, i)=>{
+	const toPrint = s.tiles.map((v, i)=>{
 		const alignedIndex = i < 10 ? ` ${i}` : i;
 		const ret = printTile(v).map((v, j)=>{
 			if (j === 0) {
@@ -265,6 +257,40 @@ drop();
 goto('storage', 'flour')
 pickup();
 goto('mixer');
+drop();
 interact();
+
+// glitteringPrizes();
+// buy('mint_flavoring', 20);
+// goto('storage', 'mint flavoring');
+// pickup();
+// goto('mixer')
+// drop();
+// goto('storage', 'mint flavoring');
+// pickup();
+// goto('mixer')
+// drop();
+// goto('storage', 'mint flavoring');
+// pickup();
+// goto('mixer')
+// drop();
+// goto('storage', 'mint flavoring');
+// pickup();
+// goto('mixer')
+// drop();
+// goto('storage', 'mint flavoring');
+// pickup();
+// goto('mixer')
+// drop();
+// interact()
+// goto(9)
+// pickup()
+// goto('mixer')
+// pickup()
+
+goto(9)
+pickup()
+goto('mixer')
+drop()
 
 console.log("BREAKPOINT ME")

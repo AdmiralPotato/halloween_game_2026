@@ -130,7 +130,7 @@ export const panMayContain = (pan: PanType, itemName: string): boolean => {
 	return pansMayContainMap[pan].includes(itemName);
 };
 
-// ----------------------------------------- FOOD COMPONENT ----------------------------------------- //
+// ----------------------------------------- INGREDIENTS ----------------------------------------- //
 
 export type Ingredient = {
 	name: string;
@@ -201,7 +201,7 @@ export const ingredientToTallies = (ingredients: Ingredient[]) => {
 	return ret;
 };
 
-// ---------------------------------- FINISHED PRODUCTS ---------------------------------- //
+// ---------------------------------- PRODUCTS ---------------------------------- //
 
 export type Product = {
 	name: string;
@@ -267,7 +267,120 @@ export const itemsCanStack = (a: Item, b: Item): boolean => {
 		}
 	}
 	return itemsMatchIgnoringQuantity(a, b);
+};
+
+// Returns the new item object (because it might have a greater quantity now, i.e. in the destination)
+export const addItemToList = (itemToAdd: Item, arr: Item[]): Item => {
+	const foundIndex = arr.findIndex((v)=>itemsCanStack(itemToAdd, v));
+	// Not there? Easy, just add it at the end
+	if (foundIndex === -1) {
+		arr.push(itemToAdd);
+		return itemToAdd;
+	}
+	// Otherwise add our quantity to the found thing
+	const item = arr[foundIndex];
+	item.quantity += itemToAdd.quantity;
+	return item;
+};
+
+export const addItems = (a: Item | null, b: Item | null): Item | null => {
+	if (a === null && b !== null) {
+		return structuredClone(b);
+	}
+	if (a !== null && b === null) {
+		return structuredClone(a);
+	}
+	if (a === null || b === null) {
+		throw new Error ('addItems: try not to do this one!')
+	}
+	if (!itemsCanStack(a, b)) {
+		throw new Error (`addItems: items cannot stack (check before using this function!)`);
+	}
+	const item = structuredClone(a);
+	item.quantity += b.quantity;
+	return item;
 }
+
+// -------------------- ITEM MATH (outermost part, e.g. pan in pan of cookies) -------------------- //
+
+export const rootItemSubtract = <T extends Product|Ingredient|Pan>(item: T, n = 1): T | null => {
+	item.quantity -= n;
+	if (item.quantity === 0) {
+		return null;
+	}
+	return item;
+};
+export const rootItemAdd = <T extends Product|Ingredient>(item: T, n = 1): T => {
+	item.quantity += n;
+	return item;
+};
+export const getOneRootItem = <T extends Product|Ingredient|Pan>(item: T): T => {
+	const clone = structuredClone(item);
+	clone.quantity = 1;
+	return clone;
+};
+
+// -------------------- ITEM MATH (innermost part, e.g. cookies in pan of cookies) -------------------- //
+
+export const getOneInnermostItem = (item: Item): Item => {
+	const innermost = structuredClone(getInnermostItem(item));
+	innermost.quantity = 1;
+	return innermost;
+};
+
+export const getAllInnermostItems = (item: Item): Item => {
+	const innermost = structuredClone(getInnermostItem(item));
+	return innermost;
+};
+
+// Returns the item inside the pan if any, otherwise just hands the root item back 
+export const getInnermostItem = (item: Item): Item => {
+	if (!isPan(item)) { return item; }
+	if (item.carrying === null) { return item; }
+	return item.carrying;
+};
+// Removes the item inside the pan if any and hands the pan back, otherwise hands back null 
+export const clearInnermostItems = <T extends Product|Ingredient|Pan>(givenItem: T): T | null => {
+	const item = structuredClone(givenItem);
+	if (isPan(item)) {
+		item.carrying === null;
+		return item;
+	} else {
+		return  null;
+	}
+};
+
+// Changes the item inside the pan if any, otherwise just changes the item; returns the root item
+export const innermostItemAdd = <T extends Product|Ingredient|Pan>(givenItem: T, n: number): T => {
+	const item = structuredClone(givenItem);
+	if (!isPan(item)) {
+		item.quantity += n;
+		return item;
+	}
+	if (item.carrying === null) {
+		item.quantity += n;
+		return item;
+	}
+	item.carrying.quantity += n;
+	return item;
+};
+// Changes the item inside the pan if any, otherwise just changes the item; returns the root item
+export const innermostItemSubtract = <T extends Product|Ingredient|Pan>(givenItem: T, n: number): T | null => {
+	const item = structuredClone(givenItem);
+	if (!isPan(item)) {
+		item.quantity -= n;
+		return item.quantity === 0 ? null : item;
+	}
+	if (item.carrying === null) {
+		item.quantity -= n;
+		return item.quantity === 0 ? null : item;
+	}
+	item.carrying.quantity -= n;
+	if (item.carrying.quantity === 0) {
+		item.carrying = null;
+	}
+	return item;
+};
 
 // ------------------------------------- AUTO DISPLAY NAMES ------------------------------------- //
 

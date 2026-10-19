@@ -1,5 +1,5 @@
 import { isAttributeMap, type AttributeMap } from "./attributes.ts";
-import type { Ingredient as Ingredient, Product } from "./utilities.ts";
+import type { Ingredient as Ingredient, Item, Product } from "./utilities.ts";
 
 export type StorageType = 'bag' | 'fridge' | 'freezer' | 'crate' | 'jar';
 export const isStorageType = (v: unknown): v is StorageType => {
@@ -425,3 +425,8 @@ export const getItemInfo = (item: string) => {
 	}
 	return info;
 };
+
+export const itemMatchesStorageType = (item: Item, storageType: string) => {
+	const info = getItemInfo(item.name);
+	return info.storageType === storageType;
+}
