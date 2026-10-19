@@ -24,9 +24,6 @@ const FURNI_LIST := [
 		if is_node_ready():
 			update_floor()
 
-var time: float = 0
-
-
 func _ready():
 	update_floor()
 	if Engine.is_editor_hint():
@@ -46,12 +43,6 @@ func _ready():
 	ingredientSource = FURNI_SOURCE.instantiate();
 	ingredientSource.ingredient_type = FurniSource.IngredientType.CARAMEL_APPLE
 	$Tilemap.swap_furni(Vector2i(4,2), ingredientSource)
-
-	DebugPanel.monitor("Every 60 frames", self, "time", 60)
-	DebugPanel.monitor("Every 30 frames", self, "time", 30)
-	DebugPanel.monitor("Every 10 frames", self, "time", 10)
-	DebugPanel.monitor("Every frame", self, "time", 1)
-	DebugPanel.monitor("Every frame formatted: %.2f", self, "time", 1)
 
 func update_floor():
 	$Tilemap.clear()
@@ -77,4 +68,7 @@ func _physics_process(delta):
 	var work_tile: Vector2i = $Tilemap.find_tile(birb_position, birb_facing, 1.4)
 	$PlayerInteractIndicator.position.x = work_tile.x + 0.5
 	$PlayerInteractIndicator.position.z = work_tile.y + 0.5
-	time += delta
+	if $TestPlayer.in_rearrange_mode:
+		$PlayerInteractIndicator.light_color = Color("ddcc31")
+	else:
+		$PlayerInteractIndicator.light_color = Color("1fff52")

@@ -12,7 +12,7 @@ const TWEEN_TIME = 0.1
 @export var turn_speed := TAU
 
 var held_object: BaseMapNode
-var in_rearrange_mode := true
+var in_rearrange_mode := false
 
 @onready var carry_node = $RightHand/Carry
 @onready var right_hand_node = $RightHand
@@ -21,6 +21,8 @@ var in_rearrange_mode := true
 @onready var hand_bone = skeleton.find_bone("hand_R")
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("toggle_rearrange"):
+		in_rearrange_mode = !in_rearrange_mode
 	right_hand_node.transform = skeleton.get_bone_global_pose(hand_bone)
 	var input_vec := Vector2(
 		Input.get_axis("move_left", "move_right"),
