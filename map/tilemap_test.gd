@@ -34,15 +34,15 @@ func _ready():
 		$Tilemap.swap_furni(Vector2i(x,0), FurniPiece.instantiate())
 		$Tilemap.swap_furni(Vector2i(x,number_of_tiles.y - 1), FurniPiece.instantiate())
 
-	var ingredientSource : FurniSource = FURNI_SOURCE.instantiate();
-	ingredientSource.ingredient_type = FurniSource.IngredientType.GUMDROP
-	$Tilemap.swap_furni(Vector2i(2,2), ingredientSource)
-	ingredientSource = FURNI_SOURCE.instantiate();
-	ingredientSource.ingredient_type = FurniSource.IngredientType.PUMPKIN
-	$Tilemap.swap_furni(Vector2i(3,2), ingredientSource)
-	ingredientSource = FURNI_SOURCE.instantiate();
-	ingredientSource.ingredient_type = FurniSource.IngredientType.CARAMEL_APPLE
-	$Tilemap.swap_furni(Vector2i(4,2), ingredientSource)
+	#var ingredientSource : FurniSource# = FURNI_SOURCE.instantiate();
+	#ingredientSource.ingredient_type = FurniSource.IngredientType.GUMDROP
+	#$Tilemap.swap_furni(Vector2i(2,2), ingredientSource)
+	#ingredientSource = FURNI_SOURCE.instantiate();
+	#ingredientSource.ingredient_type = FurniSource.IngredientType.PUMPKIN
+	#$Tilemap.swap_furni(Vector2i(3,2), ingredientSource)
+	#ingredientSource = FURNI_SOURCE.instantiate();
+	#ingredientSource.ingredient_type = FurniSource.IngredientType.CARAMEL_APPLE
+	#$Tilemap.swap_furni(Vector2i(4,2), ingredientSource)
 
 func update_floor():
 	$Tilemap.clear()

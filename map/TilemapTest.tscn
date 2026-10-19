@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c6ijo65efyycu" path="res://map/tilemap_test.gd" id="1_0n275"]
 [ext_resource type="Script" uid="uid://brhfhuo7lsymv" path="res://map/tilemap.gd" id="2_xtlfy"]
+[ext_resource type="PackedScene" uid="uid://d0du8065dim5b" path="res://map/FurniSource.tscn" id="3_0vrjm"]
 [ext_resource type="PackedScene" uid="uid://v5tdiarwxe74" path="res://map/TestPlayer.tscn" id="3_8t2af"]
 [ext_resource type="PackedScene" uid="uid://03n546k1srnw" path="res://ui/debug_panel.tscn" id="4_8t2af"]
 
@@ -40,6 +41,18 @@ script = ExtResource("1_0n275")
 [node name="Tilemap" type="Node3D" parent="." unique_id=991694847]
 script = ExtResource("2_xtlfy")
 metadata/_custom_type_script = "uid://brhfhuo7lsymv"
+
+[node name="Furni2_2" parent="Tilemap" unique_id=1615491916 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 2.5)
+ingredient_type = 7
+
+[node name="Furni3_2" parent="Tilemap" unique_id=2070057252 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 2.5)
+ingredient_type = 3
+
+[node name="Furni4_2" parent="Tilemap" unique_id=991868078 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 2.5)
+ingredient_type = 5
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=2097173625]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.5, 4)

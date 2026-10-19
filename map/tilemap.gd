@@ -147,5 +147,23 @@ func combine_item(xy: Vector2i, new_node: ItemNode) -> ItemNode:
 	return null
 
 func _init():
-	if not Engine.is_editor_hint():
+	if Engine.is_editor_hint():
+		EditorInterface.get_selection().connect("selection_changed", self.mess_with_children)
+	else: # not Engine.is_editor_hint()
 		Global.tilemap = self
+
+func mess_with_children():
+	for child in get_children():
+		if child is FurniNode:
+			var tile_x: int = floor(child.position.x)
+			var tile_y: int = floor(child.position.z)
+			child.name = "Furni%d_%d" % [tile_x, tile_y]
+			child.position.x = tile_x + 0.5
+			child.position.y = 0.0
+			child.position.z = tile_y + 0.5
+		elif child is ItemNode:
+			var tile_x: int = floor(child.position.x)
+			var tile_y: int = floor(child.position.z)
+			child.name = "Item%d_%d" % [tile_x, tile_y]
+			child.position.x = tile_x + 0.5
+			child.position.z = tile_y + 0.5
