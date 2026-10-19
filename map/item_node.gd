@@ -1,5 +1,5 @@
 @abstract
-extends Node3D
+extends BaseMapNode
 class_name ItemNode
 
 ## If the given item can be combined with this item, do it, and return true.

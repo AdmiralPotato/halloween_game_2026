@@ -1,5 +1,5 @@
 @abstract
-extends Node3D
+extends BaseMapNode
 class_name FurniNode
 
 @export var item_height = 1;

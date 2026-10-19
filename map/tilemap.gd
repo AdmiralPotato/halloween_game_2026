@@ -73,16 +73,19 @@ func swap_furni(xy: Vector2i, new_node: FurniNode) -> FurniNode:
 	if !tile: return new_node
 	var old_node := tile.furni
 	if old_node:
+		old_node.store_global_transform()
 		old_node.name = "FurniPickedUp"
 		remove_child(old_node)
 		old_node.pack()
 	tile.furni = new_node
 	if new_node:
+		new_node.store_global_transform()
 		if new_node.get_parent():
 			new_node.reparent(self, false)
 		else:
 			add_child(new_node)
 		new_node.position = Vector3(xy.x+0.5, 0.0, xy.y+0.5)
+		new_node.scale = Vector3.ONE
 		new_node.name = "Furni%d_%d" % [xy.x, xy.y]
 		new_node.unpack()
 	if tile.item:

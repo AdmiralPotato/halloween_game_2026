@@ -11,7 +11,7 @@ const TWEEN_TIME = 0.1
 ## How fast the birb wants to turn in RADIANS per second
 @export var turn_speed := TAU
 
-var held_object: Node3D
+var held_object: BaseMapNode
 var in_rearrange_mode := true
 
 func _physics_process(delta):
@@ -35,34 +35,16 @@ func _physics_process(delta):
 		var target_tile := Global.tilemap.find_tile(self.position, self.basis.z, 1.4)
 		var tilemap := Global.tilemap
 		var old_held := held_object
-		var old_xform := old_held.global_transform if old_held else Transform3D()
 		if held_object is FurniNode || in_rearrange_mode:
 			# doesn't matter if we're in rearrange mode if we're already holding furni
-			var placed_furni = Global.tilemap.get_furni(target_tile)
-			if placed_furni:
-				# XXX assume it unlikely that the position of a Furni node
-				# is exactly 0
-				old_xform = placed_furni.global_transform
 			held_object = Global.tilemap.swap_furni(target_tile, held_object)
 		elif held_object is ItemNode || !in_rearrange_mode:
 			held_object = Global.tilemap.swap_item(target_tile, held_object)
 		# If we're holding an object now, it's because we picked one up.
 		if held_object:
 			add_child(held_object)
-			# after we're added as a child, our global_position is again valid
-			# based on our new hierarchy; tween over to where we want to be in
-			# local space.
-			held_object.global_transform = old_xform
-			var tween = create_tween().set_trans(Tween.TRANS_SINE)
-			var target = Transform3D()
-			target.basis = target.basis.scaled(SMOL)
-			target.origin = HAND_POS
-			tween.tween_property(held_object, "transform", target, TWEEN_TIME)
-		else:  # we put something down
-			if old_held is FurniNode:
-				var new_xform = old_held.transform  # set by swap_furni
-				# reset to unity scale
-				new_xform.basis = new_xform.basis.scaled(Vector3.ONE / new_xform.basis.get_scale())
-				old_held.global_transform = old_xform
-				var tween = create_tween().set_trans(Tween.TRANS_SINE)
-				tween.tween_property(old_held, "transform", new_xform, TWEEN_TIME)
+			held_object.position = HAND_POS
+			held_object.scale = SMOL
+			held_object.animate_to_current_transform()
+		if old_held:
+			old_held.animate_to_current_transform()
