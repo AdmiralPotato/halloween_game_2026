@@ -139,6 +139,7 @@ export type Ingredient = {
 	modifiers: string[];
 };
 export const isIngredient = (givenV: unknown): givenV is Ingredient => {
+	if (isProduct(givenV)) { return false; }
 	if (typeof givenV !== 'object') { return false; }
 	if (givenV === null) { return false; }
 	const v = givenV as Ingredient;
@@ -271,6 +272,7 @@ export const itemsCanStack = (a: Item, b: Item): boolean => {
 };
 
 // Returns the new item object (because it might have a greater quantity now, i.e. in the destination)
+// MODIFIES ORIGINAL ITEM IN LIST
 export const addItemToList = (itemToAdd: Item, arr: Item[]): Item => {
 	const foundIndex = arr.findIndex((v)=>itemsCanStack(itemToAdd, v));
 	// Not there? Easy, just add it at the end
@@ -320,12 +322,29 @@ export const getOneRootItem = <T extends Product|Ingredient|Pan>(item: T): T => 
 	clone.quantity = 1;
 	return clone;
 };
+export const getXRootItem = <T extends Product|Ingredient|Pan>(item: T, quantity: number): T => {
+	if (quantity < item.quantity) {
+		throw new Error ('Not enough quantity in item to grab X (you should be checking in advance)')
+	}
+	const clone = structuredClone(item);
+	clone.quantity = quantity;
+	return clone;
+};
 
 // -------------------- ITEM MATH (innermost part, e.g. cookies in pan of cookies) -------------------- //
 
 export const getOneInnermostItem = (item: Item): Item => {
 	const innermost = structuredClone(getInnermostItem(item));
 	innermost.quantity = 1;
+	return innermost;
+};
+
+export const getXInnermostItems = (item: Item, quantity: number): Item => {
+	const innermost = structuredClone(getInnermostItem(item));
+	if (quantity < innermost.quantity) {
+		throw new Error ('Not enough quantity in item to grab X (you should be checking in advance)')
+	}
+	innermost.quantity = quantity;
 	return innermost;
 };
 
@@ -473,7 +492,7 @@ export const printFinishedProduct = (product: Product): string => {
 
 // For things that aren't finished, like things from the store or in inventory, here's a more generic thing:
 
-export const printFoodComponent = (item: Ingredient) => {
+export const printIngredient = (item: Ingredient) => {
 	const modifierAndItemName = printModifiersWithItemName(item.name, item.modifiers);
 	const nX = printXQuantity(item.quantity);
 	return nX + modifierAndItemName;
@@ -501,11 +520,12 @@ export const printItem = (item: Item | null): string => {
 		return `(nothing)`
 	}
 	if (isIngredient(item)) {
-		return printFoodComponent(item)
+		return printIngredient(item)
 	} else if (isProduct(item)) {
 		return printFinishedProduct(item);
-	} else {
+	} else if (isPan(item)) {
 		return printPan(item);
 	}
+	throw new Error ("PRINT ITEM CASE NOT YET HANDLED")
 }
 

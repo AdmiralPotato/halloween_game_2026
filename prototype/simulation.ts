@@ -31,12 +31,12 @@ const s = newState([
 	newTile('storage', newPan('cookie_sheet', 3)),
 	newTile('storage', newPan('muffin_tin', 3)),
 	newTile('storage', newPan('cake_pan', 3)),
-	newCountertopTile(''),
-	newCountertopTile(''),
-	newCountertopTile(''),
-	newCountertopTile(''),
-	newCountertopTile(''),
-	newCountertopTile(''),
+	newTile('storage', newIngredient('rainbow_sprinkles', 5)),
+	newTile('countertop'),
+	newTile('countertop'),
+	newTile('countertop'),
+	newTile('countertop'),
+	newTile('countertop'),
 	null,
 	null,
 	null,
@@ -89,27 +89,6 @@ const findApplianceTileIndex = (type: string): number => {
 		return s.tiles.findIndex(v=>isOvenTile(v));
 	}
 	return s.tiles.findIndex(v=>v?.tile === 'appliance' && v?.type === type);
-};
-
-const help = () => {
-	console.log(header);
-	console.log(`======================== Commands ========================`);
-	console.log(`> interact ()`)
-	console.log(`    Interacts with the appliance at the current location.`)
-	console.log(`> pickupOrDrop ()`)
-	console.log(`    Drops or picks up an item. Context (i.e. location) dependent.`)
-	console.log(`    Aliases: pickup(), drop()`)
-	console.log(`> goto (destination: string|number, subtype: string)`)
-	console.log(`    Set location to the tile at the given index, e.g. goto(4)`)
-	console.log(`    or find a tile with strings, e.g. goto('oven') or goto('storage', 'flour')`)
-	console.log(`> buy (itemName: string, quantity?: number [10])`)
-	console.log(`    Buy from the warehouse; refills existing storage, or adds a new storage tile to a null tile`)
-	// console.log(`empty ('oven'|'mixer'|'cutting_board') [discards entire contents, if any]`);
-	// console.log(`discard (location, index) [removes and discards item, if any]`);
-	// console.log(`attributes (location, index?) [index defaults to 0]`)
-	// console.log(`addFilling () [uses finisher: filling]`);
-	// console.log(`addDecoration () [uses finisher: decoration]`);
-	// console.log(`addDoodad () [uses finisher: doodad]`);
 };
 
 const costTiers: Record<number, number> = {
@@ -247,7 +226,28 @@ const tiles = () => {
 	}).join('\n');
 	console.log(`LOCATION TILES:`)
 	console.log(toPrint);
-}
+};
+
+const help = () => {
+	console.log(header);
+	console.log(`======================== Commands ========================`);
+	console.log(`> interact ()`)
+	console.log(`    Interacts with the appliance at the current location.`)
+	console.log(`> pickupOrDrop ()`)
+	console.log(`    Drops or picks up an item. Context (i.e. location) dependent.`)
+	console.log(`    Aliases: pickup(), drop()`)
+	console.log(`> goto (destination: string|number, subtype: string)`)
+	console.log(`    Set location to the tile at the given index, e.g. goto(4)`)
+	console.log(`    or find a tile with strings, e.g. goto('oven') or goto('storage', 'flour')`)
+	console.log(`> buy (itemName: string, quantity?: number [10])`)
+	console.log(`    Buy from the warehouse; refills existing storage, or adds a new storage tile to a null tile`)
+	// console.log(`empty ('oven'|'mixer'|'cutting_board') [discards entire contents, if any]`);
+	// console.log(`discard (location, index) [removes and discards item, if any]`);
+	// console.log(`attributes (location, index?) [index defaults to 0]`)
+	// console.log(`addFilling () [uses finisher: filling]`);
+	// console.log(`addDecoration () [uses finisher: decoration]`);
+	// console.log(`addDoodad () [uses finisher: doodad]`);
+};
 
 tiles()
 goto('storage', 'sugar');
@@ -283,14 +283,34 @@ pickup();
 goto('mixer')
 drop();
 interact()
-goto(9)
+goto('storage', 'cookie_sheet');
 pickup()
 goto('mixer')
 pickup()
 
+// BAKE
 goto('oven')
 drop()
 interact()
+pickup()
+
+// set on countertop
+goto(17) // definitely empty counter
+drop()
+
+// apply frosting
+goto('storage', 'frosting')
+pickup()
+goto(17)
+interact()
+
+// apply sprinkles
+goto('storage', 'rainbow sprinkles')
+pickup()
+goto(17)
+interact()
+
+// deliver
 pickup()
 goto(0)
 drop()

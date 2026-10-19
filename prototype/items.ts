@@ -11,19 +11,19 @@ export const isStorageType = (v: unknown): v is StorageType => {
 	return true;
 };
 
-type ItemCategory = 'base' // raw ingredient, e.g. egg, flour, or base material, e.g. cookie dough
+export type ItemCategory = 'base' // raw ingredient, e.g. egg, flour, or base material, e.g. cookie dough
 	| 'modifier' // optional supplement for any other category
 	| 'product' // final, sellable item
-	| 'filling' // optional; useable only on a finished product
-	| 'decoration' // optional; useable only on a finished product
-	| 'doodad' // optional; useable only on a finished product if a decoration is already present
+	| 'fillings' // optional; useable only on a finished product
+	| 'decorations' // optional; useable only on a finished product
+	| 'doodads' // optional; useable only on a finished product if a decoration is already present
 	| 'pan'
 const isItemCategory = (v: unknown): v is ItemCategory => {
 	if (v === 'base') { return true; }
 	if (v === 'modifier') { return true; }
-	if (v === 'filling') { return true; }
-	if (v === 'decoration') { return true; }
-	if (v === 'doodad') { return true; }
+	if (v === 'fillings') { return true; }
+	if (v === 'decorations') { return true; }
+	if (v === 'doodads') { return true; }
 	if (v === 'pan') { return true; }
 	return true;
 };
@@ -238,7 +238,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 	},
 	red_candied_flowers: {
 		storageType: 'jar',
-		categories: [ 'doodad' ],
+		categories: [ 'doodads' ],
 		cost: 5,
 		attributes: {
 			red: 1,
@@ -247,7 +247,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 	},
 	white_candied_flowers: {
 		storageType: 'jar',
-		categories: [ 'doodad' ],
+		categories: [ 'doodads' ],
 		cost: 5,
 		attributes: {
 			pale: 2,
@@ -256,7 +256,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 	},
 	blue_candied_flowers: {
 		storageType: 'jar',
-		categories: [ 'doodad' ],
+		categories: [ 'doodads' ],
 		cost: 5,
 		attributes: {
 			blue: 1,
@@ -265,7 +265,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 	},
 	yellow_candied_flowers: {
 		storageType: 'jar',
-		categories: [ 'doodad' ],
+		categories: [ 'doodads' ],
 		cost: 5,
 		attributes: {
 			yellow: 1,
@@ -274,7 +274,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 	},
 	rainbow_sprinkles: {
 		storageType: 'jar',
-		categories: [ 'modifier', 'doodad' ],
+		categories: [ 'modifier', 'doodads' ],
 		cost: 2,
 		attributes: {
 			varigated: 1,
@@ -283,7 +283,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 	},
 	chocolate_sprinkles: {
 		storageType: 'jar',
-		categories: [ 'modifier', 'doodad' ],
+		categories: [ 'modifier', 'doodads' ],
 		cost: 2,
 		attributes: {
 			pop: 1,
@@ -291,7 +291,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 	},
 	white_sprinkles: {
 		storageType: 'jar',
-		categories: [ 'modifier', 'doodad' ],
+		categories: [ 'modifier', 'doodads' ],
 		cost: 2,
 		attributes: {
 			pale: 1,
@@ -300,7 +300,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 	},
 	ball_bearing_sprinkles: {
 		storageType: 'jar',
-		categories: [ 'modifier', 'doodad' ],
+		categories: [ 'modifier', 'doodads' ],
 		cost: 2,
 		attributes: {
 			pale: 1,
@@ -309,7 +309,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 	},
 	hard_candy_bats: {
 		storageType: 'jar',
-		categories: [ 'doodad' ],
+		categories: [ 'doodads' ],
 		cost: 3,
 		attributes: {
 			pop: 1,
@@ -317,7 +317,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 	},
 	hard_candy_eyeballs: {
 		storageType: 'jar',
-		categories: [ 'doodad' ],
+		categories: [ 'doodads' ],
 		cost: 3,
 		attributes: {
 			varigated: 1,
@@ -326,7 +326,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 	},
 	hard_candy_ghosts: {
 		storageType: 'jar',
-		categories: [ 'doodad' ],
+		categories: [ 'doodads' ],
 		cost: 3,
 		attributes: {
 			pop: 1,
@@ -334,31 +334,31 @@ const itemInfoMap: Record<string, ItemInfo> = {
 	},
 	chocolate_chips: {
 		storageType: 'jar',
-		categories: ['modifier', 'doodad'],
+		categories: ['modifier', 'doodads'],
 		cost: 3,
 		attributes: 'from_recipe',
 	},
 	frosting: {
 		storageType: 'jar',
-		categories: ['decoration'],
+		categories: ['decorations'],
 		cost: 2,
 		attributes: 'from_recipe',
 	},
 	whipped_cream: {
 		storageType: 'fridge',
-		categories: ['filling', 'decoration'],
+		categories: ['fillings', 'decorations'],
 		cost: 2,
 		attributes: 'from_recipe',
 	},
 	pastry_cream: {
 		storageType: 'fridge',
-		categories: ['filling'],
+		categories: ['fillings'],
 		cost: 3,
 		attributes: 'from_recipe',
 	},
 	pudding: {
 		storageType: 'fridge',
-		categories: ['filling'],
+		categories: ['fillings'],
 		cost: 3,
 		attributes: 'from_recipe',
 	},

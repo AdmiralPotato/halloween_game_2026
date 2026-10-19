@@ -1,4 +1,5 @@
-import type { Product, Ingredient } from "./utilities.ts";
+import { getItemInfo } from "./items.ts";
+import type { Product, Ingredient, Item } from "./utilities.ts";
 import { addItemToList } from "./utilities.ts";
 
 import { getVariantParent } from "./variants.ts";
@@ -84,6 +85,9 @@ export const productSellBatchSize = (name: string) => {
 	return info.sellBatchSize;
 }
 
+// PROBLEM: These two only work if you know in advance which type of finisher you're putting on. Don't know if that will work
+// TODO FILLING: make something like a Pan, but it's a Piping Bag (?) -- no, be more explicit: Filling Injector, but LOOKS like a piping bag
+
 // We need to do it this way because whipped cream (or other things) could be a filling OR a decoration
 export const isFinisherAllowedOnProduct = (finisherName: string, finisherType: ProductFinisherType, product: string): boolean => {
 	const finishers = getFinisherInfo(product);
@@ -99,22 +103,23 @@ export const isFinisherAllowedOnProduct = (finisherName: string, finisherType: P
 	return false;
 };
 
-// Returns new Product, or null if the process failed
-// You have to specify the finisher type because some things can be used in more than one way (e.g. whipped cream can be filling or decoration)
-export const addFinisherToProduct = (finisherType: ProductFinisherType, ingredient: Ingredient, product: Product): Product | null => {
-	if (!isFinisherAllowedOnProduct(ingredient.name, finisherType, product.name)) {
-		return null;
+// NEW PARADIGM: bare finisher: decoration, doodad; finisher in applicator: FillingInjector<Ingredient>
+
+export const itemIsBareFinisherTypes = (itemName: string): ('decorations'|'doodads')[] => {
+	return getItemInfo(itemName).categories.filter(v=>v === 'decorations' || v === 'doodads');
+};
+export const isItemBareFinisher = (itemName: string): boolean => {
+	const bareFinisherTypes = itemIsBareFinisherTypes(itemName);
+	return bareFinisherTypes.length > 0;
+};
+export const itemIsBareFinisherTypeForProduct = (itemName: string, productName: string): 'decorations' | 'doodads' | null => {
+	const itemFinisherTypes = itemIsBareFinisherTypes(itemName);
+	for (let i = 0; i < itemFinisherTypes.length; i++) {
+		const finisherType = itemFinisherTypes[i];
+		const isAllowed = isFinisherAllowedOnProduct(itemName, finisherType, productName);
+		if (isAllowed) {
+			return finisherType;
+		}
 	}
-	// Doodads cannot go on a product without a decoration for it to stick to
-	if (finisherType === 'doodads' && product.decorations.length === 0) {
-		return null;
-	}
-	// 1x finisher goes to 1x batch of product. If there is not enough finisher available, it fails.
-	if (ingredient.quantity < product.quantity) {
-		return null;
-	}
-	const ret = structuredClone(product);
-	addItemToList(ingredient, ret[finisherType]);
-	ingredient.quantity -= product.quantity;
-	return ret;
+	return null;
 }

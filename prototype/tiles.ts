@@ -1,6 +1,6 @@
-import { productSellBatchSize } from "./finishers.ts";
+import { itemIsBareFinisherTypeForProduct, productSellBatchSize } from "./finishers.ts";
 import type { StorageType } from "./items.ts";
-import { getItemInfo, isStorageType, itemMatchesStorageType, newIngredient } from "./items.ts";
+import { getItemInfo, isStorageType, itemMatchesStorageType } from "./items.ts";
 
 import { cookEval, turnCookEvalIntoOutput } from "./recipes.ts";
 
@@ -21,6 +21,7 @@ import {
 	innermostItemSubtract,
 	isEmptyPan,
 	addItemToList,
+	getXInnermostItems,
 } from "./utilities.ts";
 
 // ------------------------------------------ PRINTING ------------------------------------------ //
@@ -234,15 +235,15 @@ export const newStorageTile = (type: string): StorageTile => {
 			const carriedInnerItem = getInnermostItem(s.hand);
 			const inBox = ret.inside;
 
-			// inner held item can't go in this kind of box -> STOP
-			if (!ret.item_is_compatible(carriedInnerItem)) {
-				errorLog(s, `'drop: ${cleanString(carriedInnerItem.name)}' cannot be put into storage type: ${type}`);
-				return false;
-			}
-
 			// inner held item cannot stack with what's in the box -> STOP
 			if (inBox !== null && !itemsCanStack(carriedInnerItem, inBox)) {
 				errorLog(s, `drop: ${printItem(carriedInnerItem)} cannot stack with ${printItem(inBox)}`);
+				return false;
+			}
+
+			// inner held item can't go in this kind of box -> STOP
+			if (!ret.item_is_compatible(carriedInnerItem)) {
+				errorLog(s, `'drop: ${cleanString(carriedInnerItem.name)}' cannot be put into storage type: ${type}`);
 				return false;
 			}
 
@@ -580,7 +581,59 @@ export const newCountertopTile = (type = ''): CountertopTile => {
 		type,
 		inside: null,
 		item_is_compatible: (item: Item) => isCountertopTileInnards(item),
-		interact: () => false,
+		interact: (s: State) => {
+			// if counter is empty -> DO NOTHING
+			if (ret.inside === null) {
+				errorLog(s, `Nothing here to interact with.`);
+				return false;
+			}
+			
+			// if what's on the counter is a product, we can try to finish it
+			// (ignore any pans in this transaction, hence 'innermost')
+			const counterInner = getInnermostItem(ret.inside);
+			if (isProduct(counterInner)) {
+
+				// product on counter, empty handed -> DO NOTHING
+				if (s.hand === null) {
+					errorLog(s, `Cannot add finisher to product empty handed!`);
+					return false;
+				}
+
+				// product on counter, holding bare finisher
+				// (we're checking inside a pan if holding one though in case you put sprinkles on a pan for some reason?)
+				// TODO: for fillings, which need an applicator, you'l have to check the root item though; check for that before this
+				const handInner = getInnermostItem(s.hand);
+				const bareFinisherType = itemIsBareFinisherTypeForProduct(handInner.name, counterInner.name);
+				if (
+					bareFinisherType !== null
+					&& isIngredient(handInner)
+				) {
+					// not enough finisher to add to entirety of product stack -> DO NOTHING
+					if (handInner.quantity < counterInner.quantity) {
+						errorLog(s, `Not enough ${printItem(handInner)} to apply to ${printItem(counterInner)}`);
+						return false;
+					}
+
+					// if finisher type is doodad and product has no decoration yet -> DO NOTHING
+					if (bareFinisherType === 'doodads' && counterInner.decorations.length === 0 ) {
+						errorLog(s, `These ${printItem(handInner)} won't stick to ${printItem(counterInner)}!\nTry applying a decoration first, like frosting or whipped cream.`);
+						return false;
+					}
+
+					// otherwise -> APPLY FINISHER (at COUNTER QUANTITY)
+					const quantity = counterInner.quantity
+					const toDrop = getXInnermostItems(s.hand, quantity);
+					const remainder = innermostItemSubtract(s.hand, quantity);
+					addItemToList(toDrop, counterInner[bareFinisherType]); // apply to the product finisher list
+					s.hand = remainder; // adjust remaining stock in hand
+					log(s, `Decorated ${printItem(counterInner)} with ${printItem(toDrop)}!`)
+					return true;
+
+			}
+
+			}
+			return false;
+		},
 		pickup_or_drop: (s) => {
 			if (s.hand === null) {
 				// holding nothing, nothing on the counter -> DO NOTHING
@@ -631,6 +684,8 @@ export const newCountertopTile = (type = ''): CountertopTile => {
 				log(s, `Put ${printItem(toDrop)} on the countertop! (New stack size: ${ret.inside?.quantity})`);
 				return true;
 			}
+
+			// for "dropping" a finisher on a product, see INTERACT
 
 			// holding something, something on the counter, cannot stack -> DO NOTHING
 			errorLog(s, `drop: ${printItem(s.hand)} cannot stack with ${printItem(ret.inside)}`);
