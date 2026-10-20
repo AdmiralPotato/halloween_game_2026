@@ -9,6 +9,10 @@ const FURNI_OVEN := preload("res://map/FurniOven.tscn")
 const FURNI_SOURCE := preload("res://map/FurniSource.tscn")
 const FURNI_STORAGE := preload("res://map/FurniStorage.tscn")
 
+const FURNI_DISPLAYCASE := preload("res://map/FurniDisplaycase.tscn")
+const FURNI_WALL := FURNI_FRIDGE
+const FURNI_REGISTER := preload("res://map/FurniCashregister.tscn")
+
 const FURNI_LIST := [
 	FURNI_COUNTERTOP,
 	FURNI_CUTTINGBOARD,
@@ -18,11 +22,19 @@ const FURNI_LIST := [
 	FURNI_STORAGE,
 ];
 
-@export var number_of_tiles := Vector2i(8, 8):
+@export var number_of_tiles := Vector2i(8, 12):
 	set(x):
 		number_of_tiles = x
 		if is_node_ready():
 			update_floor()
+			
+@export var customer_spawn_time_range := Vector2(3.0, 15.0)
+
+func get_customer_spawn_time() -> float:
+	return randf_range(
+			customer_spawn_time_range.x,
+			customer_spawn_time_range.y,
+	)
 
 func _ready():
 	update_floor()
@@ -32,17 +44,28 @@ func _ready():
 	for x in range(0, number_of_tiles.x):
 		var FurniPiece = FURNI_LIST[x % FURNI_LIST.size()]
 		$Tilemap.swap_furni(Vector2i(x,0), FurniPiece.instantiate())
-		$Tilemap.swap_furni(Vector2i(x,number_of_tiles.y - 1), FurniPiece.instantiate())
+		
+	build_storefront()
+	$SpawnCustomer.start(get_customer_spawn_time())
 
-	#var ingredientSource : FurniSource# = FURNI_SOURCE.instantiate();
-	#ingredientSource.ingredient_type = FurniSource.IngredientType.GUMDROP
-	#$Tilemap.swap_furni(Vector2i(2,2), ingredientSource)
-	#ingredientSource = FURNI_SOURCE.instantiate();
-	#ingredientSource.ingredient_type = FurniSource.IngredientType.PUMPKIN
-	#$Tilemap.swap_furni(Vector2i(3,2), ingredientSource)
-	#ingredientSource = FURNI_SOURCE.instantiate();
-	#ingredientSource.ingredient_type = FurniSource.IngredientType.CARAMEL_APPLE
-	#$Tilemap.swap_furni(Vector2i(4,2), ingredientSource)
+func build_storefront():
+	for x in range(number_of_tiles.x):
+		for y in range(number_of_tiles.y - 4, number_of_tiles.y):
+			var pt = Vector2i(x, y)
+			var tile = null
+			match number_of_tiles.y - y:
+				4:
+					if number_of_tiles.x - x > 2:
+						tile = FURNI_WALL.instantiate()
+				2:
+					if x == 0:
+						tile = FURNI_REGISTER.instantiate()
+					else:
+						tile = FURNI_DISPLAYCASE.instantiate()
+			if tile:
+				tile.locked = true
+			$Tilemap.swap_furni(pt, tile)
+
 
 func update_floor():
 	$Tilemap.clear()
@@ -72,3 +95,8 @@ func _physics_process(delta):
 		$PlayerInteractIndicator.light_color = Color("ddcc31")
 	else:
 		$PlayerInteractIndicator.light_color = Color("1fff52")
+
+
+func _on_spawn_customer_timeout() -> void:
+	print("would spawn a customer")
+	$SpawnCustomer.start(get_customer_spawn_time())

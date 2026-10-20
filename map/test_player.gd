@@ -1,8 +1,6 @@
 extends RigidBody3D
 
-const HAND_POS = Vector3(0.0, -0.5, 0.5)
 const SMOL = Vector3.ONE * 0.5
-const TWEEN_TIME = 0.1
 
 ## How much force the birb can apply on a given axis
 @export var movement_force := 30
@@ -44,15 +42,18 @@ func _physics_process(delta):
 		var target_tile := Global.tilemap.find_tile(self.position, basis.z, 1.4)
 		var tilemap := Global.tilemap
 		var old_held := held_object
-		if held_object is FurniNode || in_rearrange_mode:
+		if held_object is FurniNode or (not held_object and in_rearrange_mode):
 			# doesn't matter if we're in rearrange mode if we're already holding furni
 			held_object = Global.tilemap.swap_furni(target_tile, held_object)
-		elif held_object is ItemNode || !in_rearrange_mode:
+		elif held_object is ItemNode or (not held_object and not in_rearrange_mode):
 			held_object = Global.tilemap.swap_item(target_tile, held_object)
-		# If we're holding an object now, it's because we picked one up.
-		if held_object:
-			carry_node.add_child(held_object)
+		# If we're holding an object now, and it's a new one we picked up...
+		if held_object and held_object != old_held:
+			if held_object.is_inside_tree():
+				held_object.reparent(carry_node, false)
+			else:
+				carry_node.add_child(held_object)
 			held_object.transform = Transform3D(Basis().scaled(SMOL), Vector3.ZERO)
 			held_object.animate_to_current_transform()
-		if old_held:
+		if old_held and held_object != old_held:
 			old_held.animate_to_current_transform()

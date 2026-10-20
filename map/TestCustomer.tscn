@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://ccml46p73i4ae"]
+
+[ext_resource type="Script" uid="uid://byhpra7hsmfpy" path="res://map/test_customer.gd" id="1_d32tx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a28pv"]
+radius = 0.375
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_a28pv"]
+radius = 0.375
+
+[node name="TestCustomer" type="RigidBody3D" unique_id=564519824]
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+gravity_scale = 0.0
+linear_damp = 5.0
+script = ExtResource("1_d32tx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1871894636]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_a28pv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=243257236]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_a28pv")

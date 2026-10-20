@@ -5,13 +5,15 @@ class_name Tilemap
 
 class Tile extends RefCounted:
 	var furni: FurniNode
-	var item: ItemNode
 
 var tiles: Dictionary[Vector2i, Tile]
+var pathfinder := AStarGrid2D.new()
 
 func create_slots(minCoord: Vector2i, size: Vector2i, ...extra_args):
 	var args = extra_args
 	args.insert(0, null)
+	pathfinder.region = Rect2i(minCoord, size)
+	pathfinder.update()
 	for x in range(minCoord.x, minCoord.x+size.x):
 		for y in range(minCoord.y, minCoord.y+size.y):
 			var xy := Vector2i(x, y)
@@ -23,11 +25,13 @@ func create_slots(minCoord: Vector2i, size: Vector2i, ...extra_args):
 			var node_name := "Furni%d_%d" % [x, y]
 			if self.has_node(node_name):
 				tile.furni = self.get_node(node_name)
+				pathfinder.set_point_solid(xy)
 			tiles.set(xy, tile)
 
 ## Forget everything we think we know about tiles.
 func clear():
 	tiles.clear()
+	pathfinder.clear()
 
 ## Returns the coordinates of a tile that someone standing at `position` and
 ## facing `facing` (a unit vector) should be interacting with / picking up from
@@ -73,11 +77,14 @@ func swap_furni(xy: Vector2i, new_node: FurniNode) -> FurniNode:
 	var tile := _get_tile(xy)
 	if !tile: return new_node
 	var old_node := tile.furni
+	if old_node and not old_node.can_take():
+		return new_node
 	if old_node:
 		old_node.store_global_transform()
 		old_node.name = "FurniPickedUp"
 		remove_child(old_node)
 		old_node.pack()
+		pathfinder.set_point_solid(xy, false)
 	tile.furni = new_node
 	if new_node:
 		new_node.store_global_transform()
@@ -88,38 +95,27 @@ func swap_furni(xy: Vector2i, new_node: FurniNode) -> FurniNode:
 		new_node.transform = Transform3D(Basis(), Vector3(xy.x+0.5, 0.0, xy.y+0.5))
 		new_node.name = "Furni%d_%d" % [xy.x, xy.y]
 		new_node.unpack()
-	if tile.item:
-		if tile.furni && tile.furni.has_property("item_height"):
-			tile.item.position.y = tile.furni.item_height
-		else:
-			tile.item.position.y = 0.0
+		pathfinder.set_point_solid(xy, true)
 	return old_node
 
-## If there is a tile at the given coordinates, this swaps the new node into
-## place as an item. If there was an old item node, returns that. Otherwise,
-## returns null.
+## Ask the furni at the given position to pick up/drop an item. Returns the item
+## the player should be left holding (which may be the one given).
 ##
-## Removes the old node from our list of children, and adds the new node to our
-## list of children. We will translate the new node appropriately. YOU are
-## responsible for setting the translation of the returned node / ensuring it is
-## a child of whomever it needs to be.
-##
-## NOTE: If we are placing an item, and there is furni, and that furni has a
-## "placed_item_height" property, that will be used to decide the new Y
-## translation. Otherwise it will be 0.
+## This method does *not* adjust the tree/hierarchy in any way. Individual furnis
+## may, however; users should be prepared to cope with any in- or out-of-tree
+## nodes returned.
 func swap_item(xy: Vector2i, new_node: ItemNode) -> ItemNode:
 	var tile := _get_tile(xy)
 	if !tile: return new_node
-	var old_node := tile.item
-	if old_node:
-		remove_child(old_node)
-	tile.item = new_node
+	if not tile.furni: return new_node
 	if new_node:
-		add_child(new_node)
-		new_node.position = Vector3(xy.x+0.5, 0.0, xy.y+0.5)
-		if tile.furni && tile.furni.has_property("item_height"):
-			new_node.position.y = tile.furni.item_height
-	return old_node
+		new_node.store_global_transform()
+		return tile.furni.accept_item(new_node)
+	else:
+		var item = tile.furni.provide_item()
+		if item:
+			item.store_global_transform()
+		return item
 
 ## If there is a tile at the given coordinates, this attempts to combine the
 ## given item with an item already on the tile. If there is no item, this ends
@@ -147,6 +143,7 @@ func combine_item(xy: Vector2i, new_node: ItemNode) -> ItemNode:
 	return null
 
 func _init():
+	pathfinder.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
 	if Engine.is_editor_hint():
 		# It's tempting to just reference EditorInterface here, but this singleton
 		# isn't available in exports (naturally). Somewhat surprisingly, even
@@ -173,3 +170,9 @@ func mess_with_children():
 			child.name = "Item%d_%d" % [tile_x, tile_y]
 			child.position.x = tile_x + 0.5
 			child.position.z = tile_y + 0.5
+
+func pick_open_point() -> Vector2i:
+	return pathfinder.get_point_data_in_region(pathfinder.region)\
+			.filter(func(pt: Dictionary): return not pt.solid)\
+			.pick_random()\
+			.position

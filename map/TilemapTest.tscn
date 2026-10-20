@@ -7,10 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://03n546k1srnw" path="res://ui/debug_panel.tscn" id="4_8t2af"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_el5rg"]
-size = Vector3(8, 1, 8)
+size = Vector3(8, 1, 12)
 
 [sub_resource type="BoxMesh" id="BoxMesh_el5rg"]
-size = Vector3(8, 1, 8)
+size = Vector3(8, 1, 12)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_8t2af"]
 plane = Plane(1, 0, 0, 0)
@@ -37,6 +37,7 @@ sky = SubResource("Sky_eai58")
 [node name="TilemapTest" type="Node3D" unique_id=1389805114]
 process_physics_priority = -1
 script = ExtResource("1_0n275")
+customer_spawn_time_range = null
 
 [node name="Tilemap" type="Node3D" parent="." unique_id=991694847]
 script = ExtResource("2_xtlfy")
@@ -55,7 +56,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 2.5)
 ingredient_type = 5
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=2097173625]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.5, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.5, 6)
 
 [node name="FloorBox" type="CollisionShape3D" parent="Floor" unique_id=647389857]
 shape = SubResource("BoxShape3D_el5rg")
@@ -64,20 +65,22 @@ shape = SubResource("BoxShape3D_el5rg")
 mesh = SubResource("BoxMesh_el5rg")
 
 [node name="WallNX" type="CollisionShape3D" parent="Floor" unique_id=2049535826]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.5, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.5, -6)
 shape = SubResource("WorldBoundaryShape3D_8t2af")
 
 [node name="WallNZ" type="CollisionShape3D" parent="Floor" unique_id=154043353]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.5, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.5, -6)
 shape = SubResource("WorldBoundaryShape3D_0vrjm")
 
 [node name="WallPX" type="CollisionShape3D" parent="Floor" unique_id=1048482900]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, 6)
 shape = SubResource("WorldBoundaryShape3D_8g1d1")
 
 [node name="WallPZ" type="CollisionShape3D" parent="Floor" unique_id=331193442]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, 6)
 shape = SubResource("WorldBoundaryShape3D_a28pv")
+
+[node name="Customers" type="Node3D" parent="." unique_id=1606353682]
 
 [node name="TestPlayer" parent="." unique_id=1707035649 instance=ExtResource("3_8t2af")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
@@ -115,3 +118,9 @@ offset_top = 22.0
 offset_right = 379.0
 offset_bottom = 45.0
 text = "Press Space/P to place/remove Countertops"
+
+[node name="SpawnCustomer" type="Timer" parent="." unique_id=982563971]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="SpawnCustomer" to="." method="_on_spawn_customer_timeout"]

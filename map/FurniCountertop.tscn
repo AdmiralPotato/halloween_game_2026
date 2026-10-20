@@ -16,3 +16,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("BoxShape3D_p33bg")
 
 [node name="countertop" parent="StaticBody3D" unique_id=1962611896 instance=ExtResource("2_l3uxt")]
+
+[node name="Item" type="Marker3D" parent="." unique_id=337456045]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)

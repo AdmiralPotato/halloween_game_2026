@@ -2,26 +2,19 @@
 class_name FurniSource
 extends FurniNode
 
-enum IngredientType {
-	PEANUTBUTTER_CUP,
-	DUMDUM,
-	TAFFY,
-	PUMPKIN,
-	CANDY_CORN,
-	CARAMEL_APPLE,
-	STARBURST,
-	GUMDROP,
-	KISS,
-}
+const ITEM_SCENE := preload("res://map/ItemNode.tscn")
 
-@export var ingredient_type: IngredientType:
+@export var ingredient_type: ItemNode.IngredientType:
 	set(value):
 		$StaticBody3D/CandySprite.play("%d" % value)
 		ingredient_type = value
 
-func item_can_fit(_other_item: ItemNode) -> bool:
-	# Any item can fit on a countertop
-	return true
-
 func _ready():
 	ingredient_type = ingredient_type
+
+func provide_item() -> ItemNode:
+	var item: ItemNode = ITEM_SCENE.instantiate()
+	add_child(item)
+	item.global_position = $StaticBody3D/CandySprite.global_position
+	item.ingredient_type = ingredient_type
+	return item
