@@ -148,7 +148,13 @@ func combine_item(xy: Vector2i, new_node: ItemNode) -> ItemNode:
 
 func _init():
 	if Engine.is_editor_hint():
-		EditorInterface.get_selection().connect("selection_changed", self.mess_with_children)
+		# It's tempting to just reference EditorInterface here, but this singleton
+		# isn't available in exports (naturally). Somewhat surprisingly, even
+		# referring to it in an export build causes a parse error (since the name
+		# isn't defined), so pardon the workaround.
+		Engine.get_singleton(&"EditorInterface")\
+				.get_selection()\
+				.connect("selection_changed", self.mess_with_children)
 	else: # not Engine.is_editor_hint()
 		Global.tilemap = self
 
