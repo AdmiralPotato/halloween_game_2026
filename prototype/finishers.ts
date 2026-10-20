@@ -1,7 +1,4 @@
 import { getItemInfo } from "./items.ts";
-import type { Product, Ingredient, Item } from "./utilities.ts";
-import { addItemToList } from "./utilities.ts";
-
 import { getVariantParent } from "./variants.ts";
 
 export type ProductFinisherType = 'fillings' | 'decorations' | 'doodads';
@@ -84,9 +81,6 @@ export const productSellBatchSize = (name: string) => {
 	const info = getFinisherInfo(name);
 	return info.sellBatchSize;
 }
-
-// PROBLEM: These two only work if you know in advance which type of finisher you're putting on. Don't know if that will work
-// TODO FILLING: make something like a Pan, but it's a Piping Bag (?) -- no, be more explicit: Filling Injector, but LOOKS like a piping bag
 
 // We need to do it this way because whipped cream (or other things) could be a filling OR a decoration
 export const isFinisherAllowedOnProduct = (finisherName: string, finisherType: ProductFinisherType, product: string): boolean => {

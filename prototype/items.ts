@@ -68,7 +68,7 @@ export const newIngredient = (name: string, quantity: number, modifiers?: string
 		name,
 		quantity,
 		modifiers: modifiers || [],
-	}	
+	}
 };
 export const newProduct = (name: string, quantity: number, modifiers?: string[], fillings?: Ingredient[], decorations?: Ingredient[], doodads?: Ingredient[]): Product => {
 	return {

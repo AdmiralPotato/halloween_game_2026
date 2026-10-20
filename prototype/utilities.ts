@@ -1,4 +1,3 @@
-import { getItemInfo } from "./items.ts";
 import { getVariantPrintName } from "./variants.ts";
 
 // ----------------------------------------- GENERIC ----------------------------------------- //
@@ -401,14 +400,14 @@ export const getAllInnermostItems = (item: Item): Item => {
 	return innermost;
 };
 
-// Returns the item inside the container if any, otherwise just hands the root item back 
+// Returns the item inside the container if any, otherwise just hands the root item back
 export const getInnermostItem = (item: Item): Item => {
 	if (isContainer(item) && item.contents !== null) {
 		return item.contents;
 	}
 	return item;
 };
-// Removes the item inside the container if any and hands the container back, otherwise hands back null 
+// Removes the item inside the container if any and hands the container back, otherwise hands back null
 export const clearInnermostItems = <T extends Product|Ingredient|Pan|FillingInjector>(givenItem: T): T | null => {
 	const item = structuredClone(givenItem);
 	if (isContainer(item) && item.contents !== null) {

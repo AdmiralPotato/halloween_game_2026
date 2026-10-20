@@ -1,7 +1,6 @@
 import type {
 	Product,
 	Ingredient,
-	Item
 } from "./utilities.ts";
 import {
 	listToTally,
@@ -248,7 +247,7 @@ export const getAttributesForItemNameAndModifiers = (item: string, modifiers = [
 			return cache;
 		}
 	}
-	
+
 	const itemInfo = getItemInfo(item);
 
 	// Return attributes if provided in the item info
