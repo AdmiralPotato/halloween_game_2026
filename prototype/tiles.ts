@@ -1,6 +1,6 @@
 import { isFinisherAllowedOnProduct, itemIsBareFinisherTypeForProduct, productSellBatchSize } from "./finishers.ts";
 import type { StorageType } from "./items.ts";
-import { getItemInfo, getStackSize, isStorageType, itemMatchesStorageType, stackLeftOntoRight } from "./items.ts";
+import { getItemInfo, getStackSize, isStorageType, itemMatchesStorageType } from "./items.ts";
 
 import { cookEval, turnCookEvalIntoOutput } from "./recipes.ts";
 
@@ -242,7 +242,7 @@ export const newStorageTile = (type: string): StorageTile => {
 			) {
 				const toPickup = getOneRootItem(ret.inside);
 				const remainder = rootItemSubtract(ret.inside, 1);
-				s.hand.contents = toPickup;	 // add to the container	
+				s.hand.contents = toPickup;	 // add to the container
 				ret.inside = remainder; // adjust remaining stock
 				if (
 					isFillingInjector(s.hand)
@@ -351,7 +351,7 @@ export const newOvenTile = (type = ''): OvenTile => {
 		},
 		pickup_or_drop: (s) => {
 			if (s.hand === null) {
-				
+
 				// hand is empty, oven is empty -> DO NOTHING
 				if (ret.inside === null) {
 					errorLog(s, `'pickup: cannot pick up anything from empty oven`);
@@ -368,7 +368,7 @@ export const newOvenTile = (type = ''): OvenTile => {
 			}
 
 			if (isPan(s.hand)) {
-				
+
 				// holding a pan, oven is empty -> DROP (1)
 				if (ret.inside === null) {
 					const toDrop = getOneRootItem(s.hand)
@@ -411,7 +411,7 @@ export const newOvenTile = (type = ''): OvenTile => {
 			}
 
 			const innerHand = getInnermostItem(s.hand);
-			
+
 			// holding a non-pan, oven has empty pan, items are NOT compatible -> DO NOTHING
 			if (!panMayContain(ret.inside.name, innerHand.name)) {
 				errorLog(s, `${printItem(s.hand)} can't go in the oven!`);
@@ -422,7 +422,7 @@ export const newOvenTile = (type = ''): OvenTile => {
 			if (isContainer(innerHand)) {
 				throw new Error ("UNREACHABLE: filling injectors should be eliminated by now")
 			}
-			
+
 			// holding a non-pan, oven has empty pan, items are compatible -> DROP (1)
 			const remainder = rootItemSubtract(s.hand, 1);
 			s.hand = remainder;
@@ -504,7 +504,7 @@ export const newApplianceTile = (type: string): ApplianceTile => {
 
 			// carrying nothing OR carrying empty container -> STOP
 			if (
-				s.hand === null 
+				s.hand === null
 				|| isContainer(s.hand)
 				&& s.hand.contents === null
 			) {
@@ -625,7 +625,7 @@ export const newCountertopTile = (type = ''): CountertopTile => {
 				errorLog(s, `Nothing here to interact with.`);
 				return false;
 			}
-			
+
 			// if what's on the counter is a product, we can try to finish it
 			// (ignore any pans in this transaction, hence 'innermost')
 
@@ -640,7 +640,6 @@ export const newCountertopTile = (type = ''): CountertopTile => {
 
 				// product on counter, holding bare finisher...
 				// (we're checking inside a pan if holding one though in case you put sprinkles on a pan for some reason?)
-				// TODO: for fillings, which need an applicator, you'l have to check the root item though; check for that before this
 				const handInner = getInnermostItem(s.hand);
 				const bareFinisherType = itemIsBareFinisherTypeForProduct(handInner.name, counterInner.name);
 				if (
@@ -735,14 +734,14 @@ export const newCountertopTile = (type = ''): CountertopTile => {
 			// s.hand = fromCounter;
 			// log(s, `Swapped ${printItem(inHand)} for ${printItem(fromCounter)} from countertop!`);
 			// return true;
-				
+
 			// holding something, countertop has something, they can stack but stack full -> DO NOTHING
 			const stackSize = getStackSize(ret.inside);
 			if (stackSize >= ret.inside.quantity) {
 				errorLog(s, `Cannot add any more ${printItem(ret.inside)} to the stack (max stack size ${stackSize}).`)
 				return false;
 			}
-			
+
 			// holding something, countertop has something, they can stack, stack not full -> DROP (1)
 			const toDrop = getOneRootItem(s.hand);
 			const remainder = rootItemSubtract(s.hand, 1);
@@ -785,13 +784,13 @@ export const newTrashTile = (type = ''): TrashTile => {
 				warnLog(s, `Nothing to discard.`)
 				return false;
 			}
-			
+
 			// carrying empty container -> DO NOTHING
 			if (isContainer(s.hand) && s.hand.contents === null) {
 				errorLog(s, `Cannot throw out a ${cleanString(s.hand.name)}!`)
 				return false;
 			}
-			
+
 			// otherwise -> DROP (ALL) (inner)
 			const inner = getInnermostItem(s.hand);
 			s.hand = clearInnermostItems(s.hand);

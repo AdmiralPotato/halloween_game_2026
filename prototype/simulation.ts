@@ -64,14 +64,14 @@ const swapTilesByIndices = (i: number, j: number) => {
 const findEmptyWorkspaceIndex = (): number => {
 	return s.tiles.findIndex(v=>isCountertopTile(v) && v.inside === null);
 };
-const findStorageTileWithName = (printName: string): number => {
+const simpleFindStorageTileWithName = (itemCode: string): number => {
 	return s.tiles.findIndex(v=>{
 		if (!isStorageTile(v)) { return false; }
 		if (v.inside === null) { return false; }
 		if (isContainer(v.inside)) {
-			return printName === v.inside.name;
+			return itemCode === v.inside.name;
 		}
-		return printName === printModifiersWithItemName(v.inside.name, v.inside.modifiers);
+		return itemCode === v.inside.name;
 	});
 };
 const findStorageTileIndexThatStacksWith = (item: Item): number => {
@@ -99,14 +99,18 @@ const costTiers: Record<number, number> = {
 	4: 100,
 	5: 500,
 };
-const buy = (name: string, quantity = 10): boolean => {
-	const info = getItemInfo(name);
+
+const getItemCost = (item: string): number => {
+	const info = getItemInfo(item);
 	if (info.cost === null) {
 		// item is not for sale
-		errorLog(s, `Cannot buy any '${name}': not for sale`);
-		return false;
+		throw new Error(`Cannot buy any '${item}': not for sale`);
 	}
-	const goldCost = costTiers[info.cost];
+	const goldCostSingle = costTiers[info.cost];
+	return goldCostSingle;
+};
+const buy = (name: string, quantity = 10): boolean => {
+	const goldCost = getItemCost(name);
 	const totalCost = goldCost * quantity;
 	if (totalCost > s.gold) {
 		// you can't afford it
@@ -136,6 +140,7 @@ const buy = (name: string, quantity = 10): boolean => {
 		return true;
 	}
 	// no more null tiles left to put the box! never mind
+	const info = getItemInfo(name);
 	errorLog(s, `Could not buy ${quantity}x '${name}': not enough space to put a new storage ${info.storageType}`);
 	return false;
 };
@@ -185,7 +190,7 @@ const goto = (destination: string | number, subtype?: string): boolean => {
 		return true;
 	}
 	if (destination === 'storage' && subtype !== undefined) {
-		const tileIndex = findStorageTileWithName(subtype);
+		const tileIndex = simpleFindStorageTileWithName(subtype);
 		if (tileIndex == -1) {
 			errorLog(s, `Could not find storage: '${destination}', '${subtype}'`);
 			return false;
@@ -252,48 +257,49 @@ const help = () => {
 	console.log(`> buy (itemName: string, quantity?: number [10])`)
 	console.log(`    Buy from the warehouse; refills existing storage, or adds a new storage tile to a null tile`)
 	// console.log(`empty ('oven'|'mixer'|'cutting_board') [discards entire contents, if any]`);
-	// console.log(`discard (location, index) [removes and discards item, if any]`);
 	// console.log(`attributes (location, index?) [index defaults to 0]`)
 	// console.log(`addFilling () [uses finisher: filling]`);
+	console.log(`======================== Commands ========================`);
+	console.log(`> fetch (itemName, quantity?: number [1])`)
+	console.log(`    Grabs X of the item from storage and returns you to where you just were`)
+	console.log(`    If not in storage, buys it; if you can't afford it, cheats until you can`)
+	console.log(`> fetchAndDrop (itemName, quantity?: number [1])`)
+	console.log(`    Same as the above but also drops it`)
 };
+const fetchAndDrop = (itemName: string, quantity = 1) => {
+	fetch(itemName, quantity);
+	drop()
+}
+const fetch = (itemName: string, quantity = 1) => {
+	const whereYouJustWere = s.tile_index;
+	let index = simpleFindStorageTileWithName(itemName);
+	const costForOne = getItemCost(itemName);
+	if (index === -1) {
+		// CHEATY FOR NOW
+		if (s.gold < quantity * costForOne * 10) {
+			glitteringPrizes();
+		}
+		buy(itemName, 10);
+		index = simpleFindStorageTileWithName(itemName);
+	}
+	goto('storage', itemName);
+	pickup();
+	goto(whereYouJustWere)
+}
 
 tiles()
-goto('storage', 'sugar');
-pickup();
-goto('mixer');
-drop();
-goto('storage', 'flour')
-pickup();
-goto('mixer');
-drop();
+goto('mixer')
+fetchAndDrop('sugar')
+fetchAndDrop('flour')
 interact();
 
-glitteringPrizes();
-buy('mint_flavoring', 20);
-goto('storage', 'mint flavoring');
-pickup();
-goto('mixer')
-drop();
-goto('storage', 'mint flavoring');
-pickup();
-goto('mixer')
-drop();
-goto('storage', 'mint flavoring');
-pickup();
-goto('mixer')
-drop();
-goto('storage', 'mint flavoring');
-pickup();
-goto('mixer')
-drop();
-goto('storage', 'mint flavoring');
-pickup();
-goto('mixer')
-drop();
+fetchAndDrop('mint_flavoring')
+fetchAndDrop('mint_flavoring')
+fetchAndDrop('mint_flavoring')
+fetchAndDrop('mint_flavoring')
+fetchAndDrop('mint_flavoring')
 interact()
-goto('storage', 'cookie_sheet');
-pickup()
-goto('mixer')
+fetch('cookie_sheet')
 pickup()
 
 // BAKE
@@ -307,21 +313,13 @@ goto(17) // definitely empty counter
 drop()
 
 // apply frosting
-goto('storage', 'frosting')
-pickup()
-goto(17)
+fetch('frosting')
 interact()
 
 // apply sprinkles
-goto('storage', 'rainbow sprinkles')
-pickup()
-goto(17)
+fetch('rainbow_sprinkles')
 interact()
 pickup()
-
-// // throw out
-// goto('trash')
-// interact()
 
 // deliver
 goto(0)

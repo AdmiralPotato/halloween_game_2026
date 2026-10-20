@@ -223,7 +223,7 @@ export const compareAttributes = (expected: AttributeMap, found: AttributeMap): 
 		mismatchMessages.push(v);
 		console.log(v);
 	}
-	
+
 	for (let i = 0; i < uniqueKeys.length; i++) {
 		const key = uniqueKeys[i];
 		if (found[key] !== expected[key]) {
