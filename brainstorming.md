@@ -13,89 +13,90 @@
 	2. Corfid: artist
 	3. Solra: programmer
 	4. Admiral: technical artist/programmer/build pipeline
+	5. Grissess: programmer
 4. Halloween-themed
 	1. Release by end of month with some fanfare various places
-        - SLC Game Dev Group
-        
+		- SLC Game Dev Group
+
 
 ## Brainstorming
 
 - Recipies!
-    - Fantasy ingredients?
-    - Simple / proceedural recipies?
+	- Fantasy ingredients?
+	- Simple / proceedural recipies?
 
 - Goat Pats = Plus Stats
-    
-- Factory / automation? 
 
-- Idle game? 
-    - Can have periods of "auto-pilot" where you can watch your restaurant function?
-    - Proceedural graphics presentation of idle game mechanics (like _Unnamed Space Idle_)?
+- Factory / automation?
+
+- Idle game?
+	- Can have periods of "auto-pilot" where you can watch your restaurant function?
+	- Proceedural graphics presentation of idle game mechanics (like _Unnamed Space Idle_)?
 
 - Tower Defense?
-    - tower defense but the monsters you defeat turn into ingredients that you cook
-    - cooking different dishes attracts different monsters
-    - available space to perform tower defense or cooking setup is not limited by the map you're on, you just purchase a parallel universe of a certain map/kitchen so if it's an optimal map for producing different/conflicting things, you can, and the results (monster parts or the cooked dishes) come out into the main universe to sell
+	- tower defense but the monsters you defeat turn into ingredients that you cook
+	- cooking different dishes attracts different monsters
+	- available space to perform tower defense or cooking setup is not limited by the map you're on, you just purchase a parallel universe of a certain map/kitchen so if it's an optimal map for producing different/conflicting things, you can, and the results (monster parts or the cooked dishes) come out into the main universe to sell
 
-- Harvesting ingredients? 
-    - You have a garden where the plants are the towers and you hire the critters to harvest them for you
-    - The critters approach hungry and you need to feed them, the towers are buffet style stations
-    - it's just an endless queue of critters and you feed as many as you can and that's your score/income like in chef knight
+- Harvesting ingredients?
+	- You have a garden where the plants are the towers and you hire the critters to harvest them for you
+	- The critters approach hungry and you need to feed them, the towers are buffet style stations
+	- it's just an endless queue of critters and you feed as many as you can and that's your score/income like in chef knight
 
 - ~~Defeating monsters for ingredients?~~
 
-- Have a storefront / series of storefronts? 
-    - starting out as a small time shop with limited production floor space and inventory capacity
-    - you set prices for your inventory and that affects the rate it gets bought
-    - you buy neighboring shops to expand your operation
-    - if inventory is offscreen, it can transition from "candy store people walk into" to "warehouse that candy store owners buy truckloads from" without much effort on our part
+- Have a storefront / series of storefronts?
+	- starting out as a small time shop with limited production floor space and inventory capacity
+	- you set prices for your inventory and that affects the rate it gets bought
+	- you buy neighboring shops to expand your operation
+	- if inventory is offscreen, it can transition from "candy store people walk into" to "warehouse that candy store owners buy truckloads from" without much effort on our part
 
-- Product delivery system: 
-    - _Plate Up!_'s buffet system
-    - Fulfilling specific customer orders? 
-    
+- Product delivery system:
+	- _Plate Up!_'s buffet system
+	- Fulfilling specific customer orders?
+
 - Upgrade system?
-    - Sanctum- (or Rise to Ruins-) style individual upgrades, BUT every time you do a certain upgrade it becomes cheaper to do it again
+	- Sanctum- (or Rise to Ruins-) style individual upgrades, BUT every time you do a certain upgrade it becomes cheaper to do it again
 
-- Storefront game? 
+- Storefront game?
 
 - _Harvest Moon_'s shipping box
-    - You set completed products in the box and they magically disappear and your [income] goes up
+	- You set completed products in the box and they magically disappear and your [income] goes up
 
 - Types of candies
-    - Hard candies (Jolly Rancher)
-    - Soft candies (Tootsie Roll)
-    - Stick candies (suckers)
-    - Bar candies (KitKat)
-    - Packaged pastries (Twinkie)
-    - Gummies (gummy bears)
+	- Hard candies (Jolly Rancher)
+	- Soft candies (Tootsie Roll)
+	- Stick candies (suckers)
+	- Bar candies (KitKat)
+	- Packaged pastries (Twinkie)
+	- Gummies (gummy bears)
 - Types of pastries / cookies
-    - Monocomposite cookies (sugarcookies)
-    - Conglomerate cookies (chocolate chip / rasin cookies)
-    - Stuffed (cream puffs)
-    - Doughnuts
+	- Monocomposite cookies (sugarcookies)
+	- Conglomerate cookies (chocolate chip / rasin cookies)
+	- Stuffed (cream puffs)
+	- Doughnuts
 - Types of ice creams
-    - Mostly vary in flavor
-    - Swirled mix flavors
-    - With solid ingredients mixed in
-    - Toppings variable
+	- Mostly vary in flavor
+	- Swirled mix flavors
+	- With solid ingredients mixed in
+	- Toppings variable
 - Types of… cakes?
-    - ???
+	- ???
 - Remember, none of these need to resemble reality. We are in a fantasy setting! Magic and stuff! We can get silly!
-	
+
 ## Ideas
 
 - Genre
 - Gameplay loop
 - Graphics (2D, 3D, sprites, color scripting)
-    - 3D environment
-    - 3D characters
-    - 2D or 3D ingredients? 
-        - Could go either way, but we should pick one
-    - 2D products
-        - like _Breath of the Wild_
-        - We can draw lots of kinds of foods much more easily than we can 3D model / texture / shader lots of kinds of foods
-- 
+	- 3D environment
+	- 3D characters
+	- 2D or 3D ingredients?
+		- Could go either way, but we should pick one
+	- 2D products
+		- like _Breath of the Wild_
+		- We can draw lots of kinds of foods much more easily than we can 3D model / texture / shader lots of kinds of foods
+
 
 ## Research
 
@@ -128,7 +129,7 @@
 		- Shiny, does not melt in hand
 		- To make, it must be  brought within certain temperature ranges at different points in time, several times in a row
 		- Adding a "seed crystal" helps get it started
-		- This is a pain to do, even for pros 
+		- This is a pain to do, even for pros
 - Hard candies, see [Lofty Pursuits](https://www.youtube.com/@LoftyPursuits)
 	- Boil sugar mix
 	- Cooling table
@@ -183,7 +184,7 @@
 	- Basket
 - Questions
 	- Items can spoil? NO
-    - Items can be fresh? nah
+	- Items can be fresh? nah
 	- Items need refrigeration for storage? Just in terms of where ingredients live
 	- Disasters? NO DAWG ("oh uh! weavils in your flour! lose 30% of stock")
 - Other ideas
@@ -214,21 +215,21 @@
 	- Combine the above steps; combine items
 	- Bring item to anywhere in the front
 - Can buy in bulk low quality products to sell individually at profit to get started ?
-    - would allow having a variety of products while only being able to *make* one
-    - would give an escape valve so you can make "a little money" when your pipelinei is otherwise inoperable
+	- would allow having a variety of products while only being able to *make* one
+	- would give an escape valve so you can make "a little money" when your pipelinei is otherwise inoperable
 - Set prices? (undecided, stretch goal?)
 - Employees? (stretch goal)
-    - Golems?
-    - Goblins?
-    - Oompa-Loompas?
-    - familiars?
-    - "Doers" and "Bringers"?
+	- Golems?
+	- Goblins?
+	- Oompa-Loompas?
+	- familiars?
+	- "Doers" and "Bringers"?
 - No day/night, but can have events:
-    - mundane events: heat wave, cold wave, fads, holidays
-    - fantasy events: lava rain?
+	- mundane events: heat wave, cold wave, fads, holidays
+	- fantasy events: lava rain?
 - Special order slots:
 	- Start with 1, can unlock more
-    - Time pressure? (Fixed) Time bonus if done fast (we want low pressure)
+	- Time pressure? (Fixed) Time bonus if done fast (we want low pressure)
 - What kind of goods?
 	- Modifiers
 		- Coloring
@@ -242,40 +243,40 @@
 			- Fruit
 			- Candied flowers
 			- Frosting
-    - Baked goods: YES
-	    - Cookies
-	    - Cupcakes
+	- Baked goods: YES
+		- Cookies
+		- Cupcakes
 			- Can control wrapper appearance
-	    - Big cakes
+		- Big cakes
 			- Whole and sliced
-        - Donuts
+		- Donuts
 		- Bread
 		- Crepes
-        - Sweet bread (not to be confused with sweetbread, which is a meat)
+		- Sweet bread (not to be confused with sweetbread, which is a meat)
 		- Pie
 			- Pumpkin pie
 			- Crumble pie (fruit)
 			- Cream pie (fruit, custard)
-    - Candy: ???
-        - Even if not present as an end product, we could have candies as ingredients
-    - Ice cream: ???
-    - Meats: ???
-    - Sushi: ????????
-    - Chaaaaaaaps: ???
+	- Candy: ???
+		- Even if not present as an end product, we could have candies as ingredients
+	- Ice cream: ???
+	- Meats: ???
+	- Sushi: ????????
+	- Chaaaaaaaps: ???
 
 candy corn cookies have to go in, they should maybe even be the ICON
 
 ### Anatomy of a pastry
 
 - Crust
-    - Main crust, full containment (eclair)
-    - Main crust, a circle (donut)
-    - Main crust, open top (pumpkin pie, key lime pie)
-    - Main crust, with different top crust (fruit pies)
-    - Main crust, flat (crepe)
-    - Main crust, flat, rolled (croissant)
+	- Main crust, full containment (eclair)
+	- Main crust, a circle (donut)
+	- Main crust, open top (pumpkin pie, key lime pie)
+	- Main crust, with different top crust (fruit pies)
+	- Main crust, flat (crepe)
+	- Main crust, flat, rolled (croissant)
 - Filling?
-    - required for open top / different top crust, optional for containment / circle / croissant, forbidden for crepe?
+	- required for open top / different top crust, optional for containment / circle / croissant, forbidden for crepe?
 - Frosting?
 - Decoration?
 
@@ -284,5 +285,5 @@ candy corn cookies have to go in, they should maybe even be the ICON
 - Sugar
 - Non-sugar ingredients
 - Temperature
-    - the temperature range you bring the candy mix to decides what kind of candy you get
+	- the temperature range you bring the candy mix to decides what kind of candy you get
 
