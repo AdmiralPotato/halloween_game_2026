@@ -1,6 +1,7 @@
 import type {
 	Product,
-	Ingredient
+	Ingredient,
+	Item
 } from "./utilities.ts";
 import {
 	listToTally,
@@ -140,6 +141,7 @@ const recipeList: RecipeInfo[] = [
 			'flavoring',
 			'chocolate_chips',
 			'shredded_carrot',
+			'sprinkles',
 		],
 	},
 	{

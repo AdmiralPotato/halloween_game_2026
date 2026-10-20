@@ -1,3 +1,4 @@
+import { getItemInfo } from "./items.ts";
 import { getVariantPrintName } from "./variants.ts";
 
 // ----------------------------------------- GENERIC ----------------------------------------- //
@@ -116,8 +117,8 @@ export const newPan = (name: PanType, quantity = 1): Pan => {
 
 const pansMayContainMap: Record<PanType, string[]> = {
 	cookie_sheet: [ 'cookie_dough', 'cookie', 'cookies' ],
-	muffin_tin: [ 'muffin_liners', 'batter', 'cupcakes', 'muffins' ],
-	cake_pan: [ 'cake_form', 'batter', 'cake' ],
+	muffin_tin: [ 'muffin_liners', 'cake_batter', 'cupcakes', 'muffins' ],
+	cake_pan: [ 'cake_form', 'cake_batter', 'cake' ],
 }
 export const panMayContain = (pan: PanType, itemName: string): boolean => {
 	return pansMayContainMap[pan].includes(itemName);
@@ -263,7 +264,7 @@ export const productsMatchIgnoringQuantity = (a: Product, b: Product): boolean =
 
 // --------------------------- ITEM (pan | ingredient | product | filling injector) --------------------------- //
 
-export type Item = Pan | Ingredient | Product | FillingInjector;
+export type Item = Ingredient | Product | Pan | FillingInjector;
 export const isItem = (v: unknown) => isPan(v) || isProduct(v) || isIngredient(v) || isFillingInjector(v)
 
 export type Container = Pan | FillingInjector;
