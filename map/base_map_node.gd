@@ -3,12 +3,12 @@ class_name BaseMapNode
 extends Node3D
 
 const TWEEN_TIME = 0.2
-
+var tween: Tween
 var last_global_transform: Transform3D
+
 func store_global_transform():
 	last_global_transform = global_transform if is_inside_tree() else Transform3D()
 	
-var tween: Tween
 func animate_to_current_transform():
 	if tween:
 		tween.kill()

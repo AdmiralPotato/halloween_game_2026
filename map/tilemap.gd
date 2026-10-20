@@ -85,8 +85,7 @@ func swap_furni(xy: Vector2i, new_node: FurniNode) -> FurniNode:
 			new_node.reparent(self, false)
 		else:
 			add_child(new_node)
-		new_node.position = Vector3(xy.x+0.5, 0.0, xy.y+0.5)
-		new_node.scale = Vector3.ONE
+		new_node.transform = Transform3D(Basis(), Vector3(xy.x+0.5, 0.0, xy.y+0.5))
 		new_node.name = "Furni%d_%d" % [xy.x, xy.y]
 		new_node.unpack()
 	if tile.item:

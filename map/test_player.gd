@@ -52,8 +52,7 @@ func _physics_process(delta):
 		# If we're holding an object now, it's because we picked one up.
 		if held_object:
 			carry_node.add_child(held_object)
-			held_object.position = Vector3.ZERO
-			held_object.scale = SMOL
+			held_object.transform = Transform3D(Basis().scaled(SMOL), Vector3.ZERO)
 			held_object.animate_to_current_transform()
 		if old_held:
 			old_held.animate_to_current_transform()
