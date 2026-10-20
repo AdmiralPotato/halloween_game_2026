@@ -3,7 +3,9 @@
 - You are a little guy
 - You can pick things up and set them down
 
-## Screen zones
+For other, more technical stuff, see prototype/notes.md
+
+## Map
 
 - Top: baking area
 	- Ingredient source blocks
@@ -41,7 +43,9 @@
 	- X sold out!
 - Cooking trays and dishes appear in hand and disappear when appropriate
 	- No dirty dishes, no washing up, no trays/pans/pots to manage
-- Can save finished product "recipe" and give it a name
+	- ... except cooking pans, which help distinguish otherwise-identical recipes, like cupcakes and cakes
+- Can add modifiers to a recipe to create variations of it: frosting vs chocolate frosting vs cherry frosting
+- Can save finished product ingredient combinations and name them
 
 ## Progression
 
@@ -72,9 +76,12 @@
 		- Light vs Dark
 		- Red
 		- Orange
+		- Brown
 		- Yellow
 		- Green
 		- Blue
+		- Purple
+		- Variegated (multicolored)
 	- Textures:
 		- Dry vs Moist
 		- Soft vs Hard
@@ -108,11 +115,12 @@
 	- Some purchases come with their own storage container
 - Storage types:
 	- Bag (on the ground, e.g. flour)
-	- Box (on the ground)
+	- Crate (on the ground)
 	- Fridge
-	- Countertop container (e.g. sprinkles)
+	- Freezer
+	- Jar
 	- Filling injector (looks like a pointy piping bag)
-- When empty, the box/bag/etc can be used for anything
+- When empty, the box/bag/etc can be used for anything (but freezers don't change into crates etc.)
 
 ### Aspects of a product
 
@@ -271,10 +279,11 @@ Just lying on the countertop
 
 Also there is an arbitrary amount of countertop space
 
-- **Piping bag**
+- **Filling injector**
 	- Unlock: $
 	- Fill with things like cream or custard
 	- Use to inject "post-bake" filling
+	_ (Not called "piping bag" people mainly use those to decorate on the outside, whereas we need to communicate that this is _just_ for differentiating injecting filling)
 - **Cake knife**
 	- Unlock: cake + $
 	- Used to slice cake
