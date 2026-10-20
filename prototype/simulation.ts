@@ -319,12 +319,12 @@ goto(17)
 interact()
 pickup()
 
-// throw out
-goto('trash')
-interact()
-
-// // deliver
-// goto(0)
+// // throw out
+// goto('trash')
 // interact()
+
+// deliver
+goto(0)
+interact()
 
 console.log("BREAKPOINT ME")

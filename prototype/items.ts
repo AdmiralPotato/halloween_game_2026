@@ -1,5 +1,7 @@
+import type { Ingredient, Item, Product } from "./utilities.ts";
+import { itemsCanStack } from "./utilities.ts";
+
 import { isAttributeMap, type AttributeMap } from "./attributes.ts";
-import type { Ingredient as Ingredient, Item, Product } from "./utilities.ts";
 
 export type StorageType = 'bag' | 'fridge' | 'freezer' | 'crate' | 'jar' | 'pan_stand';
 export const isStorageType = (v: unknown): v is StorageType => {
@@ -8,8 +10,7 @@ export const isStorageType = (v: unknown): v is StorageType => {
 	if (v === 'freezer') { return true; }
 	if (v === 'crate') { return true; }
 	if (v === 'jar') { return true; }
-	if (v === 'pan_stand') { return true; }
-	return true;
+	return false;
 };
 
 export type ItemCategory = 'base' // raw ingredient, e.g. egg, flour, or base material, e.g. cookie dough
@@ -18,15 +19,15 @@ export type ItemCategory = 'base' // raw ingredient, e.g. egg, flour, or base ma
 	| 'fillings' // optional; useable only on a finished product
 	| 'decorations' // optional; useable only on a finished product
 	| 'doodads' // optional; useable only on a finished product if a decoration is already present
-	| 'pan'
+	| 'container'
 const isItemCategory = (v: unknown): v is ItemCategory => {
 	if (v === 'base') { return true; }
 	if (v === 'modifier') { return true; }
 	if (v === 'fillings') { return true; }
 	if (v === 'decorations') { return true; }
 	if (v === 'doodads') { return true; }
-	if (v === 'pan') { return true; }
-	return true;
+	if (v === 'container') { return true; }
+	return false;
 };
 type ItemCategories = ItemCategory[];
 const isItemCategories = (v: unknown): v is ItemCategories => {
@@ -39,6 +40,7 @@ type ItemInfo = {
 	storageType: StorageType;
 	categories: ItemCategory[];
 	cost: number | null;
+	stackSize: number;
 	attributes: AttributeMap | 'from_recipe';
 	infinite?: boolean;
 }
@@ -79,11 +81,17 @@ export const newProduct = (name: string, quantity: number, modifiers?: string[],
 	}
 };
 
+const FLAVORING_STACK_SIZE = 50;
+const CANDIED_FLOWERS_STACK_SIZE = 9;
+const SPRINKLES_STACK_SIZE = 50;
+const HARD_CANDY_SHAPES_STACK_SIZE = 20;
+
 const itemInfoMap: Record<string, ItemInfo> = {
 	flour: {
 		storageType: 'bag',
 		categories: [ 'base' ],
 		cost: 1,
+		stackSize: 1,
 		attributes: {
 			pale: 1,
 		},
@@ -92,6 +100,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'bag',
 		categories: [ 'base' ],
 		cost: 1,
+		stackSize: 1,
 		attributes: {
 			sweet: 2,
 		},
@@ -100,12 +109,14 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'fridge',
 		categories: [ 'base' ],
 		cost: 1,
+		stackSize: 12,
 		attributes: {},
 	},
 	cream: {
 		storageType: 'fridge',
 		categories: [ 'base' ],
 		cost: 2,
+		stackSize: 4,
 		attributes: {
 			pale: 2,
 		},
@@ -114,16 +125,18 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'bag',
 		categories: [ 'modifier' ],
 		cost: 3,
+		stackSize: 4,
 		attributes: {
-			chocolatey: 1,
+			chocolatey: 2,
 			pale: -2,
-			orange: 1,
+			brown: 2,
 		},
 	},
 	chocolate_bar: {
 		storageType: 'crate',
 		categories: [ 'base' ],
 		cost: 2,
+		stackSize: 12,
 		attributes: {
 			chocolatey: 1,
 		},
@@ -132,6 +145,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'jar',
 		categories: [ 'modifier' ],
 		cost: 4,
+		stackSize: FLAVORING_STACK_SIZE,
 		attributes: {
 			fruity: 2,
 			red: 1,
@@ -143,6 +157,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'jar',
 		categories: [ 'modifier' ],
 		cost: 4,
+		stackSize: FLAVORING_STACK_SIZE,
 		attributes: {
 			fruity: 2,
 			red: 1,
@@ -153,6 +168,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'jar',
 		categories: [ 'modifier' ],
 		cost: 4,
+		stackSize: FLAVORING_STACK_SIZE,
 		attributes: {
 			fruity: 2,
 			red: 2,
@@ -163,6 +179,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'jar',
 		categories: [ 'modifier' ],
 		cost: 4,
+		stackSize: FLAVORING_STACK_SIZE,
 		attributes: {
 			fruity: 2,
 			orange: 2,
@@ -173,15 +190,17 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'jar',
 		categories: [ 'modifier' ],
 		cost: 4,
+		stackSize: FLAVORING_STACK_SIZE,
 		attributes: {
 			nutty: 1,
-			orange: 1,
+			brown: 1,
 		},
 	},
 	lemon_flavoring: {
 		storageType: 'jar',
 		categories: [ 'modifier' ],
 		cost: 4,
+		stackSize: FLAVORING_STACK_SIZE,
 		attributes: {
 			fruity: 1,
 			tart: 2,
@@ -192,6 +211,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'jar',
 		categories: [ 'modifier' ],
 		cost: 4,
+		stackSize: FLAVORING_STACK_SIZE,
 		attributes: {
 			fruity: 1,
 			tart: 2,
@@ -202,6 +222,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'jar',
 		categories: [ 'modifier' ],
 		cost: 4,
+		stackSize: FLAVORING_STACK_SIZE,
 		attributes: {
 			fruity: 2,
 			blue: 1,
@@ -212,6 +233,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'jar',
 		categories: [ 'modifier' ],
 		cost: 4,
+		stackSize: FLAVORING_STACK_SIZE,
 		attributes: {
 			purple: 2,
 			pale: -1,
@@ -221,6 +243,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'jar',
 		categories: [ 'modifier' ],
 		cost: 4,
+		stackSize: FLAVORING_STACK_SIZE,
 		attributes: {
 			minty: 3,
 			green: 1,
@@ -231,6 +254,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'jar',
 		categories: [ 'modifier' ],
 		cost: 4,
+		stackSize: FLAVORING_STACK_SIZE,
 		attributes: {
 			fruity: 2,
 			red: 2,
@@ -241,8 +265,9 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'jar',
 		categories: [ 'doodads' ],
 		cost: 5,
+		stackSize: CANDIED_FLOWERS_STACK_SIZE,
 		attributes: {
-			red: 1,
+			red: 9,
 			pop: 1,
 		},
 	},
@@ -250,6 +275,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'jar',
 		categories: [ 'doodads' ],
 		cost: 5,
+		stackSize: CANDIED_FLOWERS_STACK_SIZE,
 		attributes: {
 			pale: 2,
 			pop: 1,
@@ -259,6 +285,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'jar',
 		categories: [ 'doodads' ],
 		cost: 5,
+		stackSize: CANDIED_FLOWERS_STACK_SIZE,
 		attributes: {
 			blue: 1,
 			pop: 1,
@@ -268,6 +295,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'jar',
 		categories: [ 'doodads' ],
 		cost: 5,
+		stackSize: CANDIED_FLOWERS_STACK_SIZE,
 		attributes: {
 			yellow: 1,
 			pop: 1,
@@ -277,6 +305,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'jar',
 		categories: [ 'modifier', 'doodads' ],
 		cost: 2,
+		stackSize: SPRINKLES_STACK_SIZE,
 		attributes: {
 			varigated: 1,
 			pop: 1,
@@ -286,6 +315,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'jar',
 		categories: [ 'modifier', 'doodads' ],
 		cost: 2,
+		stackSize: SPRINKLES_STACK_SIZE,
 		attributes: {
 			pop: 1,
 		},
@@ -294,6 +324,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'jar',
 		categories: [ 'modifier', 'doodads' ],
 		cost: 2,
+		stackSize: SPRINKLES_STACK_SIZE,
 		attributes: {
 			pale: 1,
 			pop: 1,
@@ -303,6 +334,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'jar',
 		categories: [ 'modifier', 'doodads' ],
 		cost: 2,
+		stackSize: SPRINKLES_STACK_SIZE,
 		attributes: {
 			pale: 1,
 			pop: 2,
@@ -312,6 +344,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'jar',
 		categories: [ 'doodads' ],
 		cost: 3,
+		stackSize: HARD_CANDY_SHAPES_STACK_SIZE,
 		attributes: {
 			pop: 1,
 		},
@@ -320,6 +353,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'jar',
 		categories: [ 'doodads' ],
 		cost: 3,
+		stackSize: HARD_CANDY_SHAPES_STACK_SIZE,
 		attributes: {
 			varigated: 1,
 			pop: 1,
@@ -329,6 +363,7 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'jar',
 		categories: [ 'doodads' ],
 		cost: 3,
+		stackSize: HARD_CANDY_SHAPES_STACK_SIZE,
 		attributes: {
 			pop: 1,
 		},
@@ -337,84 +372,105 @@ const itemInfoMap: Record<string, ItemInfo> = {
 		storageType: 'jar',
 		categories: ['modifier', 'doodads'],
 		cost: 3,
+		stackSize: 9,
 		attributes: 'from_recipe',
 	},
 	frosting: {
 		storageType: 'jar',
 		categories: ['decorations'],
 		cost: 2,
+		stackSize: 4,
 		attributes: 'from_recipe',
 	},
 	whipped_cream: {
 		storageType: 'fridge',
 		categories: ['fillings', 'decorations'],
 		cost: 2,
+		stackSize: 1,
 		attributes: 'from_recipe',
 	},
 	pastry_cream: {
 		storageType: 'fridge',
 		categories: ['fillings'],
 		cost: 3,
+		stackSize: 1,
 		attributes: 'from_recipe',
 	},
 	pudding: {
 		storageType: 'fridge',
 		categories: ['fillings'],
 		cost: 3,
+		stackSize: 1,
 		attributes: 'from_recipe',
 	},
 	cookie_dough: {
 		storageType: 'fridge',
 		categories: ['base'],
 		cost: 2,
+		stackSize: 1,
 		attributes: 'from_recipe',
 	},
 	cake_batter: {
 		storageType: 'fridge',
 		categories: ['base'],
 		cost: 2,
+		stackSize: 1,
 		attributes: 'from_recipe',
 	},
 	cookie: {
 		storageType: 'crate',
 		categories: ['product'],
 		cost: null,
+		stackSize: 1,
 		attributes: 'from_recipe',
 	},
 	cupcake: {
 		storageType: 'fridge',
 		categories: ['product'],
 		cost: null,
+		stackSize: 1,
 		attributes: 'from_recipe',
 	},
 	cake: {
 		storageType: 'fridge',
 		categories: ['product'],
 		cost: null,
+		stackSize: 1,
 		attributes: 'from_recipe',
 	},
 	cake_slice: {
 		storageType: 'fridge',
 		categories: ['product'],
 		cost: null,
+		stackSize: 1,
 		attributes: 'from_recipe',
 	},
 	cookie_sheet: {
-		storageType: 'pan_stand',
-		categories: ['pan'],
+		storageType: 'crate',
+		categories: ['container'],
 		cost: 2,
+		stackSize: 5,
 		attributes: {},
 	},
 	muffin_tin: {
-		storageType: 'pan_stand',
-		categories: ['pan'],
+		storageType: 'crate',
+		categories: ['container'],
 		cost: 2,
+		stackSize: 5,
 		attributes: {},
 	},
 	cake_pan: {
-		storageType: 'pan_stand',
-		categories: ['pan'],
+		storageType: 'crate',
+		categories: ['container'],
 		cost: 2,
+		stackSize: 5,
+		attributes: {},
+	},
+	filling_injector: {
+		storageType: 'crate',
+		categories: ['container'],
+		cost: 2,
+		stackSize: 4,
 		attributes: {},
 	},
 };
@@ -431,3 +487,37 @@ export const itemMatchesStorageType = (item: Item, storageType: string) => {
 	const info = getItemInfo(item.name);
 	return info.storageType === storageType;
 }
+
+// ----------------------------------------- STACKING SUPPLEMENTAL ----------------------------------------- //
+
+export const getStackSize = (item: Item) => {
+	const itemInfo = getItemInfo(item.name);
+	return itemInfo.stackSize;
+}
+type StackAttemptInfo<T extends Item> = {
+	left: T,
+	right: T,
+};
+export const stackLeftOntoRight = <T extends Item>(left: T, right: T): StackAttemptInfo<T> | null => {
+	if (!itemsCanStack(left, right)) {
+		return null;
+	}
+	const itemStackSize = getItemInfo(right.name).stackSize;
+	if (itemStackSize < right.quantity) {
+		throw new Error ("ASSERT FAILED: item is stacked more than is allowed")
+	}
+	const amountToMove = itemStackSize - right.quantity;
+	if (amountToMove === 0) {
+		return { left, right };
+	}
+	const newLeft = structuredClone(left);
+	const newRight = structuredClone(right);
+	newLeft.quantity -= amountToMove;
+	newRight.quantity += amountToMove;
+	return {
+		left: newLeft,
+		right: newRight,
+	};
+};
+
+

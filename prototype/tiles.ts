@@ -1,6 +1,6 @@
 import { isFinisherAllowedOnProduct, itemIsBareFinisherTypeForProduct, productSellBatchSize } from "./finishers.ts";
 import type { StorageType } from "./items.ts";
-import { getItemInfo, isStorageType, itemMatchesStorageType } from "./items.ts";
+import { getItemInfo, getStackSize, isStorageType, itemMatchesStorageType, stackLeftOntoRight } from "./items.ts";
 
 import { cookEval, turnCookEvalIntoOutput } from "./recipes.ts";
 
@@ -263,13 +263,13 @@ export const newStorageTile = (type: string): StorageTile => {
 				return false;
 			}
 
-			// inner held item can't go in this kind of box -> STOP
+			// inner held item can't go in this kind of box, period -> STOP
 			if (!ret.item_is_compatible(carriedInnerItem)) {
 				errorLog(s, `'drop: ${cleanString(carriedInnerItem.name)}' cannot be put into storage type: ${type}`);
 				return false;
 			}
 
-			// inner held item CAN stack with what's in the box -> DROP (1)
+			// inner held item CAN stack with what's in the box (including if box is empty) -> DROP (1)
 			const toDrop = getOneInnermostItem(s.hand);
 			const remainder = innermostItemSubtract(s.hand, 1);
 			s.hand = remainder;
@@ -721,32 +721,37 @@ export const newCountertopTile = (type = ''): CountertopTile => {
 				return true;
 			}
 
-			// holding something, countertop has something, they can stack -> DROP (1)
-			// TODO: Q. if these can stack things, why buy storage boxes?
-			if (itemsCanStack(s.hand, ret.inside)) {
-				const toDrop = getOneRootItem(s.hand);
-				const remainder = rootItemSubtract(s.hand, 1);
-				ret.inside = addItems(toDrop, ret.inside); // combine quantities
-				s.hand = remainder; // adjust remaining stock in hand
-				log(s, `Put ${printItem(toDrop)} on the countertop! (New countertop quantity: ${ret.inside?.quantity})`);
-				return true;
+			// holding something, something on the counter, cannot stack -> DO NOTHING
+			if (!itemsCanStack(s.hand, ret.inside)) {
+				errorLog(s, `drop: ${printItem(s.hand)} cannot stack with ${printItem(ret.inside)}`);
+				return false;
 			}
 
-			// for "dropping" a finisher on a product, see INTERACT
-
-			// holding something, countertop has something, they CANNOT stack -> SWAP
-			const inHand = s.hand;
-			const fromCounter = ret.inside;
-			ret.inside = inHand;
-			s.hand = fromCounter;
-			log(s, `Swapped ${printItem(inHand)} for ${printItem(fromCounter)} from countertop!`);
+			// OR should we do this? (I'm thinking no because swapping by accident is annoying)
+			// // holding something, countertop has something, they CANNOT stack -> SWAP
+			// const inHand = s.hand;
+			// const fromCounter = ret.inside;
+			// ret.inside = inHand;
+			// s.hand = fromCounter;
+			// log(s, `Swapped ${printItem(inHand)} for ${printItem(fromCounter)} from countertop!`);
+			// return true;
+				
+			// holding something, countertop has something, they can stack but stack full -> DO NOTHING
+			const stackSize = getStackSize(ret.inside);
+			if (stackSize >= ret.inside.quantity) {
+				errorLog(s, `Cannot add any more ${printItem(ret.inside)} to the stack (max stack size ${stackSize}).`)
+				return false;
+			}
+			
+			// holding something, countertop has something, they can stack, stack not full -> DROP (1)
+			const toDrop = getOneRootItem(s.hand);
+			const remainder = rootItemSubtract(s.hand, 1);
+			ret.inside = addItems(toDrop, ret.inside); // combine quantities
+			s.hand = remainder; // adjust remaining stock in hand
+			log(s, `Put ${printItem(toDrop)} on the countertop! (New countertop quantity: ${ret.inside?.quantity})`);
 			return true;
 
-			// OR should we do this?
-
-			// // holding something, something on the counter, cannot stack -> DO NOTHING
-			// errorLog(s, `drop: ${printItem(s.hand)} cannot stack with ${printItem(ret.inside)}`);
-			// return false;
+			// for "dropping" a finisher on a product, see INTERACT
 		},
 	}
 	return ret;
