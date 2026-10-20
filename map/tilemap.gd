@@ -112,10 +112,11 @@ func swap_item(xy: Vector2i, new_node: ItemNode) -> ItemNode:
 	var tile := _get_tile(xy)
 	if !tile: return new_node
 	var old_node := tile.item
+	if old_node:
+		remove_child(old_node)
 	tile.item = new_node
-	remove_child(old_node)
-	add_child(tile.item)
 	if new_node:
+		add_child(new_node)
 		new_node.position = Vector3(xy.x+0.5, 0.0, xy.y+0.5)
 		if tile.furni && tile.furni.has_property("item_height"):
 			new_node.position.y = tile.furni.item_height
