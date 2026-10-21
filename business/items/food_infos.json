@@ -8,7 +8,7 @@
 		"attributes": {
 			"pale": 1
 		},
-		"texture": "res://assets/items.png@11/12,0/4"
+		"texture": "res://assets/items.png@3/12,1/6"
 	},
 	"sugar": {
 		"human_name": "sugar",
@@ -19,7 +19,7 @@
 		"attributes": {
 			"sweet": 2
 		},
-		"texture": "res://assets/items.png@11/12,0/4"
+		"texture": "res://assets/items.png@2/12,1/6"
 	},
 	"egg": {
 		"human_name": "egg",
@@ -28,7 +28,7 @@
 		"buy_price": 1,
 		"max_stack_size": 12,
 		"attributes": {},
-		"texture": "res://assets/items.png@2/12,0/4"
+		"texture": "res://assets/items.png@1/12,0/6"
 	},
 	"cream": {
 		"human_name": "cream",

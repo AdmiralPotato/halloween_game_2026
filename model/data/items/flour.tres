@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_62qmj"]
 [ext_resource type="Texture2D" uid="uid://bt02axwx2h75u" path="res://assets/items.png" id="2_wo5lj"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6aw8b"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wo5lj"]
 atlas = ExtResource("2_wo5lj")
-region = Rect2(2829.75, 0, 257.25, 265.5)
+region = Rect2(754, 257.33334, 251.33333, 257.33334)
 
 [resource]
 script = ExtResource("1_62qmj")
@@ -17,4 +17,4 @@ attributes = Dictionary[int, int]({
 0: 1
 })
 groups = PackedStringArray()
-texture = SubResource("AtlasTexture_6aw8b")
+texture = SubResource("AtlasTexture_wo5lj")
