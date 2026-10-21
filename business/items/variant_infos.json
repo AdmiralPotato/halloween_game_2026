@@ -1,0 +1,112 @@
+{
+  "cherry_flavoring": {
+    "human_name": "cherry flavoring",
+    "parent": "flavoring",
+    "variantName": "cherry"
+  },
+  "strawberry_flavoring": {
+    "human_name": "strawberry flavoring",
+    "parent": "flavoring",
+    "variantName": "strawberry"
+  },
+  "raspberry_flavoring": {
+    "human_name": "raspberry flavoring",
+    "parent": "flavoring",
+    "variantName": "raspberry"
+  },
+  "orange_flavoring": {
+    "human_name": "orange flavoring",
+    "parent": "flavoring",
+    "variantName": "orange"
+  },
+  "almond_flavoring": {
+    "human_name": "almond flavoring",
+    "parent": "flavoring",
+    "variantName": "almond"
+  },
+  "lemon_flavoring": {
+    "human_name": "lemon flavoring",
+    "parent": "flavoring",
+    "variantName": "lemon"
+  },
+  "lime_flavoring": {
+    "human_name": "lime flavoring",
+    "parent": "flavoring",
+    "variantName": "lime"
+  },
+  "blueberry_flavoring": {
+    "human_name": "blueberry flavoring",
+    "parent": "flavoring",
+    "variantName": "blueberry"
+  },
+  "ube_flavoring": {
+    "human_name": "ube flavoring",
+    "parent": "flavoring",
+    "variantName": "ube"
+  },
+  "mint_flavoring": {
+    "human_name": "mint flavoring",
+    "parent": "flavoring",
+    "variantName": "mint"
+  },
+  "caramel_flavoring": {
+    "human_name": "caramel flavoring",
+    "parent": "flavoring",
+    "variantName": "caramel"
+  },
+  "red_candied_flowers": {
+    "human_name": "red candied flowers",
+    "parent": "candied_flowers",
+    "variantName": "red"
+  },
+  "white_candied_flowers": {
+    "human_name": "white candied flowers",
+    "parent": "candied_flowers",
+    "variantName": "white"
+  },
+  "blue_candied_flowers": {
+    "human_name": "blue candied flowers",
+    "parent": "candied_flowers",
+    "variantName": "blue"
+  },
+  "yellow_candied_flowers": {
+    "human_name": "yellow candied flowers",
+    "parent": "candied_flowers",
+    "variantName": "yellow"
+  },
+  "rainbow_sprinkles": {
+    "human_name": "rainbow sprinkles",
+    "parent": "sprinkles",
+    "variantName": "rainbow"
+  },
+  "chocolate_sprinkles": {
+    "human_name": "chocolate sprinkles",
+    "parent": "sprinkles",
+    "variantName": "chocolate"
+  },
+  "white_sprinkles": {
+    "human_name": "white sprinkles",
+    "parent": "sprinkles",
+    "variantName": "white"
+  },
+  "ball_bearing_sprinkles": {
+    "human_name": "ball bearing sprinkles",
+    "parent": "sprinkles",
+    "variantName": "ball_bearing"
+  },
+  "hard_candy_bats": {
+    "human_name": "hard candy bats",
+    "parent": "hard_candy_shapes",
+    "variantName": "bat"
+  },
+  "hard_candy_eyeballs": {
+    "human_name": "hard candy eyeballs",
+    "parent": "hard_candy_shapes",
+    "variantName": "eyeball"
+  },
+  "hard_candy_ghosts": {
+    "human_name": "hard candy ghosts",
+    "parent": "hard_candy_shapes",
+    "variantName": "ghost"
+  }
+}

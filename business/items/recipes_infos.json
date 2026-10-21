@@ -1,0 +1,223 @@
+[
+  {
+    "output": "chocolate_chips",
+    "human_name": "chocolate chips",
+    "quantity": 4,
+    "location": "CUTTING_BOARD",
+    "pan": "NONE",
+    "time": 1,
+    "ingredients": [
+      "chocolate_bar"
+    ],
+    "newAttributes": {
+      "pop": 1
+    },
+    "allowedModifiers": []
+  },
+  {
+    "output": "frosting",
+    "human_name": "frosting",
+    "quantity": 2,
+    "location": "MIXER",
+    "pan": "NONE",
+    "time": 2,
+    "ingredients": [
+      "sugar"
+    ],
+    "newAttributes": {
+      "pale": 3,
+      "soft": 1
+    },
+    "allowedModifiers": [
+      "cocoa_powder",
+      "flavoring"
+    ]
+  },
+  {
+    "output": "whipped_cream",
+    "human_name": "whipped cream",
+    "quantity": 3,
+    "location": "MIXER",
+    "pan": "NONE",
+    "time": 3,
+    "ingredients": [
+      "cream"
+    ],
+    "newAttributes": {
+      "pale": 1,
+      "soft": 3
+    },
+    "allowedModifiers": []
+  },
+  {
+    "output": "pastry_cream",
+    "human_name": "pastry cream",
+    "quantity": 1,
+    "location": "SAUCEPAN",
+    "pan": "NONE",
+    "time": 2,
+    "ingredients": [
+      "cream",
+      "egg"
+    ],
+    "newAttributes": {
+      "pale": -1,
+      "soft": 1
+    },
+    "allowedModifiers": []
+  },
+  {
+    "output": "pudding",
+    "human_name": "pudding",
+    "quantity": 1,
+    "location": "SAUCEPAN",
+    "pan": "NONE",
+    "time": 2,
+    "ingredients": [
+      "cream",
+      "sugar"
+    ],
+    "newAttributes": {
+      "soft": 2
+    },
+    "allowedModifiers": [
+      "cocoa_powder",
+      "flavoring"
+    ]
+  },
+  {
+    "output": "cookie_dough",
+    "human_name": "cookie dough",
+    "quantity": 1,
+    "location": "MIXER",
+    "pan": "NONE",
+    "time": 2,
+    "ingredients": [
+      "flour",
+      "sugar"
+    ],
+    "newAttributes": {
+      "soft": 1
+    },
+    "allowedModifiers": [
+      "cocoa_powder",
+      "flavoring",
+      "chocolate_chips"
+    ]
+  },
+  {
+    "output": "cookie_dough",
+    "human_name": "cookie dough",
+    "quantity": 1,
+    "location": "MIXER",
+    "pan": "NONE",
+    "time": 0,
+    "ingredients": [
+      "cookie_dough"
+    ],
+    "newAttributes": {},
+    "allowedModifiers": [
+      "cocoa_powder",
+      "flavoring",
+      "chocolate_chips"
+    ]
+  },
+  {
+    "output": "cake_batter",
+    "human_name": "cake batter",
+    "quantity": 1,
+    "location": "MIXER",
+    "pan": "NONE",
+    "time": 2,
+    "ingredients": [
+      "flour",
+      "sugar",
+      "egg"
+    ],
+    "newAttributes": {
+      "soft": 1
+    },
+    "allowedModifiers": [
+      "cocoa_powder",
+      "flavoring",
+      "chocolate_chips",
+      "shredded_carrot",
+      "sprinkles"
+    ]
+  },
+  {
+    "output": "cake_batter",
+    "human_name": "cake batter",
+    "quantity": 1,
+    "location": "MIXER",
+    "pan": "NONE",
+    "time": 0,
+    "ingredients": [
+      "cake_batter"
+    ],
+    "newAttributes": {},
+    "allowedModifiers": [
+      "cocoa_powder",
+      "flavoring",
+      "chocolate_chips",
+      "shredded_carrot",
+      "sprinkles"
+    ]
+  },
+  {
+    "output": "cookie",
+    "human_name": "cookie",
+    "quantity": 1,
+    "location": "OVEN",
+    "pan": "COOKIE_SHEET",
+    "time": 2,
+    "ingredients": [
+      "cookie_dough"
+    ],
+    "newAttributes": {},
+    "allowedModifiers": []
+  },
+  {
+    "output": "cupcake",
+    "human_name": "cupcake",
+    "quantity": 1,
+    "location": "OVEN",
+    "pan": "MUFFIN_TIN",
+    "time": 3,
+    "ingredients": [
+      "cake_batter"
+    ],
+    "newAttributes": {},
+    "allowedModifiers": [
+      "muffin_liners"
+    ]
+  },
+  {
+    "output": "cake",
+    "human_name": "cake",
+    "quantity": 1,
+    "location": "OVEN",
+    "pan": "CAKE_PAN",
+    "time": 4,
+    "ingredients": [
+      "cake_batter"
+    ],
+    "newAttributes": {},
+    "allowedModifiers": [
+      "cake_form"
+    ]
+  },
+  {
+    "output": "cake_slice",
+    "human_name": "cake slice",
+    "quantity": 1,
+    "location": "cake_knife",
+    "pan": "NONE",
+    "time": 0,
+    "ingredients": [
+      "cake"
+    ],
+    "newAttributes": {},
+    "allowedModifiers": []
+  }
+]

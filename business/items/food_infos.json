@@ -1,0 +1,400 @@
+{
+	"flour": {
+		"human_name": "flour",
+		"storage_type": "bag",
+		"categories": [ "BASE" ],
+		"buy_price": 1,
+		"max_stack_size": 1,
+		"attributes": {
+			"pale": 1
+		}
+	},
+	"sugar": {
+		"human_name": "sugar",
+		"storage_type": "bag",
+		"categories": [ "BASE" ],
+		"buy_price": 1,
+		"max_stack_size": 1,
+		"attributes": {
+			"sweet": 2
+		}
+	},
+	"egg": {
+		"human_name": "egg",
+		"storage_type": "fridge",
+		"categories": [ "BASE" ],
+		"buy_price": 1,
+		"max_stack_size": 12,
+		"attributes": {}
+	},
+	"cream": {
+		"human_name": "cream",
+		"storage_type": "fridge",
+		"categories": [ "BASE" ],
+		"buy_price": 2,
+		"max_stack_size": 4,
+		"attributes": {
+			"pale": 2
+		}
+	},
+	"cocoa_powder": {
+		"human_name": "cocoa powder",
+		"storage_type": "bag",
+		"categories": [ "MODIFIER" ],
+		"buy_price": 3,
+		"max_stack_size": 4,
+		"attributes": {
+			"chocolatey": 2,
+			"pale": -2,
+			"brown": 2
+		}
+	},
+	"chocolate_bar": {
+		"human_name": "chocolate bar",
+		"storage_type": "crate",
+		"categories": [ "BASE" ],
+		"buy_price": 2,
+		"max_stack_size": 12,
+		"attributes": {
+			"chocolatey": 1
+		}
+	},
+	"cherry_flavoring": {
+		"human_name": "cherry flavoring",
+		"storage_type": "jar",
+		"categories": [ "MODIFIER" ],
+		"buy_price": 4,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {
+			"fruity": 2,
+			"red": 1,
+			"purple": 1,
+			"pale": -2
+		}
+	},
+	"strawberry_flavoring": {
+		"human_name": "strawberry flavoring",
+		"storage_type": "jar",
+		"categories": [ "MODIFIER" ],
+		"buy_price": 4,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {
+			"fruity": 2,
+			"red": 1,
+			"pale": -1
+		}
+	},
+	"raspberry_flavoring": {
+		"human_name": "raspberry flavoring",
+		"storage_type": "jar",
+		"categories": [ "MODIFIER" ],
+		"buy_price": 4,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {
+			"fruity": 2,
+			"red": 2,
+			"pale": -1
+		}
+	},
+	"orange_flavoring": {
+		"human_name": "orange flavoring",
+		"storage_type": "jar",
+		"categories": [ "MODIFIER" ],
+		"buy_price": 4,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {
+			"fruity": 2,
+			"orange": 2,
+			"pale": -1
+		}
+	},
+	"almond_flavoring": {
+		"human_name": "almond flavoring",
+		"storage_type": "jar",
+		"categories": [ "MODIFIER" ],
+		"buy_price": 4,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {
+			"nutty": 1,
+			"brown": 1
+		}
+	},
+	"lemon_flavoring": {
+		"human_name": "lemon flavoring",
+		"storage_type": "jar",
+		"categories": [ "MODIFIER" ],
+		"buy_price": 4,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {
+			"fruity": 1,
+			"tart": 2,
+			"yellow": 2
+		}
+	},
+	"lime_flavoring": {
+		"human_name": "lime flavoring",
+		"storage_type": "jar",
+		"categories": [ "MODIFIER" ],
+		"buy_price": 4,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {
+			"fruity": 1,
+			"tart": 2,
+			"yellow": 1,
+			"green": 1
+		}
+	},
+	"blueberry_flavoring": {
+		"human_name": "blueberry flavoring",
+		"storage_type": "jar",
+		"categories": [ "MODIFIER" ],
+		"buy_price": 4,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {
+			"fruity": 2,
+			"blue": 1,
+			"pale": -1
+		}
+	},
+	"ube_flavoring": {
+		"human_name": "ube flavoring",
+		"storage_type": "jar",
+		"categories": [ "MODIFIER" ],
+		"buy_price": 4,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {
+			"purple": 2,
+			"pale": -1
+		}
+	},
+	"mint_flavoring": {
+		"human_name": "mint flavoring",
+		"storage_type": "jar",
+		"categories": [ "MODIFIER" ],
+		"buy_price": 4,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {
+			"minty": 3,
+			"green": 1,
+			"pale": -1
+		}
+	},
+	"caramel_flavoring": {
+		"human_name": "caramel flavoring",
+		"storage_type": "jar",
+		"categories": [ "MODIFIER" ],
+		"buy_price": 4,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {
+			"fruity": 2,
+			"red": 2,
+			"pale": -2
+		}
+	},
+	"red_candied_flowers": {
+		"human_name": "red_candied_flowers",
+		"storage_type": "jar",
+		"categories": [ "DOODAD" ],
+		"buy_price": 5,
+		"max_stack_size": "CANDIED_FLOWERS_STACK_SIZE",
+		"attributes": {
+			"red": 9,
+			"pop": 1
+		}
+	},
+	"white_candied_flowers": {
+		"human_name": "white_candied_flowers",
+		"storage_type": "jar",
+		"categories": [ "DOODAD" ],
+		"buy_price": 5,
+		"max_stack_size": "CANDIED_FLOWERS_STACK_SIZE",
+		"attributes": {
+			"pale": 2,
+			"pop": 1
+		}
+	},
+	"blue_candied_flowers": {
+		"human_name": "blue_candied_flowers",
+		"storage_type": "jar",
+		"categories": [ "DOODAD" ],
+		"buy_price": 5,
+		"max_stack_size": "CANDIED_FLOWERS_STACK_SIZE",
+		"attributes": {
+			"blue": 1,
+			"pop": 1
+		}
+	},
+	"yellow_candied_flowers": {
+		"human_name": "yellow_candied_flowers",
+		"storage_type": "jar",
+		"categories": [ "DOODAD" ],
+		"buy_price": 5,
+		"max_stack_size": "CANDIED_FLOWERS_STACK_SIZE",
+		"attributes": {
+			"yellow": 1,
+			"pop": 1
+		}
+	},
+	"rainbow_sprinkles": {
+		"human_name": "rainbow sprinkles",
+		"storage_type": "jar",
+		"categories": [ "MODIFIER", "DOODAD" ],
+		"buy_price": 2,
+		"max_stack_size": "SPRINKLES_STACK_SIZE",
+		"attributes": {
+			"varigated": 1,
+			"pop": 1
+		}
+	},
+	"chocolate_sprinkles": {
+		"human_name": "chocolate sprinkles",
+		"storage_type": "jar",
+		"categories": [ "MODIFIER", "DOODAD" ],
+		"buy_price": 2,
+		"max_stack_size": "SPRINKLES_STACK_SIZE",
+		"attributes": {
+			"pop": 1
+		}
+	},
+	"white_sprinkles": {
+		"human_name": "white sprinkles",
+		"storage_type": "jar",
+		"categories": [ "MODIFIER", "DOODAD" ],
+		"buy_price": 2,
+		"max_stack_size": "SPRINKLES_STACK_SIZE",
+		"attributes": {
+			"pale": 1,
+			"pop": 1
+		}
+	},
+	"ball_bearing_sprinkles": {
+		"human_name": "ball_bearing_sprinkles",
+		"storage_type": "jar",
+		"categories": [ "MODIFIER", "DOODAD" ],
+		"buy_price": 2,
+		"max_stack_size": "SPRINKLES_STACK_SIZE",
+		"attributes": {
+			"pale": 1,
+			"pop": 2
+		}
+	},
+	"hard_candy_bats": {
+		"human_name": "hard_candy_bats",
+		"storage_type": "jar",
+		"categories": [ "DOODAD" ],
+		"buy_price": 3,
+		"max_stack_size": "HARD_CANDY_SHAPES_STACK_SIZE",
+		"attributes": {
+			"pop": 1
+		}
+	},
+	"hard_candy_eyeballs": {
+		"human_name": "hard_candy_eyeballs",
+		"storage_type": "jar",
+		"categories": [ "DOODAD" ],
+		"buy_price": 3,
+		"max_stack_size": "HARD_CANDY_SHAPES_STACK_SIZE",
+		"attributes": {
+			"varigated": 1,
+			"pop": 1
+		}
+	},
+	"hard_candy_ghosts": {
+		"human_name": "hard_candy_ghosts",
+		"storage_type": "jar",
+		"categories": [ "DOODAD" ],
+		"buy_price": 3,
+		"max_stack_size": "HARD_CANDY_SHAPES_STACK_SIZE",
+		"attributes": {
+			"pop": 1
+		}
+	},
+	"chocolate_chips": {
+		"human_name": "chocolate chips",
+		"storage_type": "jar",
+		"categories": ["MODIFIER", "DOODAD"],
+		"buy_price": 3,
+		"max_stack_size": 9,
+		"attributes": "from_recipe"
+	},
+	"frosting": {
+		"human_name": "frosting",
+		"storage_type": "jar",
+		"categories": ["DECORATION"],
+		"buy_price": 2,
+		"max_stack_size": 4,
+		"attributes": "from_recipe"
+	},
+	"whipped_cream": {
+		"human_name": "whipped cream",
+		"storage_type": "fridge",
+		"categories": ["FILLING", "DECORATION"],
+		"buy_price": 2,
+		"max_stack_size": 1,
+		"attributes": "from_recipe"
+	},
+	"pastry_cream": {
+		"human_name": "pastry cream",
+		"storage_type": "fridge",
+		"categories": ["FILLING"],
+		"buy_price": 3,
+		"max_stack_size": 1,
+		"attributes": "from_recipe"
+	},
+	"pudding": {
+		"human_name": "pudding",
+		"storage_type": "fridge",
+		"categories": ["FILLING"],
+		"buy_price": 3,
+		"max_stack_size": 1,
+		"attributes": "from_recipe"
+	},
+	"cookie_dough": {
+		"human_name": "cookie dough",
+		"storage_type": "fridge",
+		"categories": ["BASE"],
+		"buy_price": 2,
+		"max_stack_size": 1,
+		"attributes": "from_recipe"
+	},
+	"cake_batter": {
+		"human_name": "cake batter",
+		"storage_type": "fridge",
+		"categories": ["BASE"],
+		"buy_price": 2,
+		"max_stack_size": 1,
+		"attributes": "from_recipe"
+	},
+	"cookie": {
+		"human_name": "cookie",
+		"storage_type": "crate",
+		"categories": ["PRODUCT"],
+		"buy_price": null,
+		"max_stack_size": 1,
+		"attributes": "from_recipe"
+	},
+	"cupcake": {
+		"human_name": "cupcake",
+		"storage_type": "fridge",
+		"categories": ["PRODUCT"],
+		"buy_price": null,
+		"max_stack_size": 1,
+		"attributes": "from_recipe"
+	},
+	"cake": {
+		"human_name": "cake",
+		"storage_type": "fridge",
+		"categories": ["PRODUCT"],
+		"buy_price": null,
+		"max_stack_size": 1,
+		"attributes": "from_recipe"
+	},
+	"cake_slice": {
+		"human_name": "cake slice",
+		"storage_type": "fridge",
+		"categories": ["PRODUCT"],
+		"buy_price": null,
+		"max_stack_size": 1,
+		"attributes": "from_recipe"
+	}
+}
