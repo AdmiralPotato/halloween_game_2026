@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://bvpar5bdtvhrp"]
+
+[ext_resource type="Resource" uid="uid://dtpa5786bonsp" path="res://model/data/items/frosting.tres" id="1_f10hc"]
+[ext_resource type="Script" uid="uid://n2r00hcbl3ul" path="res://model/item_stack.gd" id="2_rquun"]
+[ext_resource type="Script" uid="uid://b5mlkyd7jcal7" path="res://model/recipe.gd" id="3_wf1cw"]
+
+[sub_resource type="Resource" id="Resource_f10hc"]
+script = ExtResource("2_rquun")
+item = ExtResource("1_f10hc")
+count = 2
+
+[resource]
+script = ExtResource("3_wf1cw")
+name = "frosting"
+output = SubResource("Resource_f10hc")
+location = 1
+ingredients = PackedStringArray("sugar")
+permitted_modifiers = PackedStringArray("cocoa_powder", "flavoring")

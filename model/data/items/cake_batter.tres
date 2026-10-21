@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://v0pjmdco8t3r"]
+
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_yu8v4"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_yu8v4"]
+size = Vector2(256, 256)
+
+[resource]
+script = ExtResource("1_yu8v4")
+name = "cake_batter"
+display_name = "cake batter"
+storage_type = 1
+categories = Array[int]([0])
+cost_tier = 2
+groups = PackedStringArray()
+texture = SubResource("PlaceholderTexture2D_yu8v4")

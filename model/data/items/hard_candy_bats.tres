@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://bf5t4rvw72l23"]
+
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_dmq70"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_dmq70"]
+size = Vector2(256, 256)
+
+[resource]
+script = ExtResource("1_dmq70")
+name = "hard_candy_bats"
+display_name = "hard_candy_bats"
+storage_type = 4
+categories = Array[int]([5])
+cost_tier = 3
+max_stack_size = 0
+attributes = Dictionary[int, int]({
+12: 1
+})
+groups = PackedStringArray("hard_candy_shapes")
+texture = SubResource("PlaceholderTexture2D_dmq70")

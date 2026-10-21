@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://drme21dey44pm"]
+
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_q6o25"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_q6o25"]
+size = Vector2(256, 256)
+
+[resource]
+script = ExtResource("1_q6o25")
+name = "whipped_cream"
+display_name = "whipped cream"
+storage_type = 1
+categories = Array[int]([3, 4])
+cost_tier = 2
+groups = PackedStringArray()
+texture = SubResource("PlaceholderTexture2D_q6o25")

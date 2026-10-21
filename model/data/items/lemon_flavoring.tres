@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://dkufy8htdlc00"]
+
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_xbsx6"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_xbsx6"]
+size = Vector2(256, 256)
+
+[resource]
+script = ExtResource("1_xbsx6")
+name = "lemon_flavoring"
+display_name = "lemon flavoring"
+storage_type = 4
+categories = Array[int]([1])
+cost_tier = 4
+max_stack_size = 0
+attributes = Dictionary[int, int]({
+4: 2,
+16: 1,
+20: 2
+})
+groups = PackedStringArray("flavoring")
+texture = SubResource("PlaceholderTexture2D_xbsx6")

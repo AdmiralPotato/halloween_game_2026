@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://cqkl4jri82v6d"]
+
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_try3a"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_try3a"]
+size = Vector2(256, 256)
+
+[resource]
+script = ExtResource("1_try3a")
+name = "mint_flavoring"
+display_name = "mint flavoring"
+storage_type = 4
+categories = Array[int]([1])
+cost_tier = 4
+max_stack_size = 0
+attributes = Dictionary[int, int]({
+0: -1,
+5: 1,
+17: 3
+})
+groups = PackedStringArray("flavoring")
+texture = SubResource("PlaceholderTexture2D_try3a")

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://sp4b1un2g2p5"]
+
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_5yjk2"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5yjk2"]
+size = Vector2(256, 256)
+
+[resource]
+script = ExtResource("1_5yjk2")
+name = "egg"
+display_name = "egg"
+storage_type = 1
+categories = Array[int]([0])
+cost_tier = 1
+max_stack_size = 12
+groups = PackedStringArray()
+texture = SubResource("PlaceholderTexture2D_5yjk2")

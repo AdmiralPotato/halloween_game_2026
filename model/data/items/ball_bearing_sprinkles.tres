@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://boqigsr1kfgfe"]
+
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_d0juq"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_d0juq"]
+size = Vector2(256, 256)
+
+[resource]
+script = ExtResource("1_d0juq")
+name = "ball_bearing_sprinkles"
+display_name = "ball_bearing_sprinkles"
+storage_type = 4
+categories = Array[int]([1, 5])
+cost_tier = 2
+max_stack_size = 0
+attributes = Dictionary[int, int]({
+0: 1,
+12: 2
+})
+groups = PackedStringArray("sprinkles")
+texture = SubResource("PlaceholderTexture2D_d0juq")

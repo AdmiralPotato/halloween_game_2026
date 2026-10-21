@@ -107,7 +107,7 @@
   },
   {
     "output": "cookie_dough",
-    "human_name": "cookie dough",
+    "human_name": "cookie dough remix",
     "quantity": 1,
     "location": "MIXER",
     "pan": "NONE",
@@ -147,7 +147,7 @@
   },
   {
     "output": "cake_batter",
-    "human_name": "cake batter",
+    "human_name": "cake batter remix",
     "quantity": 1,
     "location": "MIXER",
     "pan": "NONE",
@@ -211,7 +211,7 @@
     "output": "cake_slice",
     "human_name": "cake slice",
     "quantity": 1,
-    "location": "cake_knife",
+    "location": "CUTTING_BOARD",
     "pan": "NONE",
     "time": 0,
     "ingredients": [

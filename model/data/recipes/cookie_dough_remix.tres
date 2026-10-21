@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://cfscjphu6d0tk"]
+
+[ext_resource type="Resource" uid="uid://vmrcp80igtca" path="res://model/data/items/cookie_dough.tres" id="1_82dg6"]
+[ext_resource type="Script" uid="uid://n2r00hcbl3ul" path="res://model/item_stack.gd" id="2_1hsbp"]
+[ext_resource type="Script" uid="uid://b5mlkyd7jcal7" path="res://model/recipe.gd" id="3_hew4v"]
+
+[sub_resource type="Resource" id="Resource_s4ou6"]
+script = ExtResource("2_1hsbp")
+item = ExtResource("1_82dg6")
+
+[resource]
+script = ExtResource("3_hew4v")
+name = "cookie dough remix"
+output = SubResource("Resource_s4ou6")
+location = 1
+ingredients = PackedStringArray("cookie_dough")
+permitted_modifiers = PackedStringArray("cocoa_powder", "flavoring", "chocolate_chips")

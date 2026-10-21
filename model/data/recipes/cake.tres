@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://cd0372c68gyfl"]
+
+[ext_resource type="Resource" uid="uid://by7lx0wufl7ui" path="res://model/data/items/cake.tres" id="1_abuvu"]
+[ext_resource type="Script" uid="uid://n2r00hcbl3ul" path="res://model/item_stack.gd" id="2_jns5g"]
+[ext_resource type="Script" uid="uid://b5mlkyd7jcal7" path="res://model/recipe.gd" id="3_xarxu"]
+
+[sub_resource type="Resource" id="Resource_abuvu"]
+script = ExtResource("2_jns5g")
+item = ExtResource("1_abuvu")
+
+[resource]
+script = ExtResource("3_xarxu")
+name = "cake"
+output = SubResource("Resource_abuvu")
+location = 3
+container = "CAKE_PAN"
+ingredients = PackedStringArray("cake_batter")
+permitted_modifiers = PackedStringArray("cake_form")

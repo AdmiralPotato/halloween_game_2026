@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://b51yuegjqhtrh"]
+
+[ext_resource type="Resource" uid="uid://di0d7103yc36q" path="res://model/data/items/chocolate_chips.tres" id="1_e1cac"]
+[ext_resource type="Script" uid="uid://n2r00hcbl3ul" path="res://model/item_stack.gd" id="2_rsn0a"]
+[ext_resource type="Script" uid="uid://b5mlkyd7jcal7" path="res://model/recipe.gd" id="3_tc2cg"]
+
+[sub_resource type="Resource" id="Resource_e1cac"]
+script = ExtResource("2_rsn0a")
+item = ExtResource("1_e1cac")
+count = 4
+
+[resource]
+script = ExtResource("3_tc2cg")
+name = "chocolate chips"
+output = SubResource("Resource_e1cac")
+ingredients = PackedStringArray("chocolate_bar")
+permitted_modifiers = PackedStringArray()

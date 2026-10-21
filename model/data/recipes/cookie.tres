@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://61k151p35yto"]
+
+[ext_resource type="Resource" uid="uid://cgsiu2wskomec" path="res://model/data/items/cookie.tres" id="1_d3ums"]
+[ext_resource type="Script" uid="uid://n2r00hcbl3ul" path="res://model/item_stack.gd" id="2_8eiwj"]
+[ext_resource type="Script" uid="uid://b5mlkyd7jcal7" path="res://model/recipe.gd" id="3_lshx7"]
+
+[sub_resource type="Resource" id="Resource_d3ums"]
+script = ExtResource("2_8eiwj")
+item = ExtResource("1_d3ums")
+
+[resource]
+script = ExtResource("3_lshx7")
+name = "cookie"
+output = SubResource("Resource_d3ums")
+location = 3
+container = "COOKIE_SHEET"
+ingredients = PackedStringArray("cookie_dough")
+permitted_modifiers = PackedStringArray()

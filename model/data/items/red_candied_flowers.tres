@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://b2smh57bfxkqm"]
+
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_1jxb8"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1jxb8"]
+size = Vector2(256, 256)
+
+[resource]
+script = ExtResource("1_1jxb8")
+name = "red_candied_flowers"
+display_name = "red_candied_flowers"
+storage_type = 4
+categories = Array[int]([5])
+cost_tier = 5
+max_stack_size = 0
+attributes = Dictionary[int, int]({
+1: 9,
+12: 1
+})
+groups = PackedStringArray("candied_flowers")
+texture = SubResource("PlaceholderTexture2D_1jxb8")

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://cwvimk8q06x3u"]
+
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_hjll3"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_hjll3"]
+size = Vector2(256, 256)
+
+[resource]
+script = ExtResource("1_hjll3")
+name = "chocolate_bar"
+display_name = "chocolate bar"
+storage_type = 3
+categories = Array[int]([0])
+cost_tier = 2
+max_stack_size = 12
+attributes = Dictionary[int, int]({
+15: 1
+})
+groups = PackedStringArray()
+texture = SubResource("PlaceholderTexture2D_hjll3")
