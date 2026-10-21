@@ -95,8 +95,19 @@ static func from_json(name: String, d: Dictionary, variants: Dictionary = {}) ->
 	if variant:
 		info.groups.append(variant.parent)
 	var texture = d.get("texture")
-	if texture:
-		pass # TODO
+	if texture and typeof(texture) == TYPE_STRING:
+		var parts: PackedStringArray = texture.split("@", true, 2)
+		info.texture = ResourceLoader.load(parts[0], "Texture2D")
+		if parts.size() > 1:
+			var atlas := AtlasTexture.new()
+			var size: Vector2 = info.texture.get_size()
+			var coords := Array(parts[1].split(",", true, 2))
+			var spans := coords.map(func(part: String): return part.split("/", true, 2))
+			var cell := size / Vector2(float(spans[0][1]), float(spans[1][1]))
+			var index := Vector2i(int(spans[0][0]), int(spans[1][0]))
+			atlas.atlas = info.texture
+			atlas.region = Rect2(Vector2(index) * cell, cell)
+			info.texture = atlas
 	else:
 		info.texture = PlaceholderTexture2D.new()
 		info.texture.size = Vector2(256, 256)

@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://b2v8tffij1nm2"]
 
-[ext_resource type="Resource" uid="uid://cbhkv0c47w56h" path="res://model/data/items/cake_slice.tres" id="1_8dd5h"]
-[ext_resource type="Script" uid="uid://n2r00hcbl3ul" path="res://model/item_stack.gd" id="2_30lrl"]
+[ext_resource type="Script" uid="uid://n2r00hcbl3ul" path="res://model/item_stack.gd" id="1_8dd5h"]
+[ext_resource type="Resource" uid="uid://cbhkv0c47w56h" path="res://model/data/items/cake_slice.tres" id="2_30lrl"]
 [ext_resource type="Script" uid="uid://b5mlkyd7jcal7" path="res://model/recipe.gd" id="3_i82xv"]
 
 [sub_resource type="Resource" id="Resource_8dd5h"]
-script = ExtResource("2_30lrl")
-item = ExtResource("1_8dd5h")
+script = ExtResource("1_8dd5h")
+item = ExtResource("2_30lrl")
 
 [resource]
 script = ExtResource("3_i82xv")

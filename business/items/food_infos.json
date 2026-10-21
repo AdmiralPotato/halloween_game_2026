@@ -7,7 +7,8 @@
 		"max_stack_size": 1,
 		"attributes": {
 			"pale": 1
-		}
+		},
+		"texture": "res://assets/items.png@11/12,0/4"
 	},
 	"sugar": {
 		"human_name": "sugar",
@@ -17,7 +18,8 @@
 		"max_stack_size": 1,
 		"attributes": {
 			"sweet": 2
-		}
+		},
+		"texture": "res://assets/items.png@11/12,0/4"
 	},
 	"egg": {
 		"human_name": "egg",
@@ -25,7 +27,8 @@
 		"categories": [ "BASE" ],
 		"buy_price": 1,
 		"max_stack_size": 12,
-		"attributes": {}
+		"attributes": {},
+		"texture": "res://assets/items.png@2/12,0/4"
 	},
 	"cream": {
 		"human_name": "cream",

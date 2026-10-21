@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://cj287n17bxna2"]
 
 [ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_r2ulw"]
+[ext_resource type="Texture2D" uid="uid://bt02axwx2h75u" path="res://assets/items.png" id="2_siari"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_r2ulw"]
-size = Vector2(256, 256)
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0xw0"]
+atlas = ExtResource("2_siari")
+region = Rect2(2829.75, 0, 257.25, 265.5)
 
 [resource]
 script = ExtResource("1_r2ulw")
@@ -15,4 +17,4 @@ attributes = Dictionary[int, int]({
 19: 2
 })
 groups = PackedStringArray()
-texture = SubResource("PlaceholderTexture2D_r2ulw")
+texture = SubResource("AtlasTexture_i0xw0")
