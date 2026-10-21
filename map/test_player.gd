@@ -9,7 +9,6 @@ const SMOL = Vector3.ONE * 0.5
 ## How fast the birb wants to turn in RADIANS per second
 @export var turn_speed := TAU
 
-var held_object: BaseMapNode
 var in_rearrange_mode := false
 
 @onready var carry_node = $RightHand/Carry
@@ -17,6 +16,19 @@ var in_rearrange_mode := false
 @onready var mesh_node = $mage
 @onready var skeleton = $mage/mage_bones/Skeleton3D
 @onready var hand_bone = skeleton.find_bone("hand_R")
+var held_object: BaseMapNode:
+	get:
+		if carry_node.get_child_count() > 0:
+			return carry_node.get_child(0)
+		return null
+	set(v):
+		while carry_node.get_child_count() > 0:
+			carry_node.remove_child(carry_node.get_child(0))
+		if v:
+			if v.is_inside_tree():
+				v.reparent(carry_node, false)
+			else:
+				carry_node.add_child(v)
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("toggle_rearrange"):
@@ -49,10 +61,6 @@ func _physics_process(delta):
 			held_object = Global.tilemap.swap_item(target_tile, held_object)
 		# If we're holding an object now, and it's a new one we picked up...
 		if held_object and held_object != old_held:
-			if held_object.is_inside_tree():
-				held_object.reparent(carry_node, false)
-			else:
-				carry_node.add_child(held_object)
 			held_object.transform = Transform3D(Basis().scaled(SMOL), Vector3.ZERO)
 			held_object.animate_to_current_transform()
 		if old_held and held_object != old_held:

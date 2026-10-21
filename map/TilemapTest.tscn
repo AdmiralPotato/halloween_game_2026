@@ -5,6 +5,25 @@
 [ext_resource type="PackedScene" uid="uid://d0du8065dim5b" path="res://map/FurniSource.tscn" id="3_0vrjm"]
 [ext_resource type="PackedScene" uid="uid://v5tdiarwxe74" path="res://map/TestPlayer.tscn" id="3_8t2af"]
 [ext_resource type="PackedScene" uid="uid://03n546k1srnw" path="res://ui/debug_panel.tscn" id="4_8t2af"]
+[ext_resource type="Script" uid="uid://n2r00hcbl3ul" path="res://model/item_stack.gd" id="4_qtmpa"]
+[ext_resource type="Resource" uid="uid://sp4b1un2g2p5" path="res://model/data/items/egg.tres" id="5_euwyw"]
+[ext_resource type="Resource" uid="uid://cj287n17bxna2" path="res://model/data/items/sugar.tres" id="6_vwyy3"]
+[ext_resource type="Resource" uid="uid://ddmmcej5lm5pc" path="res://model/data/items/flour.tres" id="7_b8euk"]
+
+[sub_resource type="Resource" id="Resource_3qeqy"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("5_euwyw")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_5qf2s"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("6_vwyy3")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_8bmqu"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("7_b8euk")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_el5rg"]
 size = Vector3(8, 1, 12)
@@ -37,7 +56,6 @@ sky = SubResource("Sky_eai58")
 [node name="TilemapTest" type="Node3D" unique_id=1389805114]
 process_physics_priority = -1
 script = ExtResource("1_0n275")
-customer_spawn_time_range = null
 
 [node name="Tilemap" type="Node3D" parent="." unique_id=991694847]
 script = ExtResource("2_xtlfy")
@@ -45,15 +63,15 @@ metadata/_custom_type_script = "uid://brhfhuo7lsymv"
 
 [node name="Furni2_2" parent="Tilemap" unique_id=1615491916 instance=ExtResource("3_0vrjm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 2.5)
-ingredient_type = 7
+stack = SubResource("Resource_3qeqy")
 
 [node name="Furni3_2" parent="Tilemap" unique_id=2070057252 instance=ExtResource("3_0vrjm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 2.5)
-ingredient_type = 3
+stack = SubResource("Resource_5qf2s")
 
 [node name="Furni4_2" parent="Tilemap" unique_id=991868078 instance=ExtResource("3_0vrjm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 2.5)
-ingredient_type = 5
+stack = SubResource("Resource_8bmqu")
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=2097173625]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.5, 6)

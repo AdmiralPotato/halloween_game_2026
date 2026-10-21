@@ -101,3 +101,6 @@ static func from_json(name: String, d: Dictionary, variants: Dictionary = {}) ->
 		info.texture = PlaceholderTexture2D.new()
 		info.texture.size = Vector2(256, 256)
 	return info
+
+func is_category(cat: Category) -> bool:
+	return cat in categories

@@ -15,6 +15,7 @@ script = ExtResource("1_8bmqu")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1113763637]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("BoxShape3D_p33bg")
+disabled = true
 
 [node name="storageBox_v1" parent="StaticBody3D" unique_id=383906389 instance=ExtResource("2_8bmqu")]
 
