@@ -16,12 +16,14 @@ static func make_node(stack: ItemStack) -> ItemNode:
 	var node = item_scene.instantiate()
 	node.stack = stack.duplicate()
 	return node
-	
+
+
 func _to_string() -> String:
 	return "ItemNode {name}:{stack}".format({
 		name = name,
 		stack = stack,
 	})
+
 
 @export var stack: ItemStack:
 	set(v):
@@ -33,16 +35,33 @@ func _to_string() -> String:
 		update_stack_rendering()
 
 
+const BASE_SCALE = 0.8
 func update_stack_rendering():
 	if not (has_node(^"Sprite") and has_node(^"Count")):
 		# Child nodes aren't yet available--defer a call instead.
 		if not Engine.is_editor_hint():
 			ready.connect(update_stack_rendering, CONNECT_ONE_SHOT | CONNECT_DEFERRED)
 		return
-	if stack and stack.item:
-		$Sprite.texture = stack.item.texture
-		$Count.text = str(stack.count)
-		$Count.visible = stack.count > 1
+	if stack:
+		if stack.item:
+			$Sprite.texture = stack.item.texture
+			$Count.text = str(stack.count)
+			$Count.visible = stack.count > 1
+		for child in $Contents.get_children():
+			child.queue_free()
+		var contents_size := stack.contents.size()
+		var cols := int(ceil(sqrt(contents_size)))
+		var index := 0
+		for contained in stack.contents:
+			var cell = Vector2i(index % cols, index / cols)
+			index += 1
+			var node = make_node(contained)
+			$Contents.add_child(node)
+			node.transform = Transform3D(
+				Basis().scaled(Vector3.ONE * BASE_SCALE / cols),
+				Vector3(-1, 0, -1) * BASE_SCALE / 2 + \
+					Vector3(cell.x, 0, cell.y) * BASE_SCALE / max(cols - 1, 1),
+			)
 	else:
 		$Sprite.texture = PlaceholderTexture2D.new()
 		($Sprite.texture as PlaceholderTexture2D).size = Vector2(256, 256)
