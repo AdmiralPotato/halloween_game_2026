@@ -164,12 +164,6 @@ func mess_with_children():
 			child.position.x = tile_x + 0.5
 			child.position.y = 0.0
 			child.position.z = tile_y + 0.5
-		elif child is ItemNode:
-			var tile_x: int = floor(child.position.x)
-			var tile_y: int = floor(child.position.z)
-			child.name = "Item%d_%d" % [tile_x, tile_y]
-			child.position.x = tile_x + 0.5
-			child.position.z = tile_y + 0.5
 
 func pick_open_point() -> Vector2i:
 	return pathfinder.get_point_data_in_region(pathfinder.region)\

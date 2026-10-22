@@ -4,8 +4,16 @@ extends FurniNode
 
 @export var stack: ItemStack:
 	set(v):
+		if stack:
+			stack.changed.disconnect(update_node)
 		stack = v
-		$StaticBody3D/ItemNode.stack = v
+		if stack:
+			stack.changed.connect(update_node, CONNECT_DEFERRED)
+		update_node()
+		
+func update_node():
+	if has_node(^"StaticBody3D/ItemNode"):
+		$StaticBody3D/ItemNode.stack = stack
 
 func provide_item() -> ItemNode:
 	var item := ItemNode.make_node(stack)

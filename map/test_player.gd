@@ -30,6 +30,11 @@ var held_object: BaseMapNode:
 			else:
 				carry_node.add_child(v)
 
+
+func _ready():
+	Global.debug_panel.monitor("Held Object", self, "held_object", 1)
+
+
 func _physics_process(delta):
 	if Input.is_action_just_pressed("toggle_rearrange"):
 		in_rearrange_mode = !in_rearrange_mode

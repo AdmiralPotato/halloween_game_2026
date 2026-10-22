@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dhqkbi0laamdd" path="res://map/furni_source.gd" id="1_8bmqu"]
 [ext_resource type="PackedScene" uid="uid://cqpi8tk8o2j1" path="res://assets/furni_storage_box_0.glb" id="2_8bmqu"]
-[ext_resource type="Script" uid="uid://cy3x5ur0gdg0v" path="res://map/item_node.gd" id="3_8bmqu"]
+[ext_resource type="PackedScene" uid="uid://dnr2litnwd06p" path="res://map/ItemNode.tscn" id="5_7wfut"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p33bg"]
 size = Vector3(1, 0.8, 1)
@@ -19,7 +19,6 @@ disabled = true
 
 [node name="storageBox_v1" parent="StaticBody3D" unique_id=383906389 instance=ExtResource("2_8bmqu")]
 
-[node name="ItemNode" type="Node3D" parent="StaticBody3D" unique_id=203389264]
-transform = Transform3D(0.3, 0, 0, 0, -1.3113417e-08, 0.3, 0, -0.3, -1.3113417e-08, 0, 0.9513302, 0)
-script = ExtResource("3_8bmqu")
-metadata/_custom_type_script = "uid://cy3x5ur0gdg0v"
+[node name="ItemNode" parent="StaticBody3D" unique_id=184551138 instance=ExtResource("5_7wfut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+stack = null

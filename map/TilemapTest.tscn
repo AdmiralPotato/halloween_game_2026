@@ -9,6 +9,10 @@
 [ext_resource type="Resource" uid="uid://sp4b1un2g2p5" path="res://model/data/items/egg.tres" id="5_euwyw"]
 [ext_resource type="Resource" uid="uid://cj287n17bxna2" path="res://model/data/items/sugar.tres" id="6_vwyy3"]
 [ext_resource type="Resource" uid="uid://ddmmcej5lm5pc" path="res://model/data/items/flour.tres" id="7_b8euk"]
+[ext_resource type="Resource" uid="uid://bhawkao2hm3rp" path="res://model/data/items/cupcake.tres" id="8_n1qkj"]
+[ext_resource type="Resource" uid="uid://drme21dey44pm" path="res://model/data/items/whipped_cream.tres" id="9_nabl1"]
+[ext_resource type="Resource" uid="uid://di0d7103yc36q" path="res://model/data/items/chocolate_chips.tres" id="10_2f20c"]
+[ext_resource type="Resource" uid="uid://cpohusrgviils" path="res://model/data/items/rainbow_sprinkles.tres" id="11_8mw78"]
 
 [sub_resource type="Resource" id="Resource_3qeqy"]
 script = ExtResource("4_qtmpa")
@@ -23,6 +27,68 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 [sub_resource type="Resource" id="Resource_8bmqu"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("7_b8euk")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_qn3iu"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("9_nabl1")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_p5gm8"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("9_nabl1")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_2fvxq"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("9_nabl1")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_robgn"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("10_2f20c")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_77t2i"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("11_8mw78")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_15bd0"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("11_8mw78")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_tdsbi"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("11_8mw78")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_olchu"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("11_8mw78")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_6jj7b"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("11_8mw78")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_sfvuk"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("11_8mw78")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_0d7dl"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("11_8mw78")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_abky3"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("8_n1qkj")
+count = 6
+modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_qn3iu"), SubResource("Resource_p5gm8"), SubResource("Resource_2fvxq"), SubResource("Resource_robgn"), SubResource("Resource_77t2i"), SubResource("Resource_15bd0"), SubResource("Resource_tdsbi"), SubResource("Resource_olchu"), SubResource("Resource_6jj7b"), SubResource("Resource_sfvuk"), SubResource("Resource_0d7dl")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_el5rg"]
@@ -72,6 +138,10 @@ stack = SubResource("Resource_5qf2s")
 [node name="Furni4_2" parent="Tilemap" unique_id=991868078 instance=ExtResource("3_0vrjm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 2.5)
 stack = SubResource("Resource_8bmqu")
+
+[node name="Furni5_2" parent="Tilemap" unique_id=1421407579 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 2.5)
+stack = SubResource("Resource_abky3")
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=2097173625]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.5, 6)

@@ -1,22 +1,31 @@
 [gd_scene format=3 uid="uid://dnr2litnwd06p"]
 
 [ext_resource type="Script" uid="uid://cy3x5ur0gdg0v" path="res://map/item_node.gd" id="1_3qeqy"]
-[ext_resource type="Texture2D" uid="uid://tdosspgn5nwg" path="res://assets/candy.png" id="2_kemff"]
+[ext_resource type="Script" uid="uid://n2r00hcbl3ul" path="res://model/item_stack.gd" id="2_bs0ua"]
+[ext_resource type="Resource" uid="uid://ddmmcej5lm5pc" path="res://model/data/items/flour.tres" id="3_wqv6f"]
+[ext_resource type="Texture2D" uid="uid://bt02axwx2h75u" path="res://assets/items.png" id="4_bp7jc"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_asqca"]
-atlas = ExtResource("2_kemff")
-region = Rect2(0, 0, 256, 256)
+[sub_resource type="Resource" id="Resource_wo5lj"]
+script = ExtResource("2_bs0ua")
+item = ExtResource("3_wqv6f")
+count = 4
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wo5lj"]
+atlas = ExtResource("4_bp7jc")
+region = Rect2(754, 257.33334, 251.33333, 257.33334)
 
 [node name="ItemNode" type="Node3D" unique_id=184551138]
 script = ExtResource("1_3qeqy")
+stack = SubResource("Resource_wo5lj")
 metadata/_custom_type_script = "uid://cy3x5ur0gdg0v"
 
 [node name="Sprite" type="Sprite3D" parent="." unique_id=1574369792]
 transform = Transform3D(0.3, 0, 0, 0, -1.3113417e-08, 0.3, 0, -0.3, -1.3113417e-08, 0, 0, 0)
 shaded = true
 alpha_cut = 1
-texture = SubResource("AtlasTexture_asqca")
+texture = SubResource("AtlasTexture_wo5lj")
 
 [node name="Count" type="Label3D" parent="." unique_id=1674966425]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.1, 0)
-text = "1"
+text = "4"

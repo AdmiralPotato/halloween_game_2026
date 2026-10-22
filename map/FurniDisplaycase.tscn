@@ -6,7 +6,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_p33bg"]
 size = Vector3(1, 0.8, 1)
 
-[node name="FurniOven" type="Node3D" unique_id=1615491916]
+[node name="FurniDisplaycase" type="Node3D" unique_id=1615491916]
 script = ExtResource("1_qn3iu")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1407366706]

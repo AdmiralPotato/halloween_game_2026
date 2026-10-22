@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://5jo3bft5wl1u"]
 
-[ext_resource type="Script" uid="uid://du3akdgj3fk24" path="res://map/furni_countertop.gd" id="1_lex5f"]
+[ext_resource type="Script" uid="uid://mqo3qjgryl8a" path="res://map/furni_node.gd" id="1_lex5f"]
 [ext_resource type="PackedScene" uid="uid://cyax842a6qdje" path="res://assets/furni_mixer_0.glb" id="2_lex5f"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p33bg"]
@@ -8,7 +8,6 @@ size = Vector3(1, 0.8, 1)
 
 [node name="FurniMixer" type="Node3D" unique_id=1615491916]
 script = ExtResource("1_lex5f")
-item_height = null
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1407366706]
 

@@ -1,4 +1,3 @@
-@abstract
 extends BaseMapNode
 class_name FurniNode
 

@@ -16,6 +16,12 @@ static func make_node(stack: ItemStack) -> ItemNode:
 	var node = item_scene.instantiate()
 	node.stack = stack.duplicate()
 	return node
+	
+func _to_string() -> String:
+	return "ItemNode {name}:{stack}".format({
+		name = name,
+		stack = stack,
+	})
 
 @export var stack: ItemStack:
 	set(v):
@@ -28,9 +34,10 @@ static func make_node(stack: ItemStack) -> ItemNode:
 
 
 func update_stack_rendering():
-	if not (is_node_ready() and has_node(^"Sprite") and has_node(^"Count")):
+	if not (has_node(^"Sprite") and has_node(^"Count")):
 		# Child nodes aren't yet available--defer a call instead.
-		ready.connect(update_stack_rendering, CONNECT_ONE_SHOT | CONNECT_DEFERRED)
+		if not Engine.is_editor_hint():
+			ready.connect(update_stack_rendering, CONNECT_ONE_SHOT | CONNECT_DEFERRED)
 		return
 	if stack and stack.item:
 		$Sprite.texture = stack.item.texture

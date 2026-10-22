@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://do30vdu0sngt5"]
 
-[ext_resource type="Script" uid="uid://du3akdgj3fk24" path="res://map/furni_countertop.gd" id="1_i5o3g"]
+[ext_resource type="Script" uid="uid://mqo3qjgryl8a" path="res://map/furni_node.gd" id="1_i5o3g"]
 [ext_resource type="PackedScene" uid="uid://emypqd1cejye" path="res://assets/furni_oven_0.glb" id="2_i5o3g"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p33bg"]

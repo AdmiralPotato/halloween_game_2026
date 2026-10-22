@@ -66,7 +66,8 @@ func _to_string() -> String:
 	var mods := PackedStringArray()
 	var card := modifier_cardinality
 	for info in card:
-		mods.append(CARDINALITY.get(card[info], "") + info.display_name + "s")
+		var suffix = "s" if not info.display_name.ends_with("s") else ""
+		mods.append(CARDINALITY.get(card[info], "") + info.display_name + suffix)
 	var mod_string := ""
 	match mods.size():
 		1:
@@ -75,7 +76,7 @@ func _to_string() -> String:
 			mod_string = " with " + mods[0] + " and " + mods[1]
 		var l when l > 2:
 			mods[-1] = "and " + mods[-1]
-			mod_string = "with " + ", ".join(mods)
+			mod_string = " with " + ", ".join(mods)
 	return '{article} {name}{mods}'.format({
 		article = "no" if count == 0 else \
 				("an" if disp_name[0] in VOWELS else "a") if count == 1 else \

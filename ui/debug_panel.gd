@@ -11,7 +11,7 @@ static var monitored_properties: Dictionary[StringName, Monitored]
 static var labels_in_order: Array[StringName]
 var frame_count := 0
 
-func _ready() -> void:
+func _enter_tree() -> void:
 	if Global.debug_panel:
 		Global.debug_panel.queue_free()
 	Global.debug_panel = self
