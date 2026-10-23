@@ -33,6 +33,11 @@ func provide_item() -> ItemNode:
 ## the player should be holding after this interaction.
 func accept_item(item: ItemNode) -> ItemNode:
 	return item
+	
+
+## Called when the player interacts with this tile.
+func interact(player: Node):
+	pass
 
 
 func _ready():

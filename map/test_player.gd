@@ -70,3 +70,6 @@ func _physics_process(delta):
 			held_object.animate_to_current_transform()
 		if old_held and held_object != old_held:
 			old_held.animate_to_current_transform()
+	if Input.is_action_just_pressed("interact"):
+		var target_tile := Global.tilemap.find_tile(self.position, basis.z, 1.4)
+		Global.tilemap.interact(target_tile, self)

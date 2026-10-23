@@ -97,6 +97,13 @@ func swap_furni(xy: Vector2i, new_node: FurniNode) -> FurniNode:
 		new_node.unpack()
 		pathfinder.set_point_solid(xy, true)
 	return old_node
+	
+
+## Interact with the furni at the given position.
+func interact(xy: Vector2i, player: Node):
+	var tile := _get_tile(xy)
+	if tile.furni:
+		tile.furni.interact(player)
 
 ## Ask the furni at the given position to pick up/drop an item. Returns the item
 ## the player should be left holding (which may be the one given).

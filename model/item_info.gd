@@ -115,3 +115,6 @@ static func from_json(name: String, d: Dictionary, variants: Dictionary = {}) ->
 
 func is_category(cat: Category) -> bool:
 	return cat in categories
+
+func matches_spec(spec: String) -> bool:
+	return name == spec or spec in groups

@@ -16,6 +16,7 @@ extends EditorScript
 const BASE_PATH = "res://model/data/"
 const ITEM_PATH = BASE_PATH + "items/"
 const REC_PATH = BASE_PATH + "recipes/"
+const REGISTRY_PATH = BASE_PATH + "registry.tres"
 
 static func safe_name(s):
 	return RegEx.create_from_string("\\W").sub(s, "_", true)
@@ -31,11 +32,15 @@ func _run():
 			FileAccess.get_file_as_string("res://business/items/recipes_infos.json")
 	)
 	
+	var registry := Registry.new()
+	registry.take_over_path(REGISTRY_PATH)
+	
 	print('Loading items...')
 	var infos: Dictionary[String, ItemInfo] = {}
 	for name in item_info:
 		infos[name] = ItemInfo.from_json(name, item_info[name], var_info)
 		infos[name].take_over_path(ITEM_PATH + safe_name(name) + ".tres")
+		registry.add_item(infos[name])
 		
 	print('Loading recipes...')
 	var recipes: Dictionary[String, Recipe] = {}
@@ -49,11 +54,13 @@ func _run():
 			return
 		recipes[recipe.name] = recipe
 		recipe.take_over_path(REC_PATH + safe_name(recipe.name) + ".tres")
+		registry.add_recipe(recipes[recipe.name])
 	
 	print('Writing resources...')
 	for info in infos.values():
 		ResourceSaver.save(info)
 	for recipe in recipes.values():
 		ResourceSaver.save(recipe)
+	ResourceSaver.save(registry)
 		
 	print('Done!')

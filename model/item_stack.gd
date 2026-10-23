@@ -32,11 +32,20 @@ var total_attributes: Dictionary[ItemInfo.Attribute, int]:
 		
 var modifier_cardinality: Dictionary[ItemInfo, int]:
 	get:
-		var card: Dictionary[ItemInfo, int] = {}
+		# XXX we can't always assume that the same named ItemInfo is the same
+		# ItemInfo object because we have to deep-clone in many cases (e.g. the
+		# contents property), so we use another likely-static property instead.
+		var card: Dictionary[String, int] = {}
+		var info: Dictionary[String, ItemInfo] = {}
 		for mod in modifiers:
 			if mod.item:
-				card[mod.item] = card.get(mod.item, 0) + mod.count
-		return card
+				if mod.item.name not in info:
+					info[mod.item.name] = mod.item
+				card[mod.item.name] = card.get(mod.item.name, 0) + mod.count
+		var ret: Dictionary[ItemInfo, int] = {}
+		for mod_name in card:
+			ret[info[mod_name]] = card[mod_name]
+		return ret
 
 # We need to keep the nilary form of this constructor around to satisfy the
 # ResourceLoader; in that case, it's okay if item is null
@@ -59,7 +68,20 @@ const CARDINALITY: Dictionary[int, String] = {
 	9: "terrifyingly many ",
 	10: "m-m-m-monster ",
 }
-const MAX_CARDINAILTY := 10
+const MAX_CARDINALITY := 10
+static func make_list(items: PackedStringArray) -> String:
+	match items.size():
+		0:
+			return ""
+		1:
+			return items[0]
+		2:
+			return items[0] + " and " + items[1]
+		_:
+			var copy := items.duplicate()
+			copy[-1] = "and " + copy[-1]
+			return ", ".join(copy)
+
 func _to_string() -> String:
 	var disp_name := (item.display_name if item else "invalid item") + \
 			("s" if count != 1 else "")
@@ -67,22 +89,23 @@ func _to_string() -> String:
 	var card := modifier_cardinality
 	for info in card:
 		var suffix = "s" if not info.display_name.ends_with("s") else ""
-		mods.append(CARDINALITY.get(card[info], "") + info.display_name + suffix)
+		mods.append(CARDINALITY.get(min(card[info], MAX_CARDINALITY), "") + info.display_name + suffix)
 	var mod_string := ""
-	match mods.size():
-		1:
-			mod_string = " with " + mods[0]
-		2:
-			mod_string = " with " + mods[0] + " and " + mods[1]
-		var l when l > 2:
-			mods[-1] = "and " + mods[-1]
-			mod_string = " with " + ", ".join(mods)
-	return '{article} {name}{mods}'.format({
+	if mods.size() >= 1:
+		mod_string = " with " + make_list(mods)
+	var cont_string := ""
+	if contents.size() >= 1:
+		var contents_str := PackedStringArray()
+		for child in contents:
+			contents_str.append(str(child))
+		cont_string = " of " + make_list(contents_str)
+	return '{article} {name}{mods}{contents}'.format({
 		article = "no" if count == 0 else \
 				("an" if disp_name[0] in VOWELS else "a") if count == 1 else \
 				str(count),
 		name = disp_name,
 		mods = mod_string,
+		contents = cont_string,
 	})
 		
 func accept(add: ItemStack) -> Dictionary:
@@ -90,6 +113,7 @@ func accept(add: ItemStack) -> Dictionary:
 	if item.is_category(ItemInfo.Category.CONTAINER):
 		if not add.item.is_category(ItemInfo.Category.CONTAINER):
 			contents.append(add)
+			emit_changed()  # TODO: automatically cause this when contents mutate
 			return {success = true, rest = null}
 		return {success = false, rest = add}
 		
@@ -136,4 +160,18 @@ func split(amount: int) -> Array[ItemStack]:
 	contents = []
 	return [self, split]
 	
-		
+
+## Produce the combined_attributes of the set of all ItemStacks given as input.
+static func combine_attrs(inputs: Array[ItemStack]) -> Dictionary[ItemInfo.Attribute, int]:
+	var output: Dictionary[ItemInfo.Attribute, int] = {}
+	for stack in inputs:
+		for attr in stack.combined_attributes:
+			output[attr] = output.get(attr, 0) + stack.combined_attributes[attr]
+	return output
+
+
+## Update combined_attrs as if this stack were produces as the combination of the
+## input ItemStacks.
+func as_combination(inputs: Array[ItemStack]) -> ItemStack:
+	combined_attributes = combine_attrs(inputs)
+	return self

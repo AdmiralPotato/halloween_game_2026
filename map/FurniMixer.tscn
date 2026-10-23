@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://5jo3bft5wl1u"]
 
-[ext_resource type="Script" uid="uid://mqo3qjgryl8a" path="res://map/furni_node.gd" id="1_lex5f"]
+[ext_resource type="Script" uid="uid://w4twrfa6yo67" path="res://map/furni_mixer.gd" id="1_lex5f"]
 [ext_resource type="PackedScene" uid="uid://cyax842a6qdje" path="res://assets/furni_mixer_0.glb" id="2_lex5f"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p33bg"]
@@ -16,3 +16,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("BoxShape3D_p33bg")
 
 [node name="mixer_v1" parent="StaticBody3D" unique_id=1817194741 instance=ExtResource("2_lex5f")]
+
+[node name="Item" type="Marker3D" parent="." unique_id=1943789340]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 1, 0)

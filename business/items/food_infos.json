@@ -399,5 +399,14 @@
 		"buy_price": null,
 		"max_stack_size": 1,
 		"attributes": "from_recipe"
+	},
+	"bowl": {
+		"human_name": "bowl",
+		"storage_type": "CRATE",
+		"categories": ["CONTAINER"],
+		"buy_price": 1,
+		"max_stack_size": 1,
+		"attributes": {},
+		"texture": "res://assets/items.png@2/12,2/6"
 	}
 }

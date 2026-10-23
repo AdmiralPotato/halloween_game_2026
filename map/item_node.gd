@@ -14,7 +14,7 @@ static func make_node(stack: ItemStack) -> ItemNode:
 		push_warning("Tried to create an ItemNode with empty stack!")
 		return null
 	var node = item_scene.instantiate()
-	node.stack = stack.duplicate()
+	node.stack = stack.duplicate(true)
 	return node
 
 
