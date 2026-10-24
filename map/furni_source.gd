@@ -19,4 +19,5 @@ func provide_item() -> ItemNode:
 	var item := ItemNode.make_node(ItemStack.new(stack.item, stack.count))
 	add_child(item)
 	item.global_position = $StaticBody3D/ItemNode.global_position
+	item.store_global_transform()
 	return item

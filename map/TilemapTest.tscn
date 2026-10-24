@@ -11,11 +11,11 @@
 [ext_resource type="Resource" uid="uid://cj287n17bxna2" path="res://model/data/items/sugar.tres" id="7_15bd0"]
 [ext_resource type="Resource" uid="uid://vmrcp80igtca" path="res://model/data/items/cookie_dough.tres" id="7_n1qkj"]
 [ext_resource type="Resource" uid="uid://b34kf80gy2er3" path="res://model/data/items/bowl.tres" id="7_nabl1"]
-[ext_resource type="Resource" uid="uid://0xne0k7mcykn" path="res://model/data/items/blueberry_flavoring.tres" id="7_p5gm8"]
 [ext_resource type="PackedScene" uid="uid://5jo3bft5wl1u" path="res://map/FurniMixer.tscn" id="8_nabl1"]
 [ext_resource type="Resource" uid="uid://ddmmcej5lm5pc" path="res://model/data/items/flour.tres" id="8_tdsbi"]
 [ext_resource type="PackedScene" uid="uid://cl7xh1lhn0u0b" path="res://map/FurniCountertop.tscn" id="9_2f20c"]
 [ext_resource type="Resource" uid="uid://cwvimk8q06x3u" path="res://model/data/items/chocolate_bar.tres" id="9_8mw78"]
+[ext_resource type="Resource" uid="uid://cqkl4jri82v6d" path="res://model/data/items/mint_flavoring.tres" id="9_tdsbi"]
 [ext_resource type="Resource" uid="uid://coovqsg3sc4j7" path="res://model/data/items/orange_flavoring.tres" id="9_vwyy3"]
 [ext_resource type="PackedScene" uid="uid://do30vdu0sngt5" path="res://map/FurniOven.tscn" id="11_nabl1"]
 [ext_resource type="PackedScene" uid="uid://dfjdkdlvlfocq" path="res://map/FurniCuttingboard.tscn" id="14_p5gm8"]
@@ -53,7 +53,7 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_tdsbi"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("7_p5gm8")
+item = ExtResource("9_tdsbi")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_2f20c"]

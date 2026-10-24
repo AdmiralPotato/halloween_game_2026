@@ -45,6 +45,7 @@ func accept_item(item: ItemNode) -> ItemNode:
 	
 func provide_item() -> ItemNode:
 	var ret := item
+	ret.store_global_transform()
 	item = null
 	return ret
 

@@ -129,8 +129,6 @@ func swap_item(xy: Vector2i, new_node: ItemNode) -> ItemNode:
 		return tile.furni.accept_item(new_node)
 	else:
 		var item = tile.furni.provide_item()
-		if item:
-			item.store_global_transform()
 		return item
 
 ## If there is a tile at the given coordinates, this attempts to combine the
