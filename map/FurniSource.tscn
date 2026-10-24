@@ -20,5 +20,4 @@ disabled = true
 [node name="storageBox_v1" parent="StaticBody3D" unique_id=383906389 instance=ExtResource("2_8bmqu")]
 
 [node name="ItemNode" parent="StaticBody3D" unique_id=184551138 instance=ExtResource("5_7wfut")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-stack = null
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
