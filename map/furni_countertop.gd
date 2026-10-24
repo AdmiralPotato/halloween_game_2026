@@ -8,20 +8,24 @@ extends FurniNode
 		item = ItemNode.make_node(initial_stack)
 
 var item: ItemNode:
-	get:
-		if $Item.get_child_count() > 0:
-			return $Item.get_child(0)
-		return null
-	set(it):
-		while $Item.get_child_count() > 0:
-			$Item.remove_child($Item.get_child(0))
-		if it:
-			if it.is_inside_tree():
-				it.reparent($Item, false)
-			else:
-				$Item.add_child(it)
-			it.transform = Transform3D()
-			
+	get = get_item,
+	set = set_item
+
+func get_item() -> ItemNode:
+	if $Item.get_child_count() > 0:
+		return $Item.get_child(0)
+	return null
+	
+func set_item(it: ItemNode):
+	while $Item.get_child_count() > 0:
+		$Item.remove_child($Item.get_child(0))
+	if it:
+		if it.is_inside_tree():
+			it.reparent($Item, false)
+		else:
+			$Item.add_child(it)
+		it.transform = Transform3D()
+
 
 func _ready() -> void:
 	if initial_stack:
@@ -45,7 +49,8 @@ func accept_item(item: ItemNode) -> ItemNode:
 	
 func provide_item() -> ItemNode:
 	var ret := item
-	ret.store_global_transform()
+	if ret:
+		ret.store_global_transform()
 	item = null
 	return ret
 

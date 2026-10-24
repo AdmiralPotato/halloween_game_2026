@@ -1,5 +1,7 @@
 class_name FurniTash
-extends FurniNode
+extends FurniCountertop
 
-func accept_item(item: ItemNode) -> ItemNode:
-	return null
+func set_item(it: ItemNode):
+	super(it)
+	if it:
+		it.finished_animating.connect(it.queue_free, CONNECT_ONE_SHOT)

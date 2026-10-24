@@ -16,3 +16,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32500005, 0)
 shape = SubResource("CylinderShape3D_r1ocj")
 
 [node name="trashBin" parent="StaticBody3D" unique_id=615916199 instance=ExtResource("2_3482l")]
+
+[node name="Item" type="Marker3D" parent="." unique_id=583194644]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
