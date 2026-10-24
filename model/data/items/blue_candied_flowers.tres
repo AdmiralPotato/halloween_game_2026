@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://c8p0fkwhb6jme"]
 
 [ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_t23em"]
+[ext_resource type="Texture2D" uid="uid://bt02axwx2h75u" path="res://assets/items.png" id="2_qwec8"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_t23em"]
-size = Vector2(256, 256)
+[sub_resource type="AtlasTexture" id="AtlasTexture_suwk5"]
+atlas = ExtResource("2_qwec8")
+region = Rect2(0, 256, 256, 256)
 
 [resource]
 script = ExtResource("1_t23em")
@@ -18,4 +20,4 @@ attributes = Dictionary[int, int]({
 12: 1
 })
 groups = PackedStringArray("candied_flowers")
-texture = SubResource("PlaceholderTexture2D_t23em")
+texture = SubResource("AtlasTexture_suwk5")

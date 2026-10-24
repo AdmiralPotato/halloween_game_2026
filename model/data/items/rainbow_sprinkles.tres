@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://cpohusrgviils"]
 
 [ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_a1vrt"]
+[ext_resource type="Texture2D" uid="uid://bt02axwx2h75u" path="res://assets/items.png" id="2_4l3m3"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_a1vrt"]
-size = Vector2(256, 256)
+[sub_resource type="AtlasTexture" id="AtlasTexture_88r84"]
+atlas = ExtResource("2_4l3m3")
+region = Rect2(2816, 0, 256, 256)
 
 [resource]
 script = ExtResource("1_a1vrt")
@@ -18,4 +20,4 @@ attributes = Dictionary[int, int]({
 12: 1
 })
 groups = PackedStringArray("sprinkles")
-texture = SubResource("PlaceholderTexture2D_a1vrt")
+texture = SubResource("AtlasTexture_88r84")

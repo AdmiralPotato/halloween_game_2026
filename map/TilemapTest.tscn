@@ -8,9 +8,9 @@
 [ext_resource type="Script" uid="uid://n2r00hcbl3ul" path="res://model/item_stack.gd" id="4_qtmpa"]
 [ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="5_vwyy3"]
 [ext_resource type="Texture2D" uid="uid://bt02axwx2h75u" path="res://assets/items.png" id="6_b8euk"]
-[ext_resource type="Resource" uid="uid://b34kf80gy2er3" path="res://model/data/items/bowl.tres" id="7_n1qkj"]
 [ext_resource type="PackedScene" uid="uid://5jo3bft5wl1u" path="res://map/FurniMixer.tscn" id="8_nabl1"]
 [ext_resource type="PackedScene" uid="uid://cl7xh1lhn0u0b" path="res://map/FurniCountertop.tscn" id="9_2f20c"]
+[ext_resource type="Resource" uid="uid://coovqsg3sc4j7" path="res://model/data/items/orange_flavoring.tres" id="9_vwyy3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i4j5a"]
 atlas = ExtResource("6_b8euk")
@@ -98,9 +98,48 @@ script = ExtResource("4_qtmpa")
 item = SubResource("Resource_15bd0")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vpip"]
+atlas = ExtResource("6_b8euk")
+region = Rect2(502.66666, 514.6667, 251.33333, 257.33334)
+
+[sub_resource type="Resource" id="Resource_b8euk"]
+script = ExtResource("5_vwyy3")
+name = "bowl"
+display_name = "bowl"
+storage_type = 3
+categories = Array[int]([6])
+cost_tier = 1
+groups = PackedStringArray()
+texture = SubResource("AtlasTexture_1vpip")
+
 [sub_resource type="Resource" id="Resource_olchu"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("7_n1qkj")
+item = SubResource("Resource_b8euk")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_evbxi"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("9_vwyy3")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlr6m"]
+atlas = ExtResource("6_b8euk")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="Resource" id="Resource_8aiqj"]
+script = ExtResource("5_vwyy3")
+name = "chocolate chips"
+display_name = "chocolate chips"
+categories = Array[int]([1])
+cost_tier = 1
+max_stack_size = 4
+groups = null
+texture = SubResource("AtlasTexture_qlr6m")
+metadata/_custom_type_script = "uid://2hntn2isrv74"
+
+[sub_resource type="Resource" id="Resource_u7cwy"]
+script = ExtResource("4_qtmpa")
+item = SubResource("Resource_8aiqj")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_el5rg"]
@@ -167,9 +206,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 5.5)
 
 [node name="Furni1_6" parent="Tilemap" unique_id=2049711655 instance=ExtResource("9_2f20c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 6.5)
+initial_stack = SubResource("Resource_evbxi")
 
 [node name="Furni1_7" parent="Tilemap" unique_id=94086941 instance=ExtResource("9_2f20c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 7.5)
+
+[node name="Furni6_1" parent="Tilemap" unique_id=1034491232 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 1.5)
+stack = SubResource("Resource_u7cwy")
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=2097173625]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.5, 6)

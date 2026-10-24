@@ -5,7 +5,7 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_siari"]
 atlas = ExtResource("2_siari")
-region = Rect2(502.66666, 257.33334, 251.33333, 257.33334)
+region = Rect2(512, 512, 256, 256)
 
 [resource]
 script = ExtResource("1_r2ulw")

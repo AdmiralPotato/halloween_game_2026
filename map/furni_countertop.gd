@@ -1,7 +1,11 @@
+@tool
 class_name FurniCountertop
 extends FurniNode
 
-@export var initial_stack: ItemStack = null
+@export var initial_stack: ItemStack:
+	set(stack):
+		initial_stack = stack
+		item = ItemNode.make_node(initial_stack)
 
 var item: ItemNode:
 	get:

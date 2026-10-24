@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://di0d7103yc36q"]
 
 [ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_bvv3u"]
+[ext_resource type="Texture2D" uid="uid://bt02axwx2h75u" path="res://assets/items.png" id="2_5bkpp"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_bvv3u"]
-size = Vector2(256, 256)
+[sub_resource type="AtlasTexture" id="AtlasTexture_7rcx1"]
+atlas = ExtResource("2_5bkpp")
+region = Rect2(512, 0, 256, 256)
 
 [resource]
 script = ExtResource("1_bvv3u")
@@ -14,4 +16,4 @@ categories = Array[int]([1, 5])
 cost_tier = 3
 max_stack_size = 9
 groups = PackedStringArray()
-texture = SubResource("PlaceholderTexture2D_bvv3u")
+texture = SubResource("AtlasTexture_7rcx1")

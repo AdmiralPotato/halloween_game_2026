@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_hsiut"]
 [ext_resource type="Texture2D" uid="uid://bt02axwx2h75u" path="res://assets/items.png" id="2_6ii8o"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1vpip"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_hsiut"]
 atlas = ExtResource("2_6ii8o")
-region = Rect2(502.66666, 514.6667, 251.33333, 257.33334)
+region = Rect2(512, 512, 256, 256)
 
 [resource]
 script = ExtResource("1_hsiut")
@@ -15,4 +15,4 @@ storage_type = 3
 categories = Array[int]([6])
 cost_tier = 1
 groups = PackedStringArray()
-texture = SubResource("AtlasTexture_1vpip")
+texture = SubResource("AtlasTexture_hsiut")

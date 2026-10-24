@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://gl0ecxa5jnvh"]
 
 [ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_vo33e"]
+[ext_resource type="Texture2D" uid="uid://bt02axwx2h75u" path="res://assets/items.png" id="2_gc5pj"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vo33e"]
-size = Vector2(256, 256)
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0nad"]
+atlas = ExtResource("2_gc5pj")
+region = Rect2(256, 1024, 256, 256)
 
 [resource]
 script = ExtResource("1_vo33e")
@@ -19,4 +21,4 @@ attributes = Dictionary[int, int]({
 16: 2
 })
 groups = PackedStringArray("flavoring")
-texture = SubResource("PlaceholderTexture2D_vo33e")
+texture = SubResource("AtlasTexture_k0nad")
