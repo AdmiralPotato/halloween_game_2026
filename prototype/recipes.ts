@@ -216,7 +216,7 @@ export const getFirstRecipeForOutput = (product: string) => {
 };
 
 export const getRecipesForLocation = (location: string) => {
-	const recipes = Object.values(recipeList).filter(v=>v.location === location);
+	const recipes = recipeList.filter(v=>v.location === location);
 	if (recipes.length === 0) {
 		throw new Error (`No recipes found for location ${location}`);
 	}
@@ -286,17 +286,17 @@ export const getAttributesForItemNameAndModifiers = (item: string, modifiers = [
 	return attributes;
 };
 
-export const getAttributesForFoodComponent = (ingredient: Ingredient): AttributeMap => {
+export const getAttributesForIngredient = (ingredient: Ingredient): AttributeMap => {
 	const ret: AttributeMap = {};
 	for (let i = 0; i < ingredient.quantity; i++) {
 		addAttributesToMap(ret, getAttributesForItemNameAndModifiers(ingredient.name, ingredient.modifiers));
 	}
 	return ret;
 }
-export const getAttributesForFoodComponentList = (arr: Ingredient[]): AttributeMap => {
+export const getAttributesForIngredientList = (arr: Ingredient[]): AttributeMap => {
 	const ret: AttributeMap = {};
 	arr.forEach(ingredient=>{
-		addAttributesToMap(ret, getAttributesForFoodComponent(ingredient))
+		addAttributesToMap(ret, getAttributesForIngredient(ingredient))
 	})
 	return ret;
 }
@@ -304,9 +304,9 @@ export const getAttributesForFoodComponentList = (arr: Ingredient[]): AttributeM
 export const getAttributeSpreadForProduct = (product: Product): AttributeSpread => {
 	const ret: AttributeSpread = {};
 	addAttributesToSpread(ret, getAttributesForItemNameAndModifiers(product.name, product.modifiers));
-	addAttributesToSpread(ret, getAttributesForFoodComponentList(product.fillings));
-	addAttributesToSpread(ret, getAttributesForFoodComponentList(product.decorations));
-	addAttributesToSpread(ret, getAttributesForFoodComponentList(product.doodads));
+	addAttributesToSpread(ret, getAttributesForIngredientList(product.fillings));
+	addAttributesToSpread(ret, getAttributesForIngredientList(product.decorations));
+	addAttributesToSpread(ret, getAttributesForIngredientList(product.doodads));
 	return ret;
 }
 
