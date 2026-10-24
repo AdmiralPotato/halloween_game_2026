@@ -49,18 +49,22 @@ func update_stack_rendering():
 			$Count.visible = stack.count > 1
 		for child in $Contents.get_children():
 			child.queue_free()
-		var contents_size := stack.contents.size()
+		var filtered_contents := stack.contents.filter(
+				func(s: ItemStack): return s != null
+		)
+		var contents_size := filtered_contents.size()
 		var cols := int(ceil(sqrt(contents_size)))
 		var index := 0
-		for contained in stack.contents:
+		for contained in filtered_contents:
 			var cell = Vector2i(index % cols, index / cols)
 			index += 1
 			var node = make_node(contained)
 			$Contents.add_child(node)
 			node.transform = Transform3D(
 				Basis().scaled(Vector3.ONE * BASE_SCALE / cols),
-				Vector3(-1, 0, -1) * BASE_SCALE / 2 + \
-					Vector3(cell.x, 0, cell.y) * BASE_SCALE / max(cols - 1, 1),
+				(Vector3(-1, 0, -1) * BASE_SCALE / 2 \
+					if cols > 1 else Vector3.ZERO) + \
+				Vector3(cell.x, 0, cell.y) * BASE_SCALE / max(cols - 1, 1),
 			)
 	else:
 		$Sprite.texture = PlaceholderTexture2D.new()

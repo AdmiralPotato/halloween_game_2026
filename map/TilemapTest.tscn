@@ -51,7 +51,7 @@ script = ExtResource("4_qtmpa")
 item = ExtResource("8_tdsbi")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="Resource" id="Resource_tdsbi"]
+[sub_resource type="Resource" id="Resource_sfvuk"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("9_tdsbi")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
@@ -146,7 +146,7 @@ stack = SubResource("Resource_8bmqu")
 
 [node name="Furni5_4" parent="Tilemap" unique_id=1421407579 instance=ExtResource("3_0vrjm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 4.5)
-stack = SubResource("Resource_tdsbi")
+stack = SubResource("Resource_sfvuk")
 
 [node name="Furni5_5" parent="Tilemap" unique_id=636731014 instance=ExtResource("3_0vrjm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 5.5)

@@ -5,24 +5,31 @@ extends Resource
 ## The kind of item in this stack.
 @export var item: ItemInfo:
 	set(new):
-		if new != item:
-			emit_changed()
 		item = new
+		emit_changed()
 ## How many items are in this stack.
 @export_range(0, 50, 1, "or_greater") var count: int = 1:
 	set(new):
-		if new != count:
-			emit_changed()
 		count = new
+		emit_changed()
 ## The sum of all attributes vectors for items that contributed to this stack,
 ## either in base or through Recipes. Note that, in a stack with multiple items,
 ## each single item has these attributes, to keep merging and splitting simple.
 ## See .total_attributes for the sum.
-@export var combined_attributes: Dictionary[ItemInfo.Attribute, int] = {}
+@export var combined_attributes: Dictionary[ItemInfo.Attribute, int] = {}:
+	set(new):
+		combined_attributes = new
+		emit_changed()
 ## Modifiers (extra ingredients optional in some Recipes).
-@export var modifiers: Array[ItemStack] = []
+@export var modifiers: Array[ItemStack] = []:
+	set(new):
+		modifiers = new
+		emit_changed()
 ## A stack of items inside this stack (relevant for CONTAINER items).
-@export var contents: Array[ItemStack] = []
+@export var contents: Array[ItemStack] = []:
+	set(new):
+		contents = new
+		emit_changed()
 
 var total_attributes: Dictionary[ItemInfo.Attribute, int]:
 	get:
