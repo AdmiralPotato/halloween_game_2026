@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://03n546k1srnw" path="res://ui/debug_panel.tscn" id="4_8t2af"]
 [ext_resource type="Script" uid="uid://n2r00hcbl3ul" path="res://model/item_stack.gd" id="4_qtmpa"]
 [ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="5_vwyy3"]
-[ext_resource type="Texture2D" uid="uid://bt02axwx2h75u" path="res://assets/items.png" id="6_b8euk"]
+[ext_resource type="Texture2D" uid="uid://4logsfuyvxlk" path="res://assets/TILES-other.png" id="6_b8euk"]
 [ext_resource type="Resource" uid="uid://cj287n17bxna2" path="res://model/data/items/sugar.tres" id="7_15bd0"]
 [ext_resource type="Resource" uid="uid://vmrcp80igtca" path="res://model/data/items/cookie_dough.tres" id="7_n1qkj"]
 [ext_resource type="Resource" uid="uid://b34kf80gy2er3" path="res://model/data/items/bowl.tres" id="7_nabl1"]

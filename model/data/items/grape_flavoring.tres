@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://b5t8pb2ctkpkk"]
 
 [ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_4tb6v"]
-[ext_resource type="Texture2D" uid="uid://bt02axwx2h75u" path="res://assets/items.png" id="2_2jwoa"]
+[ext_resource type="Texture2D" uid="uid://4logsfuyvxlk" path="res://assets/TILES-other.png" id="2_4tb6v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4tb6v"]
-atlas = ExtResource("2_2jwoa")
+atlas = ExtResource("2_4tb6v")
 region = Rect2(2816, 1024, 256, 256)
 
 [resource]

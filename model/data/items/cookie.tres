@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://cgsiu2wskomec"]
 
 [ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_vw08m"]
+[ext_resource type="Texture2D" uid="uid://biyq5ynkfknjk" path="res://assets/TILES-cookie-baked.png" id="2_xrfvf"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vw08m"]
-size = Vector2(256, 256)
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrfvf"]
+atlas = ExtResource("2_xrfvf")
+region = Rect2(3584, 0, 256, 426.66666)
 
 [resource]
 script = ExtResource("1_vw08m")
@@ -12,4 +14,4 @@ display_name = "cookie"
 storage_type = 3
 categories = Array[int]([2])
 groups = PackedStringArray()
-texture = SubResource("PlaceholderTexture2D_vw08m")
+texture = SubResource("AtlasTexture_xrfvf")

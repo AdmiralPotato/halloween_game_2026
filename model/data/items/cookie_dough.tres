@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://vmrcp80igtca"]
 
 [ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_bwf3d"]
+[ext_resource type="Texture2D" uid="uid://b500srptuba7v" path="res://assets/TILES-dough.png" id="2_ocsqs"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_bwf3d"]
-size = Vector2(256, 256)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocsqs"]
+atlas = ExtResource("2_ocsqs")
+region = Rect2(3584, 256, 256, 256)
 
 [resource]
 script = ExtResource("1_bwf3d")
@@ -13,4 +15,4 @@ storage_type = 1
 categories = Array[int]([0])
 cost_tier = 2
 groups = PackedStringArray()
-texture = SubResource("PlaceholderTexture2D_bwf3d")
+texture = SubResource("AtlasTexture_ocsqs")

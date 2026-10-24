@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://bhawkao2hm3rp"]
 
 [ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_5s2gy"]
+[ext_resource type="Texture2D" uid="uid://bsdddt5b8wuxu" path="res://assets/TILES-cupcake-baked.png" id="2_kljp4"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5s2gy"]
-size = Vector2(256, 256)
+[sub_resource type="AtlasTexture" id="AtlasTexture_kljp4"]
+atlas = ExtResource("2_kljp4")
+region = Rect2(3584, 320, 256, 320)
 
 [resource]
 script = ExtResource("1_5s2gy")
@@ -12,4 +14,4 @@ display_name = "cupcake"
 storage_type = 1
 categories = Array[int]([2])
 groups = PackedStringArray()
-texture = SubResource("PlaceholderTexture2D_5s2gy")
+texture = SubResource("AtlasTexture_kljp4")
