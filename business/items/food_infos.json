@@ -8,7 +8,7 @@
 		"attributes": {
 			"pale": 1
 		},
-		"texture": "res://assets/items.png@4/14,2/10"
+		"texture": "res://assets/items.png@4/14,2/15"
 	},
 	"sugar": {
 		"human_name": "sugar",
@@ -19,7 +19,7 @@
 		"attributes": {
 			"sweet": 2
 		},
-		"texture": "res://assets/items.png@2/14,2/10"
+		"texture": "res://assets/items.png@2/14,2/15"
 	},
 	"egg": {
 		"human_name": "egg",
@@ -28,7 +28,7 @@
 		"buy_price": 1,
 		"max_stack_size": 12,
 		"attributes": {},
-		"texture": "res://assets/items.png@1/14,0/10"
+		"texture": "res://assets/items.png@1/14,0/15"
 	},
 	"cream": {
 		"human_name": "cream",
@@ -39,7 +39,7 @@
 		"attributes": {
 			"pale": 2
 		},
-		"texture": "res://assets/items.png@0/14,0/10"
+		"texture": "res://assets/items.png@0/14,0/15"
 	},
 	"cocoa_powder": {
 		"human_name": "cocoa powder",
@@ -52,7 +52,7 @@
 			"pale": -2,
 			"brown": 2
 		},
-		"texture": "res://assets/items.png@3/14,2/10"
+		"texture": "res://assets/items.png@3/14,2/15"
 	},
 	"chocolate_bar": {
 		"human_name": "chocolate bar",
@@ -63,7 +63,7 @@
 		"attributes": {
 			"chocolatey": 1
 		},
-		"texture": "res://assets/items.png@5/14,0/10"
+		"texture": "res://assets/items.png@5/14,0/15"
 	},
 	"cherry_flavoring": {
 		"human_name": "cherry flavoring",
@@ -77,7 +77,7 @@
 			"purple": 1,
 			"pale": -2
 		},
-		"texture": "res://assets/items.png@0/14,4/10"
+		"texture": "res://assets/items.png@0/14,4/15"
 	},
 	"raspberry_flavoring": {
 		"human_name": "raspberry flavoring",
@@ -90,7 +90,7 @@
 			"red": 2,
 			"pale": -1
 		},
-		"texture": "res://assets/items.png@1/14,4/10"
+		"texture": "res://assets/items.png@1/14,4/15"
 	},
 	"strawberry_flavoring": {
 		"human_name": "strawberry flavoring",
@@ -103,7 +103,7 @@
 			"red": 1,
 			"pale": -1
 		},
-		"texture": "res://assets/items.png@2/14,4/10"
+		"texture": "res://assets/items.png@2/14,4/15"
 	},
 	"orange_flavoring": {
 		"human_name": "orange flavoring",
@@ -116,7 +116,7 @@
 			"orange": 2,
 			"pale": -1
 		},
-		"texture": "res://assets/items.png@3/14,4/10"
+		"texture": "res://assets/items.png@3/14,4/15"
 	},
 	"almond_flavoring": {
 		"human_name": "almond flavoring",
@@ -128,7 +128,7 @@
 			"nutty": 1,
 			"brown": 1
 		},
-		"texture": "res://assets/items.png@4/14,4/10"
+		"texture": "res://assets/items.png@4/14,4/15"
 	},
 	"caramel_flavoring": {
 		"human_name": "caramel flavoring",
@@ -141,7 +141,7 @@
 			"red": 2,
 			"pale": -2
 		},
-		"texture": "res://assets/items.png@5/14,4/10"
+		"texture": "res://assets/items.png@5/14,4/15"
 	},
 	"lemon_flavoring": {
 		"human_name": "lemon flavoring",
@@ -154,7 +154,7 @@
 			"tart": 2,
 			"yellow": 2
 		},
-		"texture": "res://assets/items.png@6/14,4/10"
+		"texture": "res://assets/items.png@6/14,4/15"
 	},
 	"lime_flavoring": {
 		"human_name": "lime flavoring",
@@ -168,7 +168,7 @@
 			"yellow": 1,
 			"green": 1
 		},
-		"texture": "res://assets/items.png@7/14,4/10"
+		"texture": "res://assets/items.png@7/14,4/15"
 	},
 	"mint_flavoring": {
 		"human_name": "mint flavoring",
@@ -181,7 +181,7 @@
 			"green": 1,
 			"pale": -1
 		},
-		"texture": "res://assets/items.png@8/14,4/10"
+		"texture": "res://assets/items.png@8/14,4/15"
 	},
 	"blueberry_flavoring": {
 		"human_name": "blueberry flavoring",
@@ -194,7 +194,7 @@
 			"blue": 1,
 			"pale": -1
 		},
-		"texture": "res://assets/items.png@9/14,4/10"
+		"texture": "res://assets/items.png@9/14,4/15"
 	},
 	"ube_flavoring": {
 		"human_name": "ube flavoring",
@@ -206,7 +206,7 @@
 			"purple": 1,
 			"pale": -1
 		},
-		"texture": "res://assets/items.png@10/14,4/10"
+		"texture": "res://assets/items.png@10/14,4/15"
 	},
 	"grape_flavoring": {
 		"human_name": "grape flavoring",
@@ -218,7 +218,7 @@
 			"purple": 2,
 			"pale": -2
 		},
-		"texture": "res://assets/items.png@11/14,4/10"
+		"texture": "res://assets/items.png@11/14,4/15"
 	},
 	"blue_candied_flowers": {
 		"human_name": "blue_candied_flowers",
@@ -230,7 +230,7 @@
 			"blue": 1,
 			"pop": 1
 		},
-		"texture": "res://assets/items.png@0/14,1/10"
+		"texture": "res://assets/items.png@0/14,1/15"
 	},
 	"red_candied_flowers": {
 		"human_name": "red_candied_flowers",
@@ -242,7 +242,7 @@
 			"red": 9,
 			"pop": 1
 		},
-		"texture": "res://assets/items.png@1/14,1/10"
+		"texture": "res://assets/items.png@1/14,1/15"
 	},
 	"yellow_candied_flowers": {
 		"human_name": "yellow_candied_flowers",
@@ -254,7 +254,7 @@
 			"yellow": 1,
 			"pop": 1
 		},
-		"texture": "res://assets/items.png@2/14,1/10"
+		"texture": "res://assets/items.png@2/14,1/15"
 	},
 	"white_candied_flowers": {
 		"human_name": "white_candied_flowers",
@@ -266,7 +266,7 @@
 			"pale": 2,
 			"pop": 1
 		},
-		"texture": "res://assets/items.png@3/14,1/10"
+		"texture": "res://assets/items.png@3/14,1/15"
 	},
 	"chocolate_sprinkles": {
 		"human_name": "chocolate sprinkles",
@@ -277,7 +277,7 @@
 		"attributes": {
 			"pop": 1
 		},
-		"texture": "res://assets/items.png@8/14,0/10"
+		"texture": "res://assets/items.png@8/14,0/15"
 	},
 	"white_sprinkles": {
 		"human_name": "white sprinkles",
@@ -289,7 +289,7 @@
 			"pale": 1,
 			"pop": 1
 		},
-		"texture": "res://assets/items.png@9/14,0/10"
+		"texture": "res://assets/items.png@9/14,0/15"
 	},
 	"ball_bearing_sprinkles": {
 		"human_name": "ball_bearing_sprinkles",
@@ -301,7 +301,7 @@
 			"pale": 1,
 			"pop": 2
 		},
-		"texture": "res://assets/items.png@10/14,0/10"
+		"texture": "res://assets/items.png@10/14,0/15"
 	},
 	"rainbow_sprinkles": {
 		"human_name": "rainbow sprinkles",
@@ -313,7 +313,7 @@
 			"variegated": 1,
 			"pop": 1
 		},
-		"texture": "res://assets/items.png@11/14,0/10"
+		"texture": "res://assets/items.png@11/14,0/15"
 	},
 	"hard_candy_bats": {
 		"human_name": "hard_candy_bats",
@@ -324,7 +324,7 @@
 		"attributes": {
 			"pop": 1
 		},
-		"texture": "res://assets/items.png@4/14,1/10"
+		"texture": "res://assets/items.png@4/14,1/15"
 	},
 	"hard_candy_ghosts": {
 		"human_name": "hard_candy_ghosts",
@@ -335,7 +335,7 @@
 		"attributes": {
 			"pop": 1
 		},
-		"texture": "res://assets/items.png@2/14,1/10"
+		"texture": "res://assets/items.png@2/14,1/15"
 	},
 	"hard_candy_eyeballs": {
 		"human_name": "hard_candy_eyeballs",
@@ -347,7 +347,7 @@
 			"variegated": 1,
 			"pop": 1
 		},
-		"texture": "res://assets/items.png@3/14,1/10"
+		"texture": "res://assets/items.png@3/14,1/15"
 	},
 	"chocolate_chips": {
 		"human_name": "chocolate chips",
@@ -356,7 +356,7 @@
 		"buy_price": 3,
 		"max_stack_size": 9,
 		"attributes": "from_recipe",
-		"texture": "res://assets/items.png@2/14,0/10"
+		"texture": "res://assets/items.png@2/14,0/15"
 	},
 	"frosting": {
 		"human_name": "frosting",
@@ -366,8 +366,8 @@
 		"max_stack_size": 4,
 		"attributes": "from_recipe",
 		"texture_layers": [
-			"res://assets/items.png@14/14,3/10",
-			"res://assets/items.png@14/14,4/10"
+			"res://assets/items.png@14/14,3/15",
+			"res://assets/items.png@14/14,4/15"
 		]
 	},
 	"whipped_cream": {
@@ -377,7 +377,7 @@
 		"buy_price": 2,
 		"max_stack_size": 1,
 		"attributes": "from_recipe",
-		"texture": "res://assets/items.png@1/14,2/10"
+		"texture": "res://assets/items.png@1/14,2/15"
 	},
 	"pastry_cream": {
 		"human_name": "pastry cream",
@@ -450,6 +450,6 @@
 		"buy_price": 1,
 		"max_stack_size": 1,
 		"attributes": {},
-		"texture": "res://assets/items.png@2/14,2/10"
+		"texture": "res://assets/items.png@2/14,2/15"
 	}
 }

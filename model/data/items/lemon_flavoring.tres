@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_xbsx6"]
 [ext_resource type="Texture2D" uid="uid://bt02axwx2h75u" path="res://assets/items.png" id="2_qtt2c"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ywxg6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtt2c"]
 atlas = ExtResource("2_qtt2c")
 region = Rect2(1536, 1024, 256, 256)
 
@@ -21,4 +21,4 @@ attributes = Dictionary[int, int]({
 20: 2
 })
 groups = PackedStringArray("flavoring")
-texture = SubResource("AtlasTexture_ywxg6")
+texture = SubResource("AtlasTexture_qtt2c")

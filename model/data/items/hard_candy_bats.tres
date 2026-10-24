@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_dmq70"]
 [ext_resource type="Texture2D" uid="uid://bt02axwx2h75u" path="res://assets/items.png" id="2_nojv3"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7wwqj"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_nojv3"]
 atlas = ExtResource("2_nojv3")
 region = Rect2(1024, 256, 256, 256)
 
@@ -19,4 +19,4 @@ attributes = Dictionary[int, int]({
 12: 1
 })
 groups = PackedStringArray("hard_candy_shapes")
-texture = SubResource("AtlasTexture_7wwqj")
+texture = SubResource("AtlasTexture_nojv3")
