@@ -20,7 +20,9 @@ const FURNI_LIST := [
 	FURNI_MIXER,
 	FURNI_OVEN,
 	FURNI_STORAGE,
-];
+]
+
+const CUSTOMER = preload("res://map/TestCustomer.tscn")
 
 @export var number_of_tiles := Vector2i(8, 12):
 	set(x):
@@ -98,5 +100,7 @@ func _physics_process(delta):
 
 
 func _on_spawn_customer_timeout() -> void:
-	print("would spawn a customer")
+	var cust: TestCustomer = CUSTOMER.instantiate()
+	$Customers.add_child(cust)
+	cust.global_position = Vector3(number_of_tiles.x - 0.5, 0, number_of_tiles.y - 0.5)
 	$SpawnCustomer.start(get_customer_spawn_time())

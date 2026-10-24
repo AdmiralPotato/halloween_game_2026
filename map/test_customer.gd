@@ -83,6 +83,7 @@ class WanderTo extends State:
 			owner.set_target_gridpt(path[0])
 		else:
 			owner.target = null
+			return next_state
 		return null
 		
 
@@ -123,7 +124,9 @@ func _physics_process(delta: float) -> void:
 	if target:
 		var dir: Vector3 = (position - target).normalized()
 		var motion := Vector2(dir.x, dir.z) * movement_speed
-		constant_force = (Vector3(motion.x, 0, motion.y) - linear_velocity)\
-				.clamp(-Vector3.ONE, Vector3.ONE) * movement_force
+		apply_central_force(
+				(linear_velocity - Vector3(motion.x, 0, motion.y))\
+					.clamp(-Vector3.ONE, Vector3.ONE) * movement_force
+		)
 		if motion.length_squared() >= 0.3:
 			rotation.y += angle_difference(motion.angle(), rotation.y) * turn_speed * delta

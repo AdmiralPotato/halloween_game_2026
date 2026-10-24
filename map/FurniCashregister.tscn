@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dv2nu3stjqouh"]
 
-[ext_resource type="Script" uid="uid://mqo3qjgryl8a" path="res://map/furni_node.gd" id="1_nlytn"]
+[ext_resource type="Script" uid="uid://x7fwdbeq8byw" path="res://map/furni_cashregister.gd" id="1_nlytn"]
 [ext_resource type="PackedScene" uid="uid://cqpi8tk8o2j1" path="res://assets/furni_storage_box_0.glb" id="2_ihanj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p33bg"]

@@ -40,6 +40,15 @@ func find_tile(player_position: Vector3, facing: Vector3, reach: float = 1.0) \
 -> Vector2i:
 	var target_pos := player_position + facing * reach
 	return Vector2i(floor(target_pos.x), floor(target_pos.z))
+	
+## Returns an array of coordinates of tiles that have the given type of FurniNode
+## on them.
+func get_tiles_of_type(script) -> Array[Vector2i]:
+	var res: Array[Vector2i] = []
+	for position in tiles:
+		if tiles[position].furni and tiles[position].furni.get_script() == script:
+			res.append(position)
+	return res
 
 func _get_tile(xy: Vector2i) -> Tile:
 	return tiles.get(xy)
