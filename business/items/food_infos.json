@@ -366,8 +366,18 @@
 		"max_stack_size": 4,
 		"attributes": "from_recipe",
 		"texture_layers": [
-			"res://assets/TILES-frosting.png@14/14,3/3",
-			"res://assets/TILES-frosting.png@2/14,4/3"
+			{
+				"name": "frosting",
+				"texture": "res://assets/TILES-frosting.png@14/14,1/3"
+			},
+			{
+				"name": "jar",
+				"texture": "res://assets/TILES-frosting.png@2/14,0/3"
+			},
+			{
+				"name": "label",
+				"texture": "res://assets/TILES-frosting.png@14/14,2/3"
+			}
 		]
 	},
 	"whipped_cream": {

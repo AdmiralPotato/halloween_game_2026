@@ -19,6 +19,7 @@
 [ext_resource type="Resource" uid="uid://coovqsg3sc4j7" path="res://model/data/items/orange_flavoring.tres" id="9_vwyy3"]
 [ext_resource type="PackedScene" uid="uid://do30vdu0sngt5" path="res://map/FurniOven.tscn" id="11_nabl1"]
 [ext_resource type="PackedScene" uid="uid://dfjdkdlvlfocq" path="res://map/FurniCuttingboard.tscn" id="14_p5gm8"]
+[ext_resource type="Resource" uid="uid://dtpa5786bonsp" path="res://model/data/items/frosting.tres" id="15_olchu"]
 [ext_resource type="PackedScene" uid="uid://d1tp40f6bgvc6" path="res://map/FurniTrash.tscn" id="18_tdsbi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i4j5a"]
@@ -71,9 +72,22 @@ script = ExtResource("4_qtmpa")
 item = ExtResource("9_8mw78")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
+[sub_resource type="Resource" id="Resource_5c0gd"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("9_vwyy3")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_0d7dl"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("15_olchu")
+count = 2
+modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_5c0gd")])
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
 [sub_resource type="Resource" id="Resource_evbxi"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("9_vwyy3")
+modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_5c0gd")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qlr6m"]
@@ -165,6 +179,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 6.5)
 
 [node name="Furni1_5" parent="Tilemap" unique_id=103469227 instance=ExtResource("9_2f20c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 5.5)
+initial_stack = SubResource("Resource_0d7dl")
 
 [node name="Furni1_6" parent="Tilemap" unique_id=2049711655 instance=ExtResource("9_2f20c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 6.5)
