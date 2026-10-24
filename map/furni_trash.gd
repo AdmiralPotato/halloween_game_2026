@@ -8,5 +8,5 @@ func set_item(it: ItemNode):
 
 func animate_remove(it: ItemNode):
 	var tween := it.create_tween()
-	tween.tween_property(it, "transform", Transform3D(Basis(), -Vector3.UP), 0.2)
+	tween.tween_property(it, "transform", Transform3D(Basis().scaled(Vector3.ONE * 0.1), -Vector3.UP), 0.2)
 	tween.tween_callback(it.queue_free)
