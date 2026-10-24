@@ -4,4 +4,9 @@ extends FurniCountertop
 func set_item(it: ItemNode):
 	super(it)
 	if it:
-		it.finished_animating.connect(it.queue_free, CONNECT_ONE_SHOT)
+		it.finished_animating.connect(animate_remove.bind(it), CONNECT_ONE_SHOT)
+
+func animate_remove(it: ItemNode):
+	var tween := it.create_tween()
+	tween.tween_property(it, "transform", Transform3D(Basis(), -Vector3.UP), 0.2)
+	tween.tween_callback(it.queue_free)
