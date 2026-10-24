@@ -8,9 +8,18 @@
 [ext_resource type="Script" uid="uid://n2r00hcbl3ul" path="res://model/item_stack.gd" id="4_qtmpa"]
 [ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="5_vwyy3"]
 [ext_resource type="Texture2D" uid="uid://bt02axwx2h75u" path="res://assets/items.png" id="6_b8euk"]
+[ext_resource type="Resource" uid="uid://cj287n17bxna2" path="res://model/data/items/sugar.tres" id="7_15bd0"]
+[ext_resource type="Resource" uid="uid://vmrcp80igtca" path="res://model/data/items/cookie_dough.tres" id="7_n1qkj"]
+[ext_resource type="Resource" uid="uid://b34kf80gy2er3" path="res://model/data/items/bowl.tres" id="7_nabl1"]
+[ext_resource type="Resource" uid="uid://0xne0k7mcykn" path="res://model/data/items/blueberry_flavoring.tres" id="7_p5gm8"]
 [ext_resource type="PackedScene" uid="uid://5jo3bft5wl1u" path="res://map/FurniMixer.tscn" id="8_nabl1"]
+[ext_resource type="Resource" uid="uid://ddmmcej5lm5pc" path="res://model/data/items/flour.tres" id="8_tdsbi"]
 [ext_resource type="PackedScene" uid="uid://cl7xh1lhn0u0b" path="res://map/FurniCountertop.tscn" id="9_2f20c"]
+[ext_resource type="Resource" uid="uid://cwvimk8q06x3u" path="res://model/data/items/chocolate_bar.tres" id="9_8mw78"]
 [ext_resource type="Resource" uid="uid://coovqsg3sc4j7" path="res://model/data/items/orange_flavoring.tres" id="9_vwyy3"]
+[ext_resource type="PackedScene" uid="uid://do30vdu0sngt5" path="res://map/FurniOven.tscn" id="11_nabl1"]
+[ext_resource type="PackedScene" uid="uid://dfjdkdlvlfocq" path="res://map/FurniCuttingboard.tscn" id="14_p5gm8"]
+[ext_resource type="PackedScene" uid="uid://d1tp40f6bgvc6" path="res://map/FurniTrash.tscn" id="18_tdsbi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i4j5a"]
 atlas = ExtResource("6_b8euk")
@@ -32,89 +41,34 @@ script = ExtResource("4_qtmpa")
 item = SubResource("Resource_8mw78")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_siari"]
-atlas = ExtResource("6_b8euk")
-region = Rect2(502.66666, 257.33334, 251.33333, 257.33334)
-
-[sub_resource type="Resource" id="Resource_p5gm8"]
-script = ExtResource("5_vwyy3")
-name = "sugar"
-display_name = "sugar"
-categories = Array[int]([0])
-cost_tier = 1
-attributes = Dictionary[int, int]({
-19: 2
-})
-groups = PackedStringArray()
-texture = SubResource("AtlasTexture_siari")
-
 [sub_resource type="Resource" id="Resource_5qf2s"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_p5gm8")
+item = ExtResource("7_15bd0")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wo5lj"]
-atlas = ExtResource("6_b8euk")
-region = Rect2(754, 257.33334, 251.33333, 257.33334)
-
-[sub_resource type="Resource" id="Resource_2fvxq"]
-script = ExtResource("5_vwyy3")
-name = "flour"
-display_name = "flour"
-categories = Array[int]([0])
-cost_tier = 1
-attributes = Dictionary[int, int]({
-0: 1
-})
-groups = PackedStringArray()
-texture = SubResource("AtlasTexture_wo5lj")
 
 [sub_resource type="Resource" id="Resource_8bmqu"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_2fvxq")
+item = ExtResource("8_tdsbi")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_04n8r"]
-size = Vector2(256, 256)
-
-[sub_resource type="Resource" id="Resource_15bd0"]
-script = ExtResource("5_vwyy3")
-name = "blueberry_flavoring"
-display_name = "blueberry flavoring"
-storage_type = 4
-categories = Array[int]([1])
-cost_tier = 4
-max_stack_size = 0
-attributes = Dictionary[int, int]({
-0: -1,
-6: 1,
-16: 2
-})
-groups = PackedStringArray("flavoring")
-texture = SubResource("PlaceholderTexture2D_04n8r")
 
 [sub_resource type="Resource" id="Resource_tdsbi"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_15bd0")
+item = ExtResource("7_p5gm8")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1vpip"]
-atlas = ExtResource("6_b8euk")
-region = Rect2(502.66666, 514.6667, 251.33333, 257.33334)
-
-[sub_resource type="Resource" id="Resource_b8euk"]
-script = ExtResource("5_vwyy3")
-name = "bowl"
-display_name = "bowl"
-storage_type = 3
-categories = Array[int]([6])
-cost_tier = 1
-groups = PackedStringArray()
-texture = SubResource("AtlasTexture_1vpip")
+[sub_resource type="Resource" id="Resource_2f20c"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("7_nabl1")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_olchu"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_b8euk")
+item = ExtResource("7_n1qkj")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_6jj7b"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("9_8mw78")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_evbxi"]
@@ -196,7 +150,15 @@ stack = SubResource("Resource_tdsbi")
 
 [node name="Furni5_5" parent="Tilemap" unique_id=636731014 instance=ExtResource("3_0vrjm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 5.5)
+stack = SubResource("Resource_2f20c")
+
+[node name="Furni5_6" parent="Tilemap" unique_id=1478309089 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 6.5)
 stack = SubResource("Resource_olchu")
+
+[node name="Furni5_7" parent="Tilemap" unique_id=1584820433 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 7.5)
+stack = SubResource("Resource_6jj7b")
 
 [node name="Furni3_6" parent="Tilemap" unique_id=1634297525 instance=ExtResource("8_nabl1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 6.5)
@@ -214,6 +176,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 7.5)
 [node name="Furni6_1" parent="Tilemap" unique_id=1034491232 instance=ExtResource("3_0vrjm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 1.5)
 stack = SubResource("Resource_u7cwy")
+
+[node name="Furni3_5" parent="Tilemap" unique_id=1427712813 instance=ExtResource("11_nabl1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 5.5)
+
+[node name="Furni3_7" parent="Tilemap" unique_id=1015940051 instance=ExtResource("14_p5gm8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 7.5)
+
+[node name="Furni6_3" parent="Tilemap" unique_id=1498836395 instance=ExtResource("18_tdsbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 3.5)
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=2097173625]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.5, 6)

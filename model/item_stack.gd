@@ -82,14 +82,19 @@ static func make_list(items: PackedStringArray) -> String:
 			copy[-1] = "and " + copy[-1]
 			return ", ".join(copy)
 
+static func pluralize(s: String) -> String:
+	return s + ("s" if not s.ends_with("s") else "")
 func _to_string() -> String:
-	var disp_name := (item.display_name if item else "invalid item") + \
-			("s" if count != 1 else "")
+	var disp_name := item.display_name if item else "invalid item"
+	if count != 1:
+		disp_name = pluralize(disp_name)
 	var mods := PackedStringArray()
 	var card := modifier_cardinality
 	for info in card:
-		var suffix = "s" if not info.display_name.ends_with("s") else ""
-		mods.append(CARDINALITY.get(min(card[info], MAX_CARDINALITY), "") + info.display_name + suffix)
+		mods.append(
+				CARDINALITY.get(min(card[info], MAX_CARDINALITY), "") + \
+				info.display_name
+		)
 	var mod_string := ""
 	if mods.size() >= 1:
 		mod_string = " with " + make_list(mods)

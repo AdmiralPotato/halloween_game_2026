@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://d1tp40f6bgvc6"]
+
+[ext_resource type="Script" uid="uid://1unrb64so1ec" path="res://map/furni_trash.gd" id="1_w3dge"]
+[ext_resource type="PackedScene" uid="uid://5x0mexf7j4ka" path="res://assets/furni_trash_0.glb" id="2_3482l"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_r1ocj"]
+height = 0.55
+
+[node name="FurniTrash" type="Node3D" unique_id=1615491916]
+script = ExtResource("1_w3dge")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1407366706]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1113763637]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32500005, 0)
+shape = SubResource("CylinderShape3D_r1ocj")
+
+[node name="trashBin" parent="StaticBody3D" unique_id=615916199 instance=ExtResource("2_3482l")]

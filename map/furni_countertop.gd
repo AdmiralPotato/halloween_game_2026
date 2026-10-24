@@ -47,3 +47,17 @@ func provide_item() -> ItemNode:
 	var ret := item
 	item = null
 	return ret
+
+func interact(player: Node):
+	if (
+			player.held_object == null \
+			and item \
+			and item.stack \
+			and item.stack.item.is_category(ItemInfo.Category.CONTAINER) \
+			and not item.stack.contents.is_empty()
+	):
+		player.held_object = ItemNode.make_node(
+			item.stack.contents[-1]
+		)
+		item.stack.contents.remove_at(-1)
+		item.stack.emit_changed()

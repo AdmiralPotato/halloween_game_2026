@@ -1,4 +1,4 @@
-class_name FurniMixer
+class_name FurniStation
 extends FurniCountertop
 
 @export var location: Recipe.Location = Recipe.Location.MIXER
