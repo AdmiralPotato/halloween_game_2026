@@ -66,7 +66,10 @@ func build_storefront():
 						tile = FURNI_DISPLAYCASE.instantiate()
 			if tile:
 				tile.locked = true
-			$Tilemap.swap_furni(pt, tile)
+			var old = $Tilemap.swap_furni(pt, tile)
+			if old:
+				var open = $Tilemap.pick_open_point()
+				$Tilemap.swap_furni(open, old)
 
 
 func update_floor():
