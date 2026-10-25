@@ -32,6 +32,10 @@ window/stretch/aspect="expand"
 
 movie_writer/movie_file="./recordings/recording.ogv"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
+
 [gui]
 
 theme/custom="uid://bkphg3nelw53u"
