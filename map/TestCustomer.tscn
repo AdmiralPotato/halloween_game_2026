@@ -1,11 +1,9 @@
 [gd_scene format=3 uid="uid://ccml46p73i4ae"]
 
 [ext_resource type="Script" uid="uid://byhpra7hsmfpy" path="res://map/test_customer.gd" id="1_d32tx"]
+[ext_resource type="PackedScene" uid="uid://cka7oxcdsa3cm" path="res://assets/npc_default.glb" id="2_30qwn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a28pv"]
-radius = 0.375
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_a28pv"]
 radius = 0.375
 
 [node name="TestCustomer" type="RigidBody3D" unique_id=564519824]
@@ -22,6 +20,5 @@ script = ExtResource("1_d32tx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_a28pv")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=243257236]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_a28pv")
+[node name="npc_default2" parent="CollisionShape3D" unique_id=1106498534 instance=ExtResource("2_30qwn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
