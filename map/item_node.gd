@@ -95,7 +95,7 @@ func make_procedural_texture(_stack: ItemStack) -> Texture2D:
 			var new_texture: ImageTexture = ImageTexture.create_from_image(
 				layer.texture.get_image()
 			)
-			var color = Color(1.0, 0.743, 0.3, 1.0) if layer.name == "frosting" else Color(1,1,1,1)
+			var color = Color.from_hsv(randf(), 0.4, 1, 1.0) if layer.name == "frosting" else Color(1,1,1,1)
 			texture.blit_rect(
 				Rect2i(0, 0, 256, 256),
 				new_texture,
