@@ -36,11 +36,17 @@ extends Resource
 	set(new):
 		craft_depth = new
 		emit_changed()
-## How many modifiers this stack has had in the course of its processing.
+## How many unique modifiers this stack has had in the course of its processing.
 ## Determines the cost of resulting products.
-@export var modifier_depth: int = 0:
+@export var unique_modifier_depth: int = 0:
 	set(new):
-		modifier_depth = new
+		unique_modifier_depth = new
+		emit_changed()
+## How many total modifiers this stack has had in the course of its processing.
+## Determines the cost of resulting products.
+@export var total_modifier_depth: int = 0:
+	set(new):
+		total_modifier_depth = new
 		emit_changed()
 
 var total_attributes: Dictionary[ItemInfo.Attribute, int]:
@@ -76,7 +82,8 @@ var sell_price: int:
 			return 0
 		return int(ceil(item.sell_price * \
 				ItemInfo.PER_CRAFT_BASE ** craft_depth * \
-				ItemInfo.PER_MOD_BASE ** modifier_depth
+				ItemInfo.PER_UNIQUE_MOD_BASE ** unique_modifier_depth * \
+				ItemInfo.PER_EACH_MOD_BASE ** total_modifier_depth
 		)) * count
 
 # We need to keep the nilary form of this constructor around to satisfy the

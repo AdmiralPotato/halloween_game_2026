@@ -19,7 +19,8 @@ func interact(player: Node):
 					.as_combination(info.modifiers + info.ingredients)
 			stack.modifiers = info.modifiers
 			stack.craft_depth = info.craft_depth
-			stack.modifier_depth = info.modifier_depth
+			stack.unique_modifier_depth = info.unique_modifier_depth
+			stack.total_modifier_depth = info.total_modifier_depth
 			if info.container:
 				var container_stack: ItemStack = info.container.duplicate(true)
 				container_stack.contents = [stack]

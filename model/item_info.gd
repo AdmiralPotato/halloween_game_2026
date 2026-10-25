@@ -49,7 +49,8 @@ enum Attribute {
 }
 
 const TIER_COSTS: Dictionary[int, int] = {1: 10, 2: 25, 3: 50, 4: 100, 5: 500}
-const PER_MOD_BASE: float = 1.25
+const PER_EACH_MOD_BASE: float = 1.1
+const PER_UNIQUE_MOD_BASE: float = 1.25
 const PER_CRAFT_BASE: float = 1.5
 
 ## Name of this kind of item. May be used in Recipes.

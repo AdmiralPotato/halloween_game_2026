@@ -109,17 +109,21 @@ func matches(inputs: Array[ItemStack], container: ItemStack = null) -> Dictionar
 					break
 			
 			if not impossible:
-				var mod_depth := 0
+				var uniq_mod_depth := 0
+				var total_mod_depth := 0
 				for stack in used_ingredients:
-					mod_depth += stack.modifier_depth
-				mod_depth += ItemStack.get_modifier_cardinality_for_modifiers(remaining).size()
+					uniq_mod_depth += stack.unique_modifier_depth
+					total_mod_depth += stack.total_modifier_depth
+				uniq_mod_depth += ItemStack.get_modifier_cardinality_for_modifiers(remaining).size()
+				total_mod_depth += remaining.size()
 				return {
 					success = true,
 					modifiers = remaining,
 					ingredients = used_ingredients,
 					container = container,
 					craft_depth = new_depth,
-					modifier_depth = mod_depth,
+					unique_modifier_depth = uniq_mod_depth,
+					total_modifier_depth = total_mod_depth,
 				}
 				
 		var can_continue := false

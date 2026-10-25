@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://do30vdu0sngt5" path="res://map/FurniOven.tscn" id="11_nabl1"]
 [ext_resource type="PackedScene" uid="uid://dfjdkdlvlfocq" path="res://map/FurniCuttingboard.tscn" id="14_p5gm8"]
 [ext_resource type="Resource" uid="uid://dtpa5786bonsp" path="res://model/data/items/frosting.tres" id="15_olchu"]
+[ext_resource type="Resource" uid="uid://by7lx0wufl7ui" path="res://model/data/items/cake.tres" id="16_0d7dl"]
 [ext_resource type="PackedScene" uid="uid://d1tp40f6bgvc6" path="res://map/FurniTrash.tscn" id="18_tdsbi"]
 [ext_resource type="Texture2D" uid="uid://tdosspgn5nwg" path="res://assets/candy.png" id="23_0d7dl"]
 [ext_resource type="Script" uid="uid://bxwh47wigsd11" path="res://map/gold.gd" id="24_0d7dl"]
@@ -42,57 +43,57 @@ texture = SubResource("AtlasTexture_i4j5a")
 [sub_resource type="Resource" id="Resource_3qeqy"]
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_8mw78")
-craft_depth = null
-modifier_depth = null
+unique_modifier_depth = null
+total_modifier_depth = null
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_5qf2s"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("7_15bd0")
-craft_depth = null
-modifier_depth = null
+unique_modifier_depth = null
+total_modifier_depth = null
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_8bmqu"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("8_tdsbi")
-craft_depth = null
-modifier_depth = null
+unique_modifier_depth = null
+total_modifier_depth = null
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_sfvuk"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("9_tdsbi")
-craft_depth = null
-modifier_depth = null
+unique_modifier_depth = null
+total_modifier_depth = null
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_2f20c"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("7_nabl1")
-craft_depth = null
-modifier_depth = null
+unique_modifier_depth = null
+total_modifier_depth = null
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_olchu"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("7_n1qkj")
-craft_depth = null
-modifier_depth = null
+unique_modifier_depth = null
+total_modifier_depth = null
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_6jj7b"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("9_8mw78")
-craft_depth = null
-modifier_depth = null
+unique_modifier_depth = null
+total_modifier_depth = null
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_5c0gd"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("9_vwyy3")
-craft_depth = null
-modifier_depth = null
+unique_modifier_depth = null
+total_modifier_depth = null
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_0d7dl"]
@@ -100,16 +101,24 @@ script = ExtResource("4_qtmpa")
 item = ExtResource("15_olchu")
 count = 2
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_5c0gd")])
-craft_depth = null
-modifier_depth = null
+unique_modifier_depth = null
+total_modifier_depth = null
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_evbxi"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("9_vwyy3")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_5c0gd")])
-craft_depth = null
-modifier_depth = null
+unique_modifier_depth = null
+total_modifier_depth = null
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_robgn"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("16_0d7dl")
+craft_depth = 2
+unique_modifier_depth = 12
+total_modifier_depth = 36
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qlr6m"]
@@ -130,8 +139,8 @@ metadata/_custom_type_script = "uid://2hntn2isrv74"
 [sub_resource type="Resource" id="Resource_u7cwy"]
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_8aiqj")
-craft_depth = null
-modifier_depth = null
+unique_modifier_depth = null
+total_modifier_depth = null
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_el5rg"]
@@ -213,6 +222,10 @@ initial_stack = SubResource("Resource_evbxi")
 [node name="Furni1_7" parent="Tilemap" unique_id=94086941 instance=ExtResource("9_2f20c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 7.5)
 
+[node name="Furni7_5" parent="Tilemap" unique_id=2109306680 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 5.5)
+initial_stack = SubResource("Resource_robgn")
+
 [node name="Furni6_1" parent="Tilemap" unique_id=1034491232 instance=ExtResource("3_0vrjm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 1.5)
 stack = SubResource("Resource_u7cwy")
@@ -257,7 +270,7 @@ shape = SubResource("WorldBoundaryShape3D_a28pv")
 [node name="Customers" type="Node3D" parent="." unique_id=1606353682]
 
 [node name="TestPlayer" parent="." unique_id=1707035649 instance=ExtResource("3_8t2af")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6479325, 0, 6.437139)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1716016636]
 environment = SubResource("Environment_el5rg")
