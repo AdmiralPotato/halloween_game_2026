@@ -44,6 +44,8 @@ func accept_item(item: ItemNode) -> ItemNode:
 			return item if item.stack else null
 	
 	var old_item := self.item
+	if old_item:
+		old_item.store_global_transform()
 	self.item = item
 	return old_item
 	
