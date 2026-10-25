@@ -21,6 +21,8 @@
 [ext_resource type="PackedScene" uid="uid://dfjdkdlvlfocq" path="res://map/FurniCuttingboard.tscn" id="14_p5gm8"]
 [ext_resource type="Resource" uid="uid://dtpa5786bonsp" path="res://model/data/items/frosting.tres" id="15_olchu"]
 [ext_resource type="PackedScene" uid="uid://d1tp40f6bgvc6" path="res://map/FurniTrash.tscn" id="18_tdsbi"]
+[ext_resource type="Texture2D" uid="uid://tdosspgn5nwg" path="res://assets/candy.png" id="23_0d7dl"]
+[ext_resource type="Script" uid="uid://bxwh47wigsd11" path="res://map/gold.gd" id="24_0d7dl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i4j5a"]
 atlas = ExtResource("6_b8euk")
@@ -40,41 +42,57 @@ texture = SubResource("AtlasTexture_i4j5a")
 [sub_resource type="Resource" id="Resource_3qeqy"]
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_8mw78")
+craft_depth = null
+modifier_depth = null
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_5qf2s"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("7_15bd0")
+craft_depth = null
+modifier_depth = null
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_8bmqu"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("8_tdsbi")
+craft_depth = null
+modifier_depth = null
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_sfvuk"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("9_tdsbi")
+craft_depth = null
+modifier_depth = null
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_2f20c"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("7_nabl1")
+craft_depth = null
+modifier_depth = null
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_olchu"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("7_n1qkj")
+craft_depth = null
+modifier_depth = null
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_6jj7b"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("9_8mw78")
+craft_depth = null
+modifier_depth = null
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_5c0gd"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("9_vwyy3")
+craft_depth = null
+modifier_depth = null
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_0d7dl"]
@@ -82,12 +100,16 @@ script = ExtResource("4_qtmpa")
 item = ExtResource("15_olchu")
 count = 2
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_5c0gd")])
+craft_depth = null
+modifier_depth = null
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_evbxi"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("9_vwyy3")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_5c0gd")])
+craft_depth = null
+modifier_depth = null
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qlr6m"]
@@ -108,6 +130,8 @@ metadata/_custom_type_script = "uid://2hntn2isrv74"
 [sub_resource type="Resource" id="Resource_u7cwy"]
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_8aiqj")
+craft_depth = null
+modifier_depth = null
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_el5rg"]
@@ -137,6 +161,10 @@ sky_material = SubResource("PhysicalSkyMaterial_xtlfy")
 background_mode = 1
 background_color = Color(0.11727656, 0.011531538, 0.21022078, 1)
 sky = SubResource("Sky_eai58")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jga7m"]
+atlas = ExtResource("23_0d7dl")
+region = Rect2(256, 256, 256, 256)
 
 [node name="TilemapTest" type="Node3D" unique_id=1389805114]
 process_physics_priority = -1
@@ -174,9 +202,6 @@ stack = SubResource("Resource_olchu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 7.5)
 stack = SubResource("Resource_6jj7b")
 
-[node name="Furni3_6" parent="Tilemap" unique_id=1634297525 instance=ExtResource("8_nabl1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 6.5)
-
 [node name="Furni1_5" parent="Tilemap" unique_id=103469227 instance=ExtResource("9_2f20c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 5.5)
 initial_stack = SubResource("Resource_0d7dl")
@@ -200,6 +225,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 7.5)
 
 [node name="Furni6_3" parent="Tilemap" unique_id=1498836395 instance=ExtResource("18_tdsbi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 3.5)
+
+[node name="Furni3_6" parent="Tilemap" unique_id=1563951735 instance=ExtResource("8_nabl1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 6.5)
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=2097173625]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.5, 6)
@@ -257,16 +285,30 @@ spot_angle = 2.0
 
 [node name="DebugPanel" parent="." unique_id=249136689 instance=ExtResource("4_8t2af")]
 
-[node name="Label" type="Label" parent="." unique_id=1777443388]
-custom_minimum_size = Vector2(16, 16)
-offset_left = 25.0
-offset_top = 22.0
-offset_right = 379.0
-offset_bottom = 45.0
-text = "Press Space/P to place/remove Countertops"
-
 [node name="SpawnCustomer" type="Timer" parent="." unique_id=982563971]
 wait_time = 2.0
 one_shot = true
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=702785822]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=1699535166]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer" unique_id=1315648894]
+custom_maximum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_jga7m")
+
+[node name="Gold" type="Label" parent="PanelContainer/HBoxContainer" unique_id=651876760]
+layout_mode = 2
+text = "0"
+script = ExtResource("24_0d7dl")
 
 [connection signal="timeout" from="SpawnCustomer" to="." method="_on_spawn_customer_timeout"]

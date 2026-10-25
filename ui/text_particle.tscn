@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cxsek4cov4mh0"]
+
+[ext_resource type="FontFile" uid="uid://c6nt4017bdbn6" path="res://assets/sym_font.png" id="1_i3yta"]
+[ext_resource type="Script" uid="uid://dwg8364dwxv67" path="res://ui/text_particle.gd" id="1_rmqn1"]
+
+[node name="TextParticle" type="Label3D" unique_id=1312117544]
+pixel_size = 0.02
+billboard = 1
+text = "$Text"
+font = ExtResource("1_i3yta")
+script = ExtResource("1_rmqn1")

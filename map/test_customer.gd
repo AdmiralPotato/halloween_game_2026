@@ -17,10 +17,16 @@ extends RigidBody3D
 	func _init(owner: TestCustomer):
 		self.owner = owner
 		
+	func _to_string():
+		return "State"
+		
 	@abstract func tick(delta: float) -> State
 	
 	
 class Leave extends State:
+	func _to_string():
+		return "Leave"
+		
 	func tick(delta: float) -> State:
 		owner.queue_free()
 		return null
@@ -32,6 +38,9 @@ class Dwell extends State:
 	func _init(owner: TestCustomer, duration: float):
 		super(owner)
 		until = owner.time_in_scene + duration
+		
+	func _to_string():
+		return "Dwell:{0}".format([until])
 		
 	func tick(delta: float) -> State:
 		if owner.time_in_scene >= until:
@@ -57,6 +66,9 @@ class WanderTo extends State:
 			next = Dwell.new(owner, randf_range(2.0, 6.0))
 		next_state = next
 		self.to = to
+		
+	func _to_string():
+		return "WanderTo:{0}->{1}".format([to, next_state])
 		
 	func recompute():
 		path = Global.tilemap.pathfinder.get_point_path(
@@ -87,9 +99,64 @@ class WanderTo extends State:
 		return null
 		
 
-class ChooseState extends State:
+class BuyFrom extends State:
+	var tile: Vector2i
+	
+	func _init(owner: TestCustomer, tile: Vector2i):
+		super(owner)
+		self.tile = tile
+		
+	func _to_string():
+		return "BuyFrom:{0}".format([tile])
+		
 	func tick(delta: float) -> State:
-		# TODO: figure out what we want to do
+		var furni: FurniDisplayCase = Global.tilemap.get_furni(self.tile)
+		if not (furni and furni.item and furni.item.stack):
+			return ChooseState.new(owner)
+		var value := furni.item.stack.sell_price
+		furni.item = null
+		var registers: Array[Vector2i] = \
+			Global.tilemap.get_tiles_of_type(preload("res://map/furni_cashregister.gd"))
+		if registers.is_empty():
+			Global.gold += value
+			return Leave.new(owner)
+		var reg: Vector2i = registers.pick_random()
+		return WanderTo.new(owner, reg,
+				GiveMoney.new(owner, value, reg),
+		)
+
+class GiveMoney extends State:
+	var gold: int
+	var tile: Vector2i
+	
+	func _init(owner: TestCustomer, gold: int, tile: Vector2i):
+		super(owner)
+		self.gold = gold
+		self.tile = tile
+		
+	func _to_string():
+		return "GiveMoney:{0}".format([gold])
+		
+	func tick(delta: float) -> State:
+		Global.gold += gold
+		var reg = Global.tilemap.get_furni(tile)
+		if reg and reg is FurniCashRegister:
+			reg.spawn_particle("$" + str(gold), Color.GREEN)
+		return Leave.new(owner)
+
+class ChooseState extends State:
+	func _to_string():
+		return "ChooseState"
+		
+	func tick(delta: float) -> State:
+		var cases: Array[Vector2i] = \
+			Global.tilemap.get_tiles_of_type(preload("res://map/furni_displaycase.gd"))
+		for case in cases:
+			var furni: FurniDisplayCase = Global.tilemap.get_furni(case)
+			if furni and furni.item and furni.item.stack:
+				return WanderTo.new(owner, case,
+						BuyFrom.new(owner, case),
+				)
 		var new_state := WanderTo.new(owner)
 		if owner.time_in_scene > 15.0:
 			new_state.next_state = Leave.new(owner)
@@ -110,6 +177,12 @@ func get_gridpt(pos = null) -> Vector2i:
 	if pos == null:
 		pos = position
 	return Vector2i(Vector2(pos.x, pos.z).floor())
+	
+func _ready():
+	Global.request_debug_info.connect(register_debug_info)
+	
+func register_debug_info(dp: DebugPanel):
+	dp.monitor("Customer {0} state".format([self]), self, &"state")
 
 func _physics_process(delta: float) -> void:
 	time_in_scene += delta
@@ -118,6 +191,7 @@ func _physics_process(delta: float) -> void:
 		# Loop to give zero-frame delays to things like ChooseState. This somewhat
 		# complicates frame timing decisions for some other things like Dwell, but
 		# not in ways that matter much.
+		print(self, ' enters state ', new_state)
 		state = new_state
 		new_state = state.tick(delta)
 		

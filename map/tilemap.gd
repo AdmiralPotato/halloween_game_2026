@@ -32,6 +32,13 @@ func create_slots(minCoord: Vector2i, size: Vector2i, ...extra_args):
 func clear():
 	tiles.clear()
 	pathfinder.clear()
+	
+
+## Convert a tile position to a world position. This position is on the floor,
+## in the center of the tile--where the tile itself would be placed.
+func to_world_point(xy: Vector2i) -> Vector3:
+	return Vector3(xy.x + 0.5, 0.0, xy.y + 0.5)
+
 
 ## Returns the coordinates of a tile that someone standing at `position` and
 ## facing `facing` (a unit vector) should be interacting with / picking up from

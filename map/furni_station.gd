@@ -18,6 +18,8 @@ func interact(player: Node):
 			var stack: ItemStack = recipe.output.duplicate(true)\
 					.as_combination(info.modifiers + info.ingredients)
 			stack.modifiers = info.modifiers
+			stack.craft_depth = info.craft_depth
+			stack.modifier_depth = info.modifier_depth
 			if info.container:
 				var container_stack: ItemStack = info.container.duplicate(true)
 				container_stack.contents = [stack]

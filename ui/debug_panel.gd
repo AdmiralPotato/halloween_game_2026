@@ -10,6 +10,16 @@ class Monitored:
 static var monitored_properties: Dictionary[StringName, Monitored]
 static var labels_in_order: Array[StringName]
 var frame_count := 0
+const REFRESH_INTERVAL = 60
+
+
+func refresh():
+	monitored_properties.clear()
+	labels_in_order.clear()
+	for child in $PanelContainer/VBoxContainer.get_children():
+		child.queue_free()
+	Global.request_debug_info.emit(self)
+	
 
 func _enter_tree() -> void:
 	if Global.debug_panel:
@@ -26,6 +36,8 @@ func _input(event) -> void:
 
 func _process(_delta) -> void:
 	frame_count += 1
+	if frame_count % REFRESH_INTERVAL == 0:
+		refresh.call_deferred()
 	if visible:
 		var props_to_delete: Array[StringName] = []
 		for label in labels_in_order:

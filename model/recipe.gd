@@ -61,6 +61,19 @@ func matches(inputs: Array[ItemStack], container: ItemStack = null) -> Dictionar
 			print(self, ": could not find a match for ingr ", ingr)
 			return {success = false}
 		permitted_ingredients.append(valid)
+		
+	var new_depth: int = 1
+	match inputs.size():
+		0:
+			pass
+		1:
+			new_depth = inputs[0].craft_depth + 1
+		2:
+			var res = max.callv(inputs.map(
+					func(s: ItemStack): return s.craft_depth
+			))
+			print('max(', inputs, ') = ', res)
+			new_depth = res + 1
 			
 	var indices: Array[int] = Array(
 		permitted_ingredients.map(func(_ignored): return 0),
@@ -96,11 +109,17 @@ func matches(inputs: Array[ItemStack], container: ItemStack = null) -> Dictionar
 					break
 			
 			if not impossible:
+				var mod_depth := 0
+				for stack in used_ingredients:
+					mod_depth += stack.modifier_depth
+				mod_depth += ItemStack.get_modifier_cardinality_for_modifiers(remaining).size()
 				return {
 					success = true,
 					modifiers = remaining,
 					ingredients = used_ingredients,
 					container = container,
+					craft_depth = new_depth,
+					modifier_depth = mod_depth,
 				}
 				
 		var can_continue := false

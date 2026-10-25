@@ -30,6 +30,18 @@ extends Resource
 	set(new):
 		contents = new
 		emit_changed()
+## How many recipes/changes this stack has gone through. Determines the cost
+## of resulting products.
+@export var craft_depth: int = 0:
+	set(new):
+		craft_depth = new
+		emit_changed()
+## How many modifiers this stack has had in the course of its processing.
+## Determines the cost of resulting products.
+@export var modifier_depth: int = 0:
+	set(new):
+		modifier_depth = new
+		emit_changed()
 
 var total_attributes: Dictionary[ItemInfo.Attribute, int]:
 	get:
@@ -38,22 +50,34 @@ var total_attributes: Dictionary[ItemInfo.Attribute, int]:
 			attrs[attr] = combined_attributes[attr] * count
 		return attrs
 		
+static func get_modifier_cardinality_for_modifiers(mods: Array[ItemStack]) -> Dictionary[ItemInfo, int]:
+	# XXX we can't always assume that the same named ItemInfo is the same
+	# ItemInfo object because we have to deep-clone in many cases (e.g. the
+	# contents property), so we use another likely-static property instead.
+	var card: Dictionary[String, int] = {}
+	var info: Dictionary[String, ItemInfo] = {}
+	for mod in mods:
+		if mod.item:
+			if mod.item.name not in info:
+				info[mod.item.name] = mod.item
+			card[mod.item.name] = card.get(mod.item.name, 0) + mod.count
+	var ret: Dictionary[ItemInfo, int] = {}
+	for mod_name in card:
+		ret[info[mod_name]] = card[mod_name]
+	return ret
+	
 var modifier_cardinality: Dictionary[ItemInfo, int]:
 	get:
-		# XXX we can't always assume that the same named ItemInfo is the same
-		# ItemInfo object because we have to deep-clone in many cases (e.g. the
-		# contents property), so we use another likely-static property instead.
-		var card: Dictionary[String, int] = {}
-		var info: Dictionary[String, ItemInfo] = {}
-		for mod in modifiers:
-			if mod.item:
-				if mod.item.name not in info:
-					info[mod.item.name] = mod.item
-				card[mod.item.name] = card.get(mod.item.name, 0) + mod.count
-		var ret: Dictionary[ItemInfo, int] = {}
-		for mod_name in card:
-			ret[info[mod_name]] = card[mod_name]
-		return ret
+		return get_modifier_cardinality_for_modifiers(modifiers)
+
+var sell_price: int:
+	get:
+		if not item:
+			return 0
+		return int(ceil(item.sell_price * \
+				ItemInfo.PER_CRAFT_BASE ** craft_depth * \
+				ItemInfo.PER_MOD_BASE ** modifier_depth
+		)) * count
 
 # We need to keep the nilary form of this constructor around to satisfy the
 # ResourceLoader; in that case, it's okay if item is null

@@ -49,6 +49,8 @@ enum Attribute {
 }
 
 const TIER_COSTS: Dictionary[int, int] = {1: 10, 2: 25, 3: 50, 4: 100, 5: 500}
+const PER_MOD_BASE: float = 1.25
+const PER_CRAFT_BASE: float = 1.5
 
 ## Name of this kind of item. May be used in Recipes.
 @export var name: String = ""
@@ -61,6 +63,8 @@ const TIER_COSTS: Dictionary[int, int] = {1: 10, 2: 25, 3: 50, 4: 100, 5: 500}
 @export var categories: Array[Category] = []
 ## Cost tier of item; see TIER_COSTS
 @export_range(0, 5, 1) var cost_tier: int = 0
+## Base sell price.
+@export_range(1, 100, 1) var sell_price: int = 5
 ## Maximum amount of this item that can be manipulated as one "stack" (in hand or
 ## inside furniture).
 @export_range(1, 50, 1, "or_greater") var max_stack_size: int = 1

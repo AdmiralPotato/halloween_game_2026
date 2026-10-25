@@ -32,7 +32,11 @@ var held_object: BaseMapNode:
 
 
 func _ready():
-	Global.debug_panel.monitor("Held Object", self, "held_object", 1)
+	Global.request_debug_info.connect(register_debug_info)
+	
+	
+func register_debug_info(dp: DebugPanel):
+	dp.monitor("Held Object", self, "held_object", 1)
 
 
 func _physics_process(delta):
