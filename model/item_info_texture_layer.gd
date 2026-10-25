@@ -1,0 +1,6 @@
+@tool
+class_name ItemInfoTextureLayer
+extends Resource
+
+@export var name: String
+@export var texture: Texture2D

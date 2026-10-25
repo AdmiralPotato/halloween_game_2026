@@ -1,14 +1,15 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://di0d7103yc36q"]
 
-[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_bvv3u"]
-[ext_resource type="Texture2D" uid="uid://4logsfuyvxlk" path="res://assets/TILES-other.png" id="2_5bkpp"]
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_7rcx1"]
+[ext_resource type="Texture2D" uid="uid://4logsfuyvxlk" path="res://assets/TILES-other.png" id="2_ogxos"]
+[ext_resource type="Script" uid="uid://bammp41ppb2u8" path="res://model/item_info_texture_layer.gd" id="3_hmjxx"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5bkpp"]
-atlas = ExtResource("2_5bkpp")
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1cyi"]
+atlas = ExtResource("2_ogxos")
 region = Rect2(512, 0, 256, 256)
 
 [resource]
-script = ExtResource("1_bvv3u")
+script = ExtResource("1_7rcx1")
 name = "chocolate_chips"
 display_name = "chocolate chips"
 storage_type = 4
@@ -16,4 +17,4 @@ categories = Array[int]([1, 5])
 cost_tier = 3
 max_stack_size = 9
 groups = PackedStringArray()
-texture = SubResource("AtlasTexture_5bkpp")
+texture = SubResource("AtlasTexture_u1cyi")

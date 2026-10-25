@@ -368,7 +368,7 @@
 		"texture_layers": [
 			{
 				"name": "frosting",
-				"texture": "res://assets/TILES-frosting.png@14/14,1/3"
+				"texture": "res://assets/TILES-frosting.png@13/14,1/3"
 			},
 			{
 				"name": "jar",
@@ -376,7 +376,7 @@
 			},
 			{
 				"name": "label",
-				"texture": "res://assets/TILES-frosting.png@14/14,2/3"
+				"texture": "res://assets/TILES-frosting.png@13/14,2/3"
 			}
 		]
 	},
@@ -413,7 +413,7 @@
 		"buy_price": 2,
 		"max_stack_size": 1,
 		"attributes": "from_recipe",
-		"texture": "res://assets/TILES-dough.png@14/14,1/3"
+		"texture": "res://assets/TILES-dough.png@13/14,1/3"
 	},
 	"cake_batter": {
 		"human_name": "cake batter",
@@ -422,7 +422,7 @@
 		"buy_price": 2,
 		"max_stack_size": 1,
 		"attributes": "from_recipe",
-		"texture": "res://assets/TILES-batter.png@14/14,0/3"
+		"texture": "res://assets/TILES-batter.png@13/14,0/3"
 	},
 	"cookie": {
 		"human_name": "cookie",
@@ -431,7 +431,7 @@
 		"buy_price": null,
 		"max_stack_size": 1,
 		"attributes": "from_recipe",
-		"texture": "res://assets/TILES-cookie-baked.png@14/14,0/3"
+		"texture": "res://assets/TILES-cookie-baked.png@13/14,0/3"
 	},
 	"cupcake": {
 		"human_name": "cupcake",
@@ -440,7 +440,7 @@
 		"buy_price": null,
 		"max_stack_size": 1,
 		"attributes": "from_recipe",
-		"texture": "res://assets/TILES-cupcake-baked.png@14/14,1/4"
+		"texture": "res://assets/TILES-cupcake-baked.png@13/14,1/4"
 	},
 	"cake": {
 		"human_name": "cake",

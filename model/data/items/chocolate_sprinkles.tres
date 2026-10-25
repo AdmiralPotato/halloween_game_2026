@@ -1,14 +1,15 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://dsnpdtwwag8by"]
 
-[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_p7li1"]
-[ext_resource type="Texture2D" uid="uid://4logsfuyvxlk" path="res://assets/TILES-other.png" id="2_xr4o5"]
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_6w7w5"]
+[ext_resource type="Texture2D" uid="uid://4logsfuyvxlk" path="res://assets/TILES-other.png" id="2_x0v2k"]
+[ext_resource type="Script" uid="uid://bammp41ppb2u8" path="res://model/item_info_texture_layer.gd" id="3_frwsr"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xr4o5"]
-atlas = ExtResource("2_xr4o5")
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgnpa"]
+atlas = ExtResource("2_x0v2k")
 region = Rect2(2048, 0, 256, 256)
 
 [resource]
-script = ExtResource("1_p7li1")
+script = ExtResource("1_6w7w5")
 name = "chocolate_sprinkles"
 display_name = "chocolate sprinkles"
 storage_type = 4
@@ -19,4 +20,4 @@ attributes = Dictionary[int, int]({
 12: 1
 })
 groups = PackedStringArray("sprinkles")
-texture = SubResource("AtlasTexture_xr4o5")
+texture = SubResource("AtlasTexture_hgnpa")

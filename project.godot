@@ -14,8 +14,8 @@ config/name="Halloween Game 2026"
 run/main_scene="uid://dvqbw3sbxx3si"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
-boot_splash/image="uid://tdosspgn5nwg"
-config/icon="res://icon.svg"
+boot_splash/image="uid://3rmjefbjljr8"
+config/icon="uid://3rmjefbjljr8"
 
 [autoload]
 

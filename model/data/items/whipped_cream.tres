@@ -1,18 +1,19 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://drme21dey44pm"]
 
-[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_q6o25"]
-[ext_resource type="Texture2D" uid="uid://4logsfuyvxlk" path="res://assets/TILES-other.png" id="2_0opue"]
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_me231"]
+[ext_resource type="Texture2D" uid="uid://4logsfuyvxlk" path="res://assets/TILES-other.png" id="2_vp2yb"]
+[ext_resource type="Script" uid="uid://bammp41ppb2u8" path="res://model/item_info_texture_layer.gd" id="3_sfwlr"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0opue"]
-atlas = ExtResource("2_0opue")
+[sub_resource type="AtlasTexture" id="AtlasTexture_dbyok"]
+atlas = ExtResource("2_vp2yb")
 region = Rect2(256, 512, 256, 256)
 
 [resource]
-script = ExtResource("1_q6o25")
+script = ExtResource("1_me231")
 name = "whipped_cream"
 display_name = "whipped cream"
 storage_type = 1
 categories = Array[int]([3, 4])
 cost_tier = 2
 groups = PackedStringArray()
-texture = SubResource("AtlasTexture_0opue")
+texture = SubResource("AtlasTexture_dbyok")

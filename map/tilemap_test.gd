@@ -29,7 +29,7 @@ const CUSTOMER = preload("res://map/TestCustomer.tscn")
 		number_of_tiles = x
 		if is_node_ready():
 			update_floor()
-			
+
 @export var customer_spawn_time_range := Vector2(3.0, 15.0)
 
 func get_customer_spawn_time() -> float:
@@ -46,7 +46,7 @@ func _ready():
 	for x in range(0, number_of_tiles.x):
 		var FurniPiece = FURNI_LIST[x % FURNI_LIST.size()]
 		$Tilemap.swap_furni(Vector2i(x,0), FurniPiece.instantiate())
-		
+
 	build_storefront()
 	$SpawnCustomer.start(get_customer_spawn_time())
 
@@ -85,7 +85,7 @@ func update_floor():
 	$Floor/MeshInstance3D.mesh.size.x = number_of_tiles.x
 	$Floor/MeshInstance3D.mesh.size.z = number_of_tiles.y
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Engine.is_editor_hint():
 		return
 	var birb_position: Vector3 = $TestPlayer.position

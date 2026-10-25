@@ -36,7 +36,7 @@ func accept_item(item: ItemNode) -> ItemNode:
 	
 
 ## Called when the player interacts with this tile.
-func interact(player: Node):
+func interact(_player: Node):
 	pass
 
 

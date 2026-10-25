@@ -1,15 +1,16 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://by7lx0wufl7ui"]
 
-[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_ypqq1"]
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_iiy72"]
+[ext_resource type="Script" uid="uid://bammp41ppb2u8" path="res://model/item_info_texture_layer.gd" id="2_ph5pg"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ypqq1"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_akypi"]
 size = Vector2(256, 256)
 
 [resource]
-script = ExtResource("1_ypqq1")
+script = ExtResource("1_iiy72")
 name = "cake"
 display_name = "cake"
 storage_type = 1
 categories = Array[int]([2])
 groups = PackedStringArray()
-texture = SubResource("PlaceholderTexture2D_ypqq1")
+texture = SubResource("PlaceholderTexture2D_akypi")

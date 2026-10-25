@@ -4,14 +4,14 @@
 [ext_resource type="Resource" uid="uid://cgsiu2wskomec" path="res://model/data/items/cookie.tres" id="2_8eiwj"]
 [ext_resource type="Script" uid="uid://b5mlkyd7jcal7" path="res://model/recipe.gd" id="3_lshx7"]
 
-[sub_resource type="Resource" id="Resource_d3ums"]
+[sub_resource type="Resource" id="Resource_2g4rv"]
 script = ExtResource("1_d3ums")
 item = ExtResource("2_8eiwj")
 
 [resource]
 script = ExtResource("3_lshx7")
 name = "cookie"
-output = SubResource("Resource_d3ums")
+output = SubResource("Resource_2g4rv")
 location = 3
 container = "COOKIE_SHEET"
 ingredients = PackedStringArray("cookie_dough")

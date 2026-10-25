@@ -35,8 +35,8 @@ func _ready():
 	Global.request_debug_info.connect(register_debug_info)
 	
 	
-func register_debug_info(dp: DebugPanel):
-	dp.monitor("Held Object", self, "held_object", 1)
+func register_debug_info(_dp: DebugPanel):
+	DebugPanel.monitor("Held Object", self, "held_object", 1)
 
 
 func _physics_process(delta):

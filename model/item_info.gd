@@ -75,12 +75,14 @@ const PER_CRAFT_BASE: float = 1.5
 ## Groups this kind of item belongs to. These can be used as aliases for multiple
 ## kinds of items in Recipes.
 @export var groups: PackedStringArray = PackedStringArray()
+## ...if you have a complex set of layers for how this item appears in the game.
+@export var texture_layers: Array[ItemInfoTextureLayer]
 ## How this item appears in the game.
 @export var texture: Texture2D
 
-static func from_json(name: String, d: Dictionary, variants: Dictionary = {}) -> ItemInfo:
+static func from_json(label: String, d: Dictionary, variants: Dictionary = {}) -> ItemInfo:
 	var info = ItemInfo.new()
-	info.name = name
+	info.name = label
 	info.display_name = d.get("human_name", "")
 	info.storage_type = StorageType[d.get("storage_type", "BAG")]
 	info.categories.assign(d.get("categories", []).map(
@@ -99,23 +101,24 @@ static func from_json(name: String, d: Dictionary, variants: Dictionary = {}) ->
 	var variant = variants.get(info.name)
 	if variant:
 		info.groups.append(variant.parent)
-	var texture = d.get("texture")
-	if texture and typeof(texture) == TYPE_STRING:
-		var parts: PackedStringArray = texture.split("@", true, 2)
-		info.texture = ResourceLoader.load(parts[0], "Texture2D")
-		if parts.size() > 1:
-			var atlas := AtlasTexture.new()
-			var size: Vector2 = info.texture.get_size()
-			var coords := Array(parts[1].split(",", true, 2))
-			var spans := coords.map(func(part: String): return part.split("/", true, 2))
-			var cell := size / Vector2(float(spans[0][1]), float(spans[1][1]))
-			var index := Vector2i(int(spans[0][0]), int(spans[1][0]))
-			atlas.atlas = info.texture
-			atlas.region = Rect2(Vector2(index) * cell, cell)
-			info.texture = atlas
+	var texture_path = d.get("texture")
+	if texture_path and typeof(texture_path) == TYPE_STRING:
+		info.texture = process_texture_string(texture_path)
 	else:
 		info.texture = PlaceholderTexture2D.new()
 		info.texture.size = Vector2(256, 256)
+	var texture_layers_data = d.get("texture_layers")
+	if texture_layers_data and texture_layers_data.size() > 0:
+		print('Item has texture layers ', info.name)
+		info.texture_layers.assign([])
+		for layer_data in texture_layers_data:
+			var layer = ItemInfoTextureLayer.new()
+			print('	layer name: ', layer_data.name)
+			layer.name = layer_data.name
+			layer.texture = process_texture_string(layer_data.texture)
+			print('	layer texture: ', layer.texture)
+			info.texture_layers.append(layer)
+		print('	all layers ', info.texture_layers)
 	return info
 
 func is_category(cat: Category) -> bool:
@@ -123,3 +126,18 @@ func is_category(cat: Category) -> bool:
 
 func matches_spec(spec: String) -> bool:
 	return name == spec or spec in groups
+
+static func process_texture_string(texture_path: String) -> Texture2D:
+	var parts: PackedStringArray = texture_path.split("@", true, 2)
+	var result_texture = ResourceLoader.load(parts[0], "Texture2D")
+	if parts.size() > 1:
+		var atlas := AtlasTexture.new()
+		var size: Vector2 = result_texture.get_size()
+		var coords := Array(parts[1].split(",", true, 2))
+		var spans := coords.map(func(part: String): return part.split("/", true, 2))
+		var cell := size / Vector2(float(spans[0][1]), float(spans[1][1]))
+		var index := Vector2i(int(spans[0][0]), int(spans[1][0]))
+		atlas.atlas = result_texture
+		atlas.region = Rect2(Vector2(index) * cell, cell)
+		result_texture = atlas
+	return result_texture

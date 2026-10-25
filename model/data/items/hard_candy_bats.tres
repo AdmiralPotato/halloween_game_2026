@@ -1,14 +1,15 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://bf5t4rvw72l23"]
 
-[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_dmq70"]
-[ext_resource type="Texture2D" uid="uid://4logsfuyvxlk" path="res://assets/TILES-other.png" id="2_nojv3"]
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_7wwqj"]
+[ext_resource type="Texture2D" uid="uid://4logsfuyvxlk" path="res://assets/TILES-other.png" id="2_p1h7y"]
+[ext_resource type="Script" uid="uid://bammp41ppb2u8" path="res://model/item_info_texture_layer.gd" id="3_x3vuh"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nojv3"]
-atlas = ExtResource("2_nojv3")
+[sub_resource type="AtlasTexture" id="AtlasTexture_io1qh"]
+atlas = ExtResource("2_p1h7y")
 region = Rect2(1024, 256, 256, 256)
 
 [resource]
-script = ExtResource("1_dmq70")
+script = ExtResource("1_7wwqj")
 name = "hard_candy_bats"
 display_name = "hard_candy_bats"
 storage_type = 4
@@ -19,4 +20,4 @@ attributes = Dictionary[int, int]({
 12: 1
 })
 groups = PackedStringArray("hard_candy_shapes")
-texture = SubResource("AtlasTexture_nojv3")
+texture = SubResource("AtlasTexture_io1qh")

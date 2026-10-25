@@ -13,63 +13,63 @@ extends RigidBody3D
 
 @abstract class State extends RefCounted:
 	var owner: TestCustomer
-	
-	func _init(owner: TestCustomer):
-		self.owner = owner
-		
+
+	func _init(_owner: TestCustomer):
+		self.owner = _owner
+
 	func _to_string():
 		return "State"
-		
+
 	@abstract func tick(delta: float) -> State
-	
-	
+
+
 class Leave extends State:
 	func _to_string():
 		return "Leave"
-		
-	func tick(delta: float) -> State:
+
+	func tick(_delta: float) -> State:
 		owner.queue_free()
 		return null
-		
-	
+
+
 class Dwell extends State:
 	var until: float
-	
-	func _init(owner: TestCustomer, duration: float):
-		super(owner)
-		until = owner.time_in_scene + duration
-		
+
+	func _init(_owner: TestCustomer, duration: float):
+		super(_owner)
+		until = _owner.time_in_scene + duration
+
 	func _to_string():
 		return "Dwell:{0}".format([until])
-		
-	func tick(delta: float) -> State:
+
+	func tick(_delta: float) -> State:
 		if owner.time_in_scene >= until:
 			return ChooseState.new(owner)
 		return null
-	
-	
+
+
 class WanderTo extends State:
 	const NOWHERE = Vector2i(-1, -1)
 	const RECOMPUTE_TIME = 5000  # ms
 	const CLOSE = 0.3  # within _about_ 0.1m
-	
+
 	var to: Vector2i
 	var path: PackedVector2Array
 	var next_path_recompute := 0
 	var next_state: State
-	
-	func _init(owner: TestCustomer, to: Vector2i = NOWHERE, next: State = null):
-		super(owner)
-		if to == NOWHERE:
-			to = Global.tilemap.pick_open_point()
+
+	func _init(_owner: TestCustomer, _to: Vector2i = NOWHERE, next: State = null):
+		super(_owner)
+		if _to == NOWHERE:
+			_to = Global.tilemap.pick_open_point()
 		if not next:
-			next = Dwell.new(owner, randf_range(2.0, 6.0))
+			next = Dwell.new(_owner, randf_range(2.0, 6.0))
 		next_state = next
-		self.to = to
-		
+		self.to = _to
+
 	func _to_string():
 		return "WanderTo:{0}->{1}".format([to, next_state])
-		
+
 	func recompute():
 		path = Global.tilemap.pathfinder.get_point_path(
 				owner.get_gridpt(),
@@ -77,15 +77,15 @@ class WanderTo extends State:
 				true,
 		)
 		next_path_recompute = Time.get_ticks_msec() + RECOMPUTE_TIME
-		
+
 	static func is_close(pa: Vector3, pb: Vector3) -> bool:
 		return pa.distance_squared_to(pb) <= CLOSE
-		
+
 	func pop_nearby_pts():
 		while path.size() > 0 and is_close(owner.position, owner.to_worldpt(path[0])):
 			path.remove_at(0)
-		
-	func tick(delta: float) -> State:
+
+	func tick(_delta: float) -> State:
 		if is_close(owner.position, owner.to_worldpt(to)):
 			return next_state
 		if Time.get_ticks_msec() >= next_path_recompute:
@@ -97,19 +97,19 @@ class WanderTo extends State:
 			owner.target = null
 			return next_state
 		return null
-		
+
 
 class BuyFrom extends State:
 	var tile: Vector2i
-	
-	func _init(owner: TestCustomer, tile: Vector2i):
-		super(owner)
-		self.tile = tile
-		
+
+	func _init(_owner: TestCustomer, _tile: Vector2i):
+		super(_owner)
+		self.tile = _tile
+
 	func _to_string():
 		return "BuyFrom:{0}".format([tile])
-		
-	func tick(delta: float) -> State:
+
+	func tick(_delta: float) -> State:
 		var furni: FurniDisplayCase = Global.tilemap.get_furni(self.tile)
 		if not (furni and furni.item and furni.item.stack):
 			return ChooseState.new(owner)
@@ -128,16 +128,16 @@ class BuyFrom extends State:
 class GiveMoney extends State:
 	var gold: int
 	var tile: Vector2i
-	
-	func _init(owner: TestCustomer, gold: int, tile: Vector2i):
-		super(owner)
-		self.gold = gold
-		self.tile = tile
-		
+
+	func _init(_owner: TestCustomer, _gold: int, _tile: Vector2i):
+		super(_owner)
+		self.gold = _gold
+		self.tile = _tile
+
 	func _to_string():
 		return "GiveMoney:{0}".format([gold])
-		
-	func tick(delta: float) -> State:
+
+	func tick(_delta: float) -> State:
 		Global.gold += gold
 		var reg = Global.tilemap.get_furni(tile)
 		if reg and reg is FurniCashRegister:
@@ -147,8 +147,8 @@ class GiveMoney extends State:
 class ChooseState extends State:
 	func _to_string():
 		return "ChooseState"
-		
-	func tick(delta: float) -> State:
+
+	func tick(_delta: float) -> State:
 		var cases: Array[Vector2i] = \
 			Global.tilemap.get_tiles_of_type(preload("res://map/furni_displaycase.gd"))
 		for case in cases:
@@ -161,28 +161,28 @@ class ChooseState extends State:
 		if owner.time_in_scene > 15.0:
 			new_state.next_state = Leave.new(owner)
 		return new_state
-	
-	
+
+
 var time_in_scene := 0.0
 var target = null  # null | Vector3
 var state: State = ChooseState.new(self)
-	
+
 func to_worldpt(v: Vector2i) -> Vector3:
 	return Vector3(v.x + 0.5, 0, v.y + 0.5)
-	
+
 func set_target_gridpt(v: Vector2i):
 	target = to_worldpt(v)
-	
+
 func get_gridpt(pos = null) -> Vector2i:
 	if pos == null:
 		pos = position
 	return Vector2i(Vector2(pos.x, pos.z).floor())
-	
+
 func _ready():
 	Global.request_debug_info.connect(register_debug_info)
-	
-func register_debug_info(dp: DebugPanel):
-	dp.monitor("Customer {0} state".format([self]), self, &"state")
+
+func register_debug_info(_dp: DebugPanel):
+	DebugPanel.monitor("Customer {0} state".format([self]), self, &"state")
 
 func _physics_process(delta: float) -> void:
 	time_in_scene += delta
@@ -194,7 +194,7 @@ func _physics_process(delta: float) -> void:
 		print(self, ' enters state ', new_state)
 		state = new_state
 		new_state = state.tick(delta)
-		
+
 	if target:
 		var dir: Vector3 = (position - target).normalized()
 		var motion := Vector2(dir.x, dir.z) * movement_speed

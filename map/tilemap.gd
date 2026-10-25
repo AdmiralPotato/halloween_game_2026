@@ -32,7 +32,7 @@ func create_slots(minCoord: Vector2i, size: Vector2i, ...extra_args):
 func clear():
 	tiles.clear()
 	pathfinder.clear()
-	
+
 
 ## Convert a tile position to a world position. This position is on the floor,
 ## in the center of the tile--where the tile itself would be placed.
@@ -43,18 +43,18 @@ func to_world_point(xy: Vector2i) -> Vector3:
 ## Returns the coordinates of a tile that someone standing at `position` and
 ## facing `facing` (a unit vector) should be interacting with / picking up from
 ## / putting down on. (This tile may or may not actually exist.)
-func find_tile(player_position: Vector3, facing: Vector3, reach: float = 1.0) \
--> Vector2i:
+func find_tile(player_position: Vector3, facing: Vector3, reach: float = 1.0) -> Vector2i:
 	var target_pos := player_position + facing * reach
 	return Vector2i(floor(target_pos.x), floor(target_pos.z))
-	
+
+
 ## Returns an array of coordinates of tiles that have the given type of FurniNode
 ## on them.
 func get_tiles_of_type(script) -> Array[Vector2i]:
 	var res: Array[Vector2i] = []
-	for position in tiles:
-		if tiles[position].furni and tiles[position].furni.get_script() == script:
-			res.append(position)
+	for tile in tiles:
+		if tiles[tile].furni and tiles[tile].furni.get_script() == script:
+			res.append(tile)
 	return res
 
 func _get_tile(xy: Vector2i) -> Tile:
@@ -113,7 +113,7 @@ func swap_furni(xy: Vector2i, new_node: FurniNode) -> FurniNode:
 		new_node.unpack()
 		pathfinder.set_point_solid(xy, true)
 	return old_node
-	
+
 
 ## Interact with the furni at the given position.
 func interact(xy: Vector2i, player: Node):

@@ -1,18 +1,19 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://vmrcp80igtca"]
 
-[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_bwf3d"]
-[ext_resource type="Texture2D" uid="uid://b500srptuba7v" path="res://assets/TILES-dough.png" id="2_ocsqs"]
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_yui3g"]
+[ext_resource type="Texture2D" uid="uid://b500srptuba7v" path="res://assets/TILES-dough.png" id="2_llkod"]
+[ext_resource type="Script" uid="uid://bammp41ppb2u8" path="res://model/item_info_texture_layer.gd" id="3_aso83"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ocsqs"]
-atlas = ExtResource("2_ocsqs")
-region = Rect2(3584, 256, 256, 256)
+[sub_resource type="AtlasTexture" id="AtlasTexture_om1k4"]
+atlas = ExtResource("2_llkod")
+region = Rect2(3328, 256, 256, 256)
 
 [resource]
-script = ExtResource("1_bwf3d")
+script = ExtResource("1_yui3g")
 name = "cookie_dough"
 display_name = "cookie dough"
 storage_type = 1
 categories = Array[int]([0])
 cost_tier = 2
 groups = PackedStringArray()
-texture = SubResource("AtlasTexture_ocsqs")
+texture = SubResource("AtlasTexture_om1k4")

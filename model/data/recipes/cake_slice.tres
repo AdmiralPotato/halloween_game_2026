@@ -4,13 +4,13 @@
 [ext_resource type="Resource" uid="uid://cbhkv0c47w56h" path="res://model/data/items/cake_slice.tres" id="2_30lrl"]
 [ext_resource type="Script" uid="uid://b5mlkyd7jcal7" path="res://model/recipe.gd" id="3_i82xv"]
 
-[sub_resource type="Resource" id="Resource_8dd5h"]
+[sub_resource type="Resource" id="Resource_3usvr"]
 script = ExtResource("1_8dd5h")
 item = ExtResource("2_30lrl")
 
 [resource]
 script = ExtResource("3_i82xv")
 name = "cake slice"
-output = SubResource("Resource_8dd5h")
+output = SubResource("Resource_3usvr")
 ingredients = PackedStringArray("cake")
 permitted_modifiers = PackedStringArray()

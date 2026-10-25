@@ -15,7 +15,7 @@ func get_item() -> ItemNode:
 	if $Item.get_child_count() > 0:
 		return $Item.get_child(0)
 	return null
-	
+
 func set_item(it: ItemNode):
 	while $Item.get_child_count() > 0:
 		$Item.remove_child($Item.get_child(0))
@@ -31,22 +31,22 @@ func _ready() -> void:
 	if initial_stack:
 		item = ItemNode.make_node(initial_stack)
 
-func accept_item(item: ItemNode) -> ItemNode:
-	if item == self.item:
-		push_error("Woah! Accepted item aliased with current item, bailing out!")
-		return item
-	if item.stack and self.item and self.item.stack:
+func accept_item(_item: ItemNode) -> ItemNode:
+	if _item == self.item:
+		push_error("Woah! Accepted _item aliased with current _item, bailing out!")
+		return _item
+	if _item.stack and self.item and self.item.stack:
 		# Try stacking first
-		var res := self.item.stack.accept(item.stack)
-		item.stack = res.rest
+		var res := self.item.stack.accept(_item.stack)
+		_item.stack = res.rest
 		if res.success:
 			# Some items were accepted; end the interaction now rather than swapping
-			return item if item.stack else null
-	
+			return _item if _item.stack else null
+
 	var old_item := self.item
-	self.item = item
+	self.item = _item
 	return old_item
-	
+
 func provide_item() -> ItemNode:
 	var ret := item
 	if ret:

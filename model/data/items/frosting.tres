@@ -1,12 +1,41 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://dtpa5786bonsp"]
 
-[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_vtt3h"]
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_qx4ld"]
+[ext_resource type="Script" uid="uid://bammp41ppb2u8" path="res://model/item_info_texture_layer.gd" id="2_28kgc"]
+[ext_resource type="Texture2D" uid="uid://qnmj275es5oq" path="res://assets/TILES-frosting.png" id="3_28kgc"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vtt3h"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_28kgc"]
 size = Vector2(256, 256)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vy08t"]
+atlas = ExtResource("3_28kgc")
+region = Rect2(3328, 256, 256, 256)
+
+[sub_resource type="Resource" id="Resource_vqpea"]
+script = ExtResource("2_28kgc")
+name = "frosting"
+texture = SubResource("AtlasTexture_vy08t")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7r87u"]
+atlas = ExtResource("3_28kgc")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="Resource" id="Resource_vbsqn"]
+script = ExtResource("2_28kgc")
+name = "jar"
+texture = SubResource("AtlasTexture_7r87u")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bof8t"]
+atlas = ExtResource("3_28kgc")
+region = Rect2(3328, 512, 256, 256)
+
+[sub_resource type="Resource" id="Resource_c7ug2"]
+script = ExtResource("2_28kgc")
+name = "label"
+texture = SubResource("AtlasTexture_bof8t")
+
 [resource]
-script = ExtResource("1_vtt3h")
+script = ExtResource("1_qx4ld")
 name = "frosting"
 display_name = "frosting"
 storage_type = 4
@@ -14,4 +43,5 @@ categories = Array[int]([4])
 cost_tier = 2
 max_stack_size = 4
 groups = PackedStringArray()
-texture = SubResource("PlaceholderTexture2D_vtt3h")
+texture_layers = Array[ExtResource("2_28kgc")]([SubResource("Resource_vqpea"), SubResource("Resource_vbsqn"), SubResource("Resource_c7ug2")])
+texture = SubResource("PlaceholderTexture2D_28kgc")

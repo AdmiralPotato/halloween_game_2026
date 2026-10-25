@@ -1,14 +1,15 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://2x1mwsk5krkr"]
 
-[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_u234x"]
-[ext_resource type="Texture2D" uid="uid://4logsfuyvxlk" path="res://assets/TILES-other.png" id="2_i23vt"]
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_iu22j"]
+[ext_resource type="Texture2D" uid="uid://4logsfuyvxlk" path="res://assets/TILES-other.png" id="2_f6c70"]
+[ext_resource type="Script" uid="uid://bammp41ppb2u8" path="res://model/item_info_texture_layer.gd" id="3_48m5n"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i23vt"]
-atlas = ExtResource("2_i23vt")
+[sub_resource type="AtlasTexture" id="AtlasTexture_tm86o"]
+atlas = ExtResource("2_f6c70")
 region = Rect2(0, 1024, 256, 256)
 
 [resource]
-script = ExtResource("1_u234x")
+script = ExtResource("1_iu22j")
 name = "cherry_flavoring"
 display_name = "cherry flavoring"
 storage_type = 4
@@ -22,4 +23,4 @@ attributes = Dictionary[int, int]({
 16: 2
 })
 groups = PackedStringArray("flavoring")
-texture = SubResource("AtlasTexture_i23vt")
+texture = SubResource("AtlasTexture_tm86o")

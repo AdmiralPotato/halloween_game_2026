@@ -1,14 +1,15 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://c8p0fkwhb6jme"]
 
-[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_t23em"]
-[ext_resource type="Texture2D" uid="uid://4logsfuyvxlk" path="res://assets/TILES-other.png" id="2_qwec8"]
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_suwk5"]
+[ext_resource type="Texture2D" uid="uid://4logsfuyvxlk" path="res://assets/TILES-other.png" id="2_613c4"]
+[ext_resource type="Script" uid="uid://bammp41ppb2u8" path="res://model/item_info_texture_layer.gd" id="3_735b1"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qwec8"]
-atlas = ExtResource("2_qwec8")
+[sub_resource type="AtlasTexture" id="AtlasTexture_771bg"]
+atlas = ExtResource("2_613c4")
 region = Rect2(0, 256, 256, 256)
 
 [resource]
-script = ExtResource("1_t23em")
+script = ExtResource("1_suwk5")
 name = "blue_candied_flowers"
 display_name = "blue_candied_flowers"
 storage_type = 4
@@ -20,4 +21,4 @@ attributes = Dictionary[int, int]({
 12: 1
 })
 groups = PackedStringArray("candied_flowers")
-texture = SubResource("AtlasTexture_qwec8")
+texture = SubResource("AtlasTexture_771bg")

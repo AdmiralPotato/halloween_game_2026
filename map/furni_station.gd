@@ -1,12 +1,13 @@
+@tool
 class_name FurniStation
 extends FurniCountertop
 
 @export var location: Recipe.Location = Recipe.Location.MIXER
 
-func interact(player: Node):
+func interact(_player: Node):
 	if not item:
 		return false
-		
+
 	var my_recipes = Global.registry.recipes.values().filter(
 			func(r: Recipe): return r.location == location
 	)

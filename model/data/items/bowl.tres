@@ -1,18 +1,19 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://b34kf80gy2er3"]
 
-[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_hsiut"]
-[ext_resource type="Texture2D" uid="uid://c5smb87pld4k1" path="res://assets/TILES-batter.png" id="2_hsiut"]
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_6ii8o"]
+[ext_resource type="Texture2D" uid="uid://c5smb87pld4k1" path="res://assets/TILES-batter.png" id="2_1vpip"]
+[ext_resource type="Script" uid="uid://bammp41ppb2u8" path="res://model/item_info_texture_layer.gd" id="3_qc0jg"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6ii8o"]
-atlas = ExtResource("2_hsiut")
+[sub_resource type="AtlasTexture" id="AtlasTexture_65nlu"]
+atlas = ExtResource("2_1vpip")
 region = Rect2(256, 0, 256, 256)
 
 [resource]
-script = ExtResource("1_hsiut")
+script = ExtResource("1_6ii8o")
 name = "bowl"
 display_name = "bowl"
 storage_type = 3
 categories = Array[int]([6])
 cost_tier = 1
 groups = PackedStringArray()
-texture = SubResource("AtlasTexture_6ii8o")
+texture = SubResource("AtlasTexture_65nlu")

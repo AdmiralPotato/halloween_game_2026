@@ -1,14 +1,15 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://cwvimk8q06x3u"]
 
-[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_hjll3"]
-[ext_resource type="Texture2D" uid="uid://4logsfuyvxlk" path="res://assets/TILES-other.png" id="2_74gmt"]
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_wbwbj"]
+[ext_resource type="Texture2D" uid="uid://4logsfuyvxlk" path="res://assets/TILES-other.png" id="2_i1k14"]
+[ext_resource type="Script" uid="uid://bammp41ppb2u8" path="res://model/item_info_texture_layer.gd" id="3_klafi"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_74gmt"]
-atlas = ExtResource("2_74gmt")
+[sub_resource type="AtlasTexture" id="AtlasTexture_331k4"]
+atlas = ExtResource("2_i1k14")
 region = Rect2(1280, 0, 256, 256)
 
 [resource]
-script = ExtResource("1_hjll3")
+script = ExtResource("1_wbwbj")
 name = "chocolate_bar"
 display_name = "chocolate bar"
 storage_type = 3
@@ -19,4 +20,4 @@ attributes = Dictionary[int, int]({
 15: 1
 })
 groups = PackedStringArray()
-texture = SubResource("AtlasTexture_74gmt")
+texture = SubResource("AtlasTexture_331k4")
