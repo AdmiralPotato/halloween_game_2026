@@ -9,11 +9,11 @@ size = Vector2(256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vy08t"]
 atlas = ExtResource("3_28kgc")
-region = Rect2(3328, 256, 256, 256)
+region = Rect2(0, 0, 256, 256)
 
 [sub_resource type="Resource" id="Resource_vqpea"]
 script = ExtResource("2_28kgc")
-name = "frosting"
+name = "tintable"
 texture = SubResource("AtlasTexture_vy08t")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7r87u"]

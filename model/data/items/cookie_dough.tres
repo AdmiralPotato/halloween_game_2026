@@ -3,10 +3,37 @@
 [ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_yui3g"]
 [ext_resource type="Texture2D" uid="uid://b500srptuba7v" path="res://assets/TILES-dough.png" id="2_llkod"]
 [ext_resource type="Script" uid="uid://bammp41ppb2u8" path="res://model/item_info_texture_layer.gd" id="3_aso83"]
+[ext_resource type="Texture2D" uid="uid://qnmj275es5oq" path="res://assets/TILES-frosting.png" id="4_llkod"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_om1k4"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_llkod"]
+size = Vector2(256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aso83"]
 atlas = ExtResource("2_llkod")
-region = Rect2(3328, 256, 256, 256)
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="Resource" id="Resource_om1k4"]
+script = ExtResource("3_aso83")
+name = "tintable"
+texture = SubResource("AtlasTexture_aso83")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71qq8"]
+atlas = ExtResource("2_llkod")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="Resource" id="Resource_xselp"]
+script = ExtResource("3_aso83")
+name = "bowl"
+texture = SubResource("AtlasTexture_71qq8")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6asr"]
+atlas = ExtResource("4_llkod")
+region = Rect2(3328, 512, 256, 256)
+
+[sub_resource type="Resource" id="Resource_6eud7"]
+script = ExtResource("3_aso83")
+name = "label"
+texture = SubResource("AtlasTexture_w6asr")
 
 [resource]
 script = ExtResource("1_yui3g")
@@ -16,4 +43,5 @@ storage_type = 1
 categories = Array[int]([0])
 cost_tier = 2
 groups = PackedStringArray()
-texture = SubResource("AtlasTexture_om1k4")
+texture_layers = Array[ExtResource("3_aso83")]([SubResource("Resource_om1k4"), SubResource("Resource_xselp"), SubResource("Resource_6eud7")])
+texture = SubResource("PlaceholderTexture2D_llkod")

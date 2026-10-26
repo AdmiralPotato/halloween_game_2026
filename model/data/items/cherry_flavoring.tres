@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://4logsfuyvxlk" path="res://assets/TILES-other.png" id="2_f6c70"]
 [ext_resource type="Script" uid="uid://bammp41ppb2u8" path="res://model/item_info_texture_layer.gd" id="3_48m5n"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tm86o"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_iu22j"]
 atlas = ExtResource("2_f6c70")
 region = Rect2(0, 1024, 256, 256)
 
@@ -23,4 +23,4 @@ attributes = Dictionary[int, int]({
 16: 2
 })
 groups = PackedStringArray("flavoring")
-texture = SubResource("AtlasTexture_tm86o")
+texture = SubResource("AtlasTexture_iu22j")

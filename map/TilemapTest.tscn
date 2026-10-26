@@ -13,10 +13,15 @@
 [ext_resource type="Texture2D" uid="uid://b500srptuba7v" path="res://assets/TILES-dough.png" id="8_2fvxq"]
 [ext_resource type="PackedScene" uid="uid://5jo3bft5wl1u" path="res://map/FurniMixer.tscn" id="8_nabl1"]
 [ext_resource type="PackedScene" uid="uid://cl7xh1lhn0u0b" path="res://map/FurniCountertop.tscn" id="9_2f20c"]
+[ext_resource type="Texture2D" uid="uid://qnmj275es5oq" path="res://assets/TILES-frosting.png" id="11_15bd0"]
 [ext_resource type="PackedScene" uid="uid://do30vdu0sngt5" path="res://map/FurniOven.tscn" id="11_nabl1"]
 [ext_resource type="PackedScene" uid="uid://dfjdkdlvlfocq" path="res://map/FurniCuttingboard.tscn" id="14_p5gm8"]
 [ext_resource type="Resource" uid="uid://dtpa5786bonsp" path="res://model/data/items/frosting.tres" id="15_tdsbi"]
+[ext_resource type="Resource" uid="uid://0xne0k7mcykn" path="res://model/data/items/blueberry_flavoring.tres" id="17_olchu"]
+[ext_resource type="Resource" uid="uid://vmrcp80igtca" path="res://model/data/items/cookie_dough.tres" id="18_sfvuk"]
 [ext_resource type="PackedScene" uid="uid://d1tp40f6bgvc6" path="res://map/FurniTrash.tscn" id="18_tdsbi"]
+[ext_resource type="Resource" uid="uid://2x1mwsk5krkr" path="res://model/data/items/cherry_flavoring.tres" id="19_0d7dl"]
+[ext_resource type="Resource" uid="uid://c21pmt4yfpddq" path="res://model/data/items/lime_flavoring.tres" id="20_0d7dl"]
 [ext_resource type="Texture2D" uid="uid://tdosspgn5nwg" path="res://assets/candy.png" id="23_0d7dl"]
 [ext_resource type="Script" uid="uid://bxwh47wigsd11" path="res://map/gold.gd" id="24_0d7dl"]
 
@@ -168,6 +173,48 @@ script = ExtResource("4_qtmpa")
 item = SubResource("Resource_tnmf5")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_28kgc"]
+size = Vector2(256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vy08t"]
+atlas = ExtResource("11_15bd0")
+region = Rect2(3328, 256, 256, 256)
+
+[sub_resource type="Resource" id="Resource_vqpea"]
+script = ExtResource("7_15bd0")
+name = "frosting"
+texture = SubResource("AtlasTexture_vy08t")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7r87u"]
+atlas = ExtResource("11_15bd0")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="Resource" id="Resource_vbsqn"]
+script = ExtResource("7_15bd0")
+name = "jar"
+texture = SubResource("AtlasTexture_7r87u")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bof8t"]
+atlas = ExtResource("11_15bd0")
+region = Rect2(3328, 512, 256, 256)
+
+[sub_resource type="Resource" id="Resource_c7ug2"]
+script = ExtResource("7_15bd0")
+name = "label"
+texture = SubResource("AtlasTexture_bof8t")
+
+[sub_resource type="Resource" id="Resource_vkwjd"]
+script = ExtResource("5_vwyy3")
+name = "frosting"
+display_name = "frosting"
+storage_type = 4
+categories = Array[int]([4])
+cost_tier = 2
+max_stack_size = 4
+groups = PackedStringArray()
+texture_layers = Array[ExtResource("7_15bd0")]([SubResource("Resource_vqpea"), SubResource("Resource_vbsqn"), SubResource("Resource_c7ug2")])
+texture = SubResource("PlaceholderTexture2D_28kgc")
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_hre5x"]
 atlas = ExtResource("6_b8euk")
 region = Rect2(768, 1024, 256, 256)
@@ -195,7 +242,7 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_0d7dl"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("15_tdsbi")
+item = SubResource("Resource_vkwjd")
 count = 2
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_5c0gd")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
@@ -246,95 +293,188 @@ script = ExtResource("4_qtmpa")
 item = SubResource("Resource_8aiqj")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4kjg7"]
-atlas = ExtResource("6_b8euk")
-region = Rect2(2304, 1024, 256, 256)
-
-[sub_resource type="Resource" id="Resource_myeuv"]
-script = ExtResource("5_vwyy3")
-name = "blueberry_flavoring"
-display_name = "blueberry flavoring"
-storage_type = 4
-categories = Array[int]([1])
-cost_tier = 4
-max_stack_size = 0
-attributes = Dictionary[int, int]({
-0: -1,
-6: 1,
-16: 2
-})
-groups = PackedStringArray("flavoring")
-texture = SubResource("AtlasTexture_4kjg7")
-
 [sub_resource type="Resource" id="Resource_abky3"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_myeuv")
+item = ExtResource("17_olchu")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_nadkd"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("15_tdsbi")
-count = 2
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_abky3")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_r177p"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_myeuv")
+item = ExtResource("17_olchu")
 count = 2
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_p1ie5"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("15_tdsbi")
-count = 2
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_r177p")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_0tecm"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_myeuv")
+item = ExtResource("17_olchu")
 count = 3
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_b2em1"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("15_tdsbi")
-count = 2
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_0tecm")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_evb3a"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_myeuv")
+item = ExtResource("17_olchu")
 count = 4
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_r47yw"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("15_tdsbi")
-count = 2
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_evb3a")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_jqjf8"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_myeuv")
+item = ExtResource("17_olchu")
 count = 5
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_wru5m"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("15_tdsbi")
-count = 2
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_jqjf8")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
+[sub_resource type="Resource" id="Resource_3o4ji"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("19_0d7dl")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_p33bg"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("18_sfvuk")
+modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_3o4ji")])
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_myeuv"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("19_0d7dl")
+count = 2
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_tpfgo"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("18_sfvuk")
+modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_myeuv")])
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_rnlcp"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("19_0d7dl")
+count = 3
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_4jjfc"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("18_sfvuk")
+modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_rnlcp")])
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_85464"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("19_0d7dl")
+count = 4
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_0bjib"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("18_sfvuk")
+modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_85464")])
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_vjff0"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("19_0d7dl")
+count = 5
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_288ad"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("18_sfvuk")
+modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_vjff0")])
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_tyky6"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("20_0d7dl")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_cfenv"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("18_sfvuk")
+modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_tyky6")])
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_kpsrv"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("20_0d7dl")
+count = 2
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_oqusu"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("18_sfvuk")
+modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_kpsrv")])
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_846fc"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("20_0d7dl")
+count = 3
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_2x7cx"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("18_sfvuk")
+modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_846fc")])
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_4ffdg"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("20_0d7dl")
+count = 4
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_rsi80"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("18_sfvuk")
+modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_4ffdg")])
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_jy8v6"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("20_0d7dl")
+count = 5
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_im7sk"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("18_sfvuk")
+modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_jy8v6")])
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_el5rg"]
-size = Vector3(8, 1, 15)
+size = Vector3(11, 1, 15)
 
 [sub_resource type="BoxMesh" id="BoxMesh_el5rg"]
-size = Vector3(8, 1, 15)
+size = Vector3(11, 1, 15)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_8t2af"]
 plane = Plane(1, 0, 0, 0)
@@ -365,7 +505,7 @@ region = Rect2(256, 256, 256, 256)
 [node name="TilemapTest" type="Node3D" unique_id=1389805114]
 process_physics_priority = -1
 script = ExtResource("1_0n275")
-number_of_tiles = Vector2i(8, 15)
+number_of_tiles = Vector2i(11, 15)
 
 [node name="Tilemap" type="Node3D" parent="." unique_id=991694847]
 script = ExtResource("2_xtlfy")
@@ -410,8 +550,8 @@ initial_stack = SubResource("Resource_evbxi")
 [node name="Furni1_7" parent="Tilemap" unique_id=94086941 instance=ExtResource("9_2f20c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 7.5)
 
-[node name="Furni7_5" parent="Tilemap" unique_id=2109306680 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 5.5)
+[node name="Furni0_4" parent="Tilemap" unique_id=2109306680 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 4.5)
 initial_stack = SubResource("Resource_robgn")
 
 [node name="Furni6_1" parent="Tilemap" unique_id=1034491232 instance=ExtResource("3_0vrjm")]
@@ -430,28 +570,68 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 3.5)
 [node name="Furni3_6" parent="Tilemap" unique_id=1563951735 instance=ExtResource("8_nabl1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 6.5)
 
-[node name="Furni0_5" parent="Tilemap" unique_id=580082991 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 5.5)
+[node name="Furni7_2" parent="Tilemap" unique_id=580082991 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 2.5)
 initial_stack = SubResource("Resource_nadkd")
 
-[node name="Furni0_6" parent="Tilemap" unique_id=71650266 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 6.5)
+[node name="Furni7_3" parent="Tilemap" unique_id=71650266 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 3.5)
 initial_stack = SubResource("Resource_p1ie5")
 
-[node name="Furni0_7" parent="Tilemap" unique_id=201526846 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 7.5)
+[node name="Furni7_4" parent="Tilemap" unique_id=201526846 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 4.5)
 initial_stack = SubResource("Resource_b2em1")
 
-[node name="Furni0_8" parent="Tilemap" unique_id=1013267244 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 8.5)
+[node name="Furni7_5" parent="Tilemap" unique_id=1013267244 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 5.5)
 initial_stack = SubResource("Resource_r47yw")
 
-[node name="Furni0_9" parent="Tilemap" unique_id=1290863860 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 9.5)
+[node name="Furni7_6" parent="Tilemap" unique_id=1290863860 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 6.5)
 initial_stack = SubResource("Resource_wru5m")
 
+[node name="Furni8_2" parent="Tilemap" unique_id=1037497024 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 2.5)
+initial_stack = SubResource("Resource_p33bg")
+
+[node name="Furni8_3" parent="Tilemap" unique_id=1908588056 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 3.5)
+initial_stack = SubResource("Resource_tpfgo")
+
+[node name="Furni8_4" parent="Tilemap" unique_id=1271117331 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 4.5)
+initial_stack = SubResource("Resource_4jjfc")
+
+[node name="Furni8_5" parent="Tilemap" unique_id=1244904311 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 5.5)
+initial_stack = SubResource("Resource_0bjib")
+
+[node name="Furni8_6" parent="Tilemap" unique_id=760497017 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 6.5)
+initial_stack = SubResource("Resource_288ad")
+
+[node name="Furni9_2" parent="Tilemap" unique_id=971411297 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 2.5)
+initial_stack = SubResource("Resource_cfenv")
+
+[node name="Furni9_3" parent="Tilemap" unique_id=1183721574 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 3.5)
+initial_stack = SubResource("Resource_oqusu")
+
+[node name="Furni9_4" parent="Tilemap" unique_id=1444245761 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 4.5)
+initial_stack = SubResource("Resource_2x7cx")
+
+[node name="Furni9_5" parent="Tilemap" unique_id=785995695 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 5.5)
+initial_stack = SubResource("Resource_rsi80")
+
+[node name="Furni9_6" parent="Tilemap" unique_id=456956654 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 6.5)
+initial_stack = SubResource("Resource_im7sk")
+
 [node name="Floor" type="StaticBody3D" parent="." unique_id=2097173625]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.5, 7.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, -0.5, 7.5)
 
 [node name="FloorBox" type="CollisionShape3D" parent="Floor" unique_id=647389857]
 shape = SubResource("BoxShape3D_el5rg")
@@ -460,25 +640,25 @@ shape = SubResource("BoxShape3D_el5rg")
 mesh = SubResource("BoxMesh_el5rg")
 
 [node name="WallNX" type="CollisionShape3D" parent="Floor" unique_id=2049535826]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.5, -7.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 0.5, -7.5)
 shape = SubResource("WorldBoundaryShape3D_8t2af")
 
 [node name="WallNZ" type="CollisionShape3D" parent="Floor" unique_id=154043353]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.5, -7.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 0.5, -7.5)
 shape = SubResource("WorldBoundaryShape3D_0vrjm")
 
 [node name="WallPX" type="CollisionShape3D" parent="Floor" unique_id=1048482900]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, 7.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0.5, 7.5)
 shape = SubResource("WorldBoundaryShape3D_8g1d1")
 
 [node name="WallPZ" type="CollisionShape3D" parent="Floor" unique_id=331193442]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, 7.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0.5, 7.5)
 shape = SubResource("WorldBoundaryShape3D_a28pv")
 
 [node name="Customers" type="Node3D" parent="." unique_id=1606353682]
 
 [node name="TestPlayer" parent="." unique_id=1707035649 instance=ExtResource("3_8t2af")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8561277, 0, 3.9053597)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5334015, 0, 3.9053597)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1716016636]
 environment = SubResource("Environment_el5rg")

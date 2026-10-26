@@ -2,6 +2,25 @@
 extends BaseMapNode
 class_name ItemNode
 
+enum FlavoringSpriteOffset {
+	CHERRY,
+	RASPBERRY,
+	STRAWBERRY,
+	ORANGE,
+	ALMOND,
+	CARAMEL,
+	LEMON,
+	LIME,
+	MINT,
+	BLUEBERRY,
+	UBE,
+	GRAPE,
+	CHOCOLATE,
+	PLAIN,
+	WHIPPED_CREAM,
+}
+
+
 # Attend the slight circular dependency where we have to refer to the scene to
 # which we are attached as a script; for this reason, don't just preload this.
 const ITEM_RESOURCE := "res://map/ItemNode.tscn"
@@ -91,18 +110,66 @@ func make_procedural_texture(_stack: ItemStack) -> Texture2D:
 		)
 		for layer in _stack.item.texture_layers:
 			print('	layers: ', layer.name)
-			# GODOT BUG: layer.texture can't be used directly in texture.blit_rect
-			var new_texture: ImageTexture = ImageTexture.create_from_image(
-				layer.texture.get_image()
-			)
-			var color = Color.from_hsv(randf(), 0.4, 1, 1.0) if layer.name == "frosting" else Color(1,1,1,1)
-			texture.blit_rect(
-				Rect2i(0, 0, 256, 256),
-				new_texture,
-				color,
-			)
+			if (
+				layer.name == "tintable"
+				and _stack.modifiers
+				and _stack.modifiers.size() > 0
+			):
+				draw_layer_into_texture(texture, layer.texture)
+				for modifier in _stack.modifiers:
+					#print('		modifier: ', modifier.item.name, ' count: ', modifier.count)
+					for pass_index in modifier.count:
+						var modifier_texture = modifier.item.texture
+						draw_layer_into_texture(
+							texture,
+							modifier_texture,
+							BlitMaterial.BlendMode.BLEND_MODE_MUL
+						)
+			elif (
+				layer.name == "label"
+				and _stack.modifiers
+				and _stack.modifiers.size() > 0
+			):
+				var label: String = ""
+				for modifier in _stack.modifiers:
+					label += modifier.item.name.replace('_flavoring', '').to_upper()
+				var labelIndex = FlavoringSpriteOffset.keys().find(label)
+				# note to Admiral: Rect2i and other simple types are pass by value, not reference
+				var region_orig = layer.texture.region as Rect2i
+				var region = layer.texture.region as Rect2i
+				print('	label: ', label, '\n	labelIndex: ', labelIndex)
+				if labelIndex != -1:
+					region.position.x = 256 * labelIndex
+				print('	region: ', layer.texture.region)
+				layer.texture.region = region
+				draw_layer_into_texture(texture, layer.texture)
+				layer.texture.region = region_orig
+			else:
+				draw_layer_into_texture(texture, layer.texture)
 		return texture
 	else:
 		var texture = PlaceholderTexture2D.new()
 		texture.size = Vector2(256, 256)
 		return texture
+
+static func draw_layer_into_texture(
+	destination: DrawableTexture2D,
+	source: Texture2D,
+	blend_mode: BlitMaterial.BlendMode = BlitMaterial.BlendMode.BLEND_MODE_MIX,
+):
+	# GODOT BUG: Texture2D can't be used directly in DrawableTexture2D.blit_rect
+	var source_image = source.get_image()
+	# if you get errors calling source.get_image(), click on the image in fs
+	# view, then look at the "import" tab ABOVE the FileSystem tab and change
+	# mode to "Lossless" and then click "Reimport" at the bottom of the import panel
+	var new_texture: ImageTexture = ImageTexture.create_from_image(source_image)
+	# end bug handling
+	var material = BlitMaterial.new()
+	material.blend_mode = blend_mode
+	destination.blit_rect(
+		Rect2i(0, 0, 256, 256),
+		new_texture,
+		Color(1,1,1,1),
+		0,
+		material,
+	)

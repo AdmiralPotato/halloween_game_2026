@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b500srptuba7v"
-path.s3tc="res://.godot/imported/TILES-dough.png-1c1d5d187fc1bbe04ac3b1052c8872f1.s3tc.ctex"
+path="res://.godot/imported/TILES-dough.png-1c1d5d187fc1bbe04ac3b1052c8872f1.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://assets/TILES-dough.png"
-dest_files=["res://.godot/imported/TILES-dough.png-1c1d5d187fc1bbe04ac3b1052c8872f1.s3tc.ctex"]
+dest_files=["res://.godot/imported/TILES-dough.png-1c1d5d187fc1bbe04ac3b1052c8872f1.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

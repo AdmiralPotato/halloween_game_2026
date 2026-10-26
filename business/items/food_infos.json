@@ -367,8 +367,8 @@
 		"attributes": "from_recipe",
 		"texture_layers": [
 			{
-				"name": "frosting",
-				"texture": "res://assets/TILES-frosting.png@13/14,1/3"
+				"name": "tintable",
+				"texture": "res://assets/TILES-frosting.png@0/14,0/3"
 			},
 			{
 				"name": "jar",
@@ -413,7 +413,20 @@
 		"buy_price": 2,
 		"max_stack_size": 1,
 		"attributes": "from_recipe",
-		"texture": "res://assets/TILES-dough.png@13/14,1/3"
+		"texture_layers": [
+			{
+				"name": "tintable",
+				"texture": "res://assets/TILES-dough.png@0/14,0/3"
+			},
+			{
+				"name": "bowl",
+				"texture": "res://assets/TILES-dough.png@1/14,0/3"
+			},
+			{
+				"name": "label",
+				"texture": "res://assets/TILES-frosting.png@13/14,2/3"
+			}
+		]
 	},
 	"cake_batter": {
 		"human_name": "cake batter",
