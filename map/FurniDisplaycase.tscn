@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dpm21fst06t5p"]
 
 [ext_resource type="Script" uid="uid://bqnusckvvuj8e" path="res://map/furni_displaycase.gd" id="1_qn3iu"]
-[ext_resource type="PackedScene" uid="uid://cqpi8tk8o2j1" path="res://assets/furni_storage_box_0.glb" id="2_robgn"]
+[ext_resource type="MeshLibrary" uid="uid://3ox14caeh7gd" path="res://assets/kitchen_mesh_library.tres" id="3_77t2i"]
 [ext_resource type="FontFile" uid="uid://c6nt4017bdbn6" path="res://assets/sym_font.png" id="3_robgn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p33bg"]
@@ -16,15 +16,26 @@ script = ExtResource("1_qn3iu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("BoxShape3D_p33bg")
 
-[node name="storageBox_v1" parent="StaticBody3D" unique_id=383906389 instance=ExtResource("2_robgn")]
-
 [node name="Cost" type="Label3D" parent="StaticBody3D" unique_id=743044569]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.5)
+transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 0.5, 0.41039687)
 visible = false
 pixel_size = 0.01
 text = "$0"
 font = ExtResource("3_robgn")
+
+[node name="GridMap" type="GridMap" parent="StaticBody3D" unique_id=1307234822]
+mesh_library = ExtResource("3_77t2i")
+cell_size = Vector3(1, 1, 1)
+cell_center_x = false
+cell_center_y = false
+cell_center_z = false
+collision_layer = 0
+collision_mask = 0
+data = {
+"cells": PackedInt32Array(0, 0, 1)
+}
+metadata/_edit_group_ = true
 
 [node name="Item" type="Marker3D" parent="." unique_id=1797907171]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)

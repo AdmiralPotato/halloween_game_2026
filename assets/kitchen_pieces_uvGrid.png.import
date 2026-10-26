@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b763pql6jopus"
-path.s3tc="res://.godot/imported/tile_display_case_1_uvGrid.png-396cd99a940864557116f52a6a68d3f1.s3tc.ctex"
+uid="uid://dwtlb5q7r7kcl"
+path.s3tc="res://.godot/imported/kitchen_pieces_uvGrid.png-e89bf2c6893575a1b3cd25b993530fc1.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://assets/tile_display_case_1_uvGrid.png"
-dest_files=["res://.godot/imported/tile_display_case_1_uvGrid.png-396cd99a940864557116f52a6a68d3f1.s3tc.ctex"]
+source_file="res://assets/kitchen_pieces_uvGrid.png"
+dest_files=["res://.godot/imported/kitchen_pieces_uvGrid.png-e89bf2c6893575a1b3cd25b993530fc1.s3tc.ctex"]
 
 [params]
 

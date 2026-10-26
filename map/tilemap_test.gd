@@ -10,7 +10,6 @@ const FURNI_SOURCE := preload("res://map/FurniSource.tscn")
 const FURNI_STORAGE := preload("res://map/FurniStorage.tscn")
 
 const FURNI_DISPLAYCASE := preload("res://map/FurniDisplaycase.tscn")
-const FURNI_WALL := FURNI_FRIDGE
 const FURNI_REGISTER := preload("res://map/FurniCashregister.tscn")
 
 const FURNI_LIST := [
@@ -43,10 +42,6 @@ func _ready():
 	if Engine.is_editor_hint():
 		return
 
-	for x in range(0, number_of_tiles.x):
-		var FurniPiece = FURNI_LIST[x % FURNI_LIST.size()]
-		$Tilemap.swap_furni(Vector2i(x,0), FurniPiece.instantiate())
-
 	build_storefront()
 	$SpawnCustomer.start(get_customer_spawn_time())
 
@@ -58,14 +53,14 @@ func build_storefront():
 			match number_of_tiles.y - y:
 				4:
 					if number_of_tiles.x - x > 2:
-						tile = FURNI_WALL.instantiate()
+						# "wall"
+						tile = FURNI_LIST[x % FURNI_LIST.size()].instantiate()
 				2:
 					if x == 0:
 						tile = FURNI_REGISTER.instantiate()
 					else:
 						tile = FURNI_DISPLAYCASE.instantiate()
-			if tile:
-				tile.locked = true
+					tile.locked = true
 			$Tilemap.swap_furni(pt, tile)
 
 

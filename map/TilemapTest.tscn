@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://d1tp40f6bgvc6" path="res://map/FurniTrash.tscn" id="18_tdsbi"]
 [ext_resource type="Resource" uid="uid://2x1mwsk5krkr" path="res://model/data/items/cherry_flavoring.tres" id="19_0d7dl"]
 [ext_resource type="Resource" uid="uid://c21pmt4yfpddq" path="res://model/data/items/lime_flavoring.tres" id="20_0d7dl"]
+[ext_resource type="MeshLibrary" uid="uid://3ox14caeh7gd" path="res://assets/kitchen_mesh_library.tres" id="22_abky3"]
 [ext_resource type="Texture2D" uid="uid://tdosspgn5nwg" path="res://assets/candy.png" id="23_0d7dl"]
 [ext_resource type="Script" uid="uid://bxwh47wigsd11" path="res://map/gold.gd" id="24_0d7dl"]
 
@@ -471,10 +472,10 @@ modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_jy8v6")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_el5rg"]
-size = Vector3(11, 1, 15)
+size = Vector3(11, 1, 16)
 
 [sub_resource type="BoxMesh" id="BoxMesh_el5rg"]
-size = Vector3(11, 1, 15)
+size = Vector3(11, 1, 16)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_8t2af"]
 plane = Plane(1, 0, 0, 0)
@@ -505,30 +506,30 @@ region = Rect2(256, 256, 256, 256)
 [node name="TilemapTest" type="Node3D" unique_id=1389805114]
 process_physics_priority = -1
 script = ExtResource("1_0n275")
-number_of_tiles = Vector2i(11, 15)
+number_of_tiles = Vector2i(11, 16)
 
 [node name="Tilemap" type="Node3D" parent="." unique_id=991694847]
 script = ExtResource("2_xtlfy")
 metadata/_custom_type_script = "uid://brhfhuo7lsymv"
 
-[node name="Furni2_2" parent="Tilemap" unique_id=1615491916 instance=ExtResource("3_0vrjm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 2.5)
+[node name="Furni2_1" parent="Tilemap" unique_id=1615491916 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 1.5)
 stack = SubResource("Resource_3qeqy")
 
-[node name="Furni3_2" parent="Tilemap" unique_id=2070057252 instance=ExtResource("3_0vrjm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 2.5)
+[node name="Furni3_1" parent="Tilemap" unique_id=2070057252 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 1.5)
 stack = SubResource("Resource_5qf2s")
 
-[node name="Furni4_2" parent="Tilemap" unique_id=991868078 instance=ExtResource("3_0vrjm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 2.5)
+[node name="Furni4_1" parent="Tilemap" unique_id=991868078 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 1.5)
 stack = SubResource("Resource_8bmqu")
 
-[node name="Furni5_4" parent="Tilemap" unique_id=1421407579 instance=ExtResource("3_0vrjm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 4.5)
+[node name="Furni5_1" parent="Tilemap" unique_id=1421407579 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 1.5)
 stack = SubResource("Resource_sfvuk")
 
-[node name="Furni5_5" parent="Tilemap" unique_id=636731014 instance=ExtResource("3_0vrjm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 5.5)
+[node name="Furni1_1" parent="Tilemap" unique_id=636731014 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 1.5)
 stack = SubResource("Resource_2f20c")
 
 [node name="Furni5_6" parent="Tilemap" unique_id=1478309089 instance=ExtResource("3_0vrjm")]
@@ -550,25 +551,25 @@ initial_stack = SubResource("Resource_evbxi")
 [node name="Furni1_7" parent="Tilemap" unique_id=94086941 instance=ExtResource("9_2f20c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 7.5)
 
-[node name="Furni0_4" parent="Tilemap" unique_id=2109306680 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 4.5)
+[node name="Furni8_7" parent="Tilemap" unique_id=2109306680 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 7.5)
 initial_stack = SubResource("Resource_robgn")
 
 [node name="Furni6_1" parent="Tilemap" unique_id=1034491232 instance=ExtResource("3_0vrjm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 1.5)
 stack = SubResource("Resource_u7cwy")
 
-[node name="Furni3_5" parent="Tilemap" unique_id=1427712813 instance=ExtResource("11_nabl1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 5.5)
+[node name="Furni1_3" parent="Tilemap" unique_id=1427712813 instance=ExtResource("11_nabl1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 3.5)
 
-[node name="Furni3_7" parent="Tilemap" unique_id=1015940051 instance=ExtResource("14_p5gm8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 7.5)
+[node name="Furni3_3" parent="Tilemap" unique_id=1015940051 instance=ExtResource("14_p5gm8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 3.5)
 
-[node name="Furni6_3" parent="Tilemap" unique_id=1498836395 instance=ExtResource("18_tdsbi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 3.5)
+[node name="Furni5_0" parent="Tilemap" unique_id=1498836395 instance=ExtResource("18_tdsbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 0.5)
 
-[node name="Furni3_6" parent="Tilemap" unique_id=1563951735 instance=ExtResource("8_nabl1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 6.5)
+[node name="Furni2_3" parent="Tilemap" unique_id=1563951735 instance=ExtResource("8_nabl1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 3.5)
 
 [node name="Furni7_2" parent="Tilemap" unique_id=580082991 instance=ExtResource("9_2f20c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 2.5)
@@ -631,7 +632,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 6.5)
 initial_stack = SubResource("Resource_im7sk")
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=2097173625]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, -0.5, 7.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, -0.5, 8)
 
 [node name="FloorBox" type="CollisionShape3D" parent="Floor" unique_id=647389857]
 shape = SubResource("BoxShape3D_el5rg")
@@ -640,25 +641,25 @@ shape = SubResource("BoxShape3D_el5rg")
 mesh = SubResource("BoxMesh_el5rg")
 
 [node name="WallNX" type="CollisionShape3D" parent="Floor" unique_id=2049535826]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 0.5, -7.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 0.5, -8)
 shape = SubResource("WorldBoundaryShape3D_8t2af")
 
 [node name="WallNZ" type="CollisionShape3D" parent="Floor" unique_id=154043353]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 0.5, -7.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 0.5, -8)
 shape = SubResource("WorldBoundaryShape3D_0vrjm")
 
 [node name="WallPX" type="CollisionShape3D" parent="Floor" unique_id=1048482900]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0.5, 7.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0.5, 8)
 shape = SubResource("WorldBoundaryShape3D_8g1d1")
 
 [node name="WallPZ" type="CollisionShape3D" parent="Floor" unique_id=331193442]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0.5, 7.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0.5, 8)
 shape = SubResource("WorldBoundaryShape3D_a28pv")
 
 [node name="Customers" type="Node3D" parent="." unique_id=1606353682]
 
 [node name="TestPlayer" parent="." unique_id=1707035649 instance=ExtResource("3_8t2af")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5334015, 0, 3.9053597)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.980051, 0, 3.7065005)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1716016636]
 environment = SubResource("Environment_el5rg")
@@ -683,6 +684,17 @@ light_color = Color(0.12156863, 1, 0.32156864, 1)
 light_energy = 10.0
 spot_range = 20.0
 spot_angle = 2.0
+
+[node name="GridMap" type="GridMap" parent="." unique_id=339802995]
+mesh_library = ExtResource("22_abky3")
+cell_size = Vector3(1, 1, 1)
+cell_center_y = false
+collision_layer = 0
+collision_mask = 0
+data = {
+"cells": PackedInt32Array(65535, 65535, 6, 11, 65535, 1441798, 65535, 15, 1048584, 65535, 16, 1048583, 65535, 14, 1048580, 65535, 13, 1048580, 65535, 12, 1048580, 65535, 11, 1048580, 65535, 10, 1048580, 65535, 9, 1048580, 65535, 8, 1048580, 65535, 7, 1048580, 65535, 6, 1048580, 65535, 5, 1048580, 65535, 4, 1048580, 65535, 3, 1048580, 65535, 2, 1048580, 65535, 1, 1048580, 65535, 0, 1048580, 0, 65535, 4, 1, 65535, 4, 2, 65535, 4, 3, 65535, 4, 4, 65535, 4, 5, 65535, 4, 6, 65535, 4, 7, 65535, 4, 8, 65535, 4, 9, 65535, 4, 10, 65535, 4, 11, 0, 1441796, 11, 1, 1441796, 11, 2, 1441796, 11, 3, 1441796, 11, 4, 1441796, 11, 5, 1441796, 11, 6, 1441796, 11, 7, 1441796, 11, 8, 1441796, 11, 9, 1441796, 11, 10, 1441796, 11, 11, 1441796, 11, 12, 1441796, 11, 13, 1441796, 11, 14, 1441796, 11, 15, 1441799, 11, 16, 1441800, 65535, 17, 5, 11, 17, 1441797, 0, 17, 1441794, 1, 17, 1441794, 2, 17, 1441794, 3, 17, 1441794, 4, 17, 1441794, 5, 17, 1441794, 6, 17, 1441794, 7, 17, 1441794, 8, 17, 1441794, 9, 17, 1441794, 10, 17, 1441794, 0, 15, 1441794, 0, 16, 1441794, 1, 15, 1441794, 1, 16, 1441794, 2, 15, 1441794, 2, 16, 1441794, 3, 15, 1441794, 3, 16, 1441794, 4, 15, 1441794, 4, 16, 1441794, 5, 15, 1441794, 5, 16, 1441794, 6, 15, 1441794, 6, 16, 1441794, 7, 15, 1441794, 7, 16, 1441794, 8, 15, 1441794, 8, 16, 1441794, 9, 15, 1441794, 9, 16, 1441794, 10, 15, 1441794, 10, 16, 1441794, 0, 14, 2, 1, 14, 2, 2, 14, 2, 3, 14, 2, 4, 14, 2, 5, 14, 2, 6, 14, 2, 7, 14, 2, 8, 14, 2, 9, 14, 2, 10, 14, 2, 0, 0, 3, 0, 1, 3, 0, 2, 3, 0, 3, 3, 0, 4, 3, 0, 5, 3, 0, 6, 3, 0, 7, 3, 0, 8, 3, 0, 9, 3, 0, 10, 3, 0, 11, 3, 0, 12, 3, 0, 13, 3, 1, 0, 3, 1, 1, 3, 1, 2, 3, 1, 3, 3, 1, 4, 3, 1, 5, 3, 1, 6, 3, 1, 7, 3, 1, 8, 3, 1, 9, 3, 1, 10, 3, 1, 11, 3, 1, 12, 3, 1, 13, 3, 2, 0, 3, 2, 1, 3, 2, 2, 3, 2, 3, 3, 2, 4, 3, 2, 5, 3, 2, 6, 3, 2, 7, 3, 2, 8, 3, 2, 9, 3, 2, 10, 3, 2, 11, 3, 2, 12, 3, 2, 13, 3, 3, 0, 3, 3, 1, 3, 3, 2, 3, 3, 3, 3, 3, 4, 3, 3, 5, 3, 3, 6, 3, 3, 7, 3, 3, 8, 3, 3, 9, 3, 3, 10, 3, 3, 11, 3, 3, 12, 3, 3, 13, 3, 4, 0, 3, 4, 1, 3, 4, 2, 3, 4, 3, 3, 4, 4, 3, 4, 5, 3, 4, 6, 3, 4, 7, 3, 4, 8, 3, 4, 9, 3, 4, 10, 3, 4, 11, 3, 4, 12, 3, 4, 13, 3, 5, 0, 3, 5, 1, 3, 5, 2, 3, 5, 3, 3, 5, 4, 3, 5, 5, 3, 5, 6, 3, 5, 7, 3, 5, 8, 3, 5, 9, 3, 5, 10, 3, 5, 11, 3, 5, 12, 3, 5, 13, 3, 6, 0, 3, 6, 1, 3, 6, 2, 3, 6, 3, 3, 6, 4, 3, 6, 5, 3, 6, 6, 3, 6, 7, 3, 6, 8, 3, 6, 9, 3, 6, 10, 3, 6, 11, 3, 6, 12, 3, 6, 13, 3, 7, 0, 3, 7, 1, 3, 7, 2, 3, 7, 3, 3, 7, 4, 3, 7, 5, 3, 7, 6, 3, 7, 7, 3, 7, 8, 3, 7, 9, 3, 7, 10, 3, 7, 11, 3, 7, 12, 3, 7, 13, 3, 8, 0, 3, 8, 1, 3, 8, 2, 3, 8, 3, 3, 8, 4, 3, 8, 5, 3, 8, 6, 3, 8, 7, 3, 8, 8, 3, 8, 9, 3, 8, 10, 3, 8, 11, 3, 8, 12, 3, 8, 13, 3, 9, 0, 3, 9, 1, 3, 9, 2, 3, 9, 3, 3, 9, 4, 3, 9, 5, 3, 9, 6, 3, 9, 7, 3, 9, 8, 3, 9, 9, 3, 9, 10, 3, 9, 11, 3, 9, 12, 3, 9, 13, 3, 10, 0, 3, 10, 1, 3, 10, 2, 3, 10, 3, 3, 10, 4, 3, 10, 5, 3, 10, 6, 3, 10, 7, 3, 10, 8, 3, 10, 9, 3, 10, 10, 3, 10, 11, 3, 10, 12, 3, 10, 13, 3)
+}
+metadata/_edit_group_ = true
 
 [node name="DebugPanel" parent="." unique_id=249136689 instance=ExtResource("4_8t2af")]
 
