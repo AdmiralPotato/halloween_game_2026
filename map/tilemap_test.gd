@@ -116,20 +116,6 @@ func update_floor():
 	$GridMap.set_cell_item(Vector3i(x,0,door_y+1), 8, wall_direction_west)
 
 
-func _physics_process(_delta):
-	if Engine.is_editor_hint():
-		return
-	var birb_position: Vector3 = $TestPlayer.position
-	var birb_facing: Vector3 = $TestPlayer.basis.z
-	var work_tile: Vector2i = $Tilemap.find_tile(birb_position, birb_facing, 1.4)
-	$PlayerInteractIndicator.position.x = work_tile.x + 0.5
-	$PlayerInteractIndicator.position.z = work_tile.y + 0.5
-	if $TestPlayer.in_rearrange_mode:
-		$PlayerInteractIndicator.light_color = Color("ddcc31")
-	else:
-		$PlayerInteractIndicator.light_color = Color("1fff52")
-
-
 func _on_spawn_customer_timeout() -> void:
 	var cust: TestCustomer = CUSTOMER.instantiate()
 	$Customers.add_child(cust)

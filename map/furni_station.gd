@@ -4,7 +4,14 @@ extends FurniCountertop
 
 @export var location: Recipe.Location = Recipe.Location.MIXER
 
-func interact(_player: Node):
+func interact(player: Node):
+	if not try_craft():
+		# that won't do
+		player.indicator.light_color = Color.RED
+		var tween := player.create_tween().set_ease(Tween.EASE_OUT)
+		tween.tween_property(player.indicator, ^"light_color", player.indicator_color, 0.2)
+
+func try_craft() -> bool:
 	if not item:
 		return false
 
@@ -28,4 +35,5 @@ func interact(_player: Node):
 				stack = container_stack
 			print("success: made ", stack)
 			item = ItemNode.make_node(stack)
-			return
+			return true
+	return false
