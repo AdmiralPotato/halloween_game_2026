@@ -1,0 +1,5861 @@
+{
+  "cake_batter": {
+    "base": {
+      "root": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f9ebcb"
+          },
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#e0c074"
+          }
+        ]
+      }
+    },
+    "flavoring_modifiers": {
+      "cocoa_powder": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#9e8374"
+          },
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#63453a"
+          }
+        ]
+      },
+      "cherry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c98699"
+          },
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7b394c"
+          }
+        ]
+      },
+      "raspberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3a9c8"
+          },
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#ad497c"
+          }
+        ]
+      },
+      "strawberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#e39fac"
+          },
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c05a65"
+          }
+        ]
+      },
+      "orange_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3c370"
+          },
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b37537"
+          }
+        ]
+      },
+      "almond_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c4b39e"
+          },
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#88734f"
+          }
+        ]
+      },
+      "caramel_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c7a16e"
+          },
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#8d5f2e"
+          }
+        ]
+      },
+      "lemon_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f7ee93"
+          },
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c49d2c"
+          }
+        ]
+      },
+      "lime_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#bedc73"
+          },
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#66893d"
+          }
+        ]
+      },
+      "mint_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b5e0ce"
+          },
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#569577"
+          }
+        ]
+      },
+      "blueberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7aa3c4"
+          },
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#385f95"
+          }
+        ]
+      },
+      "ube_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#a9a4c9"
+          },
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#65639e"
+          }
+        ]
+      },
+      "grape_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b383cd"
+          },
+          {
+            "file": "TILES-cake_batter.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#6b477b"
+          }
+        ]
+      }
+    },
+    "other_modifiers": {
+      "chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake_batter.png",
+        "x": 0,
+        "y": 1
+      },
+      "white_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake_batter.png",
+        "x": 1,
+        "y": 1
+      },
+      "dark_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake_batter.png",
+        "x": 2,
+        "y": 1
+      },
+      "chocolate_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake_batter.png",
+        "x": 3,
+        "y": 1
+      },
+      "white_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake_batter.png",
+        "x": 4,
+        "y": 1
+      },
+      "ball_bearing_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake_batter.png",
+        "x": 5,
+        "y": 1
+      },
+      "rainbow_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake_batter.png",
+        "x": 6,
+        "y": 1
+      }
+    },
+    "other": {
+      "bowl": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake_batter.png",
+        "x": 2,
+        "y": 0
+      }
+    }
+  },
+  "cookie_dough": {
+    "base": {
+      "root": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-dough.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#e2c49c"
+          },
+          {
+            "file": "TILES-dough.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#ad774b"
+          }
+        ]
+      }
+    },
+    "flavoring_modifiers": {
+      "cocoa_powder": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-dough.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#9e8374"
+          },
+          {
+            "file": "TILES-dough.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#63453a"
+          }
+        ]
+      },
+      "cherry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-dough.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c98699"
+          },
+          {
+            "file": "TILES-dough.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7b394c"
+          }
+        ]
+      },
+      "raspberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-dough.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3a9c8"
+          },
+          {
+            "file": "TILES-dough.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#ad497c"
+          }
+        ]
+      },
+      "strawberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-dough.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#e39fac"
+          },
+          {
+            "file": "TILES-dough.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c05a65"
+          }
+        ]
+      },
+      "orange_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-dough.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3c370"
+          },
+          {
+            "file": "TILES-dough.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b37537"
+          }
+        ]
+      },
+      "almond_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-dough.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c4b39e"
+          },
+          {
+            "file": "TILES-dough.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#88734f"
+          }
+        ]
+      },
+      "caramel_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-dough.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c7a16e"
+          },
+          {
+            "file": "TILES-dough.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#8d5f2e"
+          }
+        ]
+      },
+      "lemon_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-dough.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f7ee93"
+          },
+          {
+            "file": "TILES-dough.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c49d2c"
+          }
+        ]
+      },
+      "lime_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-dough.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#bedc73"
+          },
+          {
+            "file": "TILES-dough.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#66893d"
+          }
+        ]
+      },
+      "mint_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-dough.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b5e0ce"
+          },
+          {
+            "file": "TILES-dough.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#569577"
+          }
+        ]
+      },
+      "blueberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-dough.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7aa3c4"
+          },
+          {
+            "file": "TILES-dough.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#385f95"
+          }
+        ]
+      },
+      "ube_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-dough.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#a9a4c9"
+          },
+          {
+            "file": "TILES-dough.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#65639e"
+          }
+        ]
+      },
+      "grape_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-dough.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b383cd"
+          },
+          {
+            "file": "TILES-dough.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#6b477b"
+          }
+        ]
+      }
+    },
+    "other_modifiers": {
+      "chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-dough.png",
+        "x": 0,
+        "y": 1
+      },
+      "white_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-dough.png",
+        "x": 1,
+        "y": 1
+      },
+      "dark_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-dough.png",
+        "x": 2,
+        "y": 1
+      }
+    },
+    "other": {
+      "bowl": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-dough.png",
+        "x": 2,
+        "y": 0
+      }
+    }
+  },
+  "cookie": {
+    "base": {
+      "root": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#e2c49c"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#ad774b"
+          }
+        ]
+      }
+    },
+    "flavoring_modifiers": {
+      "cocoa_powder": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#9e8374"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#63453a"
+          }
+        ]
+      },
+      "cherry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c98699"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7b394c"
+          }
+        ]
+      },
+      "raspberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3a9c8"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#ad497c"
+          }
+        ]
+      },
+      "strawberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#e39fac"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c05a65"
+          }
+        ]
+      },
+      "orange_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3c370"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b37537"
+          }
+        ]
+      },
+      "almond_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c4b39e"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#88734f"
+          }
+        ]
+      },
+      "caramel_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c7a16e"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#8d5f2e"
+          }
+        ]
+      },
+      "lemon_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f7ee93"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c49d2c"
+          }
+        ]
+      },
+      "lime_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#bedc73"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#66893d"
+          }
+        ]
+      },
+      "mint_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b5e0ce"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#569577"
+          }
+        ]
+      },
+      "blueberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7aa3c4"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#385f95"
+          }
+        ]
+      },
+      "ube_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#a9a4c9"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#65639e"
+          }
+        ]
+      },
+      "grape_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b383cd"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#6b477b"
+          }
+        ]
+      }
+    },
+    "other_modifiers": {
+      "chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cookie-baked.png",
+        "x": 7,
+        "y": 1
+      },
+      "white_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cookie-baked.png",
+        "x": 8,
+        "y": 1
+      },
+      "dark_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cookie-baked.png",
+        "x": 9,
+        "y": 1
+      }
+    },
+    "decorations": {
+      "frosting": {
+        "type": "ref",
+        "value": "cookie_frosting"
+      },
+      "whipped_cream": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#eeeff0"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#a0b7ba"
+          }
+        ]
+      }
+    },
+    "doodads": {
+      "chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cookie-baked.png",
+        "x": 0,
+        "y": 1
+      },
+      "white_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cookie-baked.png",
+        "x": 1,
+        "y": 1
+      },
+      "dark_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cookie-baked.png",
+        "x": 2,
+        "y": 1
+      },
+      "chocolate_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cookie-baked.png",
+        "x": 3,
+        "y": 1
+      },
+      "white_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cookie-baked.png",
+        "x": 4,
+        "y": 1
+      },
+      "ball_bearing_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cookie-baked.png",
+        "x": 5,
+        "y": 1
+      },
+      "rainbow_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cookie-baked.png",
+        "x": 6,
+        "y": 1
+      },
+      "candy_corn": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cookie-baked.png",
+        "x": 0,
+        "y": 2
+      },
+      "hard_candy_eyeballs": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cookie-baked.png",
+        "x": 1,
+        "y": 2
+      },
+      "hard_candy_ghosts": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cookie-baked.png",
+        "x": 2,
+        "y": 2
+      },
+      "hard_candy_bats": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cookie-baked.png",
+        "x": 3,
+        "y": 2
+      }
+    }
+  },
+  "cookie_frosting": {
+    "base": {
+      "root": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f7f5f2"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b7ada0"
+          }
+        ]
+      }
+    },
+    "flavoring_modifiers": {
+      "cocoa_powder": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#9e8374"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#63453a"
+          }
+        ]
+      },
+      "cherry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c98699"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7b394c"
+          }
+        ]
+      },
+      "raspberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3a9c8"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#ad497c"
+          }
+        ]
+      },
+      "strawberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#e39fac"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c05a65"
+          }
+        ]
+      },
+      "orange_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3c370"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b37537"
+          }
+        ]
+      },
+      "almond_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c4b39e"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#88734f"
+          }
+        ]
+      },
+      "caramel_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c7a16e"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#8d5f2e"
+          }
+        ]
+      },
+      "lemon_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f7ee93"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c49d2c"
+          }
+        ]
+      },
+      "lime_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#bedc73"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#66893d"
+          }
+        ]
+      },
+      "mint_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b5e0ce"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#569577"
+          }
+        ]
+      },
+      "blueberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7aa3c4"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#385f95"
+          }
+        ]
+      },
+      "ube_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#a9a4c9"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#65639e"
+          }
+        ]
+      },
+      "grape_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b383cd"
+          },
+          {
+            "file": "TILES-cookie-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#6b477b"
+          }
+        ]
+      }
+    }
+  },
+  "cupcake": {
+    "base": {
+      "root": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f9ebcb"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#e0c074"
+          }
+        ]
+      }
+    },
+    "flavoring_modifiers": {
+      "cocoa_powder": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#9e8374"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#63453a"
+          }
+        ]
+      },
+      "cherry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c98699"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7b394c"
+          }
+        ]
+      },
+      "raspberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3a9c8"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#ad497c"
+          }
+        ]
+      },
+      "strawberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#e39fac"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c05a65"
+          }
+        ]
+      },
+      "orange_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3c370"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b37537"
+          }
+        ]
+      },
+      "almond_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c4b39e"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#88734f"
+          }
+        ]
+      },
+      "caramel_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c7a16e"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#8d5f2e"
+          }
+        ]
+      },
+      "lemon_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f7ee93"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c49d2c"
+          }
+        ]
+      },
+      "lime_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#bedc73"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#66893d"
+          }
+        ]
+      },
+      "mint_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b5e0ce"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#569577"
+          }
+        ]
+      },
+      "blueberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7aa3c4"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#385f95"
+          }
+        ]
+      },
+      "ube_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#a9a4c9"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#65639e"
+          }
+        ]
+      },
+      "grape_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b383cd"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#6b477b"
+          }
+        ]
+      }
+    },
+    "other_modifiers": {
+      "chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cupcake-baked.png",
+        "x": 7,
+        "y": 1
+      },
+      "white_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cupcake-baked.png",
+        "x": 8,
+        "y": 1
+      },
+      "dark_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cupcake-baked.png",
+        "x": 9,
+        "y": 1
+      },
+      "chocolate_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cupcake-baked.png",
+        "x": 3,
+        "y": 1
+      },
+      "white_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cupcake-baked.png",
+        "x": 4,
+        "y": 1
+      },
+      "ball_bearing_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cupcake-baked.png",
+        "x": 5,
+        "y": 1
+      },
+      "rainbow_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cupcake-baked.png",
+        "x": 6,
+        "y": 1
+      }
+    },
+    "decorations": {
+      "frosting": {
+        "type": "ref",
+        "value": "cupcake_frosting"
+      },
+      "whipped_cream": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#eeeff0"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#a0b7ba"
+          }
+        ]
+      }
+    },
+    "doodads": {
+      "chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cupcake-baked.png",
+        "x": 0,
+        "y": 1
+      },
+      "white_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cupcake-baked.png",
+        "x": 1,
+        "y": 1
+      },
+      "dark_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cupcake-baked.png",
+        "x": 2,
+        "y": 1
+      },
+      "chocolate_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cupcake-baked.png",
+        "x": 3,
+        "y": 1
+      },
+      "white_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cupcake-baked.png",
+        "x": 4,
+        "y": 1
+      },
+      "ball_bearing_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cupcake-baked.png",
+        "x": 5,
+        "y": 1
+      },
+      "rainbow_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cupcake-baked.png",
+        "x": 6,
+        "y": 1
+      },
+      "candy_corn": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cupcake-baked.png",
+        "x": 0,
+        "y": 2
+      },
+      "hard_candy_eyeballs": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cupcake-baked.png",
+        "x": 1,
+        "y": 2
+      },
+      "hard_candy_ghosts": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cupcake-baked.png",
+        "x": 2,
+        "y": 2
+      },
+      "hard_candy_bats": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cupcake-baked.png",
+        "x": 3,
+        "y": 2
+      }
+    },
+    "liner": {
+      "pale": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#e2e2e2"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#706c62"
+          }
+        ]
+      },
+      "lavender": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#a29ad3"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#5b5779"
+          }
+        ]
+      },
+      "baby_blue": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#9ab6d3"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#576779"
+          }
+        ]
+      },
+      "sky_blue": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#9ad3d3"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#577973"
+          }
+        ]
+      },
+      "sage": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b2cb8d"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#607049"
+          }
+        ]
+      },
+      "lemongrass": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#d4e07b"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#797d50"
+          }
+        ]
+      },
+      "buttercup": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3df7c"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#9a8b49"
+          }
+        ]
+      },
+      "tangerine": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#ecbf7c"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#9c7736"
+          }
+        ]
+      },
+      "salmon": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#d3a99a"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#825444"
+          }
+        ]
+      },
+      "blush": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#d39aac"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#824457"
+          }
+        ]
+      },
+      "brown": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#957d64"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#4e372d"
+          }
+        ]
+      },
+      "metal": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f9f9f9"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#302d26"
+          }
+        ]
+      },
+      "party": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#ffffff"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#8d8778"
+          },
+          {
+            "type": "sprite",
+            "mode": "multiply",
+            "file": "TILES-cupcake-baked.png",
+            "x": 6,
+            "y": 0
+          }
+        ]
+      }
+    }
+  },
+  "cupcake_frosting": {
+    "base": {
+      "root": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f7f5f2"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b7ada0"
+          }
+        ]
+      }
+    },
+    "flavoring_modifiers": {
+      "cocoa_powder": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#9e8374"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#63453a"
+          }
+        ]
+      },
+      "cherry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c98699"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7b394c"
+          }
+        ]
+      },
+      "raspberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3a9c8"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#ad497c"
+          }
+        ]
+      },
+      "strawberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#e39fac"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c05a65"
+          }
+        ]
+      },
+      "orange_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3c370"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b37537"
+          }
+        ]
+      },
+      "almond_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c4b39e"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#88734f"
+          }
+        ]
+      },
+      "caramel_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c7a16e"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#8d5f2e"
+          }
+        ]
+      },
+      "lemon_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f7ee93"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c49d2c"
+          }
+        ]
+      },
+      "lime_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#bedc73"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#66893d"
+          }
+        ]
+      },
+      "mint_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b5e0ce"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#569577"
+          }
+        ]
+      },
+      "blueberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7aa3c4"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#385f95"
+          }
+        ]
+      },
+      "ube_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#a9a4c9"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#65639e"
+          }
+        ]
+      },
+      "grape_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b383cd"
+          },
+          {
+            "file": "TILES-cupcake-baked.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#6b477b"
+          }
+        ]
+      }
+    }
+  },
+  "cake": {
+    "base": {
+      "root": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f9ebcb"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#e0c074"
+          }
+        ]
+      }
+    },
+    "flavoring_modifiers": {
+      "cocoa_powder": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#9e8374"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#63453a"
+          }
+        ]
+      },
+      "cherry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c98699"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7b394c"
+          }
+        ]
+      },
+      "raspberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3a9c8"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#ad497c"
+          }
+        ]
+      },
+      "strawberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#e39fac"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c05a65"
+          }
+        ]
+      },
+      "orange_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3c370"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b37537"
+          }
+        ]
+      },
+      "almond_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c4b39e"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#88734f"
+          }
+        ]
+      },
+      "caramel_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c7a16e"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#8d5f2e"
+          }
+        ]
+      },
+      "lemon_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f7ee93"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c49d2c"
+          }
+        ]
+      },
+      "lime_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#bedc73"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#66893d"
+          }
+        ]
+      },
+      "mint_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b5e0ce"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#569577"
+          }
+        ]
+      },
+      "blueberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7aa3c4"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#385f95"
+          }
+        ]
+      },
+      "ube_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#a9a4c9"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#65639e"
+          }
+        ]
+      },
+      "grape_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b383cd"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#6b477b"
+          }
+        ]
+      }
+    },
+    "other_modifiers": {
+      "chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 0,
+        "y": 1
+      },
+      "white_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 1,
+        "y": 1
+      },
+      "dark_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 2,
+        "y": 1
+      },
+      "chocolate_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 3,
+        "y": 1
+      },
+      "white_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 4,
+        "y": 1
+      },
+      "ball_bearing_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 5,
+        "y": 1
+      },
+      "rainbow_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 6,
+        "y": 1
+      }
+    },
+    "decorations": {
+      "frosting": {
+        "type": "ref",
+        "value": "cake_frosting"
+      },
+      "whipped_cream": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#eeeff0"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#a0b7ba"
+          }
+        ]
+      }
+    },
+    "piping": {
+      "frosting": {
+        "type": "ref",
+        "value": "cake_piping"
+      },
+      "whipped_cream": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#eeeff0"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#a0b7ba"
+          }
+        ]
+      }
+    },
+    "doodads_without_piping": {
+      "chocolate_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 10,
+        "y": 1
+      },
+      "white_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 11,
+        "y": 1
+      },
+      "ball_bearing_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 12,
+        "y": 1
+      },
+      "rainbow_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 13,
+        "y": 1
+      },
+      "candy_corn": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 10,
+        "y": 3
+      },
+      "hard_candy_eyeballs": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 11,
+        "y": 3
+      },
+      "hard_candy_ghosts": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 12,
+        "y": 3
+      },
+      "hard_candy_bats": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 13,
+        "y": 3
+      },
+      "white_candied_flowers": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 0,
+        "y": 3
+      },
+      "red_candied_flowers": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 1,
+        "y": 3
+      },
+      "yellow_candied_flowers": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 2,
+        "y": 3
+      },
+      "blue_candied_flowers": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 3,
+        "y": 3
+      }
+    },
+    "doodads_with_piping": {
+      "chocolate_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 10,
+        "y": 2
+      },
+      "white_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 11,
+        "y": 2
+      },
+      "ball_bearing_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 12,
+        "y": 2
+      },
+      "rainbow_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 13,
+        "y": 2
+      },
+      "candy_corn": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 10,
+        "y": 4
+      },
+      "hard_candy_eyeballs": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 11,
+        "y": 4
+      },
+      "hard_candy_ghosts": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 12,
+        "y": 4
+      },
+      "hard_candy_bats": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 13,
+        "y": 4
+      },
+      "white_candied_flowers": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 0,
+        "y": 3
+      },
+      "red_candied_flowers": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 1,
+        "y": 3
+      },
+      "yellow_candied_flowers": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 2,
+        "y": 3
+      },
+      "blue_candied_flowers": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 3,
+        "y": 3
+      }
+    }
+  },
+  "cake_frosting": {
+    "base": {
+      "root": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f7f5f2"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b7ada0"
+          }
+        ]
+      }
+    },
+    "flavoring_modifiers": {
+      "cocoa_powder": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#9e8374"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#63453a"
+          }
+        ]
+      },
+      "cherry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c98699"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7b394c"
+          }
+        ]
+      },
+      "raspberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3a9c8"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#ad497c"
+          }
+        ]
+      },
+      "strawberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#e39fac"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c05a65"
+          }
+        ]
+      },
+      "orange_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3c370"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b37537"
+          }
+        ]
+      },
+      "almond_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c4b39e"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#88734f"
+          }
+        ]
+      },
+      "caramel_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c7a16e"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#8d5f2e"
+          }
+        ]
+      },
+      "lemon_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f7ee93"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c49d2c"
+          }
+        ]
+      },
+      "lime_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#bedc73"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#66893d"
+          }
+        ]
+      },
+      "mint_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b5e0ce"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#569577"
+          }
+        ]
+      },
+      "blueberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7aa3c4"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#385f95"
+          }
+        ]
+      },
+      "ube_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#a9a4c9"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#65639e"
+          }
+        ]
+      },
+      "grape_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b383cd"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#6b477b"
+          }
+        ]
+      }
+    }
+  },
+  "cake_piping": {
+    "base": {
+      "root": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f7f5f2"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b7ada0"
+          }
+        ]
+      }
+    },
+    "flavoring_modifiers": {
+      "cocoa_powder": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#9e8374"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#63453a"
+          }
+        ]
+      },
+      "cherry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c98699"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7b394c"
+          }
+        ]
+      },
+      "raspberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3a9c8"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#ad497c"
+          }
+        ]
+      },
+      "strawberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#e39fac"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c05a65"
+          }
+        ]
+      },
+      "orange_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3c370"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b37537"
+          }
+        ]
+      },
+      "almond_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c4b39e"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#88734f"
+          }
+        ]
+      },
+      "caramel_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c7a16e"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#8d5f2e"
+          }
+        ]
+      },
+      "lemon_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f7ee93"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c49d2c"
+          }
+        ]
+      },
+      "lime_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#bedc73"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#66893d"
+          }
+        ]
+      },
+      "mint_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b5e0ce"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#569577"
+          }
+        ]
+      },
+      "blueberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7aa3c4"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#385f95"
+          }
+        ]
+      },
+      "ube_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#a9a4c9"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#65639e"
+          }
+        ]
+      },
+      "grape_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b383cd"
+          },
+          {
+            "file": "TILES-cake.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#6b477b"
+          }
+        ]
+      }
+    }
+  },
+  "cake_slice": {
+    "base": {
+      "root": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f9ebcb"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#e0c074"
+          }
+        ]
+      }
+    },
+    "flavoring_modifiers": {
+      "cocoa_powder": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#9e8374"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#63453a"
+          }
+        ]
+      },
+      "cherry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c98699"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7b394c"
+          }
+        ]
+      },
+      "raspberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3a9c8"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#ad497c"
+          }
+        ]
+      },
+      "strawberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#e39fac"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c05a65"
+          }
+        ]
+      },
+      "orange_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3c370"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b37537"
+          }
+        ]
+      },
+      "almond_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c4b39e"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#88734f"
+          }
+        ]
+      },
+      "caramel_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c7a16e"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#8d5f2e"
+          }
+        ]
+      },
+      "lemon_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f7ee93"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c49d2c"
+          }
+        ]
+      },
+      "lime_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#bedc73"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#66893d"
+          }
+        ]
+      },
+      "mint_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b5e0ce"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#569577"
+          }
+        ]
+      },
+      "blueberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7aa3c4"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#385f95"
+          }
+        ]
+      },
+      "ube_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#a9a4c9"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#65639e"
+          }
+        ]
+      },
+      "grape_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b383cd"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#6b477b"
+          }
+        ]
+      }
+    },
+    "other_modifiers": {
+      "chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 0,
+        "y": 1
+      },
+      "white_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 1,
+        "y": 1
+      },
+      "dark_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 2,
+        "y": 1
+      },
+      "chocolate_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 3,
+        "y": 1
+      },
+      "white_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 4,
+        "y": 1
+      },
+      "ball_bearing_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 5,
+        "y": 1
+      },
+      "rainbow_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 6,
+        "y": 1
+      }
+    },
+    "decorations": {
+      "frosting": {
+        "type": "ref",
+        "value": "cake_slice_frosting"
+      },
+      "whipped_cream": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#eeeff0"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#a0b7ba"
+          }
+        ]
+      }
+    },
+    "piping": {
+      "frosting": {
+        "type": "ref",
+        "value": "cake_slice_piping"
+      },
+      "whipped_cream": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#eeeff0"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#a0b7ba"
+          }
+        ]
+      }
+    },
+    "doodads_without_piping": {
+      "chocolate_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 10,
+        "y": 1
+      },
+      "white_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 11,
+        "y": 1
+      },
+      "ball_bearing_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 12,
+        "y": 1
+      },
+      "rainbow_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 13,
+        "y": 1
+      },
+      "candy_corn": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 10,
+        "y": 3
+      },
+      "hard_candy_eyeballs": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 11,
+        "y": 3
+      },
+      "hard_candy_ghosts": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 12,
+        "y": 3
+      },
+      "hard_candy_bats": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 13,
+        "y": 3
+      },
+      "white_candied_flowers": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 0,
+        "y": 3
+      },
+      "red_candied_flowers": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 1,
+        "y": 3
+      },
+      "yellow_candied_flowers": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 2,
+        "y": 3
+      },
+      "blue_candied_flowers": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 3,
+        "y": 3
+      }
+    },
+    "doodads_with_piping": {
+      "chocolate_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 10,
+        "y": 2
+      },
+      "white_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 11,
+        "y": 2
+      },
+      "ball_bearing_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 12,
+        "y": 2
+      },
+      "rainbow_sprinkles": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 13,
+        "y": 2
+      },
+      "candy_corn": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 10,
+        "y": 4
+      },
+      "hard_candy_eyeballs": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 11,
+        "y": 4
+      },
+      "hard_candy_ghosts": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 12,
+        "y": 4
+      },
+      "hard_candy_bats": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 13,
+        "y": 4
+      },
+      "white_candied_flowers": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 0,
+        "y": 3
+      },
+      "red_candied_flowers": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 1,
+        "y": 3
+      },
+      "yellow_candied_flowers": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 2,
+        "y": 3
+      },
+      "blue_candied_flowers": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 3,
+        "y": 3
+      }
+    }
+  },
+  "cake_slice_frosting": {
+    "base": {
+      "root": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f7f5f2"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b7ada0"
+          }
+        ]
+      }
+    },
+    "flavoring_modifiers": {
+      "cocoa_powder": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#9e8374"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#63453a"
+          }
+        ]
+      },
+      "cherry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c98699"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7b394c"
+          }
+        ]
+      },
+      "raspberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3a9c8"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#ad497c"
+          }
+        ]
+      },
+      "strawberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#e39fac"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c05a65"
+          }
+        ]
+      },
+      "orange_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3c370"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b37537"
+          }
+        ]
+      },
+      "almond_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c4b39e"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#88734f"
+          }
+        ]
+      },
+      "caramel_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c7a16e"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#8d5f2e"
+          }
+        ]
+      },
+      "lemon_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f7ee93"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c49d2c"
+          }
+        ]
+      },
+      "lime_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#bedc73"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#66893d"
+          }
+        ]
+      },
+      "mint_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b5e0ce"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#569577"
+          }
+        ]
+      },
+      "blueberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7aa3c4"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#385f95"
+          }
+        ]
+      },
+      "ube_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#a9a4c9"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#65639e"
+          }
+        ]
+      },
+      "grape_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 2,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b383cd"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 3,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#6b477b"
+          }
+        ]
+      }
+    }
+  },
+  "cake_slice_piping": {
+    "base": {
+      "root": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f7f5f2"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b7ada0"
+          }
+        ]
+      }
+    },
+    "flavoring_modifiers": {
+      "cocoa_powder": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#9e8374"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#63453a"
+          }
+        ]
+      },
+      "cherry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c98699"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7b394c"
+          }
+        ]
+      },
+      "raspberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3a9c8"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#ad497c"
+          }
+        ]
+      },
+      "strawberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#e39fac"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c05a65"
+          }
+        ]
+      },
+      "orange_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3c370"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b37537"
+          }
+        ]
+      },
+      "almond_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c4b39e"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#88734f"
+          }
+        ]
+      },
+      "caramel_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c7a16e"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#8d5f2e"
+          }
+        ]
+      },
+      "lemon_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f7ee93"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c49d2c"
+          }
+        ]
+      },
+      "lime_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#bedc73"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#66893d"
+          }
+        ]
+      },
+      "mint_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b5e0ce"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#569577"
+          }
+        ]
+      },
+      "blueberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7aa3c4"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#385f95"
+          }
+        ]
+      },
+      "ube_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#a9a4c9"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#65639e"
+          }
+        ]
+      },
+      "grape_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b383cd"
+          },
+          {
+            "file": "TILES-cake-sice.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#6b477b"
+          }
+        ]
+      }
+    }
+  },
+  "frosting": {
+    "plain": {
+      "root": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f7f5f2"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b7ada0"
+          }
+        ]
+      }
+    },
+    "base": {
+      "root": {
+        "file": "TILES-frosting.png",
+        "x": 0,
+        "y": 0,
+        "type": "sprite",
+        "mode": "mix",
+        "colorize": "#f7f5f2"
+      }
+    },
+    "flavoring_modifiers": {
+      "cocoa_powder": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#9e8374"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#63453a"
+          }
+        ]
+      },
+      "cherry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c98699"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7b394c"
+          }
+        ]
+      },
+      "raspberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3a9c8"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#ad497c"
+          }
+        ]
+      },
+      "strawberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#e39fac"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c05a65"
+          }
+        ]
+      },
+      "orange_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3c370"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b37537"
+          }
+        ]
+      },
+      "almond_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c4b39e"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#88734f"
+          }
+        ]
+      },
+      "caramel_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c7a16e"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#8d5f2e"
+          }
+        ]
+      },
+      "lemon_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f7ee93"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c49d2c"
+          }
+        ]
+      },
+      "lime_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#bedc73"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#66893d"
+          }
+        ]
+      },
+      "mint_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b5e0ce"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#569577"
+          }
+        ]
+      },
+      "blueberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7aa3c4"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#385f95"
+          }
+        ]
+      },
+      "ube_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#a9a4c9"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#65639e"
+          }
+        ]
+      },
+      "grape_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 0,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b383cd"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 1,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#6b477b"
+          }
+        ]
+      }
+    },
+    "jar": {
+      "chocolate_jar": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 1,
+        "y": 0
+      },
+      "no_chocolate_jar": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 2,
+        "y": 0
+      }
+    },
+    "decals": {
+      "cherry_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 0,
+        "y": 1
+      },
+      "raspberry_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 1,
+        "y": 1
+      },
+      "strawberry_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 2,
+        "y": 1
+      },
+      "orange_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 3,
+        "y": 1
+      },
+      "almond_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 4,
+        "y": 1
+      },
+      "caramel_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 5,
+        "y": 1
+      },
+      "lemon_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 6,
+        "y": 1
+      },
+      "lime_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 7,
+        "y": 1
+      },
+      "mint_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 8,
+        "y": 1
+      },
+      "blueberry_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 9,
+        "y": 1
+      },
+      "ube_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 10,
+        "y": 1
+      },
+      "grape_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 11,
+        "y": 1
+      },
+      "cocoa_powder": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 12,
+        "y": 1
+      },
+      "plain": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-sice.png",
+        "x": 13,
+        "y": 1
+      }
+    }
+  },
+  "cream": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "egg": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 1,
+        "y": 0
+      }
+    }
+  },
+  "chocolate_chips": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 2,
+        "y": 0
+      }
+    }
+  },
+  "white_chocolate_chips": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 3,
+        "y": 0
+      }
+    }
+  },
+  "dark_chocolate_chips": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 4,
+        "y": 0
+      }
+    }
+  },
+  "chocolate_bar": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 5,
+        "y": 0
+      }
+    }
+  },
+  "white_chocolate_bar": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 6,
+        "y": 0
+      }
+    }
+  },
+  "dark_chocolate_bar": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 7,
+        "y": 0
+      }
+    }
+  },
+  "chocolate_sprinkles": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 8,
+        "y": 0
+      }
+    }
+  },
+  "white_sprinkles": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 9,
+        "y": 0
+      }
+    }
+  },
+  "ball_bearing_sprinkles": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 10,
+        "y": 0
+      }
+    }
+  },
+  "rainbow_sprinkles": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 11,
+        "y": 0
+      }
+    }
+  },
+  "blue_candied_flowers": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 0,
+        "y": 1
+      }
+    }
+  },
+  "red_candied_flowers": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 1,
+        "y": 1
+      }
+    }
+  },
+  "yellow_candied_flowers": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 2,
+        "y": 1
+      }
+    }
+  },
+  "white_candied_flowers": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 3,
+        "y": 1
+      }
+    }
+  },
+  "hard_candy_bats": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 4,
+        "y": 1
+      }
+    }
+  },
+  "hard_candy_ghosts": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 5,
+        "y": 1
+      }
+    }
+  },
+  "hard_candy_eyeballs": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 6,
+        "y": 1
+      }
+    }
+  },
+  "candy_corn": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 7,
+        "y": 1
+      }
+    }
+  },
+  "pastry_cream": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 0,
+        "y": 2
+      }
+    }
+  },
+  "whipped_cream": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 1,
+        "y": 2
+      }
+    }
+  },
+  "sugar": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 2,
+        "y": 2
+      }
+    }
+  },
+  "cocoa_powder": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 3,
+        "y": 2
+      }
+    }
+  },
+  "flour": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 4,
+        "y": 2
+      }
+    }
+  },
+  "chocolate_bar_naked": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 5,
+        "y": 2
+      }
+    }
+  },
+  "cherry_flavoring": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 0,
+        "y": 4
+      }
+    }
+  },
+  "raspberry_flavoring": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 1,
+        "y": 4
+      }
+    }
+  },
+  "strawberry_flavoring": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 2,
+        "y": 4
+      }
+    }
+  },
+  "orange_flavoring": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 3,
+        "y": 4
+      }
+    }
+  },
+  "almond_flavoring": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 4,
+        "y": 4
+      }
+    }
+  },
+  "caramel_flavoring": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 5,
+        "y": 4
+      }
+    }
+  },
+  "lemon_flavoring": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 6,
+        "y": 4
+      }
+    }
+  },
+  "lime_flavoring": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 7,
+        "y": 4
+      }
+    }
+  },
+  "mint_flavoring": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 8,
+        "y": 4
+      }
+    }
+  },
+  "blueberry_flavoring": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 9,
+        "y": 4
+      }
+    }
+  },
+  "ube_flavoring": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 10,
+        "y": 4
+      }
+    }
+  },
+  "grape_flavoring": {
+    "base": {
+      "root": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-other.png",
+        "x": 11,
+        "y": 4
+      }
+    }
+  }
+}
