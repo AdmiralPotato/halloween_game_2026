@@ -23,13 +23,23 @@ extends RigidBody3D
 	@abstract func tick(delta: float) -> State
 
 
-class Leave extends State:
+class Vanish extends State:
 	func _to_string():
-		return "Leave"
+		return "Vanish"
 
 	func tick(_delta: float) -> State:
 		owner.queue_free()
 		return null
+
+
+class Leave extends State:
+	func _to_string():
+		return "Leave"
+		
+	func tick(_delta: float) -> State:
+		return WanderTo.new(owner, Global.tilemap.get_customer_spawnpoint(),
+				Vanish.new(owner),
+		)
 
 
 class Dwell extends State:
@@ -82,11 +92,11 @@ class WanderTo extends State:
 		return pa.distance_squared_to(pb) <= CLOSE
 
 	func pop_nearby_pts():
-		while path.size() > 0 and is_close(owner.position, owner.to_worldpt(path[0])):
+		while path.size() > 0 and is_close(owner.position, Global.tilemap.to_world_point(path[0])):
 			path.remove_at(0)
 
 	func tick(_delta: float) -> State:
-		if is_close(owner.position, owner.to_worldpt(to)):
+		if is_close(owner.position, Global.tilemap.to_world_point(to)):
 			return next_state
 		if Time.get_ticks_msec() >= next_path_recompute:
 			recompute()
@@ -113,31 +123,32 @@ class BuyFrom extends State:
 		var furni: FurniDisplayCase = Global.tilemap.get_furni(self.tile)
 		if not (furni and furni.item and furni.item.stack):
 			return ChooseState.new(owner)
-		var value := furni.item.stack.sell_price
+		furni.item.store_global_transform()
+		owner.item = furni.item
 		furni.item = null
 		var registers: Array[Vector2i] = \
 			Global.tilemap.get_tiles_of_type(preload("res://map/furni_cashregister.gd"))
 		if registers.is_empty():
-			Global.gold += value
+			Global.gold += owner.item.stack.sell_price
 			return Leave.new(owner)
 		var reg: Vector2i = registers.pick_random()
 		return WanderTo.new(owner, reg,
-				GiveMoney.new(owner, value, reg),
+				GiveMoney.new(owner, reg),
 		)
 
 class GiveMoney extends State:
-	var gold: int
 	var tile: Vector2i
 
-	func _init(_owner: TestCustomer, _gold: int, _tile: Vector2i):
+	func _init(_owner: TestCustomer, _tile: Vector2i):
 		super(_owner)
-		self.gold = _gold
 		self.tile = _tile
 
 	func _to_string():
-		return "GiveMoney:{0}".format([gold])
+		return "GiveMoney:{0}".format([owner.item.stack])
 
 	func tick(_delta: float) -> State:
+		var gold = owner.item.stack.sell_price
+		owner.item = null
 		Global.gold += gold
 		var reg = Global.tilemap.get_furni(tile)
 		if reg and reg is FurniCashRegister:
@@ -166,12 +177,24 @@ class ChooseState extends State:
 var time_in_scene := 0.0
 var target = null  # null | Vector3
 var state: State = ChooseState.new(self)
-
-func to_worldpt(v: Vector2i) -> Vector3:
-	return Vector3(v.x + 0.5, 0, v.y + 0.5)
+var item: ItemNode:
+	get:
+		if $Item.get_child_count() > 0:
+			return $Item.get_child(0)
+		return null
+	set(it):
+		while $Item.get_child_count() > 0:
+			$Item.remove_child($Item.get_child(0))
+		if it:
+			if it.is_inside_tree():
+				it.reparent($Item, false)
+			else:
+				$Item.add_child(it)
+			it.transform = Transform3D()
+			it.animate_to_current_transform()
 
 func set_target_gridpt(v: Vector2i):
-	target = to_worldpt(v)
+	target = Global.tilemap.to_world_point(v)
 
 func get_gridpt(pos = null) -> Vector2i:
 	if pos == null:

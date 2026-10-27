@@ -191,3 +191,6 @@ func pick_open_point() -> Vector2i:
 			.filter(func(pt: Dictionary): return not pt.solid)\
 			.pick_random()\
 			.position
+
+func get_customer_spawnpoint() -> Vector2i:
+	return pathfinder.region.end - Vector2i.ONE

@@ -119,5 +119,7 @@ func update_floor():
 func _on_spawn_customer_timeout() -> void:
 	var cust: TestCustomer = CUSTOMER.instantiate()
 	$Customers.add_child(cust)
-	cust.global_position = Vector3(number_of_tiles.x - 0.5, 0, number_of_tiles.y - 0.5)
+	cust.global_position = $Tilemap.to_world_point(
+			$Tilemap.get_customer_spawnpoint()
+	)
 	$SpawnCustomer.start(get_customer_spawn_time())
