@@ -119,9 +119,13 @@ func matches(inputs: Array[ItemStack], _container: ItemStack = null) -> Dictiona
 					total_mod_depth += stack.total_modifier_depth
 				uniq_mod_depth += ItemStack.get_modifier_cardinality_for_modifiers(remaining).size()
 				total_mod_depth += remaining.size()
+				var new_modifiers: Array[ItemStack] = []
+				for inp in inputs:
+					new_modifiers.append_array(inp.modifiers)
+				new_modifiers.append_array(remaining)
 				return {
 					success = true,
-					modifiers = remaining,
+					modifiers = new_modifiers,
 					ingredients = used_ingredients,
 					container = _container,
 					craft_depth = new_depth,

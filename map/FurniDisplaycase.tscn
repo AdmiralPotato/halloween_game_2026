@@ -33,7 +33,7 @@ cell_center_z = false
 collision_layer = 0
 collision_mask = 0
 data = {
-"cells": PackedInt32Array(0, 0, 1)
+"cells": PackedInt32Array(0, 0, 0)
 }
 metadata/_edit_group_ = true
 

@@ -37,7 +37,7 @@ class Leave extends State:
 		return "Leave"
 		
 	func tick(_delta: float) -> State:
-		return WanderTo.new(owner, Global.tilemap.get_customer_spawnpoint(),
+		return WanderTo.new(owner, Global.tilemap.get_customer_exitpoint(),
 				Vanish.new(owner),
 		)
 

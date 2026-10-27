@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Halloween Game 2026"
-run/main_scene="uid://dvqbw3sbxx3si"
+run/main_scene="uid://cxg5b1w6h1fdj"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="uid://3rmjefbjljr8"
@@ -121,3 +121,4 @@ common/physics_interpolation=true
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.3, 0.3, 0.3, 0)

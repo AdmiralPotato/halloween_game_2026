@@ -16,12 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://qnmj275es5oq" path="res://assets/TILES-frosting.png" id="11_15bd0"]
 [ext_resource type="PackedScene" uid="uid://do30vdu0sngt5" path="res://map/FurniOven.tscn" id="11_nabl1"]
 [ext_resource type="PackedScene" uid="uid://dfjdkdlvlfocq" path="res://map/FurniCuttingboard.tscn" id="14_p5gm8"]
-[ext_resource type="Resource" uid="uid://dtpa5786bonsp" path="res://model/data/items/frosting.tres" id="15_tdsbi"]
 [ext_resource type="Resource" uid="uid://0xne0k7mcykn" path="res://model/data/items/blueberry_flavoring.tres" id="17_olchu"]
 [ext_resource type="Resource" uid="uid://vmrcp80igtca" path="res://model/data/items/cookie_dough.tres" id="18_sfvuk"]
 [ext_resource type="PackedScene" uid="uid://d1tp40f6bgvc6" path="res://map/FurniTrash.tscn" id="18_tdsbi"]
-[ext_resource type="Resource" uid="uid://2x1mwsk5krkr" path="res://model/data/items/cherry_flavoring.tres" id="19_0d7dl"]
-[ext_resource type="Resource" uid="uid://c21pmt4yfpddq" path="res://model/data/items/lime_flavoring.tres" id="20_0d7dl"]
 [ext_resource type="MeshLibrary" uid="uid://3ox14caeh7gd" path="res://assets/kitchen_mesh_library.tres" id="22_abky3"]
 [ext_resource type="Texture2D" uid="uid://tdosspgn5nwg" path="res://assets/candy.png" id="23_0d7dl"]
 [ext_resource type="Script" uid="uid://bxwh47wigsd11" path="res://map/gold.gd" id="24_0d7dl"]
@@ -294,174 +291,319 @@ script = ExtResource("4_qtmpa")
 item = SubResource("Resource_8aiqj")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_tdsbi"]
+size = Vector2(256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olchu"]
+atlas = ExtResource("11_15bd0")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="Resource" id="Resource_d4a68"]
+script = ExtResource("7_15bd0")
+name = "tintable"
+texture = SubResource("AtlasTexture_olchu")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xbvgi"]
+atlas = ExtResource("11_15bd0")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="Resource" id="Resource_fstvk"]
+script = ExtResource("7_15bd0")
+name = "jar"
+texture = SubResource("AtlasTexture_xbvgi")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5y0pr"]
+atlas = ExtResource("11_15bd0")
+region = Rect2(3328, 512, 256, 256)
+
+[sub_resource type="Resource" id="Resource_lhta0"]
+script = ExtResource("7_15bd0")
+name = "label"
+texture = SubResource("AtlasTexture_5y0pr")
+
+[sub_resource type="Resource" id="Resource_1chi6"]
+script = ExtResource("5_vwyy3")
+name = "frosting"
+display_name = "frosting"
+storage_type = 4
+categories = Array[int]([4])
+cost_tier = 2
+max_stack_size = 4
+groups = PackedStringArray()
+texture_layers = Array[ExtResource("7_15bd0")]([SubResource("Resource_d4a68"), SubResource("Resource_fstvk"), SubResource("Resource_lhta0")])
+texture = SubResource("PlaceholderTexture2D_tdsbi")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ppci1"]
+atlas = ExtResource("6_b8euk")
+region = Rect2(2304, 1024, 256, 256)
+
+[sub_resource type="Resource" id="Resource_gmsic"]
+script = ExtResource("5_vwyy3")
+name = "blueberry_flavoring"
+display_name = "blueberry flavoring"
+storage_type = 4
+categories = Array[int]([1])
+cost_tier = 4
+max_stack_size = 0
+attributes = Dictionary[int, int]({
+0: -1,
+6: 1,
+16: 2
+})
+groups = PackedStringArray("flavoring")
+texture = SubResource("AtlasTexture_ppci1")
+
 [sub_resource type="Resource" id="Resource_abky3"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("17_olchu")
+item = SubResource("Resource_gmsic")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_nadkd"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("15_tdsbi")
+item = SubResource("Resource_1chi6")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_abky3")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_r177p"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("17_olchu")
+item = SubResource("Resource_gmsic")
 count = 2
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_p1ie5"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("15_tdsbi")
+item = SubResource("Resource_1chi6")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_r177p")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_0tecm"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("17_olchu")
+item = SubResource("Resource_gmsic")
 count = 3
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_b2em1"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("15_tdsbi")
+item = SubResource("Resource_1chi6")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_0tecm")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_evb3a"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("17_olchu")
+item = SubResource("Resource_gmsic")
 count = 4
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_r47yw"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("15_tdsbi")
+item = SubResource("Resource_1chi6")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_evb3a")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_jqjf8"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("17_olchu")
+item = SubResource("Resource_gmsic")
 count = 5
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_wru5m"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("15_tdsbi")
+item = SubResource("Resource_1chi6")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_jqjf8")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_llkod"]
+size = Vector2(256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aso83"]
+atlas = ExtResource("8_2fvxq")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="Resource" id="Resource_om1k4"]
+script = ExtResource("7_15bd0")
+name = "tintable"
+texture = SubResource("AtlasTexture_aso83")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71qq8"]
+atlas = ExtResource("8_2fvxq")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="Resource" id="Resource_xselp"]
+script = ExtResource("7_15bd0")
+name = "bowl"
+texture = SubResource("AtlasTexture_71qq8")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6asr"]
+atlas = ExtResource("11_15bd0")
+region = Rect2(3328, 512, 256, 256)
+
+[sub_resource type="Resource" id="Resource_6eud7"]
+script = ExtResource("7_15bd0")
+name = "label"
+texture = SubResource("AtlasTexture_w6asr")
+
+[sub_resource type="Resource" id="Resource_6760i"]
+script = ExtResource("5_vwyy3")
+name = "cookie_dough"
+display_name = "cookie dough"
+storage_type = 1
+categories = Array[int]([0])
+cost_tier = 2
+groups = PackedStringArray()
+texture_layers = Array[ExtResource("7_15bd0")]([SubResource("Resource_om1k4"), SubResource("Resource_xselp"), SubResource("Resource_6eud7")])
+texture = SubResource("PlaceholderTexture2D_llkod")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iu22j"]
+atlas = ExtResource("6_b8euk")
+region = Rect2(0, 1024, 256, 256)
+
+[sub_resource type="Resource" id="Resource_ep1r0"]
+script = ExtResource("5_vwyy3")
+name = "cherry_flavoring"
+display_name = "cherry flavoring"
+storage_type = 4
+categories = Array[int]([1])
+cost_tier = 4
+max_stack_size = 0
+attributes = Dictionary[int, int]({
+0: -2,
+1: 1,
+7: 1,
+16: 2
+})
+groups = PackedStringArray("flavoring")
+texture = SubResource("AtlasTexture_iu22j")
+
 [sub_resource type="Resource" id="Resource_3o4ji"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("19_0d7dl")
+item = SubResource("Resource_ep1r0")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_p33bg"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("18_sfvuk")
+item = SubResource("Resource_6760i")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_3o4ji")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_myeuv"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("19_0d7dl")
+item = SubResource("Resource_ep1r0")
 count = 2
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_tpfgo"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("18_sfvuk")
+item = SubResource("Resource_6760i")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_myeuv")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_rnlcp"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("19_0d7dl")
+item = SubResource("Resource_ep1r0")
 count = 3
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_4jjfc"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("18_sfvuk")
+item = SubResource("Resource_6760i")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_rnlcp")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_85464"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("19_0d7dl")
+item = SubResource("Resource_ep1r0")
 count = 4
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_0bjib"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("18_sfvuk")
+item = SubResource("Resource_6760i")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_85464")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_vjff0"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("19_0d7dl")
+item = SubResource("Resource_ep1r0")
 count = 5
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_288ad"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("18_sfvuk")
+item = SubResource("Resource_6760i")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_vjff0")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_75ql6"]
+atlas = ExtResource("6_b8euk")
+region = Rect2(1792, 1024, 256, 256)
+
+[sub_resource type="Resource" id="Resource_7bfm5"]
+script = ExtResource("5_vwyy3")
+name = "lime_flavoring"
+display_name = "lime flavoring"
+storage_type = 4
+categories = Array[int]([1])
+cost_tier = 4
+max_stack_size = 0
+attributes = Dictionary[int, int]({
+4: 1,
+5: 1,
+16: 1,
+20: 2
+})
+groups = PackedStringArray("flavoring")
+texture = SubResource("AtlasTexture_75ql6")
+
 [sub_resource type="Resource" id="Resource_tyky6"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("20_0d7dl")
+item = SubResource("Resource_7bfm5")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_cfenv"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("18_sfvuk")
+item = SubResource("Resource_6760i")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_tyky6")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_kpsrv"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("20_0d7dl")
+item = SubResource("Resource_7bfm5")
 count = 2
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_oqusu"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("18_sfvuk")
+item = SubResource("Resource_6760i")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_kpsrv")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_846fc"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("20_0d7dl")
+item = SubResource("Resource_7bfm5")
 count = 3
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_2x7cx"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("18_sfvuk")
+item = SubResource("Resource_6760i")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_846fc")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_4ffdg"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("20_0d7dl")
+item = SubResource("Resource_7bfm5")
 count = 4
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_rsi80"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("18_sfvuk")
+item = SubResource("Resource_6760i")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_4ffdg")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_jy8v6"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("20_0d7dl")
+item = SubResource("Resource_7bfm5")
 count = 5
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
@@ -469,6 +611,30 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 script = ExtResource("4_qtmpa")
 item = ExtResource("18_sfvuk")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_jy8v6")])
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_xbvgi"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("17_olchu")
+count = 2
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_5y0pr"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("18_sfvuk")
+modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_xbvgi")])
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_71tmt"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("17_olchu")
+count = 2
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_81ea7"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("18_sfvuk")
+modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_71tmt")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_el5rg"]
@@ -627,6 +793,14 @@ initial_stack = SubResource("Resource_rsi80")
 [node name="Furni9_6" parent="Tilemap" unique_id=456956654 instance=ExtResource("9_2f20c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 6.5)
 initial_stack = SubResource("Resource_im7sk")
+
+[node name="Furni8_8" parent="Tilemap" unique_id=1679202074 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 8.5)
+initial_stack = SubResource("Resource_5y0pr")
+
+[node name="Furni9_8" parent="Tilemap" unique_id=1777777127 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 8.5)
+initial_stack = SubResource("Resource_81ea7")
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=2097173625]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -0.5, 7)

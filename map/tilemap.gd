@@ -194,3 +194,6 @@ func pick_open_point() -> Vector2i:
 
 func get_customer_spawnpoint() -> Vector2i:
 	return pathfinder.region.end - Vector2i.ONE
+	
+func get_customer_exitpoint() -> Vector2i:
+	return Vector2i(0, pathfinder.region.end.y - 1)

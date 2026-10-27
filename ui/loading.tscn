@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://cxg5b1w6h1fdj"]
+
+[ext_resource type="Script" uid="uid://dihp0h4jshvvy" path="res://ui/loading.gd" id="1_og8k8"]
+[ext_resource type="Texture2D" uid="uid://3rmjefbjljr8" path="res://assets/icon.png" id="2_og8k8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_og8k8"]
+bg_color = Color(0.11489678, 0.11489683, 0.11489671, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3143161, 0.31431615, 0.31431586, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uku2u"]
+bg_color = Color(0.40262184, 0.6902846, 0.115130596, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a28pv"]
+bg_color = Color(0.44, 0.08799999, 0.08799999, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.8, 0, 0, 1)
+border_blend = true
+
+[node name="Loading" type="CenterContainer" unique_id=1064847712]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_og8k8")
+next_scene = "uid://dvqbw3sbxx3si"
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=584455429]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=2059807170]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=2056220414]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Spinner" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=116116149]
+unique_name_in_owner = true
+custom_maximum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_og8k8")
+
+[node name="ProgressText" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=410353983]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Example Progress Text"
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1513218759]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_og8k8")
+theme_override_styles/fill = SubResource("StyleBoxFlat_uku2u")
+max_value = 1.0
+
+[node name="MessageTimer" type="Timer" parent="." unique_id=1148114934]
+autostart = true
+
+[node name="ErrorDialog" type="AcceptDialog" parent="." unique_id=1088644039]
+oversampling_override = 1.0
+title = "Yikes!"
+position = Vector2i(0, 36)
+size = Vector2i(1327, 158)
+theme_override_styles/panel = SubResource("StyleBoxFlat_a28pv")
+dialog_text = "An error occurred and the game cannot be loaded. Sorry about that! Please report this to your nearest developer. If you had a console/terminal and see game logs, please include those too.
+
+Press OK to exit."
+dialog_autowrap = true
+
+[node name="StartLoad" type="Timer" parent="." unique_id=969285332]
+wait_time = 0.5
+one_shot = true
+autostart = true
+ignore_time_scale = true
+
+[node name="StartSwitch" type="Timer" parent="." unique_id=886549244]
+wait_time = 0.25
+one_shot = true
+ignore_time_scale = true
+
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
+[connection signal="confirmed" from="ErrorDialog" to="." method="_on_error_dialog_confirmed"]
+[connection signal="timeout" from="StartLoad" to="." method="_on_start_load_timeout"]
+[connection signal="timeout" from="StartSwitch" to="." method="_on_start_switch_timeout"]
