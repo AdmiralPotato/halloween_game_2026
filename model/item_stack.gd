@@ -80,11 +80,14 @@ var sell_price: int:
 	get:
 		if not item:
 			return 0
-		return int(ceil(item.sell_price * \
+		var my_price := int(ceil(item.sell_price * \
 				ItemInfo.PER_CRAFT_BASE ** craft_depth * \
 				ItemInfo.PER_UNIQUE_MOD_BASE ** unique_modifier_depth * \
 				ItemInfo.PER_EACH_MOD_BASE ** total_modifier_depth
 		)) * count
+		for stack in contents:
+			my_price += stack.sell_price
+		return my_price
 
 # We need to keep the nilary form of this constructor around to satisfy the
 # ResourceLoader; in that case, it's okay if item is null

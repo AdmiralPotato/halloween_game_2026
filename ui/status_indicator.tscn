@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://c8eyf6e45y65d"]
+
+[ext_resource type="Script" uid="uid://b3oyr8ddth0sq" path="res://ui/status_indicator.gd" id="1_22gwk"]
+
+[sub_resource type="Environment" id="Environment_a28pv"]
+background_mode = 1
+background_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_llkod"]
+bg_color = Color(0.15127608, 0.15127608, 0.15127605, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aso83"]
+bg_color = Color(0.11730001, 0.69, 0.18411507, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_a28pv"]
+viewport_path = NodePath("SubViewport")
+
+[node name="StatusIndicator" type="Node3D" unique_id=1939945637]
+script = ExtResource("1_22gwk")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=793987346]
+disable_3d = true
+own_world_3d = true
+size = Vector2i(96, 24)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport" unique_id=212263604]
+environment = SubResource("Environment_a28pv")
+
+[node name="Progress" type="ProgressBar" parent="SubViewport" unique_id=888835586]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_llkod")
+theme_override_styles/fill = SubResource("StyleBoxFlat_aso83")
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1976129700]
+visible = false
+billboard = 1
+texture = SubResource("ViewportTexture_a28pv")

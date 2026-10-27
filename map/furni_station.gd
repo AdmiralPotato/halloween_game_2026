@@ -4,7 +4,18 @@ extends FurniCountertop
 
 @export var location: Recipe.Location = Recipe.Location.MIXER
 
+var eventual_result: ItemStack = null
+@onready var recipe_timer: Timer = $RecipeTimer
+@onready var status_indicator: HGStatusIndicator = $StatusIndicator
+
+
+func _ready() -> void:
+	recipe_timer.timeout.connect(_on_recipe_timeout)
+
+
 func interact(player: Node):
+	if not recipe_timer.is_stopped():
+		return  # be patient
 	if not try_craft():
 		# that won't do
 		player.indicator.light_color = Color.RED
@@ -33,7 +44,21 @@ func try_craft() -> bool:
 				var container_stack: ItemStack = info.container.duplicate(true)
 				container_stack.contents = [stack]
 				stack = container_stack
-			print("success: made ", stack)
-			item = ItemNode.make_node(stack)
+			print("success: will make ", stack)
+			eventual_result = stack
+			recipe_timer.start(recipe.time)
+			status_indicator.start()
 			return true
 	return false
+
+
+func _process(_delta: float) -> void:
+	if not recipe_timer.is_stopped():
+		status_indicator.set_progress(
+				1.0 - recipe_timer.time_left / max(0.001, recipe_timer.wait_time)
+		)
+
+
+func _on_recipe_timeout():
+	item = ItemNode.make_node(eventual_result)
+	status_indicator.stop()

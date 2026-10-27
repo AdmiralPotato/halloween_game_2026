@@ -16,3 +16,4 @@ output = SubResource("Resource_i0pdh")
 location = 1
 ingredients = PackedStringArray("sugar")
 permitted_modifiers = PackedStringArray("cocoa_powder", "flavoring")
+time = 2.0

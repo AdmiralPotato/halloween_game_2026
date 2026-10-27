@@ -16,3 +16,4 @@ location = 3
 container = "MUFFIN_TIN"
 ingredients = PackedStringArray("cake_batter")
 permitted_modifiers = PackedStringArray("muffin_liners")
+time = 3.0

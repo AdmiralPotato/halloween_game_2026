@@ -25,10 +25,13 @@ enum Location {
 ## Multiplicity is not recommended--one can always add as many of these kinds
 ## of items as desired.
 @export var permitted_modifiers: PackedStringArray = PackedStringArray()
+## How long this recipe takes, in seconds.
+@export var time: float = 1.0
 
 static func from_json(d: Dictionary, lookup_item: Callable) -> Recipe:
 	var rec = Recipe.new()
 	rec.name = d.get("human_name", "")
+	rec.time = float(d.get("time", 0.0))
 	rec.output = ItemStack.new(lookup_item.call(d.get("output")), d.get("quantity", 1))
 	var pan = d.get("pan")
 	if pan and pan != "NONE":
