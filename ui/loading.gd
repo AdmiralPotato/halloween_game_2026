@@ -30,7 +30,7 @@ func _ready() -> void:
 
 func begin_load():
 	started_load = true
-	ResourceLoader.load_threaded_request(next_scene, "PackedScene", true)
+	ResourceLoader.load_threaded_request(next_scene, "PackedScene")
 
 
 func _process(delta: float) -> void:
