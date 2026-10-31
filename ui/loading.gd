@@ -81,10 +81,11 @@ func _on_start_load_timeout() -> void:
 
 func _on_start_switch_timeout() -> void:
 	print('switching to ', next_scene)
-	match get_tree().change_scene_to_packed(
-			ResourceLoader.load_threaded_get(next_scene),
-	):
+	var next: PackedScene = ResourceLoader.load_threaded_get(next_scene)
+	if not next:
+		error_occurred("scene could not be read")
+	match get_tree().change_scene_to_packed(next):
 		OK:
 			pass
 		_:
-			error_occurred()
+			error_occurred("scene could not be switched to")
