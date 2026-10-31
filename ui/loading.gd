@@ -14,6 +14,8 @@ const LOADING_TEXT = [
 @export var spin_speed: float = TAU
 @export_file("*.tscn") var next_scene: String
 
+var started_load := false
+
 var _shuffled_messages: Array[String] = []
 func get_next_loading_message() -> String:
 	if not _shuffled_messages:
@@ -27,6 +29,7 @@ func _ready() -> void:
 
 
 func begin_load():
+	started_load = true
 	ResourceLoader.load_threaded_request(next_scene, "PackedScene", true)
 
 
@@ -35,7 +38,10 @@ func _process(delta: float) -> void:
 	var result := ResourceLoader.load_threaded_get_status(next_scene, progress)
 	match result:
 		ResourceLoader.ThreadLoadStatus.THREAD_LOAD_FAILED:
-			error_occurred()
+			error_occurred("resource load failed")
+		ResourceLoader.ThreadLoadStatus.THREAD_LOAD_INVALID_RESOURCE:
+			if started_load:
+				error_occurred("load resulted in invalid resource")
 		ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
 			%ProgressBar.value = 1.0
 			$MessageTimer.stop()
@@ -47,7 +53,8 @@ func _process(delta: float) -> void:
 			%ProgressBar.value = progress[0]
 
 
-func error_occurred():
+func error_occurred(ctx: String = "unknown error occurred"):
+	$ErrorDialog.dialog_text = $ErrorDialog.dialog_text.format({error = ctx})
 	$ErrorDialog.popup_centered_clamped()
 	$MessageTimer.stop()
 

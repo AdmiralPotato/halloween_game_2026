@@ -86,6 +86,8 @@ size = Vector2i(1327, 158)
 theme_override_styles/panel = SubResource("StyleBoxFlat_a28pv")
 dialog_text = "An error occurred and the game cannot be loaded. Sorry about that! Please report this to your nearest developer. If you had a console/terminal and see game logs, please include those too.
 
+The error description is: {error}.
+
 Press OK to exit."
 dialog_autowrap = true
 
