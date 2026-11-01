@@ -27,7 +27,7 @@
 
 ## `cookie_dough`
 
-1. Always draw: `cookie_doughbase.root`
+1. Always draw: `cookie_dough.base.root`
 2. Draw once per count in modifiers: `cookie_dough.flavoring_modifiers[name]`
 3. Draw once if any quantity is present in modifiers: `cookie_dough.other_modifiers[name]`
 4. Always draw: `cookie_doughother.bowl`

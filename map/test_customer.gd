@@ -191,7 +191,7 @@ func _physics_process(delta: float) -> void:
 		# Loop to give zero-frame delays to things like ChooseState. This somewhat
 		# complicates frame timing decisions for some other things like Dwell, but
 		# not in ways that matter much.
-		print(self, ' enters state ', new_state)
+		# print(self, ' enters state ', new_state)
 		state = new_state
 		new_state = state.tick(delta)
 

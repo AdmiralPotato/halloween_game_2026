@@ -7,8 +7,7 @@
 		"max_stack_size": 1,
 		"attributes": {
 			"pale": 1
-		},
-		"texture": "res://assets/TILES-other.png@4/14,2/5"
+		}
 	},
 	"sugar": {
 		"human_name": "sugar",
@@ -18,8 +17,7 @@
 		"max_stack_size": 1,
 		"attributes": {
 			"sweet": 2
-		},
-		"texture": "res://assets/TILES-other.png@2/14,2/5"
+		}
 	},
 	"egg": {
 		"human_name": "egg",
@@ -27,8 +25,7 @@
 		"categories": [ "BASE" ],
 		"buy_price": 1,
 		"max_stack_size": 12,
-		"attributes": {},
-		"texture": "res://assets/TILES-other.png@1/14,0/5"
+		"attributes": {}
 	},
 	"cream": {
 		"human_name": "cream",
@@ -38,8 +35,7 @@
 		"max_stack_size": 4,
 		"attributes": {
 			"pale": 2
-		},
-		"texture": "res://assets/TILES-other.png@0/14,0/5"
+		}
 	},
 	"cocoa_powder": {
 		"human_name": "cocoa powder",
@@ -51,8 +47,7 @@
 			"chocolatey": 2,
 			"pale": -2,
 			"brown": 2
-		},
-		"texture": "res://assets/TILES-other.png@3/14,2/5"
+		}
 	},
 	"chocolate_bar": {
 		"human_name": "chocolate bar",
@@ -62,8 +57,7 @@
 		"max_stack_size": 12,
 		"attributes": {
 			"chocolatey": 1
-		},
-		"texture": "res://assets/TILES-other.png@5/14,0/5"
+		}
 	},
 	"cherry_flavoring": {
 		"human_name": "cherry flavoring",
@@ -76,8 +70,7 @@
 			"red": 1,
 			"purple": 1,
 			"pale": -2
-		},
-		"texture": "res://assets/TILES-other.png@0/14,4/5"
+		}
 	},
 	"raspberry_flavoring": {
 		"human_name": "raspberry flavoring",
@@ -89,8 +82,7 @@
 			"fruity": 2,
 			"red": 2,
 			"pale": -1
-		},
-		"texture": "res://assets/TILES-other.png@1/14,4/5"
+		}
 	},
 	"strawberry_flavoring": {
 		"human_name": "strawberry flavoring",
@@ -102,8 +94,7 @@
 			"fruity": 2,
 			"red": 1,
 			"pale": -1
-		},
-		"texture": "res://assets/TILES-other.png@2/14,4/5"
+		}
 	},
 	"orange_flavoring": {
 		"human_name": "orange flavoring",
@@ -115,8 +106,7 @@
 			"fruity": 2,
 			"orange": 2,
 			"pale": -1
-		},
-		"texture": "res://assets/TILES-other.png@3/14,4/5"
+		}
 	},
 	"almond_flavoring": {
 		"human_name": "almond flavoring",
@@ -127,8 +117,7 @@
 		"attributes": {
 			"nutty": 1,
 			"brown": 1
-		},
-		"texture": "res://assets/TILES-other.png@4/14,4/5"
+		}
 	},
 	"caramel_flavoring": {
 		"human_name": "caramel flavoring",
@@ -140,8 +129,7 @@
 			"fruity": 2,
 			"red": 2,
 			"pale": -2
-		},
-		"texture": "res://assets/TILES-other.png@5/14,4/5"
+		}
 	},
 	"lemon_flavoring": {
 		"human_name": "lemon flavoring",
@@ -153,8 +141,7 @@
 			"fruity": 1,
 			"tart": 2,
 			"yellow": 2
-		},
-		"texture": "res://assets/TILES-other.png@6/14,4/5"
+		}
 	},
 	"lime_flavoring": {
 		"human_name": "lime flavoring",
@@ -167,8 +154,7 @@
 			"tart": 2,
 			"yellow": 1,
 			"green": 1
-		},
-		"texture": "res://assets/TILES-other.png@7/14,4/5"
+		}
 	},
 	"mint_flavoring": {
 		"human_name": "mint flavoring",
@@ -180,8 +166,7 @@
 			"minty": 3,
 			"green": 1,
 			"pale": -1
-		},
-		"texture": "res://assets/TILES-other.png@8/14,4/5"
+		}
 	},
 	"blueberry_flavoring": {
 		"human_name": "blueberry flavoring",
@@ -193,8 +178,7 @@
 			"fruity": 2,
 			"blue": 1,
 			"pale": -1
-		},
-		"texture": "res://assets/TILES-other.png@9/14,4/5"
+		}
 	},
 	"ube_flavoring": {
 		"human_name": "ube flavoring",
@@ -205,8 +189,7 @@
 		"attributes": {
 			"purple": 1,
 			"pale": -1
-		},
-		"texture": "res://assets/TILES-other.png@10/14,4/5"
+		}
 	},
 	"grape_flavoring": {
 		"human_name": "grape flavoring",
@@ -217,8 +200,7 @@
 		"attributes": {
 			"purple": 2,
 			"pale": -2
-		},
-		"texture": "res://assets/TILES-other.png@11/14,4/5"
+		}
 	},
 	"blue_candied_flowers": {
 		"human_name": "blue_candied_flowers",
@@ -229,8 +211,7 @@
 		"attributes": {
 			"blue": 1,
 			"pop": 1
-		},
-		"texture": "res://assets/TILES-other.png@0/14,1/5"
+		}
 	},
 	"red_candied_flowers": {
 		"human_name": "red_candied_flowers",
@@ -241,8 +222,7 @@
 		"attributes": {
 			"red": 9,
 			"pop": 1
-		},
-		"texture": "res://assets/TILES-other.png@1/14,1/5"
+		}
 	},
 	"yellow_candied_flowers": {
 		"human_name": "yellow_candied_flowers",
@@ -253,8 +233,7 @@
 		"attributes": {
 			"yellow": 1,
 			"pop": 1
-		},
-		"texture": "res://assets/TILES-other.png@2/14,1/5"
+		}
 	},
 	"white_candied_flowers": {
 		"human_name": "white_candied_flowers",
@@ -265,8 +244,7 @@
 		"attributes": {
 			"pale": 2,
 			"pop": 1
-		},
-		"texture": "res://assets/TILES-other.png@3/14,1/5"
+		}
 	},
 	"chocolate_sprinkles": {
 		"human_name": "chocolate sprinkles",
@@ -276,8 +254,7 @@
 		"max_stack_size": "SPRINKLES_STACK_SIZE",
 		"attributes": {
 			"pop": 1
-		},
-		"texture": "res://assets/TILES-other.png@8/14,0/5"
+		}
 	},
 	"white_sprinkles": {
 		"human_name": "white sprinkles",
@@ -288,8 +265,7 @@
 		"attributes": {
 			"pale": 1,
 			"pop": 1
-		},
-		"texture": "res://assets/TILES-other.png@9/14,0/5"
+		}
 	},
 	"ball_bearing_sprinkles": {
 		"human_name": "ball_bearing_sprinkles",
@@ -300,8 +276,7 @@
 		"attributes": {
 			"pale": 1,
 			"pop": 2
-		},
-		"texture": "res://assets/TILES-other.png@10/14,0/5"
+		}
 	},
 	"rainbow_sprinkles": {
 		"human_name": "rainbow sprinkles",
@@ -312,8 +287,7 @@
 		"attributes": {
 			"variegated": 1,
 			"pop": 1
-		},
-		"texture": "res://assets/TILES-other.png@11/14,0/5"
+		}
 	},
 	"hard_candy_bats": {
 		"human_name": "hard_candy_bats",
@@ -323,8 +297,7 @@
 		"max_stack_size": "HARD_CANDY_SHAPES_STACK_SIZE",
 		"attributes": {
 			"pop": 1
-		},
-		"texture": "res://assets/TILES-other.png@4/14,1/5"
+		}
 	},
 	"hard_candy_ghosts": {
 		"human_name": "hard_candy_ghosts",
@@ -334,8 +307,7 @@
 		"max_stack_size": "HARD_CANDY_SHAPES_STACK_SIZE",
 		"attributes": {
 			"pop": 1
-		},
-		"texture": "res://assets/TILES-other.png@5/14,1/5"
+		}
 	},
 	"hard_candy_eyeballs": {
 		"human_name": "hard_candy_eyeballs",
@@ -346,8 +318,7 @@
 		"attributes": {
 			"variegated": 1,
 			"pop": 1
-		},
-		"texture": "res://assets/TILES-other.png@6/14,1/5"
+		}
 	},
 	"chocolate_chips": {
 		"human_name": "chocolate chips",
@@ -355,8 +326,7 @@
 		"categories": ["MODIFIER", "DOODAD"],
 		"buy_price": 3,
 		"max_stack_size": 9,
-		"attributes": "from_recipe",
-		"texture": "res://assets/TILES-other.png@2/14,0/5"
+		"attributes": "from_recipe"
 	},
 	"frosting": {
 		"human_name": "frosting",
@@ -364,21 +334,7 @@
 		"categories": ["DECORATION"],
 		"buy_price": 2,
 		"max_stack_size": 4,
-		"attributes": "from_recipe",
-		"texture_layers": [
-			{
-				"name": "tintable",
-				"texture": "res://assets/TILES-frosting.png@0/14,0/3"
-			},
-			{
-				"name": "jar",
-				"texture": "res://assets/TILES-frosting.png@2/14,0/3"
-			},
-			{
-				"name": "label",
-				"texture": "res://assets/TILES-frosting.png@13/14,2/3"
-			}
-		]
+		"attributes": "from_recipe"
 	},
 	"whipped_cream": {
 		"human_name": "whipped cream",
@@ -386,8 +342,7 @@
 		"categories": ["FILLING", "DECORATION"],
 		"buy_price": 2,
 		"max_stack_size": 1,
-		"attributes": "from_recipe",
-		"texture": "res://assets/TILES-other.png@1/14,2/5"
+		"attributes": "from_recipe"
 	},
 	"pastry_cream": {
 		"human_name": "pastry cream",
@@ -403,8 +358,7 @@
 		"categories": ["FILLING"],
 		"buy_price": 3,
 		"max_stack_size": 1,
-		"attributes": "from_recipe",
-		"texture": "res://assets/TILES-other.png@0/14,2/5"
+		"attributes": "from_recipe"
 	},
 	"cookie_dough": {
 		"human_name": "cookie dough",
@@ -412,21 +366,7 @@
 		"categories": ["BASE"],
 		"buy_price": 2,
 		"max_stack_size": 1,
-		"attributes": "from_recipe",
-		"texture_layers": [
-			{
-				"name": "tintable",
-				"texture": "res://assets/TILES-dough.png@0/14,0/3"
-			},
-			{
-				"name": "bowl",
-				"texture": "res://assets/TILES-dough.png@1/14,0/3"
-			},
-			{
-				"name": "label",
-				"texture": "res://assets/TILES-frosting.png@13/14,2/3"
-			}
-		]
+		"attributes": "from_recipe"
 	},
 	"cake_batter": {
 		"human_name": "cake batter",
@@ -434,8 +374,7 @@
 		"categories": ["BASE"],
 		"buy_price": 2,
 		"max_stack_size": 1,
-		"attributes": "from_recipe",
-		"texture": "res://assets/TILES-batter.png@13/14,0/3"
+		"attributes": "from_recipe"
 	},
 	"cookie": {
 		"human_name": "cookie",
@@ -443,8 +382,7 @@
 		"categories": ["PRODUCT"],
 		"buy_price": null,
 		"max_stack_size": 1,
-		"attributes": "from_recipe",
-		"texture": "res://assets/TILES-cookie-baked.png@13/14,0/3"
+		"attributes": "from_recipe"
 	},
 	"cupcake": {
 		"human_name": "cupcake",
@@ -452,8 +390,7 @@
 		"categories": ["PRODUCT"],
 		"buy_price": null,
 		"max_stack_size": 1,
-		"attributes": "from_recipe",
-		"texture": "res://assets/TILES-cupcake-baked.png@13/14,1/4"
+		"attributes": "from_recipe"
 	},
 	"cake": {
 		"human_name": "cake",
@@ -477,7 +414,6 @@
 		"categories": ["CONTAINER"],
 		"buy_price": 1,
 		"max_stack_size": 1,
-		"attributes": {},
-		"texture": "res://assets/TILES-batter.png@1/14,0/3"
+		"attributes": {}
 	}
 }

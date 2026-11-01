@@ -1,12 +1,6 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://bv8nixos7brsv"]
 
 [ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_eq17j"]
-[ext_resource type="Texture2D" uid="uid://4logsfuyvxlk" path="res://assets/TILES-other.png" id="2_6dais"]
-[ext_resource type="Script" uid="uid://bammp41ppb2u8" path="res://model/item_info_texture_layer.gd" id="3_r33a4"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_16qj7"]
-atlas = ExtResource("2_6dais")
-region = Rect2(2560, 1024, 256, 256)
 
 [resource]
 script = ExtResource("1_eq17j")
@@ -21,4 +15,3 @@ attributes = Dictionary[int, int]({
 7: 1
 })
 groups = PackedStringArray("flavoring")
-texture = SubResource("AtlasTexture_16qj7")
