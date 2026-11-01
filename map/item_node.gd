@@ -36,6 +36,13 @@ static func make_node(_stack: ItemStack) -> ItemNode:
 	node.stack = _stack.duplicate(true)
 	return node
 
+static var recipe_render_data: Dictionary
+
+static func _static_init() -> void:
+	ItemNode.recipe_render_data.assign(JSON.parse_string(
+			FileAccess.get_file_as_string("res://business/items/draw_sprites.json")
+	))
+	#print('ItemNode.recipe_render_data', ItemNode.recipe_render_data)
 
 func _ready():
 	update_stack_rendering()
@@ -66,10 +73,7 @@ func update_stack_rendering():
 		return
 	if stack:
 		if stack.item:
-			if stack.item.texture:
-				$Sprite.texture = stack.item.texture
-			if stack.item.texture_layers:
-				$Sprite.texture = make_procedural_texture(stack)
+			$Sprite.texture = render_recipe(stack)
 			$Count.text = str(stack.count)
 			$Count.visible = stack.count > 1
 		for child in $Contents.get_children():
@@ -92,72 +96,18 @@ func update_stack_rendering():
 				Vector3(cell.x, 0, cell.y) * BASE_SCALE / max(cols - 1, 1),
 			)
 	else:
-		$Sprite.texture = PlaceholderTexture2D.new()
-		($Sprite.texture as PlaceholderTexture2D).size = Vector2(256, 256)
+		$Sprite.texture = make_unimplemented_texture()
 		$Count.text = '0'
 		$Count.visible = true
 
-func make_procedural_texture(_stack: ItemStack) -> Texture2D:
-	if _stack.item.texture_layers:
-		print('Item has texture layers ', _stack.item.name)
-		var texture = DrawableTexture2D.new()
-		texture.setup(
-			256,
-			256,
-			DrawableTexture2D.DRAWABLE_FORMAT_RGBA8,
-			Color(0,0,0,0),
-			false
-		)
-		for layer in _stack.item.texture_layers:
-			print('	layers: ', layer.name)
-			if (
-				layer.name == "tintable"
-				and _stack.modifiers
-				and _stack.modifiers.size() > 0
-			):
-				draw_layer_into_texture(texture, layer.texture)
-				for modifier in _stack.modifiers:
-					#print('		modifier: ', modifier.item.name, ' count: ', modifier.count)
-					for pass_index in modifier.count:
-						var modifier_texture = modifier.item.texture
-						draw_layer_into_texture(
-							texture,
-							modifier_texture,
-							BlitMaterial.BlendMode.BLEND_MODE_MUL
-						)
-			elif (
-				layer.name == "label"
-				and _stack.modifiers
-				and _stack.modifiers.size() > 0
-			):
-				var label: String = ""
-				for modifier in _stack.modifiers:
-					label += modifier.item.name.replace('_flavoring', '').to_upper()
-				var labelIndex = FlavoringSpriteOffset.keys().find(label)
-				# note to Admiral: Rect2i and other simple types are pass by value, not reference
-				var region_orig = layer.texture.region as Rect2i
-				var region = layer.texture.region as Rect2i
-				print('	label: ', label, '\n	labelIndex: ', labelIndex)
-				if labelIndex != -1:
-					region.position.x = 256 * labelIndex
-				print('	region: ', layer.texture.region)
-				layer.texture.region = region
-				draw_layer_into_texture(texture, layer.texture)
-				layer.texture.region = region_orig
-			else:
-				draw_layer_into_texture(texture, layer.texture)
-		return texture
-	else:
-		var texture = PlaceholderTexture2D.new()
-		texture.size = Vector2(256, 256)
-		return texture
 
 static func draw_layer_into_texture(
 	destination: DrawableTexture2D,
 	source: Texture2D,
 	blend_mode: BlitMaterial.BlendMode = BlitMaterial.BlendMode.BLEND_MODE_MIX,
+	color: Color = Color(1,1,1,1)
 ):
-	# GODOT BUG: Texture2D can't be used directly in DrawableTexture2D.blit_rect
+	# GODOT BUG: AtlasTexture2D can't be used directly in DrawableTexture2D.blit_rect
 	var source_image = source.get_image()
 	# if you get errors calling source.get_image(), click on the image in fs
 	# view, then look at the "import" tab ABOVE the FileSystem tab and change
@@ -169,7 +119,168 @@ static func draw_layer_into_texture(
 	destination.blit_rect(
 		Rect2i(0, 0, 256, 256),
 		new_texture,
-		Color(1,1,1,1),
+		color,
 		0,
 		material,
 	)
+
+
+static func render_recipe (_stack: ItemStack) -> Texture2D:
+	var recipe_name = _stack.item.name
+	print('render_recipe: recipe_name: ', recipe_name)
+	if not recipe_name in ItemNode.recipe_render_data:
+		print('render_recipe: NO RENDER DATA FOR RECIPE: ', recipe_name)
+		return make_unimplemented_texture()
+	var recipe: Dictionary = ItemNode.recipe_render_data[recipe_name]
+	if recipe.keys().size() == 1 and recipe.has('base'):
+		return render_recipe_layer(recipe.base.root, _stack)
+	match recipe_name:
+		'frosting': return render_recipe_frosting(recipe, _stack)
+		'cake_batter': return render_recipe_cookie_dough(recipe, _stack)
+		'cookie_dough': return render_recipe_cookie_dough(recipe, _stack)
+		_:
+			print('render_recipe: render not implemented yet: ', recipe_name)
+			return make_unimplemented_texture()
+
+
+static func render_recipe_layer (
+	_layer: Dictionary,
+	_stack: ItemStack,
+	_texture: Texture2D = make_empty_texture(),
+) -> Texture2D:
+	var type: String = _layer.type;
+	#print('render_recipe_layer type: ', type);
+	match type:
+		'sprite': return render_recipe_layer_sprite(_layer, _stack, _texture)
+		'multi': return render_recipe_layer_multi(_layer, _stack, _texture)
+		_:
+			print('render_recipe_layer: Unsupported type: ', type)
+			return make_unimplemented_texture()
+
+
+static func render_recipe_layer_sprite (
+	_layer: Dictionary,
+	_stack: ItemStack,
+	_texture: Texture2D = make_empty_texture(),
+) -> Texture2D:
+	#print('render_recipe_layer_sprite _layer:', _layer)
+	var texture_path = "res://assets/" + _layer.file
+	#print('render_recipe_layer_sprite texture_path:', texture_path)
+	var sourceTexture = make_atlas_texture_at_path_and_coords(texture_path, _layer.x, _layer.y)
+	var blend_mode = get_blend_mode_from_string(_layer.mode)
+	var color = (
+		Color.WHITE
+		if not 'colorize' in _layer else
+		_layer.colorize
+	)
+	draw_layer_into_texture(_texture, sourceTexture, blend_mode, color)
+	return _texture
+
+
+static func get_blend_mode_from_string (mode: String) -> BlitMaterial.BlendMode:
+	return (
+		BlitMaterial.BlendMode.BLEND_MODE_MUL
+		if mode == 'multiply' else
+		BlitMaterial.BlendMode.BLEND_MODE_MIX
+	)
+
+
+static func make_empty_texture(color: Color = Color(0,0,0,0)) -> DrawableTexture2D:
+	var texture = DrawableTexture2D.new()
+	texture.setup(
+		256,
+		256,
+		DrawableTexture2D.DRAWABLE_FORMAT_RGBA8,
+		color,
+		false
+	)
+	return texture
+
+
+static func make_atlas_texture_at_path_and_coords(texture_path: String, x: int, y: int) -> AtlasTexture:
+	var file = load(texture_path) as CompressedTexture2D
+	var sourceTexture = AtlasTexture.new()
+	sourceTexture.region = Rect2i(x * 256, y * 256, 256, 256)
+	sourceTexture.atlas = file
+	return sourceTexture
+
+
+static func make_unimplemented_texture() -> PlaceholderTexture2D:
+	var texture = PlaceholderTexture2D.new()
+	texture.size = Vector2i(256, 256)
+	return texture
+
+
+static func render_recipe_layer_multi (
+	_layer: Dictionary,
+	_stack: ItemStack,
+	_texture: Texture2D = make_empty_texture(),
+) -> Texture2D:
+	if 'sprites' in _layer:
+		for sprite in _layer.sprites:
+			#print('render_recipe_layer_multi sprite: ', sprite)
+			draw_layer_into_texture(
+				_texture,
+				render_recipe_layer(sprite, _stack),
+				get_blend_mode_from_string(sprite.mode),
+			)
+	return _texture
+
+
+static func render_recipe_frosting(_recipe: Dictionary, _stack: ItemStack) -> Texture2D:
+	print('render_recipe_frosting: ', _stack)
+	var frosting_texture = (
+		render_recipe_layer(_recipe.plain.root, _stack)
+		if _stack.modifiers.size() == 0 else
+		render_recipe_layer(_recipe.base.root, _stack)
+	)
+	var has_chocolate = false
+	var label_key = ''
+	for modifier in _stack.modifiers:
+		var flavor_modifier: Dictionary = _recipe.flavoring_modifiers[modifier.item.name]
+		if flavor_modifier:
+			label_key += modifier.item.name
+			if modifier.item.name == 'cocoa_powder':
+				has_chocolate = true
+			for i in modifier.count:
+				draw_layer_into_texture(
+					frosting_texture,
+					render_recipe_layer(flavor_modifier, _stack),
+					get_blend_mode_from_string(flavor_modifier.mode),
+				)
+	var jar_layer: Dictionary = (
+		_recipe.jar.chocolate_jar
+		if has_chocolate else
+		_recipe.jar.no_chocolate_jar
+	)
+	#print('render_recipe_frosting jar_layer: ', jar_layer)
+	render_recipe_layer(jar_layer, _stack, frosting_texture)
+	if not label_key or not label_key in _recipe.decals:
+		label_key = 'plain'
+	var decal_layer: Dictionary = _recipe.decals[label_key]
+	render_recipe_layer(decal_layer, _stack, frosting_texture)
+	return frosting_texture
+
+
+static func render_recipe_cookie_dough(_recipe: Dictionary, _stack: ItemStack) -> Texture2D:
+	print('render_recipe_cookie_dough: ', _stack)
+	var texture = render_recipe_layer(_recipe.base.root, _stack)
+	for modifier in _stack.modifiers:
+		if modifier.item.name in _recipe.flavoring_modifiers:
+			var flavor_modifier: Dictionary = _recipe.flavoring_modifiers[modifier.item.name]
+			for i in modifier.count:
+				draw_layer_into_texture(
+	 				texture,
+	 				render_recipe_layer(flavor_modifier, _stack),
+	 				get_blend_mode_from_string(flavor_modifier.mode),
+	 			)
+	for modifier in _stack.modifiers:
+		if modifier.item.name in _recipe.other_modifiers:
+			var flavor_modifier: Dictionary = _recipe.other_modifiers[modifier.item.name]
+			draw_layer_into_texture(
+				texture,
+				render_recipe_layer(flavor_modifier, _stack),
+				get_blend_mode_from_string(flavor_modifier.mode),
+			)
+	render_recipe_layer(_recipe.other.bowl, _stack, texture)
+	return texture

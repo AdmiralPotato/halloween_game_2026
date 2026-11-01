@@ -1,41 +1,9 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://dtpa5786bonsp"]
 
-[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_28kgc"]
-[ext_resource type="Script" uid="uid://bammp41ppb2u8" path="res://model/item_info_texture_layer.gd" id="2_vy08t"]
-[ext_resource type="Texture2D" uid="uid://qnmj275es5oq" path="res://assets/TILES-frosting.png" id="3_vqpea"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7r87u"]
-size = Vector2(256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vbsqn"]
-atlas = ExtResource("3_vqpea")
-region = Rect2(0, 0, 256, 256)
-
-[sub_resource type="Resource" id="Resource_bof8t"]
-script = ExtResource("2_vy08t")
-name = "tintable"
-texture = SubResource("AtlasTexture_vbsqn")
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c7ug2"]
-atlas = ExtResource("3_vqpea")
-region = Rect2(512, 0, 256, 256)
-
-[sub_resource type="Resource" id="Resource_h3roo"]
-script = ExtResource("2_vy08t")
-name = "jar"
-texture = SubResource("AtlasTexture_c7ug2")
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x20k6"]
-atlas = ExtResource("3_vqpea")
-region = Rect2(3328, 512, 256, 256)
-
-[sub_resource type="Resource" id="Resource_1ffc0"]
-script = ExtResource("2_vy08t")
-name = "label"
-texture = SubResource("AtlasTexture_x20k6")
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_vtt3h"]
 
 [resource]
-script = ExtResource("1_28kgc")
+script = ExtResource("1_vtt3h")
 name = "frosting"
 display_name = "frosting"
 storage_type = 4
@@ -43,5 +11,3 @@ categories = Array[int]([4])
 cost_tier = 2
 max_stack_size = 4
 groups = PackedStringArray()
-texture_layers = Array[ExtResource("2_vy08t")]([SubResource("Resource_bof8t"), SubResource("Resource_h3roo"), SubResource("Resource_1ffc0")])
-texture = SubResource("PlaceholderTexture2D_7r87u")

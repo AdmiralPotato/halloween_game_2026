@@ -75,10 +75,6 @@ const PER_CRAFT_BASE: float = 1.5
 ## Groups this kind of item belongs to. These can be used as aliases for multiple
 ## kinds of items in Recipes.
 @export var groups: PackedStringArray = PackedStringArray()
-## ...if you have a complex set of layers for how this item appears in the game.
-@export var texture_layers: Array[ItemInfoTextureLayer]
-## How this item appears in the game.
-@export var texture: Texture2D
 
 static func from_json(label: String, d: Dictionary, variants: Dictionary = {}) -> ItemInfo:
 	var info = ItemInfo.new()
@@ -101,24 +97,6 @@ static func from_json(label: String, d: Dictionary, variants: Dictionary = {}) -
 	var variant = variants.get(info.name)
 	if variant:
 		info.groups.append(variant.parent)
-	var texture_path = d.get("texture")
-	if texture_path and typeof(texture_path) == TYPE_STRING:
-		info.texture = process_texture_string(texture_path)
-	else:
-		info.texture = PlaceholderTexture2D.new()
-		info.texture.size = Vector2(256, 256)
-	var texture_layers_data = d.get("texture_layers")
-	if texture_layers_data and texture_layers_data.size() > 0:
-		print('Item has texture layers ', info.name)
-		info.texture_layers.assign([])
-		for layer_data in texture_layers_data:
-			var layer = ItemInfoTextureLayer.new()
-			print('	layer name: ', layer_data.name)
-			layer.name = layer_data.name
-			layer.texture = process_texture_string(layer_data.texture)
-			print('	layer texture: ', layer.texture)
-			info.texture_layers.append(layer)
-		print('	all layers ', info.texture_layers)
 	return info
 
 func is_category(cat: Category) -> bool:

@@ -35,46 +35,49 @@ func _run():
 	var furni_info = JSON.parse_string(
 			FileAccess.get_file_as_string("res://business/furnis.json")
 	)
-	
+
 	var registry := Registry.new()
 	registry.take_over_path(REGISTRY_PATH)
-	
-	print('Loading items...')
+
+	print('Processing infos...')
 	var infos: Dictionary[String, ItemInfo] = {}
 	for name in item_info:
 		infos[name] = ItemInfo.from_json(name, item_info[name], var_info)
 		infos[name].take_over_path(ITEM_PATH + safe_name(name) + ".tres")
 		registry.add_item(infos[name])
-		
-	print('Loading recipes...')
+	print('Writing infos...')
+	for info in infos.values():
+		ResourceSaver.save(info)
+
+	print('Processing recipes...')
 	var recipes: Dictionary[String, Recipe] = {}
 	for desc in recipe_info:
+		#print('Processing recipe...', desc.human_name)
 		var recipe = Recipe.from_json(desc, func(n: String): return infos[n])
-		if recipe.name in recipes:
-			push_error(
-					"Recipe {0} already defined; each recipe must have a unique name"\
-					.format([recipe.name])
-			)
-			return
+		assert(
+			not recipe.name in recipes,
+			"Recipe {0} already defined; each recipe must have a unique name"\
+			.format([recipe.name])
+		)
 		recipes[recipe.name] = recipe
 		recipe.take_over_path(REC_PATH + safe_name(recipe.name) + ".tres")
 		registry.add_recipe(recipes[recipe.name])
-		
-	print('Loading furniture...')
+
+	print('Writing recipes...')
+	for recipe in recipes.values():
+		ResourceSaver.save(recipe)
+
+	print('Processing furniture...')
 	var furnis: Dictionary[String, FurniInfo] = {}
 	for name in furni_info:
 		var furni = FurniInfo.from_json(name, furni_info[name])
 		furnis[name] = furni
 		furni.take_over_path(FURNI_PATH + safe_name(furni.name) + ".tres")
 		registry.add_furni(furni)
-	
-	print('Writing resources...')
-	for info in infos.values():
-		ResourceSaver.save(info)
-	for recipe in recipes.values():
-		ResourceSaver.save(recipe)
+
+	print('Writing furniture...')
 	for furni in furnis.values():
 		ResourceSaver.save(furni)
 	ResourceSaver.save(registry)
-		
+
 	print('Done!')

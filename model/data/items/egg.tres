@@ -1,15 +1,9 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://sp4b1un2g2p5"]
 
-[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_nggde"]
-[ext_resource type="Texture2D" uid="uid://4logsfuyvxlk" path="res://assets/TILES-other.png" id="2_jd4sp"]
-[ext_resource type="Script" uid="uid://bammp41ppb2u8" path="res://model/item_info_texture_layer.gd" id="3_tvwtl"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d8hcm"]
-atlas = ExtResource("2_jd4sp")
-region = Rect2(256, 0, 256, 256)
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_5yjk2"]
 
 [resource]
-script = ExtResource("1_nggde")
+script = ExtResource("1_5yjk2")
 name = "egg"
 display_name = "egg"
 storage_type = 1
@@ -17,4 +11,3 @@ categories = Array[int]([0])
 cost_tier = 1
 max_stack_size = 12
 groups = PackedStringArray()
-texture = SubResource("AtlasTexture_d8hcm")
