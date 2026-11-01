@@ -25,20 +25,29 @@ transparent_bg = true
 size = Vector2i(256, 256)
 
 [node name="PanelContainer" type="PanelContainer" parent="SubViewport" unique_id=1618622580]
-custom_minimum_size = Vector2(256, 256)
+custom_minimum_size = Vector2(256, 32)
 custom_maximum_size = Vector2(256, 256)
-anchors_preset = 15
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -66.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxTexture_q2p5x")
 
-[node name="Label" type="Label" parent="SubViewport/PanelContainer" unique_id=270202399]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(256, 256)
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport/PanelContainer" unique_id=421654990]
 layout_mode = 2
-text = "Cursor Text Cursor Text Cursor Text Cursor Text Cursor Text Cursor Text Cursor Text Cursor Text "
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Label" type="Label" parent="SubViewport/PanelContainer/MarginContainer" unique_id=270202399]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+text = "Cursor Text"
 label_settings = SubResource("LabelSettings_2ce4e")
 horizontal_alignment = 1
 vertical_alignment = 1
