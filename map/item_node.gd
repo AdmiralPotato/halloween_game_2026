@@ -273,20 +273,22 @@ static func render_recipe_cookie_dough(_recipe: Dictionary, _stack: ItemStack) -
 	var texture = render_recipe_layer(_recipe.base.root)
 	for modifier in _stack.modifiers:
 		if modifier.item.name in _recipe.flavoring_modifiers:
-			var flavor_modifier: Dictionary = _recipe.flavoring_modifiers[modifier.item.name]
+			var modifier_layer: Dictionary = _recipe.flavoring_modifiers[modifier.item.name]
 			for i in modifier.count:
 				draw_layer_into_texture(
 	 				texture,
-	 				render_recipe_layer(flavor_modifier),
-	 				get_blend_mode_from_string(flavor_modifier.mode),
+	 				render_recipe_layer(modifier_layer),
+	 				get_blend_mode_from_string(modifier_layer.mode),
 	 			)
 	for modifier in _stack.modifiers:
-		if modifier.item.name in _recipe.other_modifiers:
-			var flavor_modifier: Dictionary = _recipe.other_modifiers[modifier.item.name]
+		var modifier_name = modifier.item.name;
+		if modifier_name in _recipe.other_modifiers:
+			var modifier_layer: Dictionary = _recipe.other_modifiers[modifier_name]
+			#print('render_recipe_cookie_dough: other_modifiers: ', modifier_name, ': ', modifier_layer)
 			draw_layer_into_texture(
 				texture,
-				render_recipe_layer(flavor_modifier),
-				get_blend_mode_from_string(flavor_modifier.mode),
+				render_recipe_layer(modifier_layer),
+				get_blend_mode_from_string(modifier_layer.mode),
 			)
 	render_recipe_layer(_recipe.other.bowl, texture)
 	return texture
