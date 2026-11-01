@@ -4,5 +4,5 @@ extends TextureButton
 @export var item: ItemInfo:
 	set(info):
 		item = info
-		if item and item.texture:
-			texture_normal = item.texture
+		if item:
+			texture_normal = ItemNode.render_simple_item_texture_by_name(item.name)

@@ -124,6 +124,15 @@ static func draw_layer_into_texture(
 		material,
 	)
 
+static func render_simple_item_texture_by_name(recipe_name: String) -> Texture2D:
+	if not recipe_name in ItemNode.recipe_render_data:
+		print('render_simple_item_texture_by_name: MISSING RENDER DATA FOR: ', recipe_name)
+		return make_unimplemented_texture()
+	var recipe: Dictionary = ItemNode.recipe_render_data[recipe_name]
+	if recipe.keys().size() == 1 and recipe.has('base'):
+		return render_recipe_layer(recipe.base.root)
+	print('render_simple_item_texture_by_name: render not implemented yet: ', recipe_name)
+	return make_unimplemented_texture()
 
 static func render_recipe (_stack: ItemStack) -> Texture2D:
 	var recipe_name = _stack.item.name
@@ -133,7 +142,7 @@ static func render_recipe (_stack: ItemStack) -> Texture2D:
 		return make_unimplemented_texture()
 	var recipe: Dictionary = ItemNode.recipe_render_data[recipe_name]
 	if recipe.keys().size() == 1 and recipe.has('base'):
-		return render_recipe_layer(recipe.base.root, _stack)
+		return render_recipe_layer(recipe.base.root)
 	match recipe_name:
 		'frosting': return render_recipe_frosting(recipe, _stack)
 		'cake_batter': return render_recipe_cookie_dough(recipe, _stack)
@@ -145,14 +154,13 @@ static func render_recipe (_stack: ItemStack) -> Texture2D:
 
 static func render_recipe_layer (
 	_layer: Dictionary,
-	_stack: ItemStack,
 	_texture: Texture2D = make_empty_texture(),
 ) -> Texture2D:
 	var type: String = _layer.type;
 	#print('render_recipe_layer type: ', type);
 	match type:
-		'sprite': return render_recipe_layer_sprite(_layer, _stack, _texture)
-		'multi': return render_recipe_layer_multi(_layer, _stack, _texture)
+		'sprite': return render_recipe_layer_sprite(_layer, _texture)
+		'multi': return render_recipe_layer_multi(_layer, _texture)
 		_:
 			print('render_recipe_layer: Unsupported type: ', type)
 			return make_unimplemented_texture()
@@ -160,7 +168,6 @@ static func render_recipe_layer (
 
 static func render_recipe_layer_sprite (
 	_layer: Dictionary,
-	_stack: ItemStack,
 	_texture: Texture2D = make_empty_texture(),
 ) -> Texture2D:
 	#print('render_recipe_layer_sprite _layer:', _layer)
@@ -213,7 +220,6 @@ static func make_unimplemented_texture() -> PlaceholderTexture2D:
 
 static func render_recipe_layer_multi (
 	_layer: Dictionary,
-	_stack: ItemStack,
 	_texture: Texture2D = make_empty_texture(),
 ) -> Texture2D:
 	if 'sprites' in _layer:
@@ -221,7 +227,7 @@ static func render_recipe_layer_multi (
 			#print('render_recipe_layer_multi sprite: ', sprite)
 			draw_layer_into_texture(
 				_texture,
-				render_recipe_layer(sprite, _stack),
+				render_recipe_layer(sprite),
 				get_blend_mode_from_string(sprite.mode),
 			)
 	return _texture
@@ -230,9 +236,9 @@ static func render_recipe_layer_multi (
 static func render_recipe_frosting(_recipe: Dictionary, _stack: ItemStack) -> Texture2D:
 	print('render_recipe_frosting: ', _stack)
 	var frosting_texture = (
-		render_recipe_layer(_recipe.plain.root, _stack)
+		render_recipe_layer(_recipe.plain.root)
 		if _stack.modifiers.size() == 0 else
-		render_recipe_layer(_recipe.base.root, _stack)
+		render_recipe_layer(_recipe.base.root)
 	)
 	var has_chocolate = false
 	var label_key = ''
@@ -245,7 +251,7 @@ static func render_recipe_frosting(_recipe: Dictionary, _stack: ItemStack) -> Te
 			for i in modifier.count:
 				draw_layer_into_texture(
 					frosting_texture,
-					render_recipe_layer(flavor_modifier, _stack),
+					render_recipe_layer(flavor_modifier),
 					get_blend_mode_from_string(flavor_modifier.mode),
 				)
 	var jar_layer: Dictionary = (
@@ -254,24 +260,24 @@ static func render_recipe_frosting(_recipe: Dictionary, _stack: ItemStack) -> Te
 		_recipe.jar.no_chocolate_jar
 	)
 	#print('render_recipe_frosting jar_layer: ', jar_layer)
-	render_recipe_layer(jar_layer, _stack, frosting_texture)
+	render_recipe_layer(jar_layer, frosting_texture)
 	if not label_key or not label_key in _recipe.decals:
 		label_key = 'plain'
 	var decal_layer: Dictionary = _recipe.decals[label_key]
-	render_recipe_layer(decal_layer, _stack, frosting_texture)
+	render_recipe_layer(decal_layer, frosting_texture)
 	return frosting_texture
 
 
 static func render_recipe_cookie_dough(_recipe: Dictionary, _stack: ItemStack) -> Texture2D:
 	print('render_recipe_cookie_dough: ', _stack)
-	var texture = render_recipe_layer(_recipe.base.root, _stack)
+	var texture = render_recipe_layer(_recipe.base.root)
 	for modifier in _stack.modifiers:
 		if modifier.item.name in _recipe.flavoring_modifiers:
 			var flavor_modifier: Dictionary = _recipe.flavoring_modifiers[modifier.item.name]
 			for i in modifier.count:
 				draw_layer_into_texture(
 	 				texture,
-	 				render_recipe_layer(flavor_modifier, _stack),
+	 				render_recipe_layer(flavor_modifier),
 	 				get_blend_mode_from_string(flavor_modifier.mode),
 	 			)
 	for modifier in _stack.modifiers:
@@ -279,8 +285,8 @@ static func render_recipe_cookie_dough(_recipe: Dictionary, _stack: ItemStack) -
 			var flavor_modifier: Dictionary = _recipe.other_modifiers[modifier.item.name]
 			draw_layer_into_texture(
 				texture,
-				render_recipe_layer(flavor_modifier, _stack),
+				render_recipe_layer(flavor_modifier),
 				get_blend_mode_from_string(flavor_modifier.mode),
 			)
-	render_recipe_layer(_recipe.other.bowl, _stack, texture)
+	render_recipe_layer(_recipe.other.bowl, texture)
 	return texture
