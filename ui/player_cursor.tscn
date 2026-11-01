@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://x71gqlsmfg4w"]
+
+[ext_resource type="Script" uid="uid://biggr3rpwaatd" path="res://ui/player_cursor.gd" id="1_2ce4e"]
+[ext_resource type="Texture2D" uid="uid://s3ygy4svln3l" path="res://assets/callout.png" id="1_q2p5x"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q2p5x"]
+texture = ExtResource("1_q2p5x")
+modulate_color = Color(1, 1, 1, 0.5019608)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2ce4e"]
+font_size = 24
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_a28pv"]
+viewport_path = NodePath("SubViewport")
+
+[node name="PlayerCursor" type="Node3D" unique_id=1769439579]
+script = ExtResource("1_2ce4e")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=89636628]
+disable_3d = true
+own_world_3d = true
+transparent_bg = true
+size = Vector2i(256, 256)
+
+[node name="PanelContainer" type="PanelContainer" parent="SubViewport" unique_id=1618622580]
+custom_minimum_size = Vector2(256, 256)
+custom_maximum_size = Vector2(256, 256)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_q2p5x")
+
+[node name="Label" type="Label" parent="SubViewport/PanelContainer" unique_id=270202399]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+text = "Cursor Text Cursor Text Cursor Text Cursor Text Cursor Text Cursor Text Cursor Text Cursor Text "
+label_settings = SubResource("LabelSettings_2ce4e")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=109766417]
+offset = Vector2(0, 128)
+pixel_size = 0.005
+billboard = 1
+texture = SubResource("ViewportTexture_a28pv")

@@ -54,6 +54,9 @@ func provide_item() -> ItemNode:
 	item = null
 	return ret
 
+func query_item() -> ItemNode:
+	return item
+
 func interact(player: Node):
 	if (
 			player.held_object == null \

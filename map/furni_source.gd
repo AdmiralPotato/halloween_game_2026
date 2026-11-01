@@ -21,3 +21,6 @@ func provide_item() -> ItemNode:
 	item.global_position = $StaticBody3D/ItemNode.global_position
 	item.store_global_transform()
 	return item
+
+func query_item() -> ItemNode:
+	return $StaticBody3D/ItemNode

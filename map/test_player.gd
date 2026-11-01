@@ -15,6 +15,7 @@ var in_rearrange_mode := false
 var indicator_color: Color:
 	get:
 		return Color("ddcc31") if in_rearrange_mode else Color("1fff52")
+var cursor_last_item: ItemNode = null
 
 @onready var carry_node = $RightHand/Carry
 @onready var right_hand_node = $RightHand
@@ -22,6 +23,7 @@ var indicator_color: Color:
 @onready var skeleton = $mage/mage_bones/Skeleton3D
 @onready var hand_bone = skeleton.find_bone("hand_R")
 @onready var indicator: SpotLight3D = $InteractIndicator
+@onready var cursor: PlayerCursor = $PlayerCursor
 var held_object: BaseMapNode:
 	get:
 		if carry_node.get_child_count() > 0:
@@ -59,6 +61,19 @@ func _physics_process(delta):
 			indicator.global_position.y,
 			world_pointing.z,
 	)
+	var pointed_furni: FurniNode = Global.tilemap.get_furni(pointing)
+	var cursor_shown := false
+	if pointed_furni:
+		var inode: ItemNode = pointed_furni.query_item()
+		if inode and inode.stack:
+			cursor_shown = true
+			cursor.text = str(inode.stack)
+			if inode != cursor_last_item or not cursor.visible:
+				cursor.popup_at(inode.global_position)
+			cursor_last_item = inode
+	if not cursor_shown:
+		cursor.visible = false
+		cursor_last_item = null
 	
 	right_hand_node.transform = skeleton.get_bone_global_pose(hand_bone)
 	

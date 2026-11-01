@@ -60,6 +60,7 @@ unique_name_in_owner = true
 custom_maximum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
+offset_transform_enabled = true
 texture = ExtResource("2_og8k8")
 
 [node name="ProgressText" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=410353983]
