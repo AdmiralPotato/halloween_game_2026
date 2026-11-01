@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://cj287n17bxna2"]
 
-[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_i0xw0"]
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_r2ulw"]
 
 [resource]
-script = ExtResource("1_i0xw0")
+script = ExtResource("1_r2ulw")
 name = "sugar"
 display_name = "sugar"
 categories = Array[int]([0])

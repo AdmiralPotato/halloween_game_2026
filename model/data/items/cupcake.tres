@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://bhawkao2hm3rp"]
 
-[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_g10wp"]
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_5s2gy"]
 
 [resource]
-script = ExtResource("1_g10wp")
+script = ExtResource("1_5s2gy")
 name = "cupcake"
 display_name = "cupcake"
 storage_type = 1

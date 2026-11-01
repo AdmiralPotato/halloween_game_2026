@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://b34kf80gy2er3"]
 
-[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_6ii8o"]
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_xnh5w"]
 
 [resource]
-script = ExtResource("1_6ii8o")
+script = ExtResource("1_xnh5w")
 name = "bowl"
 display_name = "bowl"
 storage_type = 3

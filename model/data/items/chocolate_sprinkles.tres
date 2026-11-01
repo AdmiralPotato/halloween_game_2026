@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://dsnpdtwwag8by"]
 
-[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_6w7w5"]
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_p7li1"]
 
 [resource]
-script = ExtResource("1_6w7w5")
+script = ExtResource("1_p7li1")
 name = "chocolate_sprinkles"
 display_name = "chocolate sprinkles"
 storage_type = 4

@@ -4,14 +4,14 @@
 [ext_resource type="Resource" uid="uid://bhawkao2hm3rp" path="res://model/data/items/cupcake.tres" id="2_87enw"]
 [ext_resource type="Script" uid="uid://b5mlkyd7jcal7" path="res://model/recipe.gd" id="3_txude"]
 
-[sub_resource type="Resource" id="Resource_3o2sa"]
+[sub_resource type="Resource" id="Resource_ohyw7"]
 script = ExtResource("1_3o2sa")
 item = ExtResource("2_87enw")
 
 [resource]
 script = ExtResource("3_txude")
 name = "cupcake"
-output = SubResource("Resource_3o2sa")
+output = SubResource("Resource_ohyw7")
 location = 3
 container = "MUFFIN_TIN"
 ingredients = PackedStringArray("cake_batter")
