@@ -2,6 +2,8 @@ extends RigidBody3D
 
 const SMOL = Vector3.ONE * 0.5
 
+signal held_object_changed
+
 ## How much force the birb can apply on a given axis
 @export var movement_force := 30
 ## How fast the birb wants to go when a given axis is maxed out
@@ -33,6 +35,7 @@ var held_object: BaseMapNode:
 				v.reparent(carry_node, false)
 			else:
 				carry_node.add_child(v)
+		held_object_changed.emit()
 
 
 func _ready():

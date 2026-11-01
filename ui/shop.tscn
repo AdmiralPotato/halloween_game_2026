@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dahs4c1bgiu58"]
+
+[ext_resource type="Script" uid="uid://dinaw7y1abkg7" path="res://ui/shop.gd" id="1_foe6g"]
+
+[sub_resource type="Gradient" id="Gradient_foe6g"]
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.7254902)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_e4u7y"]
+gradient = SubResource("Gradient_foe6g")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1slnd"]
+texture = SubResource("GradientTexture1D_e4u7y")
+
+[node name="Shop" type="PanelContainer" unique_id=1972639199]
+custom_minimum_size = Vector2(128, 0)
+custom_maximum_size = Vector2(384, -1)
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_1slnd")
+script = ExtResource("1_foe6g")
+
+[node name="Categories" type="VBoxContainer" parent="." unique_id=1335580342]
+layout_mode = 2
+
+[node name="Furniture" type="HFlowContainer" parent="Categories" unique_id=957931693]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Items" type="HFlowContainer" parent="Categories" unique_id=1815028541]
+unique_name_in_owner = true
+layout_mode = 2

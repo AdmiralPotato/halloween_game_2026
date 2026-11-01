@@ -138,30 +138,6 @@ func swap_item(xy: Vector2i, new_node: ItemNode) -> ItemNode:
 		var item = tile.furni.provide_item()
 		return item
 
-## If there is a tile at the given coordinates, this attempts to combine the
-## given item with an item already on the tile. If there is no item, this ends
-## up being the same as swap_item. If there is an item, and it accepts the swap,
-## we return null, indicating that you are no longer holding an item. If there
-## is an item but the swap is rejected, or if there is no tile, we return the
-## item you passed in.
-##
-## If we return an item, its tree membership was not affected.
-func combine_item(xy: Vector2i, new_node: ItemNode) -> ItemNode:
-	var tile := _get_tile(xy)
-	if !tile: return new_node
-	if tile.item != null:
-		if tile.item.attempt_combine(new_node):
-			new_node.queue_free();
-			return null
-		return new_node
-	assert(tile.item == null)
-	tile.item = new_node
-	add_child(tile.item)
-	new_node.position = Vector3(xy.x+0.5, 0.0, xy.y+0.5)
-	if tile.item:
-		if tile.furni && tile.furni.has_property("item_height"):
-			new_node.position.y = tile.furni.item_height
-	return null
 
 func _init():
 	pathfinder.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES

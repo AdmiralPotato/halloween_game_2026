@@ -16,9 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://qnmj275es5oq" path="res://assets/TILES-frosting.png" id="11_15bd0"]
 [ext_resource type="PackedScene" uid="uid://do30vdu0sngt5" path="res://map/FurniOven.tscn" id="11_nabl1"]
 [ext_resource type="PackedScene" uid="uid://dfjdkdlvlfocq" path="res://map/FurniCuttingboard.tscn" id="14_p5gm8"]
-[ext_resource type="Resource" uid="uid://0xne0k7mcykn" path="res://model/data/items/blueberry_flavoring.tres" id="17_olchu"]
-[ext_resource type="Resource" uid="uid://vmrcp80igtca" path="res://model/data/items/cookie_dough.tres" id="18_sfvuk"]
 [ext_resource type="PackedScene" uid="uid://d1tp40f6bgvc6" path="res://map/FurniTrash.tscn" id="18_tdsbi"]
+[ext_resource type="Script" uid="uid://sxpgsgxykexm" path="res://map/gold_overlay.gd" id="19_6jj7b"]
+[ext_resource type="PackedScene" uid="uid://dahs4c1bgiu58" path="res://ui/shop.tscn" id="21_olchu"]
 [ext_resource type="MeshLibrary" uid="uid://3ox14caeh7gd" path="res://assets/kitchen_mesh_library.tres" id="22_abky3"]
 [ext_resource type="Texture2D" uid="uid://tdosspgn5nwg" path="res://assets/candy.png" id="23_0d7dl"]
 [ext_resource type="Script" uid="uid://bxwh47wigsd11" path="res://map/gold.gd" id="24_0d7dl"]
@@ -601,6 +601,47 @@ item = SubResource("Resource_6760i")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_4ffdg")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6jj7b"]
+size = Vector2(256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfvuk"]
+atlas = ExtResource("8_2fvxq")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="Resource" id="Resource_kv6ra"]
+script = ExtResource("7_15bd0")
+name = "tintable"
+texture = SubResource("AtlasTexture_sfvuk")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_miiix"]
+atlas = ExtResource("8_2fvxq")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="Resource" id="Resource_t3co8"]
+script = ExtResource("7_15bd0")
+name = "bowl"
+texture = SubResource("AtlasTexture_miiix")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6sk0w"]
+atlas = ExtResource("11_15bd0")
+region = Rect2(3328, 512, 256, 256)
+
+[sub_resource type="Resource" id="Resource_jnbr1"]
+script = ExtResource("7_15bd0")
+name = "label"
+texture = SubResource("AtlasTexture_6sk0w")
+
+[sub_resource type="Resource" id="Resource_2muxb"]
+script = ExtResource("5_vwyy3")
+name = "cookie_dough"
+display_name = "cookie dough"
+storage_type = 1
+categories = Array[int]([0])
+cost_tier = 2
+groups = PackedStringArray()
+texture_layers = Array[ExtResource("7_15bd0")]([SubResource("Resource_kv6ra"), SubResource("Resource_t3co8"), SubResource("Resource_jnbr1")])
+texture = SubResource("PlaceholderTexture2D_6jj7b")
+
 [sub_resource type="Resource" id="Resource_jy8v6"]
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_7bfm5")
@@ -609,31 +650,51 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_im7sk"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("18_sfvuk")
+item = SubResource("Resource_2muxb")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_jy8v6")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xkf3a"]
+atlas = ExtResource("6_b8euk")
+region = Rect2(2304, 1024, 256, 256)
+
+[sub_resource type="Resource" id="Resource_icjej"]
+script = ExtResource("5_vwyy3")
+name = "blueberry_flavoring"
+display_name = "blueberry flavoring"
+storage_type = 4
+categories = Array[int]([1])
+cost_tier = 4
+max_stack_size = 0
+attributes = Dictionary[int, int]({
+0: -1,
+6: 1,
+16: 2
+})
+groups = PackedStringArray("flavoring")
+texture = SubResource("AtlasTexture_xkf3a")
+
 [sub_resource type="Resource" id="Resource_xbvgi"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("17_olchu")
+item = SubResource("Resource_icjej")
 count = 2
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_5y0pr"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("18_sfvuk")
+item = SubResource("Resource_2muxb")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_xbvgi")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_71tmt"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("17_olchu")
+item = SubResource("Resource_icjej")
 count = 2
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_81ea7"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("18_sfvuk")
+item = SubResource("Resource_2muxb")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_71tmt")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
@@ -863,7 +924,7 @@ metadata/_edit_group_ = true
 wait_time = 2.0
 one_shot = true
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=702785822]
+[node name="GoldOverlay" type="PanelContainer" parent="." unique_id=702785822]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -871,18 +932,25 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 40.0
 grow_horizontal = 2
+script = ExtResource("19_6jj7b")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=1699535166]
+[node name="HBoxContainer" type="HBoxContainer" parent="GoldOverlay" unique_id=1699535166]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer" unique_id=1315648894]
+[node name="TextureRect" type="TextureRect" parent="GoldOverlay/HBoxContainer" unique_id=1315648894]
 custom_maximum_size = Vector2(32, 32)
 layout_mode = 2
 texture = SubResource("AtlasTexture_jga7m")
 
-[node name="Gold" type="Label" parent="PanelContainer/HBoxContainer" unique_id=651876760]
+[node name="Gold" type="Label" parent="GoldOverlay/HBoxContainer" unique_id=651876760]
 layout_mode = 2
 text = "0"
 script = ExtResource("24_0d7dl")
 
+[node name="Shop" parent="." unique_id=1972639199 instance=ExtResource("21_olchu")]
+visible = false
+
+[connection signal="held_object_changed" from="TestPlayer" to="." method="_on_test_player_held_object_changed"]
 [connection signal="timeout" from="SpawnCustomer" to="." method="_on_spawn_customer_timeout"]
+[connection signal="purchase_furni" from="Shop" to="." method="_on_shop_purchase_furni"]
+[connection signal="purchase_item" from="Shop" to="." method="_on_shop_purchase_item"]

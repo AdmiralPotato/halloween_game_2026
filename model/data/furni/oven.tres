@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FurniInfo" format=3 uid="uid://c0lkot6fr7sb6"]
+
+[ext_resource type="PackedScene" uid="uid://do30vdu0sngt5" path="res://map/FurniOven.tscn" id="1_mp1ed"]
+[ext_resource type="Script" uid="uid://cg3yvhquhplvs" path="res://model/furni_info.gd" id="2_6warg"]
+
+[resource]
+script = ExtResource("2_6warg")
+name = "oven"
+scene = ExtResource("1_mp1ed")
+cost = 500

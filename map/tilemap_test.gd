@@ -45,6 +45,15 @@ func _ready():
 	build_storefront()
 	$SpawnCustomer.start(get_customer_spawn_time())
 
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("shop"):
+		get_viewport().set_input_as_handled()
+		if $Shop.visible:
+			$Shop.visible = false
+		elif not $TestPlayer.held_object:
+			$Shop.visible = true
+
 func build_storefront():
 	for x in range(number_of_tiles.x):
 		for y in range(number_of_tiles.y - 5, number_of_tiles.y):
@@ -123,3 +132,34 @@ func _on_spawn_customer_timeout() -> void:
 			$Tilemap.get_customer_spawnpoint()
 	)
 	$SpawnCustomer.start(get_customer_spawn_time())
+
+
+func _on_test_player_held_object_changed() -> void:
+	if $TestPlayer.held_object and $Shop.visible:
+		$Shop.visible = false
+
+
+func _on_shop_purchase_furni(furni: FurniInfo) -> void:
+	if Global.gold < furni.cost:
+		$GoldOverlay.flash()
+		return
+	Global.gold -= furni.cost
+	var node: FurniNode = furni.scene.instantiate()
+	node.pack()
+	node.transform = node.transform.scaled($TestPlayer.SMOL)
+	$TestPlayer.held_object = node
+	$Shop.visible = false
+
+
+func _on_shop_purchase_item(item: ItemInfo) -> void:
+	var full_cost := item.actual_cost * item.max_stack_size
+	if Global.gold < full_cost:
+		$GoldOverlay.flash()
+		return
+	Global.gold -= item.actual_cost
+	var furni: FurniSource = FURNI_SOURCE.instantiate()
+	furni.stack = ItemStack.new(item)
+	furni.pack()
+	furni.transform = furni.transform.scaled($TestPlayer.SMOL)
+	$TestPlayer.held_object = furni
+	$Shop.visible = false

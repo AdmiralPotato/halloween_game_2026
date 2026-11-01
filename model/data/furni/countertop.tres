@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FurniInfo" format=3 uid="uid://s4s43334u7rq"]
+
+[ext_resource type="PackedScene" uid="uid://cl7xh1lhn0u0b" path="res://map/FurniCountertop.tscn" id="1_naxwi"]
+[ext_resource type="Script" uid="uid://cg3yvhquhplvs" path="res://model/furni_info.gd" id="2_l3skr"]
+
+[resource]
+script = ExtResource("2_l3skr")
+name = "countertop"
+scene = ExtResource("1_naxwi")
+cost = 250

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FurniInfo" format=3 uid="uid://dsln4ddl6vb7y"]
+
+[ext_resource type="PackedScene" uid="uid://cde0ctma7xn5i" path="res://map/FurniFridge.tscn" id="1_8dstn"]
+[ext_resource type="Script" uid="uid://cg3yvhquhplvs" path="res://model/furni_info.gd" id="2_x6jf2"]
+
+[resource]
+script = ExtResource("2_x6jf2")
+name = "fridge"
+scene = ExtResource("1_8dstn")
+cost = 375

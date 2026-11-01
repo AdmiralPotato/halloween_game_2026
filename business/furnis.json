@@ -1,0 +1,22 @@
+{
+	"countertop": {
+		"path": "res://map/FurniCountertop.tscn",
+		"cost": 250
+	},
+	"cuttingboard": {
+		"path": "res://map/FurniCuttingboard.tscn",
+		"cost": 250
+	},
+	"fridge": {
+		"path": "res://map/FurniFridge.tscn",
+		"cost": 375
+	},
+	"mixer": {
+		"path": "res://map/FurniMixer.tscn",
+		"cost": 500
+	},
+	"oven": {
+		"path": "res://map/FurniOven.tscn",
+		"cost": 500
+	}
+}

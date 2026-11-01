@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FurniInfo" format=3 uid="uid://c6pa6pnpox8vy"]
+
+[ext_resource type="PackedScene" uid="uid://dfjdkdlvlfocq" path="res://map/FurniCuttingboard.tscn" id="1_463vv"]
+[ext_resource type="Script" uid="uid://cg3yvhquhplvs" path="res://model/furni_info.gd" id="2_rcldt"]
+
+[resource]
+script = ExtResource("2_rcldt")
+name = "cuttingboard"
+scene = ExtResource("1_463vv")
+cost = 250

@@ -16,6 +16,7 @@ extends EditorScript
 const BASE_PATH = "res://model/data/"
 const ITEM_PATH = BASE_PATH + "items/"
 const REC_PATH = BASE_PATH + "recipes/"
+const FURNI_PATH = BASE_PATH + "furni/"
 const REGISTRY_PATH = BASE_PATH + "registry.tres"
 
 static func safe_name(s):
@@ -30,6 +31,9 @@ func _run():
 	)
 	var recipe_info = JSON.parse_string(
 			FileAccess.get_file_as_string("res://business/items/recipes_infos.json")
+	)
+	var furni_info = JSON.parse_string(
+			FileAccess.get_file_as_string("res://business/furnis.json")
 	)
 	
 	var registry := Registry.new()
@@ -55,12 +59,22 @@ func _run():
 		recipes[recipe.name] = recipe
 		recipe.take_over_path(REC_PATH + safe_name(recipe.name) + ".tres")
 		registry.add_recipe(recipes[recipe.name])
+		
+	print('Loading furniture...')
+	var furnis: Dictionary[String, FurniInfo] = {}
+	for name in furni_info:
+		var furni = FurniInfo.from_json(name, furni_info[name])
+		furnis[name] = furni
+		furni.take_over_path(FURNI_PATH + safe_name(furni.name) + ".tres")
+		registry.add_furni(furni)
 	
 	print('Writing resources...')
 	for info in infos.values():
 		ResourceSaver.save(info)
 	for recipe in recipes.values():
 		ResourceSaver.save(recipe)
+	for furni in furnis.values():
+		ResourceSaver.save(furni)
 	ResourceSaver.save(registry)
 		
 	print('Done!')

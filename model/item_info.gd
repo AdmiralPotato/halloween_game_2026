@@ -141,3 +141,7 @@ static func process_texture_string(texture_path: String) -> Texture2D:
 		atlas.region = Rect2(Vector2(index) * cell, cell)
 		result_texture = atlas
 	return result_texture
+
+var actual_cost: int:
+	get:
+		return TIER_COSTS.get(cost_tier, 0)
