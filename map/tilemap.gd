@@ -118,7 +118,7 @@ func swap_furni(xy: Vector2i, new_node: FurniNode, facing := Vector3.BACK) -> Fu
 ## Interact with the furni at the given position.
 func interact(xy: Vector2i, player: Node):
 	var tile := _get_tile(xy)
-	if tile.furni:
+	if tile and tile.furni:
 		tile.furni.interact(player)
 
 ## Ask the furni at the given position to pick up/drop an item. Returns the item
