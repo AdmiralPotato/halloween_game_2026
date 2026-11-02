@@ -11,3 +11,4 @@ categories = Array[int]([4])
 cost_tier = 2
 max_stack_size = 4
 groups = PackedStringArray()
+sort = 400

@@ -100,6 +100,9 @@ const PER_CRAFT_BASE: float = 1.5
 ## Groups this kind of item belongs to. These can be used as aliases for multiple
 ## kinds of items in Recipes.
 @export var groups: PackedStringArray = PackedStringArray()
+## Classification of this item; meant to be used to sort ascending in user-
+## facing item enumerations.
+@export var sort: int = 0
 
 static func from_json(label: String, d: Dictionary, variants: Dictionary = {}) -> ItemInfo:
 	var info = ItemInfo.new()
@@ -122,6 +125,7 @@ static func from_json(label: String, d: Dictionary, variants: Dictionary = {}) -
 	var variant = variants.get(info.name)
 	if variant:
 		info.groups.append(variant.parent)
+	info.sort = d.get("sort", 0)
 	return info
 
 func is_category(cat: Category) -> bool:

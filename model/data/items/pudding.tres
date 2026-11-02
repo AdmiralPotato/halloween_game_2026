@@ -10,3 +10,4 @@ storage_type = 1
 categories = Array[int]([3])
 cost_tier = 3
 groups = PackedStringArray()
+sort = 350

@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_cufkg")
 name = "hard_candy_eyeballs"
-display_name = "hard_candy_eyeballs"
+display_name = "hard candy eyeballs"
 storage_type = 4
 categories = Array[int]([5])
 cost_tier = 3
@@ -15,3 +15,4 @@ attributes = Dictionary[int, int]({
 12: 1
 })
 groups = PackedStringArray("hard_candy_shapes")
+sort = 522

@@ -16,3 +16,4 @@ attributes = Dictionary[int, int]({
 17: 3
 })
 groups = PackedStringArray("flavoring")
+sort = 208

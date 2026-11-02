@@ -194,6 +194,8 @@ class ChooseState extends State:
 	func tick(_delta: float) -> State:
 		var cases: Array[Vector2i] = \
 			Global.tilemap.get_tiles_of_type(preload("res://map/furni_displaycase.gd"))
+		var best_desire := -1.0
+		var best_case = null
 		for case in cases:
 			var furni: FurniDisplayCase = Global.tilemap.get_furni(case)
 			if (
@@ -201,10 +203,14 @@ class ChooseState extends State:
 					and furni.item \
 					and furni.item.stack \
 					and owner.get_desire_for(furni.item.stack) >= owner.desire
+					and owner.get_desire_for(furni.item.stack) > best_desire
 			):
-				return WanderTo.new(owner, case,
-						BuyFrom.new(owner, case),
-				)
+				best_desire = owner.get_desire_for(furni.item.stack)
+				best_case = case
+		if best_case:
+			return WanderTo.new(owner, best_case,
+					BuyFrom.new(owner, best_case),
+			)
 		var new_state := WanderTo.new(owner)
 		if owner.time_in_scene > owner.leave_time:
 			new_state.next_state = Leave.new(owner)

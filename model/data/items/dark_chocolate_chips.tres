@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://c30hr74cgq7rr"]
+
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_mw05v"]
+
+[resource]
+script = ExtResource("1_mw05v")
+name = "dark_chocolate_chips"
+display_name = "dark chocolate chips"
+storage_type = 4
+categories = Array[int]([1, 5])
+cost_tier = 3
+max_stack_size = 9
+groups = PackedStringArray()
+sort = 382

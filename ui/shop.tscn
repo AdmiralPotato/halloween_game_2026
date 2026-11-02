@@ -12,7 +12,7 @@ gradient = SubResource("Gradient_foe6g")
 texture = SubResource("GradientTexture1D_e4u7y")
 
 [node name="Shop" type="PanelContainer" unique_id=1972639199]
-custom_minimum_size = Vector2(128, 0)
+custom_minimum_size = Vector2(256, 0)
 custom_maximum_size = Vector2(384, -1)
 anchors_preset = 11
 anchor_left = 1.0

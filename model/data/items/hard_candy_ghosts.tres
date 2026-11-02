@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_gc4j6")
 name = "hard_candy_ghosts"
-display_name = "hard_candy_ghosts"
+display_name = "hard candy ghosts"
 storage_type = 4
 categories = Array[int]([5])
 cost_tier = 3
@@ -14,3 +14,4 @@ attributes = Dictionary[int, int]({
 12: 1
 })
 groups = PackedStringArray("hard_candy_shapes")
+sort = 521
