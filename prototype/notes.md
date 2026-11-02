@@ -13,8 +13,11 @@
 	- Container: may be empty, or may contain something.
 		- Pan: required to cook something (primarily to distinguish cupcakes and cakes)
 		- Filling injector: required to add filling (primarily to distinguish whipped cream as filling or a decoration)
-- Every item has its own cost (if available for sale at the warehouse), categories (e.g. filling, doodad, base, modifier), and type of storage dispenser block (e.g. crate, fridge, bag)
-- Some items belong to a variant, e.g. cherry flavoring is a variant of flavoring, rainbow sprinkles are a variant of sprinkles.
+- Every item has its own cost (if available for sale at the warehouse),
+	categories (e.g. filling, doodad, base, modifier), and type of storage
+	dispenser block (e.g. crate, fridge, bag)
+- Some items belong to a variant, e.g. cherry flavoring is a variant of
+	flavoring, rainbow sprinkles are a variant of sprinkles.
 	- When looking for an item (e.g. to order from the warehouse vs for looking up what an item is compatible with), you might need either the variant's name or its parent's name.
 - Stacking:
 	- Items can stack if their identity matches: their name and their modifier names. Quantities need not match.
@@ -35,7 +38,7 @@ Each item can belong to one or more categories (though usually only one):
 		- **Doodad**: countable noun (not mass noun) that can be applied to a product, but only if there's a decoration layer to adhere to (e.g. can't add sprinkles to a sugar cookie without frosting)
 - Container
 	- **Pan**
-	- **Filling injector**
+	- **Filling injector**	
 
 ### Root item vs innermost item
 
@@ -130,6 +133,93 @@ Each item can belong to one or more categories (though usually only one):
 ### Questions
 
 - If items on the countertop can stack, why have storage boxes?
+
+## Chewy Decimal System
+
+- Base items (100):
+	- Flour (100)
+	- Sugar (101)
+	- Egg (102)
+	- Cream (103)
+	- Cocoa Powder (104)
+	- Chocolate Bars (180):
+		- Chocolate bar (180)
+		- White Chocolate bar (181)
+		- Dark Chocolate bar (182)
+- Modifiers (200):
+	- Flavoring (200):
+		- Cherry Flavoring (200)
+		- Raspberry Flavoring (201)
+		- Strawberry Flavoring (202)
+		- Orange Flavoring (203)
+		- Almond Flavoring (204)
+		- Caramel Flavoring (205)
+		- Lemon Flavoring (206)
+		- Lime Flavoring (207)
+		- Mint Flavoring (208)
+		- Blueberry Flavoring (209)
+		- Ube Flavoring (210)
+		- Grape Flavoring (211)
+- Intermediate Items (300)
+	- Whipped Cream (300)
+	- Pastry cream (301)
+	- Pudding (350):
+		- Cherry Pudding (350)
+		- Raspberry Pudding (351)
+		- Strawberry Pudding (352)
+		- Orange Pudding (353)
+		- Almond Pudding (354)
+		- Caramel Pudding (355)
+		- Lemon Pudding (356)
+		- Lime Pudding (357)
+		- Mint Pudding (358)
+		- Blueberry Pudding (359)
+		- Ube Pudding (360)
+		- Grape Pudding (361)
+	- Chocolate Chips (380):
+		- Chocolate chips (380)
+		- White Chocolate chips (381)
+		- Dark Chocolate chips (382)
+- Frosting (400):
+	- PLAIN Frosting (400)
+	- Cherry Frosting (410)
+	- Raspberry Frosting (411)
+	- Strawberry Frosting (412)
+	- Orange Frosting (413)
+	- Almond Frosting (414)
+	- Caramel Frosting (415)
+	- Lemon Frosting (416)
+	- Lime Frosting (417)
+	- Mint Frosting (418)
+	- Blueberry Frosting (419)
+	- Ube Flavoring (420)
+	- Grape Frosting (421)
+- Doodads (500):
+	- Sprinkles (500):
+		- Chocolate Sprinkles (500)
+		- White Sprinkles (501)
+		- Ball Bearing Sprinkles (502)
+		- Rainbow Sprinkles (503)
+	- Candied Flowers (510):
+		- White Flowers (510)
+		- Yellow Flowers (511)
+		- Red Flowers (512)
+		- Blue Flowers (513)
+	- Candies (520):
+		-  Hard Candy Bats (520)
+		-  Hard Candy Ghosts (521)
+		-  Hard Candy Eyes (522)
+		-  Candy Corn (523)
+- Pre-baked items (800):
+	- Cookie dough (800)
+	- Cake batter (801)
+- Product (900):
+	- Cookie (900)
+	- Cupcake (901)
+	- Cake (902)
+	- Cake slice (903)
+- All the rest (999-):
+	- Bowl (999)
 
 # GODOT SCRIPT VERSION
 
