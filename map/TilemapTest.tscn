@@ -25,8 +25,8 @@
 [ext_resource type="PackedScene" uid="uid://d1tp40f6bgvc6" path="res://map/FurniTrash.tscn" id="18_tdsbi"]
 [ext_resource type="Script" uid="uid://sxpgsgxykexm" path="res://map/gold_overlay.gd" id="19_6jj7b"]
 [ext_resource type="PackedScene" uid="uid://dahs4c1bgiu58" path="res://ui/shop.tscn" id="21_olchu"]
-[ext_resource type="MeshLibrary" uid="uid://3ox14caeh7gd" path="res://assets/kitchen_mesh_library.tres" id="22_abky3"]
 [ext_resource type="Texture2D" uid="uid://tdosspgn5nwg" path="res://assets/candy.png" id="23_0d7dl"]
+[ext_resource type="MeshLibrary" uid="uid://dki7gkkp1gpw8" path="res://assets/kitchen_mesh_library.meshlib" id="23_p1ie5"]
 [ext_resource type="Script" uid="uid://bxwh47wigsd11" path="res://map/gold.gd" id="24_0d7dl"]
 
 [sub_resource type="Resource" id="Resource_8mw78"]
@@ -58,6 +58,9 @@ groups = PackedStringArray()
 [sub_resource type="Resource" id="Resource_5qf2s"]
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_15bd0")
+combined_attributes = Dictionary[int, int]({
+19: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_tdsbi"]
@@ -74,6 +77,9 @@ groups = PackedStringArray()
 [sub_resource type="Resource" id="Resource_8bmqu"]
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_tdsbi")
+combined_attributes = Dictionary[int, int]({
+0: 1
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_ph5do"]
@@ -94,6 +100,11 @@ groups = PackedStringArray("flavoring")
 [sub_resource type="Resource" id="Resource_sfvuk"]
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_ph5do")
+combined_attributes = Dictionary[int, int]({
+0: -1,
+5: 1,
+17: 3
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_utt7c"]
@@ -127,6 +138,12 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 [sub_resource type="Resource" id="Resource_cv5h5"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("7_0d7dl")
+combined_attributes = Dictionary[int, int]({
+0: -2,
+1: 1,
+7: 1,
+16: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_6mfjq"]
@@ -137,6 +154,10 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 [sub_resource type="Resource" id="Resource_qa6d5"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("9_nadkd")
+combined_attributes = Dictionary[int, int]({
+8: 1,
+12: 1
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_d4a68"]
@@ -148,6 +169,11 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 [sub_resource type="Resource" id="Resource_p33bg"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("11_p1ie5")
+combined_attributes = Dictionary[int, int]({
+0: -1,
+2: 2,
+16: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_3o4ji"]
@@ -183,6 +209,9 @@ groups = PackedStringArray()
 [sub_resource type="Resource" id="Resource_6jj7b"]
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_tnmf5")
+combined_attributes = Dictionary[int, int]({
+15: 1
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_vkwjd"]
@@ -213,6 +242,11 @@ groups = PackedStringArray("flavoring")
 [sub_resource type="Resource" id="Resource_5c0gd"]
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_gdj6q")
+combined_attributes = Dictionary[int, int]({
+0: -1,
+2: 2,
+16: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_0d7dl"]
@@ -225,17 +259,34 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 [sub_resource type="Resource" id="Resource_evbxi"]
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_gdj6q")
+combined_attributes = Dictionary[int, int]({
+0: -1,
+2: 2,
+16: 2
+})
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_5c0gd")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_nadkd"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("7_0d7dl")
+combined_attributes = Dictionary[int, int]({
+0: -2,
+1: 1,
+7: 1,
+16: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_t3co8"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("16_p1ie5")
+combined_attributes = Dictionary[int, int]({
+4: 1,
+5: 1,
+16: 1,
+20: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_abky3"]
@@ -247,6 +298,9 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 [sub_resource type="Resource" id="Resource_r177p"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("17_p1ie5")
+combined_attributes = Dictionary[int, int]({
+12: 1
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_robgn"]
@@ -288,6 +342,11 @@ groups = PackedStringArray("flavoring")
 [sub_resource type="Resource" id="Resource_6sk0w"]
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_gmsic")
+combined_attributes = Dictionary[int, int]({
+0: -1,
+6: 1,
+16: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_cc7i2"]
@@ -300,6 +359,11 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_gmsic")
 count = 2
+combined_attributes = Dictionary[int, int]({
+0: -1,
+6: 1,
+16: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_p1ie5"]
@@ -312,6 +376,11 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_gmsic")
 count = 3
+combined_attributes = Dictionary[int, int]({
+0: -1,
+6: 1,
+16: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_b2em1"]
@@ -324,6 +393,11 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_gmsic")
 count = 4
+combined_attributes = Dictionary[int, int]({
+0: -1,
+6: 1,
+16: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_r47yw"]
@@ -336,6 +410,11 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_gmsic")
 count = 5
+combined_attributes = Dictionary[int, int]({
+0: -1,
+6: 1,
+16: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_wru5m"]
@@ -372,6 +451,12 @@ groups = PackedStringArray("flavoring")
 [sub_resource type="Resource" id="Resource_lhta0"]
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_ep1r0")
+combined_attributes = Dictionary[int, int]({
+0: -2,
+1: 1,
+7: 1,
+16: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_kv6ra"]
@@ -384,6 +469,12 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_ep1r0")
 count = 2
+combined_attributes = Dictionary[int, int]({
+0: -2,
+1: 1,
+7: 1,
+16: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_tpfgo"]
@@ -396,6 +487,12 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_ep1r0")
 count = 3
+combined_attributes = Dictionary[int, int]({
+0: -2,
+1: 1,
+7: 1,
+16: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_4jjfc"]
@@ -408,6 +505,12 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_ep1r0")
 count = 4
+combined_attributes = Dictionary[int, int]({
+0: -2,
+1: 1,
+7: 1,
+16: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_0bjib"]
@@ -420,6 +523,12 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_ep1r0")
 count = 5
+combined_attributes = Dictionary[int, int]({
+0: -2,
+1: 1,
+7: 1,
+16: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_288ad"]
@@ -447,6 +556,12 @@ groups = PackedStringArray("flavoring")
 [sub_resource type="Resource" id="Resource_tyky6"]
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_7bfm5")
+combined_attributes = Dictionary[int, int]({
+4: 1,
+5: 1,
+16: 1,
+20: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_cfenv"]
@@ -459,6 +574,12 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_7bfm5")
 count = 2
+combined_attributes = Dictionary[int, int]({
+4: 1,
+5: 1,
+16: 1,
+20: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_oqusu"]
@@ -471,6 +592,12 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_7bfm5")
 count = 3
+combined_attributes = Dictionary[int, int]({
+4: 1,
+5: 1,
+16: 1,
+20: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_2x7cx"]
@@ -483,6 +610,12 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_7bfm5")
 count = 4
+combined_attributes = Dictionary[int, int]({
+4: 1,
+5: 1,
+16: 1,
+20: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_rsi80"]
@@ -504,6 +637,12 @@ groups = PackedStringArray()
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_7bfm5")
 count = 5
+combined_attributes = Dictionary[int, int]({
+4: 1,
+5: 1,
+16: 1,
+20: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_im7sk"]
@@ -531,6 +670,11 @@ groups = PackedStringArray("flavoring")
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_icjej")
 count = 2
+combined_attributes = Dictionary[int, int]({
+0: -1,
+6: 1,
+16: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_5y0pr"]
@@ -543,6 +687,11 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_icjej")
 count = 2
+combined_attributes = Dictionary[int, int]({
+0: -1,
+6: 1,
+16: 2
+})
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_81ea7"]
@@ -773,13 +922,13 @@ light_color = Color(0.97131807, 0.8903729, 0.91132176, 1)
 light_energy = 0.2
 
 [node name="GridMap" type="GridMap" parent="." unique_id=339802995]
-mesh_library = ExtResource("22_abky3")
+mesh_library = ExtResource("23_p1ie5")
 cell_size = Vector3(1, 1, 1)
 cell_center_y = false
 collision_layer = 0
 collision_mask = 0
 data = {
-"cells": PackedInt32Array(0, 0, 3, 1, 0, 3, 2, 0, 3, 3, 0, 3, 4, 0, 3, 5, 0, 3, 6, 0, 3, 7, 0, 3, 8, 0, 3, 9, 0, 3, 10, 0, 3, 11, 0, 3, 0, 1, 3, 1, 1, 3, 2, 1, 3, 3, 1, 3, 4, 1, 3, 5, 1, 3, 6, 1, 3, 7, 1, 3, 8, 1, 3, 9, 1, 3, 10, 1, 3, 11, 1, 3, 0, 2, 3, 1, 2, 3, 2, 2, 3, 3, 2, 3, 4, 2, 3, 5, 2, 3, 6, 2, 3, 7, 2, 3, 8, 2, 3, 9, 2, 3, 10, 2, 3, 11, 2, 3, 0, 3, 3, 1, 3, 3, 2, 3, 3, 3, 3, 3, 4, 3, 3, 5, 3, 3, 6, 3, 3, 7, 3, 3, 8, 3, 3, 9, 3, 3, 10, 3, 3, 11, 3, 3, 0, 4, 3, 1, 4, 3, 2, 4, 3, 3, 4, 3, 4, 4, 3, 5, 4, 3, 6, 4, 3, 7, 4, 3, 8, 4, 3, 9, 4, 3, 10, 4, 3, 11, 4, 3, 0, 5, 3, 1, 5, 3, 2, 5, 3, 3, 5, 3, 4, 5, 3, 5, 5, 3, 6, 5, 3, 7, 5, 3, 8, 5, 3, 9, 5, 3, 10, 5, 3, 11, 5, 3, 0, 6, 3, 1, 6, 3, 2, 6, 3, 3, 6, 3, 4, 6, 3, 5, 6, 3, 6, 6, 3, 7, 6, 3, 8, 6, 3, 9, 6, 3, 10, 6, 3, 11, 6, 3, 0, 7, 3, 1, 7, 3, 2, 7, 3, 3, 7, 3, 4, 7, 3, 5, 7, 3, 6, 7, 3, 7, 7, 3, 8, 7, 3, 9, 7, 3, 10, 7, 3, 11, 7, 3, 0, 8, 3, 1, 8, 3, 2, 8, 3, 3, 8, 3, 4, 8, 3, 5, 8, 3, 6, 8, 3, 7, 8, 3, 8, 8, 3, 9, 8, 3, 10, 8, 3, 11, 8, 3, 0, 9, 3, 1, 9, 3, 2, 9, 3, 3, 9, 3, 4, 9, 3, 5, 9, 3, 6, 9, 3, 7, 9, 3, 8, 9, 3, 9, 9, 3, 10, 9, 3, 11, 9, 3, 0, 10, 3, 1, 10, 3, 2, 10, 3, 3, 10, 3, 4, 10, 3, 5, 10, 3, 6, 10, 3, 7, 10, 3, 8, 10, 3, 9, 10, 3, 10, 10, 3, 11, 10, 3, 0, 11, 2, 1, 11, 2, 2, 11, 2, 3, 11, 2, 4, 11, 2, 5, 11, 2, 6, 11, 2, 7, 11, 2, 8, 11, 2, 9, 11, 2, 10, 11, 2, 11, 11, 2, 0, 12, 2, 1, 12, 2, 2, 12, 2, 3, 12, 2, 4, 12, 2, 5, 12, 2, 6, 12, 2, 7, 12, 2, 8, 12, 2, 9, 12, 2, 10, 12, 2, 11, 12, 2, 0, 13, 2, 1, 13, 2, 2, 13, 2, 3, 13, 2, 4, 13, 2, 5, 13, 2, 6, 13, 2, 7, 13, 2, 8, 13, 2, 9, 13, 2, 10, 13, 2, 11, 13, 2, 0, 65535, 4, 1, 65535, 4, 2, 65535, 4, 3, 65535, 4, 4, 65535, 4, 5, 65535, 4, 6, 65535, 4, 7, 65535, 4, 8, 65535, 4, 9, 65535, 4, 10, 65535, 4, 11, 65535, 4, 65535, 0, 1048580, 12, 0, 1441796, 65535, 1, 1048580, 12, 1, 1441796, 65535, 2, 1048580, 12, 2, 1441796, 65535, 3, 1048580, 12, 3, 1441796, 65535, 4, 1048580, 12, 4, 1441796, 65535, 5, 1048580, 12, 5, 1441796, 65535, 6, 1048580, 12, 6, 1441796, 65535, 7, 1048580, 12, 7, 1441796, 65535, 8, 1048580, 12, 8, 1441796, 65535, 9, 1048580, 12, 9, 1441796, 65535, 10, 1048580, 12, 10, 1441796, 65535, 11, 1048580, 12, 11, 1441796, 65535, 12, 1048584, 12, 12, 1441799, 65535, 13, 1048583, 12, 13, 1441800, 65535, 65535, 6, 12, 65535, 1441798)
+"cells": PackedInt32Array(0, 0, 2, 1, 0, 2, 2, 0, 2, 3, 0, 2, 4, 0, 2, 5, 0, 2, 6, 0, 2, 7, 0, 2, 8, 0, 2, 9, 0, 2, 10, 0, 2, 11, 0, 2, 0, 1, 2, 1, 1, 2, 2, 1, 2, 3, 1, 2, 4, 1, 2, 5, 1, 2, 6, 1, 2, 7, 1, 2, 8, 1, 2, 9, 1, 2, 10, 1, 2, 11, 1, 2, 0, 2, 2, 1, 2, 2, 2, 2, 2, 3, 2, 2, 4, 2, 2, 5, 2, 2, 6, 2, 2, 7, 2, 2, 8, 2, 2, 9, 2, 2, 10, 2, 2, 11, 2, 2, 0, 3, 2, 1, 3, 2, 2, 3, 2, 3, 3, 2, 4, 3, 2, 5, 3, 2, 6, 3, 2, 7, 3, 2, 8, 3, 2, 9, 3, 2, 10, 3, 2, 11, 3, 2, 0, 4, 2, 1, 4, 2, 2, 4, 2, 3, 4, 2, 4, 4, 2, 5, 4, 2, 6, 4, 2, 7, 4, 2, 8, 4, 2, 9, 4, 2, 10, 4, 2, 11, 4, 2, 0, 5, 2, 1, 5, 2, 2, 5, 2, 3, 5, 2, 4, 5, 2, 5, 5, 2, 6, 5, 2, 7, 5, 2, 8, 5, 2, 9, 5, 2, 10, 5, 2, 11, 5, 2, 0, 6, 2, 1, 6, 2, 2, 6, 2, 3, 6, 2, 4, 6, 2, 5, 6, 2, 6, 6, 2, 7, 6, 2, 8, 6, 2, 9, 6, 2, 10, 6, 2, 11, 6, 2, 0, 7, 2, 1, 7, 2, 2, 7, 2, 3, 7, 2, 4, 7, 2, 5, 7, 2, 6, 7, 2, 7, 7, 2, 8, 7, 2, 9, 7, 2, 10, 7, 2, 11, 7, 2, 0, 8, 2, 1, 8, 2, 2, 8, 2, 3, 8, 2, 4, 8, 2, 5, 8, 2, 6, 8, 2, 7, 8, 2, 8, 8, 2, 9, 8, 2, 10, 8, 2, 11, 8, 2, 0, 9, 2, 1, 9, 2, 2, 9, 2, 3, 9, 2, 4, 9, 2, 5, 9, 2, 6, 9, 2, 7, 9, 2, 8, 9, 2, 9, 9, 2, 10, 9, 2, 11, 9, 2, 0, 10, 2, 1, 10, 2, 2, 10, 2, 3, 10, 2, 4, 10, 2, 5, 10, 2, 6, 10, 2, 7, 10, 2, 8, 10, 2, 9, 10, 2, 10, 10, 2, 11, 10, 2, 0, 11, 3, 1, 11, 3, 2, 11, 3, 3, 11, 3, 4, 11, 3, 5, 11, 3, 6, 11, 3, 7, 11, 3, 8, 11, 3, 9, 11, 3, 10, 11, 3, 11, 11, 3, 0, 12, 3, 1, 12, 3, 2, 12, 3, 3, 12, 3, 4, 12, 3, 5, 12, 3, 6, 12, 3, 7, 12, 3, 8, 12, 3, 9, 12, 3, 10, 12, 3, 11, 12, 3, 0, 13, 3, 1, 13, 3, 2, 13, 3, 3, 13, 3, 4, 13, 3, 5, 13, 3, 6, 13, 3, 7, 13, 3, 8, 13, 3, 9, 13, 3, 10, 13, 3, 11, 13, 3, 0, 65535, 4, 1, 65535, 4, 2, 65535, 4, 3, 65535, 4, 4, 65535, 4, 5, 65535, 4, 6, 65535, 4, 7, 65535, 4, 8, 65535, 4, 9, 65535, 4, 10, 65535, 4, 11, 65535, 4, 65535, 0, 1048580, 12, 0, 1441796, 65535, 1, 1048580, 12, 1, 1441796, 65535, 2, 1048580, 12, 2, 1441796, 65535, 3, 1048580, 12, 3, 1441796, 65535, 4, 1048580, 12, 4, 1441796, 65535, 5, 1048580, 12, 5, 1441796, 65535, 6, 1048580, 12, 6, 1441796, 65535, 7, 1048580, 12, 7, 1441796, 65535, 8, 1048580, 12, 8, 1441796, 65535, 9, 1048580, 12, 9, 1441796, 65535, 10, 1048580, 12, 10, 1441796, 65535, 11, 1048580, 12, 11, 1441796, 65535, 12, 1048584, 12, 12, 1441799, 65535, 13, 1048583, 12, 13, 1441800, 65535, 65535, 6, 12, 65535, 1441798)
 }
 metadata/_edit_group_ = true
 

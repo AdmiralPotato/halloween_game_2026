@@ -88,9 +88,9 @@ func update_floor():
 	$Floor/FloorBox.shape.size.z = number_of_tiles.y
 	$GridMap.clear()
 	for y in number_of_tiles.y:
-		var tile = 2 # customer tile
+		var tile = 3 # customer tile
 		if y < number_of_tiles.y - 3:
-			tile = 3 # kitchen tile
+			tile = 2 # kitchen tile
 		for x in number_of_tiles.x:
 			$GridMap.set_cell_item(Vector3i(x,0,y),tile)
 	# walls
