@@ -108,7 +108,23 @@ func swap_furni(xy: Vector2i, new_node: FurniNode, facing := Vector3.BACK) -> Fu
 			new_node.reparent(self, false)
 		else:
 			add_child(new_node)
-		new_node.transform = Transform3D(Basis(), Vector3(xy.x+0.5, 0.0, xy.y+0.5))
+		var axis := facing.abs().max_axis_index()
+		var rot := Basis()
+		match axis:
+			Vector3.AXIS_X:
+				if facing.x > 0:
+					rot = rot.rotated(Vector3.UP, TAU / 4)
+				else:
+					rot = rot.rotated(Vector3.UP, -TAU / 4)
+			Vector3.AXIS_Z:
+				if facing.z <= 0:
+					rot = rot.rotated(Vector3.UP, TAU / 2)
+			Vector3.AXIS_Y:  # XXX should we even support this?
+				if facing.y > 0:
+					rot = rot.rotated(Vector3.RIGHT, -TAU / 4)
+				else:
+					rot = rot.rotated(Vector3.RIGHT, TAU / 4)
+		new_node.transform = Transform3D(rot, Vector3(xy.x+0.5, 0.0, xy.y+0.5))
 		new_node.name = "Furni%d_%d" % [xy.x, xy.y]
 		new_node.unpack()
 		pathfinder.set_point_solid(xy, true)

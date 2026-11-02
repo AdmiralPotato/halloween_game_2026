@@ -98,7 +98,9 @@ func _physics_process(delta):
 		var old_held := held_object
 		if held_object is FurniNode or (not held_object and in_rearrange_mode):
 			# doesn't matter if we're in rearrange mode if we're already holding furni
-			held_object = Global.tilemap.swap_furni(pointing, held_object)
+			held_object = Global.tilemap.swap_furni(pointing, held_object,
+					Global.tilemap.to_world_point(pointing).direction_to(global_position),
+			)
 		elif held_object is ItemNode or (not held_object and not in_rearrange_mode):
 			held_object = Global.tilemap.swap_item(pointing, held_object)
 		# If we're holding an object now, and it's a new one we picked up...
