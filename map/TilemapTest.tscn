@@ -18,6 +18,10 @@
 [ext_resource type="Resource" uid="uid://coovqsg3sc4j7" path="res://model/data/items/orange_flavoring.tres" id="11_p1ie5"]
 [ext_resource type="Resource" uid="uid://cgsiu2wskomec" path="res://model/data/items/cookie.tres" id="12_0d7dl"]
 [ext_resource type="PackedScene" uid="uid://dfjdkdlvlfocq" path="res://map/FurniCuttingboard.tscn" id="14_p5gm8"]
+[ext_resource type="Resource" uid="uid://cbhkv0c47w56h" path="res://model/data/items/cake_slice.tres" id="14_r177p"]
+[ext_resource type="Resource" uid="uid://dtpa5786bonsp" path="res://model/data/items/frosting.tres" id="15_r177p"]
+[ext_resource type="Resource" uid="uid://c21pmt4yfpddq" path="res://model/data/items/lime_flavoring.tres" id="16_p1ie5"]
+[ext_resource type="Resource" uid="uid://bf5t4rvw72l23" path="res://model/data/items/hard_candy_bats.tres" id="17_p1ie5"]
 [ext_resource type="PackedScene" uid="uid://d1tp40f6bgvc6" path="res://map/FurniTrash.tscn" id="18_tdsbi"]
 [ext_resource type="Script" uid="uid://sxpgsgxykexm" path="res://map/gold_overlay.gd" id="19_6jj7b"]
 [ext_resource type="PackedScene" uid="uid://dahs4c1bgiu58" path="res://ui/shop.tscn" id="21_olchu"]
@@ -224,35 +228,36 @@ item = SubResource("Resource_gdj6q")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_5c0gd")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="Resource" id="Resource_cc7i2"]
-script = ExtResource("5_vwyy3")
-name = "cake"
-display_name = "cake"
-storage_type = 1
-categories = Array[int]([2])
-groups = PackedStringArray()
+[sub_resource type="Resource" id="Resource_nadkd"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("7_0d7dl")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_t3co8"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("16_p1ie5")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_abky3"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("15_r177p")
+modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_t3co8")])
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_r177p"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("17_p1ie5")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_robgn"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_cc7i2")
-craft_depth = 2
-unique_modifier_depth = 12
-total_modifier_depth = 36
+item = ExtResource("14_r177p")
+modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_nadkd"), SubResource("Resource_abky3"), SubResource("Resource_r177p")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
-
-[sub_resource type="Resource" id="Resource_8aiqj"]
-script = ExtResource("5_vwyy3")
-name = "chocolate chips"
-display_name = "chocolate chips"
-categories = Array[int]([1])
-cost_tier = 1
-max_stack_size = 4
-groups = null
-metadata/_custom_type_script = "uid://2hntn2isrv74"
 
 [sub_resource type="Resource" id="Resource_u7cwy"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_8aiqj")
+item = ExtResource("8_abky3")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_1chi6"]
@@ -280,18 +285,18 @@ attributes = Dictionary[int, int]({
 })
 groups = PackedStringArray("flavoring")
 
-[sub_resource type="Resource" id="Resource_abky3"]
+[sub_resource type="Resource" id="Resource_6sk0w"]
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_gmsic")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="Resource" id="Resource_nadkd"]
+[sub_resource type="Resource" id="Resource_cc7i2"]
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_1chi6")
-modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_abky3")])
+modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_6sk0w")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="Resource" id="Resource_r177p"]
+[sub_resource type="Resource" id="Resource_jnbr1"]
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_gmsic")
 count = 2
@@ -300,7 +305,7 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 [sub_resource type="Resource" id="Resource_p1ie5"]
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_1chi6")
-modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_r177p")])
+modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_jnbr1")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_0tecm"]
@@ -657,7 +662,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 3.5)
 
 [node name="Furni7_2" parent="Tilemap" unique_id=580082991 instance=ExtResource("9_2f20c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 2.5)
-initial_stack = SubResource("Resource_nadkd")
+initial_stack = SubResource("Resource_cc7i2")
 
 [node name="Furni7_3" parent="Tilemap" unique_id=71650266 instance=ExtResource("9_2f20c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 3.5)
@@ -748,7 +753,7 @@ shape = SubResource("WorldBoundaryShape3D_a28pv")
 [node name="Customers" type="Node3D" parent="." unique_id=1606353682]
 
 [node name="TestPlayer" parent="." unique_id=1707035649 instance=ExtResource("3_8t2af")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.980051, 0, 3.7065005)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.903643, 0, 5.0838165)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1716016636]
 environment = SubResource("Environment_el5rg")
