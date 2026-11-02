@@ -19,7 +19,7 @@ const commonColors: Record<string, { base: string; shadow: string; }> = {
 const fileNames: Record<string, string> = {
 	cake_batter: 'TILES-batter.png',
 	cake: 'TILES-cake.png',
-	cake_slice: 'TILES-cake-sice.png',
+	cake_slice: 'TILES-cake-slice.png',
 	cookie: 'TILES-cookie-baked.png',
 	cupcake: 'TILES-cupcake-baked.png',
 	cookie_dough: 'TILES-dough.png',
