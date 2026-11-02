@@ -147,6 +147,7 @@ static func render_recipe (_stack: ItemStack) -> Texture2D:
 		'frosting': return render_recipe_frosting(recipe, _stack)
 		'cake_batter': return render_recipe_cookie_dough(recipe, _stack)
 		'cookie_dough': return render_recipe_cookie_dough(recipe, _stack)
+		'cookie': return render_recipe_cookie(recipe, _stack)
 		_:
 			print('render_recipe: render not implemented yet: ', recipe_name)
 			return make_unimplemented_texture()
@@ -232,16 +233,38 @@ static func render_recipe_layer_multi (
 			)
 	return _texture
 
+static func render_recipe_stack_modifiers (
+	_stack: ItemStack,
+	_recipe_layer_dict: Dictionary,
+	_texture: Texture2D = make_empty_texture(),
+):
+	#print('render_recipe_stack_modifiers: _stack: ', _stack.item.name, ' _stack.modifiers: ', _stack.modifiers)
+	#print('render_recipe_stack_modifiers: _recipe_layer_dict: ', _recipe_layer_dict)
+	for modifier in _stack.modifiers:
+		var modifier_name = modifier.item.name
+		#print('render_recipe_stack_modifiers: modifier: ', modifier_name)
+		if modifier_name in _recipe_layer_dict:
+			var modifier_layer: Dictionary = _recipe_layer_dict[modifier_name]
+			print('render_recipe_stack_modifiers: modifier: ', modifier_name, ': ', modifier_layer)
+			for i in modifier.count:
+				draw_layer_into_texture(
+	 				_texture,
+	 				render_recipe_layer(modifier_layer),
+	 				get_blend_mode_from_string(modifier_layer.mode),
+	 			)
+
 
 static func render_recipe_frosting(_recipe: Dictionary, _stack: ItemStack) -> Texture2D:
 	print('render_recipe_frosting: ', _stack)
-	var frosting_texture = (
+	var texture = (
 		render_recipe_layer(_recipe.plain.root)
 		if _stack.modifiers.size() == 0 else
 		render_recipe_layer(_recipe.base.root)
 	)
 	var has_chocolate = false
 	var label_key = ''
+	# Note: This is NOT a good candidate for replacement with render_recipe_stack_modifiers(...)
+	# because we need to collect values for `has_chocolate` and `label_key`
 	for modifier in _stack.modifiers:
 		var flavor_modifier: Dictionary = _recipe.flavoring_modifiers[modifier.item.name]
 		if flavor_modifier:
@@ -250,7 +273,7 @@ static func render_recipe_frosting(_recipe: Dictionary, _stack: ItemStack) -> Te
 				has_chocolate = true
 			for i in modifier.count:
 				draw_layer_into_texture(
-					frosting_texture,
+					texture,
 					render_recipe_layer(flavor_modifier),
 					get_blend_mode_from_string(flavor_modifier.mode),
 				)
@@ -260,35 +283,27 @@ static func render_recipe_frosting(_recipe: Dictionary, _stack: ItemStack) -> Te
 		_recipe.jar.no_chocolate_jar
 	)
 	#print('render_recipe_frosting jar_layer: ', jar_layer)
-	render_recipe_layer(jar_layer, frosting_texture)
+	render_recipe_layer(jar_layer, texture)
 	if not label_key or not label_key in _recipe.decals:
 		label_key = 'plain'
 	var decal_layer: Dictionary = _recipe.decals[label_key]
-	render_recipe_layer(decal_layer, frosting_texture)
-	return frosting_texture
+	render_recipe_layer(decal_layer, texture)
+	return texture
 
 
 static func render_recipe_cookie_dough(_recipe: Dictionary, _stack: ItemStack) -> Texture2D:
 	print('render_recipe_cookie_dough: ', _stack)
 	var texture = render_recipe_layer(_recipe.base.root)
-	for modifier in _stack.modifiers:
-		if modifier.item.name in _recipe.flavoring_modifiers:
-			var modifier_layer: Dictionary = _recipe.flavoring_modifiers[modifier.item.name]
-			for i in modifier.count:
-				draw_layer_into_texture(
-	 				texture,
-	 				render_recipe_layer(modifier_layer),
-	 				get_blend_mode_from_string(modifier_layer.mode),
-	 			)
-	for modifier in _stack.modifiers:
-		var modifier_name = modifier.item.name;
-		if modifier_name in _recipe.other_modifiers:
-			var modifier_layer: Dictionary = _recipe.other_modifiers[modifier_name]
-			#print('render_recipe_cookie_dough: other_modifiers: ', modifier_name, ': ', modifier_layer)
-			draw_layer_into_texture(
-				texture,
-				render_recipe_layer(modifier_layer),
-				get_blend_mode_from_string(modifier_layer.mode),
-			)
+	render_recipe_stack_modifiers(_stack, _recipe.flavoring_modifiers, texture)
+	render_recipe_stack_modifiers(_stack, _recipe.other_modifiers, texture)
 	render_recipe_layer(_recipe.other.bowl, texture)
+	return texture
+
+
+static func render_recipe_cookie(_recipe: Dictionary, _stack: ItemStack) -> Texture2D:
+	print('render_recipe_cookie: ', _stack)
+	var texture = render_recipe_layer(_recipe.base.root)
+	render_recipe_stack_modifiers(_stack, _recipe.flavoring_modifiers, texture)
+	render_recipe_stack_modifiers(_stack, _recipe.other_modifiers, texture)
+	render_recipe_stack_modifiers(_stack, _recipe.doodads, texture)
 	return texture
