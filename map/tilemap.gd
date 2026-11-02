@@ -89,7 +89,7 @@ func get_item(xy: Vector2i) -> Node3D:
 ## NOTE: If there is an item, it will need a new Y translation. If there is
 ## furni, and it has a "placed_item_height" property, that will be used to
 ## decide the new Y translation. Otherwise it will be 0.
-func swap_furni(xy: Vector2i, new_node: FurniNode) -> FurniNode:
+func swap_furni(xy: Vector2i, new_node: FurniNode, facing := Vector3.BACK) -> FurniNode:
 	var tile := _get_tile(xy)
 	if !tile: return new_node
 	var old_node := tile.furni

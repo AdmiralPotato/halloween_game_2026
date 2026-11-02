@@ -2,10 +2,17 @@
 class_name ItemStack
 extends Resource
 
-## The kind of item in this stack.
+## The kind of item in this stack. (NOTE: Setting this will reset the combined
+## modifiers, but only for those modifers on the item. Generally, don't do this
+## after forming the item stack; the only reason this occurs is to support the
+## editor and Resource deserialization, which invokes the nilary constructor and
+## then this setter.)
 @export var item: ItemInfo:
 	set(new):
 		item = new
+		if item:
+			for attr in item.attributes:
+				combined_attributes[attr] = item.attributes[attr]
 		emit_changed()
 ## How many items are in this stack.
 @export_range(0, 50, 1, "or_greater") var count: int = 1:
@@ -103,9 +110,6 @@ var sell_price: int:
 func _init(_item: ItemInfo = null, _count: int = 1):
 	self.item = _item
 	self.count = _count
-	if _item:
-		for attr in _item.attributes:
-			combined_attributes[attr] = _item.attributes[attr]
 
 const VOWELS := "aeiou"
 const CARDINALITY: Dictionary[int, String] = {

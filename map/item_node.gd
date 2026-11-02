@@ -25,6 +25,14 @@ enum FlavoringSpriteOffset {
 # which we are attached as a script; for this reason, don't just preload this.
 const ITEM_RESOURCE := "res://map/ItemNode.tscn"
 static var item_scene: PackedScene = null
+## Make a new ItemNode. An ItemNode is the renderer and container for an ItemStack,
+## and can be placed in the scene tree. The returned node is not yet in the tree,
+## and has default transforms (usually centered on the origin with identity basis).
+##
+## The ItemStack is deep-copied. Thus, it is safe to hand the ItemNode to other
+## users without worry that it will alias and mutate the stack passed as an
+## argument. As a FurniNode, if you _want_ to relinquish ownership, it's better
+## to take or give the ItemNode and not its underlying stack.
 static func make_node(_stack: ItemStack) -> ItemNode:
 	if not item_scene:
 		item_scene = load(ITEM_RESOURCE)
