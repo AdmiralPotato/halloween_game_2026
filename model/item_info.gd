@@ -48,6 +48,31 @@ enum Attribute {
 	FLORAL,
 }
 
+const AttrNames: Dictionary[Attribute, String] = {
+	Attribute.PALE: "Pale",
+	Attribute.RED: "Red",
+	Attribute.ORANGE: "Orange",
+	Attribute.BROWN: "Brown",
+	Attribute.YELLOW: "Yellow",
+	Attribute.GREEN: "Green",
+	Attribute.BLUE: "Blue",
+	Attribute.PURPLE: "Purple",
+	Attribute.VARIEGATED: "Variegated",
+	Attribute.MOIST: "Moist",
+	Attribute.SOFT: "Soft",
+	Attribute.CRUMBLY: "Crumbly",
+	Attribute.POP: "Pop",
+	Attribute.NUTTY: "Nutty",
+	Attribute.SAVORY: "Savory",
+	Attribute.CHOCOLATEY: "Chocolatey",
+	Attribute.FRUITY: "Fruity",
+	Attribute.MINTY: "Minty",
+	Attribute.SALTY: "Salty",
+	Attribute.SWEET: "Sweet",
+	Attribute.TART: "Tart",
+	Attribute.FLORAL: "Floral",
+}
+
 const TIER_COSTS: Dictionary[int, int] = {1: 10, 2: 25, 3: 50, 4: 100, 5: 500}
 const PER_EACH_MOD_BASE: float = 1.1
 const PER_UNIQUE_MOD_BASE: float = 1.25

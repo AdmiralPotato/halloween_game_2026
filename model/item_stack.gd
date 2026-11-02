@@ -80,10 +80,19 @@ var sell_price: int:
 	get:
 		if not item:
 			return 0
+		var my_modifier_cardinality := modifier_cardinality
+		var my_unique_modifier_depth: int = my_modifier_cardinality.size()
+		var my_total_modifier_depth: int = 0
+		for key in my_modifier_cardinality:
+			my_total_modifier_depth += my_modifier_cardinality[key]
+		var entire_unique_modifier_depth := \
+				unique_modifier_depth + my_unique_modifier_depth
+		var entire_total_modifier_depth := \
+				total_modifier_depth + my_total_modifier_depth
 		var my_price := int(ceil(item.sell_price * \
 				ItemInfo.PER_CRAFT_BASE ** craft_depth * \
-				ItemInfo.PER_UNIQUE_MOD_BASE ** unique_modifier_depth * \
-				ItemInfo.PER_EACH_MOD_BASE ** total_modifier_depth
+				ItemInfo.PER_UNIQUE_MOD_BASE ** entire_unique_modifier_depth * \
+				ItemInfo.PER_EACH_MOD_BASE ** entire_total_modifier_depth
 		)) * count
 		for stack in contents:
 			my_price += stack.sell_price

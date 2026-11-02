@@ -2,9 +2,67 @@
 
 [ext_resource type="Script" uid="uid://byhpra7hsmfpy" path="res://map/test_customer.gd" id="1_d32tx"]
 [ext_resource type="PackedScene" uid="uid://cka7oxcdsa3cm" path="res://assets/npc_default.glb" id="2_30qwn"]
+[ext_resource type="PackedScene" uid="uid://x71gqlsmfg4w" path="res://ui/player_cursor.tscn" id="3_db40f"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a28pv"]
 radius = 0.375
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_30qwn"]
+animation = &"carry"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_db40f"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2y0wt"]
+nodes/output/position = Vector2(560, 140)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_30qwn")
+nodes/Animation/position = Vector2(160, 120)
+nodes/move_speed/node = SubResource("AnimationNodeTimeScale_db40f")
+nodes/move_speed/position = Vector2(340, 120)
+node_connections = [&"output", 0, &"move_speed", &"move_speed", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uejo3"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4cmi2"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_6ttwi"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_dcons"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hbrga"]
+graph_offset = Vector2(-152.61462, -32.548485)
+nodes/output/position = Vector2(740, 220)
+nodes/move_speed/node = SubResource("AnimationNodeTimeScale_dcons")
+nodes/move_speed/position = Vector2(360, 40)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_4cmi2")
+nodes/Animation/position = Vector2(200, 60)
+nodes/idle_blend/node = SubResource("AnimationNodeBlend2_6ttwi")
+nodes/idle_blend/position = Vector2(540, 120)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_uejo3")
+"nodes/Animation 2/position" = Vector2(360, 240)
+node_connections = [&"output", 0, &"idle_blend", &"move_speed", 0, &"Animation", &"idle_blend", 0, &"Animation 2", &"idle_blend", 1, &"move_speed"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4i4jg"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xyqqj"]
+xfade_time = 0.1
+advance_mode = 2
+advance_expression = "held_item"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c1bso"]
+xfade_time = 0.1
+advance_mode = 2
+advance_expression = "not held_item"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_a28pv"]
+states/Start/position = Vector2(179, 100)
+states/carry/node = SubResource("AnimationNodeBlendTree_2y0wt")
+states/carry/position = Vector2(336, 127)
+states/empty/node = SubResource("AnimationNodeBlendTree_hbrga")
+states/empty/position = Vector2(336, 54)
+transitions = ["Start", "empty", SubResource("AnimationNodeStateMachineTransition_4i4jg"), "empty", "carry", SubResource("AnimationNodeStateMachineTransition_xyqqj"), "carry", "empty", SubResource("AnimationNodeStateMachineTransition_c1bso")]
 
 [node name="TestCustomer" type="RigidBody3D" unique_id=564519824]
 collision_layer = 4
@@ -13,6 +71,7 @@ axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 gravity_scale = 0.0
+lock_rotation = true
 linear_damp = 5.0
 script = ExtResource("1_d32tx")
 
@@ -23,5 +82,50 @@ shape = SubResource("CapsuleShape3D_a28pv")
 [node name="npc_default2" parent="CollisionShape3D" unique_id=1106498534 instance=ExtResource("2_30qwn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
+[node name="Skeleton3D" parent="CollisionShape3D/npc_default2/npc_bones" parent_id_path=PackedInt32Array(1106498534, 1617244189) index="0" unique_id=462207442]
+bones/1/position = Vector3(2.5479424e-15, 0.9765391, -0.26000008)
+bones/2/rotation = Quaternion(-0.7289251, 1.822391e-07, 3.693841e-07, 0.6845935)
+bones/3/rotation = Quaternion(-0.066094324, -1.11565326e-10, 2.1209145e-08, 0.9978134)
+bones/4/rotation = Quaternion(0.1204731, -1.7928388e-10, -1.9754834e-08, 0.99271667)
+bones/5/rotation = Quaternion(0.07010815, -0.13232155, 0.015786685, 0.98859835)
+bones/6/position = Vector3(0.09999943, 0.16190487, -0.043563917)
+bones/6/rotation = Quaternion(0.4336352, 0.5527795, 0.5575547, -0.4421857)
+bones/7/rotation = Quaternion(-0.5781751, 0.11358529, 0.19932176, 0.782996)
+bones/8/rotation = Quaternion(-0.07001999, -0.08089937, -0.34609345, 0.9320793)
+bones/9/rotation = Quaternion(-0.01535908, -0.013445912, -0.0020130018, 0.9997896)
+bones/10/position = Vector3(-0.09999946, 0.161836, -0.043566406)
+bones/10/rotation = Quaternion(-0.42623723, 0.55945575, 0.54935896, 0.45114967)
+bones/11/rotation = Quaternion(-0.5757815, -0.11666957, -0.1989586, 0.7843975)
+bones/12/rotation = Quaternion(-0.10070118, 0.07676916, 0.3398092, 0.9319311)
+bones/13/rotation = Quaternion(-0.038665093, 0.005082766, 0.005192878, 0.99922585)
+bones/14/rotation = Quaternion(-4.2251352e-07, 1.4703362e-07, -0.70710707, 0.7071066)
+bones/15/rotation = Quaternion(0.6838834, -0.12620988, -0.056113176, 0.7163978)
+bones/16/rotation = Quaternion(-1.6078117e-07, 6.073294e-09, -0.21605328, 0.9763816)
+bones/17/rotation = Quaternion(1.470336e-07, 4.2251355e-07, 0.7071066, 0.70710707)
+bones/18/rotation = Quaternion(0.69136155, 0.10086625, 0.030476207, 0.7147843)
+bones/19/rotation = Quaternion(-1.6063174e-07, -1.798173e-08, 0.21605322, 0.97638166)
+bones/20/rotation = Quaternion(-5.3385087e-08, 0.7071068, 0.7071068, -5.3385087e-08)
+bones/21/position = Vector3(0.20000008, 0.19000006, -0.060000926)
+bones/22/rotation = Quaternion(-0.34284708, 2.948904e-07, 1.0762534e-07, 0.93939126)
+bones/24/position = Vector3(-0.2000002, 0.19, -0.05999941)
+bones/25/rotation = Quaternion(-0.34284773, -2.9489033e-07, -1.0762557e-07, 0.9393911)
+bones/26/rotation = Quaternion(-0.2982715, 0.6411195, -0.29827163, 0.6411193)
+bones/27/position = Vector3(0.32034016, 0.5999999, 0.44321877)
+bones/28/position = Vector3(-0.28557009, 0.5999999, 0.44321877)
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1964735711]
+root_node = NodePath("../CollisionShape3D/npc_default2")
+tree_root = SubResource("AnimationNodeStateMachine_a28pv")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../CollisionShape3D/npc_default2/AnimationPlayer")
+parameters/carry/move_speed/scale = 1.0
+parameters/empty/move_speed/scale = 1.0
+parameters/empty/idle_blend/blend_amount = 0.0
+
 [node name="Item" type="Marker3D" parent="." unique_id=1172594617]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.7, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7252903e-08, 1.5, 0.70000005)
+
+[node name="MoodIndicator" parent="." unique_id=1769439579 instance=ExtResource("3_db40f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 0)
+
+[editable path="CollisionShape3D/npc_default2"]

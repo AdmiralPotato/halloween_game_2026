@@ -3,13 +3,35 @@ extends RigidBody3D
 
 # TODO: refactor this into a common base with TestPlayer
 #region from player
+@export_group("Movement")
 ## How much force the birb can apply on a given axis
 @export var movement_force := 30
 ## How fast the birb wants to go when a given axis is maxed out
 @export var movement_speed := 8
 ## How fast the birb wants to turn in RADIANS per second
-@export var turn_speed := TAU
+@export var turn_alpha := 0.1
 #endregion
+
+@export_group("Timeouts")
+## Customers generally leave of their own accord after this many seconds if they
+## can't find something interesting by then.
+@export var leave_time := 15.0
+## Remove customer after this many seconds in simulation. Usually this indicates
+## something pathological is happening with the movement code.
+@export var max_existing_time := 45.0
+## Cancel any movement state that takes longer than this. Usually this indicates
+## something pathological is happening with the movement code.
+@export var max_move_time := 15.0
+
+@export_group("Purchasing", "desire_")
+## Range for how "picky" customers are. The x component is the minimum, the y is
+## the maximum. desire ("pickiness") is initialized uniformly random between these
+## two values.
+@export var desire_range := Vector2(-1.0, 3.5)
+## Bonus for exceeding expectations. This is raised to the difference between
+## desire ("pickiness") and the appraised value of an item, then multiplied
+## into the sale cost. (It's like a tip!)
+@export var desire_excess_bonus := 2.0
 
 @abstract class State extends RefCounted:
 	var owner: TestCustomer
@@ -50,7 +72,7 @@ class Dwell extends State:
 		until = _owner.time_in_scene + duration
 
 	func _to_string():
-		return "Dwell:{0}".format([until])
+		return "Dwell:%.2f/%.2f" % [owner.time_in_scene, until]
 
 	func tick(_delta: float) -> State:
 		if owner.time_in_scene >= until:
@@ -67,6 +89,7 @@ class WanderTo extends State:
 	var path: PackedVector2Array
 	var next_path_recompute := 0
 	var next_state: State
+	var initial_time := -1.0  # used to figure out how long we've been navigating
 
 	func _init(_owner: TestCustomer, _to: Vector2i = NOWHERE, next: State = null):
 		super(_owner)
@@ -96,7 +119,14 @@ class WanderTo extends State:
 			path.remove_at(0)
 
 	func tick(_delta: float) -> State:
+		if initial_time == -1.0:
+			initial_time = owner.time_in_scene
+		if owner.time_in_scene > initial_time + owner.max_move_time:
+			push_warning("Customer ", owner, ": ran out of time navigating to ", to, ", skipping")
+			owner.target = null
+			return next_state
 		if is_close(owner.position, Global.tilemap.to_world_point(to)):
+			owner.target = null
 			return next_state
 		if Time.get_ticks_msec() >= next_path_recompute:
 			recompute()
@@ -147,7 +177,9 @@ class GiveMoney extends State:
 		return "GiveMoney:{0}".format([owner.item.stack])
 
 	func tick(_delta: float) -> State:
-		var gold = owner.item.stack.sell_price
+		if not owner.item:
+			return ChooseState.new(owner)
+		var gold := owner.get_sale_price_for(owner.item.stack)
 		owner.item = null
 		Global.gold += gold
 		var reg = Global.tilemap.get_furni(tile)
@@ -164,16 +196,23 @@ class ChooseState extends State:
 			Global.tilemap.get_tiles_of_type(preload("res://map/furni_displaycase.gd"))
 		for case in cases:
 			var furni: FurniDisplayCase = Global.tilemap.get_furni(case)
-			if furni and furni.item and furni.item.stack:
+			if (
+					furni \
+					and furni.item \
+					and furni.item.stack \
+					and owner.get_desire_for(furni.item.stack) >= owner.desire
+			):
 				return WanderTo.new(owner, case,
 						BuyFrom.new(owner, case),
 				)
 		var new_state := WanderTo.new(owner)
-		if owner.time_in_scene > 15.0:
+		if owner.time_in_scene > owner.leave_time:
 			new_state.next_state = Leave.new(owner)
 		return new_state
 
 
+var prefs: Dictionary[ItemInfo.Attribute, float] = {}
+var desire: float = 0.0
 var time_in_scene := 0.0
 var target = null  # null | Vector3
 var state: State = ChooseState.new(self)
@@ -193,6 +232,14 @@ var item: ItemNode:
 			it.transform = Transform3D()
 			it.animate_to_current_transform()
 
+# AnimationTree expression targets
+var moving: bool:
+	get:
+		return linear_velocity.length_squared() > 0.3
+var held_item: bool:
+	get:
+		return $Item.get_child_count() > 0
+
 func set_target_gridpt(v: Vector2i):
 	target = Global.tilemap.to_world_point(v)
 
@@ -203,12 +250,73 @@ func get_gridpt(pos = null) -> Vector2i:
 
 func _ready():
 	Global.request_debug_info.connect(register_debug_info)
+	# we always want a few preferences to be nearly unit, so we scatter a shuffled
+	# array rather than just computing rand for each one.
+	var components: Array = []
+	components.resize(ItemInfo.Attribute.size())
+	for i in range(len(components)):
+		components[i] = remap(i, 0, max(1, len(components) - 1), -1.0, 1.0)
+	components.shuffle()
+	var index := 0
+	for attrname in ItemInfo.Attribute:
+		prefs[ItemInfo.Attribute[attrname]] = components[index]
+		index += 1
+	desire = desire_range.x + randf() * (desire_range.y - desire_range.x)
+	var prefstrings := PackedStringArray()
+	for attr in get_top_n_desires(3):
+		prefstrings.append("- " + ItemInfo.AttrNames[attr])
+	$MoodIndicator.text = "Wants\n{prefs}\n{pickiness}".format({
+		prefs = "\n".join(prefstrings),
+		pickiness = describe_desire(desire),
+	})
+	$MoodIndicator.top_level = false
+	$MoodIndicator.popup_at($MoodIndicator.global_position)
 
 func register_debug_info(_dp: DebugPanel):
 	DebugPanel.monitor("Customer {0} state".format([self]), self, &"state")
+	DebugPanel.monitor("Customer {0} target".format([self]), self, &"target")
+
+func get_desire_for(stack: ItemStack) -> float:
+	var total := 0.0
+	for attr in stack.combined_attributes:
+		total += prefs[attr] * stack.combined_attributes[attr]
+	return total
+
+func get_sale_price_for(stack: ItemStack) -> int:
+	var diff_des := maxf(0.0, get_desire_for(stack) - desire)
+	return int(ceil(desire_excess_bonus ** diff_des * stack.sell_price))
+
+func get_top_n_desires(n: int = 1) -> Array[ItemInfo.Attribute]:
+	var pairs := []
+	for attr in prefs:
+		pairs.append([prefs[attr], attr])
+	# NB: we want this sort descending, thus >
+	pairs.sort_custom(func(lpair: Array, rpair: Array): return lpair[0] > rpair[0])
+	var ret: Array[ItemInfo.Attribute] = []
+	for i in range(n):
+		ret.append(pairs[i][1])
+	return ret
+
+static func describe_desire(des: float) -> String:
+	if des <= 0.25:
+		return "not picky at all"
+	elif des <= 1.0:
+		return "a bit picky"
+	elif des <= 3.0:
+		return "quite picky"
+	else:
+		return "very picky"
 
 func _physics_process(delta: float) -> void:
 	time_in_scene += delta
+	if time_in_scene > max_existing_time:
+		push_warning("Customer ", self, ": ran out of time (stuck?). Last state: ", state)
+		# pay for our goods if we have them
+		if item and item.stack:
+			Global.gold += get_sale_price_for(item.stack)
+		queue_free()
+		return
+		
 	var new_state = state.tick(delta)
 	while new_state:
 		# Loop to give zero-frame delays to things like ChooseState. This somewhat
@@ -217,13 +325,24 @@ func _physics_process(delta: float) -> void:
 		# print(self, ' enters state ', new_state)
 		state = new_state
 		new_state = state.tick(delta)
+	
+	# this is OK to put above forces; we don't integrate in this callback anyway,
+	# so the result won't change. (That happens in _integrate_forces().)
+	var move_speed := linear_velocity.length() / 3.0
+	$AnimationTree["parameters/carry/move_speed/scale"] = move_speed
+	$AnimationTree["parameters/empty/move_speed/scale"] = move_speed
+	$AnimationTree["parameters/empty/idle_blend/blend_amount"] = \
+			clamp(linear_velocity.length(), 0, 1)
 
 	if target:
 		var dir: Vector3 = (position - target).normalized()
 		var motion := Vector2(dir.x, dir.z) * movement_speed
 		apply_central_force(
-				(linear_velocity - Vector3(motion.x, 0, motion.y))\
+				(-Vector3(motion.x, 0, motion.y))\
 					.clamp(-Vector3.ONE, Vector3.ONE) * movement_force
 		)
-		if motion.length_squared() >= 0.3:
-			rotation.y += angle_difference(motion.angle(), rotation.y) * turn_speed * delta
+	if linear_velocity.length_squared() >= 0.3:
+		var current := basis.get_rotation_quaternion()
+		var desired := Quaternion(Vector3.BACK, linear_velocity.normalized())
+		var next := current.slerp(desired, turn_alpha)
+		basis = Basis(next)

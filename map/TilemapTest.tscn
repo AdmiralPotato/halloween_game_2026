@@ -737,7 +737,7 @@ shape = SubResource("WorldBoundaryShape3D_a28pv")
 [node name="Customers" type="Node3D" parent="." unique_id=1606353682]
 
 [node name="TestPlayer" parent="." unique_id=1707035649 instance=ExtResource("3_8t2af")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.980051, 0, 3.7065005)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.595673, 0, 8.937071)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1716016636]
 environment = SubResource("Environment_el5rg")
