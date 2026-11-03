@@ -163,3 +163,7 @@ func _on_shop_purchase_item(item: ItemInfo) -> void:
 	furni.transform = furni.transform.scaled($TestPlayer.SMOL)
 	$TestPlayer.held_object = furni
 	$Shop.visible = false
+
+
+func _on_welcome_button_up() -> void:
+	$WelcomePanelContainer.visible = false

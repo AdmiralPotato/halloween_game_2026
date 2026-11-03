@@ -729,6 +729,13 @@ sky = SubResource("Sky_eai58")
 atlas = ExtResource("23_0d7dl")
 region = Rect2(256, 256, 256, 256)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pgham"]
+content_margin_left = 32.0
+content_margin_top = 32.0
+content_margin_right = 32.0
+content_margin_bottom = 32.0
+bg_color = Color(0.8, 0.5137255, 0.2627451, 0.78039217)
+
 [node name="TilemapTest" type="Node3D" unique_id=1389805114]
 process_physics_priority = -1
 script = ExtResource("1_0n275")
@@ -942,8 +949,8 @@ one_shot = true
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
+offset_left = -23.0
+offset_right = 23.0
 offset_bottom = 40.0
 grow_horizontal = 2
 script = ExtResource("19_6jj7b")
@@ -964,7 +971,46 @@ script = ExtResource("24_0d7dl")
 [node name="Shop" parent="." unique_id=1972639199 instance=ExtResource("21_olchu")]
 visible = false
 
-[connection signal="held_object_changed" from="TestPlayer" to="." method="_on_test_player_held_object_changed"]
+[node name="WelcomePanelContainer" type="PanelContainer" parent="." unique_id=1846917784]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_pgham")
+
+[node name="Panel" type="Panel" parent="WelcomePanelContainer" unique_id=2048986022]
+layout_mode = 2
+offset_transform_enabled = true
+
+[node name="WelcomeScreenContainer" type="VBoxContainer" parent="WelcomePanelContainer/Panel" unique_id=1339192541]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="WelcomePanelContainer/Panel/WelcomeScreenContainer" unique_id=1036837673]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Welcome to our Halloween game! Here are the controls: 
+
+Move: WASD or Arrows
+Pickup/Put down: Spacebar
+Action: E
+Console: Backtick
+Switch Furniture/Item Placement: Tab
+Store: Q"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="WelcomePanelContainer/Panel/WelcomeScreenContainer" unique_id=258634766]
+layout_mode = 2
+text = "Okay! <3 "
+
 [connection signal="timeout" from="SpawnCustomer" to="." method="_on_spawn_customer_timeout"]
 [connection signal="purchase_furni" from="Shop" to="." method="_on_shop_purchase_furni"]
 [connection signal="purchase_item" from="Shop" to="." method="_on_shop_purchase_item"]
+[connection signal="button_up" from="WelcomePanelContainer/Panel/WelcomeScreenContainer/Button" to="." method="_on_welcome_button_up"]
