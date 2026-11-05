@@ -32,7 +32,7 @@ func create_slots(minCoord: Vector2i, size: Vector2i, ...extra_args):
 func clear():
 	tiles.clear()
 	pathfinder.clear()
-	
+
 
 ## Convert a tile position to a world position. This position is on the floor,
 ## in the center of the tile--where the tile itself would be placed.
@@ -43,18 +43,18 @@ func to_world_point(xy: Vector2i) -> Vector3:
 ## Returns the coordinates of a tile that someone standing at `position` and
 ## facing `facing` (a unit vector) should be interacting with / picking up from
 ## / putting down on. (This tile may or may not actually exist.)
-func find_tile(player_position: Vector3, facing: Vector3, reach: float = 1.0) \
--> Vector2i:
+func find_tile(player_position: Vector3, facing: Vector3, reach: float = 1.0) -> Vector2i:
 	var target_pos := player_position + facing * reach
 	return Vector2i(floor(target_pos.x), floor(target_pos.z))
-	
+
+
 ## Returns an array of coordinates of tiles that have the given type of FurniNode
 ## on them.
 func get_tiles_of_type(script) -> Array[Vector2i]:
 	var res: Array[Vector2i] = []
-	for position in tiles:
-		if tiles[position].furni and tiles[position].furni.get_script() == script:
-			res.append(position)
+	for tile in tiles:
+		if tiles[tile].furni and tiles[tile].furni.get_script() == script:
+			res.append(tile)
 	return res
 
 func _get_tile(xy: Vector2i) -> Tile:
@@ -89,7 +89,7 @@ func get_item(xy: Vector2i) -> Node3D:
 ## NOTE: If there is an item, it will need a new Y translation. If there is
 ## furni, and it has a "placed_item_height" property, that will be used to
 ## decide the new Y translation. Otherwise it will be 0.
-func swap_furni(xy: Vector2i, new_node: FurniNode) -> FurniNode:
+func swap_furni(xy: Vector2i, new_node: FurniNode, facing := Vector3.BACK) -> FurniNode:
 	var tile := _get_tile(xy)
 	if !tile: return new_node
 	var old_node := tile.furni
@@ -108,17 +108,33 @@ func swap_furni(xy: Vector2i, new_node: FurniNode) -> FurniNode:
 			new_node.reparent(self, false)
 		else:
 			add_child(new_node)
-		new_node.transform = Transform3D(Basis(), Vector3(xy.x+0.5, 0.0, xy.y+0.5))
+		var axis := facing.abs().max_axis_index()
+		var rot := Basis()
+		match axis:
+			Vector3.AXIS_X:
+				if facing.x > 0:
+					rot = rot.rotated(Vector3.UP, TAU / 4)
+				else:
+					rot = rot.rotated(Vector3.UP, -TAU / 4)
+			Vector3.AXIS_Z:
+				if facing.z <= 0:
+					rot = rot.rotated(Vector3.UP, TAU / 2)
+			Vector3.AXIS_Y:  # XXX should we even support this?
+				if facing.y > 0:
+					rot = rot.rotated(Vector3.RIGHT, -TAU / 4)
+				else:
+					rot = rot.rotated(Vector3.RIGHT, TAU / 4)
+		new_node.transform = Transform3D(rot, Vector3(xy.x+0.5, 0.0, xy.y+0.5))
 		new_node.name = "Furni%d_%d" % [xy.x, xy.y]
 		new_node.unpack()
 		pathfinder.set_point_solid(xy, true)
 	return old_node
-	
+
 
 ## Interact with the furni at the given position.
 func interact(xy: Vector2i, player: Node):
 	var tile := _get_tile(xy)
-	if tile.furni:
+	if tile and tile.furni:
 		tile.furni.interact(player)
 
 ## Ask the furni at the given position to pick up/drop an item. Returns the item
@@ -138,30 +154,6 @@ func swap_item(xy: Vector2i, new_node: ItemNode) -> ItemNode:
 		var item = tile.furni.provide_item()
 		return item
 
-## If there is a tile at the given coordinates, this attempts to combine the
-## given item with an item already on the tile. If there is no item, this ends
-## up being the same as swap_item. If there is an item, and it accepts the swap,
-## we return null, indicating that you are no longer holding an item. If there
-## is an item but the swap is rejected, or if there is no tile, we return the
-## item you passed in.
-##
-## If we return an item, its tree membership was not affected.
-func combine_item(xy: Vector2i, new_node: ItemNode) -> ItemNode:
-	var tile := _get_tile(xy)
-	if !tile: return new_node
-	if tile.item != null:
-		if tile.item.attempt_combine(new_node):
-			new_node.queue_free();
-			return null
-		return new_node
-	assert(tile.item == null)
-	tile.item = new_node
-	add_child(tile.item)
-	new_node.position = Vector3(xy.x+0.5, 0.0, xy.y+0.5)
-	if tile.item:
-		if tile.furni && tile.furni.has_property("item_height"):
-			new_node.position.y = tile.furni.item_height
-	return null
 
 func _init():
 	pathfinder.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
@@ -191,3 +183,9 @@ func pick_open_point() -> Vector2i:
 			.filter(func(pt: Dictionary): return not pt.solid)\
 			.pick_random()\
 			.position
+
+func get_customer_spawnpoint() -> Vector2i:
+	return pathfinder.region.end - Vector2i.ONE
+	
+func get_customer_exitpoint() -> Vector2i:
+	return Vector2i(0, pathfinder.region.end.y - 1)

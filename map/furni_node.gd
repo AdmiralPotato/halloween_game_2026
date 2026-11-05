@@ -27,7 +27,14 @@ func pack():
 ## Called when the player tries to pick up an item from this tile
 func provide_item() -> ItemNode:
 	return null
-	
+
+
+## Called when the player's cursor is on this tile; it should NOT modify the
+## state of the tile, and the caller MUST NOT modify the node. The returned
+## ItemNode should be in-tree and positioned as the "most prominent"--we may
+## use it for tooltips.
+func query_item() -> ItemNode:
+	return null
 
 ## Called when the player tries to place an item on this tile; returns the item
 ## the player should be holding after this interaction.
@@ -36,7 +43,7 @@ func accept_item(item: ItemNode) -> ItemNode:
 	
 
 ## Called when the player interacts with this tile.
-func interact(player: Node):
+func interact(_player: Node):
 	pass
 
 

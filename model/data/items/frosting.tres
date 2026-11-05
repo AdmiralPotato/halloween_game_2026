@@ -2,9 +2,6 @@
 
 [ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_vtt3h"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vtt3h"]
-size = Vector2(256, 256)
-
 [resource]
 script = ExtResource("1_vtt3h")
 name = "frosting"
@@ -14,4 +11,4 @@ categories = Array[int]([4])
 cost_tier = 2
 max_stack_size = 4
 groups = PackedStringArray()
-texture = SubResource("PlaceholderTexture2D_vtt3h")
+sort = 400

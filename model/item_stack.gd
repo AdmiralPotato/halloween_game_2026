@@ -2,10 +2,17 @@
 class_name ItemStack
 extends Resource
 
-## The kind of item in this stack.
+## The kind of item in this stack. (NOTE: Setting this will reset the combined
+## modifiers, but only for those modifers on the item. Generally, don't do this
+## after forming the item stack; the only reason this occurs is to support the
+## editor and Resource deserialization, which invokes the nilary constructor and
+## then this setter.)
 @export var item: ItemInfo:
 	set(new):
 		item = new
+		if item:
+			for attr in item.attributes:
+				combined_attributes[attr] = item.attributes[attr]
 		emit_changed()
 ## How many items are in this stack.
 @export_range(0, 50, 1, "or_greater") var count: int = 1:
@@ -55,7 +62,7 @@ var total_attributes: Dictionary[ItemInfo.Attribute, int]:
 		for attr in combined_attributes:
 			attrs[attr] = combined_attributes[attr] * count
 		return attrs
-		
+
 static func get_modifier_cardinality_for_modifiers(mods: Array[ItemStack]) -> Dictionary[ItemInfo, int]:
 	# XXX we can't always assume that the same named ItemInfo is the same
 	# ItemInfo object because we have to deep-clone in many cases (e.g. the
@@ -71,7 +78,7 @@ static func get_modifier_cardinality_for_modifiers(mods: Array[ItemStack]) -> Di
 	for mod_name in card:
 		ret[info[mod_name]] = card[mod_name]
 	return ret
-	
+
 var modifier_cardinality: Dictionary[ItemInfo, int]:
 	get:
 		return get_modifier_cardinality_for_modifiers(modifiers)
@@ -80,21 +87,30 @@ var sell_price: int:
 	get:
 		if not item:
 			return 0
-		return int(ceil(item.sell_price * \
+		var my_modifier_cardinality := modifier_cardinality
+		var my_unique_modifier_depth: int = my_modifier_cardinality.size()
+		var my_total_modifier_depth: int = 0
+		for key in my_modifier_cardinality:
+			my_total_modifier_depth += my_modifier_cardinality[key]
+		var entire_unique_modifier_depth := \
+				unique_modifier_depth + my_unique_modifier_depth
+		var entire_total_modifier_depth := \
+				total_modifier_depth + my_total_modifier_depth
+		var my_price := int(ceil(item.sell_price * \
 				ItemInfo.PER_CRAFT_BASE ** craft_depth * \
-				ItemInfo.PER_UNIQUE_MOD_BASE ** unique_modifier_depth * \
-				ItemInfo.PER_EACH_MOD_BASE ** total_modifier_depth
+				ItemInfo.PER_UNIQUE_MOD_BASE ** entire_unique_modifier_depth * \
+				ItemInfo.PER_EACH_MOD_BASE ** entire_total_modifier_depth
 		)) * count
+		for stack in contents:
+			my_price += stack.sell_price
+		return my_price
 
 # We need to keep the nilary form of this constructor around to satisfy the
 # ResourceLoader; in that case, it's okay if item is null
-func _init(item: ItemInfo = null, count: int = 1):
-	self.item = item
-	self.count = count
-	if item:
-		for attr in item.attributes:
-			combined_attributes[attr] = item.attributes[attr]
-			
+func _init(_item: ItemInfo = null, _count: int = 1):
+	self.item = _item
+	self.count = _count
+
 const VOWELS := "aeiou"
 const CARDINALITY: Dictionary[int, String] = {
 	2: "extra ",
@@ -151,7 +167,7 @@ func _to_string() -> String:
 		mods = mod_string,
 		contents = cont_string,
 	})
-		
+
 func accept(add: ItemStack) -> Dictionary:
 	# Containers can hold anything but other containers
 	if item.is_category(ItemInfo.Category.CONTAINER):
@@ -160,7 +176,7 @@ func accept(add: ItemStack) -> Dictionary:
 			emit_changed()  # TODO: automatically cause this when contents mutate
 			return {success = true, rest = null}
 		return {success = false, rest = add}
-		
+
 	# The following definition of stackable is very conservative, by intent;
 	# in general, players won't be crafting by stacking, but by using the
 	# Recipe system.
@@ -194,16 +210,16 @@ func split(amount: int) -> Array[ItemStack]:
 	if amount >= count:
 		return [null, self]
 	count -= amount
-	var split = ItemStack.new(item, amount)
-	split.combined_attributes = combined_attributes
-	split.modifiers = modifiers
+	var split_stack = ItemStack.new(item, amount)
+	split_stack.combined_attributes = combined_attributes
+	split_stack.modifiers = modifiers
 	# We really don't want to duplicate contents if, somehow, we get a stack of
 	# containers with contents, so we have to choose one to recieve those
 	# contents. Arbitrarily, choose new.
-	split.contents = contents
+	split_stack.contents = contents
 	contents = []
-	return [self, split]
-	
+	return [self, split_stack]
+
 
 ## Produce the combined_attributes of the set of all ItemStacks given as input.
 static func combine_attrs(inputs: Array[ItemStack]) -> Dictionary[ItemInfo.Attribute, int]:

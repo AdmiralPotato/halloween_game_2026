@@ -2,9 +2,6 @@
 
 [ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_fnpm3"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_fnpm3"]
-size = Vector2(256, 256)
-
 [resource]
 script = ExtResource("1_fnpm3")
 name = "cake_slice"
@@ -12,4 +9,4 @@ display_name = "cake slice"
 storage_type = 1
 categories = Array[int]([2])
 groups = PackedStringArray()
-texture = SubResource("PlaceholderTexture2D_fnpm3")
+sort = 903

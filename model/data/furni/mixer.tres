@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FurniInfo" format=3 uid="uid://8khahfrnja8"]
+
+[ext_resource type="PackedScene" uid="uid://5jo3bft5wl1u" path="res://map/FurniMixer.tscn" id="1_wu7sd"]
+[ext_resource type="Script" uid="uid://cg3yvhquhplvs" path="res://model/furni_info.gd" id="2_n0p8m"]
+
+[resource]
+script = ExtResource("2_n0p8m")
+name = "mixer"
+scene = ExtResource("1_wu7sd")
+cost = 500

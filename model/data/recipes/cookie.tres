@@ -16,3 +16,4 @@ location = 3
 container = "COOKIE_SHEET"
 ingredients = PackedStringArray("cookie_dough")
 permitted_modifiers = PackedStringArray()
+time = 2.0

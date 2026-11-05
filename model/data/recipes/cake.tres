@@ -16,3 +16,4 @@ location = 3
 container = "CAKE_PAN"
 ingredients = PackedStringArray("cake_batter")
 permitted_modifiers = PackedStringArray("cake_form")
+time = 4.0

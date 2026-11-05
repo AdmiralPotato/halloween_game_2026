@@ -15,3 +15,4 @@ output = SubResource("Resource_v8gn5")
 location = 2
 ingredients = PackedStringArray("cream", "egg")
 permitted_modifiers = PackedStringArray()
+time = 2.0

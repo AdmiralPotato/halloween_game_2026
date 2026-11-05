@@ -25,10 +25,13 @@ enum Location {
 ## Multiplicity is not recommended--one can always add as many of these kinds
 ## of items as desired.
 @export var permitted_modifiers: PackedStringArray = PackedStringArray()
+## How long this recipe takes, in seconds.
+@export var time: float = 1.0
 
 static func from_json(d: Dictionary, lookup_item: Callable) -> Recipe:
 	var rec = Recipe.new()
 	rec.name = d.get("human_name", "")
+	rec.time = float(d.get("time", 0.0))
 	rec.output = ItemStack.new(lookup_item.call(d.get("output")), d.get("quantity", 1))
 	var pan = d.get("pan")
 	if pan and pan != "NONE":
@@ -39,16 +42,16 @@ static func from_json(d: Dictionary, lookup_item: Callable) -> Recipe:
 	for mod in d.get("allowedModifiers", []):
 		rec.permitted_modifiers.append(mod)
 	return rec
-	
-	
+
+
 func _to_string() -> String:
 	return "Recipe:" + name
 
 
-func matches(inputs: Array[ItemStack], container: ItemStack = null) -> Dictionary:
+func matches(inputs: Array[ItemStack], _container: ItemStack = null) -> Dictionary:
 	if inputs.size() == 1 and inputs[0].item.is_category(ItemInfo.Category.CONTAINER):
 		return matches(inputs[0].contents, inputs[0])
-	
+
 	print(self, ": considering inputs ", inputs)
 	var permitted_ingredients = []
 	for ingr in ingredients:
@@ -61,7 +64,7 @@ func matches(inputs: Array[ItemStack], container: ItemStack = null) -> Dictionar
 			print(self, ": could not find a match for ingr ", ingr)
 			return {success = false}
 		permitted_ingredients.append(valid)
-		
+
 	var new_depth: int = 1
 	match inputs.size():
 		0:
@@ -74,7 +77,7 @@ func matches(inputs: Array[ItemStack], container: ItemStack = null) -> Dictionar
 			))
 			print('max(', inputs, ') = ', res)
 			new_depth = res + 1
-			
+
 	var indices: Array[int] = Array(
 		permitted_ingredients.map(func(_ignored): return 0),
 		TYPE_INT, &"", null,
@@ -83,13 +86,13 @@ func matches(inputs: Array[ItemStack], container: ItemStack = null) -> Dictionar
 		var remaining := inputs.duplicate()
 		var to_remove: Array[int] = []
 		var impossible := false
-		
+
 		for meta_index in range(len(indices)):
 			if permitted_ingredients[meta_index][indices[meta_index]].index in to_remove:
 				impossible = true
 				break
 			to_remove.append(permitted_ingredients[meta_index][indices[meta_index]].index)
-		
+
 		if not impossible:
 			to_remove.sort()
 			to_remove.reverse()
@@ -97,7 +100,7 @@ func matches(inputs: Array[ItemStack], container: ItemStack = null) -> Dictionar
 			for index in to_remove:
 				used_ingredients.append(remaining[index])
 				remaining.remove_at(index)
-			
+
 			for stack in remaining:
 				var found := false
 				for kind in permitted_modifiers:
@@ -107,7 +110,7 @@ func matches(inputs: Array[ItemStack], container: ItemStack = null) -> Dictionar
 				if not found:
 					impossible = true
 					break
-			
+
 			if not impossible:
 				var uniq_mod_depth := 0
 				var total_mod_depth := 0
@@ -116,16 +119,20 @@ func matches(inputs: Array[ItemStack], container: ItemStack = null) -> Dictionar
 					total_mod_depth += stack.total_modifier_depth
 				uniq_mod_depth += ItemStack.get_modifier_cardinality_for_modifiers(remaining).size()
 				total_mod_depth += remaining.size()
+				var new_modifiers: Array[ItemStack] = []
+				for inp in inputs:
+					new_modifiers.append_array(inp.modifiers)
+				new_modifiers.append_array(remaining)
 				return {
 					success = true,
-					modifiers = remaining,
+					modifiers = new_modifiers,
 					ingredients = used_ingredients,
-					container = container,
+					container = _container,
 					craft_depth = new_depth,
 					unique_modifier_depth = uniq_mod_depth,
 					total_modifier_depth = total_mod_depth,
 				}
-				
+
 		var can_continue := false
 		for meta_index in range(len(indices)):
 			indices[meta_index] += 1
@@ -134,8 +141,8 @@ func matches(inputs: Array[ItemStack], container: ItemStack = null) -> Dictionar
 			else:
 				can_continue = true
 				break
-		
+
 		if not can_continue:
 			break
-	
+
 	return {success = false}

@@ -2,6 +2,8 @@ extends RigidBody3D
 
 const SMOL = Vector3.ONE * 0.5
 
+signal held_object_changed
+
 ## How much force the birb can apply on a given axis
 @export var movement_force := 30
 ## How fast the birb wants to go when a given axis is maxed out
@@ -10,12 +12,18 @@ const SMOL = Vector3.ONE * 0.5
 @export var turn_speed := TAU
 
 var in_rearrange_mode := false
+var indicator_color: Color:
+	get:
+		return Color("ddcc31") if in_rearrange_mode else Color("1fff52")
+var cursor_last_item: ItemNode = null
 
 @onready var carry_node = $RightHand/Carry
 @onready var right_hand_node = $RightHand
 @onready var mesh_node = $mage
 @onready var skeleton = $mage/mage_bones/Skeleton3D
 @onready var hand_bone = skeleton.find_bone("hand_R")
+@onready var indicator: SpotLight3D = $InteractIndicator
+@onready var cursor: PlayerCursor = $PlayerCursor
 var held_object: BaseMapNode:
 	get:
 		if carry_node.get_child_count() > 0:
@@ -29,20 +37,46 @@ var held_object: BaseMapNode:
 				v.reparent(carry_node, false)
 			else:
 				carry_node.add_child(v)
+		held_object_changed.emit()
 
 
 func _ready():
 	Global.request_debug_info.connect(register_debug_info)
 	
 	
-func register_debug_info(dp: DebugPanel):
-	dp.monitor("Held Object", self, "held_object", 1)
+func register_debug_info(_dp: DebugPanel):
+	DebugPanel.monitor("Held Object", self, "held_object", 1)
 
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("toggle_rearrange"):
 		in_rearrange_mode = !in_rearrange_mode
+		indicator.light_color = indicator_color
+	
+	var pointing: Vector2i = \
+			Global.tilemap.find_tile(position, basis.z, 1.4)
+	var world_pointing = Global.tilemap.to_world_point(pointing)
+	indicator.global_position = Vector3(
+			world_pointing.x,
+			indicator.global_position.y,
+			world_pointing.z,
+	)
+	var pointed_furni: FurniNode = Global.tilemap.get_furni(pointing)
+	var cursor_shown := false
+	if pointed_furni:
+		var inode: ItemNode = pointed_furni.query_item()
+		if inode and inode.stack:
+			cursor_shown = true
+			cursor.text = str(inode.stack)
+			if inode != cursor_last_item or not cursor.visible:
+				cursor.popup_at(inode.global_position)
+			cursor_last_item = inode
+	if not cursor_shown:
+		cursor.visible = false
+		cursor_last_item = null
+	
 	right_hand_node.transform = skeleton.get_bone_global_pose(hand_bone)
+	
 	var input_vec := Vector2(
 		Input.get_axis("move_left", "move_right"),
 		Input.get_axis("move_up", "move_down"),
@@ -60,14 +94,15 @@ func _physics_process(delta):
 		var facing_delta = angle_difference(rotation.y, desired_facing)
 		rotation.y += facing_delta * turn_speed * delta
 	if Input.is_action_just_pressed("pickup"):
-		var target_tile := Global.tilemap.find_tile(self.position, basis.z, 1.4)
 		var tilemap := Global.tilemap
 		var old_held := held_object
 		if held_object is FurniNode or (not held_object and in_rearrange_mode):
 			# doesn't matter if we're in rearrange mode if we're already holding furni
-			held_object = Global.tilemap.swap_furni(target_tile, held_object)
+			held_object = Global.tilemap.swap_furni(pointing, held_object,
+					Global.tilemap.to_world_point(pointing).direction_to(global_position),
+			)
 		elif held_object is ItemNode or (not held_object and not in_rearrange_mode):
-			held_object = Global.tilemap.swap_item(target_tile, held_object)
+			held_object = Global.tilemap.swap_item(pointing, held_object)
 		# If we're holding an object now, and it's a new one we picked up...
 		if held_object and held_object != old_held:
 			held_object.transform = Transform3D(Basis().scaled(SMOL), Vector3.ZERO)
@@ -75,5 +110,4 @@ func _physics_process(delta):
 		if old_held and held_object != old_held:
 			old_held.animate_to_current_transform()
 	if Input.is_action_just_pressed("interact"):
-		var target_tile := Global.tilemap.find_tile(self.position, basis.z, 1.4)
-		Global.tilemap.interact(target_tile, self)
+		Global.tilemap.interact(pointing, self)

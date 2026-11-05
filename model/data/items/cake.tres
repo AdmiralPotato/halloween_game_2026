@@ -2,9 +2,6 @@
 
 [ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_ypqq1"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ypqq1"]
-size = Vector2(256, 256)
-
 [resource]
 script = ExtResource("1_ypqq1")
 name = "cake"
@@ -12,4 +9,4 @@ display_name = "cake"
 storage_type = 1
 categories = Array[int]([2])
 groups = PackedStringArray()
-texture = SubResource("PlaceholderTexture2D_ypqq1")
+sort = 902

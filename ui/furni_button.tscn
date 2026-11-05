@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://vjgsh57mgq78"]
+
+[ext_resource type="Script" uid="uid://6q5b8q7oaw0t" path="res://ui/furni_button.gd" id="1_jomkf"]
+
+[node name="FurniButton" type="Button" unique_id=1124906034]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_jomkf")

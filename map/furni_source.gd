@@ -16,8 +16,11 @@ func update_node():
 		$StaticBody3D/ItemNode.stack = stack
 
 func provide_item() -> ItemNode:
-	var item := ItemNode.make_node(ItemStack.new(stack.item, stack.count))
+	var item := ItemNode.make_node(stack)
 	add_child(item)
 	item.global_position = $StaticBody3D/ItemNode.global_position
 	item.store_global_transform()
 	return item
+
+func query_item() -> ItemNode:
+	return $StaticBody3D/ItemNode

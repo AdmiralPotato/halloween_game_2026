@@ -48,6 +48,31 @@ enum Attribute {
 	FLORAL,
 }
 
+const AttrNames: Dictionary[Attribute, String] = {
+	Attribute.PALE: "Pale",
+	Attribute.RED: "Red",
+	Attribute.ORANGE: "Orange",
+	Attribute.BROWN: "Brown",
+	Attribute.YELLOW: "Yellow",
+	Attribute.GREEN: "Green",
+	Attribute.BLUE: "Blue",
+	Attribute.PURPLE: "Purple",
+	Attribute.VARIEGATED: "Variegated",
+	Attribute.MOIST: "Moist",
+	Attribute.SOFT: "Soft",
+	Attribute.CRUMBLY: "Crumbly",
+	Attribute.POP: "Pop",
+	Attribute.NUTTY: "Nutty",
+	Attribute.SAVORY: "Savory",
+	Attribute.CHOCOLATEY: "Chocolatey",
+	Attribute.FRUITY: "Fruity",
+	Attribute.MINTY: "Minty",
+	Attribute.SALTY: "Salty",
+	Attribute.SWEET: "Sweet",
+	Attribute.TART: "Tart",
+	Attribute.FLORAL: "Floral",
+}
+
 const TIER_COSTS: Dictionary[int, int] = {1: 10, 2: 25, 3: 50, 4: 100, 5: 500}
 const PER_EACH_MOD_BASE: float = 1.1
 const PER_UNIQUE_MOD_BASE: float = 1.25
@@ -75,12 +100,13 @@ const PER_CRAFT_BASE: float = 1.5
 ## Groups this kind of item belongs to. These can be used as aliases for multiple
 ## kinds of items in Recipes.
 @export var groups: PackedStringArray = PackedStringArray()
-## How this item appears in the game.
-@export var texture: Texture2D
+## Classification of this item; meant to be used to sort ascending in user-
+## facing item enumerations.
+@export var sort: int = 0
 
-static func from_json(name: String, d: Dictionary, variants: Dictionary = {}) -> ItemInfo:
+static func from_json(label: String, d: Dictionary, variants: Dictionary = {}) -> ItemInfo:
 	var info = ItemInfo.new()
-	info.name = name
+	info.name = label
 	info.display_name = d.get("human_name", "")
 	info.storage_type = StorageType[d.get("storage_type", "BAG")]
 	info.categories.assign(d.get("categories", []).map(
@@ -99,23 +125,7 @@ static func from_json(name: String, d: Dictionary, variants: Dictionary = {}) ->
 	var variant = variants.get(info.name)
 	if variant:
 		info.groups.append(variant.parent)
-	var texture = d.get("texture")
-	if texture and typeof(texture) == TYPE_STRING:
-		var parts: PackedStringArray = texture.split("@", true, 2)
-		info.texture = ResourceLoader.load(parts[0], "Texture2D")
-		if parts.size() > 1:
-			var atlas := AtlasTexture.new()
-			var size: Vector2 = info.texture.get_size()
-			var coords := Array(parts[1].split(",", true, 2))
-			var spans := coords.map(func(part: String): return part.split("/", true, 2))
-			var cell := size / Vector2(float(spans[0][1]), float(spans[1][1]))
-			var index := Vector2i(int(spans[0][0]), int(spans[1][0]))
-			atlas.atlas = info.texture
-			atlas.region = Rect2(Vector2(index) * cell, cell)
-			info.texture = atlas
-	else:
-		info.texture = PlaceholderTexture2D.new()
-		info.texture.size = Vector2(256, 256)
+	info.sort = d.get("sort", 0)
 	return info
 
 func is_category(cat: Category) -> bool:
@@ -123,3 +133,22 @@ func is_category(cat: Category) -> bool:
 
 func matches_spec(spec: String) -> bool:
 	return name == spec or spec in groups
+
+static func process_texture_string(texture_path: String) -> Texture2D:
+	var parts: PackedStringArray = texture_path.split("@", true, 2)
+	var result_texture = ResourceLoader.load(parts[0], "Texture2D")
+	if parts.size() > 1:
+		var atlas := AtlasTexture.new()
+		var size: Vector2 = result_texture.get_size()
+		var coords := Array(parts[1].split(",", true, 2))
+		var spans := coords.map(func(part: String): return part.split("/", true, 2))
+		var cell := size / Vector2(float(spans[0][1]), float(spans[1][1]))
+		var index := Vector2i(int(spans[0][0]), int(spans[1][0]))
+		atlas.atlas = result_texture
+		atlas.region = Rect2(Vector2(index) * cell, cell)
+		result_texture = atlas
+	return result_texture
+
+var actual_cost: int:
+	get:
+		return TIER_COSTS.get(cost_tier, 0)

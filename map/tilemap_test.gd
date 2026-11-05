@@ -10,7 +10,6 @@ const FURNI_SOURCE := preload("res://map/FurniSource.tscn")
 const FURNI_STORAGE := preload("res://map/FurniStorage.tscn")
 
 const FURNI_DISPLAYCASE := preload("res://map/FurniDisplaycase.tscn")
-const FURNI_WALL := FURNI_FRIDGE
 const FURNI_REGISTER := preload("res://map/FurniCashregister.tscn")
 
 const FURNI_LIST := [
@@ -29,7 +28,7 @@ const CUSTOMER = preload("res://map/TestCustomer.tscn")
 		number_of_tiles = x
 		if is_node_ready():
 			update_floor()
-			
+
 @export var customer_spawn_time_range := Vector2(3.0, 15.0)
 
 func get_customer_spawn_time() -> float:
@@ -43,23 +42,29 @@ func _ready():
 	if Engine.is_editor_hint():
 		return
 
-	for x in range(0, number_of_tiles.x):
-		var FurniPiece = FURNI_LIST[x % FURNI_LIST.size()]
-		$Tilemap.swap_furni(Vector2i(x,0), FurniPiece.instantiate())
-		
 	build_storefront()
 	$SpawnCustomer.start(get_customer_spawn_time())
 
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("shop"):
+		get_viewport().set_input_as_handled()
+		if $Shop.visible:
+			$Shop.visible = false
+		elif not $TestPlayer.held_object:
+			$Shop.visible = true
+
 func build_storefront():
 	for x in range(number_of_tiles.x):
-		for y in range(number_of_tiles.y - 4, number_of_tiles.y):
+		for y in range(number_of_tiles.y - 5, number_of_tiles.y):
 			var pt = Vector2i(x, y)
 			var tile = null
 			match number_of_tiles.y - y:
-				4:
+				5:
 					if number_of_tiles.x - x > 2:
-						tile = FURNI_WALL.instantiate()
-				2:
+						# "wall"
+						tile = FURNI_LIST[x % FURNI_LIST.size()].instantiate()
+				3:
 					if x == 0:
 						tile = FURNI_REGISTER.instantiate()
 					else:
@@ -85,25 +90,84 @@ func update_floor():
 	$Floor/WallPZ.global_position = opposite
 	$Floor/FloorBox.shape.size.x = number_of_tiles.x
 	$Floor/FloorBox.shape.size.z = number_of_tiles.y
-	$Floor/MeshInstance3D.mesh.size.x = number_of_tiles.x
-	$Floor/MeshInstance3D.mesh.size.z = number_of_tiles.y
-
-func _physics_process(delta):
-	if Engine.is_editor_hint():
-		return
-	var birb_position: Vector3 = $TestPlayer.position
-	var birb_facing: Vector3 = $TestPlayer.basis.z
-	var work_tile: Vector2i = $Tilemap.find_tile(birb_position, birb_facing, 1.4)
-	$PlayerInteractIndicator.position.x = work_tile.x + 0.5
-	$PlayerInteractIndicator.position.z = work_tile.y + 0.5
-	if $TestPlayer.in_rearrange_mode:
-		$PlayerInteractIndicator.light_color = Color("ddcc31")
-	else:
-		$PlayerInteractIndicator.light_color = Color("1fff52")
+	$GridMap.clear()
+	for y in number_of_tiles.y:
+		var tile = 3 # customer tile
+		if y < number_of_tiles.y - 3:
+			tile = 2 # kitchen tile
+		for x in number_of_tiles.x:
+			$GridMap.set_cell_item(Vector3i(x,0,y),tile)
+	# walls
+	var wall_direction_south = $GridMap.get_orthogonal_index_from_basis(
+		Basis.looking_at(Vector3(0,0,-1))
+	)
+	#var wall_direction_north = $GridMap.get_orthogonal_index_from_basis(
+		#Basis.looking_at(Vector3(0,0,1))
+	#)
+	var wall_direction_east = $GridMap.get_orthogonal_index_from_basis(
+		Basis.looking_at(Vector3(-1,0,0))
+	)
+	var wall_direction_west = $GridMap.get_orthogonal_index_from_basis(
+		Basis.looking_at(Vector3(1,0,0))
+	)
+	# top wall
+	for x in number_of_tiles.x:
+		$GridMap.set_cell_item(Vector3i(x,0,-1), 4, wall_direction_south)
+	# vertical walls
+	var x = number_of_tiles.x
+	for y in number_of_tiles.y:
+		$GridMap.set_cell_item(Vector3i(-1,0,y), 4, wall_direction_east)
+		$GridMap.set_cell_item(Vector3i(x,0,y), 4, wall_direction_west)
+	# top corners
+	$GridMap.set_cell_item(Vector3i(-1,0,-1), 6, wall_direction_south)
+	$GridMap.set_cell_item(Vector3i(x,0,-1), 6, wall_direction_west)
+	# customer doors
+	var door_y = number_of_tiles.y - 2
+	$GridMap.set_cell_item(Vector3i(-1,0,door_y), 8, wall_direction_east)
+	$GridMap.set_cell_item(Vector3i(-1,0,door_y+1), 7, wall_direction_east)
+	$GridMap.set_cell_item(Vector3i(x,0,door_y), 7, wall_direction_west)
+	$GridMap.set_cell_item(Vector3i(x,0,door_y+1), 8, wall_direction_west)
 
 
 func _on_spawn_customer_timeout() -> void:
 	var cust: TestCustomer = CUSTOMER.instantiate()
 	$Customers.add_child(cust)
-	cust.global_position = Vector3(number_of_tiles.x - 0.5, 0, number_of_tiles.y - 0.5)
+	cust.global_position = $Tilemap.to_world_point(
+			$Tilemap.get_customer_spawnpoint()
+	)
 	$SpawnCustomer.start(get_customer_spawn_time())
+
+
+func _on_test_player_held_object_changed() -> void:
+	if $TestPlayer.held_object and $Shop.visible:
+		$Shop.visible = false
+
+
+func _on_shop_purchase_furni(furni: FurniInfo) -> void:
+	if Global.gold < furni.cost:
+		$GoldOverlay.flash()
+		return
+	Global.gold -= furni.cost
+	var node: FurniNode = furni.scene.instantiate()
+	node.pack()
+	node.transform = node.transform.scaled($TestPlayer.SMOL)
+	$TestPlayer.held_object = node
+	$Shop.visible = false
+
+
+func _on_shop_purchase_item(item: ItemInfo) -> void:
+	var full_cost := item.actual_cost * item.max_stack_size
+	if Global.gold < full_cost:
+		$GoldOverlay.flash()
+		return
+	Global.gold -= item.actual_cost
+	var furni: FurniSource = FURNI_SOURCE.instantiate()
+	furni.stack = ItemStack.new(item)
+	furni.pack()
+	furni.transform = furni.transform.scaled($TestPlayer.SMOL)
+	$TestPlayer.held_object = furni
+	$Shop.visible = false
+
+
+func _on_welcome_button_up() -> void:
+	$WelcomePanelContainer.visible = false

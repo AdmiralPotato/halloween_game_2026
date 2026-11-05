@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://bgdy4shh6webf"]
+
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_f2xyp"]
+
+[resource]
+script = ExtResource("1_f2xyp")
+name = "white_chocolate_bar"
+display_name = "white chocolate bar"
+storage_type = 3
+categories = Array[int]([0])
+cost_tier = 3
+max_stack_size = 12
+attributes = Dictionary[int, int]({
+15: 1
+})
+groups = PackedStringArray()
+sort = 181

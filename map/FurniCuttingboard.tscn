@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://w4twrfa6yo67" path="res://map/furni_station.gd" id="1_rjncw"]
 [ext_resource type="PackedScene" uid="uid://cqpi8tk8o2j1" path="res://assets/furni_storage_box_0.glb" id="2_fqyai"]
+[ext_resource type="PackedScene" uid="uid://c8eyf6e45y65d" path="res://ui/status_indicator.tscn" id="3_fqyai"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p33bg"]
 size = Vector3(1, 0.8, 1)
@@ -20,3 +21,9 @@ shape = SubResource("BoxShape3D_p33bg")
 
 [node name="Item" type="Marker3D" parent="." unique_id=1313142800]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="StatusIndicator" parent="." unique_id=1939945637 instance=ExtResource("3_fqyai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5000001, 0)
+
+[node name="RecipeTimer" type="Timer" parent="." unique_id=211141727]
+one_shot = true
