@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://d1tp40f6bgvc6" path="res://map/FurniTrash.tscn" id="18_tdsbi"]
 [ext_resource type="Script" uid="uid://sxpgsgxykexm" path="res://map/gold_overlay.gd" id="19_6jj7b"]
 [ext_resource type="PackedScene" uid="uid://dahs4c1bgiu58" path="res://ui/shop.tscn" id="21_olchu"]
+[ext_resource type="PackedScene" uid="uid://cde0ctma7xn5i" path="res://map/FurniFridge.tscn" id="22_0tecm"]
 [ext_resource type="Texture2D" uid="uid://tdosspgn5nwg" path="res://assets/candy.png" id="23_0d7dl"]
 [ext_resource type="MeshLibrary" uid="uid://dki7gkkp1gpw8" path="res://assets/kitchen_mesh_library.meshlib" id="23_p1ie5"]
 [ext_resource type="Script" uid="uid://bxwh47wigsd11" path="res://map/gold.gd" id="24_0d7dl"]
@@ -883,6 +884,9 @@ initial_stack = SubResource("Resource_5y0pr")
 [node name="Furni9_8" parent="Tilemap" unique_id=1777777127 instance=ExtResource("9_2f20c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 8.5)
 initial_stack = SubResource("Resource_81ea7")
+
+[node name="Furni11_0" parent="Tilemap" unique_id=730219184 instance=ExtResource("22_0tecm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, 0.5)
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=2097173625]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -0.5, 7)

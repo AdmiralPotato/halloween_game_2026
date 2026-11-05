@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dfjdkdlvlfocq"]
 
 [ext_resource type="Script" uid="uid://w4twrfa6yo67" path="res://map/furni_station.gd" id="1_rjncw"]
-[ext_resource type="PackedScene" uid="uid://cqpi8tk8o2j1" path="res://assets/furni_storage_box_0.glb" id="2_fqyai"]
+[ext_resource type="PackedScene" uid="uid://cn1ys4l5t3mqh" path="res://assets/furni_cutting_board_0.glb" id="2_fqyai"]
 [ext_resource type="PackedScene" uid="uid://c8eyf6e45y65d" path="res://ui/status_indicator.tscn" id="3_fqyai"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p33bg"]
@@ -17,7 +17,8 @@ location = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("BoxShape3D_p33bg")
 
-[node name="storageBox_v1" parent="StaticBody3D" unique_id=383906389 instance=ExtResource("2_fqyai")]
+[node name="cuttingBoard_v1" parent="StaticBody3D/CollisionShape3D" unique_id=572428 instance=ExtResource("2_fqyai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
 
 [node name="Item" type="Marker3D" parent="." unique_id=1313142800]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

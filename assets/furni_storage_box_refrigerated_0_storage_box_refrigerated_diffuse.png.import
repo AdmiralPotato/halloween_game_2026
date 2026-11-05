@@ -2,14 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1k0w7gpvm18n"
+uid="uid://dulc3txwrtdxd"
 path.s3tc="res://.godot/imported/furni_storage_box_refrigerated_0_storage_box_refrigerated_diffuse.png-91dfbab4ff0d2e7c41152648e1ade6fd.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "4a0a12e4d38f1d714fc54185bb69f3c5"
+"md5": "3cb811e6b1bb1439c2038bada09f7da7"
 }
 
 [deps]
