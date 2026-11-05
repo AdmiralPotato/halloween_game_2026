@@ -31,10 +31,10 @@ func get_save_state() -> Dictionary:
 		map = '???'  # TODO: figure out how to get the PackedScene path for the tree root
 	return {
 		map = map,
-		tilemap = tilemap.get_save_state(),
+		state = (get_tree().current_scene as BaseMap).get_save_state()
 	}
 
 func set_save_state(save: Dictionary):
 	get_tree().change_scene_to_file(save.map)
 	await get_tree().scene_changed
-	tilemap.set_save_state(save.tilemap)
+	get_tree().current_scene.set_save_state(save.state)

@@ -41,6 +41,26 @@ var held_object: BaseMapNode:
 		held_object_changed.emit()
 
 
+func get_save_state() -> Dictionary:
+	var save := {
+		pos = [global_position.x, global_position.z],
+		rot = rotation.y
+	}
+	if held_object:
+		save.hand = held_object.get_save_state()
+	return save
+
+
+func set_save_state(save: Dictionary):
+	global_position.x = save.pos[0]
+	global_position.z = save.pos[1]
+	basis = Basis().rotated(Vector3.UP, save.rot)
+	if 'hand' in save:
+		held_object = BaseMapNode.from_save_state(save.hand)
+	else:
+		held_object = null
+
+
 func _ready():
 	Global.request_debug_info.connect(register_debug_info)
 	

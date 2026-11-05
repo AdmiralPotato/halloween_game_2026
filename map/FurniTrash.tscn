@@ -8,6 +8,7 @@ height = 0.55
 
 [node name="FurniTrash" type="Node3D" unique_id=1615491916]
 script = ExtResource("1_w3dge")
+current_scene = "uid://d1tp40f6bgvc6"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1407366706]
 

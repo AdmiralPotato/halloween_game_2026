@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://4wbq0c0cn3rt" path="res://map/pause_menu.gd" id="18_h8ld1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_el5rg"]
-size = Vector3(32, 1, 32)
+size = Vector3(12, 1, 14)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_8t2af"]
 plane = Plane(1, 0, 0, 0)

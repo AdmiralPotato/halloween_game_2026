@@ -24,6 +24,7 @@ func get_save_state() -> Dictionary:
 
 
 func set_save_state(save: Dictionary) -> void:
+	super(save)
 	if 'time_left' in save:
 		eventual_result = ItemStack.from_save_state(save.result)
 		recipe_timer.start(save.time_left)

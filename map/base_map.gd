@@ -1,4 +1,5 @@
 @tool
+class_name BaseMap
 extends Node3D
 
 const FURNI_COUNTERTOP := preload("res://map/FurniCountertop.tscn")
@@ -36,6 +37,16 @@ func get_customer_spawn_time() -> float:
 			customer_spawn_time_range.x,
 			customer_spawn_time_range.y,
 	)
+
+func get_save_state() -> Dictionary:
+	return {
+		tilemap = $Tilemap.get_save_state(),
+		player = $TestPlayer.get_save_state(),
+	}
+
+func set_save_state(save: Dictionary):
+	$Tilemap.set_save_state(save.tilemap)
+	$TestPlayer.set_save_state(save.player)
 
 func _ready():
 	update_floor()

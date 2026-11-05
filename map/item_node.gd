@@ -64,7 +64,7 @@ func get_save_state() -> Dictionary:
 func set_save_state(save: Dictionary) -> void:
 	super(save)
 	if 'stack' in save:
-		save.stack = ItemStack.from_save_state(save)
+		stack = ItemStack.from_save_state(save.stack)
 
 func _to_string() -> String:
 	return "ItemNode {name}:{stack}".format({

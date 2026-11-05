@@ -8,7 +8,9 @@ class Tile extends RefCounted:
 	func get_save_state() -> Dictionary:
 		if not furni:
 			return {}
-		return {furni = furni.get_save_state()}
+		return {
+			furni = furni.get_save_state(),
+		}
 	func set_save_state(save: Dictionary):
 		if 'furni' in save:
 			furni = FurniNode.from_save_state(save.furni)
@@ -56,6 +58,10 @@ func get_save_state() -> Dictionary:
 
 func set_save_state(save: Dictionary):
 	clear()
+	while get_child_count() > 0:
+		var child := get_child(0)
+		remove_child(child)
+		child.queue_free()
 	create_slots(
 			Vector2i(save.region[0], save.region[1]),
 			Vector2i(save.region[2], save.region[3])
@@ -67,8 +73,9 @@ func set_save_state(save: Dictionary):
 		var pt := Vector2i(int(parts[0]), int(parts[1]))
 		tiles[pt].set_save_state(save[tpt])
 		if tiles[pt].furni:
+			add_child(tiles[pt].furni)
 			pathfinder.set_point_solid(pt)
-	
+	mess_with_children()
 
 
 ## Convert a tile position to a world position. This position is on the floor,

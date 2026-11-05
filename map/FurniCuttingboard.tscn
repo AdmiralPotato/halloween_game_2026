@@ -10,6 +10,7 @@ size = Vector3(1, 0.8, 1)
 [node name="FurniCuttingboard" type="Node3D" unique_id=1615491916]
 script = ExtResource("1_rjncw")
 location = 0
+current_scene = "uid://dfjdkdlvlfocq"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1407366706]
 

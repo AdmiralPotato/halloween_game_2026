@@ -8,6 +8,7 @@ size = Vector3(1, 0.8, 1)
 
 [node name="FurniStorage" type="Node3D" unique_id=1615491916]
 script = ExtResource("1_jesxq")
+current_scene = "uid://b50655f77362"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1407366706]
 

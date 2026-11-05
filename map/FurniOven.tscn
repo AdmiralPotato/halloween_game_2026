@@ -10,6 +10,7 @@ size = Vector3(1, 0.8, 1)
 [node name="FurniOven" type="Node3D" unique_id=1615491916]
 script = ExtResource("1_i5o3g")
 location = 3
+current_scene = "uid://do30vdu0sngt5"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1407366706]
 
