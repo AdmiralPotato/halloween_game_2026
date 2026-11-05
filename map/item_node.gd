@@ -55,6 +55,16 @@ static func _static_init() -> void:
 func _ready():
 	update_stack_rendering()
 
+func get_save_state() -> Dictionary:
+	var save := super()
+	if stack:
+		save.stack = stack.get_save_state()
+	return save
+
+func set_save_state(save: Dictionary) -> void:
+	super(save)
+	if 'stack' in save:
+		save.stack = ItemStack.from_save_state(save)
 
 func _to_string() -> String:
 	return "ItemNode {name}:{stack}".format({

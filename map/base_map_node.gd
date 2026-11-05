@@ -7,6 +7,20 @@ var tween: Tween
 var last_global_transform: Transform3D
 signal finished_animating
 
+func get_save_state() -> Dictionary:
+	return {
+		script = get_script().resource_path
+	}
+	
+func set_save_state(save: Dictionary) -> void:
+	pass
+	
+static func from_save_state(save: Dictionary) -> BaseMapNode:
+	var node := Node3D.new()
+	node.set_script(load(save.script))
+	(node as BaseMapNode).set_save_state(save)
+	return (node as BaseMapNode)
+
 func store_global_transform():
 	last_global_transform = global_transform if is_inside_tree() else Transform3D()
 	

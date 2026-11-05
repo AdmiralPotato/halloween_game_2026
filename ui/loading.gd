@@ -12,7 +12,7 @@ const LOADING_TEXT = [
 ]
 
 @export var spin_speed: float = TAU
-@export_file("*.tscn") var next_scene: String
+var next_scene: String
 
 var started_load := false
 
@@ -25,6 +25,7 @@ func get_next_loading_message() -> String:
 
 
 func _ready() -> void:
+	next_scene = Global.scene_change_info.path
 	%ProgressText.text = get_next_loading_message()
 
 

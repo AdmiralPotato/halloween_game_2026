@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://oja3kl3rps06"]
+
+[ext_resource type="Script" uid="uid://md12a12b6axo" path="res://ui/main_menu.gd" id="1_t7e0r"]
+[ext_resource type="PackedScene" uid="uid://cxg5b1w6h1fdj" path="res://ui/loading.tscn" id="2_0dkrt"]
+
+[node name="MainMenu" type="MarginContainer" unique_id=1964352092]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+script = ExtResource("1_t7e0r")
+loading_scene = ExtResource("2_0dkrt")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=235529636]
+layout_mode = 2
+
+[node name="WelcomeScreenContainer" type="VBoxContainer" parent="PanelContainer" unique_id=400921692]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/WelcomeScreenContainer" unique_id=117053631]
+layout_mode = 2
+text = "Welcome to our Halloween game! Here are the controls: 
+
+Move: WASD or Arrows
+Pickup/Put down: Spacebar
+Action: E
+Console: Backtick
+Switch Furniture/Item Placement: Tab
+Store: Q"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MapList" type="ItemList" parent="PanelContainer/WelcomeScreenContainer" unique_id=1256293670]
+unique_name_in_owner = true
+layout_mode = 2
+auto_height = true
+
+[node name="Create" type="Button" parent="PanelContainer/WelcomeScreenContainer" unique_id=471692349]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "Start New!"
+
+[node name="Load" type="Button" parent="PanelContainer/WelcomeScreenContainer" unique_id=1388735291]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load..."
+
+[node name="Leave" type="Button" parent="PanelContainer/WelcomeScreenContainer" unique_id=995031346]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Exit :("
+
+[node name="OpenDialog" type="FileDialog" parent="." unique_id=1147432190]
+unique_name_in_owner = true
+title = "Open a File"
+file_mode = 0
+access = 2
+
+[connection signal="item_selected" from="PanelContainer/WelcomeScreenContainer/MapList" to="." method="_on_map_list_item_selected"]
+[connection signal="pressed" from="PanelContainer/WelcomeScreenContainer/Create" to="." method="_on_create_pressed"]
+[connection signal="pressed" from="PanelContainer/WelcomeScreenContainer/Load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="PanelContainer/WelcomeScreenContainer/Leave" to="." method="_on_leave_pressed"]
+[connection signal="file_selected" from="OpenDialog" to="." method="_on_open_dialog_file_selected"]

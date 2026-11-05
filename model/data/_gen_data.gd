@@ -22,19 +22,15 @@ const REGISTRY_PATH = BASE_PATH + "registry.tres"
 static func safe_name(s):
 	return RegEx.create_from_string("\\W").sub(s, "_", true)
 
+static func load_json_file(path: String) -> Variant:
+	return JSON.parse_string(FileAccess.get_file_as_string(path))
+
 func _run():
-	var item_info = JSON.parse_string(
-			FileAccess.get_file_as_string("res://business/items/food_infos.json")
-	)
-	var var_info = JSON.parse_string(
-			FileAccess.get_file_as_string("res://business/items/variant_infos.json")
-	)
-	var recipe_info = JSON.parse_string(
-			FileAccess.get_file_as_string("res://business/items/recipes_infos.json")
-	)
-	var furni_info = JSON.parse_string(
-			FileAccess.get_file_as_string("res://business/furnis.json")
-	)
+	var item_info = load_json_file("res://business/items/food_infos.json")
+	var var_info = load_json_file("res://business/items/variant_infos.json")
+	var recipe_info = load_json_file("res://business/items/recipes_infos.json")
+	var furni_info = load_json_file("res://business/furnis.json")
+	var map_info = load_json_file("res://business/maps.json")
 
 	var registry := Registry.new()
 	registry.take_over_path(REGISTRY_PATH)
@@ -78,6 +74,12 @@ func _run():
 	print('Writing furniture...')
 	for furni in furnis.values():
 		ResourceSaver.save(furni)
+	
+	print('Processing maps...')
+	for name in map_info:
+		registry.add_map(name, map_info[name].path)
+	
+	print('Writing the registry...')
 	ResourceSaver.save(registry)
 
 	print('Done!')

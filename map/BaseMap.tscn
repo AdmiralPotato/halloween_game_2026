@@ -1,0 +1,190 @@
+[gd_scene format=3 uid="uid://bcdsp4c8prm15"]
+
+[ext_resource type="Script" uid="uid://dda6d1ohs1fbv" path="res://map/base_map.gd" id="1_2h6hj"]
+[ext_resource type="Script" uid="uid://brhfhuo7lsymv" path="res://map/tilemap.gd" id="2_oyrmm"]
+[ext_resource type="PackedScene" uid="uid://oja3kl3rps06" path="res://ui/main_menu.tscn" id="11_n4k6e"]
+[ext_resource type="PackedScene" uid="uid://v5tdiarwxe74" path="res://map/TestPlayer.tscn" id="11_scweb"]
+[ext_resource type="MeshLibrary" uid="uid://dki7gkkp1gpw8" path="res://assets/kitchen_mesh_library.meshlib" id="12_qr8jf"]
+[ext_resource type="PackedScene" uid="uid://03n546k1srnw" path="res://ui/debug_panel.tscn" id="13_7yr34"]
+[ext_resource type="Script" uid="uid://sxpgsgxykexm" path="res://map/gold_overlay.gd" id="14_qyemh"]
+[ext_resource type="Texture2D" uid="uid://tdosspgn5nwg" path="res://assets/candy.png" id="15_qaalu"]
+[ext_resource type="Script" uid="uid://bxwh47wigsd11" path="res://map/gold.gd" id="16_ots2d"]
+[ext_resource type="PackedScene" uid="uid://dahs4c1bgiu58" path="res://ui/shop.tscn" id="17_ot4t6"]
+[ext_resource type="Script" uid="uid://4wbq0c0cn3rt" path="res://map/pause_menu.gd" id="18_h8ld1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_el5rg"]
+size = Vector3(32, 1, 32)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_8t2af"]
+plane = Plane(1, 0, 0, 0)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_0vrjm"]
+plane = Plane(0, 0, 1, 0)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_8g1d1"]
+plane = Plane(-1, 0, 0, 0)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_a28pv"]
+plane = Plane(0, 0, -1, 0)
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_xtlfy"]
+
+[sub_resource type="Sky" id="Sky_eai58"]
+sky_material = SubResource("PhysicalSkyMaterial_xtlfy")
+
+[sub_resource type="Environment" id="Environment_el5rg"]
+background_mode = 1
+background_color = Color(0.11727656, 0.011531538, 0.21022078, 1)
+sky = SubResource("Sky_eai58")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jga7m"]
+atlas = ExtResource("15_qaalu")
+region = Rect2(256, 256, 256, 256)
+
+[node name="BaseMap" type="Node3D" unique_id=1389805114]
+process_physics_priority = -1
+script = ExtResource("1_2h6hj")
+number_of_tiles = Vector2i(12, 14)
+
+[node name="Tilemap" type="Node3D" parent="." unique_id=2127179981]
+script = ExtResource("2_oyrmm")
+metadata/_custom_type_script = "uid://brhfhuo7lsymv"
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=2097173625]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -0.5, 7)
+
+[node name="FloorBox" type="CollisionShape3D" parent="Floor" unique_id=647389857]
+shape = SubResource("BoxShape3D_el5rg")
+
+[node name="WallNX" type="CollisionShape3D" parent="Floor" unique_id=2049535826]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.5, -7)
+shape = SubResource("WorldBoundaryShape3D_8t2af")
+
+[node name="WallNZ" type="CollisionShape3D" parent="Floor" unique_id=154043353]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.5, -7)
+shape = SubResource("WorldBoundaryShape3D_0vrjm")
+
+[node name="WallPX" type="CollisionShape3D" parent="Floor" unique_id=1048482900]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.5, 7)
+shape = SubResource("WorldBoundaryShape3D_8g1d1")
+
+[node name="WallPZ" type="CollisionShape3D" parent="Floor" unique_id=331193442]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.5, 7)
+shape = SubResource("WorldBoundaryShape3D_a28pv")
+
+[node name="Customers" type="Node3D" parent="." unique_id=1606353682]
+
+[node name="TestPlayer" parent="." unique_id=1707035649 instance=ExtResource("11_scweb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1716016636]
+environment = SubResource("Environment_el5rg")
+
+[node name="MainLight" type="DirectionalLight3D" parent="." unique_id=1786253674]
+transform = Transform3D(0.8660253, 0.43301287, -0.25000006, 0, 0.49999997, 0.86602545, 0.5000002, -0.75, 0.43301263, 0, 0, 0)
+shadow_enabled = true
+
+[node name="KeyLight" type="DirectionalLight3D" parent="." unique_id=169939251]
+transform = Transform3D(0.49999997, -0.43301272, 0.75, 0, 0.8660254, 0.5, -0.86602545, -0.24999999, 0.43301266, 0, 0, 0)
+light_color = Color(0.8664359, 0.92989075, 0.9247431, 1)
+light_energy = 0.1
+
+[node name="BackLight" type="DirectionalLight3D" parent="." unique_id=1688291091]
+transform = Transform3D(-0.4999999, -0.22414388, -0.8365163, 0, 0.9659258, -0.25881904, 0.86602545, -0.12940949, -0.48296282, 0, 0, 0)
+light_color = Color(0.97131807, 0.8903729, 0.91132176, 1)
+light_energy = 0.2
+
+[node name="GridMap" type="GridMap" parent="." unique_id=339802995]
+mesh_library = ExtResource("12_qr8jf")
+cell_size = Vector3(1, 1, 1)
+cell_center_y = false
+collision_layer = 0
+collision_mask = 0
+data = {
+"cells": PackedInt32Array(0, 0, 2, 1, 0, 2, 2, 0, 2, 3, 0, 2, 4, 0, 2, 5, 0, 2, 6, 0, 2, 7, 0, 2, 8, 0, 2, 9, 0, 2, 10, 0, 2, 11, 0, 2, 0, 1, 2, 1, 1, 2, 2, 1, 2, 3, 1, 2, 4, 1, 2, 5, 1, 2, 6, 1, 2, 7, 1, 2, 8, 1, 2, 9, 1, 2, 10, 1, 2, 11, 1, 2, 0, 2, 2, 1, 2, 2, 2, 2, 2, 3, 2, 2, 4, 2, 2, 5, 2, 2, 6, 2, 2, 7, 2, 2, 8, 2, 2, 9, 2, 2, 10, 2, 2, 11, 2, 2, 0, 3, 2, 1, 3, 2, 2, 3, 2, 3, 3, 2, 4, 3, 2, 5, 3, 2, 6, 3, 2, 7, 3, 2, 8, 3, 2, 9, 3, 2, 10, 3, 2, 11, 3, 2, 0, 4, 2, 1, 4, 2, 2, 4, 2, 3, 4, 2, 4, 4, 2, 5, 4, 2, 6, 4, 2, 7, 4, 2, 8, 4, 2, 9, 4, 2, 10, 4, 2, 11, 4, 2, 0, 5, 2, 1, 5, 2, 2, 5, 2, 3, 5, 2, 4, 5, 2, 5, 5, 2, 6, 5, 2, 7, 5, 2, 8, 5, 2, 9, 5, 2, 10, 5, 2, 11, 5, 2, 0, 6, 2, 1, 6, 2, 2, 6, 2, 3, 6, 2, 4, 6, 2, 5, 6, 2, 6, 6, 2, 7, 6, 2, 8, 6, 2, 9, 6, 2, 10, 6, 2, 11, 6, 2, 0, 7, 2, 1, 7, 2, 2, 7, 2, 3, 7, 2, 4, 7, 2, 5, 7, 2, 6, 7, 2, 7, 7, 2, 8, 7, 2, 9, 7, 2, 10, 7, 2, 11, 7, 2, 0, 8, 2, 1, 8, 2, 2, 8, 2, 3, 8, 2, 4, 8, 2, 5, 8, 2, 6, 8, 2, 7, 8, 2, 8, 8, 2, 9, 8, 2, 10, 8, 2, 11, 8, 2, 0, 9, 2, 1, 9, 2, 2, 9, 2, 3, 9, 2, 4, 9, 2, 5, 9, 2, 6, 9, 2, 7, 9, 2, 8, 9, 2, 9, 9, 2, 10, 9, 2, 11, 9, 2, 0, 10, 2, 1, 10, 2, 2, 10, 2, 3, 10, 2, 4, 10, 2, 5, 10, 2, 6, 10, 2, 7, 10, 2, 8, 10, 2, 9, 10, 2, 10, 10, 2, 11, 10, 2, 0, 11, 3, 1, 11, 3, 2, 11, 3, 3, 11, 3, 4, 11, 3, 5, 11, 3, 6, 11, 3, 7, 11, 3, 8, 11, 3, 9, 11, 3, 10, 11, 3, 11, 11, 3, 0, 12, 3, 1, 12, 3, 2, 12, 3, 3, 12, 3, 4, 12, 3, 5, 12, 3, 6, 12, 3, 7, 12, 3, 8, 12, 3, 9, 12, 3, 10, 12, 3, 11, 12, 3, 0, 13, 3, 1, 13, 3, 2, 13, 3, 3, 13, 3, 4, 13, 3, 5, 13, 3, 6, 13, 3, 7, 13, 3, 8, 13, 3, 9, 13, 3, 10, 13, 3, 11, 13, 3, 0, 65535, 4, 1, 65535, 4, 2, 65535, 4, 3, 65535, 4, 4, 65535, 4, 5, 65535, 4, 6, 65535, 4, 7, 65535, 4, 8, 65535, 4, 9, 65535, 4, 10, 65535, 4, 11, 65535, 4, 65535, 0, 1048580, 12, 0, 1441796, 65535, 1, 1048580, 12, 1, 1441796, 65535, 2, 1048580, 12, 2, 1441796, 65535, 3, 1048580, 12, 3, 1441796, 65535, 4, 1048580, 12, 4, 1441796, 65535, 5, 1048580, 12, 5, 1441796, 65535, 6, 1048580, 12, 6, 1441796, 65535, 7, 1048580, 12, 7, 1441796, 65535, 8, 1048580, 12, 8, 1441796, 65535, 9, 1048580, 12, 9, 1441796, 65535, 10, 1048580, 12, 10, 1441796, 65535, 11, 1048580, 12, 11, 1441796, 65535, 12, 1048584, 12, 12, 1441799, 65535, 13, 1048583, 12, 13, 1441800, 65535, 65535, 6, 12, 65535, 1441798)
+}
+metadata/_edit_group_ = true
+
+[node name="DebugPanel" parent="." unique_id=249136689 instance=ExtResource("13_7yr34")]
+
+[node name="SpawnCustomer" type="Timer" parent="." unique_id=982563971]
+wait_time = 2.0
+one_shot = true
+
+[node name="GoldOverlay" type="PanelContainer" parent="." unique_id=702785822]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -23.0
+offset_right = 23.0
+offset_bottom = 40.0
+grow_horizontal = 2
+script = ExtResource("14_qyemh")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GoldOverlay" unique_id=1699535166]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="GoldOverlay/HBoxContainer" unique_id=1315648894]
+custom_maximum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_jga7m")
+
+[node name="Gold" type="Label" parent="GoldOverlay/HBoxContainer" unique_id=651876760]
+layout_mode = 2
+text = "0"
+script = ExtResource("16_ots2d")
+
+[node name="Shop" parent="." unique_id=1972639199 instance=ExtResource("17_ot4t6")]
+visible = false
+
+[node name="PauseMenu" type="CenterContainer" parent="." unique_id=1681424694]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("18_h8ld1")
+main_menu = ExtResource("11_n4k6e")
+
+[node name="PanelContainer" type="PanelContainer" parent="PauseMenu" unique_id=2126358434]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu/PanelContainer" unique_id=1714571242]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer" unique_id=960479629]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Resume" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=1362333657]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Resume"
+
+[node name="Export" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=948274686]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Export"
+
+[node name="Exit to Menu" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=1233873554]
+layout_mode = 2
+text = "Exit to Menu"
+
+[node name="SaveDialog" type="FileDialog" parent="PauseMenu" unique_id=62551534]
+unique_name_in_owner = true
+oversampling_override = 1.0
+position = Vector2i(0, 36)
+access = 2
+
+[connection signal="timeout" from="SpawnCustomer" to="." method="_on_spawn_customer_timeout"]
+[connection signal="purchase_furni" from="Shop" to="." method="_on_shop_purchase_furni"]
+[connection signal="purchase_item" from="Shop" to="." method="_on_shop_purchase_item"]
+[connection signal="pressed" from="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Resume" to="PauseMenu" method="_on_resume_pressed"]
+[connection signal="pressed" from="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Export" to="PauseMenu" method="_on_export_pressed"]
+[connection signal="pressed" from="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Exit to Menu" to="PauseMenu" method="_on_exit_to_menu_pressed"]
+[connection signal="file_selected" from="PauseMenu/SaveDialog" to="PauseMenu" method="_on_save_dialog_file_selected"]

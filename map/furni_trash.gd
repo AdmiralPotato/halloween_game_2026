@@ -2,6 +2,11 @@
 class_name FurniTrash
 extends FurniCountertop
 
+func get_save_state() -> Dictionary:
+	var save := super()
+	save.erase('item')
+	return save
+
 func set_item(it: ItemNode):
 	super(it)
 	if it:

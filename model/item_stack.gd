@@ -111,6 +111,47 @@ func _init(_item: ItemInfo = null, _count: int = 1):
 	self.item = _item
 	self.count = _count
 
+func get_save_state() -> Dictionary:
+	var save: Dictionary = {
+		item = item.resource_path,
+		count = count,
+		craft_depth = craft_depth,
+		unique_modifier_depth = unique_modifier_depth,
+		total_modifier_depth = total_modifier_depth,
+		combined_attributes = {},
+		modifiers = [],
+		contents = [],
+	}
+	for attr in combined_attributes:
+		save.combined_attributes[str(attr)] = combined_attributes[attr]
+	for stack in modifiers:
+		save.modifiers.append(stack.get_save_state())
+	for stack in contents:
+		save.contents.append(stack.get_save_state())
+	return save
+
+func set_save_state(save: Dictionary):
+	item = load(save.item)
+	count = int(save.count)
+	craft_depth = int(save.craft_depth)
+	unique_modifier_depth = int(save.unique_modifier_depth)
+	total_modifier_depth = int(save.total_modifier_depth)
+	combined_attributes.clear()
+	modifiers.clear()
+	contents.clear()
+	for attr in save.combined_attributes:
+		combined_attributes[int(attr)] = int(save.combined_attributes[attr])
+	for stack_save in save.modifiers:
+		modifiers.append(ItemStack.from_save_state(stack_save))
+	for stack_save in save.contents:
+		contents.append(ItemStack.from_save_state(stack_save))
+
+static func from_save_state(save: Dictionary) -> ItemStack:
+	var stack := ItemStack.new()
+	stack.set_save_state(save)
+	return stack
+	
+
 const VOWELS := "aeiou"
 const CARDINALITY: Dictionary[int, String] = {
 	2: "extra ",

@@ -1,0 +1,8 @@
+{
+	"Test Map": {
+		"path": "res://map/TilemapTest.tscn"
+	},
+	"Sandbox": {
+		"path": "res://map/EmptyLarge.tscn"
+	}
+}

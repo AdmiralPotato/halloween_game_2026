@@ -4,6 +4,7 @@ extends Resource
 @export var items: Dictionary[String, ItemInfo] = {}
 @export var recipes: Dictionary[String, Recipe] = {}
 @export var furnis: Dictionary[String, FurniInfo] = {}
+@export var maps: Dictionary[String, String] = {}
 
 var _items_by_sort: Array[ItemInfo] = []
 func get_items_by_sort() -> Array[ItemInfo]:
@@ -21,3 +22,6 @@ func add_recipe(r: Recipe):
 
 func add_furni(f: FurniInfo):
 	furnis[f.name] = f
+
+func add_map(name: String, scene_path: String):
+	maps[name] = scene_path

@@ -11,6 +11,19 @@ var item: ItemNode:
 	get = get_item,
 	set = set_item
 
+func get_save_state() -> Dictionary:
+	var save := super()
+	if item:
+		save.item = item.get_save_state()
+	return save
+
+func set_save_state(save: Dictionary) -> void:
+	super(save)
+	if 'item' in save:
+		item = ItemNode.from_save_state(save.item)
+	else:
+		item = null
+
 func get_item() -> ItemNode:
 	if $Item.get_child_count() > 0:
 		return $Item.get_child(0)

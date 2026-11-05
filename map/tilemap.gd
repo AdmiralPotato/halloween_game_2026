@@ -5,6 +5,15 @@ class_name Tilemap
 
 class Tile extends RefCounted:
 	var furni: FurniNode
+	func get_save_state() -> Dictionary:
+		if not furni:
+			return {}
+		return {furni = furni.get_save_state()}
+	func set_save_state(save: Dictionary):
+		if 'furni' in save:
+			furni = FurniNode.from_save_state(save.furni)
+		else:
+			furni = null
 
 var tiles: Dictionary[Vector2i, Tile]
 var pathfinder := AStarGrid2D.new()
@@ -32,6 +41,34 @@ func create_slots(minCoord: Vector2i, size: Vector2i, ...extra_args):
 func clear():
 	tiles.clear()
 	pathfinder.clear()
+
+
+func get_save_state() -> Dictionary:
+	var rect := pathfinder.region
+	var save := {
+		region = [rect.position.x, rect.position.y, rect.size.x, rect.size.y]
+	}
+	for pt in tiles:
+		var tpt := "%d,%d" % [pt.x, pt.y]
+		var tile := tiles[pt]
+		save[tpt] = tile.get_save_state()
+	return save
+
+func set_save_state(save: Dictionary):
+	clear()
+	create_slots(
+			Vector2i(save.region[0], save.region[1]),
+			Vector2i(save.region[2], save.region[3])
+	)
+	for tpt in save:
+		var parts := (tpt as String).split(",")
+		if parts.size() != 2:
+			continue
+		var pt := Vector2i(int(parts[0]), int(parts[1]))
+		tiles[pt].set_save_state(save[tpt])
+		if tiles[pt].furni:
+			pathfinder.set_point_solid(pt)
+	
 
 
 ## Convert a tile position to a world position. This position is on the floor,

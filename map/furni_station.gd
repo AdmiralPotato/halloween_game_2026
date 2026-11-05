@@ -15,6 +15,21 @@ func _ready() -> void:
 	recipe_timer.timeout.connect(_on_recipe_timeout)
 
 
+func get_save_state() -> Dictionary:
+	var save := super()
+	if not recipe_timer.is_stopped():
+		save.time_left = recipe_timer.time_left
+		save.result = eventual_result.get_save_state()
+	return save
+
+
+func set_save_state(save: Dictionary) -> void:
+	if 'time_left' in save:
+		eventual_result = ItemStack.from_save_state(save.result)
+		recipe_timer.start(save.time_left)
+		status_indicator.start()
+
+
 func interact(player: Node):
 	if not recipe_timer.is_stopped():
 		return  # be patient
@@ -78,6 +93,7 @@ func cancel_craft():
 	status_indicator.stop()
 
 func _on_recipe_timeout():
-	stored_stack.changed.disconnect(cancel_craft)
+	if stored_stack.changed.is_connected(cancel_craft):
+		stored_stack.changed.disconnect(cancel_craft)
 	item = ItemNode.make_node(eventual_result)
 	status_indicator.stop()

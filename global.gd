@@ -12,6 +12,7 @@ var gold: int = 10_000:
 		gold_changed.emit()
 
 @onready var registry: Registry = load("res://model/data/registry.tres")
+var scene_change_info: Dictionary = {}
 
 signal request_debug_info(panel: DebugPanel)
 signal gold_changed
@@ -21,3 +22,19 @@ func _ready():
 	
 func register_debug_info(_dp: DebugPanel):
 	DebugPanel.monitor("gold", self, &"gold", 30)
+
+func get_save_state() -> Dictionary:
+	var map: String
+	if 'path' in scene_change_info:
+		map = scene_change_info.path
+	else:
+		map = '???'  # TODO: figure out how to get the PackedScene path for the tree root
+	return {
+		map = map,
+		tilemap = tilemap.get_save_state(),
+	}
+
+func set_save_state(save: Dictionary):
+	get_tree().change_scene_to_file(save.map)
+	await get_tree().scene_changed
+	tilemap.set_save_state(save.tilemap)

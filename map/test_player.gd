@@ -1,6 +1,7 @@
 extends RigidBody3D
 
 const SMOL = Vector3.ONE * 0.5
+const PICK_RANGE = 1.0
 
 signal held_object_changed
 
@@ -54,7 +55,7 @@ func _physics_process(delta):
 		indicator.light_color = indicator_color
 	
 	var pointing: Vector2i = \
-			Global.tilemap.find_tile(position, basis.z, 1.4)
+			Global.tilemap.find_tile(position, basis.z, PICK_RANGE)
 	var world_pointing = Global.tilemap.to_world_point(pointing)
 	indicator.global_position = Vector3(
 			world_pointing.x,
