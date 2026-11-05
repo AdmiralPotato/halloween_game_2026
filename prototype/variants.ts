@@ -15,6 +15,7 @@ const variantLookup: Record<string, VariantInfo> = {
 	ube_flavoring: { parent: 'flavoring', variantName: 'ube' },
 	mint_flavoring: { parent: 'flavoring', variantName: 'mint' },
 	caramel_flavoring: { parent: 'flavoring', variantName: 'caramel' },
+	grape_flavoring: { parent: 'flavoring', variantName: 'grape' },
 	red_candied_flowers: { parent: 'candied_flowers', variantName: 'red' },
 	white_candied_flowers: { parent: 'candied_flowers', variantName: 'white' },
 	blue_candied_flowers: { parent: 'candied_flowers', variantName: 'blue' },
