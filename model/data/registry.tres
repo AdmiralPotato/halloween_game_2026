@@ -55,8 +55,10 @@
 [ext_resource type="Resource" uid="uid://b34kf80gy2er3" path="res://model/data/items/bowl.tres" id="53_rrm56"]
 [ext_resource type="Script" uid="uid://b5mlkyd7jcal7" path="res://model/recipe.gd" id="54_a0nsy"]
 [ext_resource type="Resource" uid="uid://b51yuegjqhtrh" path="res://model/data/recipes/chocolate_chips.tres" id="55_l4x8c"]
+[ext_resource type="Resource" uid="uid://clwwyugodw8rg" path="res://model/data/recipes/white_chocolate_chips.tres" id="56_8egtv"]
 [ext_resource type="Resource" uid="uid://bvpar5bdtvhrp" path="res://model/data/recipes/frosting.tres" id="56_v8wai"]
 [ext_resource type="Resource" uid="uid://cj0rcmms8r54w" path="res://model/data/recipes/whipped_cream.tres" id="57_17ko2"]
+[ext_resource type="Resource" uid="uid://be4mh5icaf7kk" path="res://model/data/recipes/dark_chocolate_chips.tres" id="57_mg4jp"]
 [ext_resource type="Resource" uid="uid://ctwsujsa7sw11" path="res://model/data/recipes/pastry_cream.tres" id="58_u703j"]
 [ext_resource type="Resource" uid="uid://pptomi2erth2" path="res://model/data/recipes/pudding.tres" id="59_li5c6"]
 [ext_resource type="Resource" uid="uid://cck62byf4r1xj" path="res://model/data/recipes/cookie_dough.tres" id="60_j1vm0"]
@@ -129,10 +131,12 @@ recipes = Dictionary[String, ExtResource("54_a0nsy")]({
 "cookie dough": ExtResource("60_j1vm0"),
 "cookie dough remix": ExtResource("61_muy2m"),
 "cupcake": ExtResource("65_4cp2b"),
+"dark chocolate chips": ExtResource("57_mg4jp"),
 "frosting": ExtResource("56_v8wai"),
 "pastry cream": ExtResource("58_u703j"),
 "pudding": ExtResource("59_li5c6"),
-"whipped cream": ExtResource("57_17ko2")
+"whipped cream": ExtResource("57_17ko2"),
+"white chocolate chips": ExtResource("56_8egtv")
 })
 furnis = Dictionary[String, ExtResource("1_amxl4")]({
 "countertop": ExtResource("2_7sucn"),
