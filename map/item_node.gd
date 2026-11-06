@@ -46,6 +46,8 @@ static func make_node(_stack: ItemStack) -> ItemNode:
 
 static var recipe_render_data: Dictionary
 
+static var cached_texture_by_recipe_string: Dictionary[String, Texture2D]
+
 static func _static_init() -> void:
 	ItemNode.recipe_render_data.assign(JSON.parse_string(
 			FileAccess.get_file_as_string("res://business/items/draw_sprites.json")
@@ -176,14 +178,30 @@ static func render_recipe_layer (
 	_modifiers: Array[ItemStack] = []
 ) -> Texture2D:
 	var type: String = _layer.type;
+	var texture_string_key = str(_layer) + str(_modifiers)
+	if texture_string_key in cached_texture_by_recipe_string:
+		print('render_recipe_layer read cache: ', texture_string_key)
+		draw_layer_into_texture(
+			_texture,
+			cached_texture_by_recipe_string[texture_string_key]
+		)
+		return _texture
 	#print('render_recipe_layer type: ', type);
+	var result = make_empty_texture()
 	match type:
-		'sprite': return render_recipe_layer_sprite(_layer, _texture)
-		'multi': return render_recipe_layer_multi(_layer, _texture)
-		'ref': return render_recipe_layer_ref(_layer, _texture, _modifiers)
+		'sprite': result = render_recipe_layer_sprite(_layer, result)
+		'multi': result = render_recipe_layer_multi(_layer, result)
+		'ref': result = render_recipe_layer_ref(_layer, result, _modifiers)
 		_:
 			print('render_recipe_layer: Unsupported type: ', type)
-			return make_unimplemented_texture()
+			result = make_unimplemented_texture()
+	print('render_recipe_layer write cache: ', texture_string_key)
+	cached_texture_by_recipe_string[texture_string_key] = result
+	draw_layer_into_texture(
+		_texture,
+		result
+	)
+	return _texture
 
 
 static func render_recipe_layer_sprite (
@@ -283,16 +301,17 @@ static func render_recipe_stack_modifiers (
 			var modifier_layer: Dictionary = _recipe_layer_dict[modifier_name]
 			print('render_recipe_stack_modifiers: modifier: ', modifier_name, ': ', modifier_layer, modifier)
 			var loops = (modifier.count if modifier.count > 1 else 1)
+			var modifier_layer_texture = render_recipe_layer(modifier_layer, make_empty_texture(), modifier.modifiers)
 			for i in loops:
 				draw_layer_into_texture(
-	 				_texture,
-	 				render_recipe_layer(modifier_layer, make_empty_texture(), modifier.modifiers),
-	 				(
+					_texture,
+					modifier_layer_texture,
+					(
 						get_blend_mode_from_string(modifier_layer.mode)
 						if 'mode' in modifier_layer else
 						BlitMaterial.BlendMode.BLEND_MODE_MIX
 					),
-	 			)
+				)
 
 
 static func render_recipe_frosting(_recipe: Dictionary, _modifiers: Array[ItemStack]) -> Texture2D:
