@@ -288,6 +288,12 @@ func get_desire_for(stack: ItemStack) -> float:
 	var total := 0.0
 	for attr in stack.combined_attributes:
 		total += prefs[attr] * stack.combined_attributes[attr]
+	if stack.item.is_category(ItemInfo.Category.CONTAINER):
+		var contents_total := 0.0
+		for content in stack.contents:
+			contents_total += get_desire_for(content)
+		if contents_total > total:
+			total = contents_total
 	return total
 
 func get_sale_price_for(stack: ItemStack) -> int:

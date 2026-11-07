@@ -1,5 +1,6 @@
 ## Attempt to fix any unique ItemInfos by relinking them to the ItemInfo resources
-## already in the tree.
+## already in the tree. You MUST run this with the map or scene currently open
+## and selected. (This can take a while!)
 @tool
 class_name RelinkItems
 extends EditorScript
