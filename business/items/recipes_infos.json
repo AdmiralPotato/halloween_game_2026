@@ -240,7 +240,7 @@
   {
     "output": "cake_slice",
     "human_name": "cake slice",
-    "quantity": 1,
+    "quantity": 6,
     "location": "CUTTING_BOARD",
     "pan": "NONE",
     "time": 0,
