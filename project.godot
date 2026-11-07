@@ -40,6 +40,12 @@ enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
 
 theme/custom="uid://bkphg3nelw53u"
 
+[importer_defaults]
+
+texture={
+&"process/fix_alpha_border": false
+}
+
 [input]
 
 move_up={
