@@ -30,8 +30,10 @@ extends RigidBody3D
 @export var desire_range := Vector2(-1.0, 3.5)
 ## Bonus for exceeding expectations. This is raised to the difference between
 ## desire ("pickiness") and the appraised value of an item, then multiplied
-## into the sale cost. (It's like a tip!)
-@export var desire_excess_bonus := 2.0
+## into the sale cost. (It's like a tip!) While desire thresholds are configured
+## above, desire _amounts_ are bounded only by the range of attributes, which
+## can be quite large in complex recipes; keep that in mind if you adjust this.
+@export var desire_excess_bonus := 1.05
 
 @abstract class State extends RefCounted:
 	var owner: TestCustomer
