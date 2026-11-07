@@ -125,6 +125,8 @@ func update_stack_rendering():
 		$Count.visible = true
 
 
+static var _old_texture: DrawableTexture2D = null
+static var _blit_copy: BlitMaterial = null
 static func draw_layer_into_texture(
 	destination: DrawableTexture2D,
 	source: Texture2D,
@@ -142,9 +144,25 @@ static func draw_layer_into_texture(
 		)
 		texture = source.atlas
 	blend_material.set_shader_parameter(&"region", uv_region)
-	destination.blit_rect(
+	if not _old_texture:
+		_old_texture = DrawableTexture2D.new()
+		_old_texture.setup(
+			256, 256,
+			DrawableTexture2D.DrawableFormat.DRAWABLE_FORMAT_RGBA8,
+		)
+		_blit_copy = BlitMaterial.new()
+		_blit_copy.blend_mode = BlitMaterial.BLEND_MODE_DISABLED
+	_old_texture.blit_rect(
+		Rect2i(Vector2i.ZERO, Vector2i(destination.get_size())),
+		destination,
+		Color.WHITE,
+		0,
+		_blit_copy,
+	)
+	destination.blit_rect_multi(
 		Rect2i(0, 0, 256, 256),
-		texture,
+		[texture, _old_texture],
+		[],
 		color,
 		0,
 		blend_material,
