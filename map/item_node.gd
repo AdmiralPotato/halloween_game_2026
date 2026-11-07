@@ -21,6 +21,10 @@ enum FlavoringSpriteOffset {
 }
 
 
+const BLEND_MATERIAL_MIX = preload("res://blit_atlas_mix.tres")
+const BLEND_MATERIAL_MUL = preload("res://blit_atlas_mul.tres")
+
+
 # Attend the slight circular dependency where we have to refer to the scene to
 # which we are attached as a script; for this reason, don't just preload this.
 const ITEM_RESOURCE := "res://map/ItemNode.tscn"
@@ -45,6 +49,8 @@ static func make_node(_stack: ItemStack) -> ItemNode:
 	return node
 
 static var recipe_render_data: Dictionary
+
+static var cached_texture_by_recipe_string: Dictionary[String, Texture2D]
 
 static func _static_init() -> void:
 	ItemNode.recipe_render_data.assign(JSON.parse_string(
@@ -122,28 +128,26 @@ func update_stack_rendering():
 static func draw_layer_into_texture(
 	destination: DrawableTexture2D,
 	source: Texture2D,
-	blend_mode: BlitMaterial.BlendMode = BlitMaterial.BlendMode.BLEND_MODE_MIX,
+	blend_material: Material = BLEND_MATERIAL_MIX,
 	color: Color = Color(1,1,1,1)
 ):
-	var texture = source;
-	# GODOT BUG: AtlasTexture can't be used directly in DrawableTexture2D.blit_rect
+	var uv_region := Rect2(0, 0, 1, 1)
+	var texture: Texture2D = source
 	if source is AtlasTexture:
-		var source_image = source.get_image()
-		if not source_image:
-			print('draw_layer_into_texture: ERROR! source_image is somehow null???')
-		# if you get errors calling source.get_image(), click on the image in fs
-		# view, then look at the "import" tab ABOVE the FileSystem tab and change
-		# mode to "Lossless" and then click "Reimport" at the bottom of the import panel
-		texture = ImageTexture.create_from_image(source_image)
-	# end bug handling
-	var material = BlitMaterial.new()
-	material.blend_mode = blend_mode
+		var region: Rect2 = source.region
+		var size: Vector2 = source.atlas.get_size()
+		uv_region = Rect2(
+			region.position / size,
+			region.size / size,
+		)
+		texture = source.atlas
+	blend_material.set_shader_parameter(&"region", uv_region)
 	destination.blit_rect(
 		Rect2i(0, 0, 256, 256),
 		texture,
 		color,
 		0,
-		material,
+		blend_material,
 	)
 
 static func render_simple_item_texture_by_name(recipe_name: String) -> Texture2D:
@@ -186,14 +190,30 @@ static func render_recipe_layer (
 	_modifiers: Array[ItemStack] = []
 ) -> Texture2D:
 	var type: String = _layer.type;
+	var texture_string_key = str(_layer) + str(_modifiers)
+	if texture_string_key in cached_texture_by_recipe_string:
+		print('render_recipe_layer read cache: ', texture_string_key)
+		draw_layer_into_texture(
+			_texture,
+			cached_texture_by_recipe_string[texture_string_key]
+		)
+		return _texture
 	#print('render_recipe_layer type: ', type);
+	var result = make_empty_texture()
 	match type:
-		'sprite': return render_recipe_layer_sprite(_layer, _texture)
-		'multi': return render_recipe_layer_multi(_layer, _texture)
-		'ref': return render_recipe_layer_ref(_layer, _texture, _modifiers)
+		'sprite': result = render_recipe_layer_sprite(_layer, result)
+		'multi': result = render_recipe_layer_multi(_layer, result)
+		'ref': result = render_recipe_layer_ref(_layer, result, _modifiers)
 		_:
 			print('render_recipe_layer: Unsupported type: ', type)
-			return make_unimplemented_texture()
+			result = make_unimplemented_texture()
+	print('render_recipe_layer write cache: ', texture_string_key)
+	cached_texture_by_recipe_string[texture_string_key] = result
+	draw_layer_into_texture(
+		_texture,
+		result
+	)
+	return _texture
 
 
 static func render_recipe_layer_sprite (
@@ -204,21 +224,21 @@ static func render_recipe_layer_sprite (
 	var texture_path = "res://assets/" + _layer.file
 	#print('render_recipe_layer_sprite texture_path:', texture_path)
 	var sourceTexture = make_atlas_texture_at_path_and_coords(texture_path, _layer.x, _layer.y)
-	var blend_mode = get_blend_mode_from_string(_layer.mode)
+	var material = get_mix_material(_layer.mode)
 	var color = (
 		Color.WHITE
-		if not 'colorize' in _layer else
+		if 'colorize' not in _layer else
 		_layer.colorize
 	)
-	draw_layer_into_texture(_texture, sourceTexture, blend_mode, color)
+	draw_layer_into_texture(_texture, sourceTexture, material, color)
 	return _texture
 
 
-static func get_blend_mode_from_string (mode: String) -> BlitMaterial.BlendMode:
+static func get_mix_material(mode: String) -> Material:
 	return (
-		BlitMaterial.BlendMode.BLEND_MODE_MUL
+		BLEND_MATERIAL_MUL
 		if mode == 'multiply' else
-		BlitMaterial.BlendMode.BLEND_MODE_MIX
+		BLEND_MATERIAL_MIX
 	)
 
 
@@ -235,7 +255,7 @@ static func make_empty_texture(color: Color = Color(0,0,0,0)) -> DrawableTexture
 
 
 static func make_atlas_texture_at_path_and_coords(texture_path: String, x: int, y: int) -> AtlasTexture:
-	var file = load(texture_path) as CompressedTexture2D
+	var file: Texture2D = load(texture_path)
 	var sourceTexture = AtlasTexture.new()
 	sourceTexture.region = Rect2i(x * 256, y * 256, 256, 256)
 	sourceTexture.atlas = file
@@ -258,7 +278,7 @@ static func render_recipe_layer_multi (
 			draw_layer_into_texture(
 				_texture,
 				render_recipe_layer(sprite),
-				get_blend_mode_from_string(sprite.mode),
+				get_mix_material(sprite.mode),
 			)
 	return _texture
 
@@ -293,16 +313,17 @@ static func render_recipe_stack_modifiers (
 			var modifier_layer: Dictionary = _recipe_layer_dict[modifier_name]
 			print('render_recipe_stack_modifiers: modifier: ', modifier_name, ': ', modifier_layer, modifier)
 			var loops = (modifier.count if modifier.count > 1 else 1)
+			var modifier_layer_texture = render_recipe_layer(modifier_layer, make_empty_texture(), modifier.modifiers)
 			for i in loops:
 				draw_layer_into_texture(
-	 				_texture,
-	 				render_recipe_layer(modifier_layer, make_empty_texture(), modifier.modifiers),
-	 				(
-						get_blend_mode_from_string(modifier_layer.mode)
+					_texture,
+					modifier_layer_texture,
+					(
+						get_mix_material(modifier_layer.mode)
 						if 'mode' in modifier_layer else
-						BlitMaterial.BlendMode.BLEND_MODE_MIX
+						BLEND_MATERIAL_MIX
 					),
-	 			)
+				)
 
 
 static func render_recipe_frosting(_recipe: Dictionary, _modifiers: Array[ItemStack]) -> Texture2D:
@@ -326,7 +347,7 @@ static func render_recipe_frosting(_recipe: Dictionary, _modifiers: Array[ItemSt
 				draw_layer_into_texture(
 					texture,
 					render_recipe_layer(flavor_modifier),
-					get_blend_mode_from_string(flavor_modifier.mode),
+					get_mix_material(flavor_modifier.mode),
 				)
 	var jar_layer: Dictionary = (
 		_recipe.jar.chocolate_jar

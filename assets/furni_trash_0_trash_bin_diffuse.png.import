@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://m6omyd1tvb4k"
-path.s3tc="res://.godot/imported/furni_storage_box_refrigerated_0_TEMPTEX_storageBoxRefrigerated.png-019834f77edf8ae38265f30e29b65fff.s3tc.ctex"
+uid="uid://bqo5krsqo8qsd"
+path.s3tc="res://.godot/imported/furni_trash_0_trash_bin_diffuse.png-f2abe370e378439587e851106a89e9be.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "cb19ec182301f02eb4e49bb47553a664"
+"md5": "a52153577274ee0c4a13d77672150013"
 }
 
 [deps]
 
-source_file="res://assets/furni_storage_box_refrigerated_0_TEMPTEX_storageBoxRefrigerated.png"
-dest_files=["res://.godot/imported/furni_storage_box_refrigerated_0_TEMPTEX_storageBoxRefrigerated.png-019834f77edf8ae38265f30e29b65fff.s3tc.ctex"]
+source_file="res://assets/furni_trash_0_trash_bin_diffuse.png"
+dest_files=["res://.godot/imported/furni_trash_0_trash_bin_diffuse.png-f2abe370e378439587e851106a89e9be.s3tc.ctex"]
 
 [params]
 

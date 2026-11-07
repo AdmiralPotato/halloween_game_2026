@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cuxm61rhu8y6n"]
+
+[ext_resource type="Shader" uid="uid://cyfmhe37802vq" path="res://blit_atlas_mix.gdshader" id="1_5ek2r"]
+
+[resource]
+shader = ExtResource("1_5ek2r")

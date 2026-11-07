@@ -15,6 +15,36 @@
     "allowedModifiers": []
   },
   {
+    "output": "white_chocolate_chips",
+    "human_name": "white chocolate chips",
+    "quantity": 4,
+    "location": "CUTTING_BOARD",
+    "pan": "NONE",
+    "time": 1,
+    "ingredients": [
+      "white_chocolate_bar"
+    ],
+    "newAttributes": {
+      "pop": 1
+    },
+    "allowedModifiers": []
+  },
+  {
+    "output": "dark_chocolate_chips",
+    "human_name": "dark chocolate chips",
+    "quantity": 4,
+    "location": "CUTTING_BOARD",
+    "pan": "NONE",
+    "time": 1,
+    "ingredients": [
+      "dark_chocolate_bar"
+    ],
+    "newAttributes": {
+      "pop": 1
+    },
+    "allowedModifiers": []
+  },
+  {
     "output": "frosting",
     "human_name": "frosting",
     "quantity": 2,
@@ -210,7 +240,7 @@
   {
     "output": "cake_slice",
     "human_name": "cake slice",
-    "quantity": 1,
+    "quantity": 6,
     "location": "CUTTING_BOARD",
     "pan": "NONE",
     "time": 0,

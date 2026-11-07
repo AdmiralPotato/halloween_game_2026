@@ -24,6 +24,11 @@
 		"parent": "flavoring",
 		"variantName": "almond"
 	},
+	"caramel_flavoring": {
+		"human_name": "caramel flavoring",
+		"parent": "flavoring",
+		"variantName": "caramel"
+	},
 	"lemon_flavoring": {
 		"human_name": "lemon flavoring",
 		"parent": "flavoring",
@@ -33,6 +38,11 @@
 		"human_name": "lime flavoring",
 		"parent": "flavoring",
 		"variantName": "lime"
+	},
+	"mint_flavoring": {
+		"human_name": "mint flavoring",
+		"parent": "flavoring",
+		"variantName": "mint"
 	},
 	"blueberry_flavoring": {
 		"human_name": "blueberry flavoring",
@@ -44,15 +54,10 @@
 		"parent": "flavoring",
 		"variantName": "ube"
 	},
-	"mint_flavoring": {
-		"human_name": "mint flavoring",
+	"grape_flavoring": {
+		"human_name": "grape flavoring",
 		"parent": "flavoring",
-		"variantName": "mint"
-	},
-	"caramel_flavoring": {
-		"human_name": "caramel flavoring",
-		"parent": "flavoring",
-		"variantName": "caramel"
+		"variantName": "ube"
 	},
 	"red_candied_flowers": {
 		"human_name": "red candied flowers",

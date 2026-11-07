@@ -261,6 +261,17 @@ const itemInfoMap: Record<string, ItemInfo> = {
 			pale: -2,
 		},
 	},
+	grape_flavoring: {
+		storageType: 'jar',
+		categories: [ 'modifier' ],
+		cost: 4,
+		stackSize: FLAVORING_STACK_SIZE,
+		attributes: {
+			fruity: 2,
+			purple: 2,
+			pale: -2,
+		},
+	},
 	red_candied_flowers: {
 		storageType: 'jar',
 		categories: [ 'doodads' ],

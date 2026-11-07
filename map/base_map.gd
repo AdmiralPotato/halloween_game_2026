@@ -80,8 +80,6 @@ func build_storefront():
 						tile = FURNI_REGISTER.instantiate()
 					else:
 						tile = FURNI_DISPLAYCASE.instantiate()
-			if tile:
-				tile.locked = true
 			var old = $Tilemap.swap_furni(pt, tile)
 			if old:
 				var open = $Tilemap.pick_open_point()
@@ -175,6 +173,6 @@ func _on_shop_purchase_item(item: ItemInfo) -> void:
 	var furni: FurniSource = FURNI_SOURCE.instantiate()
 	furni.stack = ItemStack.new(item)
 	furni.pack()
-	furni.transform = furni.transform.scaled($TestPlayer.SMOL)
+	furni.transform = furni.transform.scaled($TestPlayer.SMOL_FURNI)
 	$TestPlayer.held_object = furni
 	$Shop.visible = false
