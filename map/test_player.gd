@@ -1,6 +1,7 @@
 extends RigidBody3D
 
-const SMOL = Vector3.ONE * 0.5
+const SMOL_ITEM = Vector3.ONE
+const SMOL_FURNI = Vector3.ONE * 0.6
 
 signal held_object_changed
 
@@ -21,7 +22,7 @@ var cursor_last_item: ItemNode = null
 @onready var right_hand_node = $RightHand
 @onready var mesh_node = $mage
 @onready var skeleton = $mage/mage_bones/Skeleton3D
-@onready var hand_bone = skeleton.find_bone("hand_R")
+@onready var item_bone = skeleton.find_bone("handItem_R")
 @onready var indicator: SpotLight3D = $InteractIndicator
 @onready var cursor: PlayerCursor = $PlayerCursor
 var held_object: BaseMapNode:
@@ -75,7 +76,7 @@ func _physics_process(delta):
 		cursor.visible = false
 		cursor_last_item = null
 
-	right_hand_node.transform = skeleton.get_bone_global_pose(hand_bone)
+	right_hand_node.transform = skeleton.get_bone_global_pose(item_bone)
 
 	var input_vec := Vector2(
 		Input.get_axis("move_left", "move_right"),
@@ -88,7 +89,10 @@ func _physics_process(delta):
 		0.0,
 		clamp(desired_z_motion - self.linear_velocity.z, -1.0, 1.0),
 	) * movement_force
-	$AnimationTree.set("parameters/BlendSpace1D/blend_position", input_vec.length())
+	$AnimationTree.set(
+		"parameters/BlendSpace2D/blend_position",
+		Vector2(input_vec.length(), (1 if held_object else 0))
+	)
 	if Vector2(desired_x_motion, desired_z_motion).length() > 0.1:
 		var desired_facing = atan2(desired_x_motion, desired_z_motion)
 		var facing_delta = angle_difference(rotation.y, desired_facing)
@@ -105,7 +109,10 @@ func _physics_process(delta):
 			held_object = Global.tilemap.swap_item(pointing, held_object)
 		# If we're holding an object now, and it's a new one we picked up...
 		if held_object and held_object != old_held:
-			held_object.transform = Transform3D(Basis().scaled(SMOL), Vector3.ZERO)
+			held_object.transform = Transform3D(
+				Basis().scaled(SMOL_ITEM if held_object is ItemNode else SMOL_FURNI),
+				Vector3.ZERO,
+			)
 			held_object.animate_to_current_transform()
 		if old_held and held_object != old_held:
 			old_held.animate_to_current_transform()
