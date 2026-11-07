@@ -42,8 +42,8 @@ var held_object: BaseMapNode:
 
 func _ready():
 	Global.request_debug_info.connect(register_debug_info)
-	
-	
+
+
 func register_debug_info(_dp: DebugPanel):
 	DebugPanel.monitor("Held Object", self, "held_object", 1)
 
@@ -52,9 +52,9 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("toggle_rearrange"):
 		in_rearrange_mode = !in_rearrange_mode
 		indicator.light_color = indicator_color
-	
+
 	var pointing: Vector2i = \
-			Global.tilemap.find_tile(position, basis.z, 1.4)
+			Global.tilemap.find_tile(position, basis.z, 0.75)
 	var world_pointing = Global.tilemap.to_world_point(pointing)
 	indicator.global_position = Vector3(
 			world_pointing.x,
@@ -74,9 +74,9 @@ func _physics_process(delta):
 	if not cursor_shown:
 		cursor.visible = false
 		cursor_last_item = null
-	
+
 	right_hand_node.transform = skeleton.get_bone_global_pose(hand_bone)
-	
+
 	var input_vec := Vector2(
 		Input.get_axis("move_left", "move_right"),
 		Input.get_axis("move_up", "move_down"),
