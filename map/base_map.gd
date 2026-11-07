@@ -159,7 +159,7 @@ func _on_shop_purchase_furni(furni: FurniInfo) -> void:
 	Global.gold -= furni.cost
 	var node: FurniNode = furni.scene.instantiate()
 	node.pack()
-	node.transform = node.transform.scaled($TestPlayer.SMOL)
+	node.transform = node.transform.scaled($TestPlayer.SMOL_FURNI)
 	$TestPlayer.held_object = node
 	$Shop.visible = false
 

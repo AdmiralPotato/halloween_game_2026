@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FurniInfo" format=3 uid="uid://dsgjn1cb2618l"]
+
+[ext_resource type="PackedScene" uid="uid://d1tp40f6bgvc6" path="res://map/FurniTrash.tscn" id="1_bvo42"]
+[ext_resource type="Script" uid="uid://cg3yvhquhplvs" path="res://model/furni_info.gd" id="2_4o4l1"]
+
+[resource]
+script = ExtResource("2_4o4l1")
+name = "trash"
+scene = ExtResource("1_bvo42")
+cost = 500

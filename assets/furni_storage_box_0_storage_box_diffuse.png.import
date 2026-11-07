@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bachsomhdtkhq"
-path.s3tc="res://.godot/imported/furni_storage_box_0_storage_box_diffuse.png-8dbf7e2b31df0ae37e403e2fc4c64fe8.s3tc.ctex"
+path.bptc="res://.godot/imported/furni_storage_box_0_storage_box_diffuse.png-8dbf7e2b31df0ae37e403e2fc4c64fe8.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -15,12 +15,12 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/furni_storage_box_0_storage_box_diffuse.png"
-dest_files=["res://.godot/imported/furni_storage_box_0_storage_box_diffuse.png-8dbf7e2b31df0ae37e403e2fc4c64fe8.s3tc.ctex"]
+dest_files=["res://.godot/imported/furni_storage_box_0_storage_box_diffuse.png-8dbf7e2b31df0ae37e403e2fc4c64fe8.bptc.ctex"]
 
 [params]
 
 compress/mode=2
-compress/high_quality=false
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

@@ -18,5 +18,9 @@
 	"oven": {
 		"path": "res://map/FurniOven.tscn",
 		"cost": 500
+	},
+	"trash": {
+		"path": "res://map/FurniTrash.tscn",
+		"cost": 500
 	}
 }
