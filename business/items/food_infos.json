@@ -420,6 +420,15 @@
 		"max_stack_size": 4,
 		"attributes": "from_recipe"
 	},
+	"piping_bag": {
+		"human_name": "frosting",
+		"sort": 420,
+		"storage_type": "JAR",
+		"categories": ["DECORATION"],
+		"buy_price": 2,
+		"max_stack_size": 4,
+		"attributes": "from_recipe"
+	},
 	"whipped_cream": {
 		"human_name": "whipped cream",
 		"sort": 300,

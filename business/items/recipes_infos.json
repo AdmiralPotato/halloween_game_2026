@@ -64,6 +64,19 @@
     ]
   },
   {
+    "output": "piping_bag",
+    "human_name": "piping bag",
+    "quantity": 1,
+    "location": "CUTTING_BOARD",
+    "pan": "NONE",
+    "time": 0,
+    "ingredients": [
+      "frosting"
+    ],
+    "newAttributes": {},
+    "allowedModifiers": []
+  },
+  {
     "output": "whipped_cream",
     "human_name": "whipped cream",
     "quantity": 3,

@@ -5524,6 +5524,446 @@
       }
     }
   },
+  "piping_bag": {
+    "plain": {
+      "root": {
+        "type": "multi",
+        "mode": "mix",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f7f5f2"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b7ada0"
+          }
+        ]
+      }
+    },
+    "base": {
+      "root": {
+        "file": "TILES-frosting.png",
+        "x": 4,
+        "y": 0,
+        "type": "sprite",
+        "mode": "mix",
+        "colorize": "#f7f5f2"
+      }
+    },
+    "flavoring_modifiers": {
+      "cocoa_powder": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#9e8374"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#63453a"
+          }
+        ]
+      },
+      "cherry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c98699"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7b394c"
+          }
+        ]
+      },
+      "raspberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3a9c8"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#ad497c"
+          }
+        ]
+      },
+      "strawberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#e39fac"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c05a65"
+          }
+        ]
+      },
+      "orange_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f3c370"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b37537"
+          }
+        ]
+      },
+      "almond_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c4b39e"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#88734f"
+          }
+        ]
+      },
+      "caramel_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c7a16e"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#8d5f2e"
+          }
+        ]
+      },
+      "lemon_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#f7ee93"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#c49d2c"
+          }
+        ]
+      },
+      "lime_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#bedc73"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#66893d"
+          }
+        ]
+      },
+      "mint_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b5e0ce"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#569577"
+          }
+        ]
+      },
+      "blueberry_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#7aa3c4"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#385f95"
+          }
+        ]
+      },
+      "ube_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#a9a4c9"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#65639e"
+          }
+        ]
+      },
+      "grape_flavoring": {
+        "type": "multi",
+        "mode": "multiply",
+        "sprites": [
+          {
+            "file": "TILES-frosting.png",
+            "x": 4,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#b383cd"
+          },
+          {
+            "file": "TILES-frosting.png",
+            "x": 5,
+            "y": 0,
+            "type": "sprite",
+            "mode": "mix",
+            "colorize": "#6b477b"
+          }
+        ]
+      }
+    },
+    "jar": {
+      "chocolate_jar": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-frosting.png",
+        "x": 6,
+        "y": 0
+      },
+      "no_chocolate_jar": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-frosting.png",
+        "x": 7,
+        "y": 0
+      }
+    },
+    "decals": {
+      "cherry_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-frosting.png",
+        "x": 0,
+        "y": 2
+      },
+      "raspberry_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-frosting.png",
+        "x": 1,
+        "y": 2
+      },
+      "strawberry_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-frosting.png",
+        "x": 2,
+        "y": 2
+      },
+      "orange_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-frosting.png",
+        "x": 3,
+        "y": 2
+      },
+      "almond_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-frosting.png",
+        "x": 4,
+        "y": 2
+      },
+      "caramel_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-frosting.png",
+        "x": 5,
+        "y": 2
+      },
+      "lemon_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-frosting.png",
+        "x": 6,
+        "y": 2
+      },
+      "lime_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-frosting.png",
+        "x": 7,
+        "y": 2
+      },
+      "mint_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-frosting.png",
+        "x": 8,
+        "y": 2
+      },
+      "blueberry_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-frosting.png",
+        "x": 9,
+        "y": 2
+      },
+      "ube_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-frosting.png",
+        "x": 10,
+        "y": 2
+      },
+      "grape_flavoring": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-frosting.png",
+        "x": 11,
+        "y": 2
+      },
+      "cocoa_powder": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-frosting.png",
+        "x": 12,
+        "y": 2
+      },
+      "plain": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-frosting.png",
+        "x": 13,
+        "y": 2
+      }
+    }
+  },
   "cream": {
     "base": {
       "root": {

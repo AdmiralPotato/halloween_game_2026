@@ -93,6 +93,10 @@ const comboSpriteInfo: Record<string, ComboSpriteInfo> = {
 		light: { file: fileNames.frosting, x: 0, y: 0 },
 		dark: { file: fileNames.frosting, x: 1, y: 0 },
 	},
+	piping_bag: {
+		light: { file: fileNames.frosting, x: 4, y: 0 },
+		dark: { file: fileNames.frosting, x: 5, y: 0 },
+	},
 };
 
 // --------------------------------------------- Draw info --------------------------------------------- //
@@ -520,6 +524,48 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 			grape_flavoring:      { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 11, y: 1 },
 			cocoa_powder:         { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 12, y: 1 },
 			plain:                { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 13, y: 1 },
+		}
+	},
+	// These follow the same instructions as `frosting`
+	piping_bag: {
+		// Only draw if NO modifiers!
+		plain: {
+			root: quickComboTile(comboSpriteInfo.piping_bag, 'mix', '#f7f5f2', '#b7ada0')
+		},
+		// Only draw if there ARE modifiers!
+		base: {
+			root: { ...comboSpriteInfo.piping_bag.light, type: 'sprite', mode: 'mix', colorize: '#f7f5f2' },
+		},
+		// Draw once per count in modifiers:
+		flavoring_modifiers: {
+			...makeFlavorings(comboSpriteInfo.piping_bag),
+		},
+		// If `cocoa_powder` is present in modifiers, draw `chocolate_jar`
+		// Otherwise, draw `no_chocolate_jar`
+		jar: {
+			chocolate_jar: { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 6, y: 0 },
+			no_chocolate_jar: { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 7, y: 0 },
+		},
+		// If flavor count == 0 use the `plain` decal
+		// If flavor count == 1, use the decal for that flavor
+		// If flavor count 1> and it's all the same flavor, use the decal for that flavor
+		// If flavor count == 2 and 1 is chocolate and 1 is something else, use the decal for the something else
+		// Otherwise use the `plain` decal
+		decals: {
+			cherry_flavoring:     { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 0, y: 2 },
+			raspberry_flavoring:  { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 1, y: 2 },
+			strawberry_flavoring: { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 2, y: 2 },
+			orange_flavoring:     { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 3, y: 2 },
+			almond_flavoring:     { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 4, y: 2 },
+			caramel_flavoring:    { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 5, y: 2 },
+			lemon_flavoring:      { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 6, y: 2 },
+			lime_flavoring:       { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 7, y: 2 },
+			mint_flavoring:       { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 8, y: 2 },
+			blueberry_flavoring:  { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 9, y: 2 },
+			ube_flavoring:        { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 10, y: 2 },
+			grape_flavoring:      { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 11, y: 2 },
+			cocoa_powder:         { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 12, y: 2 },
+			plain:                { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 13, y: 2 },
 		}
 	},
 	cream: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 0, y: 0 }}},

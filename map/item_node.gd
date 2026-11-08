@@ -188,6 +188,7 @@ static func render_recipe (recipe_name: String, _modifiers: Array[ItemStack] = [
 		return render_recipe_layer(recipe.base.root, make_empty_texture(), _modifiers)
 	match recipe_name:
 		'frosting': return render_recipe_frosting(recipe, _modifiers)
+		'piping_bag': return render_recipe_frosting(recipe, _modifiers)
 		'cake_batter': return render_recipe_cookie_dough(recipe, _modifiers)
 		'cake': return render_recipe_cake(recipe, _modifiers, _finishers)
 		'cake_piping': return render_recipe_cake_piping(recipe, _modifiers)
