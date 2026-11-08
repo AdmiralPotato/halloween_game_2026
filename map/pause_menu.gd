@@ -25,10 +25,11 @@ func _on_resume_pressed() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("menu"):
 		get_viewport().set_input_as_handled()
-		if visible:
-			resume()
-		else:
+		if not get_tree().paused:
 			pause()
+		else:
+			resume()
+		return
 	if visible and event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
 		resume()
