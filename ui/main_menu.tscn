@@ -31,7 +31,14 @@ Pickup/Put down: Spacebar
 Action: E
 Console: Backtick
 Switch Furniture/Item Placement: Tab
-Store: Q"
+Store: Q
+
+Camera
+- Zoom in: 1
+- Zoom out: 3
+- Reset: 2
+
+Select a layout below to start:"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1

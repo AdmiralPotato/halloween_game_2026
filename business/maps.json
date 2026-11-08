@@ -1,8 +1,8 @@
 {
-	"Test Map": {
+	"Prepared Recipe Test Room": {
 		"path": "res://map/TilemapTest.tscn"
 	},
-	"Sandbox": {
+	"Empty Room": {
 		"path": "res://map/EmptyLarge.tscn"
 	}
 }

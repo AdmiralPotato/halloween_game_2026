@@ -1,5 +1,8 @@
 extends RigidBody3D
 
+const CAMERA_MIN = Vector3(0, 2.5, 0.5)
+const CAMERA_MAX = Vector3(0, 9, 4.5)
+
 const SMOL_ITEM = Vector3.ONE
 const SMOL_FURNI = Vector3.ONE * 0.6
 const PICK_RANGE = 0.75
@@ -10,6 +13,9 @@ signal held_object_changed
 @export var movement_force := 30
 ## How fast the birb wants to go when a given axis is maxed out
 @export var movement_speed := 8
+## How fast the camera can move in and out
+@export var camera_speed := 0.025
+@export var camera_zoom := 0.5
 ## How fast the birb wants to turn in RADIANS per second
 @export var turn_speed := TAU
 
@@ -26,6 +32,7 @@ var cursor_last_item: ItemNode = null
 @onready var item_bone = skeleton.find_bone("handItem_R")
 @onready var indicator: SpotLight3D = $InteractIndicator
 @onready var cursor: PlayerCursor = $PlayerCursor
+@onready var camera: Camera3D = $Dolly/Camera3D
 var held_object: BaseMapNode:
 	get:
 		if carry_node.get_child_count() > 0:
@@ -75,6 +82,9 @@ func _physics_process(delta):
 		in_rearrange_mode = !in_rearrange_mode
 		indicator.light_color = indicator_color
 
+	if Input.is_action_just_pressed("camera_reset"):
+		camera_zoom = 0.5
+
 	var pointing: Vector2i = \
 			Global.tilemap.find_tile(position, basis.z, PICK_RANGE)
 	var world_pointing = Global.tilemap.to_world_point(pointing)
@@ -110,6 +120,9 @@ func _physics_process(delta):
 		0.0,
 		clamp(desired_z_motion - self.linear_velocity.z, -1.0, 1.0),
 	) * movement_force
+	var camera_input := Input.get_axis("camera_in", "camera_out")
+	camera_zoom = clamp(camera_zoom + (camera_input * camera_speed), 0, 1)
+	camera.position = lerp(CAMERA_MIN, CAMERA_MAX, camera_zoom)
 	$AnimationTree.set(
 		"parameters/BlendSpace2D/blend_position",
 		Vector2(input_vec.length(), (1 if held_object else 0))

@@ -148,6 +148,6 @@ furnis = Dictionary[String, ExtResource("1_mg4jp")]({
 "trash": ExtResource("7_0d7tc")
 })
 maps = Dictionary[String, String]({
-"Sandbox": "res://map/EmptyLarge.tscn",
-"Test Map": "res://map/TilemapTest.tscn"
+"Empty Room": "res://map/EmptyLarge.tscn",
+"Prepared Recipe Test Room": "res://map/TilemapTest.tscn"
 })
