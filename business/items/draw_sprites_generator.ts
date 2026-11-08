@@ -339,6 +339,9 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 		},
 		// If there are doodads, draw them this way if there was NO PIPING drawn:
 		doodads_without_piping: {
+			chocolate_chips:       { type: 'sprite', mode: 'mix', file: fileNames.cake, x: 7, y: 1 },
+			white_chocolate_chips: { type: 'sprite', mode: 'mix', file: fileNames.cake, x: 8, y: 1 },
+			dark_chocolate_chips:  { type: 'sprite', mode: 'mix', file: fileNames.cake, x: 9, y: 1 },
 			chocolate_sprinkles:   { type: 'sprite', mode: 'mix', file: fileNames.cake, x: 10, y: 1 },
 			white_sprinkles:       { type: 'sprite', mode: 'mix', file: fileNames.cake, x: 11, y: 1 },
 			ball_bearing_sprinkles:{ type: 'sprite', mode: 'mix', file: fileNames.cake, x: 12, y: 1 },
@@ -354,6 +357,9 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 		},
 		// ...But draw them this way if there WAS piping drawn:
 		doodads_with_piping: {
+			chocolate_chips:       { type: 'sprite', mode: 'mix', file: fileNames.cake, x: 7, y: 2 },
+			white_chocolate_chips: { type: 'sprite', mode: 'mix', file: fileNames.cake, x: 8, y: 2 },
+			dark_chocolate_chips:  { type: 'sprite', mode: 'mix', file: fileNames.cake, x: 9, y: 2 },
 			chocolate_sprinkles:   { type: 'sprite', mode: 'mix', file: fileNames.cake, x: 10, y: 2 },
 			white_sprinkles:       { type: 'sprite', mode: 'mix', file: fileNames.cake, x: 11, y: 2 },
 			ball_bearing_sprinkles:{ type: 'sprite', mode: 'mix', file: fileNames.cake, x: 12, y: 2 },
@@ -420,6 +426,9 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 		},
 		// If there are doodads, draw them this way if there was NO PIPING drawn:
 		doodads_without_piping: {
+			chocolate_chips:       { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 7, y: 1 },
+			white_chocolate_chips: { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 8, y: 1 },
+			dark_chocolate_chips:  { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 9, y: 1 },
 			chocolate_sprinkles:   { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 10, y: 1 },
 			white_sprinkles:       { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 11, y: 1 },
 			ball_bearing_sprinkles:{ type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 12, y: 1 },
@@ -435,6 +444,9 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 		},
 		// ...But draw them this way if there WAS piping drawn:
 		doodads_with_piping: {
+			chocolate_chips:       { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 7, y: 2 },
+			white_chocolate_chips: { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 8, y: 2 },
+			dark_chocolate_chips:  { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 9, y: 2 },
 			chocolate_sprinkles:   { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 10, y: 2 },
 			white_sprinkles:       { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 11, y: 2 },
 			ball_bearing_sprinkles:{ type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 12, y: 2 },
@@ -485,8 +497,8 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 		// If `cocoa_powder` is present in modifiers, draw `chocolate_jar`
 		// Otherwise, draw `no_chocolate_jar`
 		jar: {
-			chocolate_jar: { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 1, y: 0 },
-			no_chocolate_jar: { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 2, y: 0 },
+			chocolate_jar: { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 2, y: 0 },
+			no_chocolate_jar: { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 3, y: 0 },
 		},
 		// If flavor count == 0 use the `plain` decal
 		// If flavor count == 1, use the decal for that flavor
@@ -494,20 +506,20 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 		// If flavor count == 2 and 1 is chocolate and 1 is something else, use the decal for the something else
 		// Otherwise use the `plain` decal
 		decals: {
-			cherry_flavoring:     { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 0, y: 1 },
-			raspberry_flavoring:  { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 1, y: 1 },
-			strawberry_flavoring: { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 2, y: 1 },
-			orange_flavoring:     { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 3, y: 1 },
-			almond_flavoring:     { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 4, y: 1 },
-			caramel_flavoring:    { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 5, y: 1 },
-			lemon_flavoring:      { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 6, y: 1 },
-			lime_flavoring:       { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 7, y: 1 },
-			mint_flavoring:       { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 8, y: 1 },
-			blueberry_flavoring:  { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 9, y: 1 },
-			ube_flavoring:        { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 10, y: 1 },
-			grape_flavoring:      { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 11, y: 1 },
-			cocoa_powder:         { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 12, y: 1 },
-			plain:                { type: 'sprite', mode: 'mix', file: fileNames.cake_slice, x: 13, y: 1 },
+			cherry_flavoring:     { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 0, y: 1 },
+			raspberry_flavoring:  { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 1, y: 1 },
+			strawberry_flavoring: { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 2, y: 1 },
+			orange_flavoring:     { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 3, y: 1 },
+			almond_flavoring:     { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 4, y: 1 },
+			caramel_flavoring:    { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 5, y: 1 },
+			lemon_flavoring:      { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 6, y: 1 },
+			lime_flavoring:       { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 7, y: 1 },
+			mint_flavoring:       { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 8, y: 1 },
+			blueberry_flavoring:  { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 9, y: 1 },
+			ube_flavoring:        { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 10, y: 1 },
+			grape_flavoring:      { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 11, y: 1 },
+			cocoa_powder:         { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 12, y: 1 },
+			plain:                { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 13, y: 1 },
 		}
 	},
 	cream: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 0, y: 0 }}},
@@ -548,6 +560,7 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 	blueberry_flavoring: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 9, y: 3 }}},
 	ube_flavoring: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 10, y: 3 }}},
 	grape_flavoring: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 11, y: 3 }}},
+	bowl: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 6, y: 2 }}},
 };
 
 console.log(data);

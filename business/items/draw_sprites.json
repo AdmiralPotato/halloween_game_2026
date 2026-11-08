@@ -2979,6 +2979,27 @@
       }
     },
     "doodads_without_piping": {
+      "chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 7,
+        "y": 1
+      },
+      "white_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 8,
+        "y": 1
+      },
+      "dark_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 9,
+        "y": 1
+      },
       "chocolate_sprinkles": {
         "type": "sprite",
         "mode": "mix",
@@ -3065,6 +3086,27 @@
       }
     },
     "doodads_with_piping": {
+      "chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 7,
+        "y": 2
+      },
+      "white_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 8,
+        "y": 2
+      },
+      "dark_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake.png",
+        "x": 9,
+        "y": 2
+      },
       "chocolate_sprinkles": {
         "type": "sprite",
         "mode": "mix",
@@ -4200,6 +4242,27 @@
       }
     },
     "doodads_without_piping": {
+      "chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-slice.png",
+        "x": 7,
+        "y": 1
+      },
+      "white_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-slice.png",
+        "x": 8,
+        "y": 1
+      },
+      "dark_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-slice.png",
+        "x": 9,
+        "y": 1
+      },
       "chocolate_sprinkles": {
         "type": "sprite",
         "mode": "mix",
@@ -4286,6 +4349,27 @@
       }
     },
     "doodads_with_piping": {
+      "chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-slice.png",
+        "x": 7,
+        "y": 2
+      },
+      "white_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-slice.png",
+        "x": 8,
+        "y": 2
+      },
+      "dark_chocolate_chips": {
+        "type": "sprite",
+        "mode": "mix",
+        "file": "TILES-cake-slice.png",
+        "x": 9,
+        "y": 2
+      },
       "chocolate_sprinkles": {
         "type": "sprite",
         "mode": "mix",
@@ -5864,7 +5948,7 @@
         "type": "sprite",
         "mode": "mix",
         "file": "TILES-other.png",
-        "x": 0,
+        "x": 6,
         "y": 2
       }
     }
