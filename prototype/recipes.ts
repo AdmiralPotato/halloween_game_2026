@@ -59,6 +59,18 @@ const recipeList: RecipeInfo[] = [
 		],
 	},
 	{
+		output: 'frosting',
+		quantity: 1,
+		location: 'mixer',
+		time: 2,
+		ingredients: [ 'frosting' ],
+		newAttributes: {},
+		allowedModifiers: [
+			'cocoa_powder',
+			'flavoring',
+		],
+	},
+	{
 		output: 'whipped_cream',
 		quantity: 3,
 		location: 'mixer',

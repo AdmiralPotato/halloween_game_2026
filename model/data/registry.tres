@@ -61,6 +61,7 @@
 [ext_resource type="Resource" uid="uid://be4mh5icaf7kk" path="res://model/data/recipes/dark_chocolate_chips.tres" id="59_2bd78"]
 [ext_resource type="Resource" uid="uid://bvpar5bdtvhrp" path="res://model/data/recipes/frosting.tres" id="60_4cp2b"]
 [ext_resource type="Resource" uid="uid://by85indbkem40" path="res://model/data/recipes/piping_bag.tres" id="61_e3biy"]
+[ext_resource type="Resource" uid="uid://dfjq25k4ra7fx" path="res://model/data/recipes/frosting_remix.tres" id="61_kuuvu"]
 [ext_resource type="Resource" uid="uid://cj0rcmms8r54w" path="res://model/data/recipes/whipped_cream.tres" id="62_n0co0"]
 [ext_resource type="Resource" uid="uid://ctwsujsa7sw11" path="res://model/data/recipes/pastry_cream.tres" id="63_rkj3d"]
 [ext_resource type="Resource" uid="uid://pptomi2erth2" path="res://model/data/recipes/pudding.tres" id="64_ybj02"]
@@ -137,6 +138,7 @@ recipes = Dictionary[String, ExtResource("56_muy2m")]({
 "cupcake": ExtResource("70_7keyp"),
 "dark chocolate chips": ExtResource("59_2bd78"),
 "frosting": ExtResource("60_4cp2b"),
+"frosting remix": ExtResource("61_kuuvu"),
 "pastry cream": ExtResource("63_rkj3d"),
 "piping bag": ExtResource("61_e3biy"),
 "pudding": ExtResource("64_ybj02"),

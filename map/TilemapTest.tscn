@@ -6,8 +6,7 @@
 [ext_resource type="Script" uid="uid://n2r00hcbl3ul" path="res://model/item_stack.gd" id="4_qtmpa"]
 [ext_resource type="PackedScene" uid="uid://5jo3bft5wl1u" path="res://map/FurniMixer.tscn" id="8_nabl1"]
 [ext_resource type="PackedScene" uid="uid://cl7xh1lhn0u0b" path="res://map/FurniCountertop.tscn" id="9_2f20c"]
-[ext_resource type="Resource" uid="uid://b30bda72nkj6t" path="res://model/data/items/piping_bag.tres" id="10_vwyy3"]
-[ext_resource type="Resource" uid="uid://2x1mwsk5krkr" path="res://model/data/items/cherry_flavoring.tres" id="11_jqjf8"]
+[ext_resource type="Resource" uid="uid://v0pjmdco8t3r" path="res://model/data/items/cake_batter.tres" id="10_r47yw"]
 [ext_resource type="PackedScene" uid="uid://do30vdu0sngt5" path="res://map/FurniOven.tscn" id="11_nabl1"]
 [ext_resource type="PackedScene" uid="uid://dfjdkdlvlfocq" path="res://map/FurniCuttingboard.tscn" id="14_p5gm8"]
 [ext_resource type="PackedScene" uid="uid://d1tp40f6bgvc6" path="res://map/FurniTrash.tscn" id="18_tdsbi"]
@@ -122,6 +121,11 @@ sort = 800
 [sub_resource type="Resource" id="Resource_v1uei"]
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_8mw78")
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="Resource" id="Resource_euwyw"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("10_r47yw")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_p5gm8"]
@@ -568,9 +572,37 @@ item = SubResource("Resource_8mw78")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_rnlcp")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
+[sub_resource type="Resource" id="Resource_wru5m"]
+script = ExtResource("4_euwyw")
+name = "piping_bag"
+display_name = "frosting"
+storage_type = 4
+categories = Array[int]([4])
+cost_tier = 2
+max_stack_size = 4
+groups = PackedStringArray()
+sort = 420
+
+[sub_resource type="Resource" id="Resource_ph5do"]
+script = ExtResource("4_euwyw")
+name = "cherry_flavoring"
+display_name = "cherry flavoring"
+storage_type = 4
+categories = Array[int]([1])
+cost_tier = 4
+max_stack_size = 0
+attributes = Dictionary[int, int]({
+0: -2,
+1: 1,
+7: 1,
+16: 2
+})
+groups = PackedStringArray("flavoring")
+sort = 200
+
 [sub_resource type="Resource" id="Resource_85464"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("11_jqjf8")
+item = SubResource("Resource_ph5do")
 count = 4
 combined_attributes = Dictionary[int, int]({
 0: -2,
@@ -582,7 +614,7 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_jx7bd"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("10_vwyy3")
+item = SubResource("Resource_wru5m")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_85464")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
@@ -602,95 +634,6 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 script = ExtResource("4_qtmpa")
 item = SubResource("Resource_8mw78")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_vjff0")])
-metadata/_custom_type_script = "uid://n2r00hcbl3ul"
-
-[sub_resource type="Resource" id="Resource_tyky6"]
-script = ExtResource("4_qtmpa")
-item = SubResource("Resource_abky3")
-combined_attributes = Dictionary[int, int]({
-4: 1,
-5: 1,
-16: 1,
-20: 2
-})
-metadata/_custom_type_script = "uid://n2r00hcbl3ul"
-
-[sub_resource type="Resource" id="Resource_l14um"]
-script = ExtResource("4_qtmpa")
-item = SubResource("Resource_8mw78")
-modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_tyky6")])
-metadata/_custom_type_script = "uid://n2r00hcbl3ul"
-
-[sub_resource type="Resource" id="Resource_kpsrv"]
-script = ExtResource("4_qtmpa")
-item = SubResource("Resource_abky3")
-count = 2
-combined_attributes = Dictionary[int, int]({
-4: 1,
-5: 1,
-16: 1,
-20: 2
-})
-metadata/_custom_type_script = "uid://n2r00hcbl3ul"
-
-[sub_resource type="Resource" id="Resource_52txr"]
-script = ExtResource("4_qtmpa")
-item = SubResource("Resource_8mw78")
-modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_kpsrv")])
-metadata/_custom_type_script = "uid://n2r00hcbl3ul"
-
-[sub_resource type="Resource" id="Resource_846fc"]
-script = ExtResource("4_qtmpa")
-item = SubResource("Resource_abky3")
-count = 3
-combined_attributes = Dictionary[int, int]({
-4: 1,
-5: 1,
-16: 1,
-20: 2
-})
-metadata/_custom_type_script = "uid://n2r00hcbl3ul"
-
-[sub_resource type="Resource" id="Resource_hh7b7"]
-script = ExtResource("4_qtmpa")
-item = SubResource("Resource_8mw78")
-modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_846fc")])
-metadata/_custom_type_script = "uid://n2r00hcbl3ul"
-
-[sub_resource type="Resource" id="Resource_4ffdg"]
-script = ExtResource("4_qtmpa")
-item = SubResource("Resource_abky3")
-count = 4
-combined_attributes = Dictionary[int, int]({
-4: 1,
-5: 1,
-16: 1,
-20: 2
-})
-metadata/_custom_type_script = "uid://n2r00hcbl3ul"
-
-[sub_resource type="Resource" id="Resource_2vjfo"]
-script = ExtResource("4_qtmpa")
-item = SubResource("Resource_8mw78")
-modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_4ffdg")])
-metadata/_custom_type_script = "uid://n2r00hcbl3ul"
-
-[sub_resource type="Resource" id="Resource_jy8v6"]
-script = ExtResource("4_qtmpa")
-item = SubResource("Resource_abky3")
-count = 5
-combined_attributes = Dictionary[int, int]({
-4: 1,
-5: 1,
-16: 1,
-20: 2
-})
-metadata/_custom_type_script = "uid://n2r00hcbl3ul"
-
-[sub_resource type="Resource" id="Resource_6eqcv"]
-script = ExtResource("4_qtmpa")
-item = SubResource("Resource_8mw78")
-modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_jy8v6")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_xbvgi"]
@@ -729,143 +672,142 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [node name="TilemapTest" unique_id=1389805114 instance=ExtResource("1_qtmpa")]
 
-[node name="Furni2_1" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="0" unique_id=1615491916 instance=ExtResource("3_0vrjm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 1.5)
+[node name="Furni2_0" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="0" unique_id=1615491916 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0.5)
 stack = SubResource("Resource_inivv")
 
-[node name="Furni3_1" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="1" unique_id=1665835639 instance=ExtResource("3_0vrjm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 1.5)
+[node name="Furni3_0" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="1" unique_id=1665835639 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 0.5)
 stack = SubResource("Resource_y2ia4")
 
-[node name="Furni4_1" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="2" unique_id=308632445 instance=ExtResource("3_0vrjm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 1.5)
+[node name="Furni4_0" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="2" unique_id=308632445 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 0.5)
 stack = SubResource("Resource_4sgfy")
 
-[node name="Furni5_1" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="3" unique_id=19551836 instance=ExtResource("3_0vrjm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 1.5)
+[node name="Furni5_0" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="3" unique_id=19551836 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 0.5)
 stack = SubResource("Resource_177l7")
 
-[node name="Furni1_1" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="4" unique_id=9090360 instance=ExtResource("3_0vrjm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 1.5)
+[node name="Furni1_0" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="4" unique_id=9090360 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0.5)
 stack = SubResource("Resource_veuph")
 
-[node name="Furni3_6" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="5" unique_id=2140492753 instance=ExtResource("3_0vrjm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 6.5)
+[node name="Furni0_1" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="5" unique_id=2140492753 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 1.5)
 stack = SubResource("Resource_v1uei")
 
-[node name="Furni4_6" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="6" unique_id=142294150 instance=ExtResource("3_0vrjm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 6.5)
+[node name="Furni0_2" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="6" unique_id=866741018 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 2.5)
+stack = SubResource("Resource_euwyw")
+
+[node name="Furni0_4" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="7" unique_id=142294150 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 4.5)
 stack = SubResource("Resource_mhdkp")
 
-[node name="Furni5_6" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="7" unique_id=1925110425 instance=ExtResource("3_0vrjm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 6.5)
+[node name="Furni0_3" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="8" unique_id=1925110425 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 3.5)
 stack = SubResource("Resource_oqx4x")
 
-[node name="Furni5_7" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="8" unique_id=1572275806 instance=ExtResource("3_0vrjm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 7.5)
+[node name="Furni0_6" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="9" unique_id=1572275806 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 6.5)
 stack = SubResource("Resource_wxjcq")
 
-[node name="Furni11_7" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="9" unique_id=331548134 instance=ExtResource("3_0vrjm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, 7.5)
+[node name="Furni0_7" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="10" unique_id=331548134 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 7.5)
 stack = SubResource("Resource_2f5mw")
 
-[node name="Furni1_5" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="10" unique_id=2080494199 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 5.5)
+[node name="Furni4_5" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="11" unique_id=2080494199 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 5.5)
 initial_stack = SubResource("Resource_hye2e")
 
-[node name="Furni1_6" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="11" unique_id=1056050822 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 6.5)
+[node name="Furni3_2" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="12" unique_id=1056050822 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 2.5)
 initial_stack = SubResource("Resource_q5464")
 
-[node name="Furni1_7" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="12" unique_id=1771358725 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 7.5)
+[node name="Furni2_8" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="13" unique_id=1771358725 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 8.5)
 
-[node name="Furni11_6" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="13" unique_id=215973244 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, 6.5)
+[node name="Furni9_8" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="14" unique_id=215973244 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 8.5)
 initial_stack = SubResource("Resource_nodiv")
 
-[node name="Furni6_1" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="14" unique_id=260047684 instance=ExtResource("3_0vrjm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 1.5)
+[node name="Furni0_5" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="15" unique_id=260047684 instance=ExtResource("3_0vrjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 5.5)
 stack = SubResource("Resource_n10fp")
 
-[node name="Furni1_3" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="15" unique_id=1665512206 instance=ExtResource("11_nabl1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 3.5)
+[node name="Furni3_5" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="16" unique_id=1665512206 instance=ExtResource("11_nabl1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 5.5)
 
-[node name="Furni3_3" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="16" unique_id=2066948825 instance=ExtResource("14_p5gm8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 3.5)
+[node name="Furni5_5" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="17" unique_id=2066948825 instance=ExtResource("14_p5gm8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 5.5)
 
-[node name="Furni5_0" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="17" unique_id=1059279905 instance=ExtResource("18_tdsbi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 0.5)
+[node name="Furni0_0" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="18" unique_id=1059279905 instance=ExtResource("18_tdsbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)
 
-[node name="Furni2_3" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="18" unique_id=572304545 instance=ExtResource("8_nabl1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 3.5)
+[node name="Furni2_2" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="19" unique_id=572304545 instance=ExtResource("8_nabl1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 2.5)
 
-[node name="Furni7_2" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="19" unique_id=996284440 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 2.5)
+[node name="Furni5_2" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="20" unique_id=996284440 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 2.5)
 initial_stack = SubResource("Resource_wjnrr")
 
-[node name="Furni7_3" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="20" unique_id=1991929786 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 3.5)
+[node name="Furni5_3" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="21" unique_id=1991929786 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 3.5)
 initial_stack = SubResource("Resource_qqp70")
 
-[node name="Furni7_4" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="21" unique_id=1393068337 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 4.5)
+[node name="Furni5_4" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="22" unique_id=1393068337 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 4.5)
 initial_stack = SubResource("Resource_aowxl")
 
-[node name="Furni7_5" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="22" unique_id=540266556 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 5.5)
+[node name="Furni4_4" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="23" unique_id=540266556 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 4.5)
 initial_stack = SubResource("Resource_smlvm")
 
-[node name="Furni7_6" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="23" unique_id=1006280834 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 6.5)
+[node name="Furni3_4" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="24" unique_id=1006280834 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 4.5)
 initial_stack = SubResource("Resource_ujhah")
 
-[node name="Furni8_2" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="24" unique_id=2009585183 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 2.5)
+[node name="Furni7_2" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="25" unique_id=2009585183 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 2.5)
 initial_stack = SubResource("Resource_3qlmg")
 
-[node name="Furni8_3" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="25" unique_id=1901841430 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 3.5)
+[node name="Furni8_2" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="26" unique_id=1901841430 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 2.5)
 initial_stack = SubResource("Resource_y45jq")
 
-[node name="Furni8_4" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="26" unique_id=843741389 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 4.5)
+[node name="Furni9_2" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="27" unique_id=843741389 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 2.5)
 initial_stack = SubResource("Resource_t3tgg")
 
-[node name="Furni8_5" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="27" unique_id=654472349 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 5.5)
+[node name="Furni9_3" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="28" unique_id=654472349 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 3.5)
 initial_stack = SubResource("Resource_jx7bd")
 
-[node name="Furni8_6" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="28" unique_id=866165527 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 6.5)
+[node name="Furni9_4" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="29" unique_id=866165527 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 4.5)
 initial_stack = SubResource("Resource_v4ia5")
 
-[node name="Furni9_2" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="29" unique_id=388894037 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 2.5)
-initial_stack = SubResource("Resource_l14um")
+[node name="Furni3_8" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="30" unique_id=388894037 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 8.5)
 
-[node name="Furni9_3" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="30" unique_id=1294705095 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 3.5)
-initial_stack = SubResource("Resource_52txr")
+[node name="Furni6_8" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="31" unique_id=1294705095 instance=ExtResource("9_2f20c")]
+transform = Transform3D(0.9999876, 3.9639076e-06, -0.0049782363, -3.9640286e-06, 1, -1.4489125e-08, 0.0049782363, 3.423279e-08, 0.9999876, 6.5, 0, 8.5)
 
-[node name="Furni9_4" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="31" unique_id=653336905 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 4.5)
-initial_stack = SubResource("Resource_hh7b7")
+[node name="Furni4_8" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="32" unique_id=653336905 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 8.5)
 
-[node name="Furni9_5" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="32" unique_id=1055110965 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 5.5)
-initial_stack = SubResource("Resource_2vjfo")
+[node name="Furni0_8" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="33" unique_id=1055110965 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 8.5)
 
-[node name="Furni9_6" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="33" unique_id=2057124158 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 6.5)
-initial_stack = SubResource("Resource_6eqcv")
+[node name="Furni7_8" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="34" unique_id=2057124158 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 8.5)
 
-[node name="Furni8_8" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="34" unique_id=43495116 instance=ExtResource("9_2f20c")]
+[node name="Furni8_8" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="35" unique_id=43495116 instance=ExtResource("9_2f20c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 8.5)
 initial_stack = SubResource("Resource_ulqex")
 
-[node name="Furni9_8" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="35" unique_id=161578514 instance=ExtResource("9_2f20c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 8.5)
+[node name="Furni9_7" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="36" unique_id=161578514 instance=ExtResource("9_2f20c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 7.5)
 initial_stack = SubResource("Resource_61qub")
 
 [node name="TestPlayer" parent="." index="3" unique_id=1707035649]
