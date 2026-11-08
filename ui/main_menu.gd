@@ -7,7 +7,10 @@ func _ready() -> void:
 	%MapList.clear()
 	for name in Global.registry.maps:
 		%MapList.add_item(name)
-		
+	%MapList.grab_focus()
+	%MapList.select(0)
+	if OS.has_feature("web"):
+		%Leave.visible = false
 
 
 func _on_map_list_item_selected(index):

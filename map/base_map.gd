@@ -61,9 +61,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("shop"):
 		get_viewport().set_input_as_handled()
 		if $Shop.visible:
-			$Shop.visible = false
+			hide_shop()
 		elif not $TestPlayer.held_object:
-			$Shop.visible = true
+			show_shop()
+	if $Shop.visible and event.is_action_pressed("ui_cancel"):
+		get_viewport().set_input_as_handled()
+		hide_shop()
 
 func build_storefront():
 	for x in range(number_of_tiles.x):
@@ -149,7 +152,7 @@ func _on_spawn_customer_timeout() -> void:
 
 func _on_test_player_held_object_changed() -> void:
 	if $TestPlayer.held_object and $Shop.visible:
-		$Shop.visible = false
+		hide_shop()
 
 
 func _on_shop_purchase_furni(furni: FurniInfo) -> void:
@@ -161,7 +164,7 @@ func _on_shop_purchase_furni(furni: FurniInfo) -> void:
 	node.pack()
 	node.transform = node.transform.scaled($TestPlayer.SMOL_FURNI)
 	$TestPlayer.held_object = node
-	$Shop.visible = false
+	hide_shop()
 
 
 func _on_shop_purchase_item(item: ItemInfo) -> void:
@@ -175,4 +178,16 @@ func _on_shop_purchase_item(item: ItemInfo) -> void:
 	furni.pack()
 	furni.transform = furni.transform.scaled($TestPlayer.SMOL_FURNI)
 	$TestPlayer.held_object = furni
+	hide_shop()
+
+
+func show_shop ():
+	$Shop.visible = true
+	$TestPlayer.input_enabled = false
+	var first_shop_item = $Shop/Categories/Items.get_child(0)
+	first_shop_item.grab_focus()
+
+
+func hide_shop ():
 	$Shop.visible = false
+	$TestPlayer.input_enabled = true

@@ -19,6 +19,8 @@ signal held_object_changed
 ## How fast the birb wants to turn in RADIANS per second
 @export var turn_speed := TAU
 
+@export var input_enabled := true
+
 var in_rearrange_mode := false
 var indicator_color: Color:
 	get:
@@ -109,9 +111,13 @@ func _physics_process(delta):
 
 	right_hand_node.transform = skeleton.get_bone_global_pose(item_bone)
 
-	var input_vec := Vector2(
-		Input.get_axis("move_left", "move_right"),
-		Input.get_axis("move_up", "move_down"),
+	var input_vec := (
+		Vector2(
+			Input.get_axis("move_left", "move_right"),
+			Input.get_axis("move_up", "move_down"),
+		)
+		if input_enabled else
+		Vector2.ZERO
 	)
 	var desired_x_motion := input_vec.x * movement_speed
 	var desired_z_motion := input_vec.y * movement_speed

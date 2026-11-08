@@ -1,11 +1,24 @@
 [gd_scene format=3 uid="uid://det6uk4xqj8fp"]
 
+[ext_resource type="Theme" uid="uid://bkphg3nelw53u" path="res://halloween_theme.tres" id="1_3uonw"]
 [ext_resource type="Script" uid="uid://cveklt6yjlsb3" path="res://ui/item_button.gd" id="1_sm061"]
+
+[sub_resource type="Gradient" id="Gradient_3uonw"]
+offsets = PackedFloat32Array(0.5123457, 1)
+colors = PackedColorArray(1, 0.67058825, 0, 0, 1, 0.67058825, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j5qw3"]
+gradient = SubResource("Gradient_3uonw")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
 
 [node name="ItemButton" type="TextureButton" unique_id=1061743146]
 custom_minimum_size = Vector2(32, 32)
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("1_3uonw")
+texture_focused = SubResource("GradientTexture2D_j5qw3")
 ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("1_sm061")

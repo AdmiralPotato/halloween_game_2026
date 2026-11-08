@@ -164,6 +164,7 @@ theme_override_constants/separation = 8
 [node name="Resume" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=1362333657]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../Exit to Menu")
 text = "Resume"
 
 [node name="Export" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=948274686]
@@ -173,6 +174,7 @@ text = "Export"
 
 [node name="Exit to Menu" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=1233873554]
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../Resume")
 text = "Exit to Menu"
 
 [node name="SaveDialog" type="FileDialog" parent="PauseMenu" unique_id=62551534]
