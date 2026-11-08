@@ -125,6 +125,7 @@ func get_save_state() -> Dictionary:
 		total_modifier_depth = total_modifier_depth,
 		combined_attributes = {},
 		modifiers = [],
+		finishers = [],
 		contents = [],
 	}
 	for attr in combined_attributes:
