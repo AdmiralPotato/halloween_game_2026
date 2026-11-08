@@ -123,9 +123,13 @@ func matches(inputs: Array[ItemStack], _container: ItemStack = null) -> Dictiona
 				for inp in inputs:
 					new_modifiers.append_array(inp.modifiers)
 				new_modifiers.append_array(remaining)
+				var new_finishers: Array[ItemStack] = []
+				for inp in inputs:
+					new_finishers.append_array(inp.finishers)
 				return {
 					success = true,
 					modifiers = new_modifiers,
+					finishers = new_finishers,
 					ingredients = used_ingredients,
 					container = _container,
 					craft_depth = new_depth,

@@ -32,6 +32,11 @@ extends Resource
 	set(new):
 		modifiers = new
 		emit_changed()
+## Finishers (Toppings that can only be applied after the item is baked).
+@export var finishers: Array[ItemStack] = []:
+	set(new):
+		finishers = new
+		emit_changed()
 ## A stack of items inside this stack (relevant for CONTAINER items).
 @export var contents: Array[ItemStack] = []:
 	set(new):
@@ -81,7 +86,7 @@ static func get_modifier_cardinality_for_modifiers(mods: Array[ItemStack]) -> Di
 
 var modifier_cardinality: Dictionary[ItemInfo, int]:
 	get:
-		return get_modifier_cardinality_for_modifiers(modifiers)
+		return get_modifier_cardinality_for_modifiers(modifiers + finishers)
 
 var sell_price: int:
 	get:
@@ -126,6 +131,8 @@ func get_save_state() -> Dictionary:
 		save.combined_attributes[str(attr)] = combined_attributes[attr]
 	for stack in modifiers:
 		save.modifiers.append(stack.get_save_state())
+	for stack in finishers:
+		save.finishers.append(stack.get_save_state())
 	for stack in contents:
 		save.contents.append(stack.get_save_state())
 	return save
@@ -143,6 +150,8 @@ func set_save_state(save: Dictionary):
 		combined_attributes[int(attr)] = int(save.combined_attributes[attr])
 	for stack_save in save.modifiers:
 		modifiers.append(ItemStack.from_save_state(stack_save))
+	for stack_save in save.finishers:
+		finishers.append(ItemStack.from_save_state(stack_save))
 	for stack_save in save.contents:
 		contents.append(ItemStack.from_save_state(stack_save))
 
@@ -150,7 +159,7 @@ static func from_save_state(save: Dictionary) -> ItemStack:
 	var stack := ItemStack.new()
 	stack.set_save_state(save)
 	return stack
-	
+
 
 const VOWELS := "aeiou"
 const CARDINALITY: Dictionary[int, String] = {
@@ -218,6 +227,16 @@ func accept(add: ItemStack) -> Dictionary:
 			return {success = true, rest = null}
 		return {success = false, rest = add}
 
+	# Products can have DECORATIONs and DOODADs added to their finishers property
+	if item.is_category(ItemInfo.Category.PRODUCT):
+		if (
+			add.item.is_category(ItemInfo.Category.DECORATION)
+			or add.item.is_category(ItemInfo.Category.DOODAD)
+		):
+			finishers.append(add)
+			emit_changed()  # TODO: automatically cause this when contents mutate
+			return {success = true, rest = null}
+
 	# The following definition of stackable is very conservative, by intent;
 	# in general, players won't be crafting by stacking, but by using the
 	# Recipe system.
@@ -254,6 +273,7 @@ func split(amount: int) -> Array[ItemStack]:
 	var split_stack = ItemStack.new(item, amount)
 	split_stack.combined_attributes = combined_attributes
 	split_stack.modifiers = modifiers
+	split_stack.finishers = finishers
 	# We really don't want to duplicate contents if, somehow, we get a stack of
 	# containers with contents, so we have to choose one to recieve those
 	# contents. Arbitrarily, choose new.

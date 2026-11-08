@@ -164,17 +164,6 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_nadkd"]
 script = ExtResource("4_qtmpa")
-item = ExtResource("11_jqjf8")
-combined_attributes = Dictionary[int, int]({
-0: -2,
-1: 1,
-7: 1,
-16: 2
-})
-metadata/_custom_type_script = "uid://n2r00hcbl3ul"
-
-[sub_resource type="Resource" id="Resource_t3co8"]
-script = ExtResource("4_qtmpa")
 item = ExtResource("20_cc7i2")
 combined_attributes = Dictionary[int, int]({
 4: 1,
@@ -184,13 +173,19 @@ combined_attributes = Dictionary[int, int]({
 })
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="Resource" id="Resource_abky3"]
+[sub_resource type="Resource" id="Resource_fqyai"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("18_vkwjd")
-modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_t3co8")])
+combined_attributes = Dictionary[int, int]({
+4: 1,
+5: 1,
+16: 1,
+20: 2
+})
+modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_nadkd")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="Resource" id="Resource_r177p"]
+[sub_resource type="Resource" id="Resource_he5u6"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("21_myeuv")
 combined_attributes = Dictionary[int, int]({
@@ -198,10 +193,22 @@ combined_attributes = Dictionary[int, int]({
 })
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
+[sub_resource type="Resource" id="Resource_r177p"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("11_jqjf8")
+combined_attributes = Dictionary[int, int]({
+0: -2,
+1: 1,
+7: 1,
+16: 2
+})
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
 [sub_resource type="Resource" id="Resource_nodiv"]
 script = ExtResource("4_qtmpa")
 item = ExtResource("19_gdj6q")
-modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_nadkd"), SubResource("Resource_abky3"), SubResource("Resource_r177p")])
+modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_r177p")])
+finishers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_fqyai"), SubResource("Resource_he5u6")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_n10fp"]

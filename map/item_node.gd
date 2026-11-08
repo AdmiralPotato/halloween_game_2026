@@ -97,7 +97,7 @@ func update_stack_rendering():
 		return
 	if stack:
 		if stack.item:
-			$Sprite.texture = render_recipe(stack.item.name, stack.modifiers)
+			$Sprite.texture = render_recipe(stack.item.name, stack.modifiers, stack.finishers)
 			$Count.text = str(stack.count)
 			$Count.visible = stack.count > 1
 		for child in $Contents.get_children():
@@ -178,7 +178,7 @@ static func render_simple_item_texture_by_name(recipe_name: String) -> Texture2D
 	print('render_simple_item_texture_by_name: render not implemented yet: ', recipe_name)
 	return make_unimplemented_texture()
 
-static func render_recipe (recipe_name: String, _modifiers: Array[ItemStack] = []) -> Texture2D:
+static func render_recipe (recipe_name: String, _modifiers: Array[ItemStack] = [], _finishers: Array[ItemStack] = []) -> Texture2D:
 	print('render_recipe: recipe_name: ', recipe_name)
 	if not recipe_name in ItemNode.recipe_render_data:
 		print('render_recipe: NO RENDER DATA FOR RECIPE: ', recipe_name)
@@ -189,14 +189,15 @@ static func render_recipe (recipe_name: String, _modifiers: Array[ItemStack] = [
 	match recipe_name:
 		'frosting': return render_recipe_frosting(recipe, _modifiers)
 		'cake_batter': return render_recipe_cookie_dough(recipe, _modifiers)
-		'cake': return render_recipe_cake(recipe, _modifiers)
+		'cake': return render_recipe_cake(recipe, _modifiers, _finishers)
 		'cake_piping': return render_recipe_cake_piping(recipe, _modifiers)
 		'cake_frosting': return render_recipe_cake_piping(recipe, _modifiers)
-		'cake_slice': return render_recipe_cake(recipe, _modifiers)
+		'cake_slice': return render_recipe_cake(recipe, _modifiers, _finishers)
 		'cake_slice_piping': return render_recipe_cake_piping(recipe, _modifiers)
 		'cake_slice_frosting': return render_recipe_cake_piping(recipe, _modifiers)
 		'cookie_dough': return render_recipe_cookie_dough(recipe, _modifiers)
-		'cookie': return render_recipe_cookie(recipe, _modifiers)
+		'cookie': return render_recipe_cookie(recipe, _modifiers, _finishers)
+		'cookie_frosting': return render_recipe_cake_piping(recipe, _modifiers)
 		_:
 			print('render_recipe: render not implemented yet: ', recipe_name)
 			return make_unimplemented_texture()
@@ -390,23 +391,24 @@ static func render_recipe_cookie_dough(_recipe: Dictionary, _modifiers: Array[It
 	return texture
 
 
-static func render_recipe_cookie(_recipe: Dictionary, _modifiers: Array[ItemStack]) -> Texture2D:
+static func render_recipe_cookie(_recipe: Dictionary, _modifiers: Array[ItemStack], _finishers: Array[ItemStack]) -> Texture2D:
 	print('render_recipe_cookie: ', _modifiers)
 	var texture = render_recipe_layer(_recipe.base.root)
 	render_recipe_stack_modifiers(_modifiers, _recipe.flavoring_modifiers, texture)
 	render_recipe_stack_modifiers(_modifiers, _recipe.other_modifiers, texture)
-	render_recipe_stack_modifiers(_modifiers, _recipe.doodads, texture)
+	render_recipe_stack_modifiers(_finishers, _recipe.decorations, texture)
+	render_recipe_stack_modifiers(_finishers, _recipe.doodads, texture)
 	return texture
 
 
-static func render_recipe_cake(_recipe: Dictionary, _modifiers: Array[ItemStack]) -> Texture2D:
+static func render_recipe_cake(_recipe: Dictionary, _modifiers: Array[ItemStack], _finishers: Array[ItemStack]) -> Texture2D:
 	print('render_recipe_cake: ', _modifiers)
 	var texture = render_recipe_layer(_recipe.base.root)
 	render_recipe_stack_modifiers(_modifiers, _recipe.flavoring_modifiers, texture)
 	render_recipe_stack_modifiers(_modifiers, _recipe.other_modifiers, texture)
-	render_recipe_stack_modifiers(_modifiers, _recipe.decorations, texture)
+	render_recipe_stack_modifiers(_finishers, _recipe.decorations, texture)
 	var has_piping = false
-	for modifier in _modifiers:
+	for modifier in _finishers:
 		if modifier.item.name in _recipe.piping:
 			has_piping = true
 			break
@@ -415,8 +417,8 @@ static func render_recipe_cake(_recipe: Dictionary, _modifiers: Array[ItemStack]
 		if has_piping else
 		_recipe.doodads_without_piping
 	)
-	render_recipe_stack_modifiers(_modifiers, _recipe.piping, texture)
-	render_recipe_stack_modifiers(_modifiers, doodads, texture)
+	render_recipe_stack_modifiers(_finishers, _recipe.piping, texture)
+	render_recipe_stack_modifiers(_finishers, doodads, texture)
 	return texture
 
 

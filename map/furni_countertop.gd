@@ -85,3 +85,11 @@ func interact(player: Node):
 		)
 		item.stack.contents.remove_at(-1)
 		item.stack.emit_changed()
+	elif (
+		player.held_object != null
+		and item
+		and item.stack.item.is_category(ItemInfo.Category.PRODUCT)
+	):
+		var attempt_to_apply = item.stack.accept(player.held_object.stack)
+		if attempt_to_apply.success:
+			player.held_object = null

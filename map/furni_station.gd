@@ -53,8 +53,13 @@ func try_craft() -> bool:
 		if info.success:
 			# TODO: wait for this result and show progress
 			var stack: ItemStack = recipe.output.duplicate(true)\
-					.as_combination(info.modifiers + info.ingredients)
+					.as_combination(
+						info.modifiers
+						+ info.finishers
+						+ info.ingredients
+					)
 			stack.modifiers = info.modifiers
+			stack.finishers = info.finishers
 			stack.craft_depth = info.craft_depth
 			stack.unique_modifier_depth = info.unique_modifier_depth
 			stack.total_modifier_depth = info.total_modifier_depth
