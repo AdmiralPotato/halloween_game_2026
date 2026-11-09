@@ -4,6 +4,9 @@ extends Node3D
 
 const TWEEN_TIME = 0.2
 var tween: Tween
+var is_animating: bool:
+	get:
+		return tween and tween.is_running()
 var last_global_transform: Transform3D
 signal finished_animating
 

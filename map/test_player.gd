@@ -103,7 +103,15 @@ func _physics_process(delta):
 			cursor_shown = true
 			cursor.text = str(inode.stack)
 			if inode != cursor_last_item or not cursor.visible:
-				cursor.popup_at(inode.global_position)
+				if inode.is_animating:
+					# capture a closure so we can evaluate inode.global_position
+					# at a later time
+					inode.finished_animating.connect(
+							func(): cursor.popup_at(inode.global_position),
+							CONNECT_ONE_SHOT
+					)
+				else:
+					cursor.popup_at(inode.global_position)
 			cursor_last_item = inode
 	if not cursor_shown:
 		cursor.visible = false
