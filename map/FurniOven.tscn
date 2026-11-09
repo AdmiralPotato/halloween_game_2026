@@ -7,9 +7,12 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_p33bg"]
 size = Vector3(1, 0.8, 1)
 
-[node name="FurniOven" type="Node3D" unique_id=1615491916]
+[node name="FurniOven" type="Node3D" unique_id=1615491916 node_paths=PackedStringArray("anim_node")]
 script = ExtResource("1_i5o3g")
 location = 3
+anim_node = NodePath("StaticBody3D/oven_v1/AnimationPlayer")
+anim_idle = "furni_oven_idle"
+anim_work = "furni_oven_working"
 current_scene = "uid://do30vdu0sngt5"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1407366706]
@@ -20,6 +23,15 @@ shape = SubResource("BoxShape3D_p33bg")
 
 [node name="oven_v1" parent="StaticBody3D" unique_id=690729319 instance=ExtResource("2_i5o3g")]
 
+[node name="Skeleton3D" parent="StaticBody3D/oven_v1/bones_oven" parent_id_path=PackedInt32Array(690729319, 1423448815) index="0" unique_id=1312751281]
+bones/2/rotation = Quaternion(0.13052621, 0, -8.50617e-08, 0.9914448)
+bones/3/rotation = Quaternion(0.3826834, -7.52755e-09, -2.312151e-07, 0.92387956)
+bones/4/rotation = Quaternion(0.3826834, -7.52755e-09, -2.312151e-07, 0.92387956)
+bones/5/position = Vector3(-0.23000012, 0.8999999, -0.19999982)
+bones/6/position = Vector3(-1.9550484e-07, 0.3, -0.3)
+bones/6/scale = Vector3(0.100000024, 0.100000024, 0.100000024)
+bones/7/position = Vector3(-0.23000012, 0.99999994, -0.19999985)
+
 [node name="Item" type="Marker3D" parent="." unique_id=1196781973]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
 
@@ -28,3 +40,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="RecipeTimer" type="Timer" parent="." unique_id=891317977]
 one_shot = true
+
+[editable path="StaticBody3D/oven_v1"]

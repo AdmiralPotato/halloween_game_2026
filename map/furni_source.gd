@@ -33,6 +33,7 @@ func provide_item() -> ItemNode:
 	add_child(item)
 	item.global_position = $StaticBody3D/ItemNode.global_position
 	item.store_global_transform()
+	$StaticBody3D/storageBox_v1/AnimationPlayer.play("furni_storage_box_activate")
 	return item
 
 func query_item() -> ItemNode:

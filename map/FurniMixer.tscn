@@ -7,8 +7,11 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_p33bg"]
 size = Vector3(1, 0.8, 1)
 
-[node name="FurniMixer" type="Node3D" unique_id=1615491916]
+[node name="FurniMixer" type="Node3D" unique_id=1615491916 node_paths=PackedStringArray("anim_node")]
 script = ExtResource("1_lex5f")
+anim_node = NodePath("StaticBody3D/mixer_v1/AnimationPlayer")
+anim_idle = "furni_cutting_board_idle"
+anim_work = "furni_mixer_working"
 current_scene = "uid://5jo3bft5wl1u"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1407366706]
@@ -19,6 +22,12 @@ shape = SubResource("BoxShape3D_p33bg")
 
 [node name="mixer_v1" parent="StaticBody3D" unique_id=1817194741 instance=ExtResource("2_lex5f")]
 
+[node name="Skeleton3D" parent="StaticBody3D/mixer_v1/bones_mixer" parent_id_path=PackedInt32Array(1817194741, 1286540859) index="0" unique_id=1211222624]
+bones/1/position = Vector3(0.29988226, 1.0704907, -0.011110707)
+bones/1/rotation = Quaternion(0.6980962, 0.69809604, 0.11252562, 0.112524666)
+bones/2/rotation = Quaternion(-7.019148e-07, 7.705422e-15, 1, 5.680463e-13)
+bones/3/rotation = Quaternion(-7.019148e-07, 7.705422e-15, 1, 5.6804626e-13)
+
 [node name="Item" type="Marker3D" parent="." unique_id=1943789340]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 1, 0)
 
@@ -27,3 +36,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="RecipeTimer" type="Timer" parent="." unique_id=1289878410]
 one_shot = true
+
+[editable path="StaticBody3D/mixer_v1"]

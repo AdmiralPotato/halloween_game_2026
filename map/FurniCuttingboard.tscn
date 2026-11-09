@@ -7,9 +7,12 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_p33bg"]
 size = Vector3(1, 0.8, 1)
 
-[node name="FurniCuttingboard" type="Node3D" unique_id=1615491916]
+[node name="FurniCuttingboard" type="Node3D" unique_id=1615491916 node_paths=PackedStringArray("anim_node")]
 script = ExtResource("1_rjncw")
 location = 0
+anim_node = NodePath("StaticBody3D/CollisionShape3D/cuttingBoard_v1/AnimationPlayer")
+anim_idle = "furni_cutting_board_idle"
+anim_work = "furni_cutting_board_working"
 current_scene = "uid://dfjdkdlvlfocq"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1407366706]
@@ -29,3 +32,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5000001, 0)
 
 [node name="RecipeTimer" type="Timer" parent="." unique_id=211141727]
 one_shot = true
+
+[editable path="StaticBody3D/CollisionShape3D/cuttingBoard_v1"]

@@ -3,6 +3,10 @@ class_name FurniStation
 extends FurniCountertop
 
 @export var location: Recipe.Location = Recipe.Location.MIXER
+@export_group("Animations", "anim")
+@export var anim_node: AnimationPlayer = null
+@export var anim_idle: String = ""
+@export var anim_work: String = ""
 
 var eventual_result: ItemStack = null
 var stored_ingredients: ItemNode = null
@@ -74,8 +78,17 @@ func try_craft() -> bool:
 			stored_stack.changed.connect(cancel_craft, CONNECT_ONE_SHOT)
 			recipe_timer.start(recipe.time)
 			status_indicator.start()
+			update_animation()
 			return true
 	return false
+
+
+func update_animation():
+	if anim_node:
+		if recipe_timer.is_stopped():
+			anim_node.play(anim_idle)
+		else:
+			anim_node.play(anim_work)
 
 
 func _process(_delta: float) -> void:
@@ -97,9 +110,11 @@ func cancel_craft():
 		stored_stack.changed.disconnect(cancel_craft)
 	recipe_timer.stop()
 	status_indicator.stop()
+	update_animation()
 
 func _on_recipe_timeout():
 	if stored_stack.changed.is_connected(cancel_craft):
 		stored_stack.changed.disconnect(cancel_craft)
 	item = ItemNode.make_node(eventual_result)
 	status_indicator.stop()
+	update_animation()

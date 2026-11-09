@@ -20,5 +20,14 @@ disabled = true
 
 [node name="storageBox_v1" parent="StaticBody3D" unique_id=383906389 instance=ExtResource("2_8bmqu")]
 
+[node name="Skeleton3D" parent="StaticBody3D/storageBox_v1/bones_storage_box" parent_id_path=PackedInt32Array(383906389, 702633252) index="0" unique_id=1759833409]
+bones/1/rotation = Quaternion(1.9453799e-08, 2.3729818e-08, -0.6339889, 0.77334213)
+bones/1/scale = Vector3(1, 1, 1)
+bones/2/scale = Vector3(1, 1, 1)
+bones/3/rotation = Quaternion(-0.59555316, -0.38120392, 0.38120392, 0.59555316)
+bones/3/scale = Vector3(0.99999994, 1, 0.99999994)
+
 [node name="ItemNode" parent="StaticBody3D" unique_id=184551138 instance=ExtResource("5_7wfut")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+
+[editable path="StaticBody3D/storageBox_v1"]
