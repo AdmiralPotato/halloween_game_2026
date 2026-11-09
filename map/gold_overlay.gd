@@ -1,19 +1,16 @@
 extends PanelContainer
 
-
 var stylebox: StyleBoxFlat
-var default_background_color: Color = Color(0, 0, 0, 0.5)
 func _ready() -> void:
-	stylebox = StyleBoxFlat.new()
-	stylebox.bg_color = default_background_color
-	add_theme_stylebox_override("panel", stylebox)
+	stylebox = get_theme_stylebox("panel")
 
 
 var tween: Tween
-func flash():
+func flash(color: Color = Color.RED):
 	print("flash")
 	if tween:
 		tween.kill()
 	tween = create_tween()
-	stylebox.bg_color = Color.RED
-	tween.tween_property(stylebox, ^"bg_color", default_background_color, 0.5)
+	stylebox.bg_color = color
+	var fade_color = Color(color, 0.0)
+	tween.tween_property(stylebox, ^"bg_color", fade_color, 0.5)

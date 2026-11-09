@@ -175,8 +175,8 @@ static func render_simple_item_texture_by_name(recipe_name: String) -> Texture2D
 	var recipe: Dictionary = ItemNode.recipe_render_data[recipe_name]
 	if recipe.keys().size() == 1 and recipe.has('base'):
 		return render_recipe_layer(recipe.base.root)
-	print('render_simple_item_texture_by_name: render not implemented yet: ', recipe_name)
-	return make_unimplemented_texture()
+	return render_recipe(recipe_name)
+
 
 static func render_recipe (recipe_name: String, _modifiers: Array[ItemStack] = [], _finishers: Array[ItemStack] = []) -> Texture2D:
 	print('render_recipe: recipe_name: ', recipe_name)

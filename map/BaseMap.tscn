@@ -37,9 +37,18 @@ background_mode = 1
 background_color = Color(0.11727656, 0.011531538, 0.21022078, 1)
 sky = SubResource("Sky_eai58")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n4k6e"]
+content_margin_left = 8.0
+content_margin_right = 8.0
+bg_color = Color(0, 0, 0, 0)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_jga7m"]
 atlas = ExtResource("15_qaalu")
 region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="LabelSettings" id="LabelSettings_e4u7y"]
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [node name="BaseMap" type="Node3D" unique_id=1389805114]
 process_physics_priority = -1
@@ -111,14 +120,20 @@ metadata/_edit_group_ = true
 wait_time = 2.0
 one_shot = true
 
+[node name="Shop" parent="." unique_id=1972639199 instance=ExtResource("17_ot4t6")]
+visible = false
+offset_left = 128.0
+offset_right = -128.0
+
 [node name="GoldOverlay" type="PanelContainer" parent="." unique_id=702785822]
-anchors_preset = 5
+anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -23.0
 offset_right = 23.0
 offset_bottom = 40.0
 grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_n4k6e")
 script = ExtResource("14_qyemh")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GoldOverlay" unique_id=1699535166]
@@ -132,10 +147,8 @@ texture = SubResource("AtlasTexture_jga7m")
 [node name="Gold" type="Label" parent="GoldOverlay/HBoxContainer" unique_id=651876760]
 layout_mode = 2
 text = "0"
+label_settings = SubResource("LabelSettings_e4u7y")
 script = ExtResource("16_ots2d")
-
-[node name="Shop" parent="." unique_id=1972639199 instance=ExtResource("17_ot4t6")]
-visible = false
 
 [node name="PauseMenu" type="CenterContainer" parent="." unique_id=1681424694]
 process_mode = 3

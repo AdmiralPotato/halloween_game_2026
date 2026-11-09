@@ -160,6 +160,7 @@ func _on_shop_purchase_furni(furni: FurniInfo) -> void:
 		$GoldOverlay.flash()
 		return
 	Global.gold -= furni.cost
+	$GoldOverlay.flash(Color.WHITE)
 	var node: FurniNode = furni.scene.instantiate()
 	node.pack()
 	node.transform = node.transform.scaled($TestPlayer.SMOL_FURNI)
@@ -172,6 +173,7 @@ func _on_shop_purchase_item(item: ItemInfo) -> void:
 	if Global.gold < full_cost:
 		$GoldOverlay.flash()
 		return
+	$GoldOverlay.flash(Color.WHITE)
 	Global.gold -= item.actual_cost
 	var furni: FurniSource = FURNI_SOURCE.instantiate()
 	furni.stack = ItemStack.new(item)

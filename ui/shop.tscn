@@ -3,33 +3,69 @@
 [ext_resource type="Script" uid="uid://dinaw7y1abkg7" path="res://ui/shop.gd" id="1_foe6g"]
 
 [sub_resource type="Gradient" id="Gradient_foe6g"]
-colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.7254902)
+offsets = PackedFloat32Array(0, 0.05, 0.95, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.7254902, 0, 0, 0, 0.7254902, 0, 0, 0, 0)
+metadata/_snap_enabled = true
+metadata/_snap_count = 20
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_e4u7y"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6wia2"]
 gradient = SubResource("Gradient_foe6g")
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1slnd"]
-texture = SubResource("GradientTexture1D_e4u7y")
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n4k6e"]
+content_margin_left = 32.0
+content_margin_top = 32.0
+content_margin_right = 32.0
+texture = SubResource("GradientTexture1D_6wia2")
+
+[sub_resource type="LabelSettings" id="LabelSettings_p33bg"]
+font_size = 48
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3o4ji"]
+font_size = 24
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Shop" type="PanelContainer" unique_id=1972639199]
-custom_minimum_size = Vector2(256, 0)
-custom_maximum_size = Vector2(384, -1)
-anchors_preset = 11
-anchor_left = 1.0
+custom_minimum_size = Vector2(640, 0)
+custom_maximum_size = Vector2(640, -1)
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 0
+grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_1slnd")
+theme_override_styles/panel = SubResource("StyleBoxTexture_n4k6e")
 script = ExtResource("1_foe6g")
 
 [node name="Categories" type="VBoxContainer" parent="." unique_id=1335580342]
 layout_mode = 2
 
+[node name="ShopLabel" type="Label" parent="Categories" unique_id=1907448804]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Shop"
+label_settings = SubResource("LabelSettings_p33bg")
+horizontal_alignment = 1
+
+[node name="FurnitureLabel" type="Label" parent="Categories" unique_id=1376911751]
+layout_mode = 2
+text = "Furniture & Appliances"
+label_settings = SubResource("LabelSettings_3o4ji")
+horizontal_alignment = 1
+
 [node name="Furniture" type="HFlowContainer" parent="Categories" unique_id=957931693]
 unique_name_in_owner = true
 layout_mode = 2
+alignment = 1
+
+[node name="ItemsLabel" type="Label" parent="Categories" unique_id=232196361]
+layout_mode = 2
+text = "Ingredients"
+label_settings = SubResource("LabelSettings_3o4ji")
+horizontal_alignment = 1
 
 [node name="Items" type="HFlowContainer" parent="Categories" unique_id=1815028541]
 unique_name_in_owner = true
 layout_mode = 2
+alignment = 1

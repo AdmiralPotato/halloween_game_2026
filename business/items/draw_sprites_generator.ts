@@ -1,3 +1,4 @@
+import {writeFile} from 'node:fs/promises'
 // --------------------------------------------- Shared info --------------------------------------------- //
 
 const commonColors: Record<string, { base: string; shadow: string; }> = {
@@ -590,6 +591,7 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 	candy_corn: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 7, y: 1 }}},
 	pastry_cream: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 0, y: 2 }}},
 	whipped_cream: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 1, y: 2 }}},
+	pudding: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 3, y: 0 }}},
 	sugar: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 2, y: 2 }}},
 	cocoa_powder: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 3, y: 2 }}},
 	flour: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 4, y: 2 }}},
@@ -610,5 +612,7 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 };
 
 console.log(data);
+
+writeFile('draw_sprites.json', JSON.stringify(data, null, '\t') + '\n')
 
 console.log('Draw tile info generated!')
