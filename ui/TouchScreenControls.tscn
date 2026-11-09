@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://clov13w8bn0y8"]
+
+[ext_resource type="PackedScene" uid="uid://bueb4ahfl1jdl" path="res://ui/TouchFaceButton.tscn" id="1_m4iw7"]
+
+[node name="TouchScreenControls" type="Control" unique_id=1653148583]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FaceButtons" type="Control" parent="." unique_id=58097057]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -192.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ButtonUp" parent="FaceButtons" unique_id=1193517147 instance=ExtResource("1_m4iw7")]
+position = Vector2(64, 16)
+action = "toggle_rearrange"
+labelText = "⇋"
+
+[node name="ButtonRight" parent="FaceButtons" unique_id=1464005840 instance=ExtResource("1_m4iw7")]
+position = Vector2(112, 64)
+action = "ui_cancel"
+labelText = "→"
+
+[node name="ButtonLeft" parent="FaceButtons" unique_id=479893553 instance=ExtResource("1_m4iw7")]
+position = Vector2(16, 64)
+action = "interact"
+labelText = "🔨"
+
+[node name="ButtonDown" parent="FaceButtons" unique_id=1581764331 instance=ExtResource("1_m4iw7")]
+position = Vector2(65, 112)
+action = "pickup"
+labelText = "↥"
+
+[node name="VirtualJoystick" type="VirtualJoystick" parent="." unique_id=1483599061]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -192.0
+offset_right = 192.0
+grow_vertical = 0
+joystick_size = 128.0
+tip_size = 64.0
+deadzone_ratio = 0.22
+clampzone_ratio = 1.13
+action_left = &"move_left"
+action_right = &"move_right"
+action_up = &"move_up"
+action_down = &"move_down"
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=333780462]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=865458026]
+layout_mode = 2
+alignment = 1
+
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer" unique_id=751813924]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Shop" parent="MarginContainer/HBoxContainer/Control" unique_id=374536746 instance=ExtResource("1_m4iw7")]
+action = "shop"
+labelText = "💰"
+
+[node name="Control2" type="Control" parent="MarginContainer/HBoxContainer" unique_id=1024740220]
+custom_minimum_size = Vector2(144, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="PauseButton" parent="MarginContainer/HBoxContainer/Control2" unique_id=98770463 instance=ExtResource("1_m4iw7")]
+action = "menu"
+labelText = "⏸"

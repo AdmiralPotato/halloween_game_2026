@@ -10,6 +10,7 @@ var gold: int = 10_000:
 	set(new):
 		gold = new
 		gold_changed.emit()
+var show_touch_ui := true
 
 @onready var registry: Registry = load("res://model/data/registry.tres")
 var scene_change_info: Dictionary = {}

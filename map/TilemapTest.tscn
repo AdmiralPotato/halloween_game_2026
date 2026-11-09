@@ -670,6 +670,11 @@ item = SubResource("Resource_8mw78")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_71tmt")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_euwyw"]
+resource_local_to_scene = true
+content_margin_left = 8.0
+content_margin_right = 8.0
+
 [node name="TilemapTest" unique_id=1389805114 instance=ExtResource("1_qtmpa")]
 
 [node name="Furni2_0" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="0" unique_id=1615491916 instance=ExtResource("3_0vrjm")]
@@ -812,3 +817,6 @@ initial_stack = SubResource("Resource_61qub")
 
 [node name="TestPlayer" parent="." index="3" unique_id=1707035649]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 7.5)
+
+[node name="GoldOverlay" parent="." index="13" unique_id=702785822]
+theme_override_styles/panel = SubResource("StyleBoxEmpty_euwyw")

@@ -2,7 +2,7 @@ extends PanelContainer
 
 var stylebox: StyleBoxFlat
 func _ready() -> void:
-	stylebox = get_theme_stylebox("panel")
+	stylebox = get_theme_stylebox("Panel")
 
 
 var tween: Tween
