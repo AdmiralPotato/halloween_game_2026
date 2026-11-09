@@ -4,6 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://c0nueq4njhld5" path="res://assets/mage.glb" id="2_rn8i4"]
 [ext_resource type="PackedScene" uid="uid://x71gqlsmfg4w" path="res://ui/player_cursor.tscn" id="3_roghl"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0dkrt"]
+friction = 0.0
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_el5rg"]
 radius = 0.375
 
@@ -50,6 +53,7 @@ axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
+physics_material_override = SubResource("PhysicsMaterial_0dkrt")
 gravity_scale = 0.0
 linear_damp = 5.0
 script = ExtResource("1_qrya2")
