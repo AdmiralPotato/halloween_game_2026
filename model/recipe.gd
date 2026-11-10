@@ -48,16 +48,49 @@ func _to_string() -> String:
 	return "Recipe:" + name
 
 
+static func _gcd(a: int, b: int) -> int:
+	while b != 0:
+		var new_a := b
+		var new_b := a % b
+		a = new_a
+		b = new_b
+	return a
+
 func matches(inputs: Array[ItemStack], _container: ItemStack = null) -> Dictionary:
+	if not inputs:
+		return {success = false}
 	if inputs.size() == 1 and inputs[0].item.is_category(ItemInfo.Category.CONTAINER):
 		return matches(inputs[0].contents, inputs[0])
+	
+	var cardinalities: Dictionary[ItemStack, int] = {}
+	for stack in inputs:
+		var found := false
+		for compare in cardinalities:
+			if compare.is_stackable(stack):
+				cardinalities[compare] += 1
+				found = true
+				break
+		if not found:
+			cardinalities[stack] = 1
+	
+	var cvs := cardinalities.values()
+	var gcd: int = cvs[0]
+	for i in range(1, len(cvs)):
+		gcd = _gcd(gcd, cvs[i])
+	
+	var multiplicity := gcd
+	var dedup_inputs: Array[ItemStack] = []
+	for stk in cardinalities:
+		var card := cardinalities[stk] / multiplicity
+		for _i in range(card):
+			dedup_inputs.append(stk)
 
-	print(self, ": considering inputs ", inputs)
+	print(self, ": considering inputs ", dedup_inputs, ' * ', multiplicity)
 	var permitted_ingredients = []
 	for ingr in ingredients:
 		var valid: Array = []
-		for index in range(len(inputs)):
-			var stack: ItemStack = inputs[index]
+		for index in range(len(dedup_inputs)):
+			var stack: ItemStack = dedup_inputs[index]
 			if stack.item.matches_spec(ingr):
 				valid.append({index = index, stack = stack})
 		if not valid:
@@ -83,7 +116,7 @@ func matches(inputs: Array[ItemStack], _container: ItemStack = null) -> Dictiona
 		TYPE_INT, &"", null,
 	)
 	while true:
-		var remaining := inputs.duplicate()
+		var remaining := dedup_inputs.duplicate()
 		var to_remove: Array[int] = []
 		var impossible := false
 
@@ -117,17 +150,18 @@ func matches(inputs: Array[ItemStack], _container: ItemStack = null) -> Dictiona
 				for stack in used_ingredients:
 					uniq_mod_depth += stack.unique_modifier_depth
 					total_mod_depth += stack.total_modifier_depth
-				uniq_mod_depth += ItemStack.get_modifier_cardinality_for_modifiers(remaining).size()
+				uniq_mod_depth += ItemStack.get_stacks_cardinality(remaining).size()
 				total_mod_depth += remaining.size()
 				var new_modifiers: Array[ItemStack] = []
-				for inp in inputs:
+				for inp in dedup_inputs:
 					new_modifiers.append_array(inp.modifiers)
 				new_modifiers.append_array(remaining)
 				var new_finishers: Array[ItemStack] = []
-				for inp in inputs:
+				for inp in dedup_inputs:
 					new_finishers.append_array(inp.finishers)
 				return {
 					success = true,
+					multiplicity = multiplicity,
 					modifiers = new_modifiers,
 					finishers = new_finishers,
 					ingredients = used_ingredients,

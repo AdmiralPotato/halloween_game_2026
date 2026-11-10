@@ -86,6 +86,34 @@ func interact(player: Node):
 		item.stack.contents.remove_at(-1)
 		item.stack.emit_changed()
 	elif (
+			(
+				player.held_object == null \
+				or (
+					player.held_object is ItemNode \
+					and player.held_object.stack \
+					and item and item.stack \
+					and player.held_object.stack.is_stackable(item.stack) \
+					and player.held_object.stack.count < \
+						player.held_object.stack.item.max_stack_size
+				)
+			)
+			and item \
+			and item.stack \
+			and item.stack.count > 1
+	):
+		var stacks := item.stack.split(1)
+		if player.held_object:
+			# XXX we can't handle failure in this branch, but it's guarded by
+			# is_stackable and a max_stack_size check, so this should be okay
+			player.held_object.stack.count += 1
+			player.held_object.stack.emit_changed()
+		else:
+			player.held_object = ItemNode.make_node(
+					stacks[1]
+			)
+		item.stack = stacks[0]
+		item.stack.emit_changed()
+	elif (
 		player.held_object != null
 		and item
 		and item.stack.item.is_category(ItemInfo.Category.PRODUCT)

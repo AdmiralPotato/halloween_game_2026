@@ -68,7 +68,7 @@ var total_attributes: Dictionary[ItemInfo.Attribute, int]:
 			attrs[attr] = combined_attributes[attr] * count
 		return attrs
 
-static func get_modifier_cardinality_for_modifiers(mods: Array[ItemStack]) -> Dictionary[ItemInfo, int]:
+static func get_stacks_cardinality(mods: Array[ItemStack]) -> Dictionary[ItemInfo, int]:
 	# XXX we can't always assume that the same named ItemInfo is the same
 	# ItemInfo object because we have to deep-clone in many cases (e.g. the
 	# contents property), so we use another likely-static property instead.
@@ -86,7 +86,7 @@ static func get_modifier_cardinality_for_modifiers(mods: Array[ItemStack]) -> Di
 
 var modifier_cardinality: Dictionary[ItemInfo, int]:
 	get:
-		return get_modifier_cardinality_for_modifiers(modifiers + finishers)
+		return get_stacks_cardinality(modifiers + finishers)
 
 var sell_price: int:
 	get:
@@ -219,6 +219,40 @@ func _to_string() -> String:
 		contents = cont_string,
 	})
 
+
+static func _cardinality_equal(
+		a: Dictionary[ItemInfo, int],
+		b: Dictionary[ItemInfo, int]
+) -> bool:
+	if a.size() != b.size():
+		return false
+	for stk in a:
+		if stk not in b:
+			return false
+		if a[stk] != b[stk]:
+			return false
+	return true
+
+func is_stackable(other: ItemStack) -> bool:
+	if item != other.item:
+		return false
+	if combined_attributes != other.combined_attributes:
+		return false
+	var mc := modifier_cardinality
+	var omc := other.modifier_cardinality
+	if not _cardinality_equal(mc, omc):
+		return false
+	var fc := get_stacks_cardinality(finishers)
+	var ofc := get_stacks_cardinality(other.finishers)
+	if not _cardinality_equal(fc, ofc):
+		return false
+	var cc := get_stacks_cardinality(contents)
+	var occ := get_stacks_cardinality(other.contents)
+	if not _cardinality_equal(cc, occ):
+		return false
+	return true
+
+
 func accept(add: ItemStack) -> Dictionary:
 	# Containers can hold anything but other containers
 	if item.is_category(ItemInfo.Category.CONTAINER):
@@ -241,14 +275,7 @@ func accept(add: ItemStack) -> Dictionary:
 	# The following definition of stackable is very conservative, by intent;
 	# in general, players won't be crafting by stacking, but by using the
 	# Recipe system.
-	if add.item != item:
-		return {success = false, rest = add}
-	if add.combined_attributes != combined_attributes:
-		return {success = false, rest = add}
-	# We could in theory compare modifiers here, but modifiers are a multiset
-	# which we don't have a good data structure for. Again, conservative, but
-	# the door is open if someone wants to try.
-	if add.modifiers or modifiers:
+	if not is_stackable(add):
 		return {success = false, rest = add}
 
 	# stack em up
@@ -296,4 +323,10 @@ static func combine_attrs(inputs: Array[ItemStack]) -> Dictionary[ItemInfo.Attri
 ## input ItemStacks.
 func as_combination(inputs: Array[ItemStack]) -> ItemStack:
 	combined_attributes = combine_attrs(inputs)
+	return self
+
+
+## Multiply count by the given integer in place, returning self.
+func multiply(factor: int) -> ItemStack:
+	count *= factor
 	return self

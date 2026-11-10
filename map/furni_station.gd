@@ -61,7 +61,8 @@ func try_craft() -> bool:
 						info.modifiers
 						+ info.finishers
 						+ info.ingredients
-					)
+					)\
+					.multiply(info.multiplicity)
 			stack.modifiers = info.modifiers
 			stack.finishers = info.finishers
 			stack.craft_depth = info.craft_depth
@@ -76,7 +77,7 @@ func try_craft() -> bool:
 			stored_ingredients = item
 			stored_stack = item.stack
 			stored_stack.changed.connect(cancel_craft, CONNECT_ONE_SHOT)
-			recipe_timer.start(recipe.time)
+			recipe_timer.start(recipe.time * info.multiplicity)
 			status_indicator.start()
 			update_animation()
 			return true
