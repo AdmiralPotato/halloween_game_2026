@@ -23,10 +23,21 @@ func set_save_state(save: Dictionary) -> void:
 		stack = ItemStack.from_save_state(save.stack)
 	else:
 		stack = null
+
+func _get_configuration_warnings() -> PackedStringArray:
+	var warnings := PackedStringArray()
+	if stack and not stack.item.resource_path.begins_with("res://model/data/"):
+		warnings.append(
+				"Stack {stack} has .item stored at {path}; this will break item equality comparisons. Run res://map/relink_data.gd in your editor with this map selected or fix this by loading the ItemInfo directly from the filesystem.".format(
+						{stack = stack, path = stack.item.resource_path}
+				))
+	return warnings
 		
 func update_node():
 	if has_node(^"StaticBody3D/ItemNode"):
 		$StaticBody3D/ItemNode.stack = stack
+	if Engine.is_editor_hint():
+		update_configuration_warnings()
 
 func provide_item() -> ItemNode:
 	var item := ItemNode.make_node(stack)

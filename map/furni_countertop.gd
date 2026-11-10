@@ -6,10 +6,20 @@ extends FurniNode
 	set(stack):
 		initial_stack = stack
 		item = ItemNode.make_node(initial_stack)
+		update_configuration_warnings()
 
 var item: ItemNode:
 	get = get_item,
 	set = set_item
+
+func _get_configuration_warnings() -> PackedStringArray:
+	var warnings := PackedStringArray()
+	if initial_stack and not initial_stack.item.resource_path.begins_with("res://model/data/"):
+		warnings.append(
+				"Stack {stack} has .item stored at {path}; this will break item equality comparisons. Run res://map/relink_data.gd in your editor with this map selected or fix this by loading the ItemInfo directly from the filesystem.".format(
+						{stack = initial_stack, path = initial_stack.item.resource_path}
+				))
+	return warnings
 
 func get_save_state() -> Dictionary:
 	var save := super()
