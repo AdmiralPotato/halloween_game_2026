@@ -421,7 +421,7 @@
 		"attributes": "from_recipe"
 	},
 	"piping_bag": {
-		"human_name": "frosting",
+		"human_name": "piping bag",
 		"sort": 420,
 		"storage_type": "JAR",
 		"categories": ["DECORATION"],

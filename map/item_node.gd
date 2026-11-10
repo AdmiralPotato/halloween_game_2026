@@ -2,24 +2,6 @@
 extends BaseMapNode
 class_name ItemNode
 
-enum FlavoringSpriteOffset {
-	CHERRY,
-	RASPBERRY,
-	STRAWBERRY,
-	ORANGE,
-	ALMOND,
-	CARAMEL,
-	LEMON,
-	LIME,
-	MINT,
-	BLUEBERRY,
-	UBE,
-	GRAPE,
-	CHOCOLATE,
-	PLAIN,
-	WHIPPED_CREAM,
-}
-
 
 const BLEND_MATERIAL_MIX = preload("res://blit_atlas_mix.tres")
 const BLEND_MATERIAL_MUL = preload("res://blit_atlas_mul.tres")
@@ -410,7 +392,7 @@ static func render_recipe_cake(_recipe: Dictionary, _modifiers: Array[ItemStack]
 	render_recipe_stack_modifiers(_finishers, _recipe.decorations, texture)
 	var has_piping = false
 	for modifier in _finishers:
-		if modifier.item.name in _recipe.piping:
+		if modifier.item.name == 'piping_bag':
 			has_piping = true
 			break
 	var doodads: Dictionary = (

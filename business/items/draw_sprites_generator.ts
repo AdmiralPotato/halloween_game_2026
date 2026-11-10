@@ -339,7 +339,7 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 		// If there is a second layer of decorations, draw them now:
 		// (If there is no frosting "layers support", draw these using the above info re: flavorings)
 		piping: {
-			frosting: { type: 'ref', value: 'cake_piping' },
+			piping_bag: { type: 'ref', value: 'cake_piping' },
 			whipped_cream: quickComboTile(comboSpriteInfo.cake_piping, 'multiply', '#eeeff0', '#a0b7ba')
 		},
 		// If there are doodads, draw them this way if there was NO PIPING drawn:
@@ -426,7 +426,7 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 		// If there is a second layer of decorations, draw them now:
 		// (If there is no frosting "layers support", draw these using the above info re: flavorings)
 		piping: {
-			frosting: { type: 'ref', value: 'cake_slice_piping' },
+			piping_bag: { type: 'ref', value: 'cake_slice_piping' },
 			whipped_cream: quickComboTile(comboSpriteInfo.cake_slice_piping, 'multiply', '#eeeff0', '#a0b7ba')
 		},
 		// If there are doodads, draw them this way if there was NO PIPING drawn:

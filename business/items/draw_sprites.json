@@ -2951,7 +2951,7 @@
 			}
 		},
 		"piping": {
-			"frosting": {
+			"piping_bag": {
 				"type": "ref",
 				"value": "cake_piping"
 			},
@@ -4214,7 +4214,7 @@
 			}
 		},
 		"piping": {
-			"frosting": {
+			"piping_bag": {
 				"type": "ref",
 				"value": "cake_slice_piping"
 			},

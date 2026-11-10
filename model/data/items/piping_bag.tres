@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_tnpnn")
 name = "piping_bag"
-display_name = "frosting"
+display_name = "piping bag"
 storage_type = 4
 categories = Array[int]([4])
 cost_tier = 2
