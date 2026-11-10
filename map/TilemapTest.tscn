@@ -2,90 +2,56 @@
 
 [ext_resource type="PackedScene" uid="uid://bcdsp4c8prm15" path="res://map/BaseMap.tscn" id="1_qtmpa"]
 [ext_resource type="PackedScene" uid="uid://d0du8065dim5b" path="res://map/FurniSource.tscn" id="3_0vrjm"]
-[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="4_euwyw"]
 [ext_resource type="Script" uid="uid://n2r00hcbl3ul" path="res://model/item_stack.gd" id="4_qtmpa"]
+[ext_resource type="Resource" uid="uid://sp4b1un2g2p5" path="res://model/data/items/egg.tres" id="4_r177p"]
+[ext_resource type="Resource" uid="uid://cj287n17bxna2" path="res://model/data/items/sugar.tres" id="5_p1ie5"]
+[ext_resource type="Resource" uid="uid://ddmmcej5lm5pc" path="res://model/data/items/flour.tres" id="6_0tecm"]
+[ext_resource type="Resource" uid="uid://cqkl4jri82v6d" path="res://model/data/items/mint_flavoring.tres" id="7_b2em1"]
+[ext_resource type="Resource" uid="uid://b34kf80gy2er3" path="res://model/data/items/bowl.tres" id="8_evb3a"]
 [ext_resource type="PackedScene" uid="uid://5jo3bft5wl1u" path="res://map/FurniMixer.tscn" id="8_nabl1"]
 [ext_resource type="PackedScene" uid="uid://cl7xh1lhn0u0b" path="res://map/FurniCountertop.tscn" id="9_2f20c"]
+[ext_resource type="Resource" uid="uid://vmrcp80igtca" path="res://model/data/items/cookie_dough.tres" id="9_r47yw"]
 [ext_resource type="Resource" uid="uid://v0pjmdco8t3r" path="res://model/data/items/cake_batter.tres" id="10_r47yw"]
+[ext_resource type="Resource" uid="uid://2x1mwsk5krkr" path="res://model/data/items/cherry_flavoring.tres" id="11_jqjf8"]
 [ext_resource type="PackedScene" uid="uid://do30vdu0sngt5" path="res://map/FurniOven.tscn" id="11_nabl1"]
+[ext_resource type="Resource" uid="uid://di0d7103yc36q" path="res://model/data/items/chocolate_chips.tres" id="12_wru5m"]
+[ext_resource type="Resource" uid="uid://cpohusrgviils" path="res://model/data/items/rainbow_sprinkles.tres" id="13_ph5do"]
 [ext_resource type="PackedScene" uid="uid://dfjdkdlvlfocq" path="res://map/FurniCuttingboard.tscn" id="14_p5gm8"]
+[ext_resource type="Resource" uid="uid://coovqsg3sc4j7" path="res://model/data/items/orange_flavoring.tres" id="14_utt7c"]
+[ext_resource type="Resource" uid="uid://cgsiu2wskomec" path="res://model/data/items/cookie.tres" id="15_xsmov"]
+[ext_resource type="Resource" uid="uid://cwvimk8q06x3u" path="res://model/data/items/chocolate_bar.tres" id="16_tnmf5"]
 [ext_resource type="PackedScene" uid="uid://d1tp40f6bgvc6" path="res://map/FurniTrash.tscn" id="18_tdsbi"]
-
-[sub_resource type="Resource" id="Resource_vwyy3"]
-script = ExtResource("4_euwyw")
-name = "egg"
-display_name = "egg"
-storage_type = 1
-categories = Array[int]([0])
-cost_tier = 1
-max_stack_size = 12
-groups = PackedStringArray()
-sort = 102
+[ext_resource type="Resource" uid="uid://dtpa5786bonsp" path="res://model/data/items/frosting.tres" id="18_vkwjd"]
+[ext_resource type="Resource" uid="uid://c21pmt4yfpddq" path="res://model/data/items/lime_flavoring.tres" id="19_gdj6q"]
+[ext_resource type="Resource" uid="uid://bf5t4rvw72l23" path="res://model/data/items/hard_candy_bats.tres" id="20_cc7i2"]
+[ext_resource type="Resource" uid="uid://cbhkv0c47w56h" path="res://model/data/items/cake_slice.tres" id="21_myeuv"]
+[ext_resource type="Resource" uid="uid://0xne0k7mcykn" path="res://model/data/items/blueberry_flavoring.tres" id="26_tpfgo"]
+[ext_resource type="Resource" uid="uid://b30bda72nkj6t" path="res://model/data/items/piping_bag.tres" id="27_rnlcp"]
 
 [sub_resource type="Resource" id="Resource_inivv"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_vwyy3")
+item = ExtResource("4_r177p")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
-
-[sub_resource type="Resource" id="Resource_b8euk"]
-script = ExtResource("4_euwyw")
-name = "sugar"
-display_name = "sugar"
-categories = Array[int]([0])
-cost_tier = 1
-attributes = Dictionary[int, int]({
-19: 2
-})
-groups = PackedStringArray()
-sort = 101
 
 [sub_resource type="Resource" id="Resource_y2ia4"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_b8euk")
+item = ExtResource("5_p1ie5")
 combined_attributes = Dictionary[int, int]({
 19: 2
 })
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="Resource" id="Resource_n1qkj"]
-script = ExtResource("4_euwyw")
-name = "flour"
-display_name = "flour"
-categories = Array[int]([0])
-cost_tier = 1
-attributes = Dictionary[int, int]({
-0: 1
-})
-groups = PackedStringArray()
-sort = 100
-
 [sub_resource type="Resource" id="Resource_4sgfy"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_n1qkj")
+item = ExtResource("6_0tecm")
 combined_attributes = Dictionary[int, int]({
 0: 1
 })
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
-
-[sub_resource type="Resource" id="Resource_nabl1"]
-script = ExtResource("4_euwyw")
-name = "mint_flavoring"
-display_name = "mint flavoring"
-storage_type = 4
-categories = Array[int]([1])
-cost_tier = 4
-max_stack_size = 0
-attributes = Dictionary[int, int]({
-0: -1,
-5: 1,
-17: 3
-})
-groups = PackedStringArray("flavoring")
-sort = 208
 
 [sub_resource type="Resource" id="Resource_177l7"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_nabl1")
+item = ExtResource("7_b2em1")
 combined_attributes = Dictionary[int, int]({
 0: -1,
 5: 1,
@@ -93,34 +59,14 @@ combined_attributes = Dictionary[int, int]({
 })
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="Resource" id="Resource_2f20c"]
-script = ExtResource("4_euwyw")
-name = "bowl"
-display_name = "bowl"
-storage_type = 3
-categories = Array[int]([6])
-cost_tier = 1
-groups = PackedStringArray()
-sort = 999
-
 [sub_resource type="Resource" id="Resource_veuph"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_2f20c")
+item = ExtResource("8_evb3a")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
-
-[sub_resource type="Resource" id="Resource_8mw78"]
-script = ExtResource("4_euwyw")
-name = "cookie_dough"
-display_name = "cookie dough"
-storage_type = 1
-categories = Array[int]([0])
-cost_tier = 2
-groups = PackedStringArray()
-sort = 800
 
 [sub_resource type="Resource" id="Resource_v1uei"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_8mw78")
+item = ExtResource("9_r47yw")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_euwyw"]
@@ -128,36 +74,9 @@ script = ExtResource("4_qtmpa")
 item = ExtResource("10_r47yw")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="Resource" id="Resource_p5gm8"]
-script = ExtResource("4_euwyw")
-name = "cake_batter"
-display_name = "cake batter"
-storage_type = 1
-categories = Array[int]([0])
-cost_tier = 2
-groups = PackedStringArray()
-sort = 801
-
-[sub_resource type="Resource" id="Resource_2fvxq"]
-script = ExtResource("4_euwyw")
-name = "cherry_flavoring"
-display_name = "cherry flavoring"
-storage_type = 4
-categories = Array[int]([1])
-cost_tier = 4
-max_stack_size = 0
-attributes = Dictionary[int, int]({
-0: -2,
-1: 1,
-7: 1,
-16: 2
-})
-groups = PackedStringArray("flavoring")
-sort = 200
-
 [sub_resource type="Resource" id="Resource_cv5h5"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_2fvxq")
+item = ExtResource("11_jqjf8")
 combined_attributes = Dictionary[int, int]({
 0: -2,
 1: 1,
@@ -166,40 +85,14 @@ combined_attributes = Dictionary[int, int]({
 })
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="Resource" id="Resource_15bd0"]
-script = ExtResource("4_euwyw")
-name = "chocolate_chips"
-display_name = "chocolate chips"
-storage_type = 4
-categories = Array[int]([1, 5])
-cost_tier = 3
-max_stack_size = 9
-groups = PackedStringArray()
-sort = 380
-
 [sub_resource type="Resource" id="Resource_6mfjq"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_15bd0")
+item = ExtResource("12_wru5m")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
-
-[sub_resource type="Resource" id="Resource_tdsbi"]
-script = ExtResource("4_euwyw")
-name = "rainbow_sprinkles"
-display_name = "rainbow sprinkles"
-storage_type = 4
-categories = Array[int]([1, 5])
-cost_tier = 2
-max_stack_size = 0
-attributes = Dictionary[int, int]({
-8: 1,
-12: 1
-})
-groups = PackedStringArray("sprinkles")
-sort = 503
 
 [sub_resource type="Resource" id="Resource_qa6d5"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_tdsbi")
+item = ExtResource("13_ph5do")
 combined_attributes = Dictionary[int, int]({
 8: 1,
 12: 1
@@ -208,29 +101,13 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_mhdkp"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_p5gm8")
+item = ExtResource("10_r47yw")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_cv5h5"), SubResource("Resource_6mfjq"), SubResource("Resource_qa6d5")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="Resource" id="Resource_olchu"]
-script = ExtResource("4_euwyw")
-name = "orange_flavoring"
-display_name = "orange flavoring"
-storage_type = 4
-categories = Array[int]([1])
-cost_tier = 4
-max_stack_size = 0
-attributes = Dictionary[int, int]({
-0: -1,
-2: 2,
-16: 2
-})
-groups = PackedStringArray("flavoring")
-sort = 203
-
 [sub_resource type="Resource" id="Resource_p33bg"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_olchu")
+item = ExtResource("14_utt7c")
 combined_attributes = Dictionary[int, int]({
 0: -1,
 2: 2,
@@ -240,66 +117,32 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_3o4ji"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_15bd0")
+item = ExtResource("12_wru5m")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_oqx4x"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_8mw78")
+item = ExtResource("9_r47yw")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_p33bg"), SubResource("Resource_3o4ji")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
-
-[sub_resource type="Resource" id="Resource_6jj7b"]
-script = ExtResource("4_euwyw")
-name = "cookie"
-display_name = "cookie"
-storage_type = 3
-categories = Array[int]([2])
-groups = PackedStringArray()
-sort = 900
 
 [sub_resource type="Resource" id="Resource_wxjcq"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_6jj7b")
+item = ExtResource("15_xsmov")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_p33bg"), SubResource("Resource_3o4ji")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="Resource" id="Resource_sfvuk"]
-script = ExtResource("4_euwyw")
-name = "chocolate_bar"
-display_name = "chocolate bar"
-storage_type = 3
-categories = Array[int]([0])
-cost_tier = 2
-max_stack_size = 12
-attributes = Dictionary[int, int]({
-15: 1
-})
-groups = PackedStringArray()
-sort = 180
-
 [sub_resource type="Resource" id="Resource_2f5mw"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_sfvuk")
+item = ExtResource("16_tnmf5")
 combined_attributes = Dictionary[int, int]({
 15: 1
 })
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="Resource" id="Resource_0d7dl"]
-script = ExtResource("4_euwyw")
-name = "frosting"
-display_name = "frosting"
-storage_type = 4
-categories = Array[int]([4])
-cost_tier = 2
-max_stack_size = 4
-groups = PackedStringArray()
-sort = 400
-
 [sub_resource type="Resource" id="Resource_5c0gd"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_olchu")
+item = ExtResource("14_utt7c")
 combined_attributes = Dictionary[int, int]({
 0: -1,
 2: 2,
@@ -309,42 +152,24 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_hye2e"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_0d7dl")
+item = ExtResource("18_vkwjd")
 count = 2
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_5c0gd")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="Resource" id="Resource_q5464"]
+[sub_resource type="Resource" id="Resource_utt7c"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_olchu")
+item = ExtResource("14_utt7c")
 combined_attributes = Dictionary[int, int]({
 0: -1,
 2: 2,
 16: 2
 })
-modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_5c0gd")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
-
-[sub_resource type="Resource" id="Resource_abky3"]
-script = ExtResource("4_euwyw")
-name = "lime_flavoring"
-display_name = "lime flavoring"
-storage_type = 4
-categories = Array[int]([1])
-cost_tier = 4
-max_stack_size = 0
-attributes = Dictionary[int, int]({
-4: 1,
-5: 1,
-16: 1,
-20: 2
-})
-groups = PackedStringArray("flavoring")
-sort = 207
 
 [sub_resource type="Resource" id="Resource_nadkd"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_abky3")
+item = ExtResource("19_gdj6q")
 combined_attributes = Dictionary[int, int]({
 4: 1,
 5: 1,
@@ -355,7 +180,7 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_fqyai"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_0d7dl")
+item = ExtResource("18_vkwjd")
 combined_attributes = Dictionary[int, int]({
 4: 1,
 5: 1,
@@ -365,40 +190,17 @@ combined_attributes = Dictionary[int, int]({
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_nadkd")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="Resource" id="Resource_p1ie5"]
-script = ExtResource("4_euwyw")
-name = "hard_candy_bats"
-display_name = "hard candy bats"
-storage_type = 4
-categories = Array[int]([5])
-cost_tier = 3
-max_stack_size = 0
-attributes = Dictionary[int, int]({
-12: 1
-})
-groups = PackedStringArray("hard_candy_shapes")
-sort = 520
-
 [sub_resource type="Resource" id="Resource_he5u6"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_p1ie5")
+item = ExtResource("20_cc7i2")
 combined_attributes = Dictionary[int, int]({
 12: 1
 })
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="Resource" id="Resource_b2em1"]
-script = ExtResource("4_euwyw")
-name = "cake_slice"
-display_name = "cake slice"
-storage_type = 1
-categories = Array[int]([2])
-groups = PackedStringArray()
-sort = 903
-
 [sub_resource type="Resource" id="Resource_r177p"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_2fvxq")
+item = ExtResource("11_jqjf8")
 combined_attributes = Dictionary[int, int]({
 0: -2,
 1: 1,
@@ -409,35 +211,19 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_nodiv"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_b2em1")
+item = ExtResource("21_myeuv")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_r177p")])
 finishers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_fqyai"), SubResource("Resource_he5u6")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_n10fp"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_15bd0")
+item = ExtResource("12_wru5m")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
-
-[sub_resource type="Resource" id="Resource_r47yw"]
-script = ExtResource("4_euwyw")
-name = "blueberry_flavoring"
-display_name = "blueberry flavoring"
-storage_type = 4
-categories = Array[int]([1])
-cost_tier = 4
-max_stack_size = 0
-attributes = Dictionary[int, int]({
-0: -1,
-6: 1,
-16: 2
-})
-groups = PackedStringArray("flavoring")
-sort = 209
 
 [sub_resource type="Resource" id="Resource_6sk0w"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_r47yw")
+item = ExtResource("26_tpfgo")
 combined_attributes = Dictionary[int, int]({
 0: -1,
 6: 1,
@@ -447,13 +233,13 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_wjnrr"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_0d7dl")
+item = ExtResource("18_vkwjd")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_6sk0w")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_jnbr1"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_r47yw")
+item = ExtResource("26_tpfgo")
 count = 2
 combined_attributes = Dictionary[int, int]({
 0: -1,
@@ -464,13 +250,13 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_qqp70"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_0d7dl")
+item = ExtResource("18_vkwjd")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_jnbr1")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_0tecm"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_r47yw")
+item = ExtResource("26_tpfgo")
 count = 3
 combined_attributes = Dictionary[int, int]({
 0: -1,
@@ -481,13 +267,13 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_aowxl"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_0d7dl")
+item = ExtResource("18_vkwjd")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_0tecm")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_evb3a"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_r47yw")
+item = ExtResource("26_tpfgo")
 count = 4
 combined_attributes = Dictionary[int, int]({
 0: -1,
@@ -498,13 +284,13 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_smlvm"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_0d7dl")
+item = ExtResource("18_vkwjd")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_evb3a")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_jqjf8"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_r47yw")
+item = ExtResource("26_tpfgo")
 count = 5
 combined_attributes = Dictionary[int, int]({
 0: -1,
@@ -515,13 +301,13 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_ujhah"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_0d7dl")
+item = ExtResource("18_vkwjd")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_jqjf8")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_lhta0"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_2fvxq")
+item = ExtResource("11_jqjf8")
 combined_attributes = Dictionary[int, int]({
 0: -2,
 1: 1,
@@ -532,13 +318,13 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_3qlmg"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_8mw78")
+item = ExtResource("9_r47yw")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_lhta0")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_myeuv"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_2fvxq")
+item = ExtResource("11_jqjf8")
 count = 2
 combined_attributes = Dictionary[int, int]({
 0: -2,
@@ -550,13 +336,13 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_y45jq"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_8mw78")
+item = ExtResource("9_r47yw")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_myeuv")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_rnlcp"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_2fvxq")
+item = ExtResource("11_jqjf8")
 count = 3
 combined_attributes = Dictionary[int, int]({
 0: -2,
@@ -568,41 +354,13 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_t3tgg"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_8mw78")
+item = ExtResource("9_r47yw")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_rnlcp")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="Resource" id="Resource_wru5m"]
-script = ExtResource("4_euwyw")
-name = "piping_bag"
-display_name = "frosting"
-storage_type = 4
-categories = Array[int]([4])
-cost_tier = 2
-max_stack_size = 4
-groups = PackedStringArray()
-sort = 420
-
-[sub_resource type="Resource" id="Resource_ph5do"]
-script = ExtResource("4_euwyw")
-name = "cherry_flavoring"
-display_name = "cherry flavoring"
-storage_type = 4
-categories = Array[int]([1])
-cost_tier = 4
-max_stack_size = 0
-attributes = Dictionary[int, int]({
-0: -2,
-1: 1,
-7: 1,
-16: 2
-})
-groups = PackedStringArray("flavoring")
-sort = 200
-
 [sub_resource type="Resource" id="Resource_85464"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_ph5do")
+item = ExtResource("11_jqjf8")
 count = 4
 combined_attributes = Dictionary[int, int]({
 0: -2,
@@ -614,13 +372,13 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_jx7bd"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_wru5m")
+item = ExtResource("27_rnlcp")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_85464")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_vjff0"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_2fvxq")
+item = ExtResource("11_jqjf8")
 count = 5
 combined_attributes = Dictionary[int, int]({
 0: -2,
@@ -632,13 +390,13 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_v4ia5"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_8mw78")
+item = ExtResource("9_r47yw")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_vjff0")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_xbvgi"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_r47yw")
+item = ExtResource("26_tpfgo")
 count = 2
 combined_attributes = Dictionary[int, int]({
 0: -1,
@@ -649,13 +407,13 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_ulqex"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_8mw78")
+item = ExtResource("9_r47yw")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_xbvgi")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_71tmt"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_r47yw")
+item = ExtResource("26_tpfgo")
 count = 2
 combined_attributes = Dictionary[int, int]({
 0: -1,
@@ -666,11 +424,11 @@ metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
 [sub_resource type="Resource" id="Resource_61qub"]
 script = ExtResource("4_qtmpa")
-item = SubResource("Resource_8mw78")
+item = ExtResource("9_r47yw")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_71tmt")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_euwyw"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r177p"]
 resource_local_to_scene = true
 content_margin_left = 8.0
 content_margin_right = 8.0
@@ -727,7 +485,7 @@ initial_stack = SubResource("Resource_hye2e")
 
 [node name="Furni3_2" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="12" unique_id=1056050822 instance=ExtResource("9_2f20c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 2.5)
-initial_stack = SubResource("Resource_q5464")
+initial_stack = SubResource("Resource_utt7c")
 
 [node name="Furni2_8" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="13" unique_id=1771358725 instance=ExtResource("9_2f20c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 8.5)
@@ -819,4 +577,4 @@ initial_stack = SubResource("Resource_61qub")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 7.5)
 
 [node name="GoldOverlay" parent="." index="13" unique_id=702785822]
-theme_override_styles/panel = SubResource("StyleBoxEmpty_euwyw")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_r177p")
