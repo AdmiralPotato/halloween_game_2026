@@ -233,6 +233,15 @@ static func _cardinality_equal(
 			return false
 	return true
 
+
+## Can [param other] be stacked on top of self? This considers all the stack attributes
+## that might differ, generally returning false if information isn't exactly the
+## same. This is a conservative implementation, so some semantically-equal
+## stacks might not stack as easily.
+##
+## Note that this does _NOT_ consider [member ItemInfo.max_stack_size], and accept can
+## "fail" to stack something as a result of this; the return value is _NOT_ a
+## guarantee that accept will return [code]{rest = null}[/code] (even if [code]{success = true}[/code]).
 func is_stackable(other: ItemStack) -> bool:
 	if item != other.item:
 		return false
@@ -253,6 +262,14 @@ func is_stackable(other: ItemStack) -> bool:
 	return true
 
 
+## Try to stack [param add] onto self. Returns a Dictionary with two fields:[br]
+##
+##  - success: bool: Did the operation succeed or fail?[br]
+##  - rest: ItemStack: The remnants of `add`. You can safely assign this back
+##    to wherever `add` was sourced.[br]
+##
+## Success does not imply any of [param add] was consumed, only that it could have been.
+## Rest will be null if the whole of [param add] was consumed.
 func accept(add: ItemStack) -> Dictionary:
 	# Containers can hold anything but other containers
 	if item.is_category(ItemInfo.Category.CONTAINER):
@@ -287,6 +304,7 @@ func accept(add: ItemStack) -> Dictionary:
 	if add.count == 0:
 		return {success = true, rest = null}
 	return {success = true, rest = add}
+
 
 ## "Split" `amount` items off of this stack into a new one, returning [remaining,
 ## new]. new will have at most amount items (unless amount is negative, in which

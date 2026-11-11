@@ -56,6 +56,32 @@ static func _gcd(a: int, b: int) -> int:
 		b = new_b
 	return a
 
+
+## Given an array of [ItemStack]s, can this recipe be done? Returns a Dictionary
+## with the following fields:[br]
+##
+## - success: bool: Will it work? If not, all other fields are omitted.[br]
+## - multiplicity: int: The amount of copies this recipe is set up to result in.
+##   This should be used to scale the [member output] (see [method ItemStack.multiply]) and
+##   also any other resources (such as [member time]).[br]
+## - modifiers: Array[lb][ItemStack][rb]: [member ItemStack.modifiers] for the
+##   resulting recipe. These should be set on a _duplicate_ of the [member output]
+##   as they will differ between successful completions.[br]
+## - finishers: Array[lb][ItemStack][rb]: [member ItemStack.finishers], similarly.[br]
+## - craft_depth: int: [member ItemStack.craft_depth], similarly.[br]
+## - unique_modifier_depth: int: [member ItemStack.unique_modifier_depth], similarly.[br]
+## - total_modifier_depth: int: [member ItemStack.total_modifier_depth], similarly.[br]
+## - container: [ItemStack]: If not [code]null[/code], the result should be put
+##   as the sole [member ItemStack.contents] in (a duplicate of) this stack.[br]
+## - ingredients: Array[lb][ItemStack][rb]: The non-modifier, non-finisher [param inputs]
+##   that were used, reduced by a factor of multiplicity. This is mostly useful
+##   for debugging.[br]
+##
+## This algorithm is _not_ fast; since there can be overlap between ingredients
+## and modifiers/finishers, this algorithm tries all permutations of inputs that
+## match each slot, making its performance approximately O(r^i) for r recipe slots
+## and i ingredients. (This is EXPTIME, and this is bad.) Cache results when
+## you can. 
 func matches(inputs: Array[ItemStack], _container: ItemStack = null) -> Dictionary:
 	if not inputs:
 		return {success = false}
