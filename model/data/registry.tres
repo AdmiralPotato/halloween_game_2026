@@ -1,157 +1,157 @@
 [gd_resource type="Resource" script_class="Registry" format=3 uid="uid://28e2xqv5pbmq"]
 
-[ext_resource type="Script" uid="uid://cg3yvhquhplvs" path="res://model/furni_info.gd" id="1_4qc20"]
-[ext_resource type="Resource" uid="uid://s4s43334u7rq" path="res://model/data/furni/countertop.tres" id="2_kuuvu"]
-[ext_resource type="Resource" uid="uid://c6pa6pnpox8vy" path="res://model/data/furni/cuttingboard.tres" id="3_vnfv4"]
-[ext_resource type="Resource" uid="uid://dsln4ddl6vb7y" path="res://model/data/furni/fridge.tres" id="4_rxh2n"]
-[ext_resource type="Resource" uid="uid://8khahfrnja8" path="res://model/data/furni/mixer.tres" id="5_0d7tc"]
-[ext_resource type="Resource" uid="uid://c0lkot6fr7sb6" path="res://model/data/furni/oven.tres" id="6_e0qyp"]
-[ext_resource type="Resource" uid="uid://dsgjn1cb2618l" path="res://model/data/furni/trash.tres" id="7_2nns4"]
-[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="8_u5pjp"]
-[ext_resource type="Resource" uid="uid://ddmmcej5lm5pc" path="res://model/data/items/flour.tres" id="9_8kmjb"]
-[ext_resource type="Resource" uid="uid://cj287n17bxna2" path="res://model/data/items/sugar.tres" id="10_fq5us"]
-[ext_resource type="Resource" uid="uid://sp4b1un2g2p5" path="res://model/data/items/egg.tres" id="11_4rhlj"]
-[ext_resource type="Resource" uid="uid://bn38o2gqxu8lw" path="res://model/data/items/cream.tres" id="12_sk0sa"]
-[ext_resource type="Resource" uid="uid://c8fiofnojserl" path="res://model/data/items/cocoa_powder.tres" id="13_jhquf"]
-[ext_resource type="Resource" uid="uid://cwvimk8q06x3u" path="res://model/data/items/chocolate_bar.tres" id="14_dq5s3"]
-[ext_resource type="Resource" uid="uid://bgdy4shh6webf" path="res://model/data/items/white_chocolate_bar.tres" id="15_nghac"]
-[ext_resource type="Resource" uid="uid://dsho81wsqo1gi" path="res://model/data/items/dark_chocolate_bar.tres" id="16_mslh1"]
-[ext_resource type="Resource" uid="uid://2x1mwsk5krkr" path="res://model/data/items/cherry_flavoring.tres" id="17_p8qik"]
-[ext_resource type="Resource" uid="uid://gl0ecxa5jnvh" path="res://model/data/items/raspberry_flavoring.tres" id="18_chs48"]
-[ext_resource type="Resource" uid="uid://cx0xrjcl15hnq" path="res://model/data/items/strawberry_flavoring.tres" id="19_su2q4"]
-[ext_resource type="Resource" uid="uid://coovqsg3sc4j7" path="res://model/data/items/orange_flavoring.tres" id="20_rofia"]
-[ext_resource type="Resource" uid="uid://bpn8qjrlgj7bd" path="res://model/data/items/almond_flavoring.tres" id="21_5bdol"]
-[ext_resource type="Resource" uid="uid://nx01rk03iawk" path="res://model/data/items/caramel_flavoring.tres" id="22_lat0w"]
-[ext_resource type="Resource" uid="uid://dkufy8htdlc00" path="res://model/data/items/lemon_flavoring.tres" id="23_1xkvs"]
-[ext_resource type="Resource" uid="uid://c21pmt4yfpddq" path="res://model/data/items/lime_flavoring.tres" id="24_1brsl"]
-[ext_resource type="Resource" uid="uid://cqkl4jri82v6d" path="res://model/data/items/mint_flavoring.tres" id="25_g8ata"]
-[ext_resource type="Resource" uid="uid://0xne0k7mcykn" path="res://model/data/items/blueberry_flavoring.tres" id="26_ovruv"]
-[ext_resource type="Resource" uid="uid://bv8nixos7brsv" path="res://model/data/items/ube_flavoring.tres" id="27_7e3lv"]
-[ext_resource type="Resource" uid="uid://b5t8pb2ctkpkk" path="res://model/data/items/grape_flavoring.tres" id="28_bgkil"]
-[ext_resource type="Resource" uid="uid://c8p0fkwhb6jme" path="res://model/data/items/blue_candied_flowers.tres" id="29_l3cr5"]
-[ext_resource type="Resource" uid="uid://b2smh57bfxkqm" path="res://model/data/items/red_candied_flowers.tres" id="30_3skj8"]
-[ext_resource type="Resource" uid="uid://ceu1dixoeqkde" path="res://model/data/items/yellow_candied_flowers.tres" id="31_xm3g8"]
-[ext_resource type="Resource" uid="uid://d0usbrx3dsspv" path="res://model/data/items/white_candied_flowers.tres" id="32_mtnqd"]
-[ext_resource type="Resource" uid="uid://dsnpdtwwag8by" path="res://model/data/items/chocolate_sprinkles.tres" id="33_kda5b"]
-[ext_resource type="Resource" uid="uid://fnsrasjasn8e" path="res://model/data/items/white_sprinkles.tres" id="34_grlub"]
-[ext_resource type="Resource" uid="uid://boqigsr1kfgfe" path="res://model/data/items/ball_bearing_sprinkles.tres" id="35_w1rt5"]
-[ext_resource type="Resource" uid="uid://cpohusrgviils" path="res://model/data/items/rainbow_sprinkles.tres" id="36_j6lnc"]
-[ext_resource type="Resource" uid="uid://bf5t4rvw72l23" path="res://model/data/items/hard_candy_bats.tres" id="37_x3kw2"]
-[ext_resource type="Resource" uid="uid://cronwfv33giic" path="res://model/data/items/hard_candy_ghosts.tres" id="38_m877a"]
-[ext_resource type="Resource" uid="uid://g42qmivnd1a2" path="res://model/data/items/hard_candy_eyeballs.tres" id="39_mim2x"]
-[ext_resource type="Resource" uid="uid://b52evep4tqcit" path="res://model/data/items/candy_corn.tres" id="40_gy3pu"]
-[ext_resource type="Resource" uid="uid://di0d7103yc36q" path="res://model/data/items/chocolate_chips.tres" id="41_ysfuu"]
-[ext_resource type="Resource" uid="uid://c70lolhppxn6r" path="res://model/data/items/white_chocolate_chips.tres" id="42_s3rp7"]
-[ext_resource type="Resource" uid="uid://c30hr74cgq7rr" path="res://model/data/items/dark_chocolate_chips.tres" id="43_frbe2"]
-[ext_resource type="Resource" uid="uid://dtpa5786bonsp" path="res://model/data/items/frosting.tres" id="44_vq12q"]
-[ext_resource type="Resource" uid="uid://b30bda72nkj6t" path="res://model/data/items/piping_bag.tres" id="45_85tsb"]
-[ext_resource type="Resource" uid="uid://drme21dey44pm" path="res://model/data/items/whipped_cream.tres" id="46_adgfe"]
-[ext_resource type="Resource" uid="uid://copbnc600ypp3" path="res://model/data/items/pastry_cream.tres" id="47_116ns"]
-[ext_resource type="Resource" uid="uid://c16v2fwi8uo88" path="res://model/data/items/pudding.tres" id="48_rrm56"]
-[ext_resource type="Resource" uid="uid://vmrcp80igtca" path="res://model/data/items/cookie_dough.tres" id="49_a0nsy"]
-[ext_resource type="Resource" uid="uid://v0pjmdco8t3r" path="res://model/data/items/cake_batter.tres" id="50_l4x8c"]
-[ext_resource type="Resource" uid="uid://cgsiu2wskomec" path="res://model/data/items/cookie.tres" id="51_v8wai"]
-[ext_resource type="Resource" uid="uid://bhawkao2hm3rp" path="res://model/data/items/cupcake.tres" id="52_17ko2"]
-[ext_resource type="Resource" uid="uid://by7lx0wufl7ui" path="res://model/data/items/cake.tres" id="53_u703j"]
-[ext_resource type="Resource" uid="uid://cbhkv0c47w56h" path="res://model/data/items/cake_slice.tres" id="54_li5c6"]
-[ext_resource type="Resource" uid="uid://b34kf80gy2er3" path="res://model/data/items/bowl.tres" id="55_j1vm0"]
-[ext_resource type="Script" uid="uid://b5mlkyd7jcal7" path="res://model/recipe.gd" id="56_muy2m"]
-[ext_resource type="Resource" uid="uid://b51yuegjqhtrh" path="res://model/data/recipes/chocolate_chips.tres" id="57_567p8"]
-[ext_resource type="Resource" uid="uid://clwwyugodw8rg" path="res://model/data/recipes/white_chocolate_chips.tres" id="58_bjaiv"]
-[ext_resource type="Resource" uid="uid://be4mh5icaf7kk" path="res://model/data/recipes/dark_chocolate_chips.tres" id="59_2bd78"]
-[ext_resource type="Resource" uid="uid://bvpar5bdtvhrp" path="res://model/data/recipes/frosting.tres" id="60_4cp2b"]
-[ext_resource type="Resource" uid="uid://by85indbkem40" path="res://model/data/recipes/piping_bag.tres" id="61_e3biy"]
-[ext_resource type="Resource" uid="uid://dfjq25k4ra7fx" path="res://model/data/recipes/frosting_remix.tres" id="61_kuuvu"]
-[ext_resource type="Resource" uid="uid://cj0rcmms8r54w" path="res://model/data/recipes/whipped_cream.tres" id="62_n0co0"]
-[ext_resource type="Resource" uid="uid://ctwsujsa7sw11" path="res://model/data/recipes/pastry_cream.tres" id="63_rkj3d"]
-[ext_resource type="Resource" uid="uid://pptomi2erth2" path="res://model/data/recipes/pudding.tres" id="64_ybj02"]
-[ext_resource type="Resource" uid="uid://cck62byf4r1xj" path="res://model/data/recipes/cookie_dough.tres" id="65_yh1h7"]
-[ext_resource type="Resource" uid="uid://cfscjphu6d0tk" path="res://model/data/recipes/cookie_dough_remix.tres" id="66_msa3i"]
-[ext_resource type="Resource" uid="uid://duf12rjgvr7mt" path="res://model/data/recipes/cake_batter.tres" id="67_xcfqs"]
-[ext_resource type="Resource" uid="uid://b6g7j76v56ayk" path="res://model/data/recipes/cake_batter_remix.tres" id="68_oii22"]
-[ext_resource type="Resource" uid="uid://61k151p35yto" path="res://model/data/recipes/cookie.tres" id="69_qrxrp"]
-[ext_resource type="Resource" uid="uid://b50n8higcvdyf" path="res://model/data/recipes/cupcake.tres" id="70_7keyp"]
-[ext_resource type="Resource" uid="uid://cd0372c68gyfl" path="res://model/data/recipes/cake.tres" id="71_vtyf6"]
-[ext_resource type="Resource" uid="uid://b2v8tffij1nm2" path="res://model/data/recipes/cake_slice.tres" id="72_lqiu4"]
-[ext_resource type="Script" uid="uid://c2nruwp1oefq" path="res://model/registry.gd" id="73_5p0y7"]
+[ext_resource type="Script" uid="uid://cg3yvhquhplvs" path="res://model/furni_info.gd" id="1_kuuvu"]
+[ext_resource type="Resource" uid="uid://s4s43334u7rq" path="res://model/data/furni/countertop.tres" id="2_vnfv4"]
+[ext_resource type="Resource" uid="uid://c6pa6pnpox8vy" path="res://model/data/furni/cuttingboard.tres" id="3_rxh2n"]
+[ext_resource type="Resource" uid="uid://dsln4ddl6vb7y" path="res://model/data/furni/fridge.tres" id="4_0d7tc"]
+[ext_resource type="Resource" uid="uid://8khahfrnja8" path="res://model/data/furni/mixer.tres" id="5_e0qyp"]
+[ext_resource type="Resource" uid="uid://c0lkot6fr7sb6" path="res://model/data/furni/oven.tres" id="6_2nns4"]
+[ext_resource type="Resource" uid="uid://dsgjn1cb2618l" path="res://model/data/furni/trash.tres" id="7_u5pjp"]
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="8_8kmjb"]
+[ext_resource type="Resource" uid="uid://ddmmcej5lm5pc" path="res://model/data/items/flour.tres" id="9_fq5us"]
+[ext_resource type="Resource" uid="uid://cj287n17bxna2" path="res://model/data/items/sugar.tres" id="10_4rhlj"]
+[ext_resource type="Resource" uid="uid://sp4b1un2g2p5" path="res://model/data/items/egg.tres" id="11_sk0sa"]
+[ext_resource type="Resource" uid="uid://bn38o2gqxu8lw" path="res://model/data/items/cream.tres" id="12_jhquf"]
+[ext_resource type="Resource" uid="uid://c8fiofnojserl" path="res://model/data/items/cocoa_powder.tres" id="13_dq5s3"]
+[ext_resource type="Resource" uid="uid://cwvimk8q06x3u" path="res://model/data/items/chocolate_bar.tres" id="14_nghac"]
+[ext_resource type="Resource" uid="uid://bgdy4shh6webf" path="res://model/data/items/white_chocolate_bar.tres" id="15_mslh1"]
+[ext_resource type="Resource" uid="uid://dsho81wsqo1gi" path="res://model/data/items/dark_chocolate_bar.tres" id="16_p8qik"]
+[ext_resource type="Resource" uid="uid://2x1mwsk5krkr" path="res://model/data/items/cherry_flavoring.tres" id="17_chs48"]
+[ext_resource type="Resource" uid="uid://gl0ecxa5jnvh" path="res://model/data/items/raspberry_flavoring.tres" id="18_su2q4"]
+[ext_resource type="Resource" uid="uid://cx0xrjcl15hnq" path="res://model/data/items/strawberry_flavoring.tres" id="19_rofia"]
+[ext_resource type="Resource" uid="uid://coovqsg3sc4j7" path="res://model/data/items/orange_flavoring.tres" id="20_5bdol"]
+[ext_resource type="Resource" uid="uid://bpn8qjrlgj7bd" path="res://model/data/items/almond_flavoring.tres" id="21_lat0w"]
+[ext_resource type="Resource" uid="uid://nx01rk03iawk" path="res://model/data/items/caramel_flavoring.tres" id="22_1xkvs"]
+[ext_resource type="Resource" uid="uid://dkufy8htdlc00" path="res://model/data/items/lemon_flavoring.tres" id="23_1brsl"]
+[ext_resource type="Resource" uid="uid://c21pmt4yfpddq" path="res://model/data/items/lime_flavoring.tres" id="24_g8ata"]
+[ext_resource type="Resource" uid="uid://cqkl4jri82v6d" path="res://model/data/items/mint_flavoring.tres" id="25_ovruv"]
+[ext_resource type="Resource" uid="uid://0xne0k7mcykn" path="res://model/data/items/blueberry_flavoring.tres" id="26_7e3lv"]
+[ext_resource type="Resource" uid="uid://bv8nixos7brsv" path="res://model/data/items/ube_flavoring.tres" id="27_bgkil"]
+[ext_resource type="Resource" uid="uid://b5t8pb2ctkpkk" path="res://model/data/items/grape_flavoring.tres" id="28_l3cr5"]
+[ext_resource type="Resource" uid="uid://c8p0fkwhb6jme" path="res://model/data/items/blue_candied_flowers.tres" id="29_3skj8"]
+[ext_resource type="Resource" uid="uid://b2smh57bfxkqm" path="res://model/data/items/red_candied_flowers.tres" id="30_xm3g8"]
+[ext_resource type="Resource" uid="uid://ceu1dixoeqkde" path="res://model/data/items/yellow_candied_flowers.tres" id="31_mtnqd"]
+[ext_resource type="Resource" uid="uid://d0usbrx3dsspv" path="res://model/data/items/white_candied_flowers.tres" id="32_kda5b"]
+[ext_resource type="Resource" uid="uid://dsnpdtwwag8by" path="res://model/data/items/chocolate_sprinkles.tres" id="33_grlub"]
+[ext_resource type="Resource" uid="uid://fnsrasjasn8e" path="res://model/data/items/white_sprinkles.tres" id="34_w1rt5"]
+[ext_resource type="Resource" uid="uid://boqigsr1kfgfe" path="res://model/data/items/ball_bearing_sprinkles.tres" id="35_j6lnc"]
+[ext_resource type="Resource" uid="uid://cpohusrgviils" path="res://model/data/items/rainbow_sprinkles.tres" id="36_x3kw2"]
+[ext_resource type="Resource" uid="uid://bf5t4rvw72l23" path="res://model/data/items/hard_candy_bats.tres" id="37_m877a"]
+[ext_resource type="Resource" uid="uid://cronwfv33giic" path="res://model/data/items/hard_candy_ghosts.tres" id="38_mim2x"]
+[ext_resource type="Resource" uid="uid://g42qmivnd1a2" path="res://model/data/items/hard_candy_eyeballs.tres" id="39_gy3pu"]
+[ext_resource type="Resource" uid="uid://b52evep4tqcit" path="res://model/data/items/candy_corn.tres" id="40_ysfuu"]
+[ext_resource type="Resource" uid="uid://di0d7103yc36q" path="res://model/data/items/chocolate_chips.tres" id="41_s3rp7"]
+[ext_resource type="Resource" uid="uid://c70lolhppxn6r" path="res://model/data/items/white_chocolate_chips.tres" id="42_frbe2"]
+[ext_resource type="Resource" uid="uid://c30hr74cgq7rr" path="res://model/data/items/dark_chocolate_chips.tres" id="43_vq12q"]
+[ext_resource type="Resource" uid="uid://dtpa5786bonsp" path="res://model/data/items/frosting.tres" id="44_85tsb"]
+[ext_resource type="Resource" uid="uid://b30bda72nkj6t" path="res://model/data/items/piping_bag.tres" id="45_adgfe"]
+[ext_resource type="Resource" uid="uid://drme21dey44pm" path="res://model/data/items/whipped_cream.tres" id="46_116ns"]
+[ext_resource type="Resource" uid="uid://copbnc600ypp3" path="res://model/data/items/pastry_cream.tres" id="47_rrm56"]
+[ext_resource type="Resource" uid="uid://c16v2fwi8uo88" path="res://model/data/items/pudding.tres" id="48_a0nsy"]
+[ext_resource type="Resource" uid="uid://vmrcp80igtca" path="res://model/data/items/cookie_dough.tres" id="49_l4x8c"]
+[ext_resource type="Resource" uid="uid://v0pjmdco8t3r" path="res://model/data/items/cake_batter.tres" id="50_v8wai"]
+[ext_resource type="Resource" uid="uid://cgsiu2wskomec" path="res://model/data/items/cookie.tres" id="51_17ko2"]
+[ext_resource type="Resource" uid="uid://bhawkao2hm3rp" path="res://model/data/items/cupcake.tres" id="52_u703j"]
+[ext_resource type="Resource" uid="uid://by7lx0wufl7ui" path="res://model/data/items/cake.tres" id="53_li5c6"]
+[ext_resource type="Resource" uid="uid://cbhkv0c47w56h" path="res://model/data/items/cake_slice.tres" id="54_j1vm0"]
+[ext_resource type="Resource" uid="uid://b34kf80gy2er3" path="res://model/data/items/bowl.tres" id="55_muy2m"]
+[ext_resource type="Script" uid="uid://b5mlkyd7jcal7" path="res://model/recipe.gd" id="56_567p8"]
+[ext_resource type="Resource" uid="uid://b51yuegjqhtrh" path="res://model/data/recipes/chocolate_chips.tres" id="57_bjaiv"]
+[ext_resource type="Resource" uid="uid://clwwyugodw8rg" path="res://model/data/recipes/white_chocolate_chips.tres" id="58_2bd78"]
+[ext_resource type="Resource" uid="uid://be4mh5icaf7kk" path="res://model/data/recipes/dark_chocolate_chips.tres" id="59_4cp2b"]
+[ext_resource type="Resource" uid="uid://bvpar5bdtvhrp" path="res://model/data/recipes/frosting.tres" id="60_e3biy"]
+[ext_resource type="Resource" uid="uid://dfjq25k4ra7fx" path="res://model/data/recipes/frosting_remix.tres" id="61_n0co0"]
+[ext_resource type="Resource" uid="uid://by85indbkem40" path="res://model/data/recipes/piping_bag.tres" id="62_rkj3d"]
+[ext_resource type="Resource" uid="uid://cj0rcmms8r54w" path="res://model/data/recipes/whipped_cream.tres" id="63_ybj02"]
+[ext_resource type="Resource" uid="uid://ctwsujsa7sw11" path="res://model/data/recipes/pastry_cream.tres" id="64_yh1h7"]
+[ext_resource type="Resource" uid="uid://pptomi2erth2" path="res://model/data/recipes/pudding.tres" id="65_msa3i"]
+[ext_resource type="Resource" uid="uid://cck62byf4r1xj" path="res://model/data/recipes/cookie_dough.tres" id="66_xcfqs"]
+[ext_resource type="Resource" uid="uid://cfscjphu6d0tk" path="res://model/data/recipes/cookie_dough_remix.tres" id="67_oii22"]
+[ext_resource type="Resource" uid="uid://duf12rjgvr7mt" path="res://model/data/recipes/cake_batter.tres" id="68_qrxrp"]
+[ext_resource type="Resource" uid="uid://b6g7j76v56ayk" path="res://model/data/recipes/cake_batter_remix.tres" id="69_7keyp"]
+[ext_resource type="Resource" uid="uid://61k151p35yto" path="res://model/data/recipes/cookie.tres" id="70_vtyf6"]
+[ext_resource type="Resource" uid="uid://b50n8higcvdyf" path="res://model/data/recipes/cupcake.tres" id="71_lqiu4"]
+[ext_resource type="Resource" uid="uid://cd0372c68gyfl" path="res://model/data/recipes/cake.tres" id="72_5p0y7"]
+[ext_resource type="Resource" uid="uid://b2v8tffij1nm2" path="res://model/data/recipes/cake_slice.tres" id="73_mavrf"]
+[ext_resource type="Script" uid="uid://c2nruwp1oefq" path="res://model/registry.gd" id="74_u428c"]
 
 [resource]
-script = ExtResource("73_5p0y7")
-items = Dictionary[String, ExtResource("8_u5pjp")]({
-"almond_flavoring": ExtResource("21_5bdol"),
-"ball_bearing_sprinkles": ExtResource("35_w1rt5"),
-"blue_candied_flowers": ExtResource("29_l3cr5"),
-"blueberry_flavoring": ExtResource("26_ovruv"),
-"bowl": ExtResource("55_j1vm0"),
-"cake": ExtResource("53_u703j"),
-"cake_batter": ExtResource("50_l4x8c"),
-"cake_slice": ExtResource("54_li5c6"),
-"candy_corn": ExtResource("40_gy3pu"),
-"caramel_flavoring": ExtResource("22_lat0w"),
-"cherry_flavoring": ExtResource("17_p8qik"),
-"chocolate_bar": ExtResource("14_dq5s3"),
-"chocolate_chips": ExtResource("41_ysfuu"),
-"chocolate_sprinkles": ExtResource("33_kda5b"),
-"cocoa_powder": ExtResource("13_jhquf"),
-"cookie": ExtResource("51_v8wai"),
-"cookie_dough": ExtResource("49_a0nsy"),
-"cream": ExtResource("12_sk0sa"),
-"cupcake": ExtResource("52_17ko2"),
-"dark_chocolate_bar": ExtResource("16_mslh1"),
-"dark_chocolate_chips": ExtResource("43_frbe2"),
-"egg": ExtResource("11_4rhlj"),
-"flour": ExtResource("9_8kmjb"),
-"frosting": ExtResource("44_vq12q"),
-"grape_flavoring": ExtResource("28_bgkil"),
-"hard_candy_bats": ExtResource("37_x3kw2"),
-"hard_candy_eyeballs": ExtResource("39_mim2x"),
-"hard_candy_ghosts": ExtResource("38_m877a"),
-"lemon_flavoring": ExtResource("23_1xkvs"),
-"lime_flavoring": ExtResource("24_1brsl"),
-"mint_flavoring": ExtResource("25_g8ata"),
-"orange_flavoring": ExtResource("20_rofia"),
-"pastry_cream": ExtResource("47_116ns"),
-"piping_bag": ExtResource("45_85tsb"),
-"pudding": ExtResource("48_rrm56"),
-"rainbow_sprinkles": ExtResource("36_j6lnc"),
-"raspberry_flavoring": ExtResource("18_chs48"),
-"red_candied_flowers": ExtResource("30_3skj8"),
-"strawberry_flavoring": ExtResource("19_su2q4"),
-"sugar": ExtResource("10_fq5us"),
-"ube_flavoring": ExtResource("27_7e3lv"),
-"whipped_cream": ExtResource("46_adgfe"),
-"white_candied_flowers": ExtResource("32_mtnqd"),
-"white_chocolate_bar": ExtResource("15_nghac"),
-"white_chocolate_chips": ExtResource("42_s3rp7"),
-"white_sprinkles": ExtResource("34_grlub"),
-"yellow_candied_flowers": ExtResource("31_xm3g8")
+script = ExtResource("74_u428c")
+items = Dictionary[String, ExtResource("8_8kmjb")]({
+"almond_flavoring": ExtResource("21_lat0w"),
+"ball_bearing_sprinkles": ExtResource("35_j6lnc"),
+"blue_candied_flowers": ExtResource("29_3skj8"),
+"blueberry_flavoring": ExtResource("26_7e3lv"),
+"bowl": ExtResource("55_muy2m"),
+"cake": ExtResource("53_li5c6"),
+"cake_batter": ExtResource("50_v8wai"),
+"cake_slice": ExtResource("54_j1vm0"),
+"candy_corn": ExtResource("40_ysfuu"),
+"caramel_flavoring": ExtResource("22_1xkvs"),
+"cherry_flavoring": ExtResource("17_chs48"),
+"chocolate_bar": ExtResource("14_nghac"),
+"chocolate_chips": ExtResource("41_s3rp7"),
+"chocolate_sprinkles": ExtResource("33_grlub"),
+"cocoa_powder": ExtResource("13_dq5s3"),
+"cookie": ExtResource("51_17ko2"),
+"cookie_dough": ExtResource("49_l4x8c"),
+"cream": ExtResource("12_jhquf"),
+"cupcake": ExtResource("52_u703j"),
+"dark_chocolate_bar": ExtResource("16_p8qik"),
+"dark_chocolate_chips": ExtResource("43_vq12q"),
+"egg": ExtResource("11_sk0sa"),
+"flour": ExtResource("9_fq5us"),
+"frosting": ExtResource("44_85tsb"),
+"grape_flavoring": ExtResource("28_l3cr5"),
+"hard_candy_bats": ExtResource("37_m877a"),
+"hard_candy_eyeballs": ExtResource("39_gy3pu"),
+"hard_candy_ghosts": ExtResource("38_mim2x"),
+"lemon_flavoring": ExtResource("23_1brsl"),
+"lime_flavoring": ExtResource("24_g8ata"),
+"mint_flavoring": ExtResource("25_ovruv"),
+"orange_flavoring": ExtResource("20_5bdol"),
+"pastry_cream": ExtResource("47_rrm56"),
+"piping_bag": ExtResource("45_adgfe"),
+"pudding": ExtResource("48_a0nsy"),
+"rainbow_sprinkles": ExtResource("36_x3kw2"),
+"raspberry_flavoring": ExtResource("18_su2q4"),
+"red_candied_flowers": ExtResource("30_xm3g8"),
+"strawberry_flavoring": ExtResource("19_rofia"),
+"sugar": ExtResource("10_4rhlj"),
+"ube_flavoring": ExtResource("27_bgkil"),
+"whipped_cream": ExtResource("46_116ns"),
+"white_candied_flowers": ExtResource("32_kda5b"),
+"white_chocolate_bar": ExtResource("15_mslh1"),
+"white_chocolate_chips": ExtResource("42_frbe2"),
+"white_sprinkles": ExtResource("34_w1rt5"),
+"yellow_candied_flowers": ExtResource("31_mtnqd")
 })
-recipes = Dictionary[String, ExtResource("56_muy2m")]({
-"cake": ExtResource("71_vtyf6"),
-"cake batter": ExtResource("67_xcfqs"),
-"cake batter remix": ExtResource("68_oii22"),
-"cake slice": ExtResource("72_lqiu4"),
-"chocolate chips": ExtResource("57_567p8"),
-"cookie": ExtResource("69_qrxrp"),
-"cookie dough": ExtResource("65_yh1h7"),
-"cookie dough remix": ExtResource("66_msa3i"),
-"cupcake": ExtResource("70_7keyp"),
-"dark chocolate chips": ExtResource("59_2bd78"),
-"frosting": ExtResource("60_4cp2b"),
-"frosting remix": ExtResource("61_kuuvu"),
-"pastry cream": ExtResource("63_rkj3d"),
-"piping bag": ExtResource("61_e3biy"),
-"pudding": ExtResource("64_ybj02"),
-"whipped cream": ExtResource("62_n0co0"),
-"white chocolate chips": ExtResource("58_bjaiv")
+recipes = Dictionary[String, ExtResource("56_567p8")]({
+"cake": ExtResource("72_5p0y7"),
+"cake batter": ExtResource("68_qrxrp"),
+"cake batter remix": ExtResource("69_7keyp"),
+"cake slice": ExtResource("73_mavrf"),
+"chocolate chips": ExtResource("57_bjaiv"),
+"cookie": ExtResource("70_vtyf6"),
+"cookie dough": ExtResource("66_xcfqs"),
+"cookie dough remix": ExtResource("67_oii22"),
+"cupcake": ExtResource("71_lqiu4"),
+"dark chocolate chips": ExtResource("59_4cp2b"),
+"frosting": ExtResource("60_e3biy"),
+"frosting remix": ExtResource("61_n0co0"),
+"pastry cream": ExtResource("64_yh1h7"),
+"piping bag": ExtResource("62_rkj3d"),
+"pudding": ExtResource("65_msa3i"),
+"whipped cream": ExtResource("63_ybj02"),
+"white chocolate chips": ExtResource("58_2bd78")
 })
-furnis = Dictionary[String, ExtResource("1_4qc20")]({
-"countertop": ExtResource("2_kuuvu"),
-"cuttingboard": ExtResource("3_vnfv4"),
-"fridge": ExtResource("4_rxh2n"),
-"mixer": ExtResource("5_0d7tc"),
-"oven": ExtResource("6_e0qyp"),
-"trash": ExtResource("7_2nns4")
+furnis = Dictionary[String, ExtResource("1_kuuvu")]({
+"countertop": ExtResource("2_vnfv4"),
+"cuttingboard": ExtResource("3_rxh2n"),
+"fridge": ExtResource("4_0d7tc"),
+"mixer": ExtResource("5_e0qyp"),
+"oven": ExtResource("6_2nns4"),
+"trash": ExtResource("7_u5pjp")
 })
 maps = Dictionary[String, String]({
 "Empty Room": "res://map/EmptyLarge.tscn",

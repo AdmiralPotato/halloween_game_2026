@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://cde0ctma7xn5i"]
 
-[ext_resource type="Script" uid="uid://mqo3qjgryl8a" path="res://map/furni_node.gd" id="1_qjcii"]
+[ext_resource type="Script" uid="uid://cbxy2m2t3ioab" path="res://map/furni_storage.gd" id="1_lbfke"]
 [ext_resource type="PackedScene" uid="uid://b1nq8a0eb32kb" path="res://assets/furni_storage_box_refrigerated_0.glb" id="2_qjcii"]
+[ext_resource type="PackedScene" uid="uid://dnr2litnwd06p" path="res://map/ItemNode.tscn" id="3_7py3r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p33bg"]
 size = Vector3(1, 0.8, 1)
 
 [node name="FurniFridge" type="Node3D" unique_id=1615491916]
-script = ExtResource("1_qjcii")
+script = ExtResource("1_lbfke")
 current_scene = "uid://cde0ctma7xn5i"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1407366706]
@@ -17,3 +18,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("BoxShape3D_p33bg")
 
 [node name="storageBoxRefrigerated_v1" parent="StaticBody3D" unique_id=1907621801 instance=ExtResource("2_qjcii")]
+
+[node name="ItemNode" parent="." unique_id=184551138 instance=ExtResource("3_7py3r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)

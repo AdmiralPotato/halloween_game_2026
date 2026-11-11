@@ -226,7 +226,7 @@
   {
     "output": "cookie",
     "human_name": "cookie",
-    "quantity": 1,
+    "quantity": 12,
     "location": "OVEN",
     "pan": "COOKIE_SHEET",
     "time": 2,
@@ -239,7 +239,7 @@
   {
     "output": "cupcake",
     "human_name": "cupcake",
-    "quantity": 1,
+    "quantity": 6,
     "location": "OVEN",
     "pan": "MUFFIN_TIN",
     "time": 3,

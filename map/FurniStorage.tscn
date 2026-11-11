@@ -21,3 +21,4 @@ shape = SubResource("BoxShape3D_p33bg")
 
 [node name="ItemNode" parent="." unique_id=184551138 instance=ExtResource("3_kpana")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3000001, 0)
+visible = false

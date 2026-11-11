@@ -38,7 +38,10 @@ func accept_item(item: ItemNode) -> ItemNode:
 	item.reparent(self)
 	item.transform = $ItemNode.transform
 	# will be animated by .animate_to_current_transform() by test_player.gd
-	item.finished_animating.connect(func(): stack.count += item.stack.count, CONNECT_ONE_SHOT)
+	var _finish := func _finish():
+		stack.count += item.stack.count
+		item.queue_free()
+	item.finished_animating.connect(_finish, CONNECT_ONE_SHOT)
 	return null
 
 
@@ -58,3 +61,15 @@ func query_item() -> ItemNode:
 	if $ItemNode.visible:
 		return $ItemNode
 	return null
+
+
+func interact(player: Node):
+	if stack and stack.count > 1 and not player.held_object:
+		var result := stack.split(stack.item.max_stack_size)
+		stack = result[0]
+		var node = ItemNode.make_node(result[1])
+		player.held_object = node
+		node.global_position = $ItemNode.global_position
+		node.store_global_transform()
+		node.transform = Transform3D()
+		node.animate_to_current_transform()

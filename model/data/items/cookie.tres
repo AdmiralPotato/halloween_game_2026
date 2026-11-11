@@ -8,5 +8,6 @@ name = "cookie"
 display_name = "cookie"
 storage_type = 3
 categories = Array[int]([2])
+max_stack_size = 12
 groups = PackedStringArray()
 sort = 900
