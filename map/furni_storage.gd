@@ -1,0 +1,63 @@
+@tool
+extends FurniNode
+
+
+@export var stack: ItemStack = null:
+	set(new):
+		if stack and stack.changed.is_connected(update_node):
+			stack.changed.disconnect(update_node)
+		stack = new
+		if stack:
+			stack.changed.connect(update_node, CONNECT_DEFERRED)
+		update_node()
+
+
+func _ready():
+	update_node()
+
+
+func update_node():
+	if has_node(^"ItemNode"):
+		$ItemNode.stack = stack
+		$ItemNode.visible = stack != null
+
+
+func accept_item(item: ItemNode) -> ItemNode:
+	if not stack:
+		stack = item.stack  # this sets up $ItemNode to be in tree
+		var initial_transform := ($ItemNode as ItemNode).transform
+		$ItemNode.global_transform = item.global_transform
+		@warning_ignore("shadowed_variable_base_class")
+		var tween := $ItemNode.create_tween().set_trans(Tween.TRANS_SINE)
+		tween.tween_property($ItemNode, ^"transform", initial_transform, BaseMapNode.TWEEN_TIME)
+		return null
+	
+	if not stack.is_stackable(item.stack):
+		return item
+	# grab this into our part of the tree for a sec, because it will be removed from elsewhere
+	item.reparent(self)
+	@warning_ignore("shadowed_variable_base_class")
+	var tween := item.create_tween().set_trans(Tween.TRANS_SINE)
+	print('tween from ', item.transform, ' to ', $ItemNode.transform)
+	tween.tween_property(item, ^"transform", $ItemNode.transform, BaseMapNode.TWEEN_TIME)
+	tween.tween_callback(func(): stack.count += item.stack.count)
+	tween.tween_callback(item.queue_free)
+	return null
+
+
+func provide_item() -> ItemNode:
+	if stack and stack.count >= 1:
+		var result := stack.split(1)
+		stack = result[0]
+		var node = ItemNode.make_node(result[1])
+		add_child(node)  # need to be in tree to store transform
+		node.global_position = $ItemNode.global_position
+		node.store_global_transform()
+		return node
+	return null
+
+
+func query_item() -> ItemNode:
+	if $ItemNode.visible:
+		return $ItemNode
+	return null

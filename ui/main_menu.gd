@@ -5,15 +5,15 @@ extends MarginContainer
 
 func _ready() -> void:
 	%MapList.clear()
-	for name in Global.registry.maps:
-		%MapList.add_item(name)
+	for map in Global.registry.maps:
+		%MapList.add_item(map)
 	%MapList.grab_focus()
 	%MapList.select(0)
 	if OS.has_feature("web"):
 		%Leave.visible = false
 
 
-func _on_map_list_item_selected(index):
+func _on_map_list_item_selected(_index):
 	%Create.disabled = %MapList.get_selected_items().is_empty()
 
 

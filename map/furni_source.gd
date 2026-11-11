@@ -31,6 +31,10 @@ func _get_configuration_warnings() -> PackedStringArray:
 				"Stack {stack} has .item stored at {path}; this will break item equality comparisons. Run res://map/relink_data.gd in your editor with this map selected or fix this by loading the ItemInfo directly from the filesystem.".format(
 						{stack = stack, path = stack.item.resource_path}
 				))
+	if not stack:
+		warnings.append(
+				"Stack not configured. An ItemStack has to be set for this node to be useful."
+		)
 	return warnings
 		
 func update_node():

@@ -16,7 +16,7 @@ func resume () -> void:
 
 
 # There's no signal for this, I guess, which makes me a little sad.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	visible = get_tree().paused
 
 func _on_resume_pressed() -> void:

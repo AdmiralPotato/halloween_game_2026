@@ -27,6 +27,7 @@
 [ext_resource type="Resource" uid="uid://cbhkv0c47w56h" path="res://model/data/items/cake_slice.tres" id="21_myeuv"]
 [ext_resource type="Resource" uid="uid://0xne0k7mcykn" path="res://model/data/items/blueberry_flavoring.tres" id="26_tpfgo"]
 [ext_resource type="Resource" uid="uid://b30bda72nkj6t" path="res://model/data/items/piping_bag.tres" id="27_rnlcp"]
+[ext_resource type="PackedScene" uid="uid://b50655f77362" path="res://map/FurniStorage.tscn" id="28_p1ie5"]
 
 [sub_resource type="Resource" id="Resource_inivv"]
 script = ExtResource("4_qtmpa")
@@ -428,7 +429,13 @@ item = ExtResource("9_r47yw")
 modifiers = Array[ExtResource("4_qtmpa")]([SubResource("Resource_71tmt")])
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0tecm"]
+[sub_resource type="Resource" id="Resource_rt6km"]
+script = ExtResource("4_qtmpa")
+item = ExtResource("15_xsmov")
+count = 25
+metadata/_custom_type_script = "uid://n2r00hcbl3ul"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p1ie5"]
 resource_local_to_scene = true
 content_margin_left = 8.0
 content_margin_right = 8.0
@@ -573,8 +580,15 @@ initial_stack = SubResource("Resource_ulqex")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 7.5)
 initial_stack = SubResource("Resource_61qub")
 
+[node name="Furni6_5" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="37" unique_id=2115998930 instance=ExtResource("28_p1ie5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 5.5)
+stack = SubResource("Resource_rt6km")
+
+[node name="Furni7_5" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="38" unique_id=1610312325 instance=ExtResource("28_p1ie5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 5.5)
+
 [node name="TestPlayer" parent="." index="3" unique_id=1707035649]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 7.5)
 
 [node name="GoldOverlay" parent="." index="13" unique_id=702785822]
-theme_override_styles/panel = SubResource("StyleBoxEmpty_0tecm")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_p1ie5")
