@@ -117,7 +117,7 @@ func _physics_process(delta):
 		cursor.visible = false
 		cursor_last_item = null
 	
-	hand_node.transform = skeleton.get_bone_global_pose(hand_bone)
+	hand_node.position = skeleton.get_bone_global_pose(hand_bone).origin
 
 	var input_vec := (
 		Vector2(
