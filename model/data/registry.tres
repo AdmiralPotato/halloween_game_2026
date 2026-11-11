@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="Registry" format=3 uid="uid://28e2xqv5pbmq"]
 
 [ext_resource type="Script" uid="uid://cg3yvhquhplvs" path="res://model/furni_info.gd" id="1_kuuvu"]
+[ext_resource type="Resource" uid="uid://bnfea53gs6um8" path="res://model/data/furni/storage.tres" id="2_rxh2n"]
 [ext_resource type="Resource" uid="uid://s4s43334u7rq" path="res://model/data/furni/countertop.tres" id="2_vnfv4"]
 [ext_resource type="Resource" uid="uid://c6pa6pnpox8vy" path="res://model/data/furni/cuttingboard.tres" id="3_rxh2n"]
 [ext_resource type="Resource" uid="uid://dsln4ddl6vb7y" path="res://model/data/furni/fridge.tres" id="4_0d7tc"]
@@ -151,6 +152,7 @@ furnis = Dictionary[String, ExtResource("1_kuuvu")]({
 "fridge": ExtResource("4_0d7tc"),
 "mixer": ExtResource("5_e0qyp"),
 "oven": ExtResource("6_2nns4"),
+"storage": ExtResource("2_rxh2n"),
 "trash": ExtResource("7_u5pjp")
 })
 maps = Dictionary[String, String]({

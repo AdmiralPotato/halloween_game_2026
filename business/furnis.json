@@ -1,4 +1,8 @@
 {
+	"storage": {
+		"path": "res://map/FurniStorage.tscn",
+		"cost": 100
+	},
 	"countertop": {
 		"path": "res://map/FurniCountertop.tscn",
 		"cost": 250
