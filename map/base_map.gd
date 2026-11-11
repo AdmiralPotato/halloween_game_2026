@@ -67,9 +67,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if $Shop.visible and event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
 		hide_shop()
-	if event.is_action_pressed("toggle_touch_ui"):
-		Global.show_touch_ui = !Global.show_touch_ui
-		$TouchControls/TouchUI.visible = Global.show_touch_ui
+
 
 func build_storefront():
 	for x in range(number_of_tiles.x):
@@ -187,7 +185,7 @@ func _on_shop_purchase_item(item: ItemInfo) -> void:
 
 
 func show_shop ():
-	$TouchControls.visible = false
+	$TouchUI.visible = false
 	$Shop.visible = true
 	$TestPlayer.input_enabled = false
 	var first_shop_item = $Shop/Categories/Items.get_child(0)
@@ -195,7 +193,6 @@ func show_shop ():
 
 
 func hide_shop ():
-	if Global.show_touch_ui:
-		$TouchControls.visible = true
+	$TouchUI.visible = true
 	$Shop.visible = false
 	$TestPlayer.input_enabled = true

@@ -11,6 +11,7 @@ var gold: int = 10_000:
 		gold = new
 		gold_changed.emit()
 var show_touch_ui := true
+var camera_zoom := 0.5
 
 @onready var registry: Registry = load("res://model/data/registry.tres")
 var scene_change_info: Dictionary = {}

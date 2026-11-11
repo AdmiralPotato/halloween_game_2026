@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://oja3kl3rps06" path="res://ui/main_menu.tscn" id="11_n4k6e"]
 [ext_resource type="PackedScene" uid="uid://v5tdiarwxe74" path="res://map/TestPlayer.tscn" id="11_scweb"]
 [ext_resource type="MeshLibrary" uid="uid://dki7gkkp1gpw8" path="res://assets/kitchen_mesh_library.meshlib" id="12_qr8jf"]
-[ext_resource type="PackedScene" uid="uid://bueb4ahfl1jdl" path="res://ui/TouchFaceButton.tscn" id="13_2jyax"]
 [ext_resource type="PackedScene" uid="uid://03n546k1srnw" path="res://ui/debug_panel.tscn" id="13_7yr34"]
 [ext_resource type="Script" uid="uid://sxpgsgxykexm" path="res://map/gold_overlay.gd" id="14_qyemh"]
 [ext_resource type="Texture2D" uid="uid://tdosspgn5nwg" path="res://assets/candy.png" id="15_qaalu"]
@@ -38,8 +37,6 @@ sky_material = SubResource("PhysicalSkyMaterial_xtlfy")
 background_mode = 1
 background_color = Color(0.11727656, 0.011531538, 0.21022078, 1)
 sky = SubResource("Sky_eai58")
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2jyax"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b0i7x"]
 content_margin_left = 8.0
@@ -120,32 +117,18 @@ metadata/_edit_group_ = true
 
 [node name="DebugPanel" parent="." unique_id=249136689 instance=ExtResource("13_7yr34")]
 
-[node name="TouchControls" type="PanelContainer" parent="." unique_id=375294608]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_2jyax")
-
-[node name="TouchUI" parent="TouchControls" unique_id=1653148583 instance=ExtResource("6_6wia2")]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="TouchControls" unique_id=1865578377]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-offset_transform_enabled = true
-offset_transform_position = Vector2(-16, 16)
-
-[node name="Options" parent="TouchControls/Control" unique_id=1193517147 instance=ExtResource("13_2jyax")]
-action = "toggle_touch_ui"
-labelText = "👆"
-
 [node name="SpawnCustomer" type="Timer" parent="." unique_id=982563971]
 wait_time = 2.0
 one_shot = true
+
+[node name="TouchUI" parent="." unique_id=1653148583 instance=ExtResource("6_6wia2")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 640.0
+offset_bottom = 640.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Shop" parent="." unique_id=1972639199 instance=ExtResource("17_ot4t6")]
 visible = false

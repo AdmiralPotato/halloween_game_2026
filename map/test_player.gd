@@ -15,7 +15,6 @@ signal held_object_changed
 @export var movement_speed := 8
 ## How fast the camera can move in and out
 @export var camera_speed := 0.025
-@export var camera_zoom := 0.5
 ## How fast the birb wants to turn in RADIANS per second
 @export var turn_speed := TAU
 
@@ -85,7 +84,7 @@ func _physics_process(delta):
 		indicator.light_color = indicator_color
 
 	if Input.is_action_just_pressed("camera_reset"):
-		camera_zoom = 0.5
+		Global.camera_zoom = 0.5
 
 	var pointing: Vector2i = \
 			Global.tilemap.find_tile(position, basis.z, PICK_RANGE)
@@ -116,7 +115,7 @@ func _physics_process(delta):
 	if not cursor_shown:
 		cursor.visible = false
 		cursor_last_item = null
-	
+
 	hand_node.position = skeleton.get_bone_global_pose(hand_bone).origin
 
 	var input_vec := (
@@ -135,8 +134,9 @@ func _physics_process(delta):
 		clamp(desired_z_motion - self.linear_velocity.z, -1.0, 1.0),
 	) * movement_force
 	var camera_input := Input.get_axis("camera_in", "camera_out")
-	camera_zoom = clamp(camera_zoom + (camera_input * camera_speed), 0, 1)
-	camera.position = lerp(CAMERA_MIN, CAMERA_MAX, camera_zoom)
+	if camera_input != 0:
+		Global.camera_zoom = clamp(Global.camera_zoom + (camera_input * camera_speed), 0, 1)
+	camera.position = lerp(CAMERA_MIN, CAMERA_MAX, Global.camera_zoom)
 	$AnimationTree.set(&"parameters/Carry/blend_position", input_vec.length())
 	$AnimationTree.set(&"parameters/NoCarry/blend_position", input_vec.length())
 	if Vector2(desired_x_motion, desired_z_motion).length() > 0.1:
