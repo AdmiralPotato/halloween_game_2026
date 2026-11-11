@@ -122,13 +122,6 @@ wait_time = 2.0
 one_shot = true
 
 [node name="TouchUI" parent="." unique_id=1653148583 instance=ExtResource("6_6wia2")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 640.0
-offset_bottom = 640.0
-grow_horizontal = 1
-grow_vertical = 1
 
 [node name="Shop" parent="." unique_id=1972639199 instance=ExtResource("17_ot4t6")]
 visible = false
