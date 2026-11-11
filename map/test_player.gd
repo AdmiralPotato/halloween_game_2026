@@ -27,11 +27,11 @@ var indicator_color: Color:
 		return Color("ddcc31") if in_rearrange_mode else Color("1fff52")
 var cursor_last_item: ItemNode = null
 
-@onready var carry_node = $RightHand/Carry
-@onready var right_hand_node = $RightHand
-@onready var mesh_node = $mage
-@onready var skeleton = $mage/mage_bones/Skeleton3D
-@onready var item_bone = skeleton.find_bone("handItem_R")
+@onready var carry_node := $Hand/Carry
+@onready var hand_node := $Hand
+@onready var skeleton := $mage/mage_bones/Skeleton3D
+@onready var hand_bone: int = skeleton.find_bone("handItem_R")
+@onready var mesh_node := $mage
 @onready var indicator: SpotLight3D = $InteractIndicator
 @onready var cursor: PlayerCursor = $PlayerCursor
 @onready var camera: Camera3D = $Dolly/Camera3D
@@ -45,7 +45,7 @@ var held_object: BaseMapNode:
 			carry_node.remove_child(carry_node.get_child(0))
 		if v:
 			if v.is_inside_tree():
-				v.reparent(carry_node, false)
+				v.reparent(carry_node)
 			else:
 				carry_node.add_child(v)
 		held_object_changed.emit()
@@ -116,8 +116,8 @@ func _physics_process(delta):
 	if not cursor_shown:
 		cursor.visible = false
 		cursor_last_item = null
-
-	right_hand_node.transform = skeleton.get_bone_global_pose(item_bone)
+	
+	hand_node.transform = skeleton.get_bone_global_pose(hand_bone)
 
 	var input_vec := (
 		Vector2(
@@ -137,10 +137,8 @@ func _physics_process(delta):
 	var camera_input := Input.get_axis("camera_in", "camera_out")
 	camera_zoom = clamp(camera_zoom + (camera_input * camera_speed), 0, 1)
 	camera.position = lerp(CAMERA_MIN, CAMERA_MAX, camera_zoom)
-	$AnimationTree.set(
-		"parameters/BlendSpace2D/blend_position",
-		Vector2(input_vec.length(), (1 if held_object else 0))
-	)
+	$AnimationTree.set(&"parameters/Carry/blend_position", input_vec.length())
+	$AnimationTree.set(&"parameters/NoCarry/blend_position", input_vec.length())
 	if Vector2(desired_x_motion, desired_z_motion).length() > 0.1:
 		var desired_facing = atan2(desired_x_motion, desired_z_motion)
 		var facing_delta = angle_difference(rotation.y, desired_facing)

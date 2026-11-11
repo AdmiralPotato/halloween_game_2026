@@ -60,5 +60,5 @@ func animate_to_current_transform():
 	tween = create_tween().set_trans(Tween.TRANS_SINE)
 	var new_transform = transform
 	global_transform = last_global_transform  # updates .transform
-	tween.tween_property(self, "transform", new_transform, TWEEN_TIME)
+	tween.tween_property(self, ^"transform", new_transform, TWEEN_TIME)
 	tween.tween_callback(finished_animating.emit)

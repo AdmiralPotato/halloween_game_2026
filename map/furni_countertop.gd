@@ -44,7 +44,7 @@ func set_item(it: ItemNode):
 		$Item.remove_child($Item.get_child(0))
 	if it:
 		if it.is_inside_tree():
-			it.reparent($Item, false)
+			it.reparent($Item)
 		else:
 			$Item.add_child(it)
 		it.transform = Transform3D()

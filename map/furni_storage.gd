@@ -36,12 +36,9 @@ func accept_item(item: ItemNode) -> ItemNode:
 		return item
 	# grab this into our part of the tree for a sec, because it will be removed from elsewhere
 	item.reparent(self)
-	@warning_ignore("shadowed_variable_base_class")
-	var tween := item.create_tween().set_trans(Tween.TRANS_SINE)
-	print('tween from ', item.transform, ' to ', $ItemNode.transform)
-	tween.tween_property(item, ^"transform", $ItemNode.transform, BaseMapNode.TWEEN_TIME)
-	tween.tween_callback(func(): stack.count += item.stack.count)
-	tween.tween_callback(item.queue_free)
+	item.transform = $ItemNode.transform
+	# will be animated by .animate_to_current_transform() by test_player.gd
+	item.finished_animating.connect(func(): stack.count += item.stack.count, CONNECT_ONE_SHOT)
 	return null
 
 
