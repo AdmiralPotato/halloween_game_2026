@@ -116,6 +116,8 @@ offset_transform_enabled = true
 
 [node name="VSlider" type="VSlider" parent="ToggleParent/MarginContainerCamera" unique_id=1918232085]
 layout_mode = 2
+max_value = 1.0
+step = 0.001
 
 [node name="Control" type="Control" parent="." unique_id=1763121740]
 custom_minimum_size = Vector2(64, 64)

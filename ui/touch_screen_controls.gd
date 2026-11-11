@@ -2,7 +2,8 @@ extends Control
 
 func _process(delta: float) -> void:
 	$ToggleParent.visible = Global.show_touch_ui
-	$ToggleParent/MarginContainerCamera/VSlider.value = Global.camera_zoom * 100
+	$ToggleParent/MarginContainerCamera/VSlider.value = 1 - Global.camera_zoom
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_touch_ui"):
@@ -11,4 +12,4 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_v_slider_value_changed(value: float) -> void:
-	Global.camera_zoom = value / 100
+	Global.camera_zoom = 1 - value
