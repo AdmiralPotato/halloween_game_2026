@@ -152,7 +152,7 @@ static func draw_layer_into_texture(
 
 static func render_simple_item_texture_by_name(recipe_name: String) -> Texture2D:
 	if not recipe_name in ItemNode.recipe_render_data:
-		print('render_simple_item_texture_by_name: MISSING RENDER DATA FOR: ', recipe_name)
+		push_warning('render_simple_item_texture_by_name: MISSING RENDER DATA FOR: ', recipe_name)
 		return make_unimplemented_texture()
 	var recipe: Dictionary = ItemNode.recipe_render_data[recipe_name]
 	if recipe.keys().size() == 1 and recipe.has('base'):
@@ -161,9 +161,9 @@ static func render_simple_item_texture_by_name(recipe_name: String) -> Texture2D
 
 
 static func render_recipe (recipe_name: String, _modifiers: Array[ItemStack] = [], _finishers: Array[ItemStack] = []) -> Texture2D:
-	print('render_recipe: recipe_name: ', recipe_name)
+	#print('render_recipe: recipe_name: ', recipe_name)
 	if not recipe_name in ItemNode.recipe_render_data:
-		print('render_recipe: NO RENDER DATA FOR RECIPE: ', recipe_name)
+		push_warning('render_recipe: NO RENDER DATA FOR RECIPE: ', recipe_name)
 		return make_unimplemented_texture()
 	var recipe: Dictionary = ItemNode.recipe_render_data[recipe_name]
 	if recipe.keys().size() == 1 and recipe.has('base'):
@@ -182,7 +182,7 @@ static func render_recipe (recipe_name: String, _modifiers: Array[ItemStack] = [
 		'cookie': return render_recipe_cookie(recipe, _modifiers, _finishers)
 		'cookie_frosting': return render_recipe_cake_piping(recipe, _modifiers)
 		_:
-			print('render_recipe: render not implemented yet: ', recipe_name)
+			push_warning('render_recipe: render not implemented yet: ', recipe_name)
 			return make_unimplemented_texture()
 
 
@@ -194,7 +194,7 @@ static func render_recipe_layer (
 	var type: String = _layer.type;
 	var texture_string_key = str(_layer) + str(_modifiers)
 	if texture_string_key in cached_texture_by_recipe_string:
-		print('render_recipe_layer read cache: ', texture_string_key)
+		#print('render_recipe_layer read cache: ', texture_string_key)
 		draw_layer_into_texture(
 			_texture,
 			cached_texture_by_recipe_string[texture_string_key]
@@ -207,9 +207,9 @@ static func render_recipe_layer (
 		'multi': result = render_recipe_layer_multi(_layer, result)
 		'ref': result = render_recipe_layer_ref(_layer, result, _modifiers)
 		_:
-			print('render_recipe_layer: Unsupported type: ', type)
+			push_warning('render_recipe_layer: Unsupported type: ', type)
 			result = make_unimplemented_texture()
-	print('render_recipe_layer write cache: ', texture_string_key)
+	#print('render_recipe_layer write cache: ', texture_string_key)
 	cached_texture_by_recipe_string[texture_string_key] = result
 	draw_layer_into_texture(
 		_texture,
@@ -291,9 +291,9 @@ static func render_recipe_layer_ref (
 	_modifiers: Array[ItemStack] = [],
 ) -> Texture2D:
 	if not _layer.value in ItemNode.recipe_render_data:
-		print('render_recipe_layer_ref: Invalid recipe:', _layer.value)
+		push_warning('render_recipe_layer_ref: Invalid recipe:', _layer.value)
 		return make_unimplemented_texture()
-	print('render_recipe_layer_ref: _modifiers:', _modifiers)
+	#print('render_recipe_layer_ref: _modifiers:', _modifiers)
 	draw_layer_into_texture(
 		_texture,
 		render_recipe(_layer.value, _modifiers),
@@ -313,7 +313,7 @@ static func render_recipe_stack_modifiers (
 		#print('render_recipe_stack_modifiers: modifier: ', modifier_name)
 		if modifier_name in _recipe_layer_dict:
 			var modifier_layer: Dictionary = _recipe_layer_dict[modifier_name]
-			print('render_recipe_stack_modifiers: modifier: ', modifier_name, ': ', modifier_layer, modifier)
+			#print('render_recipe_stack_modifiers: modifier: ', modifier_name, ': ', modifier_layer, modifier)
 			var loops = (modifier.count if modifier.count > 1 else 1)
 			var modifier_layer_texture = render_recipe_layer(modifier_layer, make_empty_texture(), modifier.modifiers)
 			for i in loops:
@@ -329,7 +329,7 @@ static func render_recipe_stack_modifiers (
 
 
 static func render_recipe_frosting(_recipe: Dictionary, _modifiers: Array[ItemStack]) -> Texture2D:
-	print('render_recipe_frosting: ', _modifiers)
+	#print('render_recipe_frosting: ', _modifiers)
 	var texture = (
 		render_recipe_layer(_recipe.plain.root)
 		if _modifiers.size() == 0 else
@@ -366,7 +366,7 @@ static func render_recipe_frosting(_recipe: Dictionary, _modifiers: Array[ItemSt
 
 
 static func render_recipe_cookie_dough(_recipe: Dictionary, _modifiers: Array[ItemStack]) -> Texture2D:
-	print('render_recipe_cookie_dough: ', _modifiers)
+	#print('render_recipe_cookie_dough: ', _modifiers)
 	var texture = render_recipe_layer(_recipe.base.root)
 	render_recipe_stack_modifiers(_modifiers, _recipe.flavoring_modifiers, texture)
 	render_recipe_stack_modifiers(_modifiers, _recipe.other_modifiers, texture)
@@ -375,7 +375,7 @@ static func render_recipe_cookie_dough(_recipe: Dictionary, _modifiers: Array[It
 
 
 static func render_recipe_cookie(_recipe: Dictionary, _modifiers: Array[ItemStack], _finishers: Array[ItemStack]) -> Texture2D:
-	print('render_recipe_cookie: ', _modifiers)
+	#print('render_recipe_cookie: ', _modifiers)
 	var texture = render_recipe_layer(_recipe.base.root)
 	render_recipe_stack_modifiers(_modifiers, _recipe.flavoring_modifiers, texture)
 	render_recipe_stack_modifiers(_modifiers, _recipe.other_modifiers, texture)
@@ -385,7 +385,7 @@ static func render_recipe_cookie(_recipe: Dictionary, _modifiers: Array[ItemStac
 
 
 static func render_recipe_cake(_recipe: Dictionary, _modifiers: Array[ItemStack], _finishers: Array[ItemStack]) -> Texture2D:
-	print('render_recipe_cake: ', _modifiers)
+	#print('render_recipe_cake: ', _modifiers)
 	var texture = render_recipe_layer(_recipe.base.root)
 	render_recipe_stack_modifiers(_modifiers, _recipe.flavoring_modifiers, texture)
 	render_recipe_stack_modifiers(_modifiers, _recipe.other_modifiers, texture)
@@ -406,7 +406,7 @@ static func render_recipe_cake(_recipe: Dictionary, _modifiers: Array[ItemStack]
 
 
 static func render_recipe_cake_piping(_recipe: Dictionary, _modifiers: Array[ItemStack]) -> Texture2D:
-	print('render_recipe_cake_piping: ', _modifiers)
+	#print('render_recipe_cake_piping: ', _modifiers)
 	var texture = render_recipe_layer(_recipe.base.root)
 	render_recipe_stack_modifiers(_modifiers, _recipe.flavoring_modifiers, texture)
 	return texture
