@@ -1816,28 +1816,28 @@
 				"type": "sprite",
 				"mode": "mix",
 				"file": "TILES-cupcake-baked.png",
-				"x": 3,
+				"x": 10,
 				"y": 1
 			},
 			"white_sprinkles": {
 				"type": "sprite",
 				"mode": "mix",
 				"file": "TILES-cupcake-baked.png",
-				"x": 4,
+				"x": 11,
 				"y": 1
 			},
 			"ball_bearing_sprinkles": {
 				"type": "sprite",
 				"mode": "mix",
 				"file": "TILES-cupcake-baked.png",
-				"x": 5,
+				"x": 12,
 				"y": 1
 			},
 			"rainbow_sprinkles": {
 				"type": "sprite",
 				"mode": "mix",
 				"file": "TILES-cupcake-baked.png",
-				"x": 6,
+				"x": 13,
 				"y": 1
 			}
 		},

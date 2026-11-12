@@ -113,5 +113,20 @@
 		"human_name": "hard candy ghosts",
 		"parent": "hard_candy_shapes",
 		"variantName": "ghost"
+	},
+	"chocolate_chips": {
+		"human_name": "chocolate chips",
+		"parent": "chocolate_chips",
+		"variantName": "chocolate"
+	},
+	"white_chocolate_chips": {
+		"human_name": "white chocolate chips",
+		"parent": "chocolate_chips",
+		"variantName": "white"
+	},
+	"dark_chocolate_chips": {
+		"human_name": "dark chocolate chips",
+		"parent": "chocolate_chips",
+		"variantName": "dark"
 	}
 }

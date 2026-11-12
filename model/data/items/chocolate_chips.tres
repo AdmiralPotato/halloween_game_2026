@@ -10,5 +10,5 @@ storage_type = 4
 categories = Array[int]([1, 5])
 cost_tier = 3
 max_stack_size = 9
-groups = PackedStringArray()
+groups = PackedStringArray("chocolate_chips")
 sort = 380

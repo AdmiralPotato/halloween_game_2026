@@ -259,10 +259,10 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 			chocolate_chips:       { type: 'sprite', mode: 'mix', file: fileNames.cupcake, x: 7, y: 1 },
 			white_chocolate_chips: { type: 'sprite', mode: 'mix', file: fileNames.cupcake, x: 8, y: 1 },
 			dark_chocolate_chips:  { type: 'sprite', mode: 'mix', file: fileNames.cupcake, x: 9, y: 1 },
-			chocolate_sprinkles:   { type: 'sprite', mode: 'mix', file: fileNames.cupcake, x: 3, y: 1 },
-			white_sprinkles:       { type: 'sprite', mode: 'mix', file: fileNames.cupcake, x: 4, y: 1 },
-			ball_bearing_sprinkles:{ type: 'sprite', mode: 'mix', file: fileNames.cupcake, x: 5, y: 1 },
-			rainbow_sprinkles:     { type: 'sprite', mode: 'mix', file: fileNames.cupcake, x: 6, y: 1 },
+			chocolate_sprinkles:   { type: 'sprite', mode: 'mix', file: fileNames.cupcake, x: 10, y: 1 },
+			white_sprinkles:       { type: 'sprite', mode: 'mix', file: fileNames.cupcake, x: 11, y: 1 },
+			ball_bearing_sprinkles:{ type: 'sprite', mode: 'mix', file: fileNames.cupcake, x: 12, y: 1 },
+			rainbow_sprinkles:     { type: 'sprite', mode: 'mix', file: fileNames.cupcake, x: 13, y: 1 },
 		},
 		// If there are decorations, draw them now:
 		decorations: {
