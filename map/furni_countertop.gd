@@ -12,6 +12,8 @@ var item: ItemNode:
 	get = get_item,
 	set = set_item
 
+@onready var item_mount: Marker3D = %Item;
+
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings := PackedStringArray()
 	if initial_stack and not initial_stack.item.resource_path.begins_with("res://model/data/"):
@@ -37,18 +39,23 @@ func set_save_state(save: Dictionary) -> void:
 func get_item() -> ItemNode:
 	# Ignore non-ItemNode children--sometimes other nodes are placed here as, e.g.
 	# effects (see FurniTrash).
-	if $Item.get_child_count() > 0 and $Item.get_child(0) is ItemNode:
-		return $Item.get_child(0)
+	if !item_mount:
+		return null
+	if item_mount.get_child_count() > 0 and item_mount.get_child(0) is ItemNode:
+		return item_mount.get_child(0)
 	return null
 
 func set_item(it: ItemNode):
-	while $Item.get_child_count() > 0:
-		$Item.remove_child($Item.get_child(0))
+	if !item_mount:
+		ready.connect(set_item.bind(it), CONNECT_DEFERRED | CONNECT_ONE_SHOT)
+		return
+	while item_mount.get_child_count() > 0:
+		item_mount.remove_child(item_mount.get_child(0))
 	if it:
 		if it.is_inside_tree():
-			it.reparent($Item)
+			it.reparent(item_mount)
 		else:
-			$Item.add_child(it)
+			item_mount.add_child(it)
 		it.transform = Transform3D()
 
 

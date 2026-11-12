@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://c46ii0s7tk2kg"]
+
+[ext_resource type="Script" uid="uid://w4twrfa6yo67" path="res://map/furni_station.gd" id="1_2e2dr"]
+[ext_resource type="PackedScene" uid="uid://dx5wsi6fcbt5g" path="res://assets/furni_piping_station_0.glb" id="2_2e2dr"]
+[ext_resource type="PackedScene" uid="uid://c8eyf6e45y65d" path="res://ui/status_indicator.tscn" id="3_kl4nk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p33bg"]
+size = Vector3(1, 0.8, 1)
+
+[node name="FurniPiping" type="Node3D" unique_id=1615491916 node_paths=PackedStringArray("anim_node")]
+script = ExtResource("1_2e2dr")
+location = 4
+anim_node = NodePath("StaticBody3D/CollisionShape3D/frostingStation/AnimationPlayer")
+anim_idle = "furni_frosting_station_idle"
+anim_work = "furni_frosting_station_activate"
+current_scene = "uid://dfjdkdlvlfocq"
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1407366706]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1113763637]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+shape = SubResource("BoxShape3D_p33bg")
+
+[node name="frostingStation" parent="StaticBody3D/CollisionShape3D" unique_id=1049216770 instance=ExtResource("2_2e2dr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="StaticBody3D/CollisionShape3D/frostingStation/frosting_station_bones/Skeleton3D" parent_id_path=PackedInt32Array(1049216770, 686777509) index="0" unique_id=629540517]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.8, 0.3)
+bone_name = "item"
+bone_idx = 3
+
+[node name="Item" type="Marker3D" parent="StaticBody3D/CollisionShape3D/frostingStation/frosting_station_bones/Skeleton3D/BoneAttachment3D" unique_id=1313142800]
+unique_name_in_owner = true
+
+[node name="frosting_station_bag" parent="StaticBody3D/CollisionShape3D/frostingStation/frosting_station_bones/Skeleton3D" parent_id_path=PackedInt32Array(1049216770, 686777509) index="1" unique_id=204292045]
+blend_shapes/krinkly = 1.0
+
+[node name="StatusIndicator" parent="." unique_id=1939945637 instance=ExtResource("3_kl4nk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5000001, 0)
+
+[node name="RecipeTimer" type="Timer" parent="." unique_id=211141727]
+one_shot = true
+
+[editable path="StaticBody3D/CollisionShape3D/frostingStation"]

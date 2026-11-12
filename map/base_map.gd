@@ -7,6 +7,7 @@ const FURNI_CUTTINGBOARD := preload("res://map/FurniCuttingboard.tscn")
 const FURNI_FRIDGE := preload("res://map/FurniFridge.tscn")
 const FURNI_MIXER := preload("res://map/FurniMixer.tscn")
 const FURNI_OVEN := preload("res://map/FurniOven.tscn")
+const FURNI_PIPING := preload("res://map/FurniPiping.tscn")
 const FURNI_SOURCE := preload("res://map/FurniSource.tscn")
 const FURNI_STORAGE := preload("res://map/FurniStorage.tscn")
 
@@ -19,6 +20,7 @@ const FURNI_LIST := [
 	FURNI_FRIDGE,
 	FURNI_MIXER,
 	FURNI_OVEN,
+	FURNI_PIPING,
 	FURNI_STORAGE,
 ]
 

@@ -83,7 +83,7 @@
     "output": "piping_bag",
     "human_name": "piping bag",
     "quantity": 1,
-    "location": "CUTTING_BOARD",
+    "location": "PIPING_STATION",
     "pan": "NONE",
     "time": 0,
     "ingredients": [

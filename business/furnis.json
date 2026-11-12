@@ -23,6 +23,10 @@
 		"path": "res://map/FurniOven.tscn",
 		"cost": 500
 	},
+	"piping": {
+		"path": "res://map/FurniPiping.tscn",
+		"cost": 500
+	},
 	"trash": {
 		"path": "res://map/FurniTrash.tscn",
 		"cost": 500
