@@ -90,9 +90,12 @@ func interact(player: Node):
 			and item.stack.item.is_category(ItemInfo.Category.CONTAINER) \
 			and not item.stack.contents.is_empty()
 	):
-		player.held_object = ItemNode.make_node(
+		var node := ItemNode.make_node(
 			item.stack.contents[-1]
 		)
+		player.held_object = node
+		node.last_global_transform = item.global_transform
+		node.animate_to_current_transform()
 		item.stack.contents.remove_at(-1)
 		item.stack.emit_changed()
 	elif (
@@ -118,9 +121,12 @@ func interact(player: Node):
 			player.held_object.stack.count += 1
 			player.held_object.stack.emit_changed()
 		else:
-			player.held_object = ItemNode.make_node(
+			var node := ItemNode.make_node(
 					stacks[1]
 			)
+			player.held_object = node
+			node.last_global_transform = item.global_transform
+			node.animate_to_current_transform()
 		item.stack = stacks[0]
 		item.stack.emit_changed()
 	elif (
@@ -130,4 +136,10 @@ func interact(player: Node):
 	):
 		var attempt_to_apply = item.stack.accept(player.held_object.stack)
 		if attempt_to_apply.success:
-			player.held_object = null
+			var node: ItemNode = player.held_object
+			node.reparent(self)  # which removes it from held_object
+			node.store_global_transform()
+			node.global_transform = item.global_transform
+			node.animate_to_current_transform()
+			node.finished_animating.connect(node.queue_free)
+			
