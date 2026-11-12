@@ -11,6 +11,15 @@ var locked := false
 func can_take() -> bool:
 	return not locked
 
+
+## Called instead of swapping with another furni.
+##
+## If this returns a Dictionary with {returned_node: FurniNode}, the swap itself is aborted.
+## In theory, you can then do whatever you'd like with the given furni, which is probably in a
+## player hand.
+func swap(other: FurniNode) -> Dictionary:
+	return {}
+
 ## Called when you have been placed on a tile. Also called when you enter the
 ## scene, if you *are* in place on a Tilemap.
 func unpack():

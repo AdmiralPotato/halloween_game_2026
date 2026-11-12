@@ -35,7 +35,9 @@ func set_save_state(save: Dictionary) -> void:
 		item = null
 
 func get_item() -> ItemNode:
-	if $Item.get_child_count() > 0:
+	# Ignore non-ItemNode children--sometimes other nodes are placed here as, e.g.
+	# effects (see FurniTrash).
+	if $Item.get_child_count() > 0 and $Item.get_child(0) is ItemNode:
 		return $Item.get_child(0)
 	return null
 

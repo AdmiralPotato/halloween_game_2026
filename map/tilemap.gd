@@ -140,6 +140,10 @@ func swap_furni(xy: Vector2i, new_node: FurniNode, facing := Vector3.BACK) -> Fu
 	if old_node and not old_node.can_take():
 		return new_node
 	if old_node:
+		if new_node:
+			var result: Dictionary = old_node.swap(new_node)
+			if result.has("returned_node"):
+				return result.returned_node
 		old_node.store_global_transform()
 		old_node.name = "FurniPickedUp"
 		remove_child(old_node)
