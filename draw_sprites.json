@@ -719,7 +719,7 @@
 			}
 		}
 	},
-	"cookie_dough_on_pan": {
+	"cookie_dough_on_sheet": {
 		"base": {
 			"root": {
 				"type": "multi",

@@ -24,7 +24,7 @@ const fileNames: Record<string, string> = {
 	cookie: 'TILES-cookie-baked.png',
 	cupcake: 'TILES-cupcake-baked.png',
 	cookie_dough: 'TILES-dough.png',
-	cookie_dough_on_pan: 'TILES-dough.png',
+	cookie_dough_on_sheet: 'TILES-dough-on-sheet.png',
 	frosting: 'TILES-frosting.png',
 	other: 'TILES-other.png',
 };
@@ -47,9 +47,9 @@ const comboSpriteInfo: Record<string, ComboSpriteInfo> = {
 		light: { file: fileNames.cookie_dough, x: 0, y: 0 },
 		dark: { file: fileNames.cookie_dough, x: 1, y: 0 },
 	},
-	cookie_dough_on_pan: {
-		light: { file: fileNames.cookie_dough_on_pan, x: 0, y: 0 },
-		dark: { file: fileNames.cookie_dough_on_pan, x: 1, y: 0 },
+	cookie_dough_on_sheet: {
+		light: { file: fileNames.cookie_dough_on_sheet, x: 0, y: 0 },
+		dark: { file: fileNames.cookie_dough_on_sheet, x: 1, y: 0 },
 	},
 	cookie_base: {
 		light: { file: fileNames.cookie, x: 0, y: 0 },
@@ -205,24 +205,24 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 			bowl: { type: 'sprite', mode: 'mix', file: fileNames.cookie_dough, x: 2, y: 0 }
 		}
 	},
-	cookie_dough_on_pan: {
+	cookie_dough_on_sheet: {
 		// Always draw:
 		base: {
-			root: quickComboTile(comboSpriteInfo.cookie_dough_on_pan, 'mix', '#e2c49c', '#ad774b'),
+			root: quickComboTile(comboSpriteInfo.cookie_dough_on_sheet, 'mix', '#e2c49c', '#ad774b'),
 		},
 		// Draw once per count in modifiers:
 		flavoring_modifiers: {
-			...makeFlavorings(comboSpriteInfo.cookie_dough_on_pan),
+			...makeFlavorings(comboSpriteInfo.cookie_dough_on_sheet),
 		},
 		// Draw once if any quantity is present in modifiers:
 		other_modifiers: {
-			chocolate_chips:       { type: 'sprite', mode: 'mix', file: fileNames.cookie_dough_on_pan, x: 0, y: 1 },
-			white_chocolate_chips: { type: 'sprite', mode: 'mix', file: fileNames.cookie_dough_on_pan, x: 1, y: 1 },
-			dark_chocolate_chips:  { type: 'sprite', mode: 'mix', file: fileNames.cookie_dough_on_pan, x: 2, y: 1 },
+			chocolate_chips:       { type: 'sprite', mode: 'mix', file: fileNames.cookie_dough_on_sheet, x: 0, y: 1 },
+			white_chocolate_chips: { type: 'sprite', mode: 'mix', file: fileNames.cookie_dough_on_sheet, x: 1, y: 1 },
+			dark_chocolate_chips:  { type: 'sprite', mode: 'mix', file: fileNames.cookie_dough_on_sheet, x: 2, y: 1 },
 		},
 		// Always draw:
 		other: {
-			bowl: { type: 'sprite', mode: 'mix', file: fileNames.cookie_dough_on_pan, x: 2, y: 0 }
+			bowl: { type: 'sprite', mode: 'mix', file: fileNames.cookie_dough_on_sheet, x: 2, y: 0 }
 		}
 	},
 	cookie: {
@@ -634,6 +634,7 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 	ube_flavoring: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 10, y: 3 }}},
 	grape_flavoring: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 11, y: 3 }}},
 	bowl: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 6, y: 2 }}},
+	cookie_sheet: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 7, y: 2 }}},
 };
 
 console.log(data);
