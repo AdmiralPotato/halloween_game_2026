@@ -518,5 +518,32 @@
 		"buy_price": 1,
 		"max_stack_size": 1,
 		"attributes": {}
+	},
+	"cookie_sheet": {
+		"human_name": "cookie sheet",
+		"sort": 1000,
+		"storage_type": "CRATE",
+		"categories": ["CONTAINER"],
+		"buy_price": 1,
+		"max_stack_size": 1,
+		"attributes": {}
+	},
+	"cake_pan": {
+		"human_name": "cake pan",
+		"sort": 1001,
+		"storage_type": "CRATE",
+		"categories": ["CONTAINER"],
+		"buy_price": 1,
+		"max_stack_size": 1,
+		"attributes": {}
+	},
+	"cupcake_pan": {
+		"human_name": "cupcake pan",
+		"sort": 1002,
+		"storage_type": "CRATE",
+		"categories": ["CONTAINER"],
+		"buy_price": 1,
+		"max_stack_size": 1,
+		"attributes": {}
 	}
 }

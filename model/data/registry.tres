@@ -56,8 +56,11 @@
 [ext_resource type="Resource" uid="uid://by7lx0wufl7ui" path="res://model/data/items/cake.tres" id="54_muy2m"]
 [ext_resource type="Resource" uid="uid://cbhkv0c47w56h" path="res://model/data/items/cake_slice.tres" id="55_567p8"]
 [ext_resource type="Resource" uid="uid://b34kf80gy2er3" path="res://model/data/items/bowl.tres" id="56_bjaiv"]
+[ext_resource type="Resource" uid="uid://cxch5ae70y1dy" path="res://model/data/items/cake_pan.tres" id="57_0d7tc"]
 [ext_resource type="Script" uid="uid://b5mlkyd7jcal7" path="res://model/recipe.gd" id="57_2bd78"]
+[ext_resource type="Resource" uid="uid://clw8q5do17j51" path="res://model/data/items/cookie_sheet.tres" id="57_e0qyp"]
 [ext_resource type="Resource" uid="uid://b51yuegjqhtrh" path="res://model/data/recipes/chocolate_chips.tres" id="58_4cp2b"]
+[ext_resource type="Resource" uid="uid://j3eno1gvpglb" path="res://model/data/items/cupcake_pan.tres" id="58_e0qyp"]
 [ext_resource type="Resource" uid="uid://clwwyugodw8rg" path="res://model/data/recipes/white_chocolate_chips.tres" id="59_e3biy"]
 [ext_resource type="Resource" uid="uid://be4mh5icaf7kk" path="res://model/data/recipes/dark_chocolate_chips.tres" id="60_n0co0"]
 [ext_resource type="Resource" uid="uid://bvpar5bdtvhrp" path="res://model/data/recipes/frosting.tres" id="61_rkj3d"]
@@ -86,6 +89,7 @@ items = Dictionary[String, ExtResource("9_4rhlj")]({
 "bowl": ExtResource("56_bjaiv"),
 "cake": ExtResource("54_muy2m"),
 "cake_batter": ExtResource("51_u703j"),
+"cake_pan": ExtResource("57_0d7tc"),
 "cake_slice": ExtResource("55_567p8"),
 "candy_corn": ExtResource("41_frbe2"),
 "caramel_flavoring": ExtResource("23_g8ata"),
@@ -96,8 +100,10 @@ items = Dictionary[String, ExtResource("9_4rhlj")]({
 "cocoa_powder": ExtResource("14_mslh1"),
 "cookie": ExtResource("52_li5c6"),
 "cookie_dough": ExtResource("50_17ko2"),
+"cookie_sheet": ExtResource("57_e0qyp"),
 "cream": ExtResource("13_nghac"),
 "cupcake": ExtResource("53_j1vm0"),
+"cupcake_pan": ExtResource("58_e0qyp"),
 "dark_chocolate_bar": ExtResource("17_su2q4"),
 "dark_chocolate_chips": ExtResource("44_adgfe"),
 "egg": ExtResource("12_dq5s3"),

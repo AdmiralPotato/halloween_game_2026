@@ -228,7 +228,7 @@
     "human_name": "cookie",
     "quantity": 12,
     "location": "OVEN",
-    "pan": "COOKIE_SHEET",
+    "pan": "cookie_sheet",
     "time": 2,
     "ingredients": [
       "cookie_dough"
@@ -241,7 +241,7 @@
     "human_name": "cupcake",
     "quantity": 6,
     "location": "OVEN",
-    "pan": "MUFFIN_TIN",
+    "pan": "cupcake_pan",
     "time": 3,
     "ingredients": [
       "cake_batter"
@@ -256,7 +256,7 @@
     "human_name": "cake",
     "quantity": 1,
     "location": "OVEN",
-    "pan": "CAKE_PAN",
+    "pan": "cake_pan",
     "time": 4,
     "ingredients": [
       "cake_batter"

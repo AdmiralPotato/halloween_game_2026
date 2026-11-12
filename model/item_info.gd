@@ -125,6 +125,8 @@ static func from_json(label: String, d: Dictionary, variants: Dictionary = {}) -
 	var variant = variants.get(info.name)
 	if variant:
 		info.groups.append(variant.parent)
+	for group in d.get('groups', []):
+		info.groups.append(group)
 	info.sort = d.get("sort", 0)
 	return info
 

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://j3eno1gvpglb"]
+
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_58utw"]
+
+[resource]
+script = ExtResource("1_58utw")
+name = "cupcake_pan"
+display_name = "cupcake pan"
+storage_type = 3
+categories = Array[int]([6])
+cost_tier = 1
+groups = PackedStringArray()
+sort = 1002

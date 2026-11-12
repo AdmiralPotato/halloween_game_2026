@@ -81,13 +81,19 @@ static func _gcd(a: int, b: int) -> int:
 ## and modifiers/finishers, this algorithm tries all permutations of inputs that
 ## match each slot, making its performance approximately O(r^i) for r recipe slots
 ## and i ingredients. (This is EXPTIME, and this is bad.) Cache results when
-## you can. 
+## you can.
 func matches(inputs: Array[ItemStack], _container: ItemStack = null) -> Dictionary:
 	if not inputs:
 		return {success = false}
 	if inputs.size() == 1 and inputs[0].item.is_category(ItemInfo.Category.CONTAINER):
 		return matches(inputs[0].contents, inputs[0])
-	
+
+	if container and not (
+		_container
+		and _container.item.matches_spec(container)
+	):
+		return {success = false}
+
 	var cardinalities: Dictionary[ItemStack, int] = {}
 	for stack in inputs:
 		var found := false
@@ -98,12 +104,12 @@ func matches(inputs: Array[ItemStack], _container: ItemStack = null) -> Dictiona
 				break
 		if not found:
 			cardinalities[stack] = 1
-	
+
 	var cvs := cardinalities.values()
 	var gcd: int = cvs[0]
 	for i in range(1, len(cvs)):
 		gcd = _gcd(gcd, cvs[i])
-	
+
 	var multiplicity := gcd
 	var dedup_inputs: Array[ItemStack] = []
 	for stk in cardinalities:
