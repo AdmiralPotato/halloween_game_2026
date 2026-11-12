@@ -320,6 +320,9 @@ func split(amount: int) -> Array[ItemStack]:
 	split_stack.combined_attributes = combined_attributes
 	split_stack.modifiers = modifiers
 	split_stack.finishers = finishers
+	split_stack.craft_depth = craft_depth
+	split_stack.unique_modifier_depth = unique_modifier_depth
+	split_stack.total_modifier_depth = total_modifier_depth
 	# We really don't want to duplicate contents if, somehow, we get a stack of
 	# containers with contents, so we have to choose one to recieve those
 	# contents. Arbitrarily, choose new.
