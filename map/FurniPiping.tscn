@@ -24,15 +24,18 @@ shape = SubResource("BoxShape3D_p33bg")
 [node name="frostingStation" parent="StaticBody3D/CollisionShape3D" unique_id=1049216770 instance=ExtResource("2_2e2dr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
 
-[node name="BoneAttachment3D" type="BoneAttachment3D" parent="StaticBody3D/CollisionShape3D/frostingStation/frosting_station_bones/Skeleton3D" parent_id_path=PackedInt32Array(1049216770, 686777509) index="0" unique_id=629540517]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.8, 0.3)
+[node name="Skeleton3D" parent="StaticBody3D/CollisionShape3D/frostingStation/frosting_station_bones" parent_id_path=PackedInt32Array(1049216770, 510317271) index="0" unique_id=897860916]
+bones/4/rotation = Quaternion(-1.1780409e-07, 0.9486833, 1.1780408e-07, -0.31622782)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="StaticBody3D/CollisionShape3D/frostingStation/frosting_station_bones/Skeleton3D" index="0" unique_id=629540517]
+transform = Transform3D(1.0000002, 4.967056e-08, 2.9802322e-08, -4.967049e-08, 1, 9.9341165e-08, -2.9802322e-08, -9.934119e-08, 1.0000002, 0.19999999, 1, 0.30000004)
 bone_name = "item"
-bone_idx = 3
+bone_idx = 5
 
 [node name="Item" type="Marker3D" parent="StaticBody3D/CollisionShape3D/frostingStation/frosting_station_bones/Skeleton3D/BoneAttachment3D" unique_id=1313142800]
 unique_name_in_owner = true
 
-[node name="frosting_station_bag" parent="StaticBody3D/CollisionShape3D/frostingStation/frosting_station_bones/Skeleton3D" parent_id_path=PackedInt32Array(1049216770, 686777509) index="1" unique_id=204292045]
+[node name="frosting_station_bag" parent="StaticBody3D/CollisionShape3D/frostingStation/frosting_station_bones/Skeleton3D" index="1" unique_id=1792186490]
 blend_shapes/krinkly = 1.0
 
 [node name="StatusIndicator" parent="." unique_id=1939945637 instance=ExtResource("3_kl4nk")]
