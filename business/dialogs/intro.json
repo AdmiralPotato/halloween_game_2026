@@ -1,0 +1,49 @@
+[
+	{
+		"message": "Oh, what a lovely day! I sure like having living relatives!",
+		"speaker_label": "DC801's Black Mage",
+		"character_id": "Mage",
+		"character_side": "RIGHT",
+		"character_animation": "JOYOUS"
+	},
+	{
+		"message": "But not for long!!",
+		"speaker_label": "Narrator"
+	},
+	{
+		"message": "A mysterious letter has been delivered via Raven"
+	},
+	{
+		"message": "To Whom It Might Probably Concern, At Least A Little:\n\n[hi, have som news of ur relative that ded under mystrs circlesnences, ther nam waz bread, and and also u've inherited ther bakery, iz no trap, promis]",
+		"speaker_label": "Letter:",
+		"character_side": "LEFT"
+	},
+	{
+		"message": "MY EXPECTATIONS ARE SHATTERED AND MY DAY IS RUINED!!!!",
+		"speaker_label": "Black Mage",
+		"character_id": "Mage",
+		"character_side": "RIGHT",
+		"character_animation": "ANGUISH"
+	},
+	{
+		"message": "...",
+		"speaker_label": "Black Mage",
+		"character_id": "Mage",
+		"character_side": "RIGHT",
+		"character_animation": "QUIZZICAL"
+	},
+	{
+		"message": "Wait I don't remember having a relative named bread.\n\n...\n\nUncle Bread? Aunt Bread? Great Grand Bread?",
+		"speaker_label": "Black Mage",
+		"character_id": "Mage",
+		"character_side": "RIGHT",
+		"character_animation": "THINKING"
+	},
+	{
+		"message": "Well, I'd better go inherit this bakery! ADVENTURE, HO!",
+		"speaker_label": "Black Mage",
+		"character_id": "Mage",
+		"character_side": "RIGHT",
+		"character_animation": "GIDDYUP"
+	}
+]
