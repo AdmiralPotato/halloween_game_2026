@@ -210,15 +210,22 @@ func get_png_data_buffer () -> PackedByteArray:
 
 func _on_export_png_pressed() -> void:
 	if $TestPlayer.held_object is ItemNode:
+		var filename = (
+			($TestPlayer.held_object.stack as ItemStack)
+				._to_string()
+				.replace(' ', '_')
+				.replace(',', '')
+			+ '.png'
+		)
 		if OS.has_feature("web"):
 			JavaScriptBridge.download_buffer(
 					get_png_data_buffer(),
-					"my_baked_good.png"
+					filename
 			)
 		else:
 			%SavePNGDialog.current_path = (
 				OS.get_system_dir(OS.SYSTEM_DIR_DOWNLOADS)
-				+ '/my_baked_good.png'
+				+ '/' + filename
 			)
 			%SavePNGDialog.popup_centered_clamped(Vector2i(640, 640), 0.9)
 
