@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FurniInfo" format=3 uid="uid://dsgy270m58lir"]
+
+[ext_resource type="PackedScene" uid="uid://c46ii0s7tk2kg" path="res://map/FurniPiping.tscn" id="1_eja78"]
+[ext_resource type="Script" uid="uid://cg3yvhquhplvs" path="res://model/furni_info.gd" id="2_xolwm"]
+
+[resource]
+script = ExtResource("2_xolwm")
+name = "piping"
+scene = ExtResource("1_eja78")
+cost = 500

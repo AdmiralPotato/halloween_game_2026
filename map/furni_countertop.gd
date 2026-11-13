@@ -12,6 +12,8 @@ var item: ItemNode:
 	get = get_item,
 	set = set_item
 
+@onready var item_mount: Marker3D = %Item;
+
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings := PackedStringArray()
 	if initial_stack and not initial_stack.item.resource_path.begins_with("res://model/data/"):
@@ -35,18 +37,25 @@ func set_save_state(save: Dictionary) -> void:
 		item = null
 
 func get_item() -> ItemNode:
-	if $Item.get_child_count() > 0:
-		return $Item.get_child(0)
+	# Ignore non-ItemNode children--sometimes other nodes are placed here as, e.g.
+	# effects (see FurniTrash).
+	if !item_mount:
+		return null
+	if item_mount.get_child_count() > 0 and item_mount.get_child(0) is ItemNode:
+		return item_mount.get_child(0)
 	return null
 
 func set_item(it: ItemNode):
-	while $Item.get_child_count() > 0:
-		$Item.remove_child($Item.get_child(0))
+	if !item_mount:
+		ready.connect(set_item.bind(it), CONNECT_DEFERRED | CONNECT_ONE_SHOT)
+		return
+	while item_mount.get_child_count() > 0:
+		item_mount.remove_child(item_mount.get_child(0))
 	if it:
 		if it.is_inside_tree():
-			it.reparent($Item)
+			it.reparent(item_mount)
 		else:
-			$Item.add_child(it)
+			item_mount.add_child(it)
 		it.transform = Transform3D()
 
 
@@ -90,9 +99,12 @@ func interact(player: Node):
 			and item.stack.item.is_category(ItemInfo.Category.CONTAINER) \
 			and not item.stack.contents.is_empty()
 	):
-		player.held_object = ItemNode.make_node(
+		var node := ItemNode.make_node(
 			item.stack.contents[-1]
 		)
+		player.held_object = node
+		node.last_global_transform = item.global_transform
+		node.animate_to_current_transform()
 		item.stack.contents.remove_at(-1)
 		item.stack.emit_changed()
 	elif (
@@ -118,9 +130,12 @@ func interact(player: Node):
 			player.held_object.stack.count += 1
 			player.held_object.stack.emit_changed()
 		else:
-			player.held_object = ItemNode.make_node(
+			var node := ItemNode.make_node(
 					stacks[1]
 			)
+			player.held_object = node
+			node.last_global_transform = item.global_transform
+			node.animate_to_current_transform()
 		item.stack = stacks[0]
 		item.stack.emit_changed()
 	elif (
@@ -130,4 +145,10 @@ func interact(player: Node):
 	):
 		var attempt_to_apply = item.stack.accept(player.held_object.stack)
 		if attempt_to_apply.success:
-			player.held_object = null
+			var node: ItemNode = player.held_object
+			node.reparent(self)  # which removes it from held_object
+			node.store_global_transform()
+			node.global_transform = item.global_transform
+			node.animate_to_current_transform()
+			node.finished_animating.connect(node.queue_free)
+			

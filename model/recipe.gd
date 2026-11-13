@@ -6,6 +6,7 @@ enum Location {
 	MIXER,
 	SAUCEPAN,
 	OVEN,
+	PIPING_STATION,
 }
 
 ## A readable name for this recipe. Not significant to gameplay.

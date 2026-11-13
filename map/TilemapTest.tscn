@@ -31,6 +31,7 @@
 [ext_resource type="Resource" uid="uid://clw8q5do17j51" path="res://model/data/items/cookie_sheet.tres" id="29_evb3a"]
 [ext_resource type="Resource" uid="uid://cxch5ae70y1dy" path="res://model/data/items/cake_pan.tres" id="30_r47yw"]
 [ext_resource type="Resource" uid="uid://j3eno1gvpglb" path="res://model/data/items/cupcake_pan.tres" id="31_jqjf8"]
+[ext_resource type="PackedScene" uid="uid://c46ii0s7tk2kg" path="res://map/FurniPiping.tscn" id="32_r47yw"]
 
 [sub_resource type="Resource" id="Resource_inivv"]
 script = ExtResource("4_qtmpa")
@@ -453,7 +454,7 @@ script = ExtResource("4_qtmpa")
 item = ExtResource("31_jqjf8")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wru5m"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r47yw"]
 resource_local_to_scene = true
 content_margin_left = 8.0
 content_margin_right = 8.0
@@ -617,8 +618,11 @@ stack = SubResource("Resource_0oq58")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 5.5)
 stack = SubResource("Resource_yyr8d")
 
+[node name="Furni7_4" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="42" unique_id=2014138953 instance=ExtResource("32_r47yw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 4.5)
+
 [node name="TestPlayer" parent="." index="3" unique_id=1707035649]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6030058, 0, 3.3565109)
 
 [node name="GoldOverlay" parent="." index="13" unique_id=702785822]
-theme_override_styles/panel = SubResource("StyleBoxEmpty_wru5m")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_r47yw")

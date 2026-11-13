@@ -1,3 +1,4 @@
+class_name TestPlayer
 extends RigidBody3D
 
 const CAMERA_MIN = Vector3(0, 2.5, 0.5)
@@ -143,6 +144,8 @@ func _physics_process(delta):
 		var desired_facing = atan2(desired_x_motion, desired_z_motion)
 		var facing_delta = angle_difference(rotation.y, desired_facing)
 		rotation.y += facing_delta * turn_speed * delta
+	if !input_enabled:
+		return
 	if Input.is_action_just_pressed("pickup"):
 		var tilemap := Global.tilemap
 		var old_held := held_object

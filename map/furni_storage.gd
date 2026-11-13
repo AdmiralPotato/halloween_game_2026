@@ -68,8 +68,10 @@ func interact(player: Node):
 		var result := stack.split(stack.item.max_stack_size)
 		stack = result[0]
 		var node = ItemNode.make_node(result[1])
-		player.held_object = node
-		node.global_position = $ItemNode.global_position
-		node.store_global_transform()
-		node.transform = Transform3D()
-		node.animate_to_current_transform()
+		# node may be null if result[1] is null or an empty stack
+		if node:
+			player.held_object = node
+			node.global_position = $ItemNode.global_position
+			node.store_global_transform()
+			node.transform = Transform3D()
+			node.animate_to_current_transform()

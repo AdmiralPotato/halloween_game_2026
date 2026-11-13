@@ -23,7 +23,7 @@ shape = SubResource("BoxShape3D_p33bg")
 
 [node name="oven_v1" parent="StaticBody3D" unique_id=690729319 instance=ExtResource("2_i5o3g")]
 
-[node name="Skeleton3D" parent="StaticBody3D/oven_v1/bones_oven" parent_id_path=PackedInt32Array(690729319, 1423448815) index="0" unique_id=1312751281]
+[node name="Skeleton3D" parent="StaticBody3D/oven_v1/bones_oven" parent_id_path=PackedInt32Array(690729319, 1610539976) index="0" unique_id=498568680]
 bones/2/rotation = Quaternion(0.13052621, 0, -8.50617e-08, 0.9914448)
 bones/3/rotation = Quaternion(0.3826834, -7.52755e-09, -2.312151e-07, 0.92387956)
 bones/4/rotation = Quaternion(0.3826834, -7.52755e-09, -2.312151e-07, 0.92387956)
@@ -33,6 +33,7 @@ bones/6/scale = Vector3(0.100000024, 0.100000024, 0.100000024)
 bones/7/position = Vector3(-0.23000012, 0.99999994, -0.19999985)
 
 [node name="Item" type="Marker3D" parent="." unique_id=1196781973]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
 
 [node name="StatusIndicator" parent="." unique_id=1939945637 instance=ExtResource("3_fqh47")]
