@@ -198,3 +198,33 @@ func hide_shop ():
 	$TouchUI.visible = true
 	$Shop.visible = false
 	$TestPlayer.input_enabled = true
+
+
+func get_png_data_buffer () -> PackedByteArray:
+	var item_node := ($TestPlayer.held_object as ItemNode)
+	var texture: Texture2D = item_node.get_node('Sprite').texture
+	var image := texture.get_image()
+	var buffer := image.save_png_to_buffer()
+	return buffer
+
+
+func _on_export_png_pressed() -> void:
+	if $TestPlayer.held_object is ItemNode:
+		if OS.has_feature("web"):
+			JavaScriptBridge.download_buffer(
+					get_png_data_buffer(),
+					"my_baked_good.png"
+			)
+		else:
+			%SavePNGDialog.current_path = (
+				OS.get_system_dir(OS.SYSTEM_DIR_DOWNLOADS)
+				+ '/my_baked_good.png'
+			)
+			%SavePNGDialog.popup_centered_clamped(Vector2i(640, 640), 0.9)
+
+
+func _on_save_png_dialog_file_selected(path: String) -> void:
+	print('save PNG to: ', path)
+	var fd := FileAccess.open(path, FileAccess.WRITE)
+	fd.store_buffer(get_png_data_buffer())
+	fd.flush()
