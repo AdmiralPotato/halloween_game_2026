@@ -11,11 +11,13 @@ var is_running: bool:
 
 
 func start():
-	$Sprite3D.visible = true
 	%Progress.value = 0
+	await get_tree().process_frame
+	$Sprite3D.visible = true
 
 
 func stop():
+	%Progress.value = 0
 	$Sprite3D.visible = false
 
 

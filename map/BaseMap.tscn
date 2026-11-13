@@ -188,6 +188,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Export"
 
+[node name="ExportPNG" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=73162611]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Export PNG of held item"
+
 [node name="Exit to Menu" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=1233873554]
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../Resume")
@@ -199,10 +204,20 @@ oversampling_override = 1.0
 position = Vector2i(0, 36)
 access = 2
 
+[node name="SavePNGDialog" type="FileDialog" parent="PauseMenu" unique_id=1352572340]
+unique_name_in_owner = true
+oversampling_override = 1.0
+size = Vector2i(640, 640)
+display_mode = 1
+access = 2
+filters = PackedStringArray("*.png")
+
 [connection signal="timeout" from="SpawnCustomer" to="." method="_on_spawn_customer_timeout"]
 [connection signal="purchase_furni" from="Shop" to="." method="_on_shop_purchase_furni"]
 [connection signal="purchase_item" from="Shop" to="." method="_on_shop_purchase_item"]
 [connection signal="pressed" from="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Resume" to="PauseMenu" method="_on_resume_pressed"]
 [connection signal="pressed" from="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Export" to="PauseMenu" method="_on_export_pressed"]
+[connection signal="pressed" from="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/ExportPNG" to="." method="_on_export_png_pressed"]
 [connection signal="pressed" from="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Exit to Menu" to="PauseMenu" method="_on_exit_to_menu_pressed"]
 [connection signal="file_selected" from="PauseMenu/SaveDialog" to="PauseMenu" method="_on_save_dialog_file_selected"]
+[connection signal="file_selected" from="PauseMenu/SavePNGDialog" to="." method="_on_save_png_dialog_file_selected"]
