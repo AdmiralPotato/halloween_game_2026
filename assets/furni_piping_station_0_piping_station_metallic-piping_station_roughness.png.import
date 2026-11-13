@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2gxgj2omxvtn"
+uid="uid://lesxuuh8op8u"
 path.s3tc="res://.godot/imported/furni_piping_station_0_piping_station_metallic-piping_station_roughness.png-91c45ecc9c5137c781edd6e344642ed8.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "58c7e2bceacf76a1f3c6411a1249f11e"
 }
 
 [deps]
