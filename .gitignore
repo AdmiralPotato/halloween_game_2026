@@ -9,3 +9,5 @@ build
 scratch/
 recordings/
 *.blend1
+*.kra~
+*.png~
