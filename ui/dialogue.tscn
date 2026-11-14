@@ -2,6 +2,18 @@
 
 [ext_resource type="StyleBox" uid="uid://cdtph6opn7cja" path="res://ui/dialogue_panel.tres" id="1_fm7tp"]
 [ext_resource type="Script" uid="uid://dcnhwvwqus3eu" path="res://ui/dialogue.gd" id="1_xl33q"]
+[ext_resource type="PackedScene" uid="uid://bueb4ahfl1jdl" path="res://ui/TouchFaceButton.tscn" id="2_uo1k0"]
+[ext_resource type="Texture2D" uid="uid://b3eluhri8l7lu" path="res://assets/TILES-icons.png" id="3_tqx3j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p33bg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3o4ji"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwm1w"]
+atlas = ExtResource("3_tqx3j")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cv5h5"]
 
 [node name="Dialogue" type="PanelContainer" unique_id=762855756]
 anchors_preset = 15
@@ -44,7 +56,7 @@ transform = Transform3D(0.86602527, 0, -0.5, 0, 1, 0, 0.5, 0, 0.86602527, 1, 0, 
 transform = Transform3D(0.86602527, 0, 0.5, 0, 1, 0, -0.5, 0, 0.86602527, -1, 0, 0)
 
 [node name="MarginContainer" type="MarginContainer" parent="Overlay/Viewport" unique_id=1849115166]
-custom_minimum_size = Vector2(0, 256)
+custom_minimum_size = Vector2(0, 320)
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -59,6 +71,37 @@ theme_override_constants/margin_bottom = 16
 [node name="VBoxContainer" type="VBoxContainer" parent="Overlay/Viewport/MarginContainer" unique_id=725713526]
 layout_mode = 2
 theme_override_constants/separation = 8
+
+[node name="HBoxContainerTouchControls" type="HBoxContainer" parent="Overlay/Viewport/MarginContainer/VBoxContainer" unique_id=1796816639]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="empy" type="PanelContainer" parent="Overlay/Viewport/MarginContainer/VBoxContainer/HBoxContainerTouchControls" unique_id=2063445268]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_p33bg")
+
+[node name="prev" type="PanelContainer" parent="Overlay/Viewport/MarginContainer/VBoxContainer/HBoxContainerTouchControls" unique_id=1773857266]
+custom_minimum_size = Vector2(64, 64)
+custom_maximum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3o4ji")
+
+[node name="ButtonPrev" parent="Overlay/Viewport/MarginContainer/VBoxContainer/HBoxContainerTouchControls/prev" unique_id=1193517147 instance=ExtResource("2_uo1k0")]
+position = Vector2(64, 0)
+scale = Vector2(-1, 1)
+action = "ui_left"
+icon = SubResource("AtlasTexture_qwm1w")
+
+[node name="next" type="PanelContainer" parent="Overlay/Viewport/MarginContainer/VBoxContainer/HBoxContainerTouchControls" unique_id=1372630246]
+custom_minimum_size = Vector2(64, 64)
+custom_maximum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_cv5h5")
+
+[node name="ButtonNext" parent="Overlay/Viewport/MarginContainer/VBoxContainer/HBoxContainerTouchControls/next" unique_id=853302089 instance=ExtResource("2_uo1k0")]
+action = "ui_right"
+icon = SubResource("AtlasTexture_qwm1w")
 
 [node name="SpeakerPanel" type="PanelContainer" parent="Overlay/Viewport/MarginContainer/VBoxContainer" unique_id=1151789643]
 unique_name_in_owner = true

@@ -22,10 +22,20 @@ func _ready() -> void:
 		start()
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept") or event.is_action_pressed("ui_right"):
+func _input(event: InputEvent) -> void:
+	if !visible:
+		return
+	if (
+		event.is_action_pressed("ui_right")
+		or event.is_action_pressed("ui_accept")
+	):
+		get_viewport().set_input_as_handled()
 		advance()
-	elif event.is_action_pressed("ui_left"):
+	elif (
+		event.is_action_pressed("ui_left")
+		or event.is_action_pressed("ui_cancel")
+	):
+		get_viewport().set_input_as_handled()
 		rewind()
 
 
