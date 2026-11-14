@@ -3,6 +3,7 @@ extends BaseMap
 
 
 func _ready() -> void:
+	super()
 	%Dialogue.start(
 		DialogueScene.from_json(
 			JSON.parse_string(
