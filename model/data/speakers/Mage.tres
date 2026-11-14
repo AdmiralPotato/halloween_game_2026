@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DialogueSpeaker" format=3 uid="uid://olpjr75jc2ri"]
+
+[ext_resource type="PackedScene" uid="uid://c0nueq4njhld5" path="res://assets/mage.glb" id="1_dh07e"]
+[ext_resource type="Script" uid="uid://wqmoqsimi6o2" path="res://ui/dialogue_speaker.gd" id="2_wp0aj"]
+
+[resource]
+script = ExtResource("2_wp0aj")
+scene = ExtResource("1_dh07e")
+animator = "AnimationPlayer"
+name = "Black Mage"
+metadata/_custom_type_script = "uid://wqmoqsimi6o2"

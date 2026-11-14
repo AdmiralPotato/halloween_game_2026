@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dvqbw3sbxx3si"]
 
 [ext_resource type="PackedScene" uid="uid://bcdsp4c8prm15" path="res://map/BaseMap.tscn" id="1_qtmpa"]
+[ext_resource type="Script" uid="uid://x2301rq57nfd" path="res://map/tilemap_test.gd" id="2_jqjf8"]
 [ext_resource type="PackedScene" uid="uid://d0du8065dim5b" path="res://map/FurniSource.tscn" id="3_0vrjm"]
 [ext_resource type="Script" uid="uid://n2r00hcbl3ul" path="res://model/item_stack.gd" id="4_qtmpa"]
 [ext_resource type="Resource" uid="uid://sp4b1un2g2p5" path="res://model/data/items/egg.tres" id="4_r177p"]
@@ -454,12 +455,13 @@ script = ExtResource("4_qtmpa")
 item = ExtResource("31_jqjf8")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r47yw"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wru5m"]
 resource_local_to_scene = true
 content_margin_left = 8.0
 content_margin_right = 8.0
 
 [node name="TilemapTest" unique_id=1389805114 instance=ExtResource("1_qtmpa")]
+script = ExtResource("2_jqjf8")
 
 [node name="Furni2_0" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="0" unique_id=1615491916 instance=ExtResource("3_0vrjm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0.5)
@@ -625,4 +627,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 4.5)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6030058, 0, 3.3565109)
 
 [node name="GoldOverlay" parent="." index="13" unique_id=702785822]
-theme_override_styles/panel = SubResource("StyleBoxEmpty_r47yw")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_wru5m")

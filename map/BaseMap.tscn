@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://oja3kl3rps06" path="res://ui/main_menu.tscn" id="11_n4k6e"]
 [ext_resource type="PackedScene" uid="uid://v5tdiarwxe74" path="res://map/TestPlayer.tscn" id="11_scweb"]
 [ext_resource type="MeshLibrary" uid="uid://dki7gkkp1gpw8" path="res://assets/kitchen_mesh_library.meshlib" id="12_qr8jf"]
+[ext_resource type="PackedScene" uid="uid://c02bveschmhrs" path="res://ui/dialogue.tscn" id="13_2jyax"]
 [ext_resource type="PackedScene" uid="uid://03n546k1srnw" path="res://ui/debug_panel.tscn" id="13_7yr34"]
 [ext_resource type="Script" uid="uid://sxpgsgxykexm" path="res://map/gold_overlay.gd" id="14_qyemh"]
 [ext_resource type="Texture2D" uid="uid://tdosspgn5nwg" path="res://assets/candy.png" id="15_qaalu"]
@@ -211,6 +212,9 @@ size = Vector2i(640, 640)
 display_mode = 1
 access = 2
 filters = PackedStringArray("*.png")
+
+[node name="Dialogue" parent="." unique_id=762855756 instance=ExtResource("13_2jyax")]
+unique_name_in_owner = true
 
 [connection signal="timeout" from="SpawnCustomer" to="." method="_on_spawn_customer_timeout"]
 [connection signal="purchase_furni" from="Shop" to="." method="_on_shop_purchase_furni"]
