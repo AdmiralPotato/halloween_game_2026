@@ -243,7 +243,7 @@
 		}
 	},
 	"blue_candied_flowers": {
-		"human_name": "blue_candied_flowers",
+		"human_name": "blue candied flowers",
 		"sort": 513,
 		"storage_type": "JAR",
 		"categories": [ "DOODAD" ],
@@ -255,7 +255,7 @@
 		}
 	},
 	"red_candied_flowers": {
-		"human_name": "red_candied_flowers",
+		"human_name": "red candied flowers",
 		"sort": 512,
 		"storage_type": "JAR",
 		"categories": [ "DOODAD" ],
@@ -267,7 +267,7 @@
 		}
 	},
 	"yellow_candied_flowers": {
-		"human_name": "yellow_candied_flowers",
+		"human_name": "yellow candied flowers",
 		"sort": 511,
 		"storage_type": "JAR",
 		"categories": [ "DOODAD" ],
@@ -279,7 +279,7 @@
 		}
 	},
 	"white_candied_flowers": {
-		"human_name": "white_candied_flowers",
+		"human_name": "white candied flowers",
 		"sort": 510,
 		"storage_type": "JAR",
 		"categories": [ "DOODAD" ],

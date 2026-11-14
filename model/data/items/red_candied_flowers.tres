@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_1jxb8")
 name = "red_candied_flowers"
-display_name = "red_candied_flowers"
+display_name = "red candied flowers"
 storage_type = 4
 categories = Array[int]([5])
 cost_tier = 5
