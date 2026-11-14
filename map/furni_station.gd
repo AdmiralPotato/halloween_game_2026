@@ -40,9 +40,9 @@ func interact(player: Node):
 		return  # be patient
 	if not try_craft():
 		# that won't do
-		player.indicator.light_color = Color.RED
+		player.indicator_material.emission = Color.RED
 		var tween := player.create_tween().set_ease(Tween.EASE_OUT)
-		tween.tween_property(player.indicator, ^"light_color", player.indicator_color, 0.2)
+		tween.tween_property(player.indicator_material, ^"emission", player.indicator_color, 0.2)
 
 func try_craft() -> bool:
 	if not item:

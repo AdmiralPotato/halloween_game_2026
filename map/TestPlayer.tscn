@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bhpv87diypx7w" path="res://map/test_player.gd" id="1_qrya2"]
 [ext_resource type="PackedScene" uid="uid://c0nueq4njhld5" path="res://assets/mage.glb" id="2_rn8i4"]
 [ext_resource type="PackedScene" uid="uid://x71gqlsmfg4w" path="res://ui/player_cursor.tscn" id="3_roghl"]
+[ext_resource type="PackedScene" uid="uid://cv0gf6hbgljd4" path="res://assets/interface-target.glb" id="4_61hgk"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0dkrt"]
 friction = 0.0
@@ -62,6 +63,13 @@ states/NoCarry/position = Vector2(371.79028, 27.047451)
 states/Start/position = Vector2(203.5, 84)
 transitions = ["Start", "NoCarry", SubResource("AnimationNodeStateMachineTransition_hprvp"), "NoCarry", "Carry", SubResource("AnimationNodeStateMachineTransition_blups"), "Carry", "NoCarry", SubResource("AnimationNodeStateMachineTransition_dwqnk")]
 graph_offset = Vector2(14.790274, -33.95255)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_61hgk"]
+blend_mode = 1
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+emission_energy_multiplier = 0.5
 
 [node name="TestPlayer" type="RigidBody3D" unique_id=1707035649]
 collision_layer = 2
@@ -178,15 +186,17 @@ parameters/NoCarry/blend_position = 0.0
 
 [node name="Carry" type="Marker3D" parent="Hand" unique_id=1186445094]
 
-[node name="InteractIndicator" type="SpotLight3D" parent="." unique_id=1715051409]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 10, 0)
-top_level = true
-light_color = Color(0.12156863, 1, 0.32156864, 1)
-light_energy = 10.0
-spot_range = 20.0
-spot_angle = 2.0
-
 [node name="PlayerCursor" parent="." unique_id=1769439579 instance=ExtResource("3_roghl")]
 top_level = true
 
+[node name="InteractIndicator" type="Marker3D" parent="." unique_id=1561871007]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="target" parent="InteractIndicator" unique_id=383669348 instance=ExtResource("4_61hgk")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 1, 0)
+
+[node name="target" parent="InteractIndicator/target" index="0" unique_id=1152886231]
+material_overlay = SubResource("StandardMaterial3D_61hgk")
+
 [editable path="mage"]
+[editable path="InteractIndicator/target"]
