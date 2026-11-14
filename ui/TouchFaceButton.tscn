@@ -7,6 +7,22 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_p33bg"]
 radius = 32.0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cv5h5"]
+blend_mode = 3
+
+[sub_resource type="Gradient" id="Gradient_c6xec"]
+offsets = PackedFloat32Array(0.9791667, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+metadata/_snap_enabled = true
+metadata/_snap_count = 48
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3o4ji"]
+gradient = SubResource("Gradient_c6xec")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0.5)
+metadata/_snap_enabled = true
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_oe0r7"]
 blend_mode = 3
 light_mode = 1
@@ -20,28 +36,31 @@ fill = 1
 fill_from = Vector2(0.41880342, 0.3974359)
 fill_to = Vector2(0, 0)
 
-[sub_resource type="LabelSettings" id="LabelSettings_xlxrt"]
-font_size = 41
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c6xec"]
+light_mode = 1
 
 [node name="TouchFaceButton" type="TouchScreenButton" unique_id=1193517147]
-clip_children = 2
 texture_normal = ExtResource("1_cqgme")
 texture_pressed = ExtResource("2_c6xec")
 shape = SubResource("CircleShape2D_p33bg")
 script = ExtResource("3_c6xec")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=2001025940]
-material = SubResource("CanvasItemMaterial_oe0r7")
+[node name="TextureRectCircle" type="TextureRect" parent="." unique_id=1479049472]
+clip_children = 2
+material = SubResource("CanvasItemMaterial_cv5h5")
 offset_right = 40.0
 offset_bottom = 40.0
+texture = SubResource("GradientTexture2D_3o4ji")
+
+[node name="TextureRect" type="TextureRect" parent="TextureRectCircle" unique_id=2001025940]
+material = SubResource("CanvasItemMaterial_oe0r7")
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
 texture = SubResource("GradientTexture2D_p33bg")
 
-[node name="Label" type="Label" parent="." unique_id=123168968]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "A"
-label_settings = SubResource("LabelSettings_xlxrt")
-horizontal_alignment = 1
+[node name="TextureRectIcon" type="TextureRect" parent="." unique_id=1433562663]
+material = SubResource("CanvasItemMaterial_c6xec")
+offset_right = 64.0
+offset_bottom = 64.0
+expand_mode = 2
