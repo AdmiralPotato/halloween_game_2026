@@ -2,6 +2,35 @@
 
 [ext_resource type="Script" uid="uid://dpn72cwyloxi4" path="res://ui/touch_screen_controls.gd" id="1_7t80l"]
 [ext_resource type="PackedScene" uid="uid://bueb4ahfl1jdl" path="res://ui/TouchFaceButton.tscn" id="1_m4iw7"]
+[ext_resource type="Texture2D" uid="uid://b3eluhri8l7lu" path="res://assets/TILES-icons.png" id="3_va4ij"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_va4ij"]
+atlas = ExtResource("3_va4ij")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fk17j"]
+atlas = ExtResource("3_va4ij")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_05702"]
+atlas = ExtResource("3_va4ij")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d85mg"]
+atlas = ExtResource("3_va4ij")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0tdd5"]
+atlas = ExtResource("3_va4ij")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rabmq"]
+atlas = ExtResource("3_va4ij")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vhru"]
+atlas = ExtResource("3_va4ij")
+region = Rect2(512, 256, 256, 256)
 
 [node name="TouchScreenControls" type="Control" unique_id=1653148583]
 layout_mode = 3
@@ -35,22 +64,22 @@ grow_vertical = 0
 [node name="ButtonUp" parent="ToggleParent/FaceButtons" unique_id=1193517147 instance=ExtResource("1_m4iw7")]
 position = Vector2(64, 16)
 action = "toggle_rearrange"
-labelText = "⇋"
+icon = SubResource("AtlasTexture_va4ij")
 
 [node name="ButtonRight" parent="ToggleParent/FaceButtons" unique_id=1464005840 instance=ExtResource("1_m4iw7")]
 position = Vector2(112, 64)
 action = "ui_cancel"
-labelText = "→"
+icon = SubResource("AtlasTexture_fk17j")
 
 [node name="ButtonLeft" parent="ToggleParent/FaceButtons" unique_id=479893553 instance=ExtResource("1_m4iw7")]
 position = Vector2(16, 64)
 action = "interact"
-labelText = "🔨"
+icon = SubResource("AtlasTexture_05702")
 
 [node name="ButtonDown" parent="ToggleParent/FaceButtons" unique_id=1581764331 instance=ExtResource("1_m4iw7")]
 position = Vector2(65, 112)
 action = "pickup"
-labelText = "↥"
+icon = SubResource("AtlasTexture_d85mg")
 
 [node name="VirtualJoystick" type="VirtualJoystick" parent="ToggleParent" unique_id=1483599061]
 layout_mode = 1
@@ -90,7 +119,7 @@ size_flags_horizontal = 3
 
 [node name="Shop" parent="ToggleParent/MarginContainer/HBoxContainer/Control" unique_id=374536746 instance=ExtResource("1_m4iw7")]
 action = "shop"
-labelText = "💰"
+icon = SubResource("AtlasTexture_0tdd5")
 
 [node name="Control2" type="Control" parent="ToggleParent/MarginContainer/HBoxContainer" unique_id=1024740220]
 custom_minimum_size = Vector2(144, 64)
@@ -99,7 +128,7 @@ size_flags_horizontal = 8
 
 [node name="PauseButton" parent="ToggleParent/MarginContainer/HBoxContainer/Control2" unique_id=98770463 instance=ExtResource("1_m4iw7")]
 action = "menu"
-labelText = "⏸"
+icon = SubResource("AtlasTexture_rabmq")
 
 [node name="MarginContainerCamera" type="MarginContainer" parent="ToggleParent" unique_id=355808588]
 layout_mode = 1
@@ -135,7 +164,7 @@ offset_transform_position = Vector2(-16, 16)
 
 [node name="Options" parent="Control" unique_id=1097190608 instance=ExtResource("1_m4iw7")]
 action = "toggle_touch_ui"
-labelText = "👆"
+icon = SubResource("AtlasTexture_6vhru")
 
 [connection signal="changed" from="ToggleParent/MarginContainerCamera/VSlider" to="." method="_on_v_slider_changed"]
 [connection signal="value_changed" from="ToggleParent/MarginContainerCamera/VSlider" to="." method="_on_v_slider_value_changed"]

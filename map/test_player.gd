@@ -24,7 +24,7 @@ signal held_object_changed
 var in_rearrange_mode := false
 var indicator_color: Color:
 	get:
-		return Color("ddcc31") if in_rearrange_mode else Color("1fff52")
+		return Color("ffeb38ff") if in_rearrange_mode else Color("1fff52")
 var cursor_last_item: ItemNode = null
 
 @onready var carry_node := $Hand/Carry
@@ -32,7 +32,8 @@ var cursor_last_item: ItemNode = null
 @onready var skeleton := $mage/mage_bones/Skeleton3D
 @onready var hand_bone: int = skeleton.find_bone("handItem_R")
 @onready var mesh_node := $mage
-@onready var indicator: SpotLight3D = $InteractIndicator
+@onready var indicator := $InteractIndicator
+@onready var indicator_material: StandardMaterial3D = $InteractIndicator/target/target.material_overlay
 @onready var cursor: PlayerCursor = $PlayerCursor
 @onready var camera: Camera3D = $Dolly/Camera3D
 var held_object: BaseMapNode:
@@ -82,7 +83,7 @@ func register_debug_info(_dp: DebugPanel):
 func _physics_process(delta):
 	if Input.is_action_just_pressed("toggle_rearrange"):
 		in_rearrange_mode = !in_rearrange_mode
-		indicator.light_color = indicator_color
+		indicator_material.emission = indicator_color
 
 	if Input.is_action_just_pressed("camera_reset"):
 		Global.camera_zoom = 0.5
@@ -144,6 +145,7 @@ func _physics_process(delta):
 		var desired_facing = atan2(desired_x_motion, desired_z_motion)
 		var facing_delta = angle_difference(rotation.y, desired_facing)
 		rotation.y += facing_delta * turn_speed * delta
+	indicator.rotation.y = -rotation.y
 	if !input_enabled:
 		return
 	if Input.is_action_just_pressed("pickup"):

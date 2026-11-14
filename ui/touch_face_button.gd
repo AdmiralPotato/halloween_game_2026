@@ -1,7 +1,7 @@
 @tool
 extends TouchScreenButton
 
-@export var labelText: String
+@export var icon: Texture2D
 
 func _ready() -> void:
-	$Label.text = labelText
+	$TextureRectIcon.texture = icon

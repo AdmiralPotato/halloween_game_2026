@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dinaw7y1abkg7" path="res://ui/shop.gd" id="1_foe6g"]
 [ext_resource type="PackedScene" uid="uid://bueb4ahfl1jdl" path="res://ui/TouchFaceButton.tscn" id="2_2v8nf"]
+[ext_resource type="Texture2D" uid="uid://b3eluhri8l7lu" path="res://assets/TILES-icons.png" id="3_1slnd"]
 
 [sub_resource type="Gradient" id="Gradient_foe6g"]
 offsets = PackedFloat32Array(0, 0.05, 0.95, 1)
@@ -27,6 +28,10 @@ outline_color = Color(0, 0, 0, 1)
 font_size = 24
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e4u7y"]
+atlas = ExtResource("3_1slnd")
+region = Rect2(256, 0, 256, 256)
 
 [node name="Shop" type="PanelContainer" unique_id=1972639199]
 custom_minimum_size = Vector2(640, 0)
@@ -80,4 +85,4 @@ size_flags_vertical = 0
 [node name="ButtonCancel" parent="Control" unique_id=1193517147 instance=ExtResource("2_2v8nf")]
 position = Vector2(-16, -16)
 action = "ui_cancel"
-labelText = "✖"
+icon = SubResource("AtlasTexture_e4u7y")
