@@ -1,4 +1,5 @@
 import {writeFile} from 'node:fs/promises'
+import {join, parse} from 'node:path'
 // --------------------------------------------- Shared info --------------------------------------------- //
 
 const commonColors: Record<string, { base: string; shadow: string; }> = {
@@ -691,6 +692,12 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 
 console.log(data);
 
-writeFile('draw_sprites.json', JSON.stringify(data, null, '\t') + '\n')
+const path = join(
+	parse(import.meta.url).dir
+		.replace('file:///', '')
+		.replace('file://', ''),
+	'draw_sprites.json'
+)
+writeFile(path, JSON.stringify(data, null, '\t') + '\n')
 
 console.log('Draw tile info generated!')

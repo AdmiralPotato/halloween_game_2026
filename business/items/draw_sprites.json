@@ -4076,28 +4076,28 @@
 				"mode": "mix",
 				"file": "TILES-cake.png",
 				"x": 0,
-				"y": 3
+				"y": 2
 			},
 			"red_candied_flowers": {
 				"type": "sprite",
 				"mode": "mix",
 				"file": "TILES-cake.png",
 				"x": 1,
-				"y": 3
+				"y": 2
 			},
 			"yellow_candied_flowers": {
 				"type": "sprite",
 				"mode": "mix",
 				"file": "TILES-cake.png",
 				"x": 2,
-				"y": 3
+				"y": 2
 			},
 			"blue_candied_flowers": {
 				"type": "sprite",
 				"mode": "mix",
 				"file": "TILES-cake.png",
 				"x": 3,
-				"y": 3
+				"y": 2
 			}
 		},
 		"doodads_with_piping": {
@@ -4183,28 +4183,28 @@
 				"mode": "mix",
 				"file": "TILES-cake.png",
 				"x": 0,
-				"y": 3
+				"y": 2
 			},
 			"red_candied_flowers": {
 				"type": "sprite",
 				"mode": "mix",
 				"file": "TILES-cake.png",
 				"x": 1,
-				"y": 3
+				"y": 2
 			},
 			"yellow_candied_flowers": {
 				"type": "sprite",
 				"mode": "mix",
 				"file": "TILES-cake.png",
 				"x": 2,
-				"y": 3
+				"y": 2
 			},
 			"blue_candied_flowers": {
 				"type": "sprite",
 				"mode": "mix",
 				"file": "TILES-cake.png",
 				"x": 3,
-				"y": 3
+				"y": 2
 			}
 		}
 	},
@@ -5339,28 +5339,28 @@
 				"mode": "mix",
 				"file": "TILES-cake-slice.png",
 				"x": 0,
-				"y": 3
+				"y": 2
 			},
 			"red_candied_flowers": {
 				"type": "sprite",
 				"mode": "mix",
 				"file": "TILES-cake-slice.png",
 				"x": 1,
-				"y": 3
+				"y": 2
 			},
 			"yellow_candied_flowers": {
 				"type": "sprite",
 				"mode": "mix",
 				"file": "TILES-cake-slice.png",
 				"x": 2,
-				"y": 3
+				"y": 2
 			},
 			"blue_candied_flowers": {
 				"type": "sprite",
 				"mode": "mix",
 				"file": "TILES-cake-slice.png",
 				"x": 3,
-				"y": 3
+				"y": 2
 			}
 		},
 		"doodads_with_piping": {
@@ -5446,28 +5446,28 @@
 				"mode": "mix",
 				"file": "TILES-cake-slice.png",
 				"x": 0,
-				"y": 3
+				"y": 2
 			},
 			"red_candied_flowers": {
 				"type": "sprite",
 				"mode": "mix",
 				"file": "TILES-cake-slice.png",
 				"x": 1,
-				"y": 3
+				"y": 2
 			},
 			"yellow_candied_flowers": {
 				"type": "sprite",
 				"mode": "mix",
 				"file": "TILES-cake-slice.png",
 				"x": 2,
-				"y": 3
+				"y": 2
 			},
 			"blue_candied_flowers": {
 				"type": "sprite",
 				"mode": "mix",
 				"file": "TILES-cake-slice.png",
 				"x": 3,
-				"y": 3
+				"y": 2
 			}
 		}
 	},
