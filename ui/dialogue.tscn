@@ -55,61 +55,57 @@ transform = Transform3D(0.86602527, 0, -0.5, 0, 1, 0, 0.5, 0, 0.86602527, 1, 0, 
 [node name="LEFT" type="Marker3D" parent="Overlay/Viewport/Places" unique_id=1518982296]
 transform = Transform3D(0.86602527, 0, 0.5, 0, 1, 0, -0.5, 0, 0.86602527, -1, 0, 0)
 
-[node name="MarginContainer" type="MarginContainer" parent="Overlay/Viewport" unique_id=1849115166]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1849115166]
 custom_minimum_size = Vector2(0, 320)
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
+layout_mode = 2
+size_flags_vertical = 8
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Overlay/Viewport/MarginContainer" unique_id=725713526]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=725713526]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="HBoxContainerTouchControls" type="HBoxContainer" parent="Overlay/Viewport/MarginContainer/VBoxContainer" unique_id=1796816639]
+[node name="HBoxContainerTouchControls" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1796816639]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="empy" type="PanelContainer" parent="Overlay/Viewport/MarginContainer/VBoxContainer/HBoxContainerTouchControls" unique_id=2063445268]
+[node name="empy" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainerTouchControls" unique_id=2063445268]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_p33bg")
 
-[node name="prev" type="PanelContainer" parent="Overlay/Viewport/MarginContainer/VBoxContainer/HBoxContainerTouchControls" unique_id=1773857266]
+[node name="prev" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainerTouchControls" unique_id=1773857266]
 custom_minimum_size = Vector2(64, 64)
 custom_maximum_size = Vector2(64, 64)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_3o4ji")
 
-[node name="ButtonPrev" parent="Overlay/Viewport/MarginContainer/VBoxContainer/HBoxContainerTouchControls/prev" unique_id=1193517147 instance=ExtResource("2_uo1k0")]
+[node name="ButtonPrev" parent="MarginContainer/VBoxContainer/HBoxContainerTouchControls/prev" unique_id=1193517147 instance=ExtResource("2_uo1k0")]
 position = Vector2(64, 0)
 scale = Vector2(-1, 1)
 action = "ui_left"
 icon = SubResource("AtlasTexture_qwm1w")
 
-[node name="next" type="PanelContainer" parent="Overlay/Viewport/MarginContainer/VBoxContainer/HBoxContainerTouchControls" unique_id=1372630246]
+[node name="next" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainerTouchControls" unique_id=1372630246]
 custom_minimum_size = Vector2(64, 64)
 custom_maximum_size = Vector2(64, 64)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_cv5h5")
 
-[node name="ButtonNext" parent="Overlay/Viewport/MarginContainer/VBoxContainer/HBoxContainerTouchControls/next" unique_id=853302089 instance=ExtResource("2_uo1k0")]
+[node name="ButtonNext" parent="MarginContainer/VBoxContainer/HBoxContainerTouchControls/next" unique_id=853302089 instance=ExtResource("2_uo1k0")]
 action = "ui_right"
 icon = SubResource("AtlasTexture_qwm1w")
 
-[node name="SpeakerPanel" type="PanelContainer" parent="Overlay/Viewport/MarginContainer/VBoxContainer" unique_id=1151789643]
+[node name="SpeakerPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=1151789643]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = ExtResource("1_fm7tp")
 
-[node name="SpeakerText" type="RichTextLabel" parent="Overlay/Viewport/MarginContainer/VBoxContainer/SpeakerPanel" unique_id=395186090]
+[node name="SpeakerText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/SpeakerPanel" unique_id=395186090]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(96, 0)
 layout_mode = 2
@@ -118,12 +114,12 @@ text = "Speaker"
 fit_content = true
 autowrap_mode = 0
 
-[node name="DialoguePanel" type="PanelContainer" parent="Overlay/Viewport/MarginContainer/VBoxContainer" unique_id=1152923604]
+[node name="DialoguePanel" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=1152923604]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_fm7tp")
 
-[node name="DialogueText" type="RichTextLabel" parent="Overlay/Viewport/MarginContainer/VBoxContainer/DialoguePanel" unique_id=1080847449]
+[node name="DialogueText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/DialoguePanel" unique_id=1080847449]
 unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
