@@ -30,7 +30,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		or event.is_action_pressed("ui_accept")
 	):
 		get_viewport().set_input_as_handled()
-		advance()
+		advance_or_reveal()
 	elif (
 		event.is_action_pressed("ui_left")
 		or event.is_action_pressed("ui_cancel")
@@ -55,6 +55,23 @@ func stop():
 	tween.tween_property(self, ^"modulate", Color.TRANSPARENT, FADE_TIME)
 	tween.tween_callback(hide)
 	stopped.emit()
+
+
+func advance_or_reveal():
+	if not is_fully_displayed():
+		reveal()
+	else:
+		advance()
+
+
+func is_fully_displayed():
+	return %DialogueText.visible_ratio >= 1.0
+
+
+func reveal():
+	if %DialogueText.visible_ratio < 1.0:
+		%DialogueText.visible_ratio = 1.0
+		displayed.emit()
 
 
 func advance():
