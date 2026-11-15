@@ -211,8 +211,7 @@ func get_png_data_buffer () -> PackedByteArray:
 func _on_export_png_pressed() -> void:
 	if $TestPlayer.held_object is ItemNode:
 		var filename = (
-			($TestPlayer.held_object.stack as ItemStack)
-				._to_string()
+			str($TestPlayer.held_object.stack as ItemStack)
 				.replace(' ', '_')
 				.replace(',', '')
 			+ '.png'
