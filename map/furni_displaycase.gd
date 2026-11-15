@@ -18,6 +18,6 @@ func set_item(it: ItemNode):
 func update_cost():
 	if item and item.stack:
 		%Cost.visible = true
-		%Cost.text = "$" + str(item.stack.sell_price)
+		%Cost.text = "$" + str(int(ceil(item.stack.sell_price / max(1, item.stack.count))))
 	else:
 		%Cost.visible = false

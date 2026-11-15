@@ -4,3 +4,4 @@
 
 [resource]
 shader = ExtResource("1_pvw8m")
+shader_parameter/region = Vector4(0, 0, 0, 0)

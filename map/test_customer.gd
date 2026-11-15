@@ -34,6 +34,9 @@ extends RigidBody3D
 ## above, desire _amounts_ are bounded only by the range of attributes, which
 ## can be quite large in complex recipes; keep that in mind if you adjust this.
 @export var desire_excess_bonus := 1.05
+## How much desire decrements during each idle. This is to simulate customers
+## becoming less picky over time (as one does when perfect slips to "good enough").
+@export var desire_idle_relax := 0.25
 
 @abstract class State extends RefCounted:
 	var owner: TestCustomer
@@ -78,6 +81,7 @@ class Dwell extends State:
 
 	func tick(_delta: float) -> State:
 		if owner.time_in_scene >= until:
+			owner.desire -= owner.desire_idle_relax
 			return ChooseState.new(owner)
 		return null
 
@@ -142,6 +146,8 @@ class WanderTo extends State:
 
 
 class BuyFrom extends State:
+	const MEDIAN = 3.0
+	
 	var tile: Vector2i
 
 	func _init(_owner: TestCustomer, _tile: Vector2i):
@@ -156,12 +162,23 @@ class BuyFrom extends State:
 		if not (furni and furni.item and furni.item.stack):
 			return ChooseState.new(owner)
 		furni.item.store_global_transform()
-		owner.item = furni.item
-		furni.item = null
+		var amount := int(clamp(
+			-log(randf()) * MEDIAN,
+			1.0,
+			furni.item.stack.item.max_stack_size,
+		))
+		var split := furni.item.stack.split(amount)
+		var node := ItemNode.make_node(split[1])
+		node.last_global_transform = furni.item.global_transform
+		owner.item = node
+		if split[0]:
+			furni.item.stack = split[0]
+		else:
+			furni.item = null
 		var registers: Array[Vector2i] = \
 			Global.tilemap.get_tiles_of_type(preload("res://map/furni_cashregister.gd"))
 		if registers.is_empty():
-			Global.gold += owner.item.stack.sell_price
+			Global.gold += owner.get_sale_price_for(owner.item.stack)
 			return Leave.new(owner)
 		var reg: Vector2i = registers.pick_random()
 		return WanderTo.new(owner, reg,
@@ -271,10 +288,14 @@ func _ready():
 		index += 1
 	desire = desire_range.x + randf() * (desire_range.y - desire_range.x)
 	var prefstrings := PackedStringArray()
-	for attr in get_top_n_desires(3):
-		prefstrings.append("- " + ItemInfo.AttrNames[attr])
-	$MoodIndicator.text = "Wants\n{prefs}\n{pickiness}".format({
-		prefs = "\n".join(prefstrings),
+	var disprefstrings := PackedStringArray()
+	for attr in get_n_most_desires(3, true):
+		prefstrings.append(ItemInfo.AttrNames[attr])
+	for attr in get_n_most_desires(3, false):
+		disprefstrings.append(ItemInfo.AttrNames[attr])
+	$MoodIndicator.text = "Likes: {prefs}\nDislikes: {disprefs}\n{pickiness}".format({
+		prefs = ", ".join(prefstrings),
+		disprefs = ", ".join(disprefstrings),
 		pickiness = describe_desire(desire),
 	})
 	$MoodIndicator.top_level = false
@@ -300,12 +321,15 @@ func get_sale_price_for(stack: ItemStack) -> int:
 	var diff_des := maxf(0.0, get_desire_for(stack) - desire)
 	return int(ceil(desire_excess_bonus ** diff_des * stack.sell_price))
 
-func get_top_n_desires(n: int = 1) -> Array[ItemInfo.Attribute]:
+func get_n_most_desires(n: int = 1, top: bool = true) -> Array[ItemInfo.Attribute]:
 	var pairs := []
 	for attr in prefs:
 		pairs.append([prefs[attr], attr])
-	# NB: we want this sort descending, thus >
-	pairs.sort_custom(func(lpair: Array, rpair: Array): return lpair[0] > rpair[0])
+	if top:
+		# NB: we want this sort descending, thus >
+		pairs.sort_custom(func(lpair: Array, rpair: Array): return lpair[0] > rpair[0])
+	else:
+		pairs.sort_custom(func(lpair: Array, rpair: Array): return lpair[0] < rpair[0])
 	var ret: Array[ItemInfo.Attribute] = []
 	for i in range(n):
 		ret.append(pairs[i][1])
