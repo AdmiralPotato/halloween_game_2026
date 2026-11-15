@@ -100,11 +100,11 @@ func matches(inputs: Array[ItemStack], _container: ItemStack = null) -> Dictiona
 		var found := false
 		for compare in cardinalities:
 			if compare.is_stackable(stack):
-				cardinalities[compare] += 1
+				cardinalities[compare] += stack.count
 				found = true
 				break
 		if not found:
-			cardinalities[stack] = 1
+			cardinalities[stack] = stack.count
 
 	var cvs := cardinalities.values()
 	var gcd: int = cvs[0]
