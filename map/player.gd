@@ -27,6 +27,8 @@ var indicator_color: Color:
 		return Color("ffeb38ff") if in_rearrange_mode else Color("1fff52")
 var cursor_last_item: ItemNode = null
 
+var pointing := Vector2i(0,0)
+
 @onready var carry_node := $Hand/Carry
 @onready var hand_node := $Hand
 @onready var skeleton := $mage/mage_bones/Skeleton3D
@@ -73,6 +75,7 @@ func set_save_state(save: Dictionary):
 
 
 func _ready():
+	Global.player = self
 	Global.request_debug_info.connect(register_debug_info)
 
 
@@ -81,14 +84,7 @@ func register_debug_info(_dp: DebugPanel):
 
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("toggle_rearrange"):
-		in_rearrange_mode = !in_rearrange_mode
-		indicator_material.emission = indicator_color
-
-	if Input.is_action_just_pressed("camera_reset"):
-		Global.camera_zoom = 0.5
-
-	var pointing: Vector2i = \
+	pointing = \
 			Global.tilemap.find_tile(position, basis.z, PICK_RANGE)
 	var world_pointing = Global.tilemap.to_world_point(pointing)
 	indicator.global_position = Vector3(
@@ -146,9 +142,19 @@ func _physics_process(delta):
 		var facing_delta = angle_difference(rotation.y, desired_facing)
 		rotation.y += facing_delta * turn_speed * delta
 	indicator.rotation.y = -rotation.y
+
+
+func _unhandled_input(event: InputEvent) -> void:
 	if !input_enabled:
 		return
-	if Input.is_action_just_pressed("pickup"):
+	if event.is_action_pressed("toggle_rearrange"):
+		in_rearrange_mode = !in_rearrange_mode
+		indicator_material.emission = indicator_color
+
+	if event.is_action_pressed("camera_reset"):
+		Global.camera_zoom = 0.5
+
+	if event.is_action_pressed("pickup"):
 		var tilemap := Global.tilemap
 		var old_held := held_object
 		if held_object is FurniNode or (not held_object and in_rearrange_mode):
@@ -167,5 +173,6 @@ func _physics_process(delta):
 			held_object.animate_to_current_transform()
 		if old_held and held_object != old_held:
 			old_held.animate_to_current_transform()
-	if Input.is_action_just_pressed("interact"):
+
+	if event.is_action_pressed("interact"):
 		Global.tilemap.interact(pointing, self)

@@ -35,7 +35,7 @@ func set_save_state(save: Dictionary) -> void:
 		status_indicator.start()
 
 
-func interact(player: Node):
+func interact(player: Player):
 	var was_just_placed := false
 	if (
 			not item

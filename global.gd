@@ -5,6 +5,7 @@ var debug_panel: DebugPanel:
 		debug_panel = new
 		if new:
 			request_debug_info.emit(new)
+var player: Player
 var tilemap: Tilemap
 var gold: int = 10_000:
 	set(new):

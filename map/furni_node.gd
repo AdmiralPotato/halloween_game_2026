@@ -31,8 +31,8 @@ func unpack():
 
 func pack():
 	$StaticBody3D/CollisionShape3D.disabled = true
-	
-	
+
+
 ## Called when the player tries to pick up an item from this tile
 func provide_item() -> ItemNode:
 	return null
@@ -49,10 +49,10 @@ func query_item() -> ItemNode:
 ## the player should be holding after this interaction.
 func accept_item(item: ItemNode) -> ItemNode:
 	return item
-	
+
 
 ## Called when the player interacts with this tile.
-func interact(_player: Node):
+func interact(_player: Player):
 	pass
 
 

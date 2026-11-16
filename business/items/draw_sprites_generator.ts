@@ -24,6 +24,7 @@ const fileNames: Record<string, string> = {
 	cake_slice: 'TILES-cake-slice.png',
 	cookie: 'TILES-cookie-baked.png',
 	cupcake: 'TILES-cupcake-baked.png',
+	batter_in_cake_pan: 'TILES-batter-in-cake-pan.png',
 	batter_in_cupcake_pan: 'TILES-batter-in-cupcake-pan.png',
 	cookie_dough: 'TILES-dough.png',
 	cookie_dough_on_sheet: 'TILES-dough-on-sheet.png',
@@ -72,6 +73,10 @@ const comboSpriteInfo: Record<string, ComboSpriteInfo> = {
 	cupcake_liner: {
 		light: { file: fileNames.cupcake, x: 4, y: 0 },
 		dark: { file: fileNames.cupcake, x: 5, y: 0 },
+	},
+	batter_in_cake_pan_base: {
+		light: { file: fileNames.batter_in_cake_pan, x: 0, y: 0 },
+		dark: { file: fileNames.batter_in_cake_pan, x: 1, y: 0 },
 	},
 	batter_in_cupcake_pan_base: {
 		light: { file: fileNames.batter_in_cupcake_pan, x: 0, y: 0 },
@@ -336,6 +341,30 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 				{ type: 'sprite', mode: 'multiply', file: fileNames.cupcake, x: 6, y: 0 }
 			]),
 		}
+	},
+	batter_in_cake_pan: {
+		// Always draw:
+		other: {
+			pan: { type: 'sprite', mode: 'mix', file: fileNames.batter_in_cake_pan, x: 2, y: 0 },
+		},
+		// Always draw:
+		base: {
+			root: quickComboTile(comboSpriteInfo.batter_in_cake_pan_base, 'mix', '#f9ebcb', '#e0c074')
+		},
+		// Draw once per count in modifiers:
+		flavoring_modifiers: {
+			...makeFlavorings(comboSpriteInfo.batter_in_cake_pan_base),
+		},
+		// Draw once if any quantity is present in modifiers:
+		other_modifiers: {
+			chocolate_chips:       { type: 'sprite', mode: 'mix', file: fileNames.batter_in_cake_pan, x: 0, y: 1 },
+			white_chocolate_chips: { type: 'sprite', mode: 'mix', file: fileNames.batter_in_cake_pan, x: 1, y: 1 },
+			dark_chocolate_chips:  { type: 'sprite', mode: 'mix', file: fileNames.batter_in_cake_pan, x: 2, y: 1 },
+			chocolate_sprinkles:   { type: 'sprite', mode: 'mix', file: fileNames.batter_in_cake_pan, x: 3, y: 1 },
+			white_sprinkles:       { type: 'sprite', mode: 'mix', file: fileNames.batter_in_cake_pan, x: 4, y: 1 },
+			ball_bearing_sprinkles:{ type: 'sprite', mode: 'mix', file: fileNames.batter_in_cake_pan, x: 5, y: 1 },
+			rainbow_sprinkles:     { type: 'sprite', mode: 'mix', file: fileNames.batter_in_cake_pan, x: 6, y: 1 },
+		},
 	},
 	batter_in_cupcake_pan: {
 		// Always draw:
@@ -688,13 +717,13 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 	bowl: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 6, y: 2 }}},
 	cookie_sheet: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 7, y: 2 }}},
 	cupcake_pan: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.batter_in_cupcake_pan, x: 2, y: 0 }}},
+	cake_pan: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.batter_in_cake_pan, x: 2, y: 0 }}},
 };
 
 console.log(data);
 
 const path = join(
 	parse(import.meta.url).dir
-		.replace('file:///', '')
 		.replace('file://', ''),
 	'draw_sprites.json'
 )

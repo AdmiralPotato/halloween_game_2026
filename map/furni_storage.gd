@@ -63,7 +63,7 @@ func query_item() -> ItemNode:
 	return null
 
 
-func interact(player: Node):
+func interact(player: Player):
 	if stack and stack.count > 1 and not player.held_object:
 		var result := stack.split(stack.item.max_stack_size)
 		stack = result[0]
