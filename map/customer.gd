@@ -1,7 +1,7 @@
-class_name TestCustomer
+class_name Customer
 extends RigidBody3D
 
-# TODO: refactor this into a common base with TestPlayer
+# TODO: refactor this into a common base with Player
 #region from player
 @export_group("Movement")
 ## How much force the birb can apply on a given axis
@@ -39,9 +39,9 @@ extends RigidBody3D
 @export var desire_idle_relax := 0.25
 
 @abstract class State extends RefCounted:
-	var owner: TestCustomer
+	var owner: Customer
 
-	func _init(_owner: TestCustomer):
+	func _init(_owner: Customer):
 		self.owner = _owner
 
 	func _to_string():
@@ -62,7 +62,7 @@ class Vanish extends State:
 class Leave extends State:
 	func _to_string():
 		return "Leave"
-		
+
 	func tick(_delta: float) -> State:
 		return WanderTo.new(owner, Global.tilemap.get_customer_exitpoint(),
 				Vanish.new(owner),
@@ -72,7 +72,7 @@ class Leave extends State:
 class Dwell extends State:
 	var until: float
 
-	func _init(_owner: TestCustomer, duration: float):
+	func _init(_owner: Customer, duration: float):
 		super(_owner)
 		until = _owner.time_in_scene + duration
 
@@ -97,7 +97,7 @@ class WanderTo extends State:
 	var next_state: State
 	var initial_time := -1.0  # used to figure out how long we've been navigating
 
-	func _init(_owner: TestCustomer, _to: Vector2i = NOWHERE, next: State = null):
+	func _init(_owner: Customer, _to: Vector2i = NOWHERE, next: State = null):
 		super(_owner)
 		if _to == NOWHERE:
 			_to = Global.tilemap.pick_open_point()
@@ -147,10 +147,10 @@ class WanderTo extends State:
 
 class BuyFrom extends State:
 	const MEDIAN = 3.0
-	
+
 	var tile: Vector2i
 
-	func _init(_owner: TestCustomer, _tile: Vector2i):
+	func _init(_owner: Customer, _tile: Vector2i):
 		super(_owner)
 		self.tile = _tile
 
@@ -188,7 +188,7 @@ class BuyFrom extends State:
 class GiveMoney extends State:
 	var tile: Vector2i
 
-	func _init(_owner: TestCustomer, _tile: Vector2i):
+	func _init(_owner: Customer, _tile: Vector2i):
 		super(_owner)
 		self.tile = _tile
 
@@ -354,7 +354,7 @@ func _physics_process(delta: float) -> void:
 			Global.gold += get_sale_price_for(item.stack)
 		queue_free()
 		return
-		
+
 	var new_state = state.tick(delta)
 	while new_state:
 		# Loop to give zero-frame delays to things like ChooseState. This somewhat
@@ -363,7 +363,7 @@ func _physics_process(delta: float) -> void:
 		# print(self, ' enters state ', new_state)
 		state = new_state
 		new_state = state.tick(delta)
-	
+
 	# this is OK to put above forces; we don't integrate in this callback anyway,
 	# so the result won't change. (That happens in _integrate_forces().)
 	var move_speed := linear_velocity.length() / 3.0

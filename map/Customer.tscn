@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ccml46p73i4ae"]
 
-[ext_resource type="Script" uid="uid://byhpra7hsmfpy" path="res://map/test_customer.gd" id="1_d32tx"]
+[ext_resource type="Script" uid="uid://byhpra7hsmfpy" path="res://map/customer.gd" id="1_d32tx"]
 [ext_resource type="PackedScene" uid="uid://cka7oxcdsa3cm" path="res://assets/npc_default.glb" id="2_30qwn"]
 [ext_resource type="PackedScene" uid="uid://x71gqlsmfg4w" path="res://ui/player_cursor.tscn" id="3_db40f"]
 
@@ -64,7 +64,7 @@ states/empty/node = SubResource("AnimationNodeBlendTree_hbrga")
 states/empty/position = Vector2(336, 54)
 transitions = ["Start", "empty", SubResource("AnimationNodeStateMachineTransition_4i4jg"), "empty", "carry", SubResource("AnimationNodeStateMachineTransition_xyqqj"), "carry", "empty", SubResource("AnimationNodeStateMachineTransition_c1bso")]
 
-[node name="TestCustomer" type="RigidBody3D" unique_id=564519824]
+[node name="Customer" type="RigidBody3D" unique_id=564519824]
 collision_layer = 4
 axis_lock_linear_y = true
 axis_lock_angular_x = true

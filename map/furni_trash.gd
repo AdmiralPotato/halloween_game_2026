@@ -15,8 +15,8 @@ func set_item(it: ItemNode):
 func swap(other: FurniNode) -> Dictionary:
 	other.reparent($Item)
 	other.store_global_transform()
-	other.transform = Transform3D().scaled(Vector3.ONE * TestPlayer.SMOL_FURNI)
-	# .animate_to_transform is called by TestPlayer._physics_process after `null`
+	other.transform = Transform3D().scaled(Vector3.ONE * Player.SMOL_FURNI)
+	# .animate_to_transform is called by Player._physics_process after `null`
 	# is returned below--don't call it again, the tweens will fight
 	other.finished_animating.connect(animate_remove.bind(other), CONNECT_ONE_SHOT)
 	return {returned_node = null}

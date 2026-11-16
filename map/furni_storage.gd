@@ -31,13 +31,13 @@ func accept_item(item: ItemNode) -> ItemNode:
 		var tween := $ItemNode.create_tween().set_trans(Tween.TRANS_SINE)
 		tween.tween_property($ItemNode, ^"transform", initial_transform, BaseMapNode.TWEEN_TIME)
 		return null
-	
+
 	if not stack.is_stackable(item.stack):
 		return item
 	# grab this into our part of the tree for a sec, because it will be removed from elsewhere
 	item.reparent(self)
 	item.transform = $ItemNode.transform
-	# will be animated by .animate_to_current_transform() by test_player.gd
+	# will be animated by .animate_to_current_transform() by player.gd
 	var _finish := func _finish():
 		stack.count += item.stack.count
 		item.queue_free()

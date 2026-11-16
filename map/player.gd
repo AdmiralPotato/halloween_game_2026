@@ -1,4 +1,4 @@
-class_name TestPlayer
+class_name Player
 extends RigidBody3D
 
 const CAMERA_MIN = Vector3(0, 2.5, 0.5)

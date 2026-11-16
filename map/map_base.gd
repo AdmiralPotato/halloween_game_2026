@@ -1,5 +1,5 @@
 @tool
-class_name BaseMap
+class_name MapBase
 extends Node3D
 
 const FURNI_COUNTERTOP := preload("res://map/FurniCountertop.tscn")
@@ -24,7 +24,7 @@ const FURNI_LIST := [
 	FURNI_STORAGE,
 ]
 
-const CUSTOMER = preload("res://map/TestCustomer.tscn")
+const CUSTOMER = preload("res://map/Customer.tscn")
 
 @export var number_of_tiles := Vector2i(8, 12):
 	set(x):
@@ -43,12 +43,12 @@ func get_customer_spawn_time() -> float:
 func get_save_state() -> Dictionary:
 	return {
 		tilemap = $Tilemap.get_save_state(),
-		player = $TestPlayer.get_save_state(),
+		player = $Player.get_save_state(),
 	}
 
 func set_save_state(save: Dictionary):
 	$Tilemap.set_save_state(save.tilemap)
-	$TestPlayer.set_save_state(save.player)
+	$Player.set_save_state(save.player)
 
 func _ready():
 	update_floor()
@@ -64,7 +64,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		if $Shop.visible:
 			hide_shop()
-		elif not $TestPlayer.held_object:
+		elif not $Player.held_object:
 			show_shop()
 	if $Shop.visible and event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
@@ -145,7 +145,7 @@ func update_floor():
 
 
 func _on_spawn_customer_timeout() -> void:
-	var cust: TestCustomer = CUSTOMER.instantiate()
+	var cust: Customer = CUSTOMER.instantiate()
 	$Customers.add_child(cust)
 	cust.global_position = $Tilemap.to_world_point(
 			$Tilemap.get_customer_spawnpoint()
@@ -153,8 +153,8 @@ func _on_spawn_customer_timeout() -> void:
 	$SpawnCustomer.start(get_customer_spawn_time())
 
 
-func _on_test_player_held_object_changed() -> void:
-	if $TestPlayer.held_object and $Shop.visible:
+func _on_player_held_object_changed() -> void:
+	if $Player.held_object and $Shop.visible:
 		hide_shop()
 
 
@@ -166,8 +166,8 @@ func _on_shop_purchase_furni(furni: FurniInfo) -> void:
 	$GoldOverlay.flash(Color.WHITE)
 	var node: FurniNode = furni.scene.instantiate()
 	node.pack()
-	node.transform = node.transform.scaled($TestPlayer.SMOL_FURNI)
-	$TestPlayer.held_object = node
+	node.transform = node.transform.scaled($Player.SMOL_FURNI)
+	$Player.held_object = node
 	hide_shop()
 
 
@@ -181,15 +181,15 @@ func _on_shop_purchase_item(item: ItemInfo) -> void:
 	var furni: FurniSource = FURNI_SOURCE.instantiate()
 	furni.stack = ItemStack.new(item)
 	furni.pack()
-	furni.transform = furni.transform.scaled($TestPlayer.SMOL_FURNI)
-	$TestPlayer.held_object = furni
+	furni.transform = furni.transform.scaled($Player.SMOL_FURNI)
+	$Player.held_object = furni
 	hide_shop()
 
 
 func show_shop ():
 	$TouchUI.visible = false
 	$Shop.visible = true
-	$TestPlayer.input_enabled = false
+	$Player.input_enabled = false
 	var first_shop_item = $Shop/Categories/Items.get_child(0)
 	first_shop_item.grab_focus()
 
@@ -197,11 +197,11 @@ func show_shop ():
 func hide_shop ():
 	$TouchUI.visible = true
 	$Shop.visible = false
-	$TestPlayer.input_enabled = true
+	$Player.input_enabled = true
 
 
 func get_png_data_buffer () -> PackedByteArray:
-	var item_node := ($TestPlayer.held_object as ItemNode)
+	var item_node := ($Player.held_object as ItemNode)
 	var texture: Texture2D = item_node.get_node('Sprite').texture
 	var image := texture.get_image()
 	var buffer := image.save_png_to_buffer()
@@ -209,9 +209,9 @@ func get_png_data_buffer () -> PackedByteArray:
 
 
 func _on_export_png_pressed() -> void:
-	if $TestPlayer.held_object is ItemNode:
+	if $Player.held_object is ItemNode:
 		var filename = (
-			str($TestPlayer.held_object.stack as ItemStack)
+			str($Player.held_object.stack as ItemStack)
 				.replace(' ', '_')
 				.replace(',', '')
 			+ '.png'

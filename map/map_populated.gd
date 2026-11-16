@@ -1,5 +1,5 @@
 @tool
-extends BaseMap
+extends MapBase
 
 
 func _ready() -> void:

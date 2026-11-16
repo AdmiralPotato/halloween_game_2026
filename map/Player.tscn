@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://v5tdiarwxe74"]
 
-[ext_resource type="Script" uid="uid://bhpv87diypx7w" path="res://map/test_player.gd" id="1_qrya2"]
+[ext_resource type="Script" uid="uid://bhpv87diypx7w" path="res://map/player.gd" id="1_qrya2"]
 [ext_resource type="PackedScene" uid="uid://c0nueq4njhld5" path="res://assets/mage.glb" id="2_rn8i4"]
 [ext_resource type="PackedScene" uid="uid://x71gqlsmfg4w" path="res://ui/player_cursor.tscn" id="3_roghl"]
 [ext_resource type="PackedScene" uid="uid://cv0gf6hbgljd4" path="res://assets/interface-target.glb" id="4_61hgk"]
@@ -71,7 +71,7 @@ emission_enabled = true
 emission = Color(0, 1, 0, 1)
 emission_energy_multiplier = 0.5
 
-[node name="TestPlayer" type="RigidBody3D" unique_id=1707035649]
+[node name="Player" type="RigidBody3D" unique_id=1707035649]
 collision_layer = 2
 axis_lock_linear_y = true
 axis_lock_angular_x = true
