@@ -202,4 +202,3 @@ func interact(player: Player):
 			node.global_transform = item.global_transform
 			node.animate_to_current_transform()
 			node.finished_animating.connect(node.queue_free)
-
