@@ -5,13 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://bueb4ahfl1jdl" path="res://ui/TouchFaceButton.tscn" id="2_uo1k0"]
 [ext_resource type="Texture2D" uid="uid://b3eluhri8l7lu" path="res://assets/TILES-icons.png" id="3_tqx3j"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p33bg"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3o4ji"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qwm1w"]
 atlas = ExtResource("3_tqx3j")
 region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p33bg"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cv5h5"]
 
@@ -72,11 +72,6 @@ theme_override_constants/separation = 8
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="empy" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainerTouchControls" unique_id=2063445268]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_p33bg")
-
 [node name="prev" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainerTouchControls" unique_id=1773857266]
 custom_minimum_size = Vector2(64, 64)
 custom_maximum_size = Vector2(64, 64)
@@ -88,6 +83,11 @@ position = Vector2(64, 0)
 scale = Vector2(-1, 1)
 action = "ui_left"
 icon = SubResource("AtlasTexture_qwm1w")
+
+[node name="empy" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainerTouchControls" unique_id=2063445268]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_p33bg")
 
 [node name="next" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainerTouchControls" unique_id=1372630246]
 custom_minimum_size = Vector2(64, 64)
