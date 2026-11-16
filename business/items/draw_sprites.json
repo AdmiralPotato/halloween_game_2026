@@ -1408,7 +1408,7 @@
 			},
 			"whipped_cream": {
 				"type": "multi",
-				"mode": "multiply",
+				"mode": "mix",
 				"sprites": [
 					{
 						"file": "TILES-cookie-baked.png",
@@ -2194,7 +2194,7 @@
 			},
 			"whipped_cream": {
 				"type": "multi",
-				"mode": "multiply",
+				"mode": "mix",
 				"sprites": [
 					{
 						"file": "TILES-cupcake-baked.png",
@@ -4318,7 +4318,7 @@
 			},
 			"whipped_cream": {
 				"type": "multi",
-				"mode": "multiply",
+				"mode": "mix",
 				"sprites": [
 					{
 						"file": "TILES-cake.png",
@@ -4344,9 +4344,9 @@
 				"type": "ref",
 				"value": "cake_piping"
 			},
-			"whipped_cream": {
+			"whipped_cream_piping_bag": {
 				"type": "multi",
-				"mode": "multiply",
+				"mode": "mix",
 				"sprites": [
 					{
 						"file": "TILES-cake.png",
@@ -5581,7 +5581,7 @@
 			},
 			"whipped_cream": {
 				"type": "multi",
-				"mode": "multiply",
+				"mode": "mix",
 				"sprites": [
 					{
 						"file": "TILES-cake-slice.png",
@@ -5607,9 +5607,9 @@
 				"type": "ref",
 				"value": "cake_slice_piping"
 			},
-			"whipped_cream": {
+			"whipped_cream_piping_bag": {
 				"type": "multi",
-				"mode": "multiply",
+				"mode": "mix",
 				"sprites": [
 					{
 						"file": "TILES-cake-slice.png",
@@ -7823,6 +7823,46 @@
 				"file": "TILES-batter-in-cake-pan.png",
 				"x": 2,
 				"y": 0
+			}
+		}
+	},
+	"whipped_cream_piping_bag": {
+		"base": {
+			"root": {
+				"type": "multi",
+				"mode": "mix",
+				"sprites": [
+					{
+						"file": "TILES-frosting.png",
+						"x": 4,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#eeeff0"
+					},
+					{
+						"file": "TILES-frosting.png",
+						"x": 5,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#a0b7ba"
+					},
+					{
+						"type": "sprite",
+						"mode": "mix",
+						"file": "TILES-frosting.png",
+						"x": 7,
+						"y": 0
+					},
+					{
+						"type": "sprite",
+						"mode": "mix",
+						"file": "TILES-frosting.png",
+						"x": 13,
+						"y": 2
+					}
+				]
 			}
 		}
 	}
