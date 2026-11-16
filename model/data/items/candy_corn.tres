@@ -9,7 +9,7 @@ display_name = "candy corn"
 storage_type = 4
 categories = Array[int]([5])
 cost_tier = 4
-max_stack_size = 0
+max_stack_size = 4
 attributes = Dictionary[int, int]({
 2: 1,
 8: 1,

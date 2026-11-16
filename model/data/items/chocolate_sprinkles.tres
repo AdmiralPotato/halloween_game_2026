@@ -9,7 +9,7 @@ display_name = "chocolate sprinkles"
 storage_type = 4
 categories = Array[int]([1, 5])
 cost_tier = 2
-max_stack_size = 0
+max_stack_size = 8
 attributes = Dictionary[int, int]({
 12: 1
 })

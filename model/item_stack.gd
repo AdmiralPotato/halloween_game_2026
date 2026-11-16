@@ -298,9 +298,14 @@ func accept(add: ItemStack) -> Dictionary:
 	# stack em up
 	print('pre stack: ', self, ', ', add)
 	var old_count := count
-	count = clamp(count + add.count, count, item.max_stack_size)
+	count = clampi(count + add.count, count, item.max_stack_size)
+	if count < old_count or count > item.max_stack_size:
+		push_error("Oops, the world has ended! !", old_count, ' <= ', count, ' <= ', item.max_stack_size)
 	add.count -= count - old_count
 	print('post stack: ', self, ', ', add, ', having added ', count - old_count)
+	if count == old_count:
+		# We didn't stack anything, so is it really successful?
+		return {success = false, rest = add}
 	if add.count == 0:
 		return {success = true, rest = null}
 	return {success = true, rest = add}

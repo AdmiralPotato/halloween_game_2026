@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://c30hr74cgq7rr" path="res://model/data/items/dark_chocolate_chips.tres" id="2_y7u0b"]
 [ext_resource type="Script" uid="uid://b5mlkyd7jcal7" path="res://model/recipe.gd" id="3_oxwql"]
 
-[sub_resource type="Resource" id="Resource_w4bgg"]
+[sub_resource type="Resource" id="Resource_hvfdg"]
 script = ExtResource("1_hvfdg")
 item = ExtResource("2_y7u0b")
 count = 4
@@ -12,6 +12,6 @@ count = 4
 [resource]
 script = ExtResource("3_oxwql")
 name = "dark chocolate chips"
-output = SubResource("Resource_w4bgg")
+output = SubResource("Resource_hvfdg")
 ingredients = PackedStringArray("dark_chocolate_bar")
 permitted_modifiers = PackedStringArray()

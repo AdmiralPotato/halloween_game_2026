@@ -455,7 +455,7 @@ script = ExtResource("4_8usld")
 item = ExtResource("32_owuqv")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dcqpf"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rjii0"]
 resource_local_to_scene = true
 content_margin_left = 8.0
 content_margin_right = 8.0
@@ -627,4 +627,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 4.5)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6030058, 0, 3.3565109)
 
 [node name="GoldOverlay" parent="." index="13" unique_id=702785822]
-theme_override_styles/panel = SubResource("StyleBoxEmpty_dcqpf")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_rjii0")

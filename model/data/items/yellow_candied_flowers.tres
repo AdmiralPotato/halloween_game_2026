@@ -9,7 +9,7 @@ display_name = "yellow candied flowers"
 storage_type = 4
 categories = Array[int]([5])
 cost_tier = 5
-max_stack_size = 0
+max_stack_size = 8
 attributes = Dictionary[int, int]({
 4: 1,
 12: 1

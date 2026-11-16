@@ -104,6 +104,13 @@ const PER_CRAFT_BASE: float = 1.5
 ## facing item enumerations.
 @export var sort: int = 0
 
+const MAX_STACK_SIZES = {
+	FLAVORING_STACK_SIZE = 6,
+	CANDIED_FLOWERS_STACK_SIZE = 8,
+	SPRINKLES_STACK_SIZE = 8,
+	HARD_CANDY_SHAPES_STACK_SIZE = 4,
+}
+
 static func from_json(label: String, d: Dictionary, variants: Dictionary = {}) -> ItemInfo:
 	var info = ItemInfo.new()
 	info.name = label
@@ -114,7 +121,10 @@ static func from_json(label: String, d: Dictionary, variants: Dictionary = {}) -
 	))
 	var price = d.get("buy_price")
 	info.cost_tier = price if price != null else 0
-	info.max_stack_size = d.get("max_stack_size", 1)
+	var max_stack_size = d.get("max_stack_size", 1)
+	if typeof(max_stack_size) == TYPE_STRING:
+		max_stack_size = MAX_STACK_SIZES.get(max_stack_size, 1)
+	info.max_stack_size = max_stack_size
 	var attrs = d.get("attributes", {})
 	if typeof(attrs) == TYPE_STRING and attrs == "from_recipe":
 		# recipe outputs already receive merged attrs; no need to specify any

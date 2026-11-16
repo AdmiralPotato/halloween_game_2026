@@ -9,7 +9,7 @@ display_name = "caramel flavoring"
 storage_type = 4
 categories = Array[int]([1])
 cost_tier = 4
-max_stack_size = 0
+max_stack_size = 6
 attributes = Dictionary[int, int]({
 0: -2,
 1: 2,
