@@ -42,6 +42,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func start(scn: DialogueScene = null):
 	if scn:
 		dialogue_scene = scn
+	Global.player.input_enabled = false
 	show()
 	modulate = Color.TRANSPARENT
 	var tween = create_tween()
@@ -53,7 +54,11 @@ func start(scn: DialogueScene = null):
 func stop():
 	var tween = create_tween()
 	tween.tween_property(self, ^"modulate", Color.TRANSPARENT, FADE_TIME)
-	tween.tween_callback(hide)
+	tween.tween_callback(
+		func():
+			Global.player.input_enabled = true
+			hide()
+	)
 	stopped.emit()
 
 

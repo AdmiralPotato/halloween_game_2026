@@ -35,7 +35,7 @@ func set_save_state(save: Dictionary) -> void:
 		status_indicator.start()
 
 
-func interact(player: Node):
+func interact(player: Player):
 	if not recipe_timer.is_stopped():
 		return  # be patient
 	if not try_craft():

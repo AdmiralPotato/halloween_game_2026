@@ -74,7 +74,7 @@ func accept_item(_item: ItemNode) -> ItemNode:
 		if res.success:
 			# Some items were accepted; end the interaction now rather than swapping
 			return _item if _item.stack else null
-		
+
 		# If both containers, and one empty, swap contents; otherwise
 		# merge toward the furni
 		if (
@@ -93,7 +93,7 @@ func accept_item(_item: ItemNode) -> ItemNode:
 				_item.stack.contents = []
 				self.item.stack.emit_changed()
 			return _item
-		
+
 		# If the player is holding a container and we have an item, put that
 		# item inside this container, and both hereon
 		if _item.stack.item.is_category(ItemInfo.Category.CONTAINER):
@@ -118,7 +118,7 @@ func provide_item() -> ItemNode:
 func query_item() -> ItemNode:
 	return item
 
-func interact(player: Node):
+func interact(player: Player):
 	if (
 			player.held_object == null \
 			and item \
@@ -202,4 +202,4 @@ func interact(player: Node):
 			node.global_transform = item.global_transform
 			node.animate_to_current_transform()
 			node.finished_animating.connect(node.queue_free)
-			
+
