@@ -307,7 +307,7 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 		// If there are decorations, draw them now:
 		decorations: {
 			frosting: { type: 'ref', value: 'cupcake_frosting' },
-			whipped_cream: quickComboTile(comboSpriteInfo.cupcake_frosting, 'multiply', '#eeeff0', '#a0b7ba')
+			whipped_cream: quickComboTile(comboSpriteInfo.cupcake_frosting, 'mix', '#eeeff0', '#a0b7ba')
 		},
 		// If there are doodads, draw them now:
 		doodads: {

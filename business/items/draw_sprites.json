@@ -2194,7 +2194,7 @@
 			},
 			"whipped_cream": {
 				"type": "multi",
-				"mode": "multiply",
+				"mode": "mix",
 				"sprites": [
 					{
 						"file": "TILES-cupcake-baked.png",
