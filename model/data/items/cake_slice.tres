@@ -8,5 +8,6 @@ name = "cake_slice"
 display_name = "cake slice"
 storage_type = 1
 categories = Array[int]([2])
+max_stack_size = 6
 groups = PackedStringArray()
 sort = 903

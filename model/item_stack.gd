@@ -298,7 +298,7 @@ func accept(add: ItemStack) -> Dictionary:
 	# stack em up
 	print('pre stack: ', self, ', ', add)
 	var old_count := count
-	count = min(count + add.count, item.max_stack_size)
+	count = clamp(count + add.count, count, item.max_stack_size)
 	add.count -= count - old_count
 	print('post stack: ', self, ', ', add, ', having added ', count - old_count)
 	if add.count == 0:
@@ -318,8 +318,8 @@ func split(amount: int) -> Array[ItemStack]:
 	count -= amount
 	var split_stack = ItemStack.new(item, amount)
 	split_stack.combined_attributes = combined_attributes
-	split_stack.modifiers = modifiers
-	split_stack.finishers = finishers
+	split_stack.modifiers = modifiers.duplicate(true)
+	split_stack.finishers = finishers.duplicate(true)
 	split_stack.craft_depth = craft_depth
 	split_stack.unique_modifier_depth = unique_modifier_depth
 	split_stack.total_modifier_depth = total_modifier_depth

@@ -33,13 +33,24 @@ func _run():
 	var map_info = load_json_file("res://business/maps.json")
 
 	var registry := Registry.new()
+	var registry_id := ResourceUID.text_to_id(
+		ResourceUID.path_to_uid(REGISTRY_PATH)
+	)
 	registry.take_over_path(REGISTRY_PATH)
+	if registry_id != ResourceUID.INVALID_ID:
+		ResourceUID.set_id(registry_id, REGISTRY_PATH)
 
 	print('Processing infos...')
 	var infos: Dictionary[String, ItemInfo] = {}
 	for name in item_info:
+		var save_path: String = ITEM_PATH + safe_name(name) + ".tres"
+		var id := ResourceUID.text_to_id(
+			ResourceUID.path_to_uid(save_path)
+		)
 		infos[name] = ItemInfo.from_json(name, item_info[name], var_info)
-		infos[name].take_over_path(ITEM_PATH + safe_name(name) + ".tres")
+		infos[name].take_over_path(save_path)
+		if id != ResourceUID.INVALID_ID:
+			ResourceUID.set_id(id, save_path)
 		registry.add_item(infos[name])
 	print('Writing infos...')
 	for info in infos.values():
@@ -56,7 +67,13 @@ func _run():
 			.format([recipe.name])
 		)
 		recipes[recipe.name] = recipe
-		recipe.take_over_path(REC_PATH + safe_name(recipe.name) + ".tres")
+		var save_path: String = REC_PATH + safe_name(recipe.name) + ".tres"
+		var id := ResourceUID.text_to_id(
+			ResourceUID.path_to_uid(save_path)
+		)
+		recipe.take_over_path(save_path)
+		if id != ResourceUID.INVALID_ID:
+			ResourceUID.set_id(id, save_path)
 		registry.add_recipe(recipes[recipe.name])
 
 	print('Writing recipes...')
@@ -68,7 +85,13 @@ func _run():
 	for name in furni_info:
 		var furni = FurniInfo.from_json(name, furni_info[name])
 		furnis[name] = furni
-		furni.take_over_path(FURNI_PATH + safe_name(furni.name) + ".tres")
+		var save_path: String = FURNI_PATH + safe_name(furni.name) + ".tres"
+		var id := ResourceUID.text_to_id(
+			ResourceUID.path_to_uid(save_path)
+		)
+		furni.take_over_path(save_path)
+		if id != ResourceUID.INVALID_ID:
+			ResourceUID.set_id(id, save_path)
 		registry.add_furni(furni)
 
 	print('Writing furniture...')

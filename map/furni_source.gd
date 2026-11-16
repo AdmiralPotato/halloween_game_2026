@@ -53,3 +53,23 @@ func provide_item() -> ItemNode:
 
 func query_item() -> ItemNode:
 	return $StaticBody3D/ItemNode
+
+func interact(player: Node):
+	var ply: Player = player
+	if (
+			ply
+			and ply.held_object is ItemNode
+			and ply.held_object.stack
+			and ply.held_object.stack.item.is_category(ItemInfo.Category.CONTAINER)
+	):
+		var found := false
+		var my_stack := stack.duplicate(true)
+		for existing_stack in ply.held_object.stack.contents:
+			var result: Dictionary = existing_stack.accept(my_stack)
+			# We don't have to worry about result.rest here--we are an infinite source
+			if result.success:
+				found = true
+				break
+		if not found:
+			ply.held_object.stack.contents.append(my_stack)
+		ply.held_object.stack.emit_changed()

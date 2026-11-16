@@ -36,13 +36,41 @@ func set_save_state(save: Dictionary) -> void:
 
 
 func interact(player: Node):
+	var was_just_placed := false
+	if (
+			not item
+			and player.held_object is ItemNode
+			and player.held_object.stack.item.is_category(ItemInfo.Category.CONTAINER)
+			and not player.held_object.stack.contents.is_empty()
+	):
+		# For compatibility with countertops: try dropping the thing in the
+		# held container first.
+		var node := ItemNode.make_node(player.held_object.stack.contents[-1])
+		player.held_object.stack.contents.remove_at(-1)
+		player.held_object.stack.emit_changed()
+		node.last_global_transform = player.held_object.global_transform
+		item = node
+		node.animate_to_current_transform()
+		# fall through--try to do the recipe
+		was_just_placed = true
 	if not recipe_timer.is_stopped():
 		return  # be patient
 	if not try_craft():
-		# that won't do
-		player.indicator_material.emission = Color.RED
-		var tween := player.create_tween().set_ease(Tween.EASE_OUT)
-		tween.tween_property(player.indicator_material, ^"emission", player.indicator_color, 0.2)
+		if (
+				player.held_object is ItemNode
+				and player.held_object.stack.item.is_category(ItemInfo.Category.CONTAINER)
+				and not was_just_placed
+		):
+			# if we didn't already just drop it on here, try picking up the thing
+			# in this station instead if the player is holding a container
+			player.held_object.stack.contents.append(item.stack)
+			player.held_object.stack.emit_changed()
+			item = null
+		else:
+			# that won't do
+			player.indicator_material.emission = Color.RED
+			var tween := player.create_tween().set_ease(Tween.EASE_OUT)
+			tween.tween_property(player.indicator_material, ^"emission", player.indicator_color, 0.2)
 
 func try_craft() -> bool:
 	if not item:

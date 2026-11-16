@@ -4,14 +4,14 @@
 [ext_resource type="Resource" uid="uid://c16v2fwi8uo88" path="res://model/data/items/pudding.tres" id="2_ok80c"]
 [ext_resource type="Script" uid="uid://b5mlkyd7jcal7" path="res://model/recipe.gd" id="3_a1vl2"]
 
-[sub_resource type="Resource" id="Resource_6ntjx"]
+[sub_resource type="Resource" id="Resource_6pcfd"]
 script = ExtResource("1_6ntjx")
 item = ExtResource("2_ok80c")
 
 [resource]
 script = ExtResource("3_a1vl2")
 name = "pudding"
-output = SubResource("Resource_6ntjx")
+output = SubResource("Resource_6pcfd")
 location = 2
 ingredients = PackedStringArray("cream", "sugar")
 permitted_modifiers = PackedStringArray("cocoa_powder", "flavoring")

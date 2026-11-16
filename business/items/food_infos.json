@@ -507,7 +507,7 @@
 		"storage_type": "FRIDGE",
 		"categories": ["PRODUCT"],
 		"buy_price": null,
-		"max_stack_size": 1,
+		"max_stack_size": 6,
 		"attributes": "from_recipe"
 	},
 	"bowl": {
