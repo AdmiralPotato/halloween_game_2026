@@ -74,6 +74,33 @@ func accept_item(_item: ItemNode) -> ItemNode:
 		if res.success:
 			# Some items were accepted; end the interaction now rather than swapping
 			return _item if _item.stack else null
+		
+		# If both containers, and one empty, swap contents; otherwise
+		# merge toward the furni
+		if (
+				_item.stack.item.is_category(ItemInfo.Category.CONTAINER)
+				and self.item.stack.item.is_category(ItemInfo.Category.CONTAINER)
+		):
+			if _item.stack.contents.is_empty():
+				_item.stack.contents = self.item.stack.contents
+				self.item.stack.contents = []
+			else:
+				# Since we're appending, we have to handle the change signal
+				# ourselves
+				self.item.stack.contents.append_array(
+						_item.stack.contents
+				)
+				_item.stack.contents = []
+				self.item.stack.emit_changed()
+			return _item
+		
+		# If the player is holding a container and we have an item, put that
+		# item inside this container, and both hereon
+		if _item.stack.item.is_category(ItemInfo.Category.CONTAINER):
+			_item.stack.contents.append(self.item.stack)
+			_item.stack.emit_changed()
+			self.item = _item
+			return null
 
 	var old_item := self.item
 	if old_item:
@@ -99,6 +126,7 @@ func interact(player: Node):
 			and item.stack.item.is_category(ItemInfo.Category.CONTAINER) \
 			and not item.stack.contents.is_empty()
 	):
+		# Pick last item out of a container
 		var node := ItemNode.make_node(
 			item.stack.contents[-1]
 		)
@@ -107,6 +135,27 @@ func interact(player: Node):
 		node.animate_to_current_transform()
 		item.stack.contents.remove_at(-1)
 		item.stack.emit_changed()
+	elif (
+			player.held_object is ItemNode
+			and player.held_object.stack
+			and player.held_object.stack.item.is_category(ItemInfo.Category.CONTAINER)
+	):
+		if item and item.stack:
+			if not item.stack.item.is_category(ItemInfo.Category.CONTAINER):
+				# Put this item inside the held container
+				player.held_object.stack.contents.append(item.stack)
+				player.held_object.stack.emit_changed()
+				item = null
+		elif not player.held_object.stack.contents.is_empty():
+			# Drop the last item out of this container onto the countertop
+			var node := ItemNode.make_node(
+				player.held_object.stack.contents[-1]
+			)
+			player.held_object.stack.contents.remove_at(-1)
+			player.held_object.stack.emit_changed()
+			node.last_global_transform = player.held_object.global_transform
+			item = node
+			node.animate_to_current_transform()
 	elif (
 			(
 				player.held_object == null \
@@ -123,6 +172,7 @@ func interact(player: Node):
 			and item.stack \
 			and item.stack.count > 1
 	):
+		# Split a stack on this countertop, or grab more of the same if possible
 		var stacks := item.stack.split(1)
 		if player.held_object:
 			# XXX we can't handle failure in this branch, but it's guarded by
@@ -143,6 +193,7 @@ func interact(player: Node):
 		and item
 		and item.stack.item.is_category(ItemInfo.Category.PRODUCT)
 	):
+		# Apply finishers/doodads
 		var attempt_to_apply = item.stack.accept(player.held_object.stack)
 		if attempt_to_apply.success:
 			var node: ItemNode = player.held_object
