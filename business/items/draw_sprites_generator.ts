@@ -258,7 +258,7 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 		// If there are decorations, draw them now:
 		decorations: {
 			frosting: { type: 'ref', value: 'cookie_frosting' },
-			whipped_cream: quickComboTile(comboSpriteInfo.cookie_frosting, 'multiply', '#eeeff0', '#a0b7ba')
+			whipped_cream: quickComboTile(comboSpriteInfo.cookie_frosting, 'mix', '#eeeff0', '#a0b7ba')
 		},
 		// If there are doodads, draw them now:
 		doodads: {
@@ -440,13 +440,13 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 		// If there are decorations, draw them now:
 		decorations: {
 			frosting: { type: 'ref', value: 'cake_frosting' },
-			whipped_cream: quickComboTile(comboSpriteInfo.cake_frosting, 'multiply', '#eeeff0', '#a0b7ba')
+			whipped_cream: quickComboTile(comboSpriteInfo.cake_frosting, 'mix', '#eeeff0', '#a0b7ba')
 		},
 		// If there is a second layer of decorations, draw them now:
 		// (If there is no frosting "layers support", draw these using the above info re: flavorings)
 		piping: {
 			piping_bag: { type: 'ref', value: 'cake_piping' },
-			whipped_cream: quickComboTile(comboSpriteInfo.cake_piping, 'multiply', '#eeeff0', '#a0b7ba')
+			whipped_cream_piping_bag: quickComboTile(comboSpriteInfo.cake_piping, 'mix', '#eeeff0', '#a0b7ba')
 		},
 		// If there are doodads, draw them this way if there was NO PIPING drawn:
 		doodads_without_piping: {
@@ -527,13 +527,13 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 		// If there are decorations, draw them now:
 		decorations: {
 			frosting: { type: 'ref', value: 'cake_slice_frosting' },
-			whipped_cream: quickComboTile(comboSpriteInfo.cake_slice_frosting, 'multiply', '#eeeff0', '#a0b7ba')
+			whipped_cream: quickComboTile(comboSpriteInfo.cake_slice_frosting, 'mix', '#eeeff0', '#a0b7ba')
 		},
 		// If there is a second layer of decorations, draw them now:
 		// (If there is no frosting "layers support", draw these using the above info re: flavorings)
 		piping: {
 			piping_bag: { type: 'ref', value: 'cake_slice_piping' },
-			whipped_cream: quickComboTile(comboSpriteInfo.cake_slice_piping, 'multiply', '#eeeff0', '#a0b7ba')
+			whipped_cream_piping_bag: quickComboTile(comboSpriteInfo.cake_slice_piping, 'mix', '#eeeff0', '#a0b7ba')
 		},
 		// If there are doodads, draw them this way if there was NO PIPING drawn:
 		doodads_without_piping: {
@@ -718,6 +718,22 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 	cookie_sheet: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 7, y: 2 }}},
 	cupcake_pan: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.batter_in_cupcake_pan, x: 2, y: 0 }}},
 	cake_pan: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.batter_in_cake_pan, x: 2, y: 0 }}},
+	whipped_cream_piping_bag: {
+		base: {
+			root: quickComboTile(
+				comboSpriteInfo.piping_bag,
+				'mix',
+				'#eeeff0',
+				'#a0b7ba',
+				[
+					// jar lid
+					{ type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 7, y: 0 },
+					// generic decal (TODO make a cream label)
+					{ type: 'sprite', mode: 'mix', file: fileNames.frosting, x: 13, y: 2 },
+				]
+			)
+		}
+	},
 };
 
 console.log(data);

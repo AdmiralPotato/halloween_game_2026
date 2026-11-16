@@ -93,6 +93,19 @@
     "allowedModifiers": []
   },
   {
+    "output": "whipped_cream_piping_bag",
+    "human_name": "whipped cream piping bag",
+    "quantity": 1,
+    "location": "PIPING_STATION",
+    "pan": "NONE",
+    "time": 0,
+    "ingredients": [
+      "whipped_cream"
+    ],
+    "newAttributes": {},
+    "allowedModifiers": []
+  },
+  {
     "output": "whipped_cream",
     "human_name": "whipped cream",
     "quantity": 3,
