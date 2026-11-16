@@ -2590,6 +2590,380 @@
 			}
 		}
 	},
+	"batter_in_cake_pan": {
+		"other": {
+			"pan": {
+				"type": "sprite",
+				"mode": "mix",
+				"file": "TILES-batter-in-cake-pan.png",
+				"x": 2,
+				"y": 0
+			}
+		},
+		"base": {
+			"root": {
+				"type": "multi",
+				"mode": "mix",
+				"sprites": [
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 0,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#f9ebcb"
+					},
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 1,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#e0c074"
+					}
+				]
+			}
+		},
+		"flavoring_modifiers": {
+			"cocoa_powder": {
+				"type": "multi",
+				"mode": "multiply",
+				"sprites": [
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 0,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#9e8374"
+					},
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 1,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#63453a"
+					}
+				]
+			},
+			"cherry_flavoring": {
+				"type": "multi",
+				"mode": "multiply",
+				"sprites": [
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 0,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#c98699"
+					},
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 1,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#7b394c"
+					}
+				]
+			},
+			"raspberry_flavoring": {
+				"type": "multi",
+				"mode": "multiply",
+				"sprites": [
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 0,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#f3a9c8"
+					},
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 1,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#ad497c"
+					}
+				]
+			},
+			"strawberry_flavoring": {
+				"type": "multi",
+				"mode": "multiply",
+				"sprites": [
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 0,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#e39fac"
+					},
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 1,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#c05a65"
+					}
+				]
+			},
+			"orange_flavoring": {
+				"type": "multi",
+				"mode": "multiply",
+				"sprites": [
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 0,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#f3c370"
+					},
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 1,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#b37537"
+					}
+				]
+			},
+			"almond_flavoring": {
+				"type": "multi",
+				"mode": "multiply",
+				"sprites": [
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 0,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#c4b39e"
+					},
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 1,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#88734f"
+					}
+				]
+			},
+			"caramel_flavoring": {
+				"type": "multi",
+				"mode": "multiply",
+				"sprites": [
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 0,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#c7a16e"
+					},
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 1,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#8d5f2e"
+					}
+				]
+			},
+			"lemon_flavoring": {
+				"type": "multi",
+				"mode": "multiply",
+				"sprites": [
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 0,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#f7ee93"
+					},
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 1,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#c49d2c"
+					}
+				]
+			},
+			"lime_flavoring": {
+				"type": "multi",
+				"mode": "multiply",
+				"sprites": [
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 0,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#bedc73"
+					},
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 1,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#66893d"
+					}
+				]
+			},
+			"mint_flavoring": {
+				"type": "multi",
+				"mode": "multiply",
+				"sprites": [
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 0,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#b5e0ce"
+					},
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 1,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#569577"
+					}
+				]
+			},
+			"blueberry_flavoring": {
+				"type": "multi",
+				"mode": "multiply",
+				"sprites": [
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 0,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#7aa3c4"
+					},
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 1,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#385f95"
+					}
+				]
+			},
+			"ube_flavoring": {
+				"type": "multi",
+				"mode": "multiply",
+				"sprites": [
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 0,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#a9a4c9"
+					},
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 1,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#65639e"
+					}
+				]
+			},
+			"grape_flavoring": {
+				"type": "multi",
+				"mode": "multiply",
+				"sprites": [
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 0,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#b383cd"
+					},
+					{
+						"file": "TILES-batter-in-cake-pan.png",
+						"x": 1,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#6b477b"
+					}
+				]
+			}
+		},
+		"other_modifiers": {
+			"chocolate_chips": {
+				"type": "sprite",
+				"mode": "mix",
+				"file": "TILES-batter-in-cake-pan.png",
+				"x": 0,
+				"y": 1
+			},
+			"white_chocolate_chips": {
+				"type": "sprite",
+				"mode": "mix",
+				"file": "TILES-batter-in-cake-pan.png",
+				"x": 1,
+				"y": 1
+			},
+			"dark_chocolate_chips": {
+				"type": "sprite",
+				"mode": "mix",
+				"file": "TILES-batter-in-cake-pan.png",
+				"x": 2,
+				"y": 1
+			},
+			"chocolate_sprinkles": {
+				"type": "sprite",
+				"mode": "mix",
+				"file": "TILES-batter-in-cake-pan.png",
+				"x": 3,
+				"y": 1
+			},
+			"white_sprinkles": {
+				"type": "sprite",
+				"mode": "mix",
+				"file": "TILES-batter-in-cake-pan.png",
+				"x": 4,
+				"y": 1
+			},
+			"ball_bearing_sprinkles": {
+				"type": "sprite",
+				"mode": "mix",
+				"file": "TILES-batter-in-cake-pan.png",
+				"x": 5,
+				"y": 1
+			},
+			"rainbow_sprinkles": {
+				"type": "sprite",
+				"mode": "mix",
+				"file": "TILES-batter-in-cake-pan.png",
+				"x": 6,
+				"y": 1
+			}
+		}
+	},
 	"batter_in_cupcake_pan": {
 		"other": {
 			"pan": {
@@ -7436,6 +7810,17 @@
 				"type": "sprite",
 				"mode": "mix",
 				"file": "TILES-batter-in-cupcake-pan.png",
+				"x": 2,
+				"y": 0
+			}
+		}
+	},
+	"cake_pan": {
+		"base": {
+			"root": {
+				"type": "sprite",
+				"mode": "mix",
+				"file": "TILES-batter-in-cake-pan.png",
 				"x": 2,
 				"y": 0
 			}
