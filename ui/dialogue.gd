@@ -26,6 +26,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if !visible:
 		return
 	if (
+		event.is_action_pressed("ui_cancel")
+	):
+		get_viewport().set_input_as_handled()
+		stop()
+	if (
 		event.is_action_pressed("ui_right")
 		or event.is_action_pressed("ui_accept")
 	):
@@ -33,7 +38,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		advance_or_reveal()
 	elif (
 		event.is_action_pressed("ui_left")
-		or event.is_action_pressed("ui_cancel")
 	):
 		get_viewport().set_input_as_handled()
 		rewind()
