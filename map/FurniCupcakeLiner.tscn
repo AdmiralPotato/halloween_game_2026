@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://d35aeva153r43"]
+
+[ext_resource type="Script" uid="uid://d150sn4mswe4r" path="res://map/furni_cupcake_liner.gd" id="1_4sed3"]
+[ext_resource type="PackedScene" uid="uid://bqd6k5oatv55b" path="res://assets/furni_cupcake_station_0.glb" id="2_4sed3"]
+[ext_resource type="PackedScene" uid="uid://c8eyf6e45y65d" path="res://ui/status_indicator.tscn" id="3_n21u0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p33bg"]
+size = Vector3(1, 0.8, 1)
+
+[node name="FurniCupcakeLiner" type="Node3D" unique_id=1615491916]
+script = ExtResource("1_4sed3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1407366706]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1113763637]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+shape = SubResource("BoxShape3D_p33bg")
+
+[node name="cupcakeStation" parent="StaticBody3D" unique_id=450490837 instance=ExtResource("2_4sed3")]
+
+[node name="Item" type="Marker3D" parent="." unique_id=1196781973]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+
+[node name="StatusIndicator" parent="." unique_id=1939945637 instance=ExtResource("3_n21u0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="RecipeTimer" type="Timer" parent="." unique_id=891317977]
+one_shot = true
+
+[editable path="StaticBody3D/cupcakeStation"]

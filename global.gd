@@ -7,6 +7,7 @@ var debug_panel: DebugPanel:
 			request_debug_info.emit(new)
 var player: Player
 var tilemap: Tilemap
+var cupcake_ui: CupcakeLinerOverlay
 var gold: int = 10_000:
 	set(new):
 		gold = new

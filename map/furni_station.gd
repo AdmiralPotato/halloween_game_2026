@@ -121,7 +121,7 @@ func update_animation():
 
 
 func _process(_delta: float) -> void:
-	if not recipe_timer.is_stopped():
+	if recipe_timer and not recipe_timer.is_stopped():
 		if item != stored_ingredients:
 			cancel_craft()
 		status_indicator.set_progress(

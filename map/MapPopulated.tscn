@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://vmrcp80igtca" path="res://model/data/items/cookie_dough.tres" id="10_nc1fn"]
 [ext_resource type="Resource" uid="uid://v0pjmdco8t3r" path="res://model/data/items/cake_batter.tres" id="11_ey3im"]
 [ext_resource type="Resource" uid="uid://2x1mwsk5krkr" path="res://model/data/items/cherry_flavoring.tres" id="12_oe1s5"]
+[ext_resource type="PackedScene" uid="uid://d35aeva153r43" path="res://map/FurniCupcakeLiner.tscn" id="13_thvsr"]
 [ext_resource type="Resource" uid="uid://di0d7103yc36q" path="res://model/data/items/chocolate_chips.tres" id="13_xb0af"]
 [ext_resource type="Resource" uid="uid://cpohusrgviils" path="res://model/data/items/rainbow_sprinkles.tres" id="14_3u0sp"]
 [ext_resource type="Resource" uid="uid://coovqsg3sc4j7" path="res://model/data/items/orange_flavoring.tres" id="15_eo3ju"]
@@ -455,7 +456,7 @@ script = ExtResource("4_8usld")
 item = ExtResource("32_owuqv")
 metadata/_custom_type_script = "uid://n2r00hcbl3ul"
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rjii0"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wuaw2"]
 resource_local_to_scene = true
 content_margin_left = 8.0
 content_margin_right = 8.0
@@ -623,8 +624,11 @@ stack = SubResource("Resource_yyr8d")
 [node name="Furni7_4" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="42" unique_id=2014138953 instance=ExtResource("33_3fvnp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 4.5)
 
+[node name="Furni9_5" parent="Tilemap" parent_id_path=PackedInt32Array(2127179981) index="43" unique_id=1614865178 instance=ExtResource("13_thvsr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 5.5)
+
 [node name="Player" parent="." index="3" unique_id=1707035649]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6030058, 0, 3.3565109)
 
 [node name="GoldOverlay" parent="." index="13" unique_id=702785822]
-theme_override_styles/panel = SubResource("StyleBoxEmpty_rjii0")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_wuaw2")

@@ -7,6 +7,7 @@ enum Location {
 	SAUCEPAN,
 	OVEN,
 	PIPING_STATION,
+	CUPCAKE_LINER,
 }
 
 ## A readable name for this recipe. Not significant to gameplay.

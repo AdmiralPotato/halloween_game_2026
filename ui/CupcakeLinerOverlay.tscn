@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://dpslv0uvmg2o0"]
+
+[ext_resource type="Script" uid="uid://c3g8u243k6ece" path="res://ui/cupcake_liner_overlay.gd" id="1_4gj3h"]
+[ext_resource type="PackedScene" uid="uid://bueb4ahfl1jdl" path="res://ui/TouchFaceButton.tscn" id="1_lojyb"]
+[ext_resource type="Texture2D" uid="uid://b3eluhri8l7lu" path="res://assets/TILES-icons.png" id="2_4gj3h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u51jh"]
+atlas = ExtResource("2_4gj3h")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ttgyg"]
+font_size = 24
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="CupcakeLinerOverlay" type="Control" unique_id=368550349]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4gj3h")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=559044297]
+propagate_maximum_size = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -42.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1961125870]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="PanelContainer/HBoxContainer" unique_id=1537524061]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="ButtonCancel" parent="PanelContainer/HBoxContainer/Control" unique_id=1193517147 instance=ExtResource("1_lojyb")]
+position = Vector2(-16, -16)
+action = "ui_cancel"
+icon = SubResource("AtlasTexture_u51jh")
+
+[node name="ItemsLabel" type="Label" parent="PanelContainer/HBoxContainer" unique_id=1699667310]
+layout_mode = 2
+text = "Select a Cupcake Liner style"
+label_settings = SubResource("LabelSettings_ttgyg")
+horizontal_alignment = 1
+
+[node name="Items" type="HFlowContainer" parent="PanelContainer/HBoxContainer" unique_id=484756939]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1

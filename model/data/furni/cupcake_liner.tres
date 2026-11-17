@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FurniInfo" format=3 uid="uid://8d4403avhj2f"]
+
+[ext_resource type="PackedScene" uid="uid://d35aeva153r43" path="res://map/FurniCupcakeLiner.tscn" id="1_k08v3"]
+[ext_resource type="Script" uid="uid://cg3yvhquhplvs" path="res://model/furni_info.gd" id="2_38mtb"]
+
+[resource]
+script = ExtResource("2_38mtb")
+name = "cupcake liner"
+scene = ExtResource("1_k08v3")
+cost = 150
