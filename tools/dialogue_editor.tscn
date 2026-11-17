@@ -102,6 +102,7 @@ text = "stopped"
 
 [node name="Progress" type="ProgressBar" parent="Tools/MarginContainer/VBoxContainer/PBInfo" unique_id=1929597609]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/background = SubResource("StyleBoxFlat_x43cg")

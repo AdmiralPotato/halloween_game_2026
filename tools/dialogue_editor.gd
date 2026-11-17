@@ -9,8 +9,8 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	%Progress.value = %Dialogue.display_progress
-	%Progress.indeterminate = not %Dialogue.is_displaying
+	%Progress.value = %Dialogue.display_progress if %Dialogue.is_displaying else 0.0
+	%Progress.show_percentage = %Dialogue.is_displaying
 
 
 func get_full_path(index: int) -> String:
