@@ -190,34 +190,49 @@ static func make_list(items: PackedStringArray) -> String:
 
 static func pluralize(s: String) -> String:
 	return s + ("s" if not s.ends_with("s") else "")
-func _to_string() -> String:
+
+func describe(article: bool = true) -> String:
 	var disp_name := item.display_name if item else "invalid item"
 	if count != 1:
 		disp_name = pluralize(disp_name)
 	var mods := PackedStringArray()
-	var card := modifier_cardinality
-	for info in card:
-		mods.append(
-				CARDINALITY.get(min(card[info], MAX_CARDINALITY), "") + \
-				info.display_name
+	var exemplars: Dictionary[ItemStack, int]
+	# TODO: find the right way to figure this out
+	for mod in modifiers + finishers:
+		var found := false
+		for stk in exemplars:
+			if stk.is_stackable(mod):
+				exemplars[stk] += mod.count
+				found = true
+				break
+		if not found:
+			exemplars[mod] = mod.count
+	for eg in exemplars:
+		mods.append(CARDINALITY.get(min(exemplars[eg], MAX_CARDINALITY), "") + \
+				eg.describe(false)
 		)
 	var mod_string := ""
 	if mods.size() >= 1:
-		mod_string = " with " + make_list(mods)
+		mod_string = (" " if article else "") + "with " + make_list(mods)
 	var cont_string := ""
 	if contents.size() >= 1:
 		var contents_str := PackedStringArray()
 		for child in contents:
 			contents_str.append(str(child))
 		cont_string = " of " + make_list(contents_str)
-	return '{article} {name}{mods}{contents}'.format({
-		article = "no" if count == 0 else \
-				("an" if disp_name[0] in VOWELS else "a") if count == 1 else \
-				str(count),
+	return '{article}{name}{lp}{mods}{contents}{rp}'.format({
+		article = "" if not article else "no " if count == 0 else \
+				("an " if disp_name[0] in VOWELS else "a ") if count == 1 else \
+				str(count) + " ",
 		name = disp_name,
 		mods = mod_string,
 		contents = cont_string,
+		lp = " (" if not article and (mod_string or cont_string) else "",
+		rp = ")" if not article and (mod_string or cont_string) else "",
 	})
+
+func _to_string() -> String:
+	return describe()
 
 
 static func _cardinality_equal(
