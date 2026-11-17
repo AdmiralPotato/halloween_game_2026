@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://cxtkcqa04as61"]
+
+[ext_resource type="PackedScene" uid="uid://c02bveschmhrs" path="res://ui/dialogue.tscn" id="1_c0a6k"]
+[ext_resource type="Script" uid="uid://dgq7mgiismca0" path="res://tools/dialogue_editor.gd" id="1_x43cg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a28pv"]
+bg_color = Color(0.3403393, 0.34033936, 0.34033918, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x43cg"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ecgij"]
+bg_color = Color(1.6244128e-06, 0.38237458, 4.813075e-08, 1)
+
+[node name="DialogueEditor" type="PanelContainer" unique_id=1142630436]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x43cg")
+scenes = "res://business/dialogs"
+
+[node name="Dialogue" parent="." unique_id=762855756 instance=ExtResource("1_c0a6k")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Tools" type="PanelContainer" parent="." unique_id=120487473]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_a28pv")
+
+[node name="MarginContainer" type="MarginContainer" parent="Tools" unique_id=2062295763]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tools/MarginContainer" unique_id=742957661]
+layout_mode = 2
+
+[node name="SceneFiles" type="ItemList" parent="Tools/MarginContainer/VBoxContainer" unique_id=1304538469]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 64)
+custom_maximum_size = Vector2(256, 64)
+layout_mode = 2
+
+[node name="Actions" type="HBoxContainer" parent="Tools/MarginContainer/VBoxContainer" unique_id=1497908512]
+layout_mode = 2
+
+[node name="Run" type="Button" parent="Tools/MarginContainer/VBoxContainer/Actions" unique_id=1891816348]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+text = "Run"
+
+[node name="Stop" type="Button" parent="Tools/MarginContainer/VBoxContainer/Actions" unique_id=319999326]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Stop
+"
+
+[node name="SceneInfo" type="HBoxContainer" parent="Tools/MarginContainer/VBoxContainer" unique_id=1555783482]
+layout_mode = 2
+
+[node name="PrevIndex" type="Button" parent="Tools/MarginContainer/VBoxContainer/SceneInfo" unique_id=1990720025]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "<"
+
+[node name="SceneIndex" type="Label" parent="Tools/MarginContainer/VBoxContainer/SceneInfo" unique_id=1498541083]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "(no scene running)"
+horizontal_alignment = 1
+
+[node name="Redisplay" type="Button" parent="Tools/MarginContainer/VBoxContainer/SceneInfo" unique_id=254934462]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "@"
+
+[node name="NextIndex" type="Button" parent="Tools/MarginContainer/VBoxContainer/SceneInfo" unique_id=658842946]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = ">"
+
+[node name="PBInfo" type="HBoxContainer" parent="Tools/MarginContainer/VBoxContainer" unique_id=1599838113]
+layout_mode = 2
+
+[node name="State" type="Label" parent="Tools/MarginContainer/VBoxContainer/PBInfo" unique_id=589273109]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "stopped"
+
+[node name="Progress" type="ProgressBar" parent="Tools/MarginContainer/VBoxContainer/PBInfo" unique_id=1929597609]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_x43cg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ecgij")
+max_value = 1.0
+value = 0.5
+
+[connection signal="displayed" from="Dialogue" to="." method="_on_dialogue_displayed"]
+[connection signal="displaying" from="Dialogue" to="." method="_on_dialogue_displaying"]
+[connection signal="stopped" from="Dialogue" to="." method="_on_dialogue_stopped"]
+[connection signal="visibility_changed" from="Dialogue" to="." method="_on_dialogue_visibility_changed"]
+[connection signal="item_activated" from="Tools/MarginContainer/VBoxContainer/SceneFiles" to="." method="_on_scene_files_item_activated"]
+[connection signal="item_selected" from="Tools/MarginContainer/VBoxContainer/SceneFiles" to="." method="_on_scene_files_item_selected"]
+[connection signal="pressed" from="Tools/MarginContainer/VBoxContainer/Actions/Run" to="." method="_on_run_pressed"]
+[connection signal="pressed" from="Tools/MarginContainer/VBoxContainer/Actions/Stop" to="." method="_on_stop_pressed"]
+[connection signal="pressed" from="Tools/MarginContainer/VBoxContainer/SceneInfo/PrevIndex" to="." method="_on_prev_index_pressed"]
+[connection signal="pressed" from="Tools/MarginContainer/VBoxContainer/SceneInfo/Redisplay" to="." method="_on_redisplay_pressed"]
+[connection signal="pressed" from="Tools/MarginContainer/VBoxContainer/SceneInfo/NextIndex" to="." method="_on_next_index_pressed"]

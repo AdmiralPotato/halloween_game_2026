@@ -15,6 +15,12 @@ signal displayed
 var current_index: int = 0
 var shown_timebase: float = 0.0
 var cps: float = 15.0
+var display_progress: float:
+	get:
+		return %DialogueText.visible_ratio
+var is_displaying: bool:
+	get:
+		return visible and display_progress < 1.0
 
 
 func _ready() -> void:
@@ -46,7 +52,8 @@ func _unhandled_input(event: InputEvent) -> void:
 func start(scn: DialogueScene = null):
 	if scn:
 		dialogue_scene = scn
-	Global.player.input_enabled = false
+	if Global.player:
+		Global.player.input_enabled = false
 	show()
 	modulate = Color.TRANSPARENT
 	var tween = create_tween()
@@ -60,7 +67,8 @@ func stop():
 	tween.tween_property(self, ^"modulate", Color.TRANSPARENT, FADE_TIME)
 	tween.tween_callback(
 		func():
-			Global.player.input_enabled = true
+			if Global.player:
+				Global.player.input_enabled = true
 			hide()
 	)
 	stopped.emit()
@@ -88,14 +96,17 @@ func advance():
 	if (not dialogue_scene) or current_index >= len(dialogue_scene.messages):
 		stop()
 	else:
-		display(dialogue_scene.messages[current_index])
+		display_current()
 
 
 func rewind():
 	if current_index > 0:
 		current_index -= 1
-	display(dialogue_scene.messages[current_index])
+	display_current()
 
+
+func display_current():
+	display(dialogue_scene.messages[current_index])
 
 func display(msg: DialogueMessage):
 	displaying.emit()
@@ -129,6 +140,8 @@ func display(msg: DialogueMessage):
 
 
 func _process(delta: float) -> void:
+	if not visible:
+		return
 	shown_timebase += delta
 	if %DialogueText.visible_ratio < 1.0:
 		%DialogueText.visible_characters = int(shown_timebase * cps)
