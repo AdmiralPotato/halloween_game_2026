@@ -125,7 +125,7 @@ one_shot = true
 
 [node name="TouchUI" parent="." unique_id=1653148583 instance=ExtResource("6_6wia2")]
 
-[node name="Shop" parent="." unique_id=1972639199 instance=ExtResource("17_ot4t6")]
+[node name="Shop" parent="." unique_id=1972639199 groups=["dialogs"] instance=ExtResource("17_ot4t6")]
 visible = false
 offset_left = 128.0
 offset_right = -128.0
@@ -155,7 +155,7 @@ text = "0"
 label_settings = SubResource("LabelSettings_e4u7y")
 script = ExtResource("16_ots2d")
 
-[node name="PauseMenu" type="CenterContainer" parent="." unique_id=1681424694]
+[node name="PauseMenu" type="CenterContainer" parent="." unique_id=1681424694 groups=["dialogs"]]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -214,10 +214,10 @@ display_mode = 1
 access = 2
 filters = PackedStringArray("*.png")
 
-[node name="Dialogue" parent="." unique_id=762855756 instance=ExtResource("13_2jyax")]
+[node name="Dialogue" parent="." unique_id=762855756 groups=["dialogs"] instance=ExtResource("13_2jyax")]
 unique_name_in_owner = true
 
-[node name="CupcakeLinerOverlay" parent="." unique_id=1395101364 instance=ExtResource("14_1dc6w")]
+[node name="CupcakeLinerOverlay" parent="." unique_id=1395101364 groups=["dialogs"] instance=ExtResource("14_1dc6w")]
 visible = false
 
 [connection signal="timeout" from="SpawnCustomer" to="." method="_on_spawn_customer_timeout"]

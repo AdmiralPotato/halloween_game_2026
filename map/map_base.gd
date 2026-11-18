@@ -60,7 +60,10 @@ func _ready():
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("shop"):
+	if (
+		!Global.are_other_dialogs_open($Shop)
+		and event.is_action_pressed("shop")
+	):
 		get_viewport().set_input_as_handled()
 		if $Shop.visible:
 			hide_shop()

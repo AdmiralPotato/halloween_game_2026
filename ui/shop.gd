@@ -1,3 +1,4 @@
+class_name Shop
 extends PanelContainer
 
 const ITEM_BUTTON = preload("res://ui/item_button.tscn")
@@ -7,6 +8,7 @@ signal purchase_item(item: ItemInfo)
 signal purchase_furni(furni: FurniInfo)
 
 func _ready() -> void:
+	Global.shop_ui = self
 	for info in Global.registry.get_items_by_sort():
 		if info.cost_tier != 0:
 			var button: ItemButton = ITEM_BUTTON.instantiate()

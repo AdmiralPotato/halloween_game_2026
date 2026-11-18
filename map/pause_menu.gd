@@ -23,6 +23,8 @@ func _on_resume_pressed() -> void:
 	resume()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if Global.are_other_dialogs_open(self):
+		return
 	if event.is_action_pressed("menu"):
 		get_viewport().set_input_as_handled()
 		if not get_tree().paused:
