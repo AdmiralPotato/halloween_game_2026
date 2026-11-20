@@ -42,6 +42,7 @@ dialogs=""
 
 [gui]
 
+common/show_focus_state_on_pointer_event=2
 theme/custom="uid://bkphg3nelw53u"
 
 [importer_defaults]

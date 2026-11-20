@@ -191,15 +191,13 @@ func _on_shop_purchase_item(item: ItemInfo) -> void:
 
 func show_shop ():
 	$TouchUI.visible = false
-	$Shop.visible = true
+	$Shop.open()
 	$Player.input_enabled = false
-	var first_shop_item = $Shop/Categories/Items.get_child(0)
-	first_shop_item.grab_focus()
 
 
 func hide_shop ():
 	$TouchUI.visible = true
-	$Shop.visible = false
+	$Shop.close()
 	$Player.input_enabled = true
 
 
