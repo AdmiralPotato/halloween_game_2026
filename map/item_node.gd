@@ -303,6 +303,22 @@ static func render_recipe_layer_ref (
 	return _texture
 
 
+static func sort_modifiers_by_desired_render_order(
+	_modifiers: Array[ItemStack],
+	_recipe_layer_dict: Dictionary,
+) -> Array[ItemStack]:
+	var sorted_modifiers: Array[ItemStack] = []
+	var keys := _recipe_layer_dict.keys();
+	# if modifier is not present in the keys for this layer, sort it first
+	for modifier in _modifiers:
+		if !keys.has(modifier.item.name):
+			sorted_modifiers.append(modifier)
+	for key in keys:
+		for modifier in _modifiers:
+			if modifier.item.name == key:
+				sorted_modifiers.append(modifier)
+	return sorted_modifiers
+
 static func render_recipe_stack_modifiers (
 	_modifiers: Array[ItemStack],
 	_recipe_layer_dict: Dictionary,
@@ -310,7 +326,8 @@ static func render_recipe_stack_modifiers (
 ):
 	#print('render_recipe_stack_modifiers: _stack: ', _stack.item.name, ' _stack.modifiers: ', _stack.modifiers)
 	#print('render_recipe_stack_modifiers: _recipe_layer_dict: ', _recipe_layer_dict)
-	for modifier in _modifiers:
+	var sorted_modifiers := sort_modifiers_by_desired_render_order(_modifiers, _recipe_layer_dict);
+	for modifier in sorted_modifiers:
 		var modifier_name = modifier.item.name
 		#print('render_recipe_stack_modifiers: modifier: ', modifier_name)
 		if modifier_name in _recipe_layer_dict:
