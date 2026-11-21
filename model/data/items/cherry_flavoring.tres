@@ -18,3 +18,5 @@ attributes = Dictionary[int, int]({
 })
 groups = PackedStringArray("flavoring")
 sort = 200
+allowed_contents = PackedStringArray()
+allowed_containers = PackedStringArray()

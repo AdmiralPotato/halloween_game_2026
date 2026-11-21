@@ -104,6 +104,17 @@ const PER_CRAFT_BASE: float = 1.5
 ## Classification of this item; meant to be used to sort ascending in user-
 ## facing item enumerations.
 @export var sort: int = 0
+## Group names of items that can be put into this container, if the item itself
+## allows it. Only relevant if not [any_contents].
+@export var allowed_contents: PackedStringArray = PackedStringArray()
+## If true, all contents are allowed, and allowed_contents is ignored.
+@export var any_contents: bool = true
+## Group names of containers allowed to contain this item, if the container
+## itself also allows it. Only relevant if not [any_container].
+@export var allowed_containers: PackedStringArray = PackedStringArray()
+## If true, all containers are allowed, and  allowed_containers is ignored.
+@export var any_container: bool = true
+
 
 const MAX_STACK_SIZES = {
 	FLAVORING_STACK_SIZE = 6,
@@ -139,6 +150,16 @@ static func from_json(label: String, d: Dictionary, variants: Dictionary = {}) -
 	for group in d.get('groups', []):
 		info.groups.append(group)
 	info.sort = d.get("sort", 0)
+	if "allowed_contents" in d:
+		info.any_contents = false
+		info.allowed_contents = PackedStringArray(d.allowed_contents)
+	else:
+		info.any_contents = true
+	if "allowed_containers" in d:
+		info.any_container = false
+		info.allowed_containers = PackedStringArray(d.allowed_containers)
+	else:
+		info.any_container = true
 	return info
 
 func is_category(cat: Category) -> bool:
@@ -146,6 +167,18 @@ func is_category(cat: Category) -> bool:
 
 func matches_spec(spec: String) -> bool:
 	return name == spec or spec in groups
+
+func matches_any_spec(specs: PackedStringArray) -> bool:
+	for spec in specs:
+		if matches_spec(spec):
+			return true
+	return false
+
+func can_contain(content: ItemInfo) -> bool:
+	return (
+		(any_contents or content.matches_any_spec(allowed_contents))
+		and (content.any_container or matches_any_spec(allowed_containers))
+	)
 
 static func process_texture_string(texture_path: String) -> Texture2D:
 	var parts: PackedStringArray = texture_path.split("@", true, 2)

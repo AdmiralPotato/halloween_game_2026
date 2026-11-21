@@ -82,22 +82,33 @@ func accept_item(_item: ItemNode) -> ItemNode:
 				and self.item.stack.item.is_category(ItemInfo.Category.CONTAINER)
 		):
 			if _item.stack.contents.is_empty():
-				_item.stack.contents = self.item.stack.contents
-				self.item.stack.contents = []
-				self.item.stack.emit_changed()
+				var i = 0
+				while i < self.item.stack.contents.size():
+					var content = self.item.stack.contents[i]
+					if _item.stack.item.can_contain(content.item):
+						_item.stack.contents.append(content)
+						self.item.stack.contents.remove_at(i)
+					else:
+						i += 1
 			else:
-				# Since we're appending, we have to handle the change signal
-				# ourselves
-				self.item.stack.contents.append_array(
-						_item.stack.contents
-				)
-				_item.stack.contents = []
-				self.item.stack.emit_changed()
+				var i = 0
+				while i < _item.stack.contents.size():
+					var content = _item.stack.contents[i]
+					if self.item.stack.item.can_contain(content.item):
+						self.item.stack.contents.append(content)
+						_item.stack.contents.remove_at(i)
+					else:
+						i += 1
+			self.item.stack.emit_changed()
+			_item.stack.emit_changed()
 			return _item
 
 		# If the player is holding a container and we have an item, put that
 		# item inside this container, and both hereon
-		if _item.stack.item.is_category(ItemInfo.Category.CONTAINER):
+		if (
+				_item.stack.item.is_category(ItemInfo.Category.CONTAINER)
+				and _item.stack.item.can_contain(self.item.stack.item)
+		):
 			_item.stack.contents.append(self.item.stack)
 			_item.stack.emit_changed()
 			self.item = _item

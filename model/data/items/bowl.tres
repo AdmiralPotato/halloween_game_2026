@@ -11,3 +11,5 @@ categories = Array[int]([6])
 cost_tier = 1
 groups = PackedStringArray()
 sort = 999
+allowed_contents = PackedStringArray()
+allowed_containers = PackedStringArray()

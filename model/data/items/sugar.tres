@@ -13,3 +13,5 @@ attributes = Dictionary[int, int]({
 })
 groups = PackedStringArray()
 sort = 101
+allowed_contents = PackedStringArray()
+allowed_containers = PackedStringArray()

@@ -12,3 +12,5 @@ cost_tier = 1
 max_stack_size = 12
 groups = PackedStringArray()
 sort = 102
+allowed_contents = PackedStringArray()
+allowed_containers = PackedStringArray()

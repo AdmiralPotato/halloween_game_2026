@@ -11,3 +11,6 @@ categories = Array[int]([6])
 cost_tier = 1
 groups = PackedStringArray()
 sort = 1000
+allowed_contents = PackedStringArray("cookie_dough", "cookie")
+any_contents = false
+allowed_containers = PackedStringArray()

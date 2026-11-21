@@ -15,3 +15,5 @@ attributes = Dictionary[int, int]({
 })
 groups = PackedStringArray("hard_candy_shapes")
 sort = 520
+allowed_contents = PackedStringArray()
+allowed_containers = PackedStringArray()

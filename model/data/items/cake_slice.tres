@@ -11,3 +11,5 @@ categories = Array[int]([2])
 max_stack_size = 6
 groups = PackedStringArray()
 sort = 903
+allowed_contents = PackedStringArray()
+allowed_containers = PackedStringArray()

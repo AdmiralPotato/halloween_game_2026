@@ -15,3 +15,5 @@ attributes = Dictionary[int, int]({
 })
 groups = PackedStringArray("sprinkles")
 sort = 500
+allowed_contents = PackedStringArray()
+allowed_containers = PackedStringArray()

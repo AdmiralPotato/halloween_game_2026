@@ -59,6 +59,7 @@ func interact(player: Player):
 		if (
 				player.held_object is ItemNode
 				and player.held_object.stack.item.is_category(ItemInfo.Category.CONTAINER)
+				and player.held_object.stack.item.can_contain(item.stack.item)
 				and not was_just_placed
 		):
 			# if we didn't already just drop it on here, try picking up the thing

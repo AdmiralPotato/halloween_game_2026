@@ -61,6 +61,7 @@ func interact(player: Node):
 			and ply.held_object is ItemNode
 			and ply.held_object.stack
 			and ply.held_object.stack.item.is_category(ItemInfo.Category.CONTAINER)
+			and ply.held_object.stack.item.can_contain(stack.item)
 	):
 		var found := false
 		var my_stack := stack.duplicate(true)

@@ -11,3 +11,5 @@ categories = Array[int]([3, 4])
 cost_tier = 2
 groups = PackedStringArray()
 sort = 300
+allowed_contents = PackedStringArray()
+allowed_containers = PackedStringArray()

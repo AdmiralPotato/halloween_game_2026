@@ -12,3 +12,5 @@ cost_tier = 3
 max_stack_size = 9
 groups = PackedStringArray("chocolate_chips")
 sort = 380
+allowed_contents = PackedStringArray()
+allowed_containers = PackedStringArray()

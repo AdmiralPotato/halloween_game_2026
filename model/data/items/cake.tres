@@ -10,3 +10,5 @@ storage_type = 1
 categories = Array[int]([2])
 groups = PackedStringArray()
 sort = 902
+allowed_contents = PackedStringArray()
+allowed_containers = PackedStringArray()

@@ -289,6 +289,8 @@ func accept(add: ItemStack) -> Dictionary:
 	# Containers can hold anything but other containers
 	if item.is_category(ItemInfo.Category.CONTAINER):
 		if not add.item.is_category(ItemInfo.Category.CONTAINER):
+			if not item.can_contain(add.item):
+				return {success = false, rest = add}
 			contents.append(add)
 			emit_changed()  # TODO: automatically cause this when contents mutate
 			return {success = true, rest = null}
