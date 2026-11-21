@@ -37,7 +37,7 @@ sky_material = SubResource("PhysicalSkyMaterial_xtlfy")
 
 [sub_resource type="Environment" id="Environment_el5rg"]
 background_mode = 1
-background_color = Color(0.11727656, 0.011531538, 0.21022078, 1)
+background_color = Color(0.08568498, 0.071365185, 0.1252102, 1)
 sky = SubResource("Sky_eai58")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b0i7x"]
