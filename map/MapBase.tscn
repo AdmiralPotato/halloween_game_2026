@@ -92,13 +92,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1716016636]
 environment = SubResource("Environment_el5rg")
 
-[node name="AreaLight3D" type="AreaLight3D" parent="." unique_id=502174211]
+[node name="AreaLight3DThatMakesPhonesCry" type="AreaLight3D" parent="." unique_id=502174211]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -0.023972047, 0.99971265, 0, -0.99971265, -0.023972047, 5.6354437, 3.8479996, 5.018531)
+visible = false
 light_color = Color(0.95741194, 0.7381257, 0.58503574, 1)
 light_energy = 0.695
 area_range = 4.092
 area_attenuation = -1.719
 area_size = Vector2(11.550219, 10.643431)
+
+[node name="AreaLight3DSubstitute" type="DirectionalLight3D" parent="." unique_id=1508279080]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.32556814, 0.94551855, 0, -0.94551855, 0.32556814, 5.6354437, 3.8479996, 5.018531)
+light_color = Color(0.95741194, 0.7381257, 0.58503574, 1)
+light_energy = 0.35
 
 [node name="MainLight" type="DirectionalLight3D" parent="." unique_id=1786253674]
 transform = Transform3D(0.8660253, 0.43301287, -0.25000006, 0, 0.49999997, 0.86602545, 0.5000002, -0.75, 0.4330126, -3.1832173, 3.4324942, 0)
@@ -206,6 +214,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Export PNG of held item"
 
+[node name="ToggleLights" type="CheckBox" parent="PauseMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=1056558743]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Pretty light make phone cry"
+
 [node name="Exit to Menu" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=1233873554]
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../Resume")
@@ -239,6 +252,7 @@ visible = false
 [connection signal="pressed" from="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Resume" to="PauseMenu" method="_on_resume_pressed"]
 [connection signal="pressed" from="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Export" to="PauseMenu" method="_on_export_pressed"]
 [connection signal="pressed" from="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/ExportPNG" to="." method="_on_export_png_pressed"]
+[connection signal="toggled" from="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/ToggleLights" to="." method="_on_toggle_lights"]
 [connection signal="pressed" from="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Exit to Menu" to="PauseMenu" method="_on_exit_to_menu_pressed"]
 [connection signal="file_selected" from="PauseMenu/SaveDialog" to="PauseMenu" method="_on_save_dialog_file_selected"]
 [connection signal="file_selected" from="PauseMenu/SavePNGDialog" to="." method="_on_save_png_dialog_file_selected"]

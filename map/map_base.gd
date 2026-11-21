@@ -235,3 +235,8 @@ func _on_save_png_dialog_file_selected(path: String) -> void:
 	var fd := FileAccess.open(path, FileAccess.WRITE)
 	fd.store_buffer(get_png_data_buffer())
 	fd.flush()
+
+
+func _on_toggle_lights(toggled_on: bool) -> void:
+	%AreaLight3DThatMakesPhonesCry.visible = toggled_on
+	%AreaLight3DSubstitute.visible = !toggled_on
