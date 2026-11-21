@@ -533,6 +533,7 @@
 		"sort": 1000,
 		"storage_type": "CRATE",
 		"categories": ["CONTAINER"],
+		"allowed_contents": [ "cookie_dough", "cookie" ],
 		"buy_price": 1,
 		"max_stack_size": 1,
 		"attributes": {}
@@ -542,6 +543,7 @@
 		"sort": 1001,
 		"storage_type": "CRATE",
 		"categories": ["CONTAINER"],
+		"allowed_contents": [ "cake_batter", "cake" ],
 		"buy_price": 1,
 		"max_stack_size": 1,
 		"attributes": {}
@@ -551,6 +553,7 @@
 		"sort": 1002,
 		"storage_type": "CRATE",
 		"categories": ["CONTAINER"],
+		"allowed_contents": [ "cake_batter", "cupcake" ],
 		"buy_price": 1,
 		"max_stack_size": 1,
 		"attributes": {}
