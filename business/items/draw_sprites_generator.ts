@@ -1,5 +1,6 @@
 import {writeFile} from 'node:fs/promises'
 import {join, parse} from 'node:path'
+import { fileURLToPath } from 'node:url';
 // --------------------------------------------- Shared info --------------------------------------------- //
 
 const commonColors: Record<string, { base: string; shadow: string; }> = {
@@ -122,7 +123,7 @@ const comboSpriteInfo: Record<string, ComboSpriteInfo> = {
 
 // --------------------------------------------- Draw info --------------------------------------------- //
 
-type DrawLayer = Tile | multi | Ref;
+type DrawLayer = Tile | Multi | Ref;
 type Mode = 'mix' | 'multiply';
 
 type Tile = {
@@ -133,7 +134,7 @@ type Tile = {
 	y: number;
 	colorize?: string;
 };
-type multi = {
+type Multi = {
 	type: 'multi';
 	mode: Mode;
 	sprites: DrawLayer[]
@@ -143,7 +144,7 @@ type Ref = {
 	value: string;
 }
 
-const quickComboTile =  (info: ComboSpriteInfo, mode: Mode, light: string, dark: string, extraTiles?: DrawLayer[]): DrawLayer => {
+const quickComboTile =  (info: ComboSpriteInfo, mode: Mode, light: string, dark: string, extraTiles?: DrawLayer[]): Multi => {
 	return {
 		type: 'multi',
 		mode,
@@ -323,6 +324,14 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 			hard_candy_ghosts:     { type: 'sprite', mode: 'mix', file: fileNames.cupcake, x: 2, y: 2 },
 			hard_candy_bats:       { type: 'sprite', mode: 'mix', file: fileNames.cupcake, x: 3, y: 2 },
 		},
+		liner: {
+			root: {
+				type: 'ref',
+				value: 'cupcake_liner',
+			}
+		}
+	},
+	cupcake_liner: {
 		// If the liner is specified, draw the specific one now; if none specified, draw "pale"
 		liner: {
 			pale:       quickComboTile(comboSpriteInfo.cupcake_liner, 'mix', '#e2e2e2', '#706c62'),
@@ -337,9 +346,17 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 			blush:      quickComboTile(comboSpriteInfo.cupcake_liner, 'mix', '#d39aac', '#824457'),
 			brown:      quickComboTile(comboSpriteInfo.cupcake_liner, 'mix', '#957d64', '#4e372d'),
 			metal:      quickComboTile(comboSpriteInfo.cupcake_liner, 'mix', '#f9f9f9', '#302d26'),
-			party: quickComboTile(comboSpriteInfo.cupcake_liner, 'mix', '#ffffff', '#8d8778', [
-				{ type: 'sprite', mode: 'multiply', file: fileNames.cupcake, x: 6, y: 0 }
-			]),
+			party: (() => {
+				const layer = quickComboTile(comboSpriteInfo.cupcake_liner, 'mix', '#ffffff', '#8d8778');
+				layer.sprites.splice(
+					1,
+					0,
+					// this is mix mode because shader error make texture disappear.
+					// so it was easier to put it below the lines layer to look decent
+					{ file: fileNames.cupcake, x: 6, y: 0, type: 'sprite', mode: 'mix' },
+				)
+				return layer;
+			})(),
 		}
 	},
 	batter_in_cake_pan: {
@@ -739,8 +756,7 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 console.log(data);
 
 const path = join(
-	parse(import.meta.url).dir
-		.replace('file://', ''),
+	parse(fileURLToPath(import.meta.url)).dir,
 	'draw_sprites.json'
 )
 writeFile(path, JSON.stringify(data, null, '\t') + '\n')

@@ -179,6 +179,7 @@ static func render_recipe (recipe_name: String, _modifiers: Array[ItemStack] = [
 		'cake_slice_piping': return render_recipe_cake_piping(recipe, _modifiers)
 		'cake_slice_frosting': return render_recipe_cake_piping(recipe, _modifiers)
 		'cupcake': return render_recipe_cupcake(recipe, _modifiers, _finishers)
+		'cupcake_liner': return render_cupcake_liner(recipe, _modifiers)
 		'cupcake_frosting': return render_recipe_cake_piping(recipe, _modifiers)
 		'cookie_dough': return render_recipe_cookie_dough(recipe, _modifiers)
 		'cookie': return render_recipe_cookie(recipe, _modifiers, _finishers)
@@ -438,8 +439,18 @@ static func render_recipe_cupcake(_recipe: Dictionary, _modifiers: Array[ItemSta
 	render_recipe_stack_modifiers(_modifiers, _recipe.other_modifiers, texture)
 	render_recipe_stack_modifiers(_finishers, _recipe.decorations, texture)
 	render_recipe_stack_modifiers(_finishers, _recipe.doodads, texture)
-	# TODO: Implement liner rendering when we have a liner station/item?
-	# 6. Draw liner: `cupcake.liner[name]`
-	# 	- If no liner is specified, draw "pale" (`cupcake.liner.pale`)
-	render_recipe_layer(_recipe.liner.pale, texture)
+	render_recipe_layer(_recipe.liner.root, texture, _modifiers)
 	return texture
+
+
+static func render_cupcake_liner(
+	_recipe: Dictionary,
+	_modifiers: Array[ItemStack],
+) -> Texture2D:
+	var style = 'pale'
+	for modifier in _modifiers:
+		if _recipe.liner.has(modifier.item.name):
+			style = modifier.item.name
+			if style == 'party':
+				print('its a party')
+	return render_recipe_layer(_recipe.liner[style])

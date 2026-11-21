@@ -13,8 +13,8 @@ func unsubscribe() -> void:
 	Global.cupcake_ui.disconnect("cancel", _on_cancel)
 
 
-func _on_select_liner(item: ItemInfo) -> void:
-	print("OMG A LINER!!", item)
+func _on_select_liner(liner_modifier: ItemStack) -> void:
+	print("OMG A LINER!!", liner_modifier)
 	unsubscribe()
 
 

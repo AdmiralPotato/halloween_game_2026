@@ -2295,6 +2295,14 @@
 			}
 		},
 		"liner": {
+			"root": {
+				"type": "ref",
+				"value": "cupcake_liner"
+			}
+		}
+	},
+	"cupcake_liner": {
+		"liner": {
 			"pale": {
 				"type": "multi",
 				"mode": "mix",
@@ -2573,18 +2581,18 @@
 					},
 					{
 						"file": "TILES-cupcake-baked.png",
+						"x": 6,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix"
+					},
+					{
+						"file": "TILES-cupcake-baked.png",
 						"x": 5,
 						"y": 0,
 						"type": "sprite",
 						"mode": "mix",
 						"colorize": "#8d8778"
-					},
-					{
-						"type": "sprite",
-						"mode": "multiply",
-						"file": "TILES-cupcake-baked.png",
-						"x": 6,
-						"y": 0
 					}
 				]
 			}
