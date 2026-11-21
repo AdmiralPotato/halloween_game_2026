@@ -18,6 +18,7 @@ enum Category {
 	DECORATION,
 	DOODAD,
 	CONTAINER,
+	CUPCAKE_LINER,
 }
 
 enum Attribute {

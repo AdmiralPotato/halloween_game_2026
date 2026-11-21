@@ -97,9 +97,14 @@ func try_craft() -> bool:
 			stack.unique_modifier_depth = info.unique_modifier_depth
 			stack.total_modifier_depth = info.total_modifier_depth
 			if info.container:
+				var inner_stack = stack
 				var container_stack: ItemStack = info.container.duplicate(true)
 				container_stack.contents = [stack]
 				stack = container_stack
+				## Transfers CupcakeLiners from CupcakePan to the Product
+				if container_stack.modifiers.size() > 0:
+					inner_stack.modifiers.append_array(item.stack.modifiers)
+					container_stack.modifiers.clear()
 			print("success: will make ", stack)
 			eventual_result = stack
 			stored_ingredients = item

@@ -84,6 +84,7 @@ func accept_item(_item: ItemNode) -> ItemNode:
 			if _item.stack.contents.is_empty():
 				_item.stack.contents = self.item.stack.contents
 				self.item.stack.contents = []
+				self.item.stack.emit_changed()
 			else:
 				# Since we're appending, we have to handle the change signal
 				# ourselves

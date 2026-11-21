@@ -17,7 +17,11 @@ func _ready() -> void:
 		var stack = ItemStack.new(recipe)
 		var style_info = ItemInfo.new()
 		style_info.name = style
-		style_info.display_name = style + ' liner'
+		style_info.display_name = style.replace('_', ' ') + ' liner'
+		style_info.categories.append_array([
+			ItemInfo.Category.CUPCAKE_LINER,
+			ItemInfo.Category.MODIFIER,
+		])
 		var style_stack = ItemStack.new(style_info)
 		stack.modifiers.append(style_stack)
 		button.stack = stack

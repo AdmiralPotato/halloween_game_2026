@@ -2972,7 +2972,7 @@
 			}
 		}
 	},
-	"batter_in_cupcake_pan": {
+	"cupcake_pan": {
 		"other": {
 			"pan": {
 				"type": "sprite",
@@ -3624,18 +3624,18 @@
 					},
 					{
 						"file": "TILES-batter-in-cupcake-pan.png",
+						"x": 5,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix"
+					},
+					{
+						"file": "TILES-batter-in-cupcake-pan.png",
 						"x": 4,
 						"y": 0,
 						"type": "sprite",
 						"mode": "mix",
 						"colorize": "#8d8778"
-					},
-					{
-						"type": "sprite",
-						"mode": "multiply",
-						"file": "TILES-batter-in-cupcake-pan.png",
-						"x": 5,
-						"y": 0
 					}
 				]
 			}
@@ -7809,17 +7809,6 @@
 				"file": "TILES-other.png",
 				"x": 7,
 				"y": 2
-			}
-		}
-	},
-	"cupcake_pan": {
-		"base": {
-			"root": {
-				"type": "sprite",
-				"mode": "mix",
-				"file": "TILES-batter-in-cupcake-pan.png",
-				"x": 2,
-				"y": 0
 			}
 		}
 	},

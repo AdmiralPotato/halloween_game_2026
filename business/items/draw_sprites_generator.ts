@@ -383,12 +383,12 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 			rainbow_sprinkles:     { type: 'sprite', mode: 'mix', file: fileNames.batter_in_cake_pan, x: 6, y: 1 },
 		},
 	},
-	batter_in_cupcake_pan: {
+	cupcake_pan: {
 		// Always draw:
 		other: {
 			pan: { type: 'sprite', mode: 'mix', file: fileNames.batter_in_cupcake_pan, x: 2, y: 0 },
 		},
-		// Always draw:
+		// Only draw if contents.size() > 0:
 		base: {
 			root: quickComboTile(comboSpriteInfo.batter_in_cupcake_pan_base, 'mix', '#f9ebcb', '#e0c074')
 		},
@@ -420,9 +420,17 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 			blush:      quickComboTile(comboSpriteInfo.batter_in_cupcake_pan_liner, 'mix', '#d39aac', '#824457'),
 			brown:      quickComboTile(comboSpriteInfo.batter_in_cupcake_pan_liner, 'mix', '#957d64', '#4e372d'),
 			metal:      quickComboTile(comboSpriteInfo.batter_in_cupcake_pan_liner, 'mix', '#f9f9f9', '#302d26'),
-			party: quickComboTile(comboSpriteInfo.batter_in_cupcake_pan_liner, 'mix', '#ffffff', '#8d8778', [
-				{ type: 'sprite', mode: 'multiply', file: fileNames.batter_in_cupcake_pan, x: 5, y: 0 }
-			]),
+			party: (() => {
+				const layer = quickComboTile(comboSpriteInfo.batter_in_cupcake_pan_liner, 'mix', '#ffffff', '#8d8778');
+				layer.sprites.splice(
+					1,
+					0,
+					// this is mix mode because shader error make texture disappear.
+					// so it was easier to put it below the lines layer to look decent
+					{ file: fileNames.batter_in_cupcake_pan, x: 5, y: 0, type: 'sprite', mode: 'mix' },
+				)
+				return layer;
+			})(),
 		}
 	},
 	cupcake_frosting: {
@@ -733,7 +741,6 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 	grape_flavoring: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 11, y: 3 }}},
 	bowl: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 6, y: 2 }}},
 	cookie_sheet: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 7, y: 2 }}},
-	cupcake_pan: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.batter_in_cupcake_pan, x: 2, y: 0 }}},
 	cake_pan: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.batter_in_cake_pan, x: 2, y: 0 }}},
 	whipped_cream_piping_bag: {
 		base: {

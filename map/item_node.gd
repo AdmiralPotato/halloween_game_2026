@@ -79,11 +79,24 @@ func update_stack_rendering():
 		return
 	if stack:
 		if stack.item:
-			$Sprite.texture = render_recipe(stack.item.name, stack.modifiers, stack.finishers)
+			$Sprite.texture = render_recipe(
+				stack.item.name,
+				stack.modifiers,
+				stack.finishers,
+				stack.contents,
+			)
 			$Count.text = str(stack.count)
 			$Count.visible = stack.count > 1
 		for child in $Contents.get_children():
 			child.queue_free()
+		# For recipes that handle rendering their own contents
+		match stack.item.name:
+			'cupcake_pan':
+				if (
+					stack.contents.size() > 0
+					and !stack.contents[0].item.is_category(ItemInfo.Category.PRODUCT)
+				):
+					return
 		var filtered_contents := stack.contents.filter(
 				func(s: ItemStack): return s != null
 		)
@@ -160,14 +173,17 @@ static func render_simple_item_texture_by_name(recipe_name: String) -> Texture2D
 	return render_recipe(recipe_name)
 
 
-static func render_recipe (recipe_name: String, _modifiers: Array[ItemStack] = [], _finishers: Array[ItemStack] = []) -> Texture2D:
+static func render_recipe (
+	recipe_name: String,
+	_modifiers: Array[ItemStack] = [],
+	_finishers: Array[ItemStack] = [],
+	_contents: Array[ItemStack] = [],
+) -> Texture2D:
 	#print('render_recipe: recipe_name: ', recipe_name)
 	if not recipe_name in ItemNode.recipe_render_data:
 		push_warning('render_recipe: NO RENDER DATA FOR RECIPE: ', recipe_name)
 		return make_unimplemented_texture()
 	var recipe: Dictionary = ItemNode.recipe_render_data[recipe_name]
-	if recipe.keys().size() == 1 and recipe.has('base'):
-		return render_recipe_layer(recipe.base.root, make_empty_texture(), _modifiers)
 	match recipe_name:
 		'frosting': return render_recipe_frosting(recipe, _modifiers)
 		'piping_bag': return render_recipe_frosting(recipe, _modifiers)
@@ -179,12 +195,15 @@ static func render_recipe (recipe_name: String, _modifiers: Array[ItemStack] = [
 		'cake_slice_piping': return render_recipe_cake_piping(recipe, _modifiers)
 		'cake_slice_frosting': return render_recipe_cake_piping(recipe, _modifiers)
 		'cupcake': return render_recipe_cupcake(recipe, _modifiers, _finishers)
+		'cupcake_pan': return render_cupcake_pan(recipe, _modifiers, _contents)
 		'cupcake_liner': return render_cupcake_liner(recipe, _modifiers)
 		'cupcake_frosting': return render_recipe_cake_piping(recipe, _modifiers)
 		'cookie_dough': return render_recipe_cookie_dough(recipe, _modifiers)
 		'cookie': return render_recipe_cookie(recipe, _modifiers, _finishers)
 		'cookie_frosting': return render_recipe_cake_piping(recipe, _modifiers)
 		_:
+			if recipe.keys().size() == 1 and recipe.has('base'):
+				return render_recipe_layer(recipe.base.root, make_empty_texture(), _modifiers)
 			push_warning('render_recipe: render not implemented yet: ', recipe_name)
 			return make_unimplemented_texture()
 
@@ -454,3 +473,64 @@ static func render_cupcake_liner(
 			if style == 'party':
 				print('its a party')
 	return render_recipe_layer(_recipe.liner[style])
+
+
+static func render_cupcake_pan(
+	_recipe: Dictionary,
+	_modifiers: Array[ItemStack],
+	_contents: Array[ItemStack],
+) -> Texture2D:
+	var texture = render_recipe_layer(_recipe.other.pan)
+	if (
+		_contents.size() > 0
+		and _contents[0].item.is_category(ItemInfo.Category.PRODUCT)
+	):
+		return texture
+	render_cupcake_pan_liner(
+		texture,
+		_recipe,
+		_modifiers,
+		_contents,
+	)
+	if _contents.size() > 0:
+		print('render_cupcake_pan: Rendering contents')
+		var modifiers = _contents[0].modifiers
+		var batter_texture = make_empty_texture()
+		render_recipe_layer(_recipe.base.root, batter_texture)
+		render_recipe_stack_modifiers(modifiers, _recipe.flavoring_modifiers, batter_texture)
+		render_recipe_stack_modifiers(modifiers, _recipe.other_modifiers, batter_texture)
+		draw_layer_into_texture(
+			texture,
+			batter_texture,
+		)
+	return texture
+
+static func render_cupcake_pan_liner(
+	_texture: Texture2D,
+	_recipe: Dictionary,
+	_modifiers: Array[ItemStack],
+	_contents: Array[ItemStack],
+) -> Texture2D:
+	var merged_modifiers: Array[ItemStack] = []
+	merged_modifiers.append_array(_modifiers)
+	for content in _contents:
+		merged_modifiers.append_array(content.modifiers)
+	var liners: Array[ItemStack] = merged_modifiers.filter(
+		func(m: ItemStack): return m.item.is_category(ItemInfo.Category.CUPCAKE_LINER)
+	)
+	if liners.size() == 0:
+		var plain_liner_item = ItemInfo.new()
+		plain_liner_item.name = 'plain'
+		plain_liner_item.display_name = 'plain'
+		plain_liner_item.categories.append_array([
+			ItemInfo.Category.MODIFIER,
+			ItemInfo.Category.CUPCAKE_LINER,
+		])
+		var plain_liner_stack = ItemStack.new(plain_liner_item)
+		liners.append(plain_liner_stack)
+	if liners.size() > 0:
+		draw_layer_into_texture(
+			_texture,
+			render_cupcake_liner(_recipe, [liners.pop_back()]),
+		)
+	return _texture

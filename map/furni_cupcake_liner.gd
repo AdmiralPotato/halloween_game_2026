@@ -15,6 +15,16 @@ func unsubscribe() -> void:
 
 func _on_select_liner(liner_modifier: ItemStack) -> void:
 	print("OMG A LINER!!", liner_modifier)
+	var cloned_stack = liner_modifier.duplicate(true)
+	var held = Global.player.held_object
+	if held:
+		held.stack.modifiers.append(cloned_stack)
+		held.stack.emit_changed()
+	else:
+		print('But the player has no held item so it cannot be added to anything')
+		#var new_item = ItemNode.make_node(liner_modifier)
+		#Global.player.held_object = new_item
+		#Global.player.held_object.stack.emit_changed()
 	unsubscribe()
 
 
