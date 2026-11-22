@@ -1,31 +1,18 @@
 class_name CupcakeLinerOverlay
 extends Control
 
-const ITEM_STACK_BUTTON = preload("res://ui/item_stack_button.tscn")
+const ITEM_BUTTON = preload("res://ui/item_button.tscn")
 
-signal select_liner(item: ItemStack)
+signal select_liner(info: ItemInfo)
 signal cancel()
 
 
 func _ready() -> void:
 	Global.cupcake_ui = self
-	for style in ItemNode.recipe_render_data.cupcake_liner.liner.keys():
-		var button: ItemStackButton = ITEM_STACK_BUTTON.instantiate()
-		var recipe = ItemInfo.new()
-		recipe.name = 'cupcake_liner'
-		recipe.display_name = 'cupcake liner'
-		var stack = ItemStack.new(recipe)
-		var style_info = ItemInfo.new()
-		style_info.name = style
-		style_info.display_name = style.replace('_', ' ') + ' liner'
-		style_info.categories.append_array([
-			ItemInfo.Category.CUPCAKE_LINER,
-			ItemInfo.Category.MODIFIER,
-		])
-		var style_stack = ItemStack.new(style_info)
-		stack.modifiers.append(style_stack)
-		button.stack = stack
-		button.pressed.connect(select.bind(style_stack))
+	for info in Global.registry.get_items_by_sort(ItemInfo.Category.CUPCAKE_LINER):
+		var button: ItemButton = ITEM_BUTTON.instantiate()
+		button.item = info
+		button.pressed.connect(select.bind(info))
 		%Items.add_child(button)
 
 
@@ -36,9 +23,9 @@ func open() -> void:
 	first_liner.grab_focus()
 
 
-func select(stack: ItemStack) -> void:
+func select(info: ItemInfo) -> void:
 	close()
-	select_liner.emit(stack)
+	select_liner.emit(info)
 
 
 func close() -> void:

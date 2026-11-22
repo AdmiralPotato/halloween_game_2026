@@ -2303,7 +2303,7 @@
 	},
 	"cupcake_liner": {
 		"liner": {
-			"pale": {
+			"pale_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -2325,7 +2325,7 @@
 					}
 				]
 			},
-			"lavender": {
+			"lavender_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -2347,7 +2347,7 @@
 					}
 				]
 			},
-			"baby_blue": {
+			"baby_blue_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -2369,7 +2369,7 @@
 					}
 				]
 			},
-			"sky_blue": {
+			"sky_blue_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -2391,7 +2391,7 @@
 					}
 				]
 			},
-			"sage": {
+			"sage_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -2413,7 +2413,7 @@
 					}
 				]
 			},
-			"lemongrass": {
+			"lemongrass_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -2435,7 +2435,7 @@
 					}
 				]
 			},
-			"buttercup": {
+			"buttercup_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -2457,7 +2457,7 @@
 					}
 				]
 			},
-			"tangerine": {
+			"tangerine_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -2479,7 +2479,7 @@
 					}
 				]
 			},
-			"salmon": {
+			"salmon_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -2501,7 +2501,7 @@
 					}
 				]
 			},
-			"blush": {
+			"blush_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -2523,7 +2523,7 @@
 					}
 				]
 			},
-			"brown": {
+			"brown_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -2545,7 +2545,7 @@
 					}
 				]
 			},
-			"metal": {
+			"metal_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -2567,7 +2567,7 @@
 					}
 				]
 			},
-			"party": {
+			"party_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -3346,7 +3346,7 @@
 			}
 		},
 		"liner": {
-			"pale": {
+			"pale_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -3368,7 +3368,7 @@
 					}
 				]
 			},
-			"lavender": {
+			"lavender_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -3390,7 +3390,7 @@
 					}
 				]
 			},
-			"baby_blue": {
+			"baby_blue_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -3412,7 +3412,7 @@
 					}
 				]
 			},
-			"sky_blue": {
+			"sky_blue_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -3434,7 +3434,7 @@
 					}
 				]
 			},
-			"sage": {
+			"sage_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -3456,7 +3456,7 @@
 					}
 				]
 			},
-			"lemongrass": {
+			"lemongrass_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -3478,7 +3478,7 @@
 					}
 				]
 			},
-			"buttercup": {
+			"buttercup_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -3500,7 +3500,7 @@
 					}
 				]
 			},
-			"tangerine": {
+			"tangerine_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -3522,7 +3522,7 @@
 					}
 				]
 			},
-			"salmon": {
+			"salmon_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -3544,7 +3544,7 @@
 					}
 				]
 			},
-			"blush": {
+			"blush_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -3566,7 +3566,7 @@
 					}
 				]
 			},
-			"brown": {
+			"brown_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -3588,7 +3588,7 @@
 					}
 				]
 			},
-			"metal": {
+			"metal_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -3610,7 +3610,7 @@
 					}
 				]
 			},
-			"party": {
+			"party_liner": {
 				"type": "multi",
 				"mode": "mix",
 				"sprites": [
@@ -7787,6 +7787,351 @@
 				"file": "TILES-other.png",
 				"x": 11,
 				"y": 3
+			}
+		}
+	},
+	"pale_liner": {
+		"base": {
+			"root": {
+				"type": "multi",
+				"mode": "mix",
+				"sprites": [
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 4,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#e2e2e2"
+					},
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 5,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#706c62"
+					}
+				]
+			}
+		}
+	},
+	"lavender_liner": {
+		"base": {
+			"root": {
+				"type": "multi",
+				"mode": "mix",
+				"sprites": [
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 4,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#a29ad3"
+					},
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 5,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#5b5779"
+					}
+				]
+			}
+		}
+	},
+	"baby_blue_liner": {
+		"base": {
+			"root": {
+				"type": "multi",
+				"mode": "mix",
+				"sprites": [
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 4,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#9ab6d3"
+					},
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 5,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#576779"
+					}
+				]
+			}
+		}
+	},
+	"sky_blue_liner": {
+		"base": {
+			"root": {
+				"type": "multi",
+				"mode": "mix",
+				"sprites": [
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 4,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#9ad3d3"
+					},
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 5,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#577973"
+					}
+				]
+			}
+		}
+	},
+	"sage_liner": {
+		"base": {
+			"root": {
+				"type": "multi",
+				"mode": "mix",
+				"sprites": [
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 4,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#b2cb8d"
+					},
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 5,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#607049"
+					}
+				]
+			}
+		}
+	},
+	"lemongrass_liner": {
+		"base": {
+			"root": {
+				"type": "multi",
+				"mode": "mix",
+				"sprites": [
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 4,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#d4e07b"
+					},
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 5,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#797d50"
+					}
+				]
+			}
+		}
+	},
+	"buttercup_liner": {
+		"base": {
+			"root": {
+				"type": "multi",
+				"mode": "mix",
+				"sprites": [
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 4,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#f3df7c"
+					},
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 5,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#9a8b49"
+					}
+				]
+			}
+		}
+	},
+	"tangerine_liner": {
+		"base": {
+			"root": {
+				"type": "multi",
+				"mode": "mix",
+				"sprites": [
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 4,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#ecbf7c"
+					},
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 5,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#9c7736"
+					}
+				]
+			}
+		}
+	},
+	"salmon_liner": {
+		"base": {
+			"root": {
+				"type": "multi",
+				"mode": "mix",
+				"sprites": [
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 4,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#d3a99a"
+					},
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 5,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#825444"
+					}
+				]
+			}
+		}
+	},
+	"blush_liner": {
+		"base": {
+			"root": {
+				"type": "multi",
+				"mode": "mix",
+				"sprites": [
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 4,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#d39aac"
+					},
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 5,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#824457"
+					}
+				]
+			}
+		}
+	},
+	"brown_liner": {
+		"base": {
+			"root": {
+				"type": "multi",
+				"mode": "mix",
+				"sprites": [
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 4,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#957d64"
+					},
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 5,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#4e372d"
+					}
+				]
+			}
+		}
+	},
+	"metal_liner": {
+		"base": {
+			"root": {
+				"type": "multi",
+				"mode": "mix",
+				"sprites": [
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 4,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#f9f9f9"
+					},
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 5,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#302d26"
+					}
+				]
+			}
+		}
+	},
+	"party_liner": {
+		"base": {
+			"root": {
+				"type": "multi",
+				"mode": "mix",
+				"sprites": [
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 4,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#ffffff"
+					},
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 6,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix"
+					},
+					{
+						"file": "TILES-cupcake-baked.png",
+						"x": 5,
+						"y": 0,
+						"type": "sprite",
+						"mode": "mix",
+						"colorize": "#8d8778"
+					}
+				]
 			}
 		}
 	},

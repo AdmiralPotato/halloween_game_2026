@@ -6,7 +6,7 @@
 script = ExtResource("1_nepoj")
 name = "cocoa_powder"
 display_name = "cocoa powder"
-categories = Array[int]([1])
+categories = Array[int]([8, 1])
 cost_tier = 3
 max_stack_size = 4
 attributes = Dictionary[int, int]({

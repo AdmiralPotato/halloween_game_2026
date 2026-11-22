@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemInfo" format=3 uid="uid://cyn3e6n5ky3xl"]
+
+[ext_resource type="Script" uid="uid://2hntn2isrv74" path="res://model/item_info.gd" id="1_1ach1"]
+
+[resource]
+script = ExtResource("1_1ach1")
+name = "brown_liner"
+display_name = "brown liner"
+storage_type = 4
+categories = Array[int]([1, 7])
+cost_tier = 2
+max_stack_size = 6
+groups = PackedStringArray("cupcake_liner")
+sort = 410
+allowed_contents = PackedStringArray()
+allowed_containers = PackedStringArray()

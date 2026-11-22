@@ -6,7 +6,7 @@
 script = ExtResource("1_62qmj")
 name = "flour"
 display_name = "flour"
-categories = Array[int]([0])
+categories = Array[int]([8, 0])
 cost_tier = 1
 attributes = Dictionary[int, int]({
 0: 1

@@ -13,12 +13,12 @@ func unsubscribe() -> void:
 	Global.cupcake_ui.disconnect("cancel", _on_cancel)
 
 
-func _on_select_liner(liner_modifier: ItemStack) -> void:
+func _on_select_liner(liner_modifier: ItemInfo) -> void:
 	print("OMG A LINER!!", liner_modifier)
-	var cloned_stack = liner_modifier.duplicate(true)
 	var held = Global.player.held_object
 	if held:
-		held.stack.modifiers.append(cloned_stack)
+		var stack = ItemStack.new(liner_modifier)
+		held.stack.modifiers.append(stack)
 		held.stack.emit_changed()
 	else:
 		print('But the player has no held item so it cannot be added to anything')

@@ -26,7 +26,7 @@ static func load_json_file(path: String) -> Variant:
 	return JSON.parse_string(FileAccess.get_file_as_string(path))
 
 func _run():
-	var item_info = load_json_file("res://business/items/food_infos.json")
+	var item_info = load_json_file("res://business/items/item_infos.json")
 	var var_info = load_json_file("res://business/items/variant_infos.json")
 	var recipe_info = load_json_file("res://business/items/recipes_infos.json")
 	var furni_info = load_json_file("res://business/furnis.json")
@@ -97,11 +97,11 @@ func _run():
 	print('Writing furniture...')
 	for furni in furnis.values():
 		ResourceSaver.save(furni)
-	
+
 	print('Processing maps...')
 	for name in map_info:
 		registry.add_map(name, map_info[name].path)
-	
+
 	print('Writing the registry...')
 	ResourceSaver.save(registry)
 

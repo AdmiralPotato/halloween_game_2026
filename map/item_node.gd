@@ -466,7 +466,7 @@ static func render_cupcake_liner(
 	_recipe: Dictionary,
 	_modifiers: Array[ItemStack],
 ) -> Texture2D:
-	var style = 'pale'
+	var style = 'pale_liner'
 	for modifier in _modifiers:
 		if _recipe.liner.has(modifier.item.name):
 			style = modifier.item.name

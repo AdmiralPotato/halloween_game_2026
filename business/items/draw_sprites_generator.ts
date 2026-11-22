@@ -40,7 +40,8 @@ type SpriteInfo = {
 };
 type ComboSpriteInfo = {
 	light: SpriteInfo,
-	dark: SpriteInfo
+	dark: SpriteInfo,
+	party?: SpriteInfo
 };
 const comboSpriteInfo: Record<string, ComboSpriteInfo> = {
 	cake_batter: {
@@ -74,6 +75,7 @@ const comboSpriteInfo: Record<string, ComboSpriteInfo> = {
 	cupcake_liner: {
 		light: { file: fileNames.cupcake, x: 4, y: 0 },
 		dark: { file: fileNames.cupcake, x: 5, y: 0 },
+		party: { file: fileNames.cupcake, x: 6, y: 0 },
 	},
 	batter_in_cake_pan_base: {
 		light: { file: fileNames.batter_in_cake_pan, x: 0, y: 0 },
@@ -86,6 +88,7 @@ const comboSpriteInfo: Record<string, ComboSpriteInfo> = {
 	batter_in_cupcake_pan_liner: {
 		light: { file: fileNames.batter_in_cupcake_pan, x: 3, y: 0 },
 		dark: { file: fileNames.batter_in_cupcake_pan, x: 4, y: 0 },
+		party: { file: fileNames.batter_in_cupcake_pan, x: 5, y: 0 },
 	},
 	cake_base: {
 		light: { file: fileNames.cake, x: 0, y: 0 },
@@ -173,6 +176,34 @@ const makeFlavorings = (info: ComboSpriteInfo): Record<string, DrawLayer> => {
 		blueberry_flavoring:  quickComboTile(info, 'multiply', '#7aa3c4', '#385f95'),
 		ube_flavoring:        quickComboTile(info, 'multiply', '#a9a4c9', '#65639e'),
 		grape_flavoring:      quickComboTile(info, 'multiply', '#b383cd', '#6b477b'),
+	};
+};
+
+const makeLiners = (info: ComboSpriteInfo): Record<string, DrawLayer> => {
+	return {
+		pale_liner:       quickComboTile(info, 'mix', '#e2e2e2', '#706c62'),
+		lavender_liner:   quickComboTile(info, 'mix', '#a29ad3', '#5b5779'),
+		baby_blue_liner:  quickComboTile(info, 'mix', '#9ab6d3', '#576779'),
+		sky_blue_liner:   quickComboTile(info, 'mix', '#9ad3d3', '#577973'),
+		sage_liner:       quickComboTile(info, 'mix', '#b2cb8d', '#607049'),
+		lemongrass_liner: quickComboTile(info, 'mix', '#d4e07b', '#797d50'),
+		buttercup_liner:  quickComboTile(info, 'mix', '#f3df7c', '#9a8b49'),
+		tangerine_liner:  quickComboTile(info, 'mix', '#ecbf7c', '#9c7736'),
+		salmon_liner:     quickComboTile(info, 'mix', '#d3a99a', '#825444'),
+		blush_liner:      quickComboTile(info, 'mix', '#d39aac', '#824457'),
+		brown_liner:      quickComboTile(info, 'mix', '#957d64', '#4e372d'),
+		metal_liner:      quickComboTile(info, 'mix', '#f9f9f9', '#302d26'),
+		party_liner: (() => {
+			const layer = quickComboTile(info, 'mix', '#ffffff', '#8d8778');
+			layer.sprites.splice(
+				1,
+				0,
+				// this is mix mode because shader error make texture disappear.
+				// so it was easier to put it below the lines layer to look decent
+				{ file: info.party.file, x: info.party.x, y: info.party.y, type: 'sprite', mode: 'mix' },
+			)
+			return layer;
+		})(),
 	};
 };
 
@@ -333,31 +364,7 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 	},
 	cupcake_liner: {
 		// If the liner is specified, draw the specific one now; if none specified, draw "pale"
-		liner: {
-			pale:       quickComboTile(comboSpriteInfo.cupcake_liner, 'mix', '#e2e2e2', '#706c62'),
-			lavender:   quickComboTile(comboSpriteInfo.cupcake_liner, 'mix', '#a29ad3', '#5b5779'),
-			baby_blue:  quickComboTile(comboSpriteInfo.cupcake_liner, 'mix', '#9ab6d3', '#576779'),
-			sky_blue:   quickComboTile(comboSpriteInfo.cupcake_liner, 'mix', '#9ad3d3', '#577973'),
-			sage:       quickComboTile(comboSpriteInfo.cupcake_liner, 'mix', '#b2cb8d', '#607049'),
-			lemongrass: quickComboTile(comboSpriteInfo.cupcake_liner, 'mix', '#d4e07b', '#797d50'),
-			buttercup:  quickComboTile(comboSpriteInfo.cupcake_liner, 'mix', '#f3df7c', '#9a8b49'),
-			tangerine:  quickComboTile(comboSpriteInfo.cupcake_liner, 'mix', '#ecbf7c', '#9c7736'),
-			salmon:     quickComboTile(comboSpriteInfo.cupcake_liner, 'mix', '#d3a99a', '#825444'),
-			blush:      quickComboTile(comboSpriteInfo.cupcake_liner, 'mix', '#d39aac', '#824457'),
-			brown:      quickComboTile(comboSpriteInfo.cupcake_liner, 'mix', '#957d64', '#4e372d'),
-			metal:      quickComboTile(comboSpriteInfo.cupcake_liner, 'mix', '#f9f9f9', '#302d26'),
-			party: (() => {
-				const layer = quickComboTile(comboSpriteInfo.cupcake_liner, 'mix', '#ffffff', '#8d8778');
-				layer.sprites.splice(
-					1,
-					0,
-					// this is mix mode because shader error make texture disappear.
-					// so it was easier to put it below the lines layer to look decent
-					{ file: fileNames.cupcake, x: 6, y: 0, type: 'sprite', mode: 'mix' },
-				)
-				return layer;
-			})(),
-		}
+		liner: makeLiners(comboSpriteInfo.cupcake_liner),
 	},
 	batter_in_cake_pan: {
 		// Always draw:
@@ -407,31 +414,7 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 			rainbow_sprinkles:     { type: 'sprite', mode: 'mix', file: fileNames.batter_in_cupcake_pan, x: 6, y: 1 },
 		},
 		// If the liner is specified, draw the specific one now; if none specified, draw "pale"
-		liner: {
-			pale:       quickComboTile(comboSpriteInfo.batter_in_cupcake_pan_liner, 'mix', '#e2e2e2', '#706c62'),
-			lavender:   quickComboTile(comboSpriteInfo.batter_in_cupcake_pan_liner, 'mix', '#a29ad3', '#5b5779'),
-			baby_blue:  quickComboTile(comboSpriteInfo.batter_in_cupcake_pan_liner, 'mix', '#9ab6d3', '#576779'),
-			sky_blue:   quickComboTile(comboSpriteInfo.batter_in_cupcake_pan_liner, 'mix', '#9ad3d3', '#577973'),
-			sage:       quickComboTile(comboSpriteInfo.batter_in_cupcake_pan_liner, 'mix', '#b2cb8d', '#607049'),
-			lemongrass: quickComboTile(comboSpriteInfo.batter_in_cupcake_pan_liner, 'mix', '#d4e07b', '#797d50'),
-			buttercup:  quickComboTile(comboSpriteInfo.batter_in_cupcake_pan_liner, 'mix', '#f3df7c', '#9a8b49'),
-			tangerine:  quickComboTile(comboSpriteInfo.batter_in_cupcake_pan_liner, 'mix', '#ecbf7c', '#9c7736'),
-			salmon:     quickComboTile(comboSpriteInfo.batter_in_cupcake_pan_liner, 'mix', '#d3a99a', '#825444'),
-			blush:      quickComboTile(comboSpriteInfo.batter_in_cupcake_pan_liner, 'mix', '#d39aac', '#824457'),
-			brown:      quickComboTile(comboSpriteInfo.batter_in_cupcake_pan_liner, 'mix', '#957d64', '#4e372d'),
-			metal:      quickComboTile(comboSpriteInfo.batter_in_cupcake_pan_liner, 'mix', '#f9f9f9', '#302d26'),
-			party: (() => {
-				const layer = quickComboTile(comboSpriteInfo.batter_in_cupcake_pan_liner, 'mix', '#ffffff', '#8d8778');
-				layer.sprites.splice(
-					1,
-					0,
-					// this is mix mode because shader error make texture disappear.
-					// so it was easier to put it below the lines layer to look decent
-					{ file: fileNames.batter_in_cupcake_pan, x: 5, y: 0, type: 'sprite', mode: 'mix' },
-				)
-				return layer;
-			})(),
-		}
+		liner: makeLiners(comboSpriteInfo.batter_in_cupcake_pan_liner),
 	},
 	cupcake_frosting: {
 		// Always draw:
@@ -739,6 +722,15 @@ const data: Record<string, Record<string, Record<string, DrawLayer>>> = {
 	blueberry_flavoring: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 9, y: 3 }}},
 	ube_flavoring: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 10, y: 3 }}},
 	grape_flavoring: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 11, y: 3 }}},
+	...(Object.entries(makeLiners(comboSpriteInfo.cupcake_liner))
+		.reduce((composite, [key, value])=>{
+			composite[key] = {
+				base: {
+					root: value
+				},
+			};
+			return composite;
+		},{})),
 	bowl: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 6, y: 2 }}},
 	cookie_sheet: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.other, x: 7, y: 2 }}},
 	cake_pan: {base:{root: { type: 'sprite', mode: 'mix', file: fileNames.batter_in_cake_pan, x: 2, y: 0 }}},

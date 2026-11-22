@@ -6,17 +6,14 @@ extends Resource
 @export var furnis: Dictionary[String, FurniInfo] = {}
 @export var maps: Dictionary[String, String] = {}
 
-var _items_by_sort: Array[ItemInfo] = []
-func get_items_by_sort() -> Array[ItemInfo]:
-	if _items_by_sort:
-		return _items_by_sort
-	_items_by_sort.assign(items.values())
-	_items_by_sort.sort_custom(func(a: ItemInfo, b: ItemInfo): return a.sort < b.sort)
-	return _items_by_sort
+func get_items_by_sort(category: ItemInfo.Category) -> Array[ItemInfo]:
+	var result = items.values()
+	result.sort_custom(func(a: ItemInfo, b: ItemInfo): return a.sort < b.sort)
+	return result.filter(func(i): return i.is_category(category))
 
 func add_item(i: ItemInfo):
 	items[i.name] = i
-	
+
 func add_recipe(r: Recipe):
 	recipes[r.name] = r
 

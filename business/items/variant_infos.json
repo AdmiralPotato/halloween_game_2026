@@ -59,6 +59,71 @@
 		"parent": "flavoring",
 		"variantName": "ube"
 	},
+	"pale_liner": {
+		"human_name": "pale liner",
+		"parent": "cupcake_liner",
+		"variantName": "pale"
+	},
+	"lavender_liner": {
+		"human_name": "lavender liner",
+		"parent": "cupcake_liner",
+		"variantName": "lavender"
+	},
+	"baby_blue_liner": {
+		"human_name": "baby_blue liner",
+		"parent": "cupcake_liner",
+		"variantName": "baby_blue"
+	},
+	"sky_blue_liner": {
+		"human_name": "sky_blue liner",
+		"parent": "cupcake_liner",
+		"variantName": "sky_blue"
+	},
+	"sage_liner": {
+		"human_name": "sage liner",
+		"parent": "cupcake_liner",
+		"variantName": "sage"
+	},
+	"lemongrass_liner": {
+		"human_name": "lemongrass liner",
+		"parent": "cupcake_liner",
+		"variantName": "lemongrass"
+	},
+	"buttercup_liner": {
+		"human_name": "buttercup liner",
+		"parent": "cupcake_liner",
+		"variantName": "buttercup"
+	},
+	"tangerine_liner": {
+		"human_name": "tangerine liner",
+		"parent": "cupcake_liner",
+		"variantName": "tangerine"
+	},
+	"salmon_liner": {
+		"human_name": "salmon liner",
+		"parent": "cupcake_liner",
+		"variantName": "salmon"
+	},
+	"blush_liner": {
+		"human_name": "blush liner",
+		"parent": "cupcake_liner",
+		"variantName": "blush"
+	},
+	"brown_liner": {
+		"human_name": "brown liner",
+		"parent": "cupcake_liner",
+		"variantName": "brown"
+	},
+	"metal_liner": {
+		"human_name": "metal liner",
+		"parent": "cupcake_liner",
+		"variantName": "metal"
+	},
+	"party_liner": {
+		"human_name": "party liner",
+		"parent": "cupcake_liner",
+		"variantName": "party"
+	},
 	"red_candied_flowers": {
 		"human_name": "red candied flowers",
 		"parent": "candied_flowers",

@@ -11,7 +11,7 @@ var last_focused;
 
 func _ready() -> void:
 	Global.shop_ui = self
-	for info in Global.registry.get_items_by_sort():
+	for info in Global.registry.get_items_by_sort(ItemInfo.Category.SHOP):
 		if info.cost_tier != 0:
 			var button: ItemButton = ITEM_BUTTON.instantiate()
 			button.item = info

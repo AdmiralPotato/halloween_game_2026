@@ -68,7 +68,7 @@ visible = false
 layout_mode = 2
 text = "We promise it's not frozen!
 Starting just takes 20 ~ 40 seconds in browser.
-We're stil learning optimization in Godot."
+We're still learning optimization in Godot."
 horizontal_alignment = 1
 
 [node name="ProgressText" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=410353983]

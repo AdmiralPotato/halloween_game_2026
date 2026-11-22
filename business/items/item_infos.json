@@ -3,7 +3,7 @@
 		"human_name": "flour",
 		"sort": 100,
 		"storage_type": "BAG",
-		"categories": [ "BASE" ],
+		"categories": ["SHOP", "BASE"],
 		"buy_price": 1,
 		"max_stack_size": 1,
 		"attributes": {
@@ -14,7 +14,7 @@
 		"human_name": "sugar",
 		"sort": 101,
 		"storage_type": "BAG",
-		"categories": [ "BASE" ],
+		"categories": ["SHOP", "BASE"],
 		"buy_price": 1,
 		"max_stack_size": 1,
 		"attributes": {
@@ -25,7 +25,7 @@
 		"human_name": "egg",
 		"sort": 102,
 		"storage_type": "FRIDGE",
-		"categories": [ "BASE" ],
+		"categories": ["SHOP", "BASE"],
 		"buy_price": 1,
 		"max_stack_size": 12,
 		"attributes": {}
@@ -34,7 +34,7 @@
 		"human_name": "cream",
 		"sort": 103,
 		"storage_type": "FRIDGE",
-		"categories": [ "BASE" ],
+		"categories": ["SHOP", "BASE"],
 		"buy_price": 2,
 		"max_stack_size": 4,
 		"attributes": {
@@ -45,7 +45,7 @@
 		"human_name": "cocoa powder",
 		"sort": 104,
 		"storage_type": "BAG",
-		"categories": [ "MODIFIER" ],
+		"categories": ["SHOP", "MODIFIER"],
 		"buy_price": 3,
 		"max_stack_size": 4,
 		"attributes": {
@@ -58,7 +58,7 @@
 		"human_name": "chocolate bar",
 		"sort": 180,
 		"storage_type": "CRATE",
-		"categories": [ "BASE" ],
+		"categories": ["SHOP", "BASE"],
 		"buy_price": 2,
 		"max_stack_size": 12,
 		"attributes": {
@@ -69,7 +69,7 @@
 		"human_name": "white chocolate bar",
 		"sort": 181,
 		"storage_type": "CRATE",
-		"categories": [ "BASE" ],
+		"categories": ["SHOP", "BASE"],
 		"buy_price": 3,
 		"max_stack_size": 12,
 		"attributes": {
@@ -80,7 +80,7 @@
 		"human_name": "dark chocolate bar",
 		"sort": 182,
 		"storage_type": "CRATE",
-		"categories": [ "BASE" ],
+		"categories": ["SHOP", "BASE"],
 		"buy_price": 3,
 		"max_stack_size": 12,
 		"attributes": {
@@ -91,7 +91,7 @@
 		"human_name": "cherry flavoring",
 		"sort": 200,
 		"storage_type": "JAR",
-		"categories": [ "MODIFIER" ],
+		"categories": ["SHOP", "MODIFIER"],
 		"buy_price": 4,
 		"max_stack_size": "FLAVORING_STACK_SIZE",
 		"attributes": {
@@ -105,7 +105,7 @@
 		"human_name": "raspberry flavoring",
 		"sort": 201,
 		"storage_type": "JAR",
-		"categories": [ "MODIFIER" ],
+		"categories": ["SHOP", "MODIFIER"],
 		"buy_price": 4,
 		"max_stack_size": "FLAVORING_STACK_SIZE",
 		"attributes": {
@@ -118,7 +118,7 @@
 		"human_name": "strawberry flavoring",
 		"sort": 202,
 		"storage_type": "JAR",
-		"categories": [ "MODIFIER" ],
+		"categories": ["SHOP", "MODIFIER"],
 		"buy_price": 4,
 		"max_stack_size": "FLAVORING_STACK_SIZE",
 		"attributes": {
@@ -131,7 +131,7 @@
 		"human_name": "orange flavoring",
 		"sort": 203,
 		"storage_type": "JAR",
-		"categories": [ "MODIFIER" ],
+		"categories": ["SHOP", "MODIFIER"],
 		"buy_price": 4,
 		"max_stack_size": "FLAVORING_STACK_SIZE",
 		"attributes": {
@@ -144,7 +144,7 @@
 		"human_name": "almond flavoring",
 		"sort": 204,
 		"storage_type": "JAR",
-		"categories": [ "MODIFIER" ],
+		"categories": ["SHOP", "MODIFIER"],
 		"buy_price": 4,
 		"max_stack_size": "FLAVORING_STACK_SIZE",
 		"attributes": {
@@ -156,7 +156,7 @@
 		"human_name": "caramel flavoring",
 		"sort": 205,
 		"storage_type": "JAR",
-		"categories": [ "MODIFIER" ],
+		"categories": ["SHOP", "MODIFIER"],
 		"buy_price": 4,
 		"max_stack_size": "FLAVORING_STACK_SIZE",
 		"attributes": {
@@ -169,7 +169,7 @@
 		"human_name": "lemon flavoring",
 		"sort": 206,
 		"storage_type": "JAR",
-		"categories": [ "MODIFIER" ],
+		"categories": ["SHOP", "MODIFIER"],
 		"buy_price": 4,
 		"max_stack_size": "FLAVORING_STACK_SIZE",
 		"attributes": {
@@ -182,7 +182,7 @@
 		"human_name": "lime flavoring",
 		"sort": 207,
 		"storage_type": "JAR",
-		"categories": [ "MODIFIER" ],
+		"categories": ["SHOP", "MODIFIER"],
 		"buy_price": 4,
 		"max_stack_size": "FLAVORING_STACK_SIZE",
 		"attributes": {
@@ -196,7 +196,7 @@
 		"human_name": "mint flavoring",
 		"sort": 208,
 		"storage_type": "JAR",
-		"categories": [ "MODIFIER" ],
+		"categories": ["SHOP", "MODIFIER"],
 		"buy_price": 4,
 		"max_stack_size": "FLAVORING_STACK_SIZE",
 		"attributes": {
@@ -209,7 +209,7 @@
 		"human_name": "blueberry flavoring",
 		"sort": 209,
 		"storage_type": "JAR",
-		"categories": [ "MODIFIER" ],
+		"categories": ["SHOP", "MODIFIER"],
 		"buy_price": 4,
 		"max_stack_size": "FLAVORING_STACK_SIZE",
 		"attributes": {
@@ -222,7 +222,7 @@
 		"human_name": "ube flavoring",
 		"sort": 210,
 		"storage_type": "JAR",
-		"categories": [ "MODIFIER" ],
+		"categories": ["SHOP", "MODIFIER"],
 		"buy_price": 4,
 		"max_stack_size": "FLAVORING_STACK_SIZE",
 		"attributes": {
@@ -234,7 +234,7 @@
 		"human_name": "grape flavoring",
 		"sort": 211,
 		"storage_type": "JAR",
-		"categories": [ "MODIFIER" ],
+		"categories": ["SHOP", "MODIFIER"],
 		"buy_price": 4,
 		"max_stack_size": "FLAVORING_STACK_SIZE",
 		"attributes": {
@@ -242,11 +242,167 @@
 			"pale": -2
 		}
 	},
+	"pale_liner": {
+		"human_name": "pale liner",
+		"sort": 400,
+		"storage_type": "JAR",
+		"categories": [
+			"MODIFIER",
+			"CUPCAKE_LINER"
+		],
+		"buy_price": 2,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {}
+	},
+	"lavender_liner": {
+		"human_name": "lavender liner",
+		"sort": 401,
+		"storage_type": "JAR",
+		"categories": [
+			"MODIFIER",
+			"CUPCAKE_LINER"
+		],
+		"buy_price": 2,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {}
+	},
+	"baby_blue_liner": {
+		"human_name": "baby_blue liner",
+		"sort": 402,
+		"storage_type": "JAR",
+		"categories": [
+			"MODIFIER",
+			"CUPCAKE_LINER"
+		],
+		"buy_price": 2,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {}
+	},
+	"sky_blue_liner": {
+		"human_name": "sky_blue liner",
+		"sort": 403,
+		"storage_type": "JAR",
+		"categories": [
+			"MODIFIER",
+			"CUPCAKE_LINER"
+		],
+		"buy_price": 2,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {}
+	},
+	"sage_liner": {
+		"human_name": "sage liner",
+		"sort": 404,
+		"storage_type": "JAR",
+		"categories": [
+			"MODIFIER",
+			"CUPCAKE_LINER"
+		],
+		"buy_price": 2,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {}
+	},
+	"lemongrass_liner": {
+		"human_name": "lemongrass liner",
+		"sort": 405,
+		"storage_type": "JAR",
+		"categories": [
+			"MODIFIER",
+			"CUPCAKE_LINER"
+		],
+		"buy_price": 2,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {}
+	},
+	"buttercup_liner": {
+		"human_name": "buttercup liner",
+		"sort": 406,
+		"storage_type": "JAR",
+		"categories": [
+			"MODIFIER",
+			"CUPCAKE_LINER"
+		],
+		"buy_price": 2,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {}
+	},
+	"tangerine_liner": {
+		"human_name": "tangerine liner",
+		"sort": 407,
+		"storage_type": "JAR",
+		"categories": [
+			"MODIFIER",
+			"CUPCAKE_LINER"
+		],
+		"buy_price": 2,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {}
+	},
+	"salmon_liner": {
+		"human_name": "salmon liner",
+		"sort": 408,
+		"storage_type": "JAR",
+		"categories": [
+			"MODIFIER",
+			"CUPCAKE_LINER"
+		],
+		"buy_price": 2,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {}
+	},
+	"blush_liner": {
+		"human_name": "blush liner",
+		"sort": 409,
+		"storage_type": "JAR",
+		"categories": [
+			"MODIFIER",
+			"CUPCAKE_LINER"
+		],
+		"buy_price": 2,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {}
+	},
+	"brown_liner": {
+		"human_name": "brown liner",
+		"sort": 410,
+		"storage_type": "JAR",
+		"categories": [
+			"MODIFIER",
+			"CUPCAKE_LINER"
+		],
+		"buy_price": 2,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {}
+	},
+	"metal_liner": {
+		"human_name": "metal liner",
+		"sort": 411,
+		"storage_type": "JAR",
+		"categories": [
+			"MODIFIER",
+			"CUPCAKE_LINER"
+		],
+		"buy_price": 2,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {}
+	},
+	"party_liner": {
+		"human_name": "party liner",
+		"sort": 412,
+		"storage_type": "JAR",
+		"categories": [
+			"MODIFIER",
+			"CUPCAKE_LINER"
+		],
+		"buy_price": 2,
+		"max_stack_size": "FLAVORING_STACK_SIZE",
+		"attributes": {}
+	},
 	"blue_candied_flowers": {
 		"human_name": "blue candied flowers",
 		"sort": 513,
 		"storage_type": "JAR",
-		"categories": [ "DOODAD" ],
+		"categories": ["SHOP", "DOODAD"],
 		"buy_price": 5,
 		"max_stack_size": "CANDIED_FLOWERS_STACK_SIZE",
 		"attributes": {
@@ -258,7 +414,7 @@
 		"human_name": "red candied flowers",
 		"sort": 512,
 		"storage_type": "JAR",
-		"categories": [ "DOODAD" ],
+		"categories": ["SHOP", "DOODAD"],
 		"buy_price": 5,
 		"max_stack_size": "CANDIED_FLOWERS_STACK_SIZE",
 		"attributes": {
@@ -270,7 +426,7 @@
 		"human_name": "yellow candied flowers",
 		"sort": 511,
 		"storage_type": "JAR",
-		"categories": [ "DOODAD" ],
+		"categories": ["SHOP", "DOODAD"],
 		"buy_price": 5,
 		"max_stack_size": "CANDIED_FLOWERS_STACK_SIZE",
 		"attributes": {
@@ -282,7 +438,7 @@
 		"human_name": "white candied flowers",
 		"sort": 510,
 		"storage_type": "JAR",
-		"categories": [ "DOODAD" ],
+		"categories": ["SHOP", "DOODAD"],
 		"buy_price": 5,
 		"max_stack_size": "CANDIED_FLOWERS_STACK_SIZE",
 		"attributes": {
@@ -294,7 +450,7 @@
 		"human_name": "chocolate sprinkles",
 		"sort": 500,
 		"storage_type": "JAR",
-		"categories": [ "MODIFIER", "DOODAD" ],
+		"categories": ["SHOP", "MODIFIER", "DOODAD"],
 		"buy_price": 2,
 		"max_stack_size": "SPRINKLES_STACK_SIZE",
 		"attributes": {
@@ -305,7 +461,7 @@
 		"human_name": "white sprinkles",
 		"sort": 501,
 		"storage_type": "JAR",
-		"categories": [ "MODIFIER", "DOODAD" ],
+		"categories": ["SHOP", "MODIFIER", "DOODAD"],
 		"buy_price": 2,
 		"max_stack_size": "SPRINKLES_STACK_SIZE",
 		"attributes": {
@@ -317,7 +473,7 @@
 		"human_name": "ball_bearing_sprinkles",
 		"sort": 502,
 		"storage_type": "JAR",
-		"categories": [ "MODIFIER", "DOODAD" ],
+		"categories": ["SHOP", "MODIFIER", "DOODAD"],
 		"buy_price": 2,
 		"max_stack_size": "SPRINKLES_STACK_SIZE",
 		"attributes": {
@@ -329,7 +485,7 @@
 		"human_name": "rainbow sprinkles",
 		"sort": 503,
 		"storage_type": "JAR",
-		"categories": [ "MODIFIER", "DOODAD" ],
+		"categories": ["SHOP", "MODIFIER", "DOODAD"],
 		"buy_price": 2,
 		"max_stack_size": "SPRINKLES_STACK_SIZE",
 		"attributes": {
@@ -341,7 +497,7 @@
 		"human_name": "hard candy bats",
 		"sort": 520,
 		"storage_type": "JAR",
-		"categories": [ "DOODAD" ],
+		"categories": ["SHOP", "DOODAD"],
 		"buy_price": 3,
 		"max_stack_size": "HARD_CANDY_SHAPES_STACK_SIZE",
 		"attributes": {
@@ -352,7 +508,7 @@
 		"human_name": "hard candy ghosts",
 		"sort": 521,
 		"storage_type": "JAR",
-		"categories": [ "DOODAD" ],
+		"categories": ["SHOP", "DOODAD"],
 		"buy_price": 3,
 		"max_stack_size": "HARD_CANDY_SHAPES_STACK_SIZE",
 		"attributes": {
@@ -363,7 +519,7 @@
 		"human_name": "hard candy eyeballs",
 		"sort": 522,
 		"storage_type": "JAR",
-		"categories": [ "DOODAD" ],
+		"categories": ["SHOP", "DOODAD"],
 		"buy_price": 3,
 		"max_stack_size": "HARD_CANDY_SHAPES_STACK_SIZE",
 		"attributes": {
@@ -375,7 +531,7 @@
 		"human_name": "candy corn",
 		"sort": 523,
 		"storage_type": "JAR",
-		"categories": [ "DOODAD" ],
+		"categories": ["SHOP", "DOODAD"],
 		"buy_price": 4,
 		"max_stack_size": "HARD_CANDY_SHAPES_STACK_SIZE",
 		"attributes": {
@@ -388,7 +544,7 @@
 		"human_name": "chocolate chips",
 		"sort": 380,
 		"storage_type": "JAR",
-		"categories": ["MODIFIER", "DOODAD"],
+		"categories": ["SHOP", "MODIFIER", "DOODAD"],
 		"buy_price": 3,
 		"max_stack_size": 9,
 		"attributes": "from_recipe"
@@ -397,7 +553,7 @@
 		"human_name": "white chocolate chips",
 		"sort": 381,
 		"storage_type": "JAR",
-		"categories": ["MODIFIER", "DOODAD"],
+		"categories": ["SHOP", "MODIFIER", "DOODAD"],
 		"buy_price": 3,
 		"max_stack_size": 9,
 		"attributes": "from_recipe"
@@ -406,16 +562,16 @@
 		"human_name": "dark chocolate chips",
 		"sort": 382,
 		"storage_type": "JAR",
-		"categories": ["MODIFIER", "DOODAD"],
+		"categories": ["SHOP", "MODIFIER", "DOODAD"],
 		"buy_price": 3,
 		"max_stack_size": 9,
 		"attributes": "from_recipe"
 	},
 	"frosting": {
 		"human_name": "frosting",
-		"sort": 400,
+		"sort": 399,
 		"storage_type": "JAR",
-		"categories": ["DECORATION"],
+		"categories": ["SHOP", "DECORATION"],
 		"buy_price": 2,
 		"max_stack_size": 4,
 		"attributes": "from_recipe"
@@ -424,7 +580,7 @@
 		"human_name": "piping bag",
 		"sort": 420,
 		"storage_type": "JAR",
-		"categories": ["DECORATION"],
+		"categories": ["SHOP", "DECORATION"],
 		"buy_price": 2,
 		"max_stack_size": 4,
 		"attributes": "from_recipe"
@@ -433,7 +589,7 @@
 		"human_name": "whipped cream piping bag",
 		"sort": 421,
 		"storage_type": "JAR",
-		"categories": ["DECORATION"],
+		"categories": ["SHOP", "DECORATION"],
 		"buy_price": 2,
 		"max_stack_size": 4,
 		"attributes": "from_recipe"
@@ -442,7 +598,7 @@
 		"human_name": "whipped cream",
 		"sort": 300,
 		"storage_type": "FRIDGE",
-		"categories": ["FILLING", "DECORATION"],
+		"categories": ["SHOP", "FILLING", "DECORATION"],
 		"buy_price": 2,
 		"max_stack_size": 1,
 		"attributes": "from_recipe"
@@ -451,7 +607,7 @@
 		"human_name": "pastry cream",
 		"sort": 301,
 		"storage_type": "FRIDGE",
-		"categories": ["FILLING"],
+		"categories": ["SHOP", "FILLING"],
 		"buy_price": 3,
 		"max_stack_size": 1,
 		"attributes": "from_recipe"
@@ -460,7 +616,7 @@
 		"human_name": "pudding",
 		"sort": 350,
 		"storage_type": "FRIDGE",
-		"categories": ["FILLING"],
+		"categories": ["SHOP", "FILLING"],
 		"buy_price": 3,
 		"max_stack_size": 1,
 		"attributes": "from_recipe"
@@ -469,7 +625,7 @@
 		"human_name": "cookie dough",
 		"sort": 800,
 		"storage_type": "FRIDGE",
-		"categories": ["BASE"],
+		"categories": ["SHOP", "BASE"],
 		"buy_price": 2,
 		"max_stack_size": 1,
 		"attributes": "from_recipe"
@@ -478,7 +634,7 @@
 		"human_name": "cake batter",
 		"sort": 801,
 		"storage_type": "FRIDGE",
-		"categories": ["BASE"],
+		"categories": ["SHOP", "BASE"],
 		"buy_price": 2,
 		"max_stack_size": 1,
 		"attributes": "from_recipe"
@@ -487,7 +643,7 @@
 		"human_name": "cookie",
 		"sort": 900,
 		"storage_type": "CRATE",
-		"categories": ["PRODUCT"],
+		"categories": ["SHOP", "PRODUCT"],
 		"buy_price": null,
 		"max_stack_size": 12,
 		"attributes": "from_recipe"
@@ -496,7 +652,7 @@
 		"human_name": "cupcake",
 		"sort": 901,
 		"storage_type": "FRIDGE",
-		"categories": ["PRODUCT"],
+		"categories": ["SHOP", "PRODUCT"],
 		"buy_price": null,
 		"max_stack_size": 6,
 		"attributes": "from_recipe"
@@ -505,7 +661,7 @@
 		"human_name": "cake",
 		"sort": 902,
 		"storage_type": "FRIDGE",
-		"categories": ["PRODUCT"],
+		"categories": ["SHOP", "PRODUCT"],
 		"buy_price": null,
 		"max_stack_size": 1,
 		"attributes": "from_recipe"
@@ -514,7 +670,7 @@
 		"human_name": "cake slice",
 		"sort": 903,
 		"storage_type": "FRIDGE",
-		"categories": ["PRODUCT"],
+		"categories": ["SHOP", "PRODUCT"],
 		"buy_price": null,
 		"max_stack_size": 6,
 		"attributes": "from_recipe"
@@ -523,7 +679,7 @@
 		"human_name": "bowl",
 		"sort": 999,
 		"storage_type": "CRATE",
-		"categories": ["CONTAINER"],
+		"categories": ["SHOP", "CONTAINER"],
 		"buy_price": 1,
 		"max_stack_size": 1,
 		"attributes": {}
@@ -532,8 +688,8 @@
 		"human_name": "cookie sheet",
 		"sort": 1000,
 		"storage_type": "CRATE",
-		"categories": ["CONTAINER"],
-		"allowed_contents": [ "cookie_dough", "cookie" ],
+		"categories": ["SHOP", "CONTAINER"],
+		"allowed_contents": [ "cookie_dough", "cookie"],
 		"buy_price": 1,
 		"max_stack_size": 1,
 		"attributes": {}
@@ -542,8 +698,8 @@
 		"human_name": "cake pan",
 		"sort": 1001,
 		"storage_type": "CRATE",
-		"categories": ["CONTAINER"],
-		"allowed_contents": [ "cake_batter", "cake" ],
+		"categories": ["SHOP", "CONTAINER"],
+		"allowed_contents": [ "cake_batter", "cake"],
 		"buy_price": 1,
 		"max_stack_size": 1,
 		"attributes": {}
@@ -552,8 +708,8 @@
 		"human_name": "cupcake pan",
 		"sort": 1002,
 		"storage_type": "CRATE",
-		"categories": ["CONTAINER"],
-		"allowed_contents": [ "cake_batter", "cupcake" ],
+		"categories": ["SHOP", "CONTAINER"],
+		"allowed_contents": [ "cake_batter", "cupcake"],
 		"buy_price": 1,
 		"max_stack_size": 1,
 		"attributes": {}
