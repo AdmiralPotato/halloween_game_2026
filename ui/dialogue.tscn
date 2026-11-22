@@ -25,6 +25,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_xl33q")
 
 [node name="Overlay" type="SubViewportContainer" parent="." unique_id=235767332]
@@ -93,6 +95,7 @@ icon = SubResource("AtlasTexture_uo1k0")
 custom_minimum_size = Vector2(0, 240)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_p33bg")
 
 [node name="HBoxContainerTouchControlsBottom" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1796816639]
