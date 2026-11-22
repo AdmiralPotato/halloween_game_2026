@@ -26,6 +26,7 @@ func get_next_loading_message() -> String:
 
 func _ready() -> void:
 	next_scene = Global.scene_change_info.path
+	%LoadingWarning.visible = OS.has_feature("web")
 	%ProgressText.text = get_next_loading_message()
 
 
