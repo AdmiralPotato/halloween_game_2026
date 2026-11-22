@@ -630,5 +630,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 5.5)
 [node name="Player" parent="." index="3" unique_id=1707035649]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6030058, 0, 3.3565109)
 
-[node name="GoldOverlay" parent="." index="13" unique_id=702785822]
+[node name="GoldOverlay" parent="." index="15" unique_id=702785822]
 theme_override_styles/panel = SubResource("StyleBoxEmpty_wuaw2")

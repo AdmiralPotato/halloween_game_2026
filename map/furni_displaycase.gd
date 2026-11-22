@@ -7,7 +7,7 @@ func _ready() -> void:
 
 var last_it: ItemNode = null
 func set_item(it: ItemNode):
-	if last_it and last_it.stack.changed.is_connected(update_cost):
+	if last_it and last_it.stack and last_it.stack.changed.is_connected(update_cost):
 		last_it.stack.changed.disconnect(update_cost)
 	super(it)
 	if it and it.stack:
