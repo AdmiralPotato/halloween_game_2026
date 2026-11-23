@@ -65,14 +65,35 @@ func query_item() -> ItemNode:
 
 
 func interact(player: Player):
-	if stack and stack.count > 1 and not player.held_object:
-		var result := stack.split(stack.item.max_stack_size)
-		stack = result[0]
-		var node = ItemNode.make_node(result[1])
-		# node may be null if result[1] is null or an empty stack
-		if node:
-			player.held_object = node
-			node.global_position = $ItemNode.global_position
-			node.store_global_transform()
-			node.transform = Transform3D()
-			node.animate_to_current_transform()
+	if stack:
+		if not player.held_object:
+			if stack.count > 1:
+				var result := stack.split(stack.item.max_stack_size)
+				stack = result[0]
+				var node = ItemNode.make_node(result[1])
+				# node may be null if result[1] is null or an empty stack
+				if node:
+					player.held_object = node
+					node.global_position = $ItemNode.global_position
+					node.store_global_transform()
+					node.transform = Transform3D()
+					node.animate_to_current_transform()
+		elif (
+			player.held_object is ItemNode
+			and player.held_object.stack
+			and player.held_object.stack.item.is_category(
+				ItemInfo.Category.CONTAINER
+			)
+		):
+			var result := stack.split(1)
+			stack = result[0]
+			var rest := result[1]
+			for content in player.held_object.stack.contents:
+				var accepted := (content as ItemStack).accept(rest)
+				rest = accepted.rest
+				if not rest:
+					break
+			if rest:
+				player.held_object.stack.contents.append(rest)
+			player.held_object.stack.emit_changed()
+				
