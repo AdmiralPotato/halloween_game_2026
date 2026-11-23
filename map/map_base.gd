@@ -181,8 +181,8 @@ func _on_shop_purchase_item(item: ItemInfo) -> void:
 		return
 	$GoldOverlay.flash(Color.WHITE)
 	Global.gold -= item.actual_cost
-	var furni: FurniSource = FURNI_SOURCE.instantiate()
-	furni.stack = ItemStack.new(item)
+	var furni: FurniStorage = FURNI_STORAGE.instantiate()
+	furni.stack = ItemStack.new(item, item.buy_count)
 	furni.pack()
 	furni.transform = furni.transform.scaled($Player.SMOL_FURNI)
 	$Player.held_object = furni

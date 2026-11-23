@@ -115,6 +115,9 @@ const PER_CRAFT_BASE: float = 1.5
 @export var allowed_containers: PackedStringArray = PackedStringArray()
 ## If true, all containers are allowed, and  allowed_containers is ignored.
 @export var any_container: bool = true
+## Amount provided in a single purchase from the shop (if this item can be
+## purchased there).
+@export var buy_count: int = 20
 
 
 const MAX_STACK_SIZES = {
@@ -134,6 +137,8 @@ static func from_json(label: String, d: Dictionary, variants: Dictionary = {}) -
 	))
 	var price = d.get("buy_price")
 	info.cost_tier = price if price != null else 0
+	if 'buy_count' in d:
+		info.buy_count = d.buy_count
 	var max_stack_size = d.get("max_stack_size", 1)
 	if typeof(max_stack_size) == TYPE_STRING:
 		max_stack_size = MAX_STACK_SIZES.get(max_stack_size, 1)

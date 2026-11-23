@@ -4,14 +4,14 @@
 [ext_resource type="Resource" uid="uid://dton6rj71b5u6" path="res://model/data/items/whipped_cream_piping_bag.tres" id="2_y8qtk"]
 [ext_resource type="Script" uid="uid://b5mlkyd7jcal7" path="res://model/recipe.gd" id="3_njqbi"]
 
-[sub_resource type="Resource" id="Resource_p71fb"]
+[sub_resource type="Resource" id="Resource_3td4t"]
 script = ExtResource("1_p71fb")
 item = ExtResource("2_y8qtk")
 
 [resource]
 script = ExtResource("3_njqbi")
 name = "whipped cream piping bag"
-output = SubResource("Resource_p71fb")
+output = SubResource("Resource_3td4t")
 location = 4
 ingredients = PackedStringArray("whipped_cream")
 permitted_modifiers = PackedStringArray()
