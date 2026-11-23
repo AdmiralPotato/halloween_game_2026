@@ -200,6 +200,17 @@ static func basis_to_facing(b: Basis) -> Vector3:
 	return Vector3.BACK
 
 
+func rotate_furni(xy: Vector2i):
+	var tile := _get_tile(xy)
+	if not (tile and tile.furni):
+		return
+	if tile.furni.is_animating:
+		return
+	tile.furni.store_global_transform()
+	tile.furni.rotate(Vector3.UP, TAU / 4)
+	tile.furni.animate_to_current_transform()
+
+
 ## Interact with the furni at the given position.
 func interact(xy: Vector2i, player: Node):
 	var tile := _get_tile(xy)

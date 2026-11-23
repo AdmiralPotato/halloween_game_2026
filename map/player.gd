@@ -227,5 +227,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 	if event.is_action_pressed("interact"):
-		Global.tilemap.interact(pointing, self)
+		if in_rearrange_mode:
+			Global.tilemap.rotate_furni(pointing)
+		else:
+			Global.tilemap.interact(pointing, self)
 		get_viewport().set_input_as_handled()
