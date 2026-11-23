@@ -51,7 +51,6 @@ auto_height = true
 [node name="Create" type="Button" parent="PanelContainer/WelcomeScreenContainer" unique_id=471692349]
 unique_name_in_owner = true
 layout_mode = 2
-disabled = true
 text = "Start New!"
 
 [node name="Load" type="Button" parent="PanelContainer/WelcomeScreenContainer" unique_id=1388735291]

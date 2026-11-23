@@ -240,6 +240,7 @@ filters = PackedStringArray("*.png")
 
 [node name="Dialogue" parent="." unique_id=762855756 groups=["dialogs"] instance=ExtResource("13_2jyax")]
 unique_name_in_owner = true
+visible = false
 
 [node name="CupcakeLinerOverlay" parent="." unique_id=1395101364 groups=["dialogs"] instance=ExtResource("14_1dc6w")]
 visible = false

@@ -7,8 +7,8 @@ func _ready() -> void:
 	%MapList.clear()
 	for map in Global.registry.maps:
 		%MapList.add_item(map)
-	%MapList.grab_focus()
 	%MapList.select(0)
+	%Create.grab_focus()
 	if OS.has_feature("web"):
 		%Leave.visible = false
 
