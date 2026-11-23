@@ -43,6 +43,18 @@ func update_node():
 	if Engine.is_editor_hint():
 		update_configuration_warnings()
 
+func accept_item(item: ItemNode) -> ItemNode:
+	# Let the player put back an item that would stack
+	# this destroys the item! it's probably alright since
+	# we supply it infinitely anyway.
+	if item and item.stack and stack.is_stackable(item.stack):
+		item.store_global_transform()
+		item.reparent(self)
+		item.global_transform = $StaticBody3D/ItemNode.global_transform
+		item.finished_animating.connect(item.queue_free)
+		return null
+	return item
+
 func provide_item() -> ItemNode:
 	var item := ItemNode.make_node(stack)
 	add_child(item)

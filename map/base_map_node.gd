@@ -8,6 +8,7 @@ var is_animating: bool:
 	get:
 		return tween and tween.is_running()
 var last_global_transform: Transform3D
+var last_animation_call: Array[ScriptBacktrace] = []
 signal finished_animating
 
 @export_file("*.tscn") var current_scene: String = "UNSET"
@@ -55,6 +56,10 @@ func store_global_transform():
 	last_global_transform = global_transform if is_inside_tree() else Transform3D()
 
 func animate_to_current_transform():
+	if is_animating:
+		push_warning("called animate_to_current_transform while already animating! this probably won't do what you want!\ninitial animation stack: ", last_animation_call)
+	else:
+		last_animation_call = Engine.capture_script_backtraces()
 	if tween:
 		tween.kill()
 	tween = create_tween().set_trans(Tween.TRANS_SINE)
