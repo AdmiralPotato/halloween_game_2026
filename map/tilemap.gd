@@ -179,6 +179,27 @@ func swap_furni(xy: Vector2i, new_node: FurniNode, facing := Vector3.BACK) -> Fu
 	return old_node
 
 
+static func basis_to_facing(b: Basis) -> Vector3:
+	var axis := b.z.abs().max_axis_index()
+	match axis:
+		Vector3.AXIS_X:
+			if b.z.x > 0:
+				return Vector3.RIGHT
+			else:
+				return Vector3.LEFT
+		Vector3.AXIS_Z:
+			if b.z.z > 0:
+				return Vector3.BACK
+			else:
+				return Vector3.FORWARD
+		Vector3.AXIS_Y:
+			if b.z.y > 0:
+				return Vector3.UP
+			else:
+				return Vector3.DOWN
+	return Vector3.BACK
+
+
 ## Interact with the furni at the given position.
 func interact(xy: Vector2i, player: Node):
 	var tile := _get_tile(xy)

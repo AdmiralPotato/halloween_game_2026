@@ -53,6 +53,17 @@ var held_object: BaseMapNode:
 				carry_node.add_child(v)
 		held_object_changed.emit()
 var source_furni: FurniNode = null
+var source_location: Dictionary = {}
+
+func set_source_location_from_tile(xy: Vector2i):
+	var pointed_furni: FurniNode = Global.tilemap.get_furni(xy)
+	if pointed_furni:
+		source_location = {
+			tile = xy,
+			facing = Global.tilemap.basis_to_facing(pointed_furni.basis),
+		}
+	else:
+		source_location = {}
 
 
 func get_save_state() -> Dictionary:
@@ -162,6 +173,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		var old_held := held_object
 		if held_object is FurniNode or (not held_object and in_rearrange_mode):
 			# doesn't matter if we're in rearrange mode if we're already holding furni
+			set_source_location_from_tile(pointing)
 			held_object = Global.tilemap.swap_furni(pointing, held_object,
 					Global.tilemap.to_world_point(pointing).direction_to(global_position),
 			)
@@ -181,19 +193,37 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 	
 	if event.is_action_pressed("ui_cancel"):
+		if held_object:
+			held_object.store_global_transform()
+		var old_held := held_object
 		if (
 			held_object is ItemNode
 			and is_instance_valid(source_furni)
 		):
-			held_object.store_global_transform()
-			var old_held := held_object
 			held_object = source_furni.accept_item(held_object)
-			if held_object != old_held:
-				if held_object:
-					held_object.animate_to_current_transform()
-				if old_held:
-					old_held.animate_to_current_transform()
 			source_furni = null
+		elif (
+			held_object is FurniNode
+			and "tile" in source_location
+		):
+			# cache this because we want to update the property with values from
+			# the node we're about to swap with, if any
+			var old_src_loc := source_location
+			set_source_location_from_tile(source_location.tile)
+			held_object = Global.tilemap.swap_furni(
+					old_src_loc.tile,
+					held_object,
+					old_src_loc.facing,
+			)
+		if held_object != old_held:
+			if held_object:
+				held_object.transform = Transform3D(
+						Basis().scaled(SMOL_ITEM if held_object is ItemNode else SMOL_FURNI),
+						Vector3.ZERO,
+				)
+				held_object.animate_to_current_transform()
+			if old_held:
+				old_held.animate_to_current_transform()
 		get_viewport().set_input_as_handled()
 
 	if event.is_action_pressed("interact"):
