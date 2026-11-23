@@ -52,6 +52,7 @@ var held_object: BaseMapNode:
 			else:
 				carry_node.add_child(v)
 		held_object_changed.emit()
+var source_furni: FurniNode = null
 
 
 func get_save_state() -> Dictionary:
@@ -150,9 +151,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_rearrange"):
 		in_rearrange_mode = !in_rearrange_mode
 		indicator_material.emission = indicator_color
+		get_viewport().set_input_as_handled()
 
 	if event.is_action_pressed("camera_reset"):
 		Global.camera_zoom = 0.5
+		get_viewport().set_input_as_handled()
 
 	if event.is_action_pressed("pickup"):
 		var tilemap := Global.tilemap
@@ -171,8 +174,28 @@ func _unhandled_input(event: InputEvent) -> void:
 				Vector3.ZERO,
 			)
 			held_object.animate_to_current_transform()
+			if held_object is ItemNode:
+				source_furni = Global.tilemap.get_furni(pointing)
 		if old_held and held_object != old_held:
 			old_held.animate_to_current_transform()
+		get_viewport().set_input_as_handled()
+	
+	if event.is_action_pressed("ui_cancel"):
+		if (
+			held_object is ItemNode
+			and is_instance_valid(source_furni)
+		):
+			held_object.store_global_transform()
+			var old_held := held_object
+			held_object = source_furni.accept_item(held_object)
+			if held_object != old_held:
+				if held_object:
+					held_object.animate_to_current_transform()
+				if old_held:
+					old_held.animate_to_current_transform()
+			source_furni = null
+		get_viewport().set_input_as_handled()
 
 	if event.is_action_pressed("interact"):
 		Global.tilemap.interact(pointing, self)
+		get_viewport().set_input_as_handled()
