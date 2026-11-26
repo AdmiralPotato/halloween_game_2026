@@ -162,10 +162,10 @@ func _on_player_held_object_changed() -> void:
 
 
 func _on_shop_purchase_furni(furni: FurniInfo) -> void:
-	if Global.gold < furni.cost:
+	if Global.state.gold < furni.cost:
 		$GoldOverlay.flash()
 		return
-	Global.gold -= furni.cost
+	Global.state.gold -= furni.cost
 	$GoldOverlay.flash(Color.WHITE)
 	var node: FurniNode = furni.scene.instantiate()
 	node.pack()
@@ -176,11 +176,11 @@ func _on_shop_purchase_furni(furni: FurniInfo) -> void:
 
 func _on_shop_purchase_item(item: ItemInfo) -> void:
 	var full_cost := item.actual_cost * item.max_stack_size
-	if Global.gold < full_cost:
+	if Global.state.gold < full_cost:
 		$GoldOverlay.flash()
 		return
 	$GoldOverlay.flash(Color.WHITE)
-	Global.gold -= item.actual_cost
+	Global.state.gold -= item.actual_cost
 	var furni: FurniStorage = FURNI_STORAGE.instantiate()
 	furni.stack = ItemStack.new(item, item.buy_count)
 	furni.pack()

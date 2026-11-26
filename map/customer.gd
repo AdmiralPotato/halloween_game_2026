@@ -178,7 +178,7 @@ class BuyFrom extends State:
 		var registers: Array[Vector2i] = \
 			Global.tilemap.get_tiles_of_type(preload("res://map/furni_cashregister.gd"))
 		if registers.is_empty():
-			Global.gold += owner.get_sale_price_for(owner.item.stack)
+			owner.perform_purchase(owner.item.stack)
 			return Leave.new(owner)
 		var reg: Vector2i = registers.pick_random()
 		return WanderTo.new(owner, reg,
@@ -199,8 +199,8 @@ class GiveMoney extends State:
 		if not owner.item:
 			return ChooseState.new(owner)
 		var gold := owner.get_sale_price_for(owner.item.stack)
+		owner.perform_purchase(owner.item.stack)
 		owner.item = null
-		Global.gold += gold
 		var reg = Global.tilemap.get_furni(tile)
 		if reg and reg is FurniCashRegister:
 			reg.spawn_particle("$" + str(gold), Color.GREEN)
@@ -321,6 +321,10 @@ func get_sale_price_for(stack: ItemStack) -> int:
 	var diff_des := maxf(0.0, get_desire_for(stack) - desire)
 	return int(ceil(desire_excess_bonus ** diff_des * stack.sell_price))
 
+func perform_purchase(stack: ItemStack):
+	Global.state.gold += get_sale_price_for(stack)
+	Global.state.inc_counter(&"purchases_made", stack)
+
 func get_n_most_desires(n: int = 1, top: bool = true) -> Array[ItemInfo.Attribute]:
 	var pairs := []
 	for attr in prefs:
@@ -351,7 +355,7 @@ func _physics_process(delta: float) -> void:
 		push_warning("Customer ", self, ": ran out of time (stuck?). Last state: ", state)
 		# pay for our goods if we have them
 		if item and item.stack:
-			Global.gold += get_sale_price_for(item.stack)
+			owner.perform_purchase(item.stack)
 		queue_free()
 		return
 

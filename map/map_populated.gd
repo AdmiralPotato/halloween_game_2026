@@ -9,3 +9,5 @@ func _ready() -> void:
 	%Dialogue.start(
 		DialogueScene.from_path("res://business/dialogs/intro.json")
 	)
+	Global.state.progress = \
+		ProgressionHandler.from_path("res://business/progression.json")

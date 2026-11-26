@@ -9,18 +9,15 @@ var player: Player
 var tilemap: Tilemap
 var shop_ui: Shop
 var cupcake_ui: CupcakeLinerOverlay
-var gold: int = 10_000:
-	set(new):
-		gold = new
-		gold_changed.emit()
 var show_touch_ui := true
 var camera_zoom := 0.5
+
+var state := GlobalState.new()
 
 @onready var registry: Registry = load("res://model/data/registry.tres")
 var scene_change_info: Dictionary = {}
 
 signal request_debug_info(panel: DebugPanel)
-signal gold_changed
 
 func _ready():
 	request_debug_info.connect(register_debug_info)
@@ -44,10 +41,12 @@ func get_save_state() -> Dictionary:
 		map = '???'  # TODO: figure out how to get the PackedScene path for the tree root
 	return {
 		map = map,
-		state = (get_tree().current_scene as MapBase).get_save_state()
+		scene = (get_tree().current_scene as MapBase).get_save_state(),
+		state = state.get_save_state(),
 	}
 
 func set_save_state(save: Dictionary):
+	state.set_save_state(save.state)
 	get_tree().change_scene_to_file(save.map)
 	await get_tree().scene_changed
-	get_tree().current_scene.set_save_state(save.state)
+	get_tree().current_scene.set_save_state(save.scene)

@@ -2,8 +2,8 @@ extends Label
 
 
 func _ready():
-	Global.gold_changed.connect(refresh)
+	Global.state.changed.connect(refresh)
 	refresh()
 	
 func refresh():
-	text = str(Global.gold)
+	text = str(Global.state.gold)

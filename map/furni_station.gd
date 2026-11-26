@@ -9,8 +9,10 @@ extends FurniCountertop
 @export var anim_work: String = ""
 
 var eventual_result: ItemStack = null
+var eventual_modifiers: Array[ItemStack] = []
 var stored_ingredients: ItemNode = null
 var stored_stack: ItemStack = null
+var recipe_name: String = ""
 @onready var recipe_timer: Timer = $RecipeTimer
 @onready var status_indicator: HGStatusIndicator = $StatusIndicator
 
@@ -93,6 +95,7 @@ func try_craft() -> bool:
 					)\
 					.multiply(info.multiplicity)
 			stack.modifiers = info.modifiers
+			eventual_modifiers = info.modifiers  # XXX alias
 			stack.finishers = info.finishers
 			stack.craft_depth = info.craft_depth
 			stack.unique_modifier_depth = info.unique_modifier_depth
@@ -111,6 +114,7 @@ func try_craft() -> bool:
 			stored_ingredients = item
 			stored_stack = item.stack
 			stored_stack.changed.connect(cancel_craft, CONNECT_ONE_SHOT)
+			recipe_name = recipe.name
 			recipe_timer.start(recipe.time * info.multiplicity)
 			status_indicator.start()
 			update_animation()
@@ -153,3 +157,11 @@ func _on_recipe_timeout():
 	item = ItemNode.make_node(eventual_result)
 	status_indicator.stop()
 	update_animation()
+	# XXX while I don't like synthesizing ItemInfo, even temporarily, it's
+	# useful here to take advantage of the machinery used to create key
+	# names from stacks
+	var counter_item := ItemInfo.new()
+	counter_item.name = recipe_name
+	var counter_stack := ItemStack.new(counter_item, 1)
+	counter_stack.modifiers = eventual_modifiers
+	Global.state.inc_counter(&"recipes_used", counter_stack)
