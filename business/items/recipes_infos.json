@@ -66,6 +66,23 @@
   {
     "output": "frosting",
     "human_name": "frosting remix",
+    "quantity": 2,
+    "location": "MIXER",
+    "pan": "NONE",
+    "time": 1,
+    "ingredients": [
+      "frosting",
+      "frosting"
+    ],
+    "newAttributes": {},
+    "allowedModifiers": [
+      "cocoa_powder",
+      "flavoring"
+    ]
+  },
+  {
+    "output": "frosting",
+    "human_name": "frosting remix (single)",
     "quantity": 1,
     "location": "MIXER",
     "pan": "NONE",
@@ -77,7 +94,8 @@
     "allowedModifiers": [
       "cocoa_powder",
       "flavoring"
-    ]
+    ],
+    "modifierFactor": 2
   },
   {
     "output": "piping_bag",

@@ -29,6 +29,11 @@ enum Location {
 @export var permitted_modifiers: PackedStringArray = PackedStringArray()
 ## How long this recipe takes, in seconds.
 @export var time: float = 1.0
+## How many times to duplicate modifiers, used for some recipes where the
+## ingredients have less conceptual mass than the modifiers themselves.
+## Note: this only applies to the remaining items applied to the recipe, not
+## the modifiers intrinsically in the ingredients themselves.
+@export var modifier_factor: int = 1
 
 static func from_json(d: Dictionary, lookup_item: Callable) -> Recipe:
 	var rec = Recipe.new()
@@ -43,6 +48,8 @@ static func from_json(d: Dictionary, lookup_item: Callable) -> Recipe:
 		rec.ingredients.append(ingr)
 	for mod in d.get("allowedModifiers", []):
 		rec.permitted_modifiers.append(mod)
+	if "modifierFactor" in d:
+		rec.modifier_factor = int(d.modifierFactor)
 	return rec
 
 
@@ -116,8 +123,18 @@ func matches(inputs: Array[ItemStack], _container: ItemStack = null) -> Dictiona
 	var dedup_inputs: Array[ItemStack] = []
 	for stk in cardinalities:
 		var card := cardinalities[stk] / multiplicity
+		var single := stk.duplicate(true)
+		single.count = 1
+		var first := true
 		for _i in range(card):
-			dedup_inputs.append(stk)
+			dedup_inputs.append(single)
+			# for subsequent stacks, don't carry over modifiers/finishers
+			# to avoid multiplying them when creating output modifiers
+			if first and card > 1:
+				single = single.duplicate(true)
+				single.finishers.clear()
+				single.modifiers.clear()
+				first = false
 
 	print(self, ": considering inputs ", dedup_inputs, ' * ', multiplicity)
 	var permitted_ingredients = []
@@ -189,7 +206,8 @@ func matches(inputs: Array[ItemStack], _container: ItemStack = null) -> Dictiona
 				var new_modifiers: Array[ItemStack] = []
 				for inp in dedup_inputs:
 					new_modifiers.append_array(inp.modifiers)
-				new_modifiers.append_array(remaining)
+				for i in range(modifier_factor):
+					new_modifiers.append_array(remaining)
 				var new_finishers: Array[ItemStack] = []
 				for inp in dedup_inputs:
 					new_finishers.append_array(inp.finishers)
