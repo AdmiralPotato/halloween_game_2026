@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dymhfq74w0eir"]
+
+[ext_resource type="Script" uid="uid://cerhuqnek24km" path="res://ui/debt_meter.gd" id="1_00i41"]
+
+[node name="DebtMeter" type="Control" unique_id=2069736029]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_00i41")
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=505726766]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -176.0
+offset_right = 400.0
+offset_bottom = -144.0
+grow_vertical = 0
+rotation = -1.5707964
+max_value = 1000000.0
+step = 1.0

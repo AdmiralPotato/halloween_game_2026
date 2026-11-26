@@ -1,0 +1,34 @@
+[
+	{
+		"trigger_id": "baby's first cookie",
+		"trigger_type": "BAKE_NTH_OF_RECIPE_TYPE",
+		"count": 1,
+		"recipe": "cookie",
+		"success_handler": "show_dialog",
+		"dialog": "dialogs/010_made_first_cookie.json"
+	},
+	{
+		"trigger_id": "sold first cookie",
+		"trigger_type": "NTH_CUSTOMER_PURCHASE_OF_RECIPE_TYPE",
+		"count": 1,
+		"recipe": "cookie",
+		"success_handler": "show_dialog",
+		"dialog": "dialogs/011_sold_first_cookie.json"
+	},
+	{
+		"trigger_id": "made 100CC",
+		"trigger_type": "MONEY",
+		"value": 100,
+		"success_handler": "show_dialog",
+		"dialog": "dialogs/012_sold_100cc_worth_here_is_shop.json"
+	},
+	{
+		"trigger_id": "baby's first cookie",
+		"trigger_type": "BAKE_NTH_OF_RECIPE_TYPE",
+		"count": 1,
+		"recipe": "cookie",
+		"modifiers": "frosting",
+		"success_handler": "show_dialog",
+		"dialog": "dialogs/010_made_first_cookie.json"
+	}
+]

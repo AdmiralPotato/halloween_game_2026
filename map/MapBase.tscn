@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dda6d1ohs1fbv" path="res://map/map_base.gd" id="1_2h6hj"]
 [ext_resource type="Script" uid="uid://brhfhuo7lsymv" path="res://map/tilemap.gd" id="2_oyrmm"]
 [ext_resource type="PackedScene" uid="uid://clov13w8bn0y8" path="res://ui/TouchScreenControls.tscn" id="6_6wia2"]
+[ext_resource type="PackedScene" uid="uid://dymhfq74w0eir" path="res://ui/DebtMeter.tscn" id="8_e2be0"]
 [ext_resource type="PackedScene" uid="uid://oja3kl3rps06" path="res://ui/main_menu.tscn" id="11_n4k6e"]
 [ext_resource type="PackedScene" uid="uid://v5tdiarwxe74" path="res://map/Player.tscn" id="11_scweb"]
 [ext_resource type="MeshLibrary" uid="uid://dki7gkkp1gpw8" path="res://assets/kitchen_mesh_library.meshlib" id="12_qr8jf"]
@@ -141,6 +142,8 @@ metadata/_edit_group_ = true
 [node name="SpawnCustomer" type="Timer" parent="." unique_id=982563971]
 wait_time = 2.0
 one_shot = true
+
+[node name="DebtMeter" parent="." unique_id=2069736029 instance=ExtResource("8_e2be0")]
 
 [node name="TouchUI" parent="." unique_id=1653148583 instance=ExtResource("6_6wia2")]
 
