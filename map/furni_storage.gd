@@ -13,6 +13,21 @@ extends FurniNode
 		update_node()
 
 
+func get_save_state() -> Dictionary:
+	var save := super()
+	if stack:
+		save.stack = stack.get_save_state()
+	return save
+
+
+func set_save_state(save: Dictionary):
+	super(save)
+	if 'stack' in save:
+		stack = ItemStack.from_save_state(save.stack)
+	else:
+		stack = null
+
+
 func _ready():
 	update_node()
 
