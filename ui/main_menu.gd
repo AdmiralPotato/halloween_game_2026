@@ -33,8 +33,28 @@ func _on_leave_pressed():
 	get_tree().quit()
 
 
+var _file_callback = JavaScriptBridge.create_callback(web_file_callback)
 func _on_load_pressed():
-	%OpenDialog.popup_centered_clamped()
+	if OS.has_feature("web"):
+		var window = JavaScriptBridge.get_interface("window")
+		var input = window.document.createElement('input')
+		input.type = 'file'
+		input.accept = 'application/json'
+		input.addEventListener('input', _file_callback)
+		input.click()
+	else:
+		%OpenDialog.popup_centered_clamped()
+
+
+var _json_callback = JavaScriptBridge.create_callback(web_json_string_callback)
+func web_file_callback(args):
+	var event = args[0]
+	event.target.files[0].text().then(_json_callback)
+
+
+func web_json_string_callback(args):
+	#print('web_json_string_callback: ', args[0])
+	Global.set_save_state(JSON.parse_string(args[0]))
 
 
 func _on_open_dialog_file_selected(path):
