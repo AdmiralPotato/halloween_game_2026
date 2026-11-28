@@ -109,7 +109,7 @@ func try_craft() -> bool:
 				if container_stack.modifiers.size() > 0:
 					inner_stack.modifiers.append_array(item.stack.modifiers)
 					container_stack.modifiers.clear()
-			print("success: will make ", stack)
+			print("success: will make ", stack, " in ", recipe.time * info.multiplicity, "s")
 			eventual_result = stack
 			stored_ingredients = item
 			stored_stack = item.stack

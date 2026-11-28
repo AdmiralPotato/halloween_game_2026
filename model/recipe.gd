@@ -34,6 +34,10 @@ enum Location {
 ## Note: this only applies to the remaining items applied to the recipe, not
 ## the modifiers intrinsically in the ingredients themselves.
 @export var modifier_factor: int = 1
+## Should this be considered as adding to crafting depth? Note: this is from
+## the input data and does not consider heuristics; you should use is_crafting_step()
+## in most cases to query this instead.
+@export var not_crafting_step: bool = false
 
 static func from_json(d: Dictionary, lookup_item: Callable) -> Recipe:
 	var rec = Recipe.new()
@@ -50,7 +54,19 @@ static func from_json(d: Dictionary, lookup_item: Callable) -> Recipe:
 		rec.permitted_modifiers.append(mod)
 	if "modifierFactor" in d:
 		rec.modifier_factor = int(d.modifierFactor)
+	if "notCraftingStep" in d and d.notCraftingStep:
+		rec.not_crafting_step = true
 	return rec
+
+
+func is_crafting_step() -> bool:
+	if not_crafting_step:
+		return false
+	# If the output is the exact same as one of the input ingredients, this
+	# recipe is cyclic--we thus consider it to not add to the crafting depth.
+	if output.item.matches_any_spec(ingredients):
+		return false
+	return true
 
 
 func _to_string() -> String:
@@ -149,18 +165,21 @@ func matches(inputs: Array[ItemStack], _container: ItemStack = null) -> Dictiona
 			return {success = false}
 		permitted_ingredients.append(valid)
 
-	var new_depth: int = 1
+	var depth_mod: int = 1
+	if not is_crafting_step():
+		depth_mod = 0
+	var new_depth: int = depth_mod
 	match inputs.size():
 		0:
 			pass
 		1:
-			new_depth = inputs[0].craft_depth + 1
+			new_depth = inputs[0].craft_depth + depth_mod
 		2:
 			var res = max.callv(inputs.map(
 					func(s: ItemStack): return s.craft_depth
 			))
 			print('max(', inputs, ') = ', res)
-			new_depth = res + 1
+			new_depth = res + depth_mod
 
 	var indices: Array[int] = Array(
 		permitted_ingredients.map(func(_ignored): return 0),

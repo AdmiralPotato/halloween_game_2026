@@ -27,7 +27,7 @@ extends RigidBody3D
 ## Range for how "picky" customers are. The x component is the minimum, the y is
 ## the maximum. desire ("pickiness") is initialized uniformly random between these
 ## two values.
-@export var desire_range := Vector2(-1.0, 3.5)
+@export var desire_range := Vector2(-1, 1)
 ## Bonus for exceeding expectations. This is raised to the difference between
 ## desire ("pickiness") and the appraised value of an item, then multiplied
 ## into the sale cost. (It's like a tip!) While desire thresholds are configured
@@ -36,7 +36,7 @@ extends RigidBody3D
 @export var desire_excess_bonus := 1.05
 ## How much desire decrements during each idle. This is to simulate customers
 ## becoming less picky over time (as one does when perfect slips to "good enough").
-@export var desire_idle_relax := 0.25
+@export var desire_idle_relax := 0.1
 
 @abstract class State extends RefCounted:
 	var owner: Customer
@@ -307,8 +307,13 @@ func register_debug_info(_dp: DebugPanel):
 
 func get_desire_for(stack: ItemStack) -> float:
 	var total := 0.0
-	for attr in stack.combined_attributes:
-		total += prefs[attr] * stack.combined_attributes[attr]
+	var attrs := stack.combined_attributes
+	var max_attr := 1.0
+	for attr in attrs:
+		if attrs[attr] > max_attr:
+			max_attr = float(attrs[attr])
+	for attr in attrs:
+		total += prefs[attr] * attrs[attr] / max_attr
 	if stack.item.is_category(ItemInfo.Category.CONTAINER):
 		var contents_total := 0.0
 		for content in stack.contents:
@@ -340,11 +345,11 @@ func get_n_most_desires(n: int = 1, top: bool = true) -> Array[ItemInfo.Attribut
 	return ret
 
 static func describe_desire(des: float) -> String:
-	if des <= 0.25:
+	if des <= -0.5:
 		return "not picky at all"
-	elif des <= 1.0:
+	elif des <= 0.0:
 		return "a bit picky"
-	elif des <= 3.0:
+	elif des <= 0.5:
 		return "quite picky"
 	else:
 		return "very picky"
